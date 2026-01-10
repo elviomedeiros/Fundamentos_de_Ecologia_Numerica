@@ -1,0 +1,214 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 3-1
+
+## Estatísticas descritivas e Normalidade {-}
+
+### RESUMO {-}
+
+A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados de forma concisa para que outros possam se beneficiar do que foi encontrado.
+
+### Apresentação {-}
+
+A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados de forma concisa para que outros possam se beneficiar do que foi encontrado. Geralmente não é possível apresentar um conjunto de dados completo em uma publicação ou em um  seminário e, mesmo que fosse, é improvável isso permitisse uma boa comunicação dos resultados da pesquisa. Em vez disso, os dados são geralmente resumidos como tabelas de frequência, histogramas e estatísticas descritivas que os leitores ou ouvintes podem assimilar prontamente, mas que ainda transmitem os elementos essenciais do conjunto de dados original. O principal objetivo do cálculo das estatísticas descritivas é transmitir informações essenciais contidas em um conjunto de dados da forma mais concisa e clara possível. 
+
+## Sobre os dados
+
+Considere os dados sobre o comprimento dos brotos de *Banksia ericifolia* de charnecas[^1] na Baía de Jervis, Austrália [@RN146] (Figura \@ref(fig:rmd3banks)). Existem 500 medições, um conjunto de dados formidável. Por inspeção, o comprimento mínimo do broto é 10,0 e o máximo é 44,9 cm. Esses valores definem o intervalo da amostra. Agora precisamos subdividir o intervalo em intervalos ou classes, cada um com o mesmo tamanho. Geralmente, é aconselhável arredondar o valor mínimo para baixo e o valor máximo para valores apropriados ao decidir as classes de intervalos. Nesse caso, parece sensato dividir a faixa de 10 a 45 cm em sete intervalos a cada 5 cm de largura. Se contarmos o número de brotos que se encontram em cada um dos sete intervalos, temos a base para a tabulação da frequência. A coluna de frequência foi obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual foi obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas foram obtidas somando progressivamente as frequências correspondentes. 
+
+[^1]: Charneiras, ou charnecas, são tipos de paisagens ou ecossistemas encontrados principalmente em regiões temperadas, como na Europa e América do Norte, embora também possam ser encontrados em outros lugares do mundo. São caracterizados por uma combinação de vegetação herbácea (gramíneas e ervas) e arbustos resistentes, muitas vezes adaptados a condições de solo pobre e clima adverso. Eles desempenham um papel importante na conservação da biodiversidade e na ecologia das áreas onde são encontrados.
+
+```{r rmd3banks, echo=FALSE, purl=FALSE, fig.cap="Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália."}
+knitr::include_graphics("imagens/banksia.png")
+```
+  
+## Organização básica
+
+```{r, eval=FALSE}
+rm(list=ls(all=TRUE)) #limpa a memória
+```
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("openxlsx") #importa arquivos do excel
+install.packages("fdth")
+```
+
+```{r}
+library(openxlsx)
+```
+
+Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R ([R CRAN](https://cran.r-project.org/) [@RN2774] e [RStudio](https://posit.co/download/rstudio-desktop/) [@RN358]). No exemplo acima, o pacote `openxlsx` permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função `install.packages()`.
+
+Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função `library()`. Por exemplo, para carregar o pacote `openxlsx`, você precisa executar a função `library(openxlsx)`. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+## Importando a planilha
+
+Note que o sómbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+
+```{r, results='hold'}
+library(openxlsx)
+brotos <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/brotos.xlsx",
+                    rowNames = F, colNames = F,
+                    sheet = "Planilha1")
+head(brotos,10)
+head(brotos[, 1:5], 10)
+```
+
+Exibindo os dados importados (esses comando são "case-sensitive" `ignore.case(object)`).
+
+```{r, eval=FALSE, results='hold'}
+#View(brotos)
+print(brotos[1:5,1:5])
+brotos
+str(brotos)
+mode(brotos)
+class(brotos)
+```
+
+Precisaremos converter para um vetor. 
+
+```{r, results='hold'}
+brotos_v <- c(t(brotos))
+brotos_v
+```
+
+E agora visualizando nossos dados.
+
+```{r, eval=FALSE, results='hold'}
+#View(brotos_v)
+print(brotos_v)
+brotos_v
+str(brotos_v)
+mode(brotos_v)
+class(brotos_v)
+```
+
+Tendo em mãos o conjunto total de 500 comprimentos medidos de brotos de *Banksia*, agora **vamos tirar uma subamostra aleatória de uma parte dos 500 valores**. Essa subamostra é tirada usando o comando `size=` no código subsequente, que estabelece o tamanho da subamostra a ser tirada do total de dados. Esse tamanho é estabelecido no quiz. Inclua esse valor de acordo com o que é pedido no quiz. Por exemplo, se for pedido uma subamostra de 150 comprimentos, então `size = 150`. Nesse tutorial usaremos todos os 500 comprimentos. 
+
+```{r, results='hold'}
+set.seed(666)
+brotos_sub <- sample(brotos_v, size = 500, replace = F) #atualize o valor de 'size=' se necessário
+brotos_sub
+```
+
+Para fazermos uma tabela de frequência do comprimento dos brotos carregamos o pacote `fdth` e pedimos a função `range` que retorna o valor máximo e mínimo no vetor.
+
+```{r}
+#| results: hold
+library(fdth)
+range(brotos_sub) #retorna o valor máximo e mínimo
+#?range
+```
+
+Agora é necessário que você substitua os valores de range `r range(brotos_v)` nos valores de início e fim da distribuição de frequência. Os comandos abaixo criam uma tabela de frequência chamada `tf` com valores máximos e mínimos definidos por `range(brotos_v)` em intervalor definidos por `h=5`, e o comando `print(tf)` exibe a tabela de frequência.
+
+```{r, results='hold'}
+tf <- fdt(brotos_sub, start=10, end=45, h=5) #tabela de frequência
+#?fdt #atente para o uso de k, por exemplo tf <- fdt(brotosv, k=5)
+print(tf)
+```
+
+Class limits = limites de classe, f = frequência de classe, rf = frequência relativa da classe, rf(%) = frequência relativa percentual da classe, cf = frequência cumulativa da classe, cf(%) = frequência cumulativa percentual da classe.
+
+Se contarmos o número de brotos que se encontram em cada um dos sete intervalos, temos a base para a tabulação da frequência. Essa tabulação é mostrada na tabela gerada pelos códigos acima. A coluna de frequência foi obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual foi obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas foram obtidas somando progressivamente as frequências correspondentes.
+
+## Gráficos de histograma e boxplot
+
+No código abaixo se define o layout dos gráficos para serem exibidos lado a lado, e na sequência criamos um gráfico de histograma com base na tabela de frequência `tf`. O comando `boxplot()` cria um gráfico de boxplot para os valores em `brotos_v`. O argumento "horizontal = TRUE" indica que o boxplot deve ser horizontal.
+
+```{r, results='hold'}
+par(mfrow = c(1,2)) #gráficos lado a lado
+plot(tf) #distribuição de frequências
+boxplot(brotos_sub, horizontal = TRUE,
+        xlab="Class limits") #boxplot
+par(mfrow = c(1,1)) #gráficos de volta ao normal
+```
+
+Se você recebeu a mensagem de erro ["Error in plot.new() : figure margins too large"]{style="color:red"}, aumente o tamanho da janela do gráfico e execute as últimas três linhas de comando novamente.
+
+## Sumário estatístico geral
+
+```{r, results='hold'}
+summary(brotos_v)
+#?summary
+sd(brotos_v) #desvio padrão
+var(brotos_v) #variância
+```
+
+## Apêndices {.unnumbered}
+
+## Sites consultados {.unnumbered}
+
+## Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "03-rmd3_univ.Rmd", output = "script-rmd3.txt", documentation = 0)
+Script <- readLines("script-rmd3.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd3.txt")
+cat(Script, sep = "\n")
+```
+
+```{r,  eval=FALSE, echo=TRUE, purl=FALSE}
+## rm(list=ls(all=TRUE)) #limpa a memória
+## install.packages("openxlsx") #importa arquivos do excel
+## install.packages("fdth")
+library(openxlsx)
+## getwd()
+## setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+brotos <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/brotos.xlsx",
+                    rowNames = F, colNames = F,
+                    sheet = "Planilha1")
+head(brotos,10)
+head(brotos[, 1:5], 10)
+## #View(brotos)
+## print(brotos[1:5,1:5])
+## brotos
+## str(brotos)
+## mode(brotos)
+## class(brotos)
+brotos_v <- c(t(brotos))
+brotos_v
+## #View(brotosv)
+## print(brotos_v)
+## brotos_v
+## str(brotos_v)
+## mode(brotos_v)
+## class(brotos_v)
+set.seed(666)
+brotos_sub <- sample(brotos_v, size = 500, replace = F) #atualize o valor de 'size=' se necessário
+brotos_sub
+library(fdth)
+range(brotos_sub) #retorna o valor máximo e mínimo
+#?range
+tf <- fdt(brotos_sub, start=10, end=45, h=5) #tabela de frequência
+#?fdt #atente para o uso de k, por exemplo tf <- fdt(brotosv, k=5)
+print(tf)
+par(mfrow = c(1,2)) #gráficos lado a lado
+plot(tf) #distribuição de frequências
+boxplot(brotos_sub, horizontal = TRUE,
+        xlab="Class limits") #boxplot
+par(mfrow = c(1,1)) #gráficos de volta ao normal
+summary(brotos_v)
+#?summary
+sd(brotos_v) #desvio padrão
+var(brotos_v) #variância
+```
+
+## Referências {-}
