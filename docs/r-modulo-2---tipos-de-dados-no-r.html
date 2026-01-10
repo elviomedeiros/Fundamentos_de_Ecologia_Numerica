@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 3 R Modulo 2 - Tipos de Dados no R | Fundamentos de Ecologia Numérica</title>
+  <meta name="description" content="…. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 3 R Modulo 2 - Tipos de Dados no R | Fundamentos de Ecologia Numérica" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="…. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/fundamentos_de_ecologia_numerica" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 3 R Modulo 2 - Tipos de Dados no R | Fundamentos de Ecologia Numérica" />
+  
+  <meta name="twitter:description" content="…. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Prof. Elvio S. F. Medeiros" />
+<meta name="author" content="Laboratório de Ecologia" />
+<meta name="author" content="Universidade Estadual da Paraíba" />
+<meta name="author" content="Campus V, João Pessoa, PB" />
+
+
+<meta name="date" content="2026-01-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introdução-ao-rrstudio.html"/>
+<link rel="next" href="r-modulo-3-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Fundamentos de Ecologia Numérica</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apresentação</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#motivação"><i class="fa fa-check"></i><b>1.1</b> Motivação</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#organização-do-livro"><i class="fa fa-check"></i><b>1.2</b> Organização do livro</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#como-estudar-por-esse-livro"><i class="fa fa-check"></i><b>1.3</b> Como estudar por esse livro?</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#para-um-estudo-aprofundado"><i class="fa fa-check"></i><b>1.3.1</b> Para um estudo aprofundado</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html"><i class="fa fa-check"></i><b>2</b> Introdução ao R/RStudio</a>
+<ul>
+<li class="chapter" data-level="" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#resumo"><i class="fa fa-check"></i>RESUMO</a></li>
+<li class="chapter" data-level="2.1" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#plano-de-estudo"><i class="fa fa-check"></i><b>2.1</b> Plano de estudo</a></li>
+<li class="chapter" data-level="2.2" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#pré-requisitos"><i class="fa fa-check"></i><b>2.2</b> Pré-requisitos</a></li>
+<li class="chapter" data-level="2.3" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#principais-conceitos"><i class="fa fa-check"></i><b>2.3</b> Principais conceitos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#o-ambiente-de-programação-do-r"><i class="fa fa-check"></i><b>2.3.1</b> O ambiente de programação do R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#o-que-é-o-r-studio"><i class="fa fa-check"></i><b>2.4</b> O que é o R Studio?</a></li>
+<li class="chapter" data-level="2.5" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#o-essencial"><i class="fa fa-check"></i><b>2.5</b> O essencial</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#licença-de-software"><i class="fa fa-check"></i><b>2.5.1</b> Licença de software</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#interface-do-usuário"><i class="fa fa-check"></i><b>2.5.2</b> Interface do usuário</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#interface-do-usuário-do-rstudio"><i class="fa fa-check"></i><b>2.5.3</b> Interface do usuário do RStudio</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#projetos"><i class="fa fa-check"></i><b>2.5.4</b> Projetos</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#nomes-de-arquivos"><i class="fa fa-check"></i><b>2.5.5</b> Nomes de arquivos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#preparação-dos-arquivos"><i class="fa fa-check"></i><b>2.6</b> Preparação dos arquivos</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#formatos-de-arquivo-de-dados"><i class="fa fa-check"></i><b>2.6.1</b> Formatos de arquivo de dados</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#o-arquivo-de-espécies"><i class="fa fa-check"></i><b>2.6.2</b> O arquivo de espécies</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#formato-de-valores-separados-por-vírgula-.csv"><i class="fa fa-check"></i><b>2.6.3</b> Formato de valores separados por vírgula (.csv)</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#editando-a-matriz-de-dados"><i class="fa fa-check"></i><b>2.6.4</b> Editando a matriz de dados</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#arquivos-de-resultados"><i class="fa fa-check"></i><b>2.6.5</b> Arquivos de resultados</a></li>
+<li class="chapter" data-level="2.6.6" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#gráficos"><i class="fa fa-check"></i><b>2.6.6</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#conclusão"><i class="fa fa-check"></i><b>2.7</b> Conclusão</a></li>
+<li class="chapter" data-level="2.8" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#sequência-típica-na-preparação-e-análise-de-dados"><i class="fa fa-check"></i><b>2.8</b> Sequência típica na preparação e análise de dados</a></li>
+<li class="chapter" data-level="2.9" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#material-de-apoio"><i class="fa fa-check"></i><b>2.9</b> Material de apoio</a></li>
+<li class="chapter" data-level="" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#apêndices"><i class="fa fa-check"></i>Apêndices</a>
+<ul>
+<li class="chapter" data-level="" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#sites-consultados"><i class="fa fa-check"></i>Sites consultados</a></li>
+<li class="chapter" data-level="2.9.1" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#leitura-suplementar"><i class="fa fa-check"></i><b>2.9.1</b> Leitura suplementar</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introdução-ao-rrstudio.html"><a href="introdução-ao-rrstudio.html#referências"><i class="fa fa-check"></i>Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html"><i class="fa fa-check"></i><b>3</b> R Modulo 2 - Tipos de Dados no R</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#apresentação-1"><i class="fa fa-check"></i>Apresentação</a></li>
+<li class="chapter" data-level="3.1" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#tipos-e-estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>3.1</b> Tipos e estruturas de dados no R</a></li>
+<li class="chapter" data-level="3.2" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#mensagens-de-erro-e-avisos-no-r"><i class="fa fa-check"></i><b>3.2</b> Mensagens de erro e avisos no R</a></li>
+<li class="chapter" data-level="3.3" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#o-que-é-um-script-e-qual-sua-diferença-para-um-código"><i class="fa fa-check"></i><b>3.3</b> O que é um <code>script</code> e qual sua diferença para um <code>código</code>?</a></li>
+<li class="chapter" data-level="3.4" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#tipos-e-estruturas-de-dados-no-r-1"><i class="fa fa-check"></i><b>3.4</b> Tipos e estruturas de dados no R</a></li>
+<li class="chapter" data-level="3.5" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#tipos-de-dados-no-r"><i class="fa fa-check"></i><b>3.5</b> Tipos de dados no R</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#variáveis-e-tipos-básicos-de-dados-figura-reffignucleos"><i class="fa fa-check"></i><b>3.5.1</b> Variáveis e tipos básicos de dados (Figura @ref(fig:nucleos))</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>3.6</b> Estruturas de dados no R</a></li>
+<li class="chapter" data-level="3.7" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#como-pedir-ajuda"><i class="fa fa-check"></i><b>3.7</b> Como pedir ajuda?</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#dentro-do-r"><i class="fa fa-check"></i><b>3.7.1</b> Dentro do R</a></li>
+<li class="chapter" data-level="3.7.2" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#fora-do-r"><i class="fa fa-check"></i><b>3.7.2</b> Fora do R</a></li>
+<li class="chapter" data-level="3.7.3" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#chatgpt"><i class="fa fa-check"></i><b>3.7.3</b> ChatGPT</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#work-flow"><i class="fa fa-check"></i><b>3.8</b> Work flow</a></li>
+<li class="chapter" data-level="3.9" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada"><i class="fa fa-check"></i><b>3.9</b> Reconhecendo a estrutura dos dados do R em uma matriz multivariada</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#organização-básica"><i class="fa fa-check"></i><b>3.9.1</b> Organização básica</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#importando-a-planilha"><i class="fa fa-check"></i><b>3.10</b> Importando a planilha</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#apêndices-1"><i class="fa fa-check"></i>Apêndices</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#snippet-e-chunk"><i class="fa fa-check"></i>Snippet e chunk</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#sites-consultados-1"><i class="fa fa-check"></i>Sites consultados</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#script-limpo"><i class="fa fa-check"></i>Script limpo</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-2---tipos-de-dados-no-r.html"><a href="r-modulo-2---tipos-de-dados-no-r.html#referências-1"><i class="fa fa-check"></i>Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html"><i class="fa fa-check"></i><b>4</b> R Modulo 3-1</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#estatísticas-descritivas-e-normalidade"><i class="fa fa-check"></i>Estatísticas descritivas e Normalidade</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#resumo-1"><i class="fa fa-check"></i>RESUMO</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#apresentação-2"><i class="fa fa-check"></i>Apresentação</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#sobre-os-dados"><i class="fa fa-check"></i><b>4.1</b> Sobre os dados</a></li>
+<li class="chapter" data-level="4.2" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#organização-básica-1"><i class="fa fa-check"></i><b>4.2</b> Organização básica</a></li>
+<li class="chapter" data-level="4.3" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#importando-a-planilha-1"><i class="fa fa-check"></i><b>4.3</b> Importando a planilha</a></li>
+<li class="chapter" data-level="4.4" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#gráficos-de-histograma-e-boxplot"><i class="fa fa-check"></i><b>4.4</b> Gráficos de histograma e boxplot</a></li>
+<li class="chapter" data-level="4.5" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#sumário-estatístico-geral"><i class="fa fa-check"></i><b>4.5</b> Sumário estatístico geral</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#apêndices-2"><i class="fa fa-check"></i>Apêndices</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#sites-consultados-2"><i class="fa fa-check"></i>Sites consultados</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#script-limpo-1"><i class="fa fa-check"></i>Script limpo</a></li>
+<li class="chapter" data-level="" data-path="r-modulo-3-1.html"><a href="r-modulo-3-1.html#referências-2"><i class="fa fa-check"></i>Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentos de Ecologia Numérica</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-modulo-2---tipos-de-dados-no-r" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number"> 3</span> R Modulo 2 - Tipos de Dados no R<a href="r-modulo-2---tipos-de-dados-no-r.html#r-modulo-2---tipos-de-dados-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="apresentação-1" class="section level3 unnumbered hasAnchor">
+<h3>Apresentação<a href="r-modulo-2---tipos-de-dados-no-r.html#apresentação-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>O R é uma <strong>linguagem de expressão</strong> com uma sintaxe muito simples (veja <span class="citation">R. C. Team (<a href="#ref-RN1787" role="doc-biblioref">1999-2024</a>)</span>). Ela é sensível a maiúsculas e minúsculas, como a maioria dos pacotes baseados em UNIX, então <code>A</code> e <code>a</code> são símbolos diferentes e se refeririam a variáveis diferentes. O conjunto de símbolos que podem ser usados nos nomes do R depende do sistema operacional e do país em que o R está sendo executado (tecnicamente, da localidade em uso). Normalmente, todos os símbolos alfanuméricos são permitidos (e em alguns países isso inclui letras acentuadas), além de <code>.</code> e <code>_</code>, com a restrição de que um nome deve começar com <code>.</code> ou uma letra, e se começar com <code>.</code>, o segundo caractere não deve ser um dígito. Os nomes são efetivamente ilimitados em comprimento.</p>
+<div id="hello" class="greeting message" style="color: green;">
+<p><span style="color:red">ATENÇÃO</span>
+Evite usar nomes longos e complicados</p>
+</div>
+<p><strong>Comandos elementares consistem em expressões ou atribuições</strong>. Se uma <code>expressão</code> for dada como um comando, ela é avaliada, impressa (a menos que seja especificamente tornada invisível) e o valor é perdido. Uma <code>atribuição</code> também avalia uma expressão e passa o valor para uma variável, mas o resultado não é automaticamente impresso.</p>
+<p>Os comandos são separados por um ponto e vírgula (<code>;</code>) ou por uma nova linha (<code>Enter</code>). Comandos elementares podem ser agrupados em uma única expressão composta por chaves (<code>{' and '}</code>).</p>
+<p><strong>Comentários</strong> podem ser colocados em quase qualquer lugar, começando com uma marca de hash (<code>#</code>), e tudo até o final da linha é um comentário.</p>
+<p>Se um comando não estiver completo no final de uma linha, o R fornecerá um prompt diferente, por padrão <code>+</code> (ao invés do tradiocional <code>&gt;</code>, nas linhas seguintes e continuará a ler a entrada até que o comando seja sintaticamente completo. Este prompt pode ser alterado pelo usuário. Geralmente, omitiremos o prompt de continuação e indicaremos a continuação apenas recuando.</p>
+<p>As linhas de comando digitadas no console são limitadas a cerca de 4095 bytes (não caracteres).</p>
+<p>No R, uma linguagem de programação amplamente utilizada para análise de dados e estatísticas, os tipos e estruturas de dados desempenham um papel fundamental na manipulação e organização das informações.</p>
+</div>
+<div id="tipos-e-estruturas-de-dados-no-r" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Tipos e estruturas de dados no R<a href="r-modulo-2---tipos-de-dados-no-r.html#tipos-e-estruturas-de-dados-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>No R, uma linguagem de programação amplamente utilizada para análise de dados e estatísticas, os tipos e estruturas de dados desempenham um papel fundamental na manipulação e organização das informações. Você vai conhecer esses tipos de estruturas de dados a seguir, mas antes se familiarize com como o R funciona.</p>
+<p>Para começar a usar o R e analisar os dados do Projeto PPBio, abra o RStudio, verifique sua interface (Figura <a href="r-modulo-2---tipos-de-dados-no-r.html#fig:interface2">3.1</a>) e siga as instruções a seguir.</p>
+<div class="figure"><span style="display:block;" id="fig:interface2"></span>
+<img src="imagens/interfaceR.png" alt="Interface típica do RStudio e nome dos paineis  ou janelas." width="648" />
+<p class="caption">
+Figura 3.1: Interface típica do RStudio e nome dos paineis ou janelas.
+</p>
+</div>
+</div>
+<div id="mensagens-de-erro-e-avisos-no-r" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Mensagens de erro e avisos no R<a href="r-modulo-2---tipos-de-dados-no-r.html#mensagens-de-erro-e-avisos-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>No contexto da linguagem de programação R, mensagens de erro (errors) e mensagens de aviso (warnings) que <span style="color:red">aparecem em vermelho no painel de console</span>. Elas são formas de feedback do sistema que indicam problemas ou situações potencialmente problemáticas durante a execução do código. Aqui está uma breve explicação de cada um:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Erro (<span style="color:red">Error</span>):</strong>
+<ul>
+<li>Um erro ocorre quando algo no código não está correto ou não pode ser executado como esperado.</li>
+<li>Isso pode ser causado por sintaxe incorreta, uso incorreto de funções, operações inválidas, referências a objetos que não existem, entre outros problemas.</li>
+<li>Quando ocorre um erro, a execução do código é interrompida e uma mensagem de erro é exibida no console em vermelho, indicando o tipo de erro e, muitas vezes, a linha onde ocorreu.</li>
+</ul></li>
+<li><strong>Aviso (<span style="color:red">Warning</span>):</strong>
+<ul>
+<li>Não indica erro. Um aviso é emitido quando algo no código pode resultar em um comportamento indesejado ou em resultados inesperados, mas não interrompe necessariamente a execução do código.</li>
+<li>Os avisos geralmente indicam situações que merecem atenção, como conversões de tipos de dados que podem perder informações ou funções que estão sendo usadas de maneira que pode levar a resultados questionáveis.</li>
+<li>Os avisos são exibidos em vermelho no console e fornecem informações sobre a natureza do aviso e, possivelmente, como abordá-lo.</li>
+</ul></li>
+</ol>
+<p>É importante prestar atenção a mensagens de erro e avisos, pois eles fornecem insights sobre problemas em seu código ou potenciais fontes de comportamento inesperado. Resolver erros é fundamental para que o código funcione conforme o esperado. Embora os avisos não interrompam a execução, investigá-los pode ajudar a evitar problemas futuros ou melhorar a qualidade do código.</p>
+</div>
+<div id="o-que-é-um-script-e-qual-sua-diferença-para-um-código" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> O que é um <code>script</code> e qual sua diferença para um <code>código</code>?<a href="r-modulo-2---tipos-de-dados-no-r.html#o-que-é-um-script-e-qual-sua-diferença-para-um-código" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Em programação R, tanto “código” quanto “script” se referem a sequências de instruções escritas na linguagem de programação R (veja também <a href="r-modulo-2---tipos-de-dados-no-r.html#snippet-e-chunk">Snippet e chunk</a>). No entanto, há uma diferença sutil em como esses termos são geralmente usados:</p>
+<ol style="list-style-type: decimal">
+<li>Código:</li>
+</ol>
+<p>Em R, “código” geralmente se refere a linhas individuais ou blocos de instruções de programação R que realizam tarefas ou operações específicas.
+O código pode ser escrito de forma interativa em um console R ou dentro de um arquivo de script.
+O código pode consistir em declarações simples, como atribuir valores a variáveis, realizar cálculos, definir funções ou chamar funções de pacotes.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Script:</li>
+</ol>
+<p>Um “script” em R refere-se a um arquivo contendo uma série de instruções de código R.
+Scripts R são essencialmente arquivos de texto contendo uma sequência de comandos e declarações R que podem ser executados em conjunto.
+Os scripts R permitem que os usuários organizem seu código em unidades reutilizáveis e estruturadas.
+Os scripts R geralmente têm a extensão de arquivo “.R”.</p>
+<p>Em resumo, enquanto “código” se refere a instruções individuais de programação R, “script” se refere a um arquivo contendo uma coleção de código R, geralmente usado para executar tarefas ou análises maiores de forma estruturada e organizada.</p>
+<p>Agora você pode começar a escrever seu código no console. Digite “Início do R Módulo” no console clique em <code>Run</code> (no canto superior direito do painel de edição de código) ou <code>Ctrl+Enter</code> e veja o que acontece:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Início do R Módulo&quot;</span></span></code></pre></div>
+<pre><code>## [1] &quot;Início do R Módulo&quot;</code></pre>
+<p>O R mostra o que você escreveu, e apresenta este <code>[1]</code> do lado. Isso significa que seu resultado foi apresentado na primeira linha. Como você pode ver, o R imprime de volta (no Console) o resultado de comandos que você dá. Você agora pode tentar as operações basicas.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">600</span><span class="sc">+</span><span class="dv">66</span></span></code></pre></div>
+<pre><code>## [1] 666</code></pre>
+<p>Cálculos repetitivos podem ser automatizados usando um <code>loop</code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb5-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb5-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {x<span class="sc">+</span><span class="dv">1</span><span class="ot">-&gt;</span>x}</span>
+<span id="cb7-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb7-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 15</code></pre>
+<p>Aqui o número 1 foi somado cinco vezes ao valor de <code>x</code> que foi armazenado cada vez como <code>x</code> (substituindo o valor anterior) até chegar em 15. Na prática o R calculou 10+1=11, 11+1=12, 12+1=13, 13+1=14, 14+1=15.</p>
+<p>Note que os <code>:</code> foi usado para produzir uma seqüência de números de 1 a 5.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>O R usa os seguintes símbolos para as operações básicas:</p>
+<pre><code>`+` Adição
+`-` Subtração
+`/` Divisão
+`*` Multiplicação
+`^` Potência
+`sqrt` Raiz quadrada (função)
+`log` Logarítmo (função)</code></pre>
+<p>Teste agora outras possibilidades com as operações básicas (veja <span class="citation">Beasley (<a href="#ref-RN1484" role="doc-biblioref">2004</a>)</span> pags 7-10 para outros exemplos de cáculos básicos).</p>
+<div id="hello" class="greeting message" style="color: green;">
+<p>Você já deve estar percebendo o potencial da programação em R como ferramenta para aprender estatística ou análise de dados, duas áreas com muita demanda de profissionais.</p>
+</div>
+<p>Em sua apostila “<em>Conversando com o R usando 57 palavras</em>” <span class="citation">Melo (<a href="#ref-RN2785" role="doc-biblioref">2014</a>)</span> ressalta que a programação em R “ajuda no sentido de prover métodos para resolvermos um problema ou entendermos uma análise”. Isso porque, primeiro, temos que reunir os elementos fundamentais e informações necessários, depois identificar e dar nomes a esses elementos, para apenas depois disso, decompor nosso problema em suas partes e, finalmente, colocar essas partes em sequência lógica <span class="citation">(<a href="#ref-RN2785" role="doc-biblioref">Melo 2014</a>)</span>.</p>
+<p>A forma linear (passo-a-passo), mas hierarquicamente estruturada, da programação em R, permite uma construção intuitiva e lógica do raciocínio associado a cada análise, que, com o tempo, se torna parte cotidiano das nossas análises de dados. Assim como, na Língua Portuguesa, aprendemos o alfabeto, depois as palavras e eventualmente conversamos sem precisar pensar sobre a gramática e construção das frases.</p>
+</div>
+<div id="tipos-e-estruturas-de-dados-no-r-1" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Tipos e estruturas de dados no R<a href="r-modulo-2---tipos-de-dados-no-r.html#tipos-e-estruturas-de-dados-no-r-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>O R oferece uma variedade de tipos e estruturas de dados que permitem aos cientistas de dados e analistas manipular e organizar informações de forma eficiente. A escolha da estrutura de dados correta depende das necessidades específicas de análise e do tipo de dados que você está lidando.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Tipos de Dados Básicos</strong>:
+<ul>
+<li><strong>Numéricos</strong>: Representam valores numéricos, como inteiros ou números de ponto flutuante.</li>
+<li><strong>Caracteres</strong>: Armazenam texto e são usados para representar sequências de caracteres.</li>
+<li><strong>Lógicos</strong>: Armazenam valores lógicos (TRUE ou FALSE), úteis para expressar afirmações condicionais.</li>
+<li><strong>Complexos</strong>: Armazenam números complexos.</li>
+</ul></li>
+<li><strong>Vetores</strong>:
+<ul>
+<li>Os vetores são a estrutura de dados mais básica no R.</li>
+<li>Eles podem conter elementos de um único tipo de dado (exemplo: vetor numérico, de caracteres ou lógico).</li>
+<li>Os vetores são criados usando a função <code>c()</code>.</li>
+</ul></li>
+<li><strong>Matrizes</strong>:
+<ul>
+<li>Matrizes são vetores bidimensionais, onde os elementos são organizados em linhas e colunas.</li>
+<li>Todos os elementos de uma matriz devem ser do mesmo tipo de dado.</li>
+<li>Matrizes podem ser criadas usando a função <code>matrix()</code>.</li>
+</ul></li>
+<li><strong>Data Frames</strong>:
+<ul>
+<li>Data frames são estruturas de dados tabulares semelhantes a planilhas ou tabelas de banco de dados.</li>
+<li>Cada coluna de um data frame pode conter um tipo de dado diferente.</li>
+<li>Data frames são amplamente usados para armazenar e manipular conjuntos de dados.</li>
+<li>São frequentemente criados com funções como <code>data.frame()</code> ou lidos de arquivos externos.</li>
+</ul></li>
+<li><strong>Fatores</strong>:
+<ul>
+<li>Fatores são usados para representar variáveis categóricas ou de fatores.</li>
+<li>São úteis para análises estatísticas e gráficos.</li>
+<li>Podem ser criados com a função <code>factor()</code>.</li>
+</ul></li>
+<li><strong>Listas</strong>:
+<ul>
+<li>Listas são estruturas de dados flexíveis que podem conter elementos de diferentes tipos.</li>
+<li>Os elementos de uma lista podem ser acessados por meio de índices ou nomes.</li>
+<li>Listas são criadas usando a função <code>list()</code>.</li>
+</ul></li>
+<li><strong>Arrays</strong>:
+<ul>
+<li>Arrays são estruturas multidimensionais que podem conter elementos de um único tipo de dado.</li>
+<li>São semelhantes às matrizes, mas podem ter mais de duas dimensões.</li>
+<li>Arrays são criados com a função <code>array()</code>.</li>
+</ul></li>
+<li><strong>Tabelas Hash</strong>:
+<ul>
+<li>Tabelas hash são estruturas de dados que associam chaves a valores.</li>
+<li>Não são nativas do R, mas podem ser implementadas com pacotes como o <code>hash</code>.</li>
+</ul></li>
+</ol>
+</div>
+<div id="tipos-de-dados-no-r" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Tipos de dados no R<a href="r-modulo-2---tipos-de-dados-no-r.html#tipos-de-dados-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="variáveis-e-tipos-básicos-de-dados-figura-reffignucleos" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Variáveis e tipos básicos de dados (Figura <a href="r-modulo-2---tipos-de-dados-no-r.html#fig:nucleos">3.2</a>)<a href="r-modulo-2---tipos-de-dados-no-r.html#variáveis-e-tipos-básicos-de-dados-figura-reffignucleos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Tipos de Dados Básicos</strong>:
+<ul>
+<li><strong>Numéricos</strong>: Representam valores numéricos, como inteiros ou números de ponto flutuante.</li>
+<li><strong>Caracteres</strong>: Armazenam texto e são usados para representar sequências de caracteres.</li>
+<li><strong>Lógicos</strong>: Armazenam valores lógicos (TRUE ou FALSE), úteis para expressar afirmações condicionais.</li>
+<li><strong>Complexos</strong>: Armazenam números complexos.</li>
+</ul></li>
+</ol>
+<p>Para guardar os valores em uma variável em R, usamos <code>&lt;-</code> (operador de atribuição). Neste caso, o print automático não ocorre, e caso queira checar qual é o valor daquela variável, basta digitar seu nome novamente, ou utilizar o comando <code>print(nome_da_variavel)</code>.</p>
+<p>Vejamos:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb12-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb12-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb12-2" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb12-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb12-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
+<pre><code>## [1] 8
+## [1] 8
+## [1] &quot;numeric&quot;</code></pre>
+<p>Criamos um <strong>objeto</strong> do R chamado <code>a</code> que armazena o resultado de <code>5+3</code>. Objetos são palavras ou letras às quais são atribuídos dados. A atribuição possibilita a manipulação de dados ou armazenamento dos resultados de análises <span class="citation">(<a href="#ref-RN2940" role="doc-biblioref">Silva et al. 2022</a>)</span>.</p>
+<p>O objeto <code>a</code> é uma variável numérica, como você pode ver ao usar a função <code>class()</code>. Se quiser trabalhar com inteiros (<code>integer</code>), você deve defini-los como <code>integer</code>, através da função <code>as.integer()</code>.</p>
+<p>Vejamos:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb14-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb14-2" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="dv">3</span>)</span>
+<span id="cb14-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(var1)</span>
+<span id="cb14-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(var2)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;
+## [1] &quot;integer&quot;</code></pre>
+<p>A função <code>class()</code> tem o mesmo efeito que a função <code>mode()</code>. Faça o teste.</p>
+<p>Em R, os dados também podem ser do tipo <code>character</code>, que é uma variável de texto (em outras linguagens pode ser conhecida como <code>string</code>) e <code>logical</code> (que em outras linguagens pode ser conhecida como <code>boolean</code>), e que assume os valores <code>TRUE</code> ou <code>FALSE</code>.</p>
+<p>Exemplos:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">&quot;Ola mundo&quot;</span></span>
+<span id="cb16-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb16-2" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb16-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span>
+<span id="cb16-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(c)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;
+## [1] &quot;logical&quot;</code></pre>
+<div id="hello" class="greeting message" style="color: green;">
+<p>Como você já deve ter percebido, uma grande parte da sua interação com o R é feita por comandos ou <code>funções</code>, onde cada função realiza um determinado papel. Seja comandar o R a mostrar uma variável recem criada, função <code>print()</code>, seja para informar o resultado de uma operação, função <code>log()</code>.</p>
+</div>
+<p>Uma <code>função</code> vem sempre seguida de parênteses <code>()</code> (no formato, <code>função(x)</code>), dentro dos quais colocamos os <code>argumentos</code> da função. Os argumentos, por sua vês, devem ser separados por vírgula <code>,</code>. Os argumentos são informações adicionais que especificam certas particularidades para serem executadas pelas <code>funções</code>.</p>
+<p>Usando a função <code>log()</code> como exemplo, temos:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">x=</span><span class="dv">20</span>, <span class="at">base=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 1.30103</code></pre>
+<p>O argumento <code>x=</code> indica de qual valor queremos o log e o argumento <code>base=</code> indica qual base para o logaritmo o R vai usar.</p>
+<p>Ou, em um segundo caso, podemos ter simplesmente a função sem nenhuma indicação de argumento:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## [1] 2.995732</code></pre>
+<p>Muitas funções possuem opções padrões (<em>default</em>) para alguns de seus argumentos. No caso do log, se não for dado nenhum argumento o <code>default</code> do R é usar o log natural do valor entre parêntesis.</p>
+</div>
+</div>
+<div id="estruturas-de-dados-no-r" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Estruturas de dados no R<a href="r-modulo-2---tipos-de-dados-no-r.html#estruturas-de-dados-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Agora vamos falar das estruturas de dados no R (Figura <a href="r-modulo-2---tipos-de-dados-no-r.html#fig:tipos">3.3</a>).</p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Vetores</strong>:
+<ul>
+<li>Os vetores são a estrutura de dados mais básica no R.</li>
+<li>Eles podem conter elementos de um único tipo de dado (exemplo: numérico, caracteres ou lógico).</li>
+<li>Os vetores são criados usando a função <code>c()</code>.</li>
+</ul></li>
+</ol>
+<p>Como ja foi dito, os vetores são uma sequência simples de elementos do mesmo tipo. Quando definimos uma variável como fizemos anteriormente, é criado um vetor com um elemento (vetor numérico, vetor de caractere, etc.).</p>
+<p>O R opera em <strong>estruturas de dados nomeadas</strong>. A estrutura mais simples é o <strong>vetor numérico</strong>, que é uma entidade única consistindo de uma coleção ordenada de números. Para configurar um vetor chamado x, por exemplo, consistindo de cinco números, a saber, 1.4, 6.5, 3, 4 e 71.2, usa-se o comando R:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.4</span>, <span class="fl">6.5</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="fl">71.2</span>)</span></code></pre></div>
+<p>Esta é uma instrução de atribuição usando a função <code>c()</code> (“combinar”), que neste contexto pode receber um número arbitrário de argumentos de vetor e cujo valor é um vetor obtido pela concatenação de seus argumentos de ponta a ponta.</p>
+<p>Observe que o operador de atribuição (<code>&lt;-</code>), que consiste nos dois caracteres ‘&lt;’ (“menor que”) e ‘-’ (“menos”) ocorrendo estritamente lado a lado, e ele “aponta” para o objeto que recebe o valor da expressão. Na maioria dos contextos, o operador ‘=’ pode ser usado como uma alternativa.</p>
+<p>Observe:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb23-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(var1)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Isso explica aquele <code>[1]</code> que vimos no início do módulo. Quando você associa uma variável dessa forma, o R cria um vetor, e o valor que você definiu será o primeiro item deste vetor.</p>
+<p>Para criarmos vetores com mais de um elemento, incluiremos os valores desejados dentro de um <code>c()</code> que significa <code>combinar</code>.</p>
+<p>Veja o exemplo:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>, <span class="fl">7.8</span>, <span class="dv">332</span>)</span>
+<span id="cb25-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1)</span>
+<span id="cb25-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb25-3" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ola&quot;</span>,<span class="st">&quot;tudo&quot;</span>,<span class="st">&quot;bem&quot;</span>)</span>
+<span id="cb25-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var2)</span>
+<span id="cb25-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb25-5" aria-hidden="true" tabindex="-1"></a>var3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb25-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var3)</span></code></pre></div>
+<pre><code>## [1]   3.0   6.0   7.8 332.0
+## [1] &quot;Ola&quot;  &quot;tudo&quot; &quot;bem&quot; 
+## [1]  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<p>Caso você tente misturar os tipos, o R irá forçar para que os elementos sejam
+todos do mesmo tipo. Veja alguns exemplos:</p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Matrizes</strong>:
+<ul>
+<li>Matrizes são vetores bidimensionais, onde os elementos são organizados em linhas e colunas.</li>
+<li>Todos os elementos de uma matriz devem ser do mesmo tipo de dado.</li>
+<li>Matrizes podem ser criadas usando a função <code>matrix()</code>.</li>
+</ul></li>
+</ol>
+<p>As matrizes são estruturas que correspondem às matrizes matemáticas, conjuntos de elementos com linhas e colunas. Assim como os vetores, todos os seus elementos sao do mesmo tipo. Existem algumas formas de criar uma matriz:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb27-1" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">15</span>,<span class="dv">8</span>),</span>
+<span id="cb27-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb27-2" aria-hidden="true" tabindex="-1"></a> <span class="at">nrow=</span><span class="dv">3</span>,</span>
+<span id="cb27-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb27-3" aria-hidden="true" tabindex="-1"></a> <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb27-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb27-4" aria-hidden="true" tabindex="-1"></a> <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb27-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat1)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    5
+## [2,]   10   30
+## [3,]   15    8</code></pre>
+<p>Ou</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb29-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb29-2" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">30</span>)</span>
+<span id="cb29-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb29-3" aria-hidden="true" tabindex="-1"></a>vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">8</span>) </span>
+<span id="cb29-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb29-4" aria-hidden="true" tabindex="-1"></a>mat2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(vec1, vec2, vec3)</span>
+<span id="cb29-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat2)</span>
+<span id="cb29-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mat2)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## vec1    1    5
+## vec2   10   30
+## vec3   15    8
+## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<p>Ou</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">5</span>),<span class="dv">10</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb31-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb31-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">20</span>),<span class="dv">10</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb31-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb31-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">10</span>),<span class="dv">10</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb31-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb31-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(a,b,c)</span>
+<span id="cb31-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb31-5" aria-hidden="true" tabindex="-1"></a>df1</span></code></pre></div>
+<pre><code>##    a  b  c
+## 1  0 10 10
+## 2  1 10  5
+## 3  5 10  0
+## 4  1 10  0
+## 5  5 10  5
+## 6  0 10  5
+## 7  1  0  5
+## 8  1 10  5
+## 9  0  0  0
+## 10 5 20  5</code></pre>
+<p>Na primeira forma, definimos os elementos da matriz, o número de linhas e colunas através dos <code>argumentos</code> <code>nrow</code> e <code>ncol</code>, e se os elementos serão preenchidos ao longo das linhas (<code>byrow = TRUE</code>) ou ao longo das colunas (<code>byrow = FALSE</code>).</p>
+<p>Na segunda forma, criamos dois vetores e então os juntamos através da função <code>rbind()</code>. Repare que na segunda matriz, o R nomeou automaticamente as linhas da matriz com os nomes dos vetores, ao invés de definir seus números.</p>
+<p>Para selecionar itens de matrizes também utilizamos os colchetes, primeiro especificando a linha e depois a coluna que desejamos retornar:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">2</span>][<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Data Frames</strong>:
+<ul>
+<li>Data frames são estruturas de dados tabulares semelhantes a planilhas ou tabelas de banco de dados.</li>
+<li>Cada coluna de um data frame pode conter um tipo de dado diferente.</li>
+<li>Data frames são amplamente usados para armazenar e manipular conjuntos de dados.</li>
+<li>São frequentemente criados com funções como <code>data.frame()</code> ou lidos de arquivos externos.</li>
+</ul></li>
+</ol>
+<p>O <code>Data Frame</code> é a estrutura do R utilizada para armazenar elementos em forma de tabela, organizados em linhas e colunas. As colunas e linhas podem ser nomeadas. Você pode criar um data frame com a função <code>data.frame()</code>:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="fu">c</span>(<span class="st">&quot;baixo&quot;</span>,<span class="st">&quot;medio&quot;</span>,<span class="st">&quot;alto&quot;</span>),<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
+<span id="cb35-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df1)</span></code></pre></div>
+<pre><code>##   c.1..2..3. c..baixo....medio....alto.. c.TRUE..TRUE..FALSE.
+## 1          1                       baixo                 TRUE
+## 2          2                       medio                 TRUE
+## 3          3                        alto                FALSE</code></pre>
+<p>Ou</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Sp1=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>), <span class="at">Sp2=</span><span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">7</span>,<span class="dv">18</span>)) </span>
+<span id="cb37-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(df2) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb37-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb37-3" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   Sp1 Sp2
+## A   1  21
+## B   5   8
+## C   2  10
+## D   5   7
+## E   3  18</code></pre>
+<p>É possivel plotar esse dataframe:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df2, <span class="at">type=</span><span class="st">&#39;n&#39;</span>); <span class="fu">text</span>(df2, <span class="fu">row.names</span>(df2))</span></code></pre></div>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><code>Dataframes</code> ou <code>Matrizes</code> muito grandes são inviáveis de serem inseridas no ambiente do R através de digitação simples como mostrado anteriormente. Uma opção é usar a função <code>read.table(text="")</code> e colar a matriz de dados entre as aspas <code>"..."</code></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">text =</span> <span class="st">&quot;</span></span>
+<span id="cb40-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="st">Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7</span></span>
+<span id="cb40-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="st">A 0 0 0 0 0 0 6</span></span>
+<span id="cb40-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="st">B 0 0 0 2 0 0 10</span></span>
+<span id="cb40-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="st">C 93 2 0 177 0 260 2</span></span>
+<span id="cb40-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="st">D 0 4 0 8 0 0 83</span></span>
+<span id="cb40-7"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="st">E 0 0 0 0 1 0 0</span></span>
+<span id="cb40-8"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="st">F 0 0 1 0 0 1 0</span></span>
+<span id="cb40-9"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="st">G 0 2 0 2 0 0 0</span></span>
+<span id="cb40-10"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb40-11"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb40-11" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+<pre><code>##   Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7
+## A   0   0   0   0   0   0   6
+## B   0   0   0   2   0   0  10
+## C  93   2   0 177   0 260   2
+## D   0   4   0   8   0   0  83
+## E   0   0   0   0   1   0   0
+## F   0   0   1   0   0   1   0
+## G   0   2   0   2   0   0   0</code></pre>
+<p>O R vem com alguns conjuntos de dados organizados em Data Frame na sua base, para a finalidade de testes e aprendizado. Um deles é o <code>mtcars</code>:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mtcars)</span></code></pre></div>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<p>Algumas funções úteis para conjuntos muito grandes de dados que você deve conhecer:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span>,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb46-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="st">&quot;Mazda RX4&quot;</span>,<span class="st">&quot;gear&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb48-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 21.0 21.0 22.8 21.4 18.7</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb50-1" aria-hidden="true" tabindex="-1"></a>mtcars[,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##  [1] 6 6 4 6 8 6 8 4 4 6 6 8 8 8 8 8 8 4 4 4 4 8 8 8 8 4 4 4 8 6 8 4</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb52-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">3</span>,]</span></code></pre></div>
+<pre><code>##             mpg cyl disp hp drat   wt  qsec vs am gear carb
+## Datsun 710 22.8   4  108 93 3.85 2.32 18.61  1  1    4    1</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mtcars)</span></code></pre></div>
+<pre><code>##  [1] &quot;Mazda RX4&quot;           &quot;Mazda RX4 Wag&quot;       &quot;Datsun 710&quot;         
+##  [4] &quot;Hornet 4 Drive&quot;      &quot;Hornet Sportabout&quot;   &quot;Valiant&quot;            
+##  [7] &quot;Duster 360&quot;          &quot;Merc 240D&quot;           &quot;Merc 230&quot;           
+## [10] &quot;Merc 280&quot;            &quot;Merc 280C&quot;           &quot;Merc 450SE&quot;         
+## [13] &quot;Merc 450SL&quot;          &quot;Merc 450SLC&quot;         &quot;Cadillac Fleetwood&quot; 
+## [16] &quot;Lincoln Continental&quot; &quot;Chrysler Imperial&quot;   &quot;Fiat 128&quot;           
+## [19] &quot;Honda Civic&quot;         &quot;Toyota Corolla&quot;      &quot;Toyota Corona&quot;      
+## [22] &quot;Dodge Challenger&quot;    &quot;AMC Javelin&quot;         &quot;Camaro Z28&quot;         
+## [25] &quot;Pontiac Firebird&quot;    &quot;Fiat X1-9&quot;           &quot;Porsche 914-2&quot;      
+## [28] &quot;Lotus Europa&quot;        &quot;Ford Pantera L&quot;      &quot;Ferrari Dino&quot;       
+## [31] &quot;Maserati Bora&quot;       &quot;Volvo 142E&quot;</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb56-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>gear</span></code></pre></div>
+<pre><code>##  [1] 4 4 4 3 3 3 3 4 4 4 4 3 3 3 3 3 3 4 4 4 3 3 3 3 3 4 5 5 5 5 5 4</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(mtcars)</span></code></pre></div>
+<pre><code>##      Mazda RX4 Mazda RX4 Wag Datsun 710 Hornet 4 Drive Hornet Sportabout
+## mpg      21.00        21.000      22.80         21.400             18.70
+## cyl       6.00         6.000       4.00          6.000              8.00
+## disp    160.00       160.000     108.00        258.000            360.00
+## hp      110.00       110.000      93.00        110.000            175.00
+## drat      3.90         3.900       3.85          3.080              3.15
+## wt        2.62         2.875       2.32          3.215              3.44
+## qsec     16.46        17.020      18.61         19.440             17.02
+## vs        0.00         0.000       1.00          1.000              0.00
+## am        1.00         1.000       1.00          0.000              0.00
+## gear      4.00         4.000       4.00          3.000              3.00
+## carb      4.00         4.000       1.00          1.000              2.00
+##      Valiant Duster 360 Merc 240D Merc 230 Merc 280 Merc 280C Merc 450SE
+## mpg    18.10      14.30     24.40    22.80    19.20     17.80      16.40
+## cyl     6.00       8.00      4.00     4.00     6.00      6.00       8.00
+## disp  225.00     360.00    146.70   140.80   167.60    167.60     275.80
+## hp    105.00     245.00     62.00    95.00   123.00    123.00     180.00
+## drat    2.76       3.21      3.69     3.92     3.92      3.92       3.07
+## wt      3.46       3.57      3.19     3.15     3.44      3.44       4.07
+## qsec   20.22      15.84     20.00    22.90    18.30     18.90      17.40
+## vs      1.00       0.00      1.00     1.00     1.00      1.00       0.00
+## am      0.00       0.00      0.00     0.00     0.00      0.00       0.00
+## gear    3.00       3.00      4.00     4.00     4.00      4.00       3.00
+## carb    1.00       4.00      2.00     2.00     4.00      4.00       3.00
+##      Merc 450SL Merc 450SLC Cadillac Fleetwood Lincoln Continental
+## mpg       17.30       15.20              10.40              10.400
+## cyl        8.00        8.00               8.00               8.000
+## disp     275.80      275.80             472.00             460.000
+## hp       180.00      180.00             205.00             215.000
+## drat       3.07        3.07               2.93               3.000
+## wt         3.73        3.78               5.25               5.424
+## qsec      17.60       18.00              17.98              17.820
+## vs         0.00        0.00               0.00               0.000
+## am         0.00        0.00               0.00               0.000
+## gear       3.00        3.00               3.00               3.000
+## carb       3.00        3.00               4.00               4.000
+##      Chrysler Imperial Fiat 128 Honda Civic Toyota Corolla Toyota Corona
+## mpg             14.700    32.40      30.400         33.900        21.500
+## cyl              8.000     4.00       4.000          4.000         4.000
+## disp           440.000    78.70      75.700         71.100       120.100
+## hp             230.000    66.00      52.000         65.000        97.000
+## drat             3.230     4.08       4.930          4.220         3.700
+## wt               5.345     2.20       1.615          1.835         2.465
+## qsec            17.420    19.47      18.520         19.900        20.010
+## vs               0.000     1.00       1.000          1.000         1.000
+## am               0.000     1.00       1.000          1.000         0.000
+## gear             3.000     4.00       4.000          4.000         3.000
+## carb             4.000     1.00       2.000          1.000         1.000
+##      Dodge Challenger AMC Javelin Camaro Z28 Pontiac Firebird Fiat X1-9
+## mpg             15.50      15.200      13.30           19.200    27.300
+## cyl              8.00       8.000       8.00            8.000     4.000
+## disp           318.00     304.000     350.00          400.000    79.000
+## hp             150.00     150.000     245.00          175.000    66.000
+## drat             2.76       3.150       3.73            3.080     4.080
+## wt               3.52       3.435       3.84            3.845     1.935
+## qsec            16.87      17.300      15.41           17.050    18.900
+## vs               0.00       0.000       0.00            0.000     1.000
+## am               0.00       0.000       0.00            0.000     1.000
+## gear             3.00       3.000       3.00            3.000     4.000
+## carb             2.00       2.000       4.00            2.000     1.000
+##      Porsche 914-2 Lotus Europa Ford Pantera L Ferrari Dino Maserati Bora
+## mpg          26.00       30.400          15.80        19.70         15.00
+## cyl           4.00        4.000           8.00         6.00          8.00
+## disp        120.30       95.100         351.00       145.00        301.00
+## hp           91.00      113.000         264.00       175.00        335.00
+## drat          4.43        3.770           4.22         3.62          3.54
+## wt            2.14        1.513           3.17         2.77          3.57
+## qsec         16.70       16.900          14.50        15.50         14.60
+## vs            0.00        1.000           0.00         0.00          0.00
+## am            1.00        1.000           1.00         1.00          1.00
+## gear          5.00        5.000           5.00         5.00          5.00
+## carb          2.00        2.000           4.00         6.00          8.00
+##      Volvo 142E
+## mpg       21.40
+## cyl        4.00
+## disp     121.00
+## hp       109.00
+## drat       4.11
+## wt         2.78
+## qsec      18.60
+## vs         1.00
+## am         1.00
+## gear       4.00
+## carb       2.00</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mtcars)</span></code></pre></div>
+<pre><code>## [1] 32</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(mtcars)</span></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb64-1" aria-hidden="true" tabindex="-1"></a>mtcars[mtcars<span class="sc">&lt;=</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##   [1] 2.760 2.930 3.000 2.760 2.620 2.875 2.320 2.200 1.615 1.835 2.465 1.935
+##  [13] 2.140 1.513 2.770 2.780 0.000 0.000 1.000 1.000 0.000 1.000 0.000 1.000
+##  [25] 1.000 1.000 1.000 0.000 0.000 0.000 0.000 0.000 0.000 1.000 1.000 1.000
+##  [37] 1.000 0.000 0.000 0.000 0.000 1.000 0.000 1.000 0.000 0.000 0.000 1.000
+##  [49] 1.000 1.000 1.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+##  [61] 0.000 0.000 0.000 0.000 0.000 1.000 1.000 1.000 0.000 0.000 0.000 0.000
+##  [73] 0.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 3.000 3.000 3.000 3.000
+##  [85] 3.000 3.000 3.000 3.000 3.000 3.000 3.000 3.000 3.000 3.000 3.000 1.000
+##  [97] 1.000 2.000 1.000 2.000 2.000 3.000 3.000 3.000 1.000 2.000 1.000 1.000
+## [109] 2.000 2.000 2.000 1.000 2.000 2.000 2.000</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb66-1" aria-hidden="true" tabindex="-1"></a>mtcars[mtcars<span class="sc">==</span><span class="dv">0</span>] </span></code></pre></div>
+<pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb68-1" aria-hidden="true" tabindex="-1"></a>mtcars[mtcars<span class="sc">!=</span><span class="dv">0</span>]</span></code></pre></div>
+<pre><code>##   [1]  21.000  21.000  22.800  21.400  18.700  18.100  14.300  24.400  22.800
+##  [10]  19.200  17.800  16.400  17.300  15.200  10.400  10.400  14.700  32.400
+##  [19]  30.400  33.900  21.500  15.500  15.200  13.300  19.200  27.300  26.000
+##  [28]  30.400  15.800  19.700  15.000  21.400   6.000   6.000   4.000   6.000
+##  [37]   8.000   6.000   8.000   4.000   4.000   6.000   6.000   8.000   8.000
+##  [46]   8.000   8.000   8.000   8.000   4.000   4.000   4.000   4.000   8.000
+##  [55]   8.000   8.000   8.000   4.000   4.000   4.000   8.000   6.000   8.000
+##  [64]   4.000 160.000 160.000 108.000 258.000 360.000 225.000 360.000 146.700
+##  [73] 140.800 167.600 167.600 275.800 275.800 275.800 472.000 460.000 440.000
+##  [82]  78.700  75.700  71.100 120.100 318.000 304.000 350.000 400.000  79.000
+##  [91] 120.300  95.100 351.000 145.000 301.000 121.000 110.000 110.000  93.000
+## [100] 110.000 175.000 105.000 245.000  62.000  95.000 123.000 123.000 180.000
+## [109] 180.000 180.000 205.000 215.000 230.000  66.000  52.000  65.000  97.000
+## [118] 150.000 150.000 245.000 175.000  66.000  91.000 113.000 264.000 175.000
+## [127] 335.000 109.000   3.900   3.900   3.850   3.080   3.150   2.760   3.210
+## [136]   3.690   3.920   3.920   3.920   3.070   3.070   3.070   2.930   3.000
+## [145]   3.230   4.080   4.930   4.220   3.700   2.760   3.150   3.730   3.080
+## [154]   4.080   4.430   3.770   4.220   3.620   3.540   4.110   2.620   2.875
+## [163]   2.320   3.215   3.440   3.460   3.570   3.190   3.150   3.440   3.440
+## [172]   4.070   3.730   3.780   5.250   5.424   5.345   2.200   1.615   1.835
+## [181]   2.465   3.520   3.435   3.840   3.845   1.935   2.140   1.513   3.170
+## [190]   2.770   3.570   2.780  16.460  17.020  18.610  19.440  17.020  20.220
+## [199]  15.840  20.000  22.900  18.300  18.900  17.400  17.600  18.000  17.980
+## [208]  17.820  17.420  19.470  18.520  19.900  20.010  16.870  17.300  15.410
+## [217]  17.050  18.900  16.700  16.900  14.500  15.500  14.600  18.600   1.000
+## [226]   1.000   1.000   1.000   1.000   1.000   1.000   1.000   1.000   1.000
+## [235]   1.000   1.000   1.000   1.000   1.000   1.000   1.000   1.000   1.000
+## [244]   1.000   1.000   1.000   1.000   1.000   1.000   1.000   1.000   4.000
+## [253]   4.000   4.000   3.000   3.000   3.000   3.000   4.000   4.000   4.000
+## [262]   4.000   3.000   3.000   3.000   3.000   3.000   3.000   4.000   4.000
+## [271]   4.000   3.000   3.000   3.000   3.000   3.000   4.000   5.000   5.000
+## [280]   5.000   5.000   5.000   4.000   4.000   4.000   1.000   1.000   2.000
+## [289]   1.000   4.000   2.000   2.000   4.000   4.000   3.000   3.000   3.000
+## [298]   4.000   4.000   4.000   1.000   2.000   1.000   1.000   2.000   2.000
+## [307]   4.000   2.000   1.000   2.000   2.000   4.000   6.000   8.000   2.000</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">as.matrix</span>(mtcars))</span></code></pre></div>
+<pre><code>## [1] 352</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mtcars)</span></code></pre></div>
+<pre><code>## [1] 32 11</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(mtcars[mtcars<span class="sc">==</span><span class="dv">0</span>])</span></code></pre></div>
+<pre><code>## [1] 37</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span></code></pre></div>
+<pre><code>##       mpg             cyl             disp             hp       
+##  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+##  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+##  Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+##  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+##  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+##  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+##       drat             wt             qsec             vs        
+##  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+##  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+##  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+##  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+##  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+##  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+##        am              gear            carb      
+##  Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+##  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+##  Median :0.0000   Median :4.000   Median :2.000  
+##  Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+##  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+##  Max.   :1.0000   Max.   :5.000   Max.   :8.000</code></pre>
+<p>As funções <code>str()</code> e <code>summary()</code> trazem algumas informaçoes úteis sobre o data frame, de uma forma geral. É comum utiliza-las ao importar uma base de dados para o R, para se ter uma ideia do que está sendo analisado.
+O <code>str()</code> conta as linhas e colunas e mostra os seus tipos e alguns valores de exemplo. Já o <code>summary()</code> traz médias, medianas, máximos, mínimos e quantidade de valores indisponíveis em cada coluna.</p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Fatores</strong>:
+<ul>
+<li>Fatores são usados para representar variáveis categóricas ou de fatores.</li>
+<li>São úteis para análises estatísticas e gráficos.</li>
+<li>Podem ser criados com a função <code>factor()</code>.</li>
+</ul></li>
+</ol>
+<p>Por fim, temos os fatores (<code>factors</code>). Fatores são usados para representar categorias. Isso quer dizer que em uma variável do tipo <code>factor</code>, aquele valor terá uma quantidade limitada de valores. Pense, por exemplo, nos meses do ano ou letras do alfabeto. Existe um número definido de meses, e o valor estará dentro destas possibilidades. Um nome de uma pessoa, ao contrário, tem infinitas possibilidades, pois não existe uma lista pré-definida de nomes de pessoas, e qualquer um pode criar um novo nome. Para criar um fator, vamos aproveitar o exemplo dos meses do ano e utilizar a função <code>factor()</code>:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb80-1" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Jan&quot;</span>,<span class="st">&quot;Jan&quot;</span>,<span class="st">&quot;Feb&quot;</span>,<span class="st">&quot;Mar&quot;</span>,<span class="st">&quot;Apr&quot;</span>,<span class="st">&quot;Apr&quot;</span>,<span class="st">&quot;May&quot;</span>,<span class="st">&quot;Jan&quot;</span>,<span class="st">&quot;Jan&quot;</span>,<span class="st">&quot;May&quot;</span>,<span class="st">&quot;May&quot;</span>,<span class="st">&quot;Jun&quot;</span>)</span>
+<span id="cb80-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb80-2" aria-hidden="true" tabindex="-1"></a>meses</span></code></pre></div>
+<pre><code>##  [1] &quot;Jan&quot; &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot; &quot;Apr&quot; &quot;Apr&quot; &quot;May&quot; &quot;Jan&quot; &quot;Jan&quot; &quot;May&quot; &quot;May&quot; &quot;Jun&quot;</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb82-1" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">factor</span>(meses)</span>
+<span id="cb82-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(meses)</span></code></pre></div>
+<pre><code>##  [1] Jan Jan Feb Mar Apr Apr May Jan Jan May May Jun
+## Levels: Apr Feb Jan Jun Mar May</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(meses)</span></code></pre></div>
+<pre><code>## meses
+## Apr Feb Jan Jun Mar May 
+##   2   1   4   1   1   3</code></pre>
+<p>Um <code>vector</code> ou “vetor” é uma estrutura de dados fundamental que armazena uma sequência ordenada de elementos do mesmo tipo. Ao imprimir (<code>print()</code>) o vetor <code>meses</code>, vemos que o R nos indica os níveis (<code>levels</code>), que nada mais são do que os valores únicos que existem naquele vetor. Usando a função <code>table()</code>, podemos ver a contagem de cada uma das categorias. Vemos que elas estão ordenadas em ordem alfabética.</p>
+<p>Como isso pode ser aplicado?</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb86-1" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;Jun&quot;</span>, <span class="st">&quot;Jun&quot;</span>, <span class="st">&quot;Jun&quot;</span>)</span>
+<span id="cb86-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb86-2" aria-hidden="true" tabindex="-1"></a>meses</span></code></pre></div>
+<pre><code>##  [1] &quot;Jan&quot; &quot;Jan&quot; &quot;Jan&quot; &quot;Feb&quot; &quot;Feb&quot; &quot;Feb&quot; &quot;Feb&quot; &quot;Mar&quot; &quot;Mar&quot; &quot;Mar&quot; &quot;Apr&quot; &quot;Apr&quot;
+## [13] &quot;Apr&quot; &quot;May&quot; &quot;May&quot; &quot;May&quot; &quot;Jun&quot; &quot;Jun&quot; &quot;Jun&quot;</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(meses)</span></code></pre></div>
+<pre><code>##  [1] Jan Jan Jan Feb Feb Feb Feb Mar Mar Mar Apr Apr Apr May May May Jun Jun Jun
+## Levels: Apr Feb Jan Jun Mar May</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(meses)</span></code></pre></div>
+<pre><code>##  [1] &quot;Jan&quot; &quot;Jan&quot; &quot;Jan&quot; &quot;Feb&quot; &quot;Feb&quot; &quot;Feb&quot; &quot;Feb&quot; &quot;Mar&quot; &quot;Mar&quot; &quot;Mar&quot; &quot;Apr&quot; &quot;Apr&quot;
+## [13] &quot;Apr&quot; &quot;May&quot; &quot;May&quot; &quot;May&quot; &quot;Jun&quot; &quot;Jun&quot; &quot;Jun&quot;</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(meses)</span></code></pre></div>
+<pre><code>## meses
+## Apr Feb Jan Jun Mar May 
+##   3   4   3   3   3   3</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb94-1" aria-hidden="true" tabindex="-1"></a>riq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb94-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb94-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Mes =</span> meses, <span class="at">Riqueza =</span> riq)</span>
+<span id="cb94-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb94-3" aria-hidden="true" tabindex="-1"></a>riq</span></code></pre></div>
+<pre><code>##  [1] 3 5 7 6 8 9 0 4 6 9 2 6 3 9 6 0 1 6 7</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb96-1" aria-hidden="true" tabindex="-1"></a>dados</span></code></pre></div>
+<pre><code>##    Mes Riqueza
+## 1  Jan       3
+## 2  Jan       5
+## 3  Jan       7
+## 4  Feb       6
+## 5  Feb       8
+## 6  Feb       9
+## 7  Feb       0
+## 8  Mar       4
+## 9  Mar       6
+## 10 Mar       9
+## 11 Apr       2
+## 12 Apr       6
+## 13 Apr       3
+## 14 May       9
+## 15 May       6
+## 16 May       0
+## 17 Jun       1
+## 18 Jun       6
+## 19 Jun       7</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(meses)</span></code></pre></div>
+<pre><code>##  [1] Jan Jan Jan Feb Feb Feb Feb Mar Mar Mar Apr Apr Apr May May May Jun Jun Jun
+## Levels: Apr Feb Jan Jun Mar May</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">factor</span>(meses),riq)</span></code></pre></div>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(riq, meses, mean)</span></code></pre></div>
+<pre><code>## meses: Apr
+## [1] 3.666667
+## ------------------------------------------------------------ 
+## meses: Feb
+## [1] 5.75
+## ------------------------------------------------------------ 
+## meses: Jan
+## [1] 5
+## ------------------------------------------------------------ 
+## meses: Jun
+## [1] 4.666667
+## ------------------------------------------------------------ 
+## meses: Mar
+## [1] 6.333333
+## ------------------------------------------------------------ 
+## meses: May
+## [1] 5</code></pre>
+<p>Uma situação diferente ocorre quando tem-se colunas com o mesmo nome.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb103-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb103-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>),</span>
+<span id="cb103-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="co">#nome duplicado</span></span>
+<span id="cb103-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb103-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">D =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb103-7"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">E =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb103-8"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">F =</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>),</span>
+<span id="cb103-9"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">G =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>),</span>
+<span id="cb103-10"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">E =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="co">#nome duplicado</span></span>
+<span id="cb103-11"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb103-12"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb103-13"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb103-13" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>##   A B A C D E  F G E
+## 1 1 4 7 0 1 1 11 1 2
+## 2 2 5 8 0 1 0 12 2 1
+## 3 3 6 9 1 0 0 13 0 1</code></pre>
+<p>Por exemplo, nesse dataframe temos colunas duplicadas. Nesse caso, encontrar e resolver colunas com o mesmo nome é crucial para garantir a integridade dos dados e realizar uma análise precisa. Você deve consolidar essas colunas duplicadas, somando-as ou fazendo sua média.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Achando colunas com nomes duplicados</span></span>
+<span id="cb105-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-2" aria-hidden="true" tabindex="-1"></a>dup_cols <span class="ot">&lt;-</span> <span class="fu">names</span>(df)[<span class="fu">duplicated</span>(<span class="fu">names</span>(df))]</span>
+<span id="cb105-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Somando colunas com o mesmo nome</span></span>
+<span id="cb105-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col_name <span class="cf">in</span> <span class="fu">unique</span>(dup_cols)) {</span>
+<span id="cb105-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get indices of columns with the same name</span></span>
+<span id="cb105-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-6" aria-hidden="true" tabindex="-1"></a>  col_indices <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> col_name)</span>
+<span id="cb105-7"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sum columns with the same name</span></span>
+<span id="cb105-8"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-8" aria-hidden="true" tabindex="-1"></a>  df[[col_name]] <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(df[, col_indices, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb105-9"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb105-10"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove as colunas duplicadas originais e mantem as novas colunas que são a soma (&quot;except for the first occurrence&quot;)</span></span>
+<span id="cb105-11"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[, <span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">names</span>(df))]</span>
+<span id="cb105-12"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostra a nova tabela com colunas repetidas somadas</span></span>
+<span id="cb105-13"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb105-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##    A B C D E  F G
+## 1  8 4 0 1 3 11 1
+## 2 10 5 0 1 1 12 2
+## 3 12 6 1 0 1 13 0</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Listas</li>
+</ol>
+<p>Listas são um tipo especial de vetor, que podem conter elementos de diferentes tipos, incluindo vetores. Veja a lista baseada em alguns vetores, a seguir:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb107-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">9</span>)</span>
+<span id="cb107-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb107-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>)</span>
+<span id="cb107-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb107-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb107-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb107-4" aria-hidden="true" tabindex="-1"></a>lista1 <span class="ot">&lt;-</span> <span class="fu">list</span>(a,b,c)</span>
+<span id="cb107-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lista1)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 3 6 9
+## 
+## [[2]]
+## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;
+## 
+## [[3]]
+## [1]  TRUE FALSE  TRUE  TRUE</code></pre>
+<p><strong>RESUMO</strong> (De <a href="http://venus.ifca.unican.es/Rintro/dataStruct.html" class="uri">http://venus.ifca.unican.es/Rintro/dataStruct.html</a>)</p>
+<p>• Vetores: arrays unidimensionais usados para armazenar coleções de dados do mesmo tipo</p>
+<p>○ Vetores Numéricos (mode: numeric)<br />
+○ Vetores Complexos (mode: complex)<br />
+○ Vetores Lógicos (mode: logical)<br />
+○ Vetor de Caracteres ou strings de texto (mode: character)</p>
+<p>• Matrizes: arrays bidimensionais para armazenar coleções de dados do mesmo modo. São acessados por dois índices inteiros.<br />
+• Arrays: semelhantes a matrizes, mas podem ser multidimensionais (mais de duas dimensões).<br />
+• Fatores: vetores de variáveis categóricas projetados para agrupar os componentes de outro vetor com o mesmo tamanho.<br />
+• Listas: coleção ordenada de objetos, onde os elementos podem ser de tipos diferentes.<br />
+• Data Frames: generalização de matrizes onde diferentes colunas podem armazenar dados de modo diferente.<br />
+• Funcões: objetos criados pelo usuário e reutilizados para realizar operações específicas.</p>
+<div class="figure"><span style="display:block;" id="fig:nucleos"></span>
+<img src="imagens/nucleos.png" alt="Resumo visual dos tipos de dados no ambiente de programação R. (De: https://www.tutorialkart.com/r-tutorial/r-data-types)" width="386" />
+<p class="caption">
+Figura 3.2: Resumo visual dos tipos de dados no ambiente de programação R. (De: <a href="https://www.tutorialkart.com/r-tutorial/r-data-types" class="uri">https://www.tutorialkart.com/r-tutorial/r-data-types</a>)
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:tipos"></span>
+<img src="imagens/tipos.png" alt="Resumo visual dos tipos de dados no ambiente de programação R. (De: https://lhmet.github.io/adar-ebook/estrutura-dados.html)" width="354" />
+<p class="caption">
+Figura 3.3: Resumo visual dos tipos de dados no ambiente de programação R. (De: <a href="https://lhmet.github.io/adar-ebook/estrutura-dados.html" class="uri">https://lhmet.github.io/adar-ebook/estrutura-dados.html</a>)
+</p>
+</div>
+</div>
+<div id="como-pedir-ajuda" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Como pedir ajuda?<a href="r-modulo-2---tipos-de-dados-no-r.html#como-pedir-ajuda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="dentro-do-r" class="section level3 hasAnchor" number="3.7.1">
+<h3><span class="header-section-number">3.7.1</span> Dentro do R<a href="r-modulo-2---tipos-de-dados-no-r.html#dentro-do-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>No R, você pode solicitar ajuda de várias maneiras:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong><code>help()</code> ou <code>?</code></strong>:</p>
+<p>Você pode usar a função <code>help()</code> seguida pelo nome da função ou pacote sobre o qual você precisa de ajuda. Por exemplo:</p></li>
+</ol>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mean)</span></code></pre></div>
+<p>Ou, de forma mais concisa:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb110-1" aria-hidden="true" tabindex="-1"></a>?mean</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><strong><code>help.search()</code></strong>:</li>
+</ol>
+<p>Você pode pesquisar por termos relacionados à sua dúvida usando a função <code>help.search()</code>.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help.search</span>(<span class="st">&quot;linear regression&quot;</span>)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><strong><code>example()</code></strong>:</li>
+</ol>
+<p>Para ver exemplos de como usar uma função, você pode usar a função <code>example()</code>.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">example</span>(mean)</span></code></pre></div>
+</div>
+<div id="fora-do-r" class="section level3 hasAnchor" number="3.7.2">
+<h3><span class="header-section-number">3.7.2</span> Fora do R<a href="r-modulo-2---tipos-de-dados-no-r.html#fora-do-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>R Site e Documentação Online</strong>:</li>
+</ol>
+<p>O site oficial do R (<a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a>) oferece uma vasta documentação, tutoriais e recursos para ajudá-lo a aprender e resolver problemas.</p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Fóruns e Comunidades Online</strong>:</li>
+</ol>
+<p>Existem várias comunidades online onde você pode fazer perguntas e obter ajuda de outros usuários do R, como o Stack Overflow (<a href="https://stackoverflow.com/" class="uri">https://stackoverflow.com/</a>), o RStudio Community (<a href="https://community.rstudio.com/" class="uri">https://community.rstudio.com/</a>), entre outros.</p>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>Livros e Tutoriais</strong>:</li>
+</ol>
+<p>Existem muitos livros e tutoriais disponíveis que podem ajudá-lo a aprender R, desde os conceitos básicos até técnicas avançadas. Os livros em Português mais importantes são <span class="citation">Ferreira and Oliveira (<a href="#ref-RN2942" role="doc-biblioref">2020</a>)</span>.</p>
+<div id="hello" class="greeting message" style="color: green;">
+<p>Ao usar esses recursos, certifique-se de fornecer informações claras sobre sua dúvida ou problema, incluindo detalhes como o código que você está usando, mensagens de erro (se houver) e o que você já tentou fazer para resolver o problema. Isso ajudará os outros a entenderem melhor sua situação e fornecer uma resposta mais útil.</p>
+</div>
+</div>
+<div id="chatgpt" class="section level3 hasAnchor" number="3.7.3">
+<h3><span class="header-section-number">3.7.3</span> ChatGPT<a href="r-modulo-2---tipos-de-dados-no-r.html#chatgpt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pergunte ao ChatGPT
+<a href="https://chat.openai.com/" class="uri">https://chat.openai.com/</a></p>
+<p><em>Para usar o ChatGPT para pedir ajuda ao R, você pode solicitar assistência na elaboração de código, depurar problemas, ou mesmo pedir orientação sobre como realizar uma determinada tarefa em R. Aqui está um exemplo de como você pode pedir ajuda ao R:</em></p>
+<pre><code>Oi ChatGPT! Estou enfrentando um problema ao tentar realizar uma análise de regressão linear no R.
+Eu tenho um conjunto de dados chamado &quot;dados.csv&quot; e estou tentando ajustar um modelo linear simples
+com a função lm(). No entanto, estou recebendo um erro que não consigo entender.
+Você poderia me ajudar a resolver isso?</code></pre>
+<p><em>Ao fazer uma pergunta específica e fornecer detalhes sobre o que você está tentando alcançar e quais problemas está enfrentando, o ChatGPT pode oferecer orientações úteis e sugestões para ajudá-lo com o seu código em R.</em></p>
+<p>Detalhe, o texto acima foi gerado pelo próprio ChatGPT (Figura <a href="r-modulo-2---tipos-de-dados-no-r.html#fig:22chat">3.4</a>). Você pode chamar o ChatGPT pelo próprio R:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abrir o link para o site oficial do R</span></span>
+<span id="cb114-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">browseURL</span>(<span class="st">&quot;https://chat.openai.com/&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:22chat"></span>
+<img src="imagens/chatgpt.png" alt="Usando o ChatGPT para pedir ajuda sobre o R." width="368" />
+<p class="caption">
+Figura 3.4: Usando o ChatGPT para pedir ajuda sobre o R.
+</p>
+</div>
+</div>
+</div>
+<div id="work-flow" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> Work flow<a href="r-modulo-2---tipos-de-dados-no-r.html#work-flow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="hello" class="greeting message" style="color: green;">
+<p>Você já deve estar percebendo que a programação em R pode se tornar confusa, pela quantidade de possibilidades disponíveis e formas diferentes de se obter o mesmo resultado.</p>
+</div>
+<p>Por isso é necessário que o usuário tenha um workflow que permita o reconhecimento de uma <strong>sequência lógica para estruturar e aplicar</strong> os devidos testes estatísticos e construção de gráficos e tabelas, após a organização e manipulação dos dados. Uma sugestão de workflow preliminar e vista na figura <a href="r-modulo-2---tipos-de-dados-no-r.html#fig:22wf">3.5</a> (modificada de <span class="citation">Oliveira, Guerra, and McDonnell (<a href="#ref-RN2941" role="doc-biblioref">2018</a>)</span>):</p>
+<p>• Carregar os dados<br />
+• Limpar os dados<br />
+• Transformar, visualizar e modelar (fase exploratória)<br />
+• Comunicar o resultado</p>
+<div class="figure"><span style="display:block;" id="fig:22wf"></span>
+<img src="imagens/wf.png" alt="Exemplo de workflow para análises no R (modificada de [@RN2941])" width="696" />
+<p class="caption">
+Figura 3.5: Exemplo de workflow para análises no R (modificada de <span class="citation">(<a href="#ref-RN2941" role="doc-biblioref">Oliveira, Guerra, and McDonnell 2018</a>)</span>)
+</p>
+</div>
+</div>
+<div id="reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> Reconhecendo a estrutura dos dados do R em uma matriz multivariada<a href="r-modulo-2---tipos-de-dados-no-r.html#reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="organização-básica" class="section level3 hasAnchor" number="3.9.1">
+<h3><span class="header-section-number">3.9.1</span> Organização básica<a href="r-modulo-2---tipos-de-dados-no-r.html#organização-básica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>)) <span class="co">#limpa a memória</span></span></code></pre></div>
+<p>Instalando os pacotes necessários para esse módulo</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>) <span class="co">#importa arquivos do excel</span></span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span></code></pre></div>
+<pre><code>## Warning: package &#39;openxlsx&#39; was built under R version 4.3.2</code></pre>
+<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">R. C. Team 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>) <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">R. S. Team 2022</a>)</span>. No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>.</p>
+<p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code>library()</code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code>library(openxlsx)</code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
+<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code>getwd()</code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code>setwd()</code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
+<p>Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do Projeto PPBio chamada ppbio**.xlsx que está no diretório <span style="color:blue">“C:/Meu/Diretório/De/Trabalho/Planilha.xlsx”</span></p>
+<p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.</p>
+<p>Ajuste a segunda linha do código abaixo para refletir <span style="color:red">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
+<p>Definindo o diretório de trabalho e installando os pacotes necessários:</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb119-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Seu/Diretório/De/Trabalho&quot;</span>)</span></code></pre></div>
+<p>O símbolo <code>?</code> é usado para acessar a documentação de uma função ou um pacote no R. Como mostrado acima você pode saber mais sobre a função <code>getwd()</code>, usando o comando <code>?getwd</code>. Isso vai abrir uma página no menu de ajuda com a descrição, os argumentos, os valores de retorno e os exemplos da função <code>getwd()</code>. Você também pode usar o símbolo <code>?</code> para obter informações sobre um pacote inteiro. Por exemplo, se você quiser saber mais sobre o pacote <code>openxlsx</code>, você pode digitar <code>?openxlsx</code>. Isso vai abrir uma página com a visão geral, a instalação, os recursos e as referências do pacote solicitado.</p>
+</div>
+</div>
+<div id="importando-a-planilha" class="section level2 hasAnchor" number="3.10">
+<h2><span class="header-section-number">3.10</span> Importando a planilha<a href="r-modulo-2---tipos-de-dados-no-r.html#importando-a-planilha" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb120-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb120-2" aria-hidden="true" tabindex="-1"></a>ppbio <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx&quot;</span>,</span>
+<span id="cb120-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb120-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rowNames =</span> T,</span>
+<span id="cb120-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb120-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colNames =</span> T,</span>
+<span id="cb120-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb120-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;Sheet1&quot;</span>)</span>
+<span id="cb120-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb120-6" aria-hidden="true" tabindex="-1"></a>ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="co">#primeiras 10 linhas e 10 colunas da matriz</span></span></code></pre></div>
+<pre><code>##         ap-davis as-bimac as-fasci ch-bimac ci-ocela ci-orien co-macro co-heter
+## S-A-ZA1        0        1        0        0        0        0        0        0
+## S-R-CC1        0       99        0        0        0        0        0        0
+## S-R-CT1        0      194       55        0        0        5        0        1
+## S-R-CP1        0       19        0        0        0        0        0        0
+## S-A-TA1        0       23        1       13        0        0        0        0
+## S-R-CT2        0      142        3        3        0       69        0        0
+## S-R-CP2        0        5        1        0       40        9        0        0
+## S-A-TA2        0       46        0      178        0        0        0        0
+## S-R-CT3        0      206       64        0        0       25        0        0
+## S-R-CP3        0       16        0        0       13       24        0        0
+##         cr-menez cu-lepid
+## S-A-ZA1        0        0
+## S-R-CC1        0        0
+## S-R-CT1       14        0
+## S-R-CP1        0        0
+## S-A-TA1        0        0
+## S-R-CT2        4        0
+## S-R-CP2        0        0
+## S-A-TA2        0        0
+## S-R-CT3        8        0
+## S-R-CP3        0        0</code></pre>
+<p>Atente para os resultados dos comandos a seguir.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
+<span id="cb122-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb122-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ppbio</span></span>
+<span id="cb122-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
+<span id="cb122-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-5" aria-hidden="true" tabindex="-1"></a><span class="co">#?str</span></span>
+<span id="cb122-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span>(ppbio)</span>
+<span id="cb122-7"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-7" aria-hidden="true" tabindex="-1"></a><span class="co">#?mode</span></span>
+<span id="cb122-8"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio)</span>
+<span id="cb122-9"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-9" aria-hidden="true" tabindex="-1"></a><span class="co">#?class</span></span>
+<span id="cb122-10"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-10" aria-hidden="true" tabindex="-1"></a>ppbio_ma <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(ppbio) <span class="co">#lê ppbio como uma matriz</span></span>
+<span id="cb122-11"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb122-11" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio_ma)</span></code></pre></div>
+<pre><code>##         ap-davis as-bimac as-fasci ch-bimac ci-ocela ci-orien co-macro co-heter
+## S-A-ZA1        0        1        0        0        0        0        0        0
+## S-R-CC1        0       99        0        0        0        0        0        0
+## S-R-CT1        0      194       55        0        0        5        0        1
+## S-R-CP1        0       19        0        0        0        0        0        0
+## S-A-TA1        0       23        1       13        0        0        0        0
+## S-R-CT2        0      142        3        3        0       69        0        0
+## S-R-CP2        0        5        1        0       40        9        0        0
+## S-A-TA2        0       46        0      178        0        0        0        0
+## S-R-CT3        0      206       64        0        0       25        0        0
+## S-R-CP3        0       16        0        0       13       24        0        0
+##         cr-menez cu-lepid
+## S-A-ZA1        0        0
+## S-R-CC1        0        0
+## S-R-CT1       14        0
+## S-R-CP1        0        0
+## S-A-TA1        0        0
+## S-R-CT2        4        0
+## S-R-CP2        0        0
+## S-A-TA2        0        0
+## S-R-CT3        8        0
+## S-R-CP3        0        0
+## &#39;data.frame&#39;:    26 obs. of  35 variables:
+##  $ ap-davis : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ as-bimac : num  1 99 194 19 23 142 5 46 206 16 ...
+##  $ as-fasci : num  0 0 55 0 1 3 1 0 64 0 ...
+##  $ ch-bimac : num  0 0 0 0 13 3 0 178 0 0 ...
+##  $ ci-ocela : num  0 0 0 0 0 0 40 0 0 13 ...
+##  $ ci-orien : num  0 0 5 0 0 69 9 0 25 24 ...
+##  $ co-macro : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ co-heter : num  0 0 1 0 0 0 0 0 0 0 ...
+##  $ cr-menez : num  0 0 14 0 0 4 0 0 8 0 ...
+##  $ cu-lepid : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ cy-gilbe : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ ge-brasi : num  0 0 3 0 0 0 0 0 1 0 ...
+##  $ he-margi : num  0 0 0 0 0 1 0 0 0 0 ...
+##  $ ho-malab : num  0 0 1 5 0 17 10 2 31 4 ...
+##  $ hy-pusar : num  0 0 9 2 0 43 2 0 11 0 ...
+##  $ le-melan : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ le-piau  : num  0 0 3 0 0 1 3 0 2 1 ...
+##  $ le-taeni : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ mo-costa : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ mo-lepid : num  0 1 39 0 0 1 0 0 0 0 ...
+##  $ or-nilot : num  0 2 36 0 0 77 0 0 138 0 ...
+##  $ pa-manag : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ pimel-sp : num  0 0 6 0 0 0 0 0 0 0 ...
+##  $ po-retic : num  0 0 0 0 0 20 0 0 5 0 ...
+##  $ po-vivip : num  0 0 47 15 0 221 32 0 326 10 ...
+##  $ pr-brevi : num  9 0 5 0 1 15 5 2 164 0 ...
+##  $ ps-rhomb : num  0 0 0 0 0 0 0 0 1 0 ...
+##  $ ps-genise: num  0 0 0 0 0 0 0 0 1 0 ...
+##  $ se-heter : num  0 0 40 14 4 60 0 0 38 0 ...
+##  $ se-piaba : num  0 0 68 0 0 0 0 0 0 0 ...
+##  $ se-spilo : num  0 0 0 0 0 0 0 0 1 0 ...
+##  $ st-noton : num  0 0 1 0 0 25 0 0 115 0 ...
+##  $ sy-marmo : num  0 0 0 0 0 0 1 0 0 0 ...
+##  $ te-chalc : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ tr-signa : num  0 0 18 0 0 15 0 0 7 0 ...
+## [1] &quot;list&quot;
+## [1] &quot;data.frame&quot;
+##  num [1:26, 1:35] 0 0 0 0 0 0 0 0 0 0 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : chr [1:26] &quot;S-A-ZA1&quot; &quot;S-R-CC1&quot; &quot;S-R-CT1&quot; &quot;S-R-CP1&quot; ...
+##   ..$ : chr [1:35] &quot;ap-davis&quot; &quot;as-bimac&quot; &quot;as-fasci&quot; &quot;ch-bimac&quot; ...</code></pre>
+</div>
+<div id="apêndices-1" class="section level2 unnumbered hasAnchor">
+<h2>Apêndices<a href="r-modulo-2---tipos-de-dados-no-r.html#apêndices-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="snippet-e-chunk" class="section level3 unnumbered hasAnchor">
+<h3>Snippet e chunk<a href="r-modulo-2---tipos-de-dados-no-r.html#snippet-e-chunk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Em programação R, tanto <code>snippet</code> (“trecho de código”) quanto <code>chunk</code> “pedaço de código” referem-se a porções de código usadas dentro de um contexto maior, geralmente no contexto de sessões interativas ou documentos estruturados como R Markdown. Aqui está como eles diferem:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Snippet</strong>:
+<ul>
+<li>Um “trecho de código” em R geralmente se refere a um pedaço pequeno e isolado de código que executa uma tarefa ou operação específica.</li>
+<li>Trechos de código são frequentemente usados de forma interativa, seja em um console R ou dentro de um ambiente de desenvolvimento integrado (IDE) como o RStudio.</li>
+<li>Esses trechos são geralmente segmentos curtos de código usados para experimentação, testes ou cálculos rápidos.</li>
+</ul></li>
+<li><strong>Chunk</strong>:
+<ul>
+<li>Um “trecho” em R é um termo comumente usado no contexto da programação literária, especialmente em documentos escritos usando R Markdown.</li>
+<li>Trechos são blocos maiores de código que podem ser executados independentemente dentro de um documento R Markdown.</li>
+<li>Os trechos são delimitados por delimitadores especiais, como <code>{r}</code>, que indicam ao processador R Markdown que o conteúdo incluído é código R.</li>
+<li>Documentos R Markdown permitem a integração de trechos de código R com texto narrativo, permitindo que os usuários combinem código, resultados e texto explicativo em um único documento.</li>
+</ul></li>
+</ol>
+<p>Em resumo, enquanto um “trecho de código” geralmente se refere a uma pequena e isolada peça de código usada para testes ou experimentação, um “trecho” se refere a um bloco maior de código usado dentro do contexto da programação literária, particularmente em documentos escritos usando R Markdown. Os trechos permitem a integração de código e texto narrativo em documentos estruturados.</p>
+</div>
+</div>
+<div id="sites-consultados-1" class="section level2 unnumbered hasAnchor">
+<h2>Sites consultados<a href="r-modulo-2---tipos-de-dados-no-r.html#sites-consultados-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recomendo visitar esses sites e ver demais conteúdos relacionados</p>
+<p>Visite:<br />
+<a href="https://felipegalvao.com.br/pt/blog/basic-r-introduction-data-types-and-structures/" class="uri">https://felipegalvao.com.br/pt/blog/basic-r-introduction-data-types-and-structures/</a><br />
+<a href="https://lhmet.github.io/adar-ebook/datatype.html" class="uri">https://lhmet.github.io/adar-ebook/datatype.html</a></p>
+<p>Vídeos:<br />
+Objetos, atributos e tipos de dados em R: <a href="https://www.youtube.com/watch?v=YdUUQapPYzs&amp;t=1s" class="uri">https://www.youtube.com/watch?v=YdUUQapPYzs&amp;t=1s</a></p>
+<p>Outros materiais de apoio:<br />
+Tipos de dados e operadores I (Parte 8): <a href="https://www.youtube.com/watch?v=Dy2cI02WbMQ" class="uri">https://www.youtube.com/watch?v=Dy2cI02WbMQ</a><br />
+Tipos de dados e operadores II (Parte 9) <a href="https://www.youtube.com/watch?v=E6ZTBbicTvg" class="uri">https://www.youtube.com/watch?v=E6ZTBbicTvg</a><br />
+Estrutura de dados I (Parte 10): <a href="https://www.youtube.com/watch?v=xzlM33Tqvic" class="uri">https://www.youtube.com/watch?v=xzlM33Tqvic</a><br />
+Estrutura de dados I (Parte 11): <a href="https://www.youtube.com/watch?v=aEaSzlDMcuI" class="uri">https://www.youtube.com/watch?v=aEaSzlDMcuI</a></p>
+</div>
+<div id="script-limpo" class="section level2 unnumbered hasAnchor">
+<h2>Script limpo<a href="r-modulo-2---tipos-de-dados-no-r.html#script-limpo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Início do R Módulo&quot;</span></span>
+<span id="cb124-2"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="dv">600</span><span class="sc">+</span><span class="dv">66</span></span>
+<span id="cb124-3"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb124-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-4" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb124-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb124-6"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb124-7"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-7" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb124-8"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-8" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="dv">3</span>)</span>
+<span id="cb124-9"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(var1)</span>
+<span id="cb124-10"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(var2)</span>
+<span id="cb124-11"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-11" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">&quot;Ola mundo&quot;</span></span>
+<span id="cb124-12"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-12" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb124-13"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-13" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span>
+<span id="cb124-14"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-14" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(c)</span>
+<span id="cb124-15"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-15" aria-hidden="true" tabindex="-1"></a>militares <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Soldado&quot;</span>,<span class="st">&quot;Soldado&quot;</span>,<span class="st">&quot;Coronel&quot;</span>,<span class="st">&quot;General&quot;</span>,<span class="st">&quot;Tenente&quot;</span>,<span class="st">&quot;Tenente&quot;</span>,<span class="st">&quot;Cabo&quot;</span>,<span class="st">&quot;Soldado&quot;</span>,<span class="st">&quot;Soldado&quot;</span>,<span class="st">&quot;Cabo&quot;</span>,<span class="st">&quot;Cabo&quot;</span>,<span class="st">&quot;Soldado&quot;</span>)</span>
+<span id="cb124-16"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-16" aria-hidden="true" tabindex="-1"></a>militares</span>
+<span id="cb124-17"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-17" aria-hidden="true" tabindex="-1"></a>militares <span class="ot">&lt;-</span> <span class="fu">factor</span>(militares)</span>
+<span id="cb124-18"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(militares)</span>
+<span id="cb124-19"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-19" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(militares)</span>
+<span id="cb124-20"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-20" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb124-21"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-21" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(var1)</span>
+<span id="cb124-22"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-22" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>, <span class="fl">7.8</span>, <span class="dv">332</span>)</span>
+<span id="cb124-23"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1)</span>
+<span id="cb124-24"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-24" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ola&quot;</span>,<span class="st">&quot;tudo&quot;</span>,<span class="st">&quot;bem&quot;</span>)</span>
+<span id="cb124-25"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var2)</span>
+<span id="cb124-26"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-26" aria-hidden="true" tabindex="-1"></a>var3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb124-27"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-27" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var3)</span>
+<span id="cb124-28"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-28" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb124-29"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-29" aria-hidden="true" tabindex="-1"></a> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">15</span>,<span class="dv">8</span>),</span>
+<span id="cb124-30"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-30" aria-hidden="true" tabindex="-1"></a> <span class="at">nrow=</span><span class="dv">3</span>,</span>
+<span id="cb124-31"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-31" aria-hidden="true" tabindex="-1"></a> <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb124-32"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-32" aria-hidden="true" tabindex="-1"></a> <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb124-33"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-33" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat1)</span>
+<span id="cb124-34"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-34" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb124-35"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-35" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">30</span>)</span>
+<span id="cb124-36"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-36" aria-hidden="true" tabindex="-1"></a>vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">8</span>) </span>
+<span id="cb124-37"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-37" aria-hidden="true" tabindex="-1"></a>mat2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(vec1, vec2, vec3)</span>
+<span id="cb124-38"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-38" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat2)</span>
+<span id="cb124-39"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-39" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mat2)</span>
+<span id="cb124-40"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-40" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">2</span>][<span class="dv">1</span>]</span>
+<span id="cb124-41"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-41" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">9</span>)</span>
+<span id="cb124-42"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-42" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>)</span>
+<span id="cb124-43"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-43" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb124-44"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-44" aria-hidden="true" tabindex="-1"></a>lista1 <span class="ot">&lt;-</span> <span class="fu">list</span>(a,b,c)</span>
+<span id="cb124-45"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-45" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lista1)</span>
+<span id="cb124-46"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-46" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="fu">c</span>(<span class="st">&quot;baixo&quot;</span>,<span class="st">&quot;medio&quot;</span>,<span class="st">&quot;alto&quot;</span>),<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
+<span id="cb124-47"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-47" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df1)</span>
+<span id="cb124-48"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-48" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mtcars)</span>
+<span id="cb124-49"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-49" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb124-50"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-50" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="st">&quot;Mazda RX4&quot;</span>,<span class="st">&quot;gear&quot;</span>]</span>
+<span id="cb124-51"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-51" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span>]</span>
+<span id="cb124-52"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-52" aria-hidden="true" tabindex="-1"></a>mtcars[,<span class="dv">2</span>]</span>
+<span id="cb124-53"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-53" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">3</span>,]</span>
+<span id="cb124-54"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-54" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mtcars)</span>
+<span id="cb124-55"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-55" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(mtcars)</span>
+<span id="cb124-56"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-56" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mtcars)</span>
+<span id="cb124-57"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-57" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span>
+<span id="cb124-58"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-58" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span>
+<span id="cb124-59"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-59" aria-hidden="true" tabindex="-1"></a><span class="do">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
+<span id="cb124-60"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-60" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages(&quot;openxlsx&quot;) #importa arquivos do excel</span></span>
+<span id="cb124-61"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb124-62"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-62" aria-hidden="true" tabindex="-1"></a><span class="do">## getwd()</span></span>
+<span id="cb124-63"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-63" aria-hidden="true" tabindex="-1"></a><span class="do">## setwd(&quot;C:/Seu/Diretório/De/Trabalho&quot;)</span></span>
+<span id="cb124-64"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-64" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb124-65"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-65" aria-hidden="true" tabindex="-1"></a>ppbio <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/bentos06.xlsx&quot;</span>,</span>
+<span id="cb124-66"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-66" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rowNames =</span> T,</span>
+<span id="cb124-67"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-67" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colNames =</span> T,</span>
+<span id="cb124-68"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-68" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;contagem&quot;</span>)</span>
+<span id="cb124-69"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-69" aria-hidden="true" tabindex="-1"></a>ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="co">#primeiras 10 linhas e 10 colunas da matriz</span></span>
+<span id="cb124-70"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-70" aria-hidden="true" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
+<span id="cb124-71"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-71" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb124-72"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-72" aria-hidden="true" tabindex="-1"></a><span class="co">#ppbio</span></span>
+<span id="cb124-73"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-73" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
+<span id="cb124-74"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-74" aria-hidden="true" tabindex="-1"></a><span class="co">#?str</span></span>
+<span id="cb124-75"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-75" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span>(ppbio)</span>
+<span id="cb124-76"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-76" aria-hidden="true" tabindex="-1"></a><span class="co">#?mode</span></span>
+<span id="cb124-77"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-77" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio)</span>
+<span id="cb124-78"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-78" aria-hidden="true" tabindex="-1"></a><span class="co">#?class</span></span>
+<span id="cb124-79"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-79" aria-hidden="true" tabindex="-1"></a>ppbio_ma <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(ppbio) <span class="co">#lê ppbio como uma matriz</span></span>
+<span id="cb124-80"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb124-80" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio_ma)</span></code></pre></div>
+</div>
+<div id="referências-1" class="section level2 unnumbered hasAnchor">
+<h2>Referências<a href="r-modulo-2---tipos-de-dados-no-r.html#referências-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-RN1484" class="csl-entry">
+Beasley, Colin Robert. 2004. <span>“Bioestatística Usando r. Apostila de Exemplos Para o Biólogo.”</span> Report. <a href="http://www.ead.unicamp.br/minicurso/bw/texto/fdl.pt.html">http://www.ead.unicamp.br/minicurso/bw/texto/fdl.pt.html</a>.
+</div>
+<div id="ref-RN2942" class="csl-entry">
+Ferreira, Eric Batista, and Marcelo Silva de Oliveira. 2020. <em>Introdução à Estatística Com r</em>. Book. Alfenas, MG: Editora Universidade Federal de Alfenas. <a href="https://www.unifal-mg.edu.br/bibliotecas/wp-content/uploads/sites/125/2021/12/32-EBR_Unifal.pdf">https://www.unifal-mg.edu.br/bibliotecas/wp-content/uploads/sites/125/2021/12/32-EBR_Unifal.pdf</a>.
+</div>
+<div id="ref-RN2785" class="csl-entry">
+Melo, Adriano S. 2014. <span>“Conversando Com o r Usando 57 Palavras: Introdução à Programação Com Exemplos Em Ecologia.”</span> Report. <a href="https://ecoevol.ufg.br/adrimelo/prog/Conversando_com_o_R_usando_57_palavras-v13.pdf">https://ecoevol.ufg.br/adrimelo/prog/Conversando_com_o_R_usando_57_palavras-v13.pdf</a>.
+</div>
+<div id="ref-RN2941" class="csl-entry">
+Oliveira, Paulo Felipe de, Saulo Guerra, and Robert McDonnell. 2018. <em>Ciência de Dados Com r: Introdução</em>. Book. Brasília, DF: Editora IBPAD. <a href="https://cdr.ibpad.com.br/">https://cdr.ibpad.com.br/</a>.
+</div>
+<div id="ref-RN2940" class="csl-entry">
+Silva, Fernando Rodrigues da, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, and Maurício Humberto Vancine. 2022. <em>Análises Ecológicas No r</em>. Edited Book. Recife, PE : Bauru, SP: Nupeea, Canal 6. <a href="https://analises-ecologicas.netlify.app/">https://analises-ecologicas.netlify.app/</a>.
+</div>
+<div id="ref-RN1787" class="csl-entry">
+Team, R Core. 1999-2024. <span>“An Introduction to r.”</span> Report. <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html">https://cran.r-project.org/doc/manuals/r-release/R-intro.html</a>.
+</div>
+<div id="ref-RN2774" class="csl-entry">
+———. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Book. Austria: R Foundation for Statistical Computing. <a href="https://www.r-project.org/">https://www.r-project.org/</a>.
+</div>
+<div id="ref-RN358" class="csl-entry">
+Team, R Studio. 2022. <em>RStudio: Integrated Development Environment for r</em>. Book. Boston, MA: RStudio, PBC. <a href="https://posit.co/products/open-source/rstudio/">https://posit.co/products/open-source/rstudio/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introdução-ao-rrstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-modulo-3-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/2-02-rmd2_tiposR.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["fundamentos_de_ecologia_numerica.pdf", "fundamentos_de_ecologia_numerica.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
