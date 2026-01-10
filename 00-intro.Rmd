@@ -1,0 +1,234 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+nocite: |
+  @RN1552, @RN2092, @RN182
+---
+
+# Introdução ao R/RStudio
+
+### RESUMO {-}
+
+Bem-vindo à disciplina de Ecologia Numérica. A base desta disciplina está no uso de técnicas multivariadas de classificação e ordenação, como são usadas em ecologia e gestão de recursos. Todos os textos e aulas foram elaborados para serem complementados pela Bibliografia Básica e pelo Material de Apoio (ver subsequentemente). Usaremos o software RStudio!, desenvolvido por RStudio Team [-@RN358] (http://www.rstudio.com/).
+
+Embora seja necessário algum conhecimento matemático e uma base em bioestatística, estes assuntos não têm uma abordagem basicamente matemática e o material de apoio será usado para revisar temas de outras disciplinas. Os procedimentos são explicados em termos de fórmulas e algoritmos e o aluno obterá pelo menos uma compreensão intuitiva do que os métodos envolvem. Para aqueles com mais interesse nos temas tratados, a bibliografia básica oferece maior profundidade. A Ecologia Numérica é a ferramenta básica do biólogo no tocante à análise quantitativa de quaisquer tipos de dados. Ela cobre, além dos assuntos abordados 
+nessa disciplina, áreas de rápido desenvolvimento de análise temporal e espacial. Esperamos que, ao concluir esta disciplina, o texto seja de valor duradouro em seu trabalho profissional.
+
+Os softwares disponíveis para análise multivariada são diversos. A maioria dos pacotes maiores tem algumas das rotinas padrão, mas um software especializado, como o R/RStudio, também é necessário para fazer o melhor uso dos avanços recentes em aplicações ecológicas. O R é um ambiente e uma linguagem de programação gratuita e de "código aberto”. Veremos mais sobre isso subsequentemente.
+
+Legendre e Legendre [-@RN1278] alertam o ecologista numérico sobre as armadilhas do uso de computadores - que **a computabilidade não garante (i) que os dados satisfaçam o método e (ii) que os resultados sejam interpretados corretamente em termos ecológicos.** A isso, infelizmente, deve ser adicionada a advertência adicional de que os computadores não negam a necessidade de verificar a exatidão dos cálculos.
+
+A conclusão desta disciplina ajudará a evitar essas armadilhas, fornecendo a você as habilidades para aplicar essas técnicas com sucesso para o avanço da ciência e do gerenciamento de nossos recursos naturais. Espero que com a conclusão dessa disciplina o aluno possa evitar essas armadilhas e possua as habilidades para aplicar essas técnicas com sucesso para avançar na sua área de atuação. 
+
+## Plano de estudo 
+
+O objetivo principal é familiarizar-se com o uso do RStudio para que você possa executar as operações básicas com confiança. Você aprenderá como instalar o software, importar e exportar dados, exibi-los em forma de planilha, modificá-los das principais formas e exibir informações básicas. Além disso, você também aprenderá a exportar resultados para permitir a apresentação e análises posteriores em outros pacotes estatísticos. Ao ler os artigos de revisão em Leitura Suplementar, você será apresentado a algumas das diversidades do trabalho multivariado e as críticas que têm recebido na ecologia, mas também um excelente exemplo de uma análise multivariada cuidadosamente descrita. Ele leva você através da configuração objetiva, seleção de caracteres e codificação de dados, em seguida, em várias análises e, em seguida, o desenho de conclusões apropriadas. 
+
+Portanto, para obter o máximo benefício, recomenda-se que você faça o seguinte: 
+
+● leia a o conteúdo Teórico inteiro sobre conceitos-chave minuciosamente;  
+● leia e estude todo o Material de Apoio disponível do Google Sala de Aula;  
+● complete os exemplos e tutorias passo-a-passo (quando houver);  
+● leia os artigos introdutórios na Leitura Suplementar (esse passo não é obrigatório nem necessário para completar o curso;  
+● participe e tire dúvidas no Chat da disciplina no Google Sala de Aula;   
+● complete os Exemplos aplicados;  
+● avalie sua compreensão dos materiais, usando os quizes, que são perguntas de múltipla escolha baseadas no Google Sala de Aula.  
+
+Conforme você avança ao longo da disciplina, concentre-se mais no fluxo de procedimentos para entrada (input) e modificação de dados, em vez de nos detalhes das opções e saídas (outputs). Eles sempre podem ser consultados quando necessário, aqui ou no sistema de ajuda do R/RStudo.
+
+Os scripts do R/RStudio documentam o histórico de sua análise. Também é aconselhável, ao fazer uma análise, registrar notas adicionais sobre a interpretação da análise (usando [#]{style="color:green"}). Isso também pode ser feito diretamente nos arquivos de resultados. 
+
+Ao completar cada Módulo o aluno deve ser capaz de:
+
+● instalar o R e RStudio  
+● decidir a melhor forma de preparar seus dados em vários formatos (.xlsx, .csv, etc)  
+● configurar diretórios de projetos  
+● importar, modificar e exportar seus dados  
+● preparar um arquivo de nome de espécies  
+● particionar arquivos de dados em subconjuntos  
+● considerar o tratamento de valores faltantes  
+● exportar resultados para outros softwares para análise e apresentação  
+● salvar e documentar um arquivo de resultados  
+
+Ao estudar cada módulo, concentre-se mais no fluxo dos procedimentos para entrada e modificação de dados, em vez dos detalhes das opções. Estes podem sempre ser revisados quando necessário, aqui ou nos materiais de apoio. A janela do Console ou (“Work Area”) documenta o histórico de sua análise. Também é aconselhável ao fazer uma análise, registrar e fazer anotações adicionais sobre sua interpretação da análise etc. Isso pode ser feito diretamente na janela de `Scripts.` 
+
+## Pré-requisitos 
+
+Familiaridade básica com computadores, tipos de arquivos (.xlsx, .docx, etc), processadores de texto e planilhas é necessária aqui. Espera-se que você seja capaz de compreender estatísticas univariadas básicas. 
+
+## Principais conceitos 
+
+### O ambiente de programação do R
+
+O programa R oferece uma poderosa ferramenta para manipulação, análise e visualização de dados, e nos últimos anos tornou-se muito popular entre os ecologistas (e não apenas eles). Ele oferece grande liberdade e permite que você faça o que quiser com seus dados, o que não é o caso de softwares clicáveis como SAS, SPSS ou STATISTICA, entre outros. No entanto, ele também surge com uma curva de aprendizado íngreme, tendo em vista sua linguagem baseada em S/S-Plus, e um certo nível de frustração por conta de mensagens de erro frequentes. A menor imprecisão na digitação do código impede que ele seja executado, e gasto de tempo na busca do erro. Isso, em parte, estimula a "copia-cola" de scripts prontos, levando o usuário a executar analises sem saber o que está fazendo. Exceto pelo livro de Jean Valentin [@RN2759], a grande maioria dos textos impressos em ecologia numérica são em inglês. Assim como inúmeros tutoriais em inglês pela internet (veja [Introduction to R for Ecologists de David Zelený](https://www.davidzeleny.net/wiki/doku.php/recol:start). Em português temos o excelente livro on-line [Análises Ecológicas no R](https://analises-ecologicas.com/) de @RN2940. 
+
+O R não é um software do tipo aplicativo, é um ambiente de programação com um conjunto integrado de ferramentas de software para manipulação de dados, cálculo e apresentação gráfica. A linguagem R foi elaborada inicialmente com o objetivo específico de análises de dados, na qual muitas técnicas estatísticas, clássicas e modernas, podem ser implementadas, entre outras coisas não tão estatísticas. Algumas dessas técnicas estão implementadas no ambiente básico do R ("R base"), mas muitas estão implementadas em pacotes adicionas ("packages").
+
+O ambiente R foi desenvolvido baseado na linguagem S, no final da década de 90 início dos anos 2000. A sua estrutura de código aberto (que vem da linguagem S) e de software público e gratuito atraiu um grande número de desenvolvedores, sendo que há hoje inúmeros pacotes para o R (veja [Introdução ao R para Análise de Dados em Consultoria Ambiental](https://melina-leite.github.io/consultR/)).
+
+Para um excelente minicurso introdutório sobre o R [clique aqui](https://www.youtube.com/watch?v=2mS-SzVWPZQ&list=PLzWDDw1w8cTS4i_B49WOWtjngjcMqTruG&index=1)
+
+
+> “Uma das coisas mais importantes que você pode fazer é dedicar um tempo para aprender uma linguagem de programação de verdade [e aprender a base teórica e estatística]. Aprender a programar é como aprender outro idioma: exige tempo e treinamento, e não há resultados práticos imediatos. Mas se você supera essa primeira subida íngreme da curva de aprendizado, os ganhos como cientista são enormes. Programar não vai apenas livrar você da camisa de força dos pacotes estatísticos, mas também irá aguçar suas habilidades analíticas e ampliar os horizontes de modelagem ecológica e estatística.” 
+>
+> --- (Nicholas J. Gotelli em Gotelli &  Ellison 2011)
+
+
+Os softwares disponíveis para análise multivariada são diversificados. A maioria dos pacotes tem algumas das análises padrão, mas o R é necessário para fazer o melhor uso dos recentes avanços em aplicações ecológicas. A literatura, por outro lado, alerta o ecologista numérico para as armadilhas do uso de computadores. A computação não garante (i) que os dados satisfaçam o método, e (ii) que os resultados sejam interpretados corretamente em termos ecológicos. Para isso, é necessária uma base teórica forte além de que os computadores não negam a necessidade de verificar a correção dos cálculos. Uma das ferramentas mais populares para análise de dados no R é o RStudio, uma interface de desenvolvimento integrada (IDE) que oferece recursos avançados para desenvolvimento, depuração e gerenciamento de projetos em R. Embora o RStudio seja uma ferramenta poderosa para análise de dados, é importante lembrar que a análise multivariada não depende apenas do software utilizado, mas também de uma base teórica forte e de verificação da correção dos cálculos. Além disso, a literatura alerta que o uso de computadores não garante a adequação dos dados ao método e a interpretação correta dos resultados em termos ecológicos. Portanto, é importante combinar o uso de ferramentas como o RStudio com uma sólida formação teórica e verificação rigorosa dos resultados.
+
+## O que é o R Studio? 
+
+O RStudio é um ambiente integrado de desenvolvimento (IDE) para a linguagem de programação R, projetado para ajudar os usuários a trabalhar com dados de forma mais eficiente e produtiva (Figura \@ref(fig:rm1fig1)). Ele oferece uma ampla variedade de recursos e ferramentas para análise de dados, incluindo edição de código, visualização de gráficos, depuração, gerenciamento de projetos e colaboração. O RStudio é gratuito e de código aberto, disponível para Windows, Mac e Linux, e é usado por uma comunidade crescente de cientistas de dados, pesquisadores, analistas e desenvolvedores em todo o mundo. Ele oferece suporte para várias bibliotecas e pacotes do R, incluindo o `tidyverse`, que é uma coleção popular de pacotes para manipulação de dados e visualização. Com o RStudio, os usuários podem facilmente importar, manipular e visualizar dados, executar análises estatísticas e criar visualizações gráficas interativas. Além disso, o RStudio oferece a possibilidade de publicar relatórios e apresentações dinâmicas em diversos formatos, como HTML, PDF e Word, facilitando a comunicação e colaboração entre os usuários.
+
+```{r rm1fig1, echo=FALSE, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R."}
+knitr::include_graphics("imagens/rm1.fig1.png")
+```
+
+O RStudio oferece diversas vantagens em relação ao uso do R base. Algumas dessas vantagens incluem:
+
+1. Interface amigável: o RStudio possui uma interface gráfica amigável e intuitiva, com recursos como realce de sintaxe, sugestões de código e facilidade na navegação entre arquivos, o que torna o processo de desenvolvimento mais fácil e produtivo. 
+2. Facilidade de gerenciamento de projetos: o RStudio oferece ferramentas para gerenciamento de projetos, que permitem aos usuários organizar e controlar arquivos e scripts em um ambiente centralizado. 
+3. Depuração eficiente: o RStudio oferece recursos de depuração integrados, como pontos de interrupção e rastreamento de variáveis, que facilitam a identificação e correção de erros no código. 
+4. Suporte para colaboração: o RStudio permite que múltiplos usuários colaborem em um projeto, com recursos como controle de versão integrado e ferramentas para compartilhamento de código. 
+5. Integração com outras ferramentas: o RStudio integra-se com diversas ferramentas populares de análise de dados, como o Git e o LaTeX, permitindo uma maior eficiência e produtividade no processo de análise e geração de relatórios. 
+
+Essas são apenas algumas das vantagens que o RStudio oferece em relação ao R. É importante notar que, embora o RStudio seja uma ferramenta poderosa para análise de dados, ele não substitui a necessidade de conhecimento em R e estatística para obter resultados precisos e significativos. 
+
+## O essencial 
+
+### Licença de software
+
+A licença de uso do RStudio depende da versão do software que está sendo utilizada. O RStudio oferece duas versões principais: a versão gratuita e a versão paga, conhecida como RStudio Pro. A versão gratuita do RStudio é licenciada sob a licença AGPLv3, o que significa que é um software de código aberto e livremente distribuível. Isso permite que os usuários baixem, modifiquem e distribuam o código-fonte do RStudio gratuitamente. No entanto, o uso comercial do RStudio sob a licença AGPLv3 pode ter algumas limitações, como a obrigatoriedade de disponibilizar o código-fonte modificado para os usuários. Já a versão paga do RStudio, o RStudio Pro, requer uma licença comercial para uso em ambientes empresariais ou acadêmicos. A licença comercial do RStudio Pro oferece recursos adicionais, como suporte técnico e atualizações regulares do software. Além disso, a licença comercial permite que os usuários utilizem o RStudio Pro em um ambiente sem a obrigação de divulgar o código-fonte modificado. É importante lembrar que as licenças de uso do RStudio podem mudar com o tempo, portanto, é recomendado que os usuários verifiquem as informações de licenciamento diretamente no site do RStudio antes de utilizar o software. 
+
+### Interface do usuário 
+
+Uma interface de programa estatístico é uma ferramenta que permite que os usuários interajam com uma linguagem de programação de maneira mais amigável e visual. Essas interfaces geralmente apresentam uma interface gráfica do usuário (GUI) que oferece um ambiente integrado para a análise de dados. Os usuários podem importar dados, criar visualizações, executar análises estatísticas e gerar relatórios. As interfaces de programa estatístico podem variar desde aplicativos de desktop autônomos até plug-ins para aplicativos de planilha, e muitos são desenvolvidos para atender a necessidades específicas de usuários em áreas como finanças, pesquisa médica, ciências sociais e outras. Essas interfaces tornam a análise de dados mais acessível a uma gama mais ampla de usuários, independentemente de sua experiência em programação ou estatística. 
+
+Linguagens de programação estatística de código aberto tem sido amplamente usadas em análises de dados e pesquisa em todo o mundo. Suas interfaces ou GUIs, embora poderosas, podem ser um pouco intimidadoras para novos usuários, uma vez que é necessário habilidades de programação básicas. 
+
+### Interface do usuário do RStudio 
+
+A interface de usuário do RStudio é composta por várias janelas e painéis que permitem a interação com o R de forma organizada e intuitiva. A janela principal é dividida em quatro painéis (Figura \@ref(fig:R-eng)):
+
+```{r R-eng, echo=FALSE, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/"}
+knitr::include_graphics("imagens/interfaceR-eng.png")
+```
+
+**Editor de código**: é onde o usuário pode criar, editar e salvar scripts R. O editor fornece recursos como destaque de sintaxe, indentação automática, autocompletar e outras ferramentas úteis para a programação. 
+
+**Console**: é onde o usuário pode digitar comandos diretamente no R e ver a saída correspondente. É aqui que a maior parte da interação com o R ocorre. 
+
+**Arquivos/Plots/Pacotes/Ajuda**: este painel pode ser dividido em quatro subpainéis, cada um dos quais mostra uma guia diferente. O painel de arquivos permite a navegação pelos arquivos e pastas do computador. O painel de plots mostra gráficos gerados no R. O painel de pacotes permite a instalação, atualização e carregamento de pacotes do R. O painel de ajuda exibe informações sobre funções e pacotes do R. 
+
+**Ambiente/Histórico/Git/Conexões**: este painel também pode ser dividido em quatro subpainéis. O painel de ambiente exibe informações sobre variáveis e funções criadas no R. O painel de histórico mostra os comandos recentes digitados no console. O painel de Git permite que o usuário integre o RStudio com um repositório Git para controle de versão. O painel de conexões permite a conexão com bancos de dados e outros recursos externos. 
+
+A interface de usuário do RStudio também inclui uma barra de ferramentas na parte superior da janela, que fornece acesso rápido a comandos e recursos comuns. Além disso, há uma barra de menus padrão que permite o acesso a todas as opções e recursos do RStudio. No geral, a interface de usuário do RStudio é altamente personalizável e pode ser configurada para atender às necessidades específicas do usuário.
+
+### Projetos 
+
+Um 'Projeto' no RStudio é um conjunto de dados e arquivos de resultados associados entre si, junto com as opções e configurações no momento em que o Projeto foi salvo pela última vez. Quando você abre um projeto, esses arquivos são abertos e suas opções e configurações são restauradas da última vez. Você só pode ter um projeto aberto por vez, mas pode alternar facilmente entre eles abrindo um projeto salvo. Um projeto pode ter mais de um arquivo de dados associado. Se você tiver um projeto aberto e abrir ou criar qualquer arquivo nele, o projeto será considerado modificado. Ao sair do RStudio ou abrir um novo projeto, será perguntado se deseja salvar o projeto modificado. Para melhor gerenciamento de dados, você pode manter seus arquivos de projeto em seus próprios diretórios, separados do software RStudio. Ele lembra o nome do caminho completo para cada projeto. Os detalhes de como o RStudio gerencia diretórios e definições de gerenciamento de arquivos são fornecidos no sistema de Ajuda. Você pode redefinir o diretório padrão (working directory) para que o RStudio navegue até o diretório que você escolheu e abra os arquivos ou projetos que você encontrará no diretório escolhido. 
+
+### Nomes de arquivos
+
+Alguns dos tipos de extensão de arquivos que podem ser criados ou manipulados no RStudio incluem:
+
+● Arquivos de script: São arquivos de texto contendo código R, com extensões de arquivo como .R, .Rmd, .Rnw, .Rhistory, entre outros.  
+● Arquivos de dados: São arquivos contendo dados que podem ser lidos e manipulados com o R, como .csv, .txt, .xls, .xlsx, .rda, .rdata, entre outros.  
+● Arquivos de pacotes: São arquivos compactados que contêm código, documentação e dados necessários para um pacote do R, com extensão .tar.gz.  
+● Arquivos de imagem: São arquivos de imagem gerados a partir de gráficos criados no R, com extensões como .pdf, .png, .jpeg, .bmp, entre outros.  
+● Arquivos de projeto: São arquivos que contêm todas as informações necessárias para reproduzir um projeto R, incluindo arquivos de script, dados e outros recursos, com extensão .Rproj. 
+
+Esses são apenas alguns dos tipos de arquivos que podem ser usados ou gerados no RStudio. O RStudio também oferece suporte a muitos outros tipos de arquivos, como arquivos de ajuda, arquivos de instalação de pacotes, entre outros. 
+
+## Preparação dos arquivos
+
+Arquivos de dados multivariádos são geralmente maiores e mais complexos do que outros, portanto, é necessário cuidado extra. Eles podem ser preparados de duas maneiras principais. A primeira forma é como a matriz completa de valores (.xlsx), onde cada linha mostra os valores de cada coluna. Isso é bom quando há poucos zeros. É assim que uma planilha funciona. A outra maneira, preferida pelos ecologistas para seus dados de espécies, é registrar apenas os valores diferentes de zero para cada espécie. Cada linha, representando uma unidade de amostragem, é então lida como uma lista de verificação ou registro quadrat. Este formato compacto (.csv ou tab delimited) é muito mais eficiente quando o tamanho da matriz de dados é muito grande. O RStudio considera as linhas no arquivo de dados como as unidades de amostragem e as colunas como as variáveis. Dependendo de quantos existem, pode ser mais conveniente inserir seus dados ao contrário e, em seguida, transpô-los para o RStudio. Veremos como fazer isso mais tarde. 
+
+### Formatos de arquivo de dados
+
+Você pode usar qualquer editor de texto, processador de texto ou planilha para construir sua planilha de dados, embora seja recomendado o uso do Excel. No entanto, a entrada de dados no RStudio deve ser feita dentro do ambiente R por linha de comando. Os dados podem ser preparados no formato de planilha (spreadsheet), mas você deve seguir o formato cuidadosamente para saber onde e como colocar as informações nas células da planilha. 
+
+A seguir é apresentada a estrutura básica de uma matriz comunitária e como importar um arquivo XLS/XLSX para o RStudio usando a programação R (Figura \@ref(fig:ppbio2)). Como tudo no R, existem várias formas para se ler os arquivos Excel. Usaremos primeiro pacote readxl (que já vem instalado com o R base) (veja https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/)
+
+```{r ppbio2, echo=FALSE, fig.cap="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada"}
+knitr::include_graphics("imagens/rm1.fig3.png")
+```
+
+### O arquivo de espécies
+
+Ao usar o formato de dados compacto, você viu que as variáveis (colunas) são numeradas, não nomeadas. Portanto, para aplicar um nome a eles, você precisa criar um arquivo de texto separado que contenha os códigos e nomes. Isso é mais útil quando as variáveis são espécies, uma vez que você pode ter um único arquivo de espécie que se aplica a todos os seus arquivos de dados e aos projetos.
+
+O arquivo de espécies também inclui o nome completo da espécie, que é usado em alguns arquivos de resultados. Esta facilidade é obviamente muito útil para registro de campo quando você pode identificar a maioria das espécies. Leve a lista de espécies com você e apenas escreva o número do código em sua folha de dados. Observe também os seguintes guias de formato e regras para o arquivo de espécies. 
+
+● Nomes de código curtos são recomendados para reduzir a superimposição de nomes em quaisquer resultados gráficos.  
+● Os registros podem estar em qualquer ordem neste arquivo. (No entanto, você achará útil manter as espécies em ordem alfabética porque a maior parte dos outputs é ordenada pela sequência de espécies em seu arquivo de espécies.).
+
+### Formato de valores separados por vírgula (.csv) 
+
+Um arquivo ASCII de valores separados por vírgula (formato *.csv) também pode ser usado para importar / exportar dados do RStudio. Este formato de arquivo requer uma formatação muito cuidadosa.
+
+### Editando a matriz de dados 
+
+O RStudio fornece uma pletora de formas para edição de matrizes. Isso é mais útil para pequenas correções. Essas edições são salvas no formato de planilha para que você possa alternar entre a edição do arquivo e o software de planilha. Use a planilha para uma edição mais extensa de suas matrizes. Você pode fazer operações do tipo matriz facilmente na janela principal. A exclusão de linhas ou colunas, transformações e transposição e multiplicação de matrizes estão disponíveis com linhas de comando.
+
+### Arquivos de resultados 
+
+Para manter um registro completo de suas análises, é melhor anexar arquivos de resultados sucessivos a um arquivo de scripts nomeado. Faça isso salvando o arquivo de resultado e, então, após cada operação sucessiva, selecione Salvar script. Você também deve adquirir o hábito de inserir um título descritivo significativo (usando [#]{style="color:green"}) para cada análise. Isso fornece documentação adicional de sua análise e aparece no script. As tabelas no arquivo de resultado são construídas com espaços, não tabulações. Portanto, o alinhamento das colunas no RStudio e nos processadores de texto só é obtido selecionando uma fonte de pitch-fixo, como Courier. Sendo arquivos de texto simples, você também pode pesquisar ou editar arquivos de resultados e scripts usando o R ou qualquer editor de texto. 
+
+Você pode exportar seus arquivos de resultado para sua planilha. 
+
+### Gráficos
+
+Você pode salvar imagens gráficas do RStudio como metarquivos do Windows (.wmf) ou metarquivos aprimorados (\*.emf), usando linhas de comando ou a interface gráfica. Um gráfico salvo dessa forma é uma imagem vetorial que pode ser aberta em um pacote gráfico ou colada em processadores de texto e redimensionada ou editada sem perda de detalhes. No entanto, certifique-se de não alterar a proporção de aspecto ao redimensionar. Se o formato *.emf não for lido corretamente por seu outro software, tente salvar o gráfico no formato .wmf.
+
+## Conclusão 
+
+Foram apresentadas as três primeiras etapas da sequência abaixo, incluindo a preparação da importantíssima matriz de dados e como importá-la e exportá-la. Resumir os dados e decidir sobre o tratamento dos valores ausentes é um primeiro passo para a familiarização com conjuntos de dados multivariados. 
+
+## Sequência típica na preparação e análise de dados 
+
+Para realizar uma análise multivariada, precisamos seguir uma sequência de etapas analíticas, como a seguir:
+
+1. Entrada de dados e verificação de erros  
+Crie os arquivos de dados e espécies usando sua planilha ou editor de texto ou banco de dados. 
+Verifique e arquive uma cópia do seu arquivo de dados limpo.
+
+2. Crie o arquivo de planilha .xlsx  
+Faça isso salvando a planilha ou importando outros formatos para o RStudio. Verifique se há erros de importação. Faça resumos para reproduzir seus registros de unidade de amostragem para dupla verificação.
+
+3. Examine a estrutura básica dos dados  
+Use os comandos de sumários para examinar os valores de linha e coluna 
+
+4. Faça uma Análise de Outliers  
+Procure outliers. Examine as relações entre curvas de espécies e espécie-área. 
+
+5. Decida se/e como modificar os dados  
+Mesclar, particionar, transformar, podar, transpor matriz etc. 
+
+5. Fazer análises, ordenar e classificar (grupos)  
+Cada análise pode exigir o carregamento de várias matrizes principais e secundárias 
+
+6. Inspecionar os resultados (gráficos e arquivos de resultados)
+
+Salve e imprima os resultados 
+
+## Material de apoio 
+
+Recursos na Web Apostilas 
+RStudio Desktop - Posit
+The Comprehensive R Archive Network (r-project.org)
+Landeiro-Introducao.pdf (r-project.org)
+
+## Apêndices {.unnumbered}
+
+### Sites consultados {.unnumbered}
+[https://youtu.be/U6ksXvvY6Q0]  
+[https://youtu.be/a7EJE_2mtGk]
+
+### Leitura suplementar 
+
+A multivariate analysis on spatiotemporal evolution of Covid-19 in Brazil (https://doi.org/10.1016/j.idm.2020.08.012)  
+Genetic markers in the playground of multivariate analysis (https://www.nature.com/articles/hdy2008130)
+
+## Referências {-}
