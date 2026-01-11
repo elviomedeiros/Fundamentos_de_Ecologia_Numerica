@@ -130,7 +130,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 1em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -380,7 +379,7 @@ div.csl-indent {
 </div>
 <div id="sobre-os-dados-2" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Sobre os dados<a href="r-modulo-3.3---gráficos-univariados.html#sobre-os-dados-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Considere os dados merísticos (ou médições morfológicas) da espécie de peixe <em>Cichla ocellaris</em> (tucunaré amarelo) do reservatório da barragem de Gramame, PB <span class="citation">(<a href="#ref-RN146" role="doc-biblioref">BRADSTOCK; TOZER; KEITH, 1997</a>)</span> (Figura <a href="r-modulo-3.3---gráficos-univariados.html#fig:rmd32tucu">9.1</a>). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da pespécie, um conjunto de dados formidável.</p>
+<p>Considere os dados merísticos (ou médições morfológicas) da espécie de peixe <em>Cichla ocellaris</em> (tucunaré amarelo) do reservatório da barragem de Gramame, PB <span class="citation">(<a href="#ref-RN3024" role="doc-biblioref">Medeiros and Rosa 1994</a>)</span> (Figura <a href="r-modulo-3.3---gráficos-univariados.html#fig:rmd32tucu">9.1</a>). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da espécie, um conjunto de dados formidável.</p>
 <div class="figure"><span style="display:block;" id="fig:rmd32tucu"></span>
 <img src="imagens/tucuna.png" alt="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB." width="260" />
 <p class="caption">
@@ -397,7 +396,7 @@ Figura 9.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (tu
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r-modulo-3.3---gráficos-univariados.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;mdatools&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-modulo-3.3---gráficos-univariados.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span></code></pre></div>
 <pre><code>## Warning: package &#39;openxlsx&#39; was built under R version 4.3.2</code></pre>
-<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, R. C., 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, R. S., 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>.</p>
+<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref"><strong>RN2774?</strong></a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref"><strong>RN358?</strong></a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code>library()</code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code>library(openxlsx)</code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code>getwd()</code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code>setwd()</code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-modulo-3.3---gráficos-univariados.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
@@ -709,15 +708,9 @@ Figura 9.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (tu
 </div>
 </div>
 <h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body" entry-spacing="1">
-<div id="ref-RN146" class="csl-entry">
-BRADSTOCK, R. A.; TOZER, M. G.; KEITH, D. A. Effects of high frequency fire on floristic composition and abundance in a fire-prone heathland near Sydney. <strong>Australian Journal of Botany</strong>, 1997. v. 45, p. 641–655.
-</div>
-<div id="ref-RN2774" class="csl-entry">
-TEAM, R. C. <strong><a href="https://www.r-project.org/">R: A language and environment for statistical computing</a></strong>. Austria: R Foundation for Statistical Computing, 2017.
-</div>
-<div id="ref-RN358" class="csl-entry">
-TEAM, R. S. <strong><a href="https://posit.co/products/open-source/rstudio/">RStudio: Integrated Development Environment for R</a></strong>. Boston, MA: RStudio, PBC, 2022.
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-RN3024" class="csl-entry">
+Medeiros, Elvio S. F., and I. L. Rosa. 1994. <span>“Reprodução de Tucunaré Cichla Ocellaris (Perciformes: Cichlidae) Bloch &amp; Schneider, 1801 Na Represa Do Rio Gramame, Alhandra / PB.”</span> Journal Article. <em>Resumos. II Encontro de Iniciação Científica Da UFPB</em>, 82–82.
 </div>
 </div>
             </section>
