@@ -130,6 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 1em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -292,7 +293,7 @@ div.csl-indent {
 <h1><span class="header-section-number"> 4</span> R Modulo 2 - Tipos de Dados no R<a href="r-modulo-2---tipos-de-dados-no-r.html#r-modulo-2---tipos-de-dados-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="apresentação-1" class="section level3 unnumbered hasAnchor">
 <h3>Apresentação<a href="r-modulo-2---tipos-de-dados-no-r.html#apresentação-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>O R é uma <strong>linguagem de expressão</strong> com uma sintaxe muito simples (veja <span class="citation">R. C. Team (<a href="#ref-RN1787" role="doc-biblioref">1999-2024</a>)</span>). Ela é sensível a maiúsculas e minúsculas, como a maioria dos pacotes baseados em UNIX, então <code>A</code> e <code>a</code> são símbolos diferentes e se refeririam a variáveis diferentes. O conjunto de símbolos que podem ser usados nos nomes do R depende do sistema operacional e do país em que o R está sendo executado (tecnicamente, da localidade em uso). Normalmente, todos os símbolos alfanuméricos são permitidos (e em alguns países isso inclui letras acentuadas), além de <code>.</code> e <code>_</code>, com a restrição de que um nome deve começar com <code>.</code> ou uma letra, e se começar com <code>.</code>, o segundo caractere não deve ser um dígito. Os nomes são efetivamente ilimitados em comprimento.</p>
+<p>O R é uma <strong>linguagem de expressão</strong> com uma sintaxe muito simples (veja <span class="citation">TEAM, R. C. (<a href="#ref-RN1787" role="doc-biblioref">1999-2024</a>)</span>). Ela é sensível a maiúsculas e minúsculas, como a maioria dos pacotes baseados em UNIX, então <code>A</code> e <code>a</code> são símbolos diferentes e se refeririam a variáveis diferentes. O conjunto de símbolos que podem ser usados nos nomes do R depende do sistema operacional e do país em que o R está sendo executado (tecnicamente, da localidade em uso). Normalmente, todos os símbolos alfanuméricos são permitidos (e em alguns países isso inclui letras acentuadas), além de <code>.</code> e <code>_</code>, com a restrição de que um nome deve começar com <code>.</code> ou uma letra, e se começar com <code>.</code>, o segundo caractere não deve ser um dígito. Os nomes são efetivamente ilimitados em comprimento.</p>
 <div id="hello" class="greeting message" style="color: green;">
 <p><span style="color:red">ATENÇÃO</span>
 Evite usar nomes longos e complicados</p>
@@ -376,11 +377,11 @@ Os scripts R geralmente têm a extensão de arquivo “.R”.</p>
 `^` Potência
 `sqrt` Raiz quadrada (função)
 `log` Logarítmo (função)</code></pre>
-<p>Teste agora outras possibilidades com as operações básicas (veja <span class="citation">Beasley (<a href="#ref-RN1484" role="doc-biblioref">2004</a>)</span> pags 7-10 para outros exemplos de cáculos básicos).</p>
+<p>Teste agora outras possibilidades com as operações básicas (veja <span class="citation">BEASLEY (<a href="#ref-RN1484" role="doc-biblioref">2004</a>)</span> pags 7-10 para outros exemplos de cáculos básicos).</p>
 <div id="hello" class="greeting message" style="color: green;">
 <p>Você já deve estar percebendo o potencial da programação em R como ferramenta para aprender estatística ou análise de dados, duas áreas com muita demanda de profissionais.</p>
 </div>
-<p>Em sua apostila “<em>Conversando com o R usando 57 palavras</em>” <span class="citation">Melo (<a href="#ref-RN2785" role="doc-biblioref">2014</a>)</span> ressalta que a programação em R “ajuda no sentido de prover métodos para resolvermos um problema ou entendermos uma análise”. Isso porque, primeiro, temos que reunir os elementos fundamentais e informações necessários, depois identificar e dar nomes a esses elementos, para apenas depois disso, decompor nosso problema em suas partes e, finalmente, colocar essas partes em sequência lógica <span class="citation">(<a href="#ref-RN2785" role="doc-biblioref">Melo 2014</a>)</span>.</p>
+<p>Em sua apostila “<em>Conversando com o R usando 57 palavras</em>” <span class="citation">MELO (<a href="#ref-RN2785" role="doc-biblioref">2014</a>)</span> ressalta que a programação em R “ajuda no sentido de prover métodos para resolvermos um problema ou entendermos uma análise”. Isso porque, primeiro, temos que reunir os elementos fundamentais e informações necessários, depois identificar e dar nomes a esses elementos, para apenas depois disso, decompor nosso problema em suas partes e, finalmente, colocar essas partes em sequência lógica <span class="citation">(<a href="#ref-RN2785" role="doc-biblioref">MELO, 2014</a>)</span>.</p>
 <p>A forma linear (passo-a-passo), mas hierarquicamente estruturada, da programação em R, permite uma construção intuitiva e lógica do raciocínio associado a cada análise, que, com o tempo, se torna parte cotidiano das nossas análises de dados. Assim como, na Língua Portuguesa, aprendemos o alfabeto, depois as palavras e eventualmente conversamos sem precisar pensar sobre a gramática e construção das frases.</p>
 </div>
 <div id="tipos-e-estruturas-de-dados-no-r-1" class="section level2 hasAnchor" number="4.4">
@@ -460,7 +461,7 @@ Os scripts R geralmente têm a extensão de arquivo “.R”.</p>
 <pre><code>## [1] 8
 ## [1] 8
 ## [1] &quot;numeric&quot;</code></pre>
-<p>Criamos um <strong>objeto</strong> do R chamado <code>a</code> que armazena o resultado de <code>5+3</code>. Objetos são palavras ou letras às quais são atribuídos dados. A atribuição possibilita a manipulação de dados ou armazenamento dos resultados de análises <span class="citation">(<a href="#ref-RN2940" role="doc-biblioref">Silva et al. 2022</a>)</span>.</p>
+<p>Criamos um <strong>objeto</strong> do R chamado <code>a</code> que armazena o resultado de <code>5+3</code>. Objetos são palavras ou letras às quais são atribuídos dados. A atribuição possibilita a manipulação de dados ou armazenamento dos resultados de análises <span class="citation">(<a href="#ref-RN2940" role="doc-biblioref">SILVA <em>et al.</em>, 2022</a>)</span>.</p>
 <p>O objeto <code>a</code> é uma variável numérica, como você pode ver ao usar a função <code>class()</code>. Se quiser trabalhar com inteiros (<code>integer</code>), você deve defini-los como <code>integer</code>, através da função <code>as.integer()</code>.</p>
 <p>Vejamos:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
@@ -563,16 +564,16 @@ todos do mesmo tipo. Veja alguns exemplos:</p>
 <span id="cb31-4"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb31-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(a,b,c)</span>
 <span id="cb31-5"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb31-5" aria-hidden="true" tabindex="-1"></a>df1</span></code></pre></div>
 <pre><code>##    a  b  c
-## 1  0  0 10
-## 2  1 10  5
-## 3  5 20 10
-## 4  0 10  5
-## 5  0 20  5
-## 6  5  0  0
-## 7  1  0  5
-## 8  1  0  0
-## 9  5  0  0
-## 10 1  0 10</code></pre>
+## 1  5 10  5
+## 2  0 10  0
+## 3  1 10  5
+## 4  0  0  5
+## 5  1  0 10
+## 6  5 20  5
+## 7  1 20  5
+## 8  0 10  5
+## 9  5 20  0
+## 10 1 20  5</code></pre>
 <p>Na primeira forma, definimos os elementos da matriz, o número de linhas e colunas através dos <code>argumentos</code> <code>nrow</code> e <code>ncol</code>, e se os elementos serão preenchidos ao longo das linhas (<code>byrow = TRUE</code>) ou ao longo das colunas (<code>byrow = FALSE</code>).</p>
 <p>Na segunda forma, criamos dois vetores e então os juntamos através da função <code>rbind()</code>. Repare que na segunda matriz, o R nomeou automaticamente as linhas da matriz com os nomes dos vetores, ao invés de definir seus números.</p>
 <p>Para selecionar itens de matrizes também utilizamos os colchetes, primeiro especificando a linha e depois a coluna que desejamos retornar:</p>
@@ -1067,7 +1068,7 @@ Figura 4.3: Resumo visual dos tipos de dados no ambiente de programação R. (De
 <ol start="6" style="list-style-type: decimal">
 <li><strong>Livros e Tutoriais</strong>:</li>
 </ol>
-<p>Existem muitos livros e tutoriais disponíveis que podem ajudá-lo a aprender R, desde os conceitos básicos até técnicas avançadas. Os livros em Português mais importantes são <span class="citation">Ferreira and Oliveira (<a href="#ref-RN2942" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Existem muitos livros e tutoriais disponíveis que podem ajudá-lo a aprender R, desde os conceitos básicos até técnicas avançadas. Os livros em Português mais importantes são <span class="citation">FERREIRA; OLIVEIRA, M. S. De (<a href="#ref-RN2942" role="doc-biblioref">2020</a>)</span>.</p>
 <div id="hello" class="greeting message" style="color: green;">
 <p>Ao usar esses recursos, certifique-se de fornecer informações claras sobre sua dúvida ou problema, incluindo detalhes como o código que você está usando, mensagens de erro (se houver) e o que você já tentou fazer para resolver o problema. Isso ajudará os outros a entenderem melhor sua situação e fornecer uma resposta mais útil.</p>
 </div>
@@ -1098,7 +1099,7 @@ Figura 4.4: Usando o ChatGPT para pedir ajuda sobre o R.
 <div id="hello" class="greeting message" style="color: green;">
 <p>Você já deve estar percebendo que a programação em R pode se tornar confusa, pela quantidade de possibilidades disponíveis e formas diferentes de se obter o mesmo resultado.</p>
 </div>
-<p>Por isso é necessário que o usuário tenha um workflow que permita o reconhecimento de uma <strong>sequência lógica para estruturar e aplicar</strong> os devidos testes estatísticos e construção de gráficos e tabelas, após a organização e manipulação dos dados. Uma sugestão de workflow preliminar e vista na figura <a href="r-modulo-2---tipos-de-dados-no-r.html#fig:22wf">4.5</a> (modificada de <span class="citation">Oliveira, Guerra, and McDonnell (<a href="#ref-RN2941" role="doc-biblioref">2018</a>)</span>):</p>
+<p>Por isso é necessário que o usuário tenha um workflow que permita o reconhecimento de uma <strong>sequência lógica para estruturar e aplicar</strong> os devidos testes estatísticos e construção de gráficos e tabelas, após a organização e manipulação dos dados. Uma sugestão de workflow preliminar e vista na figura <a href="r-modulo-2---tipos-de-dados-no-r.html#fig:22wf">4.5</a> (modificada de <span class="citation">OLIVEIRA, P. F. De; GUERRA; MCDONNELL (<a href="#ref-RN2941" role="doc-biblioref">2018</a>)</span>):</p>
 <p>• Carregar os dados<br />
 • Limpar os dados<br />
 • Transformar, visualizar e modelar (fase exploratória)<br />
@@ -1106,7 +1107,7 @@ Figura 4.4: Usando o ChatGPT para pedir ajuda sobre o R.
 <div class="figure"><span style="display:block;" id="fig:22wf"></span>
 <img src="imagens/wf.png" alt="Exemplo de workflow para análises no R (modificada de [@RN2941])" width="696" />
 <p class="caption">
-Figura 4.5: Exemplo de workflow para análises no R (modificada de <span class="citation">(<a href="#ref-RN2941" role="doc-biblioref">Oliveira, Guerra, and McDonnell 2018</a>)</span>)
+Figura 4.5: Exemplo de workflow para análises no R (modificada de <span class="citation">(<a href="#ref-RN2941" role="doc-biblioref">OLIVEIRA, P. F. De; GUERRA; MCDONNELL, 2018</a>)</span>)
 </p>
 </div>
 </div>
@@ -1119,7 +1120,7 @@ Figura 4.5: Exemplo de workflow para análises no R (modificada de <span class="
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>) <span class="co">#importa arquivos do excel</span></span></code></pre></div>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="r-modulo-2---tipos-de-dados-no-r.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span></code></pre></div>
 <pre><code>## Warning: package &#39;openxlsx&#39; was built under R version 4.3.2</code></pre>
-<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">R. C. Team 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>) <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">R. S. Team 2022</a>)</span>. No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>.</p>
+<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, R. C., 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>) <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, R. S., 2022</a>)</span>. No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code>library()</code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code>library(openxlsx)</code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code>getwd()</code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code>setwd()</code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
 <p>Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do Projeto PPBio chamada ppbio**.xlsx que está no diretório <span style="color:blue">“C:/Meu/Diretório/De/Trabalho/Planilha.xlsx”</span></p>
@@ -1366,30 +1367,30 @@ Estrutura de dados I (Parte 11): <a href="https://www.youtube.com/watch?v=aEaSzl
 </div>
 </div>
 <h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body" entry-spacing="1">
 <div id="ref-RN1484" class="csl-entry">
-Beasley, Colin Robert. 2004. <span>“Bioestatística Usando r. Apostila de Exemplos Para o Biólogo.”</span> Report. <a href="http://www.ead.unicamp.br/minicurso/bw/texto/fdl.pt.html">http://www.ead.unicamp.br/minicurso/bw/texto/fdl.pt.html</a>.
+BEASLEY, C. R. <strong>Bioestatística usando R. Apostila de exemplos para o biólogo</strong>. [S.l.]: [s.n.], 2004. Disponível em: &lt;<a href="http://www.ead.unicamp.br/minicurso/bw/texto/fdl.pt.html">http://www.ead.unicamp.br/minicurso/bw/texto/fdl.pt.html</a>&gt;.
 </div>
 <div id="ref-RN2942" class="csl-entry">
-Ferreira, Eric Batista, and Marcelo Silva de Oliveira. 2020. <em>Introdução à Estatística Com r</em>. Book. Alfenas, MG: Editora Universidade Federal de Alfenas. <a href="https://www.unifal-mg.edu.br/bibliotecas/wp-content/uploads/sites/125/2021/12/32-EBR_Unifal.pdf">https://www.unifal-mg.edu.br/bibliotecas/wp-content/uploads/sites/125/2021/12/32-EBR_Unifal.pdf</a>.
+FERREIRA, E. B.; OLIVEIRA, M. S. De. <strong><a href="https://www.unifal-mg.edu.br/bibliotecas/wp-content/uploads/sites/125/2021/12/32-EBR_Unifal.pdf">Introdução à Estatística com R</a></strong>. Alfenas, MG: Editora Universidade Federal de Alfenas, 2020. p. 194.
 </div>
 <div id="ref-RN2785" class="csl-entry">
-Melo, Adriano S. 2014. <span>“Conversando Com o r Usando 57 Palavras: Introdução à Programação Com Exemplos Em Ecologia.”</span> Report. <a href="https://ecoevol.ufg.br/adrimelo/prog/Conversando_com_o_R_usando_57_palavras-v13.pdf">https://ecoevol.ufg.br/adrimelo/prog/Conversando_com_o_R_usando_57_palavras-v13.pdf</a>.
+MELO, A. S. <strong>Conversando com o R usando 57 palavras: Introdução à programação com exemplos em Ecologia</strong>. [S.l.]: [s.n.], 2014. Disponível em: &lt;<a href="https://ecoevol.ufg.br/adrimelo/prog/Conversando_com_o_R_usando_57_palavras-v13.pdf">https://ecoevol.ufg.br/adrimelo/prog/Conversando_com_o_R_usando_57_palavras-v13.pdf</a>&gt;.
 </div>
 <div id="ref-RN2941" class="csl-entry">
-Oliveira, Paulo Felipe de, Saulo Guerra, and Robert McDonnell. 2018. <em>Ciência de Dados Com r: Introdução</em>. Book. Brasília, DF: Editora IBPAD. <a href="https://cdr.ibpad.com.br/">https://cdr.ibpad.com.br/</a>.
+OLIVEIRA, P. F. De; GUERRA, S.; MCDONNELL, R. <strong><a href="https://cdr.ibpad.com.br/">Ciência de dados com R: Introdução</a></strong>. Brasília, DF: Editora IBPAD, 2018. p. 240.
 </div>
 <div id="ref-RN2940" class="csl-entry">
-Silva, Fernando Rodrigues da, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, and Maurício Humberto Vancine. 2022. <em>Análises Ecológicas No r</em>. Edited Book. Recife, PE : Bauru, SP: Nupeea, Canal 6. <a href="https://analises-ecologicas.netlify.app/">https://analises-ecologicas.netlify.app/</a>.
+SILVA, F. R. Da <em>et al.</em> <strong><a href="https://analises-ecologicas.netlify.app/">Análises ecológicas no R</a></strong>. Recife, PE : Bauru, SP: Nupeea, Canal 6, 2022.
 </div>
 <div id="ref-RN1787" class="csl-entry">
-Team, R Core. 1999-2024. <span>“An Introduction to r.”</span> Report. <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html">https://cran.r-project.org/doc/manuals/r-release/R-intro.html</a>.
+TEAM, R. C. <strong>An Introduction to R</strong>. [S.l.]: [s.n.], 1999-2024. Disponível em: &lt;<a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html">https://cran.r-project.org/doc/manuals/r-release/R-intro.html</a>&gt;.
 </div>
 <div id="ref-RN2774" class="csl-entry">
-———. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Book. Austria: R Foundation for Statistical Computing. <a href="https://www.r-project.org/">https://www.r-project.org/</a>.
+______. <strong><a href="https://www.r-project.org/">R: A language and environment for statistical computing</a></strong>. Austria: R Foundation for Statistical Computing, 2017.
 </div>
 <div id="ref-RN358" class="csl-entry">
-Team, R Studio. 2022. <em>RStudio: Integrated Development Environment for r</em>. Book. Boston, MA: RStudio, PBC. <a href="https://posit.co/products/open-source/rstudio/">https://posit.co/products/open-source/rstudio/</a>.
+TEAM, R. S. <strong><a href="https://posit.co/products/open-source/rstudio/">RStudio: Integrated Development Environment for R</a></strong>. Boston, MA: RStudio, PBC, 2022.
 </div>
 </div>
             </section>

@@ -130,6 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 1em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -300,7 +301,7 @@ div.csl-indent {
 </div>
 <div id="sobre-os-dados" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Sobre os dados<a href="r-modulo-3.1---estatísticas-descritivas-e-normalidade.html#sobre-os-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Considere os dados sobre o comprimento dos brotos de <em>Banksia ericifolia</em> de charnecas<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> na Baía de Jervis, Austrália <span class="citation">(<a href="#ref-RN146" role="doc-biblioref">Bradstock, Tozer, and Keith 1997</a>)</span> (Figura <a href="r-modulo-3.1---estatísticas-descritivas-e-normalidade.html#fig:rmd3banks">5.1</a>). Existem 500 medições, um conjunto de dados formidável. Por inspeção, o comprimento mínimo do broto é 10,0 e o máximo é 44,9 cm. Esses valores definem o intervalo da amostra. Agora precisamos subdividir o intervalo em intervalos ou classes, cada um com o mesmo tamanho. Geralmente, é aconselhável arredondar o valor mínimo para baixo e o valor máximo para valores apropriados ao decidir as classes de intervalos. Nesse caso, parece sensato dividir a faixa de 10 a 45 cm em sete intervalos a cada 5 cm de largura. Se contarmos o número de brotos que se encontram em cada um dos sete intervalos, temos a base para a tabulação da frequência. A coluna de frequência foi obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual foi obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas foram obtidas somando progressivamente as frequências correspondentes.</p>
+<p>Considere os dados sobre o comprimento dos brotos de <em>Banksia ericifolia</em> de charnecas<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> na Baía de Jervis, Austrália <span class="citation">(<a href="#ref-RN146" role="doc-biblioref">BRADSTOCK; TOZER; KEITH, 1997</a>)</span> (Figura <a href="r-modulo-3.1---estatísticas-descritivas-e-normalidade.html#fig:rmd3banks">5.1</a>). Existem 500 medições, um conjunto de dados formidável. Por inspeção, o comprimento mínimo do broto é 10,0 e o máximo é 44,9 cm. Esses valores definem o intervalo da amostra. Agora precisamos subdividir o intervalo em intervalos ou classes, cada um com o mesmo tamanho. Geralmente, é aconselhável arredondar o valor mínimo para baixo e o valor máximo para valores apropriados ao decidir as classes de intervalos. Nesse caso, parece sensato dividir a faixa de 10 a 45 cm em sete intervalos a cada 5 cm de largura. Se contarmos o número de brotos que se encontram em cada um dos sete intervalos, temos a base para a tabulação da frequência. A coluna de frequência foi obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual foi obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas foram obtidas somando progressivamente as frequências correspondentes.</p>
 <div class="figure"><span style="display:block;" id="fig:rmd3banks"></span>
 <img src="imagens/banksia.png" alt="Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália." width="306" />
 <p class="caption">
@@ -315,7 +316,7 @@ Figura 5.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r-modulo-3.1---estatísticas-descritivas-e-normalidade.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>) <span class="co">#importa arquivos do excel</span></span>
 <span id="cb2-2"><a href="r-modulo-3.1---estatísticas-descritivas-e-normalidade.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;fdth&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-modulo-3.1---estatísticas-descritivas-e-normalidade.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span></code></pre></div>
-<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">R. C. Team 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">R. S. Team 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>.</p>
+<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, R. C., 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, R. S., 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code>library()</code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code>library(openxlsx)</code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code>getwd()</code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code>setwd()</code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-modulo-3.1---estatísticas-descritivas-e-normalidade.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
@@ -548,15 +549,15 @@ Figura 5.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 </div>
 </div>
 <h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body" entry-spacing="1">
 <div id="ref-RN146" class="csl-entry">
-Bradstock, R. A., M. G. Tozer, and D. A. Keith. 1997. <span>“Effects of High Frequency Fire on Floristic Composition and Abundance in a Fire-Prone Heathland Near Sydney.”</span> Journal Article. <em>Australian Journal of Botany</em> 45: 641–55.
+BRADSTOCK, R. A.; TOZER, M. G.; KEITH, D. A. Effects of high frequency fire on floristic composition and abundance in a fire-prone heathland near Sydney. <strong>Australian Journal of Botany</strong>, 1997. v. 45, p. 641–655.
 </div>
 <div id="ref-RN2774" class="csl-entry">
-Team, R Core. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Book. Austria: R Foundation for Statistical Computing. <a href="https://www.r-project.org/">https://www.r-project.org/</a>.
+TEAM, R. C. <strong><a href="https://www.r-project.org/">R: A language and environment for statistical computing</a></strong>. Austria: R Foundation for Statistical Computing, 2017.
 </div>
 <div id="ref-RN358" class="csl-entry">
-Team, R Studio. 2022. <em>RStudio: Integrated Development Environment for r</em>. Book. Boston, MA: RStudio, PBC. <a href="https://posit.co/products/open-source/rstudio/">https://posit.co/products/open-source/rstudio/</a>.
+TEAM, R. S. <strong><a href="https://posit.co/products/open-source/rstudio/">RStudio: Integrated Development Environment for R</a></strong>. Boston, MA: RStudio, PBC, 2022.
 </div>
 </div>
 <div class="footnotes">
