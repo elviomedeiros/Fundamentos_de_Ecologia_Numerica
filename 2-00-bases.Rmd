@@ -1,0 +1,109 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# (PART) PARTE {-}
+
+# Bases de Dados. Dados do PPBio Semiárido {#bases}
+
+### Exemplos de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido {-}
+
+### RESUMO {-}
+
+Para entender a distribuição das espécies de peixes e seu uso de habitat, uma série de variáveis ambientais foram avaliadas como preditores da composição e riqueza da assembleia de peixes em sistemas aquáticos tropicais semiáridos. Nós pesquisamos a composição de espécies de assembleias de peixes em sistemas aquáticos semiáridos e estabelecemos seu grau de associação com a estrutura do habitat aquático. Os locais consistiam em trechos de riachos com fluxo de água superficial, poças temporárias isoladas e reservatórios artificiais (açudes). A amostragem de peixes foi realizada em quatro ocasiões durante as estações chuvosa (abril e junho de 2006) e seca (setembro e dezembro de 2006).
+
+**Palavras-chave**: rios intermitentes, reservatórios, conservação, composição de substratos.
+
+## Sobre os dados do PPBio
+
+Usaremos ao longo desse livro dados que fazem parte de um estudo mais amplo sobre ecologia de rios do semiárido, coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Parte desses dados está armazenada em planilhas de Excel `ppbio**.xlsx` (Figura \@ref(fig:200ppbio)). Essas matrizes de dados são descritas na Tabela \@ref(tab:200arqs). As planilhas `ppbio**.xlsx` contém vários tipos de dados arranjados em matrizes `n x m` que incluem dados de abundância de espécies em diferentes unidades amostrais (UA's), dados da estrutura do habitat físico, e variáveis em escala de bacia hidrográfica, dados de contagem de indivíduos ajustados para Captura Por Unidade de Esforço (CPUE), etc (Figura \@ref(fig:200ppbio)).
+
+```{r 200ppbio, echo=FALSE, purl=FALSE, fig.cap="Parte da planilha de dados brutos do PPBio."}
+knitr::include_graphics("imagens/ppbio.png")
+```
+
+Por exemplo, essa é a **matriz bruta de dados**, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados. Outros tipos de arquivos existem sobre esses dados (Tabela \@ref(tab:200arqs)).
+
+Várias das espécies nessa matriz tem grande importância ecológica, como é o caso de *Astyanax bimaculatus*^[A etimologia do gênero *Astyanax* vem da mitologia Grega. Heitor personagem da "Ilíada", tinha um filho chamado Astíanax.] (Figura \@ref(fig:200asbim)), que é muito comum em rios intermitentes e serve de alimento para predadores maiores [@RN2908] como a espécie *Hoplias malabaricus*^[Do Grego, *hoplon*, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.] (Figura \@ref(fig:200hmala))[@RN2724].
+
+```{r 200asbim, echo=FALSE, purl=FALSE, fig.cap="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>"}
+knitr::include_graphics("imagens/spp/Asbim_u4.jpg")
+```
+
+```{r 200hmala, echo=FALSE, purl=FALSE, fig.cap="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>"}
+knitr::include_graphics("imagens/spp/Homal_u6.jpg")
+```
+
+Outras espécies como *Apareiodon hasemani*^[A etimologia do nome *Apareiodon* vem do Grego, *a*, sem, *pareia*, lateral ou bochecha, e *odous* dentição, em referência a ausência de dentes laterais no aparato bucal dessa espécie."] (Figura \@ref(fig:200apdavis) tem importância trófica por estar na base da cadeia alimentar, enquanto espécies da família Loricariidae, como *Pseudancistrus genisetiger*^[A etimologia do nome *Pseudancistrus* vem do Grego, *pseudes*, falso, e *agkistron*, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.] (Figura \@ref(fig:200pgen)), tem importância para taxonomia.
+
+```{r 200apdavis, echo=FALSE, purl=FALSE, fig.cap="*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Apareiodon-davisi.html>"}
+knitr::include_graphics("imagens/spp/Apdav_u0.jpg")
+```
+
+```{r 200pgen, echo=FALSE, purl=FALSE, out.width="320px", fig.cap="*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal"}
+knitr::include_graphics("imagens/spp/genis.jpg")
+```
+
+As planilhas `ppbio**.xlsx` contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \@ref(fig:200del). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela \@ref(tab:200arqs)). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.  
+Qual desses tipos de dados você acha que é apresentado na planilha?
+
+```{r 200del, echo=FALSE, purl=FALSE, fig.cap="Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo."}
+knitr::include_graphics("imagens/rm1.fig3.png")
+```
+
+## Arquivos disponíveis {#arqs}
+
+A seguir, apresento uma tabela com as informações essenciais sobre as matrizes de dados que serão utilizadas ao longo deste livro (Tabela \@ref(tab:200arqs)). Nela, estão descritos os diferentes tipos de matrizes, suas finalidades analíticas e o tipo de dado para cada uma delas. Essas informações servirão de referência para compreender a origem, a estrutura e o tratamento recomendado para os dados empregados nas análises subsequentes. Você pode baixar essas matrizes clicando no link para o arquivo em `.xlsx` na coluna `Arquivo`. Ao vizualizar a matriz que deseja baixar, clique em `Arquivo` > `Baixar` > `Microsoft Excel (.xlsx)`. Atente para a pasta onde seu computador baixa o arquivo desejado, você vai precisar dessa informação depois.
+
+```{r 200arqs, echo=FALSE, purl=FALSE}
+arqs <- tibble::tribble(
+~"Arquivo (.xlsx)", ~"Tipo de matriz", ~"Descrição", ~"Tipo de dados",
+"[ppbio06c-peixes](https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true)", "Matriz comunitária", "O arquivo ppbio06 traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.",
+"[ppbio06p-amb](https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true)", "Matriz ambiental", "O arquivo ppbio06h traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação.", "Unidades de medição diferentes (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.",
+"[ppbio06-grupos](https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true)", "Matriz de grupos", "O arquivo ppbio06 traz os dados brutos que serão usados nessa análise. A matriz de dados brutos contendo 26 locais/ocasiões (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.",
+"ppbio06cpue", "Matriz comunitária", "O arquivo ppbio06cpue traz os valores depois de terem sidos ajustados pela Captura Por Unidade de Esforço (CPUE), onde o número de indivíduos de cada espécie em uma determinada UA é dividido pelo esforço de captura daquela UA. Isso significa que os dados foram relativizados pela CPUE. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Densidades de indivíduos (no. de indivíduos por Unidade de Esforço de Captura) com alta amplitude de variação, sugerido uso de matriz relativizada."
+)
+library(knitr)
+library(kableExtra)
+arqsx <- kable(arqs, row.names = FALSE, align="l", booktabs = TRUE, caption = "Matrizes disponíveis para análises, com suas descrições e tipos de dados recomendados.")
+arqsx <- kable_styling(arqsx)
+column_spec(arqsx, 1:4, width = c("2cm","2cm","7cm","5cm"))
+```
+
+### Codificação das variáveis
+
+Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo `ppbio06-*.xlsx`, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (m=linhas ou objetos) em estações do ano diferentes, e cerca de 35 espécies (n=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores são contagens de indivíduos, e apresentam uma alta amplitude de variação, portanto, o uso de uma matriz relativizada é sugerido (Figura \@ref(tab:200arqs)). Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura \@ref(fig:200codes).
+
+```{r 200codes, echo=FALSE, purl=FALSE, fig.cap="Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem"}
+knitr::include_graphics("imagens/bases/com-codes.png")
+```
+
+### Abreviações {#abrev}
+
+No interesse de sistematizar o código R das várias matrizes que são comumente usadas em uma AMD, a tabela \@ref(tab:200abr), a seguir, resume seus tipos e abreviações.
+
+```{r 200abr, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)", ~"Abreviação no R",
+  "Matriz comunitaria", "Os atributos são táxons ou OTU's (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)", "m_com",
+  "Matriz ambiental", "Os atributos são dados ambientais e variáveis  físicas e químicas (ex. pH, condutividade, temperatura)", "m_amb",
+  "Matriz de habitat", "Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)", "m_hab",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)", "m_bruta",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas", "m_t",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)", "m_rel, m_relcol, m_rellin",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)", "m_trns, m_log10, m_asrq",
+  "Matriz de distâncias", "Matriz de m x m similaridades ou de distâncias (ex. Euclidiana, Manhattan, Bray-Curtis, etc)", "m_dists, m_euclid, m_bray",
+  "Matriz de trabalho", "Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)", "m_trab",
+  "Matriz particionada", "Foram removidas linhas ou colunas (ex. linhas que são outliers e espécies zeradas)", "m_part",
+  "Base de dados", "Arquivo do Excel planilhado a partir de dados de campo ou de laboratório. Será manejada e particionada no R, para criar a Matriz bruta", "ppbio06.xlsx, zoorebio.xlsx, bentos06.xlsx",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas e suas abreviações nos códigos do R.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
+```
+
+## Referências {-}
