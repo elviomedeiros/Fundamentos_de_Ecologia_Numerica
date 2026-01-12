@@ -1,0 +1,1228 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 4.1 - Estrutura da Comunidade
+
+### RESUMO {-}
+
+Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies.
+
+### Apresentação {-}
+
+Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies. Essas métricas são usadas para avaliar a diversidade e a estrutura de comunidades ecológicas. Elas podem fornecer informações importantes sobre como as diferentes espécies interagem em um ecossistema e como a diversidade de espécies pode ser afetada por mudanças ambientais ou distúrbios [@RN357].
+
+## Sobre os dados
+
+Usaremos para esse tutorial dois conjuntos de dados. A **Matriz comunitária** ([ppbio06c-peixes.xlsx](https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true)) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Esses são dados de espécies de peixes distribuidas em diversas unidades amostrais (UA's ou sítios). Essa é a **matriz bruta de dados**, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.
+
+Além disso usaremos a **tabela de agrupamentos** ([ppbio06-grupos](https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true))  
+
+**Revise as informações sobre as bases de dados no Capítulo \@ref(bases). A matriz de dados para esse Módulo pode ser baixada na Seção \@ref(arqs).**
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console 
+```
+
+Instalando os pacotes necessários para esse módulo.
+
+```{r, eval=FALSE}
+install.packages("vegan")
+install.packages("moments")
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("tibble")
+install.packages("tidyverse") #atente para alguma msg de erro qdo executar essa linha
+install.packages("forcats")
+install.packages("iNEXT")
+install.packages("openxlsx")
+install.packages("gt")
+```
+
+Depois de instalados, carregue os pacotes a seguir no seu computador.
+
+```{r, eval=TRUE, warning=FALSE}
+library(tibble); library(tidyverse); library(forcats); library(openxlsx); library(Rcpp)
+```
+
+Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R ([R CRAN](https://cran.r-project.org/), [@RN2774]) e [RStudio](https://posit.co/download/rstudio-desktop/) [@RN358]). No exemplo acima, o pacote `openxlsx` permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função `install.packages()`.
+
+Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função `library()`. Por exemplo, para carregar o pacote `openxlsx`, você precisa executar a função `library(openxlsx)`. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+## Importando a planilha
+
+Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.  
+	- Ajuste a primeira linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.  
+	- Ajuste o parâmetro `sheet = "Sheet1"` para refletir a aba correta do arquivo .xlsx a ser importado.
+
+```{r, results='hold'}
+#dir <- getwd() #criamos um vetor com o diretório  de trbalho 
+#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(ppbio)
+#View(ppbio)
+ppbio[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+```
+
+Exibindo os dados importados (esses comando são "case-sensitive" `ignore.case(object)`).
+
+```{r, eval=FALSE, results='hold'}
+#View(ppbio)
+print(ppbio[1:8,1:8])
+ppbio[1:10,1:10]
+str(ppbio)
+mode(ppbio)
+class(ppbio)
+```
+
+## Reset point
+
+```{r, eval=TRUE}
+m_trab <- ppbio
+#pat <- "^S"
+#m_trab <- m_trab[!grepl(pat, rownames(m_trab)), ] #exclui quem começa com pat
+```
+Aqui cria-se um novo objeto do R (`m_trab`, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela \@ref(tab:200arqs)).
+
+**Revise Seção \@ref(abrev) e a Tabela de Abreviações (\@ref(tab:200m_2)) na mesma Seção que resumem os tipos de matrizes e suas abreviações, para os nossos códigos.**
+
+## Transpor a matriz para trabalhar com as espécies
+
+Vamos transpor a matriz para trabalharmos com as espécies. A função `t` transpõe a matriz. Só deve ser usada uma vez, pois se repetida com `Ctrl+Enter` continua "girando" a matriz. As espécies como colunas representam uma matriz comunitária e as espécies como linhas representam uma matriz (comunitária) transposta.
+
+```{r, results='hold'}
+m_trab <- t(ppbio)
+str(m_trab)
+#View(m_trab)
+m_trab
+print(m_trab[1:5,1:5])
+m_trab[1:5,1:5]
+str(m_trab)
+mode(m_trab)
+class(m_trab)
+```
+
+### Informações básicas da matriz
+
+Agora podemos pedir ao R as informações básicas da matriz de trabalho (`m_trab`), como o número de observações ou tamanho do vetor (depende do tipo da matriz), número de observações igual a zero, número de observaçõoes maiores que zero e proporção de zeros na matriz.
+
+```{r, results='hold'}
+range(m_trab) #menor e maior valores
+length(m_trab) #no. de colunas
+ncol(m_trab) #no. de N colunas
+nrow(m_trab) #no. de M linhas
+sum(lengths(m_trab)) #soma os nos. de colunas
+length(as.matrix(m_trab)) #tamanho da matriz m x n
+sum(m_trab == 0) #número de observações igual a zero
+sum(m_trab > 0) #número de observações maiores que zero
+#calculando a proporção de zeros na matriz
+zeros <- (sum(m_trab == 0)/length(as.matrix(m_trab)))*100
+zeros
+```
+
+Tabela que resume as informações geradas (Tabela \@ref(tab:241tam)).
+
+```{r 241tam, results='hold', echo=FALSE}
+tamanho <- data.frame(
+  Função = c("range", "lenght", "n cols", "m linhas", "Tamanho", "Tamanho",
+             "Zeros", "Nao zeros", "% Zeros"),
+  Resultado = c(paste(range(m_trab), collapse = " - "),
+                length(m_trab), ncol(m_trab),
+                nrow(m_trab), sum(lengths(m_trab)),
+                length(as.matrix(m_trab)), sum(m_trab == 0),
+                sum(m_trab > 0), round(zeros, 1)))
+tamanho
+knitr::kable(tamanho, format = "markdown", caption = "Resumo das informações sobre o tamanho da base de dados.")
+```
+
+Ou seja, temos uma matriz de tamanho `m x n` igual a `r nrow(m_trab)` objetos por `r ncol(m_trab)` atributos, onde `r round(zeros, 2)`% dos valores da matriz são iguais a zero!
+
+Agora de conhecimento dessas informações básicas podemos calcular os primeiros descritores da estrutura da comunidade a ser estudada.
+
+## Calculando os descritores da comunidade
+
+Entre outras métricas, calcularemos os seguntes índices:
+
+1. **Riqueza de Espécies**:  
+  - A riqueza de espécies simplesmente se refere ao número total de espécies diferentes em uma comunidade. É uma medida fundamental da diversidade ecológica e reflete a variedade de formas de vida coexistentes em um ecossistema. Comunidades com alta riqueza de espécies têm um grande número de espécies diferentes, enquanto comunidades com baixa riqueza têm menos espécies.
+
+2. **Índice de Diversidade de Simpson**:  
+  - O índice de diversidade de Simpson (ou índice de Simpson) mede a probabilidade de escolher aleatoriamente duas vezes o mesmo indivíduo de uma comunidade. Quanto mais próximo de 1 for o índice de Simpson, menor é a diversidade, indicando que uma ou algumas espécies dominam a comunidade. Quanto mais próximo de 0 for o índice de Simpson, maior é a diversidade, indicando uma comunidade mais equilibrada. 
+
+3. **Índice de Diversidade de Shannon-Wiener**:  
+  - O índice de Shannon-Wiener (ou índice de Shannon) leva em consideração a riqueza de espécies e a equitabilidade (distribuição uniforme das abundâncias das espécies). Ele mede a incerteza associada à identificação de uma espécie aleatória em uma comunidade. Quanto maior o índice de Shannon, maior é a diversidade, pois indica uma comunidade com várias espécies bem distribuídas em termos de abundância.
+
+4. **Equitabilidade**:
+  - A equitabilidade é uma medida que avalia o quão uniformemente as abundâncias das diferentes espécies estão distribuídas em uma comunidade. Quanto maior a equitabilidade, mais igual é a distribuição das abundâncias, o que indica uma comunidade mais equilibrada.
+
+5. **Abundância**:
+  - A abundância se refere ao número total de indivíduos de uma espécie em uma comunidade. É uma medida simples que indica quantos indivíduos de uma espécie específica estão presentes na comunidade.
+
+6. **Abundância Relativa**:
+  - A abundância relativa é a proporção ou a fração da abundância de uma espécie em relação à abundância total de todas as espécies na comunidade. É uma medida que ajuda a entender a importância relativa de cada espécie na comunidade.
+
+7. **Dominância de Espécies**:
+  - A dominância de espécies se refere à presença de uma ou algumas espécies que têm uma abundância significativamente maior do que as outras na comunidade. Comunidades com alta dominância são frequentemente menos diversas, pois algumas espécies dominantes podem suprimir o crescimento de outras.
+
+### Variabilidade
+
+Primeiro a variabilidade estatística
+
+```{r, results='hold'}
+#?apply
+Sum <- rowSums(m_trab)
+#ou
+Sum <- apply(m_trab,1,sum)
+Sum
+## Abundância relativa (%)
+RA <- (Sum / sum(Sum)) * 100 # percentage
+## Media
+Mean <- rowMeans(m_trab)
+Mean
+## Ou
+Mean <- apply(m_trab,1,mean)
+Mean
+## Desvio padrão
+DP <- apply(m_trab,1,sd)
+DP
+## Máximo
+Max <- apply(m_trab,1,max)
+Max 
+## Mínimo
+Min <- apply(m_trab,1,min)
+Min
+## Mínimo não-zero
+MinZ <- apply(m_trab, 1, function(row) {
+  non_zero_values <- row[row > 0]  # Filter out zero values
+  if (length(non_zero_values) == 0) {
+    return(0)  # If all values are zero, return 0
+  } else {
+    return(min(non_zero_values))  # Return the minimum of non-zero values
+  }
+})
+MinZ
+```
+
+### Riqueza
+
+Atente para o fato de que a riqueza será a frequêcia de ocorrência na matrix transposta. Converte-se primeiro para matriz binária.
+
+```{r, results='hold'}
+m_pa <- m_trab
+m_pa[m_pa != 0] <- 1
+rowSums(m_pa)
+library(vegan)
+bin <- decostand(m_trab,"pa")
+bin[1:10, 1:10]
+S <- apply(bin,1,sum)
+S
+#OU
+Riqueza <- specnumber(m_trab)
+Riqueza
+Riqueza_total <- specnumber(colSums(m_trab))
+Riqueza_total
+#OU
+FO <- rowSums(m_trab > 0) / ncol(m_trab) * 100
+FO
+```
+
+## Índices de Diversidade
+
+### Shannon
+
+O índice de diversidade de Shannon ou Shannon–Weaver (or Shannon–Wiener) é uma medida de diversidade que leva em consideração tanto a riqueza de espécies quanto a uniformidade na distribuição dessas espécies [@RN2923; @RN2832]. Este índice é definido  por: 
+
+\[
+H' = -\sum_{i} p_i\log_{b} p_i
+\]
+Onde:
+
+- \( H' \) é a entropia de Shannon.
+- \( p_i \) é a abundância proporcional da espécie \( i \).
+- \( b \) é a base do logaritmo.
+
+É mais comum usar-se o logarítmo natural, embora pode-se argumentar que para o logarítmo de base = 2 (o que faz sentido mas nenhuma diferença) `r knitr::write_bib(c("vegan"), "packages.bib", width = 60)`
+
+Outra fórmula para calcular o índice de diversidade de Shannon é:
+
+\[
+H' = -\sum_{i=1}^{S} \left( \frac{n_i}{N} \times \ln\frac{n_i}{N} \right)
+\]
+
+Onde:
+
+- \(H'\) é a entropia de Shannon (ou a diversidade de Shannon).
+- \(n_i\) é o número de indivíduos da espécie \(i\).
+- \(N\) é o número total de indivíduos na comunidade.
+- \(S\) é o número total de espécies na comunidade.
+
+Esta fórmula mede a incerteza (ou entropia) na identificação de uma espécie selecionada aleatoriamente da comunidade. Quanto maior o valor de \(H'\), maior a diversidade da comunidade.
+
+```{r, results='hold'}
+H <- diversity(m_trab, index = "shannon")
+H
+```
+
+### Simpson
+
+O índice de diversidade de Simpson é uma medida de diversidade que leva em consideração a riqueza de espécies e a abundância relativa de cada espécie em uma comunidade. A fórmula para calcular o índice de diversidade de Simpson é:
+
+\[
+D = 1 - \sum_{i=1}^{S} \left( \frac{n_i (n_i - 1)}{N (N - 1)} \right)
+\]
+
+Onde:
+
+- \(D\) é o índice de diversidade de Simpson.
+- \(n_i\) é o número de indivíduos da espécie \(i\).
+- \(N\) é o número total de indivíduos na comunidade.
+- \(S\) é o número total de espécies na comunidade.
+
+Esta fórmula fornece um valor entre 0 e 1, onde 0 indica uma comunidade com apenas uma espécie presente e 1 indica uma comunidade com uma distribuição uniforme de espécies.
+
+Existem duas variantes do índice de Simpson baseado em \( D = \sum p_i^2 \) [@RN2923; @RN2832; @RN1073]: 
+
+- Ao escolhermos `simpson` o R retorna \( 1 - D \), e
+- ao escolhermos `invsimpson` o R retorna \( 1/D \) `r knitr::write_bib(c("vegan"), "packages.bib", width = 60)`.
+
+```{r, results='hold'}
+D <- diversity(m_trab, "simpson")
+D
+D[is.na(D)] <- 0 #substitui NA ou NaN por 0
+D
+```
+
+### Equitabilidade de Pielou
+
+O índice de equitabilidade de Pielou é uma medida de uniformidade em uma distribuição de espécies [@RN465]`r knitr::write_bib(c("vegan"), "packages.bib", width = 60)`. Sua fórmula é dada por:
+
+\[
+J' = \frac{H'}{\ln(S)}
+\]
+
+Onde:
+
+- \(J'\) é o índice de equitabilidade de Pielou.
+- \(H'\) é a entropia de Shannon (ou a diversidade de Shannon), que é calculada como \(-\sum_{i=1}^{S} p_i \cdot \ln(p_i)\), onde \(S\) é o número total de espécies e \(p_i\) é a proporção da espécie \(i\).
+- \(\ln(S)\) é o logarítmo natural do número total de espécies na comunidade.
+
+Esta fórmula fornece um valor entre 0 e 1, onde 0 indica uma distribuição completamente desigual onde uma comunidade apresenta uma única espécie dominante e 1 indica uma distribuição completamente equitativa onde todas as espécies têm a mesma abundância.
+
+```{r, results='hold'}
+E <- H/log(specnumber(m_trab))
+E
+E[is.na(E)] <- 0 #substitui NA ou NaN por 0
+E
+```
+
+#### Assimetria e curtose
+
+A assimetria mede a falta de simetria em uma distribuição de frequência. Uma distribuição é simétrica se as duas metades à esquerda e à direita da média são cópias espelhadas uma da outra. Se a distribuição não é simétrica, então é assimétrica. A assimetria pode ser positiva, negativa ou nula (simétrica). Uma assimetria positiva indica que a cauda da distribuição se estende mais para a direita em relação à média, enquanto uma assimetria negativa indica que a cauda da distribuição se estende mais para a esquerda em relação à média.
+
+A curtose descreve o pico ou a "pontiagudez" de uma distribuição. Uma distribuição com alta curtose tem uma alta concentração de valores ao redor da média e caudas mais pesadas (ou seja, valores extremos são mais prováveis). Uma distribuição com baixa curtose é mais achatada e dispersa, com caudas mais leves. A curtose pode ser positiva (distribuição leptocúrtica, com alta concentração em torno da média e caudas pesadas), negativa (distribuição platicúrtica, com dispersão alta e caudas mais leves) ou nula (mesocúrtica, similar à distribuição normal).
+
+Essas medidas são úteis para compreender as propriedades e características de diferentes conjuntos de dados e distribuições de frequência. Elas ajudam a compreender a forma e o comportamento dos dados em uma amostra ou população [@RN158].
+
+```{r, results='hold'}
+library(moments)
+Assimetria <- apply(m_trab,1,skewness)
+Assimetria
+Curtose <- apply(m_trab,1,kurtosis)
+Curtose
+```
+
+#### Tabela de descritores
+
+Muito confuso? Criamos na sequência uma tabela final com todos os descritores da comunidade e da normalidade.
+
+##### Descritores da estrutura da comunidade: Espécies
+
+Sum, soma; RA, abundância relativa (%), mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou [@RN465]; H, índice de diversidade de Shannon [@RN136]; D, índice de diversidade de Simpson [@RN1073].
+
+```{r, results='hold'}
+Descritores1 <- cbind(Sum, RA, Mean, DP, Max, Min, MinZ, FO, S, E, H, D)
+Descritores1 <- as.data.frame(Descritores1)
+Descritores1
+#Descritores1 <- Descritores1 %>% rownames_to_column(var="Espécies") #da nome a primeira coluna
+SomaTotalD <- apply(Descritores1,2,sum)
+SomaTotalD
+MediaTotalD <- apply(Descritores1,2,mean)
+MediaTotalD
+DPTotalD <- apply(Descritores1,2,sd)
+DPTotalD
+Descritores2 <- cbind(SomaTotalD, MediaTotalD, DPTotalD)
+Descritores2 <- as.data.frame(Descritores2)
+Descritores2 <- t(Descritores2)
+Descritores2
+DescritoresFinal <- rbind(Descritores1, Descritores2)
+DescritoresFinal
+DescritoresFinal <- round (DescritoresFinal, 2)
+DescritoresFinal
+```
+
+```{r, results='hold'}
+#Fazendo uma tabela
+library(gt)
+df <- DescritoresFinal
+ncol(df); nrow(df) #no. de N colunas x M linhas
+df <- cbind(Spp = rownames(df), df)
+gt(df, rowname_col = "Espécie", caption = "Descritores da diversidade por espécie (colunas). Sum, soma; RA, abundância relativa (%); mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; MinZ, menor valor não zero; FO, frequência de ocorrência (%); S, riqueza (ou no. de ocorrências, da matriz transposta); E, índice de equitabilidade de Pielou; H, índice de diversidade de Shannon; D, índice de diversidade de Simpson.")
+```
+
+##### Descritores da normalidade
+
+Agora tabelamos os descritores de normalidade
+
+```{r, results='hold'}
+Normalidade1 <- cbind(Assimetria, Curtose)
+Normalidade1 <- as.data.frame(Normalidade1)
+Normalidade1
+SomaTotalN <- apply(Normalidade1,2,sum)
+SomaTotalN
+MediaTotalN <- apply(Normalidade1,2,mean)
+MediaTotalN
+DPTotalN <- apply(Normalidade1,2,sd)
+DPTotalN
+Normalidade2<-cbind(SomaTotalN, MediaTotalN, DPTotalN)
+Normalidade2<-as.data.frame(Normalidade2)
+Normalidade2 <- t(Normalidade2) #"t" transpoe a matriz
+Normalidade2
+NormalidadeFinal <- rbind(Normalidade1, Normalidade2)
+NormalidadeFinal
+NormalidadeFinal <- round(NormalidadeFinal, 2)
+NormalidadeFinal
+```
+
+A função `fix(nome da matriz)` dá acesso ao grid da matriz criada para manipulação dos dados numéricos.
+
+```{r, results='hold'}
+#Fazendo uma tabela
+nf <- NormalidadeFinal
+ncol(nf); nrow(nf) #no. de N colunas x M linhas
+nf <- cbind(Spp = rownames(nf), nf)
+gt(nf, rowname_col = "Espécie", caption = "Descritores da normalidade por espécie (coluna)")
+```
+
+Nos [Apêndices](#descruas) você pode ver o script para os mesmos descritores para as Unidades Amostrais (UA´s)
+
+#### Lidando com células vazias
+
+Em R, `NaN` (Not a Number) e `NA` (Not Available) são valores especiais que representam dados ausentes ou valores inválidos em um vetor, matriz, data frame ou outra estrutura de dados.
+
+  - **NaN (Not a Number)**: É usado para representar resultados inválidos em operações matemáticas, como a divisão por zero ou a operação de raiz quadrada de um número negativo.
+
+  - **NA (Not Available)**: É usado para indicar dados ausentes. Pode ser usado em contextos onde o valor real está ausente ou desconhecido.
+
+Em muitas operações, o `NA` é tratado como um valor especial que propagará em outras operações. Isso significa que se uma operação é realizada com um ou mais valores `NA`, o resultado geralmente será `NA`. Por outro lado, `NaN` é um valor específico que indica um resultado matematicamente indefinido ou inválido.
+
+Por exemplo, ao realizar operações em um vetor que contém `NA`, o resultado será `NA` para qualquer operação que envolva um valor `NA`:
+
+```{r, results='hold'}
+x <- c(1, 2, NA, 4)
+mean(x) # Resultado será NA porque há um valor NA no vetor
+```
+
+Por outro lado, `NaN` resulta de operações matemáticas inválidas:
+
+```{r, results='hold'}
+0/0 # Resultado será NaN, pois a divisão por zero é indefinida
+sqrt(-1) # Resultado será NaN, pois não há raiz quadrada real de um número negativo
+```
+
+Em resumo, enquanto `NA` indica dados ausentes ou não disponíveis, `NaN` indica resultados de operações matematicamente inválidos.
+
+##### Salvando as tabelas criadas em .txt direto no diretório de trabalho
+
+```{r, results='hold'}
+write.table(data.frame("Spp"=rownames(DescritoresFinal),
+                       DescritoresFinal),
+            "DescritoresSPP.txt",
+            row.names=FALSE,
+            sep="\t")
+write.table(data.frame("Spp"=rownames(NormalidadeFinal),
+                       NormalidadeFinal),
+            "NormalidadeSPP.txt",
+            row.names=FALSE,
+            sep="\t")
+```
+
+Agora é necessário voltar à matriz comunitária (**antes de ter sido transposta**), antes de continuarmos a análise, porque as análises anteriores também precisam ser refeitas com a matriz não transposta. A seguir confere-se se está sendo usada a matriz comunitária com as espécies nas colunas.
+
+Para ver o código dos descritores da estrutura da comunidade para as Unidades Amostrais (UA's), matriz não transposta, veja [Descritores da estrutura da comunidade: UA's][Descritores da estrutura da comunidade: UA's] nos apêndices.
+
+```{r}
+m_trab
+m_trab <- ppbio
+```
+
+::: {#hello .greeting .message style="color: green;"}
+Note que em uma matriz comunitária (onde os atributos são as espécies), a matriz transposta vai conter as unidades amostrais como colunas e espécies como linhas. Não tendo a mesma interpretação de matriz transposta em matemática.
+:::
+
+Agora faremos uma série de gráficos para a matriz comunitária.
+
+## Gráficos descritivos
+
+### Série de Hill e pefil da diversidade
+
+Pode-se utilizar uma série de Hill ao invés dos índices específicos de diversidade. Assim, quanto maior o valor de `q` (definido em `scales`), maior será o peso para a equabilidade. Quanto mais próximo de zero, maior o peso para riqueza. Quando `q = 0`, o valor de Hill é igual a riqueza de espécies.
+
+```{r, results='hold'}
+Hill <- renyi(m_trab,
+              scales = c(0:5),
+              hill = TRUE)
+Hill
+```
+
+Podemos mapear isso em um gráfico de perfil de diversidade
+
+```{r 241hill, results='hold', fig.show='hold', fig.cap="Mapeamento dos pontos de coleta em um gráfico de perfil de diversidade."}
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+grafico1 <- Hill %>%  
+  rownames_to_column() %>% 
+  pivot_longer(-rowname) %>% 
+  mutate(name = factor(name, name[1:length(Hill)])) %>% 
+  ggplot(aes(x = name, y = value, group = rowname,
+             col = rowname)) +
+  geom_point(size = 2) +
+  geom_line(size = 1) +
+  xlab("Parâmetro de ordem de diversidade (q)") +
+  ylab("Diversidade") +
+  labs(col = "Locais") +
+  theme_bw() +
+  theme(text = element_text(size = 10)) #ajustar a fonte caso nao caiba no output html 
+grafico1
+ggsave(grafico1, dpi = 300, filename = "fig-hill.png")
+```
+
+## Distribuição de abundância
+
+Uma maneira de observar a diversidade de espécies é usando um gráfico de distribuição de abundâncias de uma comunidade, como mostrado a seguir. Note que aqui utiliza-se as abundâncias totais das espécies (Figura \@ref(fig:241abun)), mas é possível fazer por linha, basta substituir o objeto `abund` pela abundância de uma linha. Como na linha marcada com o `#`.
+
+```{r, results='hold'}
+abund <- colSums(m_trab)
+```
+
+Na primeira linha do código abaixo, retira-se o `#` do início da linha para rodar a distribuição de abundância apenas para o local (linha) 1 `comunidade[1,]`. Pode-se mudar o número para o local de interesse.
+
+O código a seguir produzirá o gráfico para o local escolhido.
+
+```{r 241abun, results='hold', fig.show='hold', fig.cap="Distribuição da densidade de indivíduos."}
+#abund <- m_trab[1, ] #escolhe a primeira linha para a distribuição de abundância
+df <- data.frame(sp = colnames(m_trab), 
+                 abun = abund) 
+grafico2 <- ggplot(df, aes(fct_reorder(sp, -abun),
+                           abun, group = 1)) +
+  geom_col() +
+  geom_line(col = "red", linetype = "dashed") + 
+  geom_point(col = "red") +
+  xlab("Espécies") +
+  ylab("Abundância") +
+  theme_bw() +
+  theme(axis.text.x = element_text(
+    angle = 45,
+    hjust = 1,
+    face = "italic"))
+grafico2
+ggsave(grafico2, dpi = 300, filename = "fig-abun.png")
+```
+
+## Curva de rarefação
+
+O código abaixo indica como usar o pacote [iNEXT](https://youtu.be/4yUXG28QPLM) para extrapolar e interpolar curvas de rarefação visando comparar a riqueza de diferentes locais (linhas, por isso se trabalha com a matriz transposta). A curva de raferação vai ser construida para as UA's demarcadas em `rarefa <- t(m_trab[c("S-R-CT2","S-R-CP2","S-A-TA2","B-A-MU2"),])`
+
+Pode-se, alternativamente, construrir a curva de raferação para as 8 linhas (UA's) com maior somatório dos valores das espécies (linhas marcadas com o símbolo [`#`]{style="color:green"}).
+
+```{r, results='hold'}
+m_trab_r <- mutate(m_trab, across(everything(), ceiling)) #arredonda a matriz original para números inteiros
+colSums(t(m_trab_r))
+colnames(t(m_trab_r))
+rarefa <- t(m_trab_r[c("S-R-CT2","S-R-CP2","S-A-TA2","B-A-MU2"),]) #curva de rarefação para os sítios especificados
+class(m_trab)
+## Curva de rarefação para todos os sítios
+#rarefa <- t(m_trab_r)
+## Curva de rarefação para as 8 UA's com maior soma 
+#m_trab_r <- as.data.frame(t(m_trab_r)) #transpõe a matriz
+#col_sums <- colSums(m_trab_r)
+#largest_columns <- names(sort(col_sums, decreasing = TRUE)[1:8])
+#rarefa <- m_trab_r[largest_columns] #curva de rarefação para as 8 UA's com maior soma
+```
+
+::: {#hello .greeting .message style="color: green;"}
+A curva de rarefação vai ser construida para os sítios: "S-R-CT2","S-R-CP2","S-A-TA2","B-A-MU2"
+:::
+
+No código abaixo o valor de `q` pode ser mudado para `q=1` para comparar a diversidade de Shannon e para `q=2` para Simpson (Figura (\@ref(fig:241rare)). A função `endpoint=` define o tamanho da amostra para o qual se deseja extrapolar a curva de rarefação. Se `endpoint=NULL`, a extrapolação será feita para o dobro do valor amostrado.
+
+```{r 241rare, fig.show='hold', fig.cap="Curva de rafefação para sítios específicos. `q=0`, riqueza; `q=1`, diversidade de Shannon; `q=2`, diversidade de Simpson; `q=5`, equitabilidade."}
+library(iNEXT)
+out <- iNEXT(rarefa, q = 0,
+             datatype = "abundance",
+             size = NULL,
+             endpoint = 2000, #define o comprimento de eixo x
+             knots = 40,
+             se = TRUE,
+             conf = 0.95,
+             nboot = 50)
+grafico3 <- ggiNEXT(out, type = 1, facet.var="None") +
+  theme_bw() +
+  labs(fill = "Áreas") +
+  xlab("Número de indivíduos") + 
+  ylab("Riqueza de espécies") +
+  theme(legend.title=element_blank()) #ver como fica com facet.var="Assemblage"
+grafico3
+ggsave(grafico3, dpi = 300, filename = "fig-rare1.png")
+```
+
+A linha sólida representa a interpolação do número de espécies observadas, e a linha tracejada mostra uma extrapolação do que seria esperado dado um aumento no número de indivíduos coletados. A área mais clara representa o intervalo de confiança de 95%.
+
+### Interpretando a curva de rarefação
+
+A curva de rarefação é uma ferramenta gráfica comumente usada em ecologia para estimar e visualizar a riqueza de espécies em uma comunidade, especialmente quando se têm dados de amostragem incompletos. Ela ajuda a responder à pergunta: "Quantas espécies diferentes podemos esperar encontrar em uma comunidade com base nas amostras que coletamos até agora?"
+
+Aqui está uma explicação passo a passo sobre como interpretar uma curva de rarefação:
+
+1. **Eixo X (Número de Indivíduos Amostrados)**:
+   - O eixo horizontal (eixo X) representa o número de indivíduos ou unidades amostrados da comunidade. Isso pode ser o número de indivíduos observados, o número de amostras coletadas ou qualquer outra unidade de amostragem que seja relevante para o estudo.
+
+2. **Eixo Y (Riqueza de Espécies)**:
+   - O eixo vertical (eixo Y) representa a riqueza de espécies, ou seja, o número total de espécies diferentes observadas ou estimadas nas amostras.
+
+3. **Pontos na Curva**:
+   - Cada ponto na curva de rarefação representa a riqueza de espécies estimada com base no número de indivíduos amostrados até o momento.
+   - À medida que você aumenta o número de indivíduos amostrados (ou seja, move-se para a direita ao longo do eixo X), a riqueza de espécies estimada também aumenta (ou seja, move-se para cima ao longo do eixo Y).
+
+4. **Inclinação da Curva**:
+   - A inclinação da curva de rarefação é importante. Uma curva que sobe rapidamente indica que novas espécies estão sendo encontradas à medida que mais indivíduos são amostrados. Isso sugere que a comunidade é rica em espécies, e ainda há muitas espécies não observadas.
+   - Uma curva que sobe lentamente sugere que a maioria das espécies já foi observada, e a riqueza de espécies está se estabilizando. Isso indica uma comunidade menos diversa ou uma amostragem mais completa.
+
+5. **Assíntota**:
+   - A assíntota é o ponto em que a curva de rarefação começa a nivelar-se, e a adição de mais indivíduos à amostra tem um impacto mínimo na riqueza de espécies estimada. A assíntota é uma estimativa da riqueza de espécies máxima que pode ser alcançada com a amostragem disponível.
+
+6. **Interpretação**:
+   - A interpretação da curva de rarefação depende do contexto. Se a curva ainda estiver subindo acentuadamente no ponto em que você parou de amostrar, isso sugere que a amostragem está incompleta, e mais espécies provavelmente serão encontradas com mais esforço de amostragem.
+   - Se a curva estiver nivelada e próxima de uma assíntota, isso sugere que a amostragem foi mais completa, e você pode ter uma estimativa confiável da riqueza de espécies na comunidade.
+
+7. **Estimativas da Riqueza**:
+   - A curva de rarefação pode ser usada para fazer estimativas da riqueza de espécies com base nas amostras coletadas. No entanto, lembre-se de que essas são estimativas e estão sujeitas a variações amostrais. É comum calcular intervalos de confiança ao redor dessas estimativas.
+
+Em resumo, a curva de rarefação é uma ferramenta valiosa para estimar a riqueza de espécies em uma comunidade com base em amostras coletadas. A interpretação depende da inclinação da curva, da presença de uma assíntota e do contexto do estudo. É importante lembrar que a amostragem mais completa geralmente resulta em estimativas mais confiáveis da riqueza de espécies.
+
+## Curva de acumulação de espécies
+
+```{r, results='hold'}
+acumula <- specaccum(m_trab,
+                     method = "random")
+acumula
+```
+
+### Plot locais
+
+Plotamos uma curva de acumulação de espécies simples.
+
+```{r, results='hold'}
+plot(acumula)
+```
+
+Uma curva de acumulação de espécies é uma ferramenta gráfica usada para entender como a riqueza de espécies em uma comunidade aumenta à medida que mais amostras são coletadas ou observações são feitas. Ela é especialmente útil em estudos de biodiversidade e ecologia. Aqui está uma explicação sobre como interpretar uma curva de acumulação de espécies:
+
+1. **Eixo X (Número de Amostras ou Unidades de Observação)**:
+   - O eixo horizontal (eixo X) representa o número de amostras coletadas, unidades de observação ou esforço amostral. Isso pode ser o número de áreas amostradas, pontos de observação, horas de coleta de dados ou qualquer unidade relevante para o estudo.
+
+2. **Eixo Y (Riqueza de Espécies Acumulada)**:
+   - O eixo vertical (eixo Y) representa a riqueza de espécies acumulada, ou seja, o número total de espécies diferentes observadas ou registradas até o momento.
+
+3. **Pontos na Curva**:
+   - Cada ponto na curva de acumulação de espécies representa a riqueza de espécies acumulada com base no número de amostras coletadas ou observações feitas até aquele ponto.
+   - À medida que você aumenta o número de amostras (ou seja, move-se para a direita ao longo do eixo X), a riqueza de espécies acumulada também aumenta (ou seja, move-se para cima ao longo do eixo Y).
+
+4. **Inclinação da Curva**:
+   - A inclinação da curva de acumulação de espécies é importante. Uma curva que sobe rapidamente indica que novas espécies estão sendo encontradas à medida que mais amostras são coletadas. Isso sugere que a comunidade é rica em espécies e que ainda há muitas espécies não observadas.
+   - Uma curva que sobe lentamente sugere que a maioria das espécies já foi observada, e a riqueza de espécies está se estabilizando. Isso indica uma comunidade menos diversa ou uma amostragem mais completa.
+
+5. **Assíntota**:
+   - A assíntota é o ponto onde a curva de acumulação de espécies começa a nivelar-se, e a adição de mais amostras tem um impacto mínimo na riqueza de espécies acumulada. A assíntota é uma estimativa da riqueza de espécies máxima que pode ser alcançada com o esforço amostral disponível.
+
+6. **Interpretação**:
+   - A interpretação da curva de acumulação de espécies depende do contexto. Se a curva ainda estiver subindo acentuadamente no ponto em que você parou de amostrar, isso sugere que a amostragem está incompleta, e mais espécies provavelmente serão encontradas com mais esforço amostral.
+   - Se a curva estiver nivelada e próxima de uma assíntota, isso sugere que a amostragem foi mais completa, e você pode ter uma estimativa confiável da riqueza de espécies na comunidade.
+
+7. **Estimativas da Riqueza**:
+   - A curva de acumulação de espécies pode ser usada para fazer estimativas da riqueza de espécies com base nas amostras coletadas. No entanto, lembre-se de que essas são estimativas e estão sujeitas a variações amostrais. É comum calcular intervalos de confiança ao redor dessas estimativas.
+
+Em resumo, a curva de acumulação de espécies é uma ferramenta valiosa para entender como a riqueza de espécies aumenta com o esforço amostral em uma comunidade. A interpretação depende da inclinação da curva, da presença de uma assíntota e do contexto do estudo. Ela ajuda a responder à pergunta: "Quantas espécies diferentes podemos esperar encontrar em uma comunidade com base nas amostras que coletamos até agora?"
+
+Agora podemos plotar uma curva de acumulação de espécies melhorada.
+
+```{r, results='hold', fig.show='hold'}
+plot_data <- data.frame("UAs" = c(0, acumula$sites),
+                        "Riqueza" = c(0, acumula$richness),
+                        "lower" = c(0, acumula$richness - acumula$sd),
+                        "upper" = c(0, acumula$richness + acumula$sd))
+gLocais <- ggplot(plot_data, aes(x = UAs, y = Riqueza)) +
+  geom_point(color = "blue", size = 4) +
+  geom_line(color = "blue", lwd = 2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), 
+              linetype=2, alpha=0.3, fill = "yellow") +
+  ylab("Riqueza acumulada") +
+  theme_classic() +
+  theme(text = element_text(size = 16))
+gLocais
+ggsave(gLocais, dpi = 300, filename = "fig-acum.png")
+```
+
+## Plot indivíduos
+
+```{r, results='hold'}
+plot_data <- data.frame("Individuos" = c(0, acumula$individuals),
+                        "Riqueza" = c(0, acumula$richness),
+                        "lower" = c(0, acumula$richness - acumula$sd),
+                        "upper" = c(0, acumula$richness + acumula$sd))
+gInd <- ggplot(plot_data, aes(x = Individuos, y = Riqueza)) +
+  geom_point(color = "blue", size = 4) +
+  geom_line(color = "blue", lwd = 2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), 
+              linetype=2, alpha=0.3, fill = "yellow") +
+  ylab("Riqueza acumulada") +
+  theme_classic() +
+  theme(text = element_text(size = 16))
+gInd
+```
+
+## Apêndices {.unnumbered}
+
+### Criando uma tabela de espécies {-}
+
+Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba `peixes`, porque nela constam os agrupamentos *a-priori* para os dados de peixes.
+
+```{r, results='hold'}
+library(openxlsx)
+t_grps <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "peixes")
+str(t_grps)
+#View(ppbio)
+t_grps[1:4,1:4] #[1:4,1:4] mostra apenas as linhas e colunas de 1 a 4.
+```
+
+```{r, eval=TRUE, results='hold'}
+library(dplyr)
+library(tidyr)
+m_trab <- m_trab %>%
+  rename_with(~ gsub("-", ".", .)) #apenas troquei o hífen pelo ponto.
+m <- m_trab %>%
+  group_by(Area = t_grps$area,
+           Habitat = t_grps$ambiente,
+           Ponto = t_grps$UA) %>%
+  summarise(across(where(is.numeric),
+                   list(mean = mean, sd = sd)),
+            .groups = 'drop') %>%
+  pivot_longer(
+    cols = -c(Area, Habitat, Ponto),
+    names_to = c("Variable", ".value"),
+    names_sep = "_"
+  )
+m
+m <- as.data.frame(m)
+m_wide <- m %>%
+  mutate(stat_string = ifelse(
+    Variable == "nome_da_variavel",  #escolhe uma variável pra ter 3 casas decimais
+    paste0(round(mean, 3), "(", round(sd, 3), ")"),
+    paste0(round(mean, 1), "(", round(sd, 1), ")")
+  )) %>%
+  unite("Location", Area, Habitat, Ponto, sep = "_") %>%
+  dplyr::select(Variable, Location, stat_string) %>% #dplyr dá conflito com MASS
+  pivot_wider(names_from = Location, values_from = stat_string)
+
+m_wide
+m_wide <- as.data.frame(m_wide)
+m_wide
+
+#Exportando dados para Excel----
+library(openxlsx)
+write.xlsx(m_wide, file = "tabela da comunidade.xlsx", rowNames = FALSE)
+wb <- loadWorkbook("tabela da comunidade.xlsx")
+writeData(wb, sheet = "Sheet 1", x = m_wide)
+saveWorkbook(wb, "tabela da comunidade.xlsx", overwrite = TRUE)
+
+#Escolher sumário de uma variavel----
+m
+var <- "as.bimac"
+m[m$Variable == var, "mean"] #cada valor de var
+summary(m[m$Variable == var, "mean"]) #sumário dos valores de var
+```
+
+### Descritores da estrutura da comunidade: UA's {#descruas .unnumbered}
+
+Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou [@RN465]; H, índice de diversidade de Shannon [@RN136]; D, índice de diversidade de Simpson [@RN1073].
+
+```{r, results='hide'}
+#Matriz transposta
+m_trab <- t(m_trab) #transpõe a matriz de volta para comunitaria
+Sum <- rowSums(m_trab)
+Sum <- apply(m_trab,1,sum)
+Mean <- rowMeans(m_trab)
+Mean <- apply(m_trab,1,mean)
+DP <- apply(m_trab,1,sd)
+Max <- apply(m_trab,1,max)
+Min <- apply(m_trab,1,min)
+#library(vegan)
+bin <- decostand(m_trab,"pa")
+S <- apply(bin,1,sum)
+Riqueza <- specnumber(m_trab)
+Riqueza_total <- specnumber(colSums(m_trab))
+H <- diversity(m_trab)
+D <- diversity(m_trab, "simpson")
+D[is.na(D)] <- 0 #substitui NA ou NaN por 0
+E <- H/log(specnumber(m_trab))
+E[is.na(E)] <- 0 #substitui NA ou NaN por 0
+#library(moments)
+Assimetria <- apply(m_trab,1,skewness)
+Curtose <- apply(m_trab,1,kurtosis)
+m_trab <- t(m_trab) #traz de volta
+Descritores1 <- cbind(Sum, Mean, DP, Max, Min, S, E, H, D)
+Descritores1 <- as.data.frame(Descritores1)
+Descritores1
+#Descritores1 <- Descritores1 %>% rownames_to_column(var="UA´s") #da nome a primeira coluna
+SomaTotalD <- apply(Descritores1,2,sum)
+SomaTotalD
+MediaTotalD <- apply(Descritores1,2,mean)
+MediaTotalD
+DPTotalD <- apply(Descritores1,2,sd)
+DPTotalD
+Descritores2 <- cbind(SomaTotalD, MediaTotalD, DPTotalD)
+Descritores2 <- as.data.frame(Descritores2)
+Descritores2 <- t(Descritores2)
+Descritores2
+DescritoresFinal <- rbind(Descritores1, Descritores2)
+DescritoresFinal
+DescritoresFinal <- round (DescritoresFinal, 2)
+#Fazendo uma tabela
+#library(gt)
+df <- DescritoresFinal
+ncol(df); nrow(df) #no. de N colunas x M linhas
+df <- cbind(UA = rownames(df), df)
+gt(df, caption = "Descritores da diversidade por Unidade Amostral (UA). Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou; H, índice de diversidade de Shannon; D, índice de diversidade de Simpson.")
+```
+
+### Descritores da normalidade {-}
+
+```{r, results='hide'}
+Normalidade1 <- cbind(Assimetria, Curtose)
+Normalidade1 <- as.data.frame(Normalidade1)
+Normalidade1 <- na.omit(Normalidade1) #remove NA e NaN
+Normalidade1
+SomaTotalN <- apply(Normalidade1,2,sum)
+SomaTotalN
+MediaTotalN <- apply(Normalidade1,2,mean)
+MediaTotalN
+DPTotalN <- apply(Normalidade1,2,sd)
+DPTotalN
+Normalidade2<-cbind(SomaTotalN, MediaTotalN, DPTotalN)
+Normalidade2<-as.data.frame(Normalidade2)
+Normalidade2 <- t(Normalidade2) #"t" transpoe a matriz
+Normalidade2
+NormalidadeFinal <- rbind(Normalidade1, Normalidade2)
+NormalidadeFinal
+NormalidadeFinal <- round(NormalidadeFinal, 2)
+#Fazendo uma tabela
+nf <- NormalidadeFinal
+ncol(nf); nrow(nf) #no. de N colunas x M linhas
+nf <- cbind(UA = rownames(nf), nf)
+gt(nf, caption = "Descritores da normalidade por Unidade Amostral (UA)")
+```
+
+A função `fix(nome da matriz)` dá acesso ao grid da matriz criada para manipulação dos dados numéricos.
+
+### Salvando as tabelas criadas em txt direto no diretório de trabalho {-}
+
+```{r, results='hide'}
+write.table(data.frame("Spp"=rownames(DescritoresFinal),
+                       DescritoresFinal),
+            "DescritoresUA.csv",
+            row.names=FALSE,
+            sep="\t")
+write.table(data.frame("Spp"=rownames(NormalidadeFinal),
+                       NormalidadeFinal),
+            "NormalidadeUA.txt",
+            row.names=FALSE,
+            sep="\t")
+```
+
+## Sites consultados {.unnumbered}
+
+## Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "04-rmd4_estr.Rmd", output = "script-rmd4.txt", documentation = 0)
+Script <- readLines("script-rmd4.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd4.txt")
+cat(Script, sep = "\n")
+```
+
+```{r,  eval=FALSE, echo=TRUE, purl=FALSE}
+## dev.off() #apaga os graficos, se houver algum
+## rm(list=ls(all=TRUE)) #limpa a memória
+## cat("\014") #limpa o console
+## install.packages("vegan")
+## install.packages("moments")
+## install.packages("ggplot2")
+## install.packages("dplyr")
+## install.packages("tidyr")
+## install.packages("tibble")
+## install.packages("tidyverse") #atente para alguma msg de erro qdo executar essa linha
+## install.packages("forcats")
+## install.packages("iNEXT")
+## install.packages("openxlsx")
+## install.packages("gt")
+## library(tibble); library(tidyverse); library(forcats); library(openxlsx); library(Rcpp)
+## getwd()
+## setwd("C:/Seu/Diretório/De/Trabalho")
+#dir <- getwd() #criamos um vetor com o diretório  de trbalho 
+#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(ppbio)
+#View(ppbio)
+ppbio[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+## #View(ppbio)
+## print(ppbio[1:8,1:8])
+## ppbio[1:10,1:10]
+## str(ppbio)
+## mode(ppbio)
+## class(ppbio)
+m_trab <- ppbio
+m_trab <- t(ppbio)
+str(m_trab)
+#View(m_trab)
+m_trab
+print(m_trab[1:5,1:5])
+m_trab[1:5,1:5]
+str(m_trab)
+mode(m_trab)
+class(m_trab)
+range(m_trab) #menor e maior valores
+length(m_trab) #no. de colunas
+ncol(m_trab) #no. de N colunas
+nrow(m_trab) #no. de M linhas
+sum(lengths(m_trab)) #soma os nos. de colunas
+length(as.matrix(m_trab)) #tamanho da matriz m x n
+sum(m_trab == 0) #número de observações igual a zero
+sum(m_trab > 0) #número de observações maiores que zero
+#calculando a proporção de zeros na matriz
+zeros <- (sum(m_trab == 0)/length(as.matrix(m_trab)))*100
+zeros
+tamanho <- data.frame(
+  Função = c("range", "lenght", "n cols", "m linhas", "Tamanho", "Tamanho",
+             "Zeros", "Nao zeros", "% Zeros"),
+  Resultado = c(paste(range(m_trab), collapse = " - "),
+                length(m_trab), ncol(m_trab),
+                nrow(m_trab), sum(lengths(m_trab)),
+                length(as.matrix(m_trab)), sum(m_trab == 0),
+                sum(m_trab > 0), round(zeros, 1)))
+tamanho
+knitr::kable(tamanho, format = "markdown", caption = "Resumo das informações sobre o tamanho da base de dados.")
+#?apply
+Sum <- rowSums(m_trab)
+#ou
+Sum <- apply(m_trab,1,sum)
+Sum
+## Media
+Mean <- rowMeans(m_trab)
+Mean
+## Ou
+Mean <- apply(m_trab,1,mean)
+Mean
+## Desvio padrão
+DP <- apply(m_trab,1,sd)
+DP
+## Máximo
+Max <- apply(m_trab,1,max)
+Max 
+## Mínimo
+Min <- apply(m_trab,1,min)
+Min
+library(vegan)
+bin <- decostand(m_trab,"pa")
+bin[1:10, 1:10]
+S <- apply(bin,1,sum)
+S
+#OU
+Riqueza <- specnumber(m_trab)
+Riqueza
+Riqueza_total <- specnumber(colSums(m_trab))
+Riqueza_total
+H <- diversity(m_trab, index = "shannon")
+H
+D <- diversity(m_trab, "simpson")
+D
+D[is.na(D)] <- 0 #substitui NA ou NaN por 0
+D
+E <- H/log(specnumber(m_trab))
+E
+E[is.na(E)] <- 0 #substitui NA ou NaN por 0
+E
+library(moments)
+Assimetria <- apply(m_trab,1,skewness)
+Assimetria
+Curtose <- apply(m_trab,1,kurtosis)
+Curtose
+Descritores1 <- cbind(Sum, Mean, DP, Max, Min, S, E, H, D)
+Descritores1 <- as.data.frame(Descritores1)
+Descritores1
+#Descritores1 <- Descritores1 %>% rownames_to_column(var="Espécies") #da nome a primeira coluna
+SomaTotalD <- apply(Descritores1,2,sum)
+SomaTotalD
+MediaTotalD <- apply(Descritores1,2,mean)
+MediaTotalD
+DPTotalD <- apply(Descritores1,2,sd)
+DPTotalD
+Descritores2 <- cbind(SomaTotalD, MediaTotalD, DPTotalD)
+Descritores2 <- as.data.frame(Descritores2)
+Descritores2 <- t(Descritores2)
+Descritores2
+DescritoresFinal <- rbind(Descritores1, Descritores2)
+DescritoresFinal
+DescritoresFinal <- round (DescritoresFinal, 2)
+DescritoresFinal
+#Fazendo uma tabela
+library(gt)
+df <- DescritoresFinal
+ncol(df); nrow(df) #no. de N colunas x M linhas
+df <- cbind(Spp = rownames(df), df)
+gt(df, rowname_col = "Espécie", caption = "Descritores da diversidade por espécie (colunas). Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou; H, índice de diversidade de Shannon; D, índice de diversidade de Simpson.")
+Normalidade1 <- cbind(Assimetria, Curtose)
+Normalidade1 <- as.data.frame(Normalidade1)
+Normalidade1
+SomaTotalN <- apply(Normalidade1,2,sum)
+SomaTotalN
+MediaTotalN <- apply(Normalidade1,2,mean)
+MediaTotalN
+DPTotalN <- apply(Normalidade1,2,sd)
+DPTotalN
+Normalidade2<-cbind(SomaTotalN, MediaTotalN, DPTotalN)
+Normalidade2<-as.data.frame(Normalidade2)
+Normalidade2 <- t(Normalidade2) #"t" transpoe a matriz
+Normalidade2
+NormalidadeFinal <- rbind(Normalidade1, Normalidade2)
+NormalidadeFinal
+NormalidadeFinal <- round(NormalidadeFinal, 2)
+NormalidadeFinal
+#Fazendo uma tabela
+nf <- NormalidadeFinal
+ncol(nf); nrow(nf) #no. de N colunas x M linhas
+nf <- cbind(Spp = rownames(nf), nf)
+gt(nf, rowname_col = "Espécie", caption = "Descritores da normalidade por espécie (coluna)")
+write.table(data.frame("Spp"=rownames(DescritoresFinal),
+                       DescritoresFinal),
+            "DescritoresSPP.txt",
+            row.names=FALSE,
+            sep="\t")
+write.table(data.frame("Spp"=rownames(NormalidadeFinal),
+                       NormalidadeFinal),
+            "NormalidadeSPP.txt",
+            row.names=FALSE,
+            sep="\t")
+m_trab <- ppbio
+m_trab
+Hill <- renyi(m_trab,
+              scales = c(0:5),
+              hill = TRUE)
+Hill
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+grafico1 <- Hill %>%  
+  rownames_to_column() %>% 
+  pivot_longer(-rowname) %>% 
+  mutate(name = factor(name, name[1:length(Hill)])) %>% 
+  ggplot(aes(x = name, y = value, group = rowname,
+             col = rowname)) +
+  geom_point(size = 2) +
+  geom_line(size = 1) +
+  xlab("Parâmetro de ordem de diversidade (q)") +
+  ylab("Diversidade") +
+  labs(col = "Locais") +
+  theme_bw() +
+  theme(text = element_text(size = 5)) #ajustar a fonte caso nao caiba no output html 
+grafico1
+ggsave(grafico1, dpi = 300, filename = "fig-hill.png")
+abund <- colSums(m_trab)
+#abund <- m_trab[1, ] #escolhe a primeira linha para a distribuição de abundância
+df <- data.frame(sp = colnames(m_trab), 
+                 abun = abund) 
+grafico2 <- ggplot(df, aes(fct_reorder(sp, -abun),
+                           abun, group = 1)) +
+  geom_col() +
+  geom_line(col = "red", linetype = "dashed") + 
+  geom_point(col = "red") +
+  xlab("Espécies") +
+  ylab("Abundância") +
+  theme_bw() +
+  theme(axis.text.x = element_text(
+    angle = 45,
+    hjust = 1,
+    face = "italic"))
+grafico2
+ggsave(grafico2, dpi = 300, filename = "fig-abun.png")
+m_trab_r <- mutate(m_trab, across(everything(), ceiling)) #arredonda a matriz original para números inteiros
+colnames(t(m_trab_r))
+rarefa <- t(m_trab_r[c("S-R-CT2","S-R-CP2","S-A-TA2","B-A-MU2"),]) #curva de rarefação para os sítios especificados
+class(m_trab)
+## Curva de rarefação para todos os sítios
+#rarefa <- t(m_trab_r)
+## Curva de rarefação para as 8 UA's com maior soma 
+#m_trab_r <- as.data.frame(t(m_trab_r)) #transpõe a matriz
+#col_sums <- colSums(m_trab_r)
+#largest_columns <- names(sort(col_sums, decreasing = TRUE)[1:8])
+#rarefa <- m_trab_r[largest_columns] #curva de rarefação para as 8 UA's com maior soma
+library(iNEXT)
+out <- iNEXT(rarefa, q = 0,
+             datatype = "abundance",
+             size = NULL,
+             endpoint = 1500, #define o comprimento de eixo x
+             knots = 40,
+             se = TRUE,
+             conf = 0.95,
+             nboot = 50)
+grafico3 <- ggiNEXT(out, type = 1, facet.var="None") +
+  theme_bw() +
+  labs(fill = "Áreas") +
+  xlab("Número de indivíduos") + 
+  ylab("Riqueza de espécies") +
+  theme(legend.title=element_blank()) #ver como fica com facet.var="Assemblage"
+grafico3
+ggsave(grafico3, dpi = 300, filename = "fig-rare1.png")
+acumula <- specaccum(m_trab,
+                     method = "random")
+acumula
+plot(acumula)
+plot_data <- data.frame("UAs" = c(0, acumula$sites),
+                        "Riqueza" = c(0, acumula$richness),
+                        "lower" = c(0, acumula$richness - acumula$sd),
+                        "upper" = c(0, acumula$richness + acumula$sd))
+gLocais <- ggplot(plot_data, aes(x = UAs, y = Riqueza)) +
+  geom_point(color = "blue", size = 4) +
+  geom_line(color = "blue", lwd = 2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), 
+              linetype=2, alpha=0.3, fill = "yellow") +
+  ylab("Riqueza acumulada") +
+  theme_classic() +
+  theme(text = element_text(size = 16))
+gLocais
+plot_data <- data.frame("Individuos" = c(0, acumula$individuals),
+                        "Riqueza" = c(0, acumula$richness),
+                        "lower" = c(0, acumula$richness - acumula$sd),
+                        "upper" = c(0, acumula$richness + acumula$sd))
+gInd <- ggplot(plot_data, aes(x = Individuos, y = Riqueza)) +
+  geom_point(color = "blue", size = 4) +
+  geom_line(color = "blue", lwd = 2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), 
+              linetype=2, alpha=0.3, fill = "yellow") +
+  ylab("Riqueza acumulada") +
+  theme_classic() +
+  theme(text = element_text(size = 16))
+gInd
+#Matriz transposta
+m_trab <- t(m_trab) #transpõe a matriz
+Sum <- rowSums(m_trab)
+Sum <- apply(m_trab,1,sum)
+Mean <- rowMeans(m_trab)
+Mean <- apply(m_trab,1,mean)
+DP <- apply(m_trab,1,sd)
+Max <- apply(m_trab,1,max)
+Min <- apply(m_trab,1,min)
+#library(vegan)
+bin <- decostand(m_trab,"pa")
+S <- apply(bin,1,sum)
+Riqueza <- specnumber(m_trab)
+Riqueza_total <- specnumber(colSums(m_trab))
+H <- diversity(m_trab)
+D <- diversity(m_trab, "simpson")
+D[is.na(D)] <- 0 #substitui NA ou NaN por 0
+E <- H/log(specnumber(m_trab))
+E[is.na(E)] <- 0 #substitui NA ou NaN por 0
+#library(moments)
+Assimetria <- apply(m_trab,1,skewness)
+Curtose <- apply(m_trab,1,kurtosis)
+m_trab <- t(m_trab) #traz de volta
+Descritores1 <- cbind(Sum, Mean, DP, Max, Min, S, E, H, D)
+Descritores1 <- as.data.frame(Descritores1)
+Descritores1
+#Descritores1 <- Descritores1 %>% rownames_to_column(var="Espécies") #da nome a primeira coluna
+SomaTotalD <- apply(Descritores1,2,sum)
+SomaTotalD
+MediaTotalD <- apply(Descritores1,2,mean)
+MediaTotalD
+DPTotalD <- apply(Descritores1,2,sd)
+DPTotalD
+Descritores2 <- cbind(SomaTotalD, MediaTotalD, DPTotalD)
+Descritores2 <- as.data.frame(Descritores2)
+Descritores2 <- t(Descritores2)
+Descritores2
+DescritoresFinal <- rbind(Descritores1, Descritores2)
+DescritoresFinal
+DescritoresFinal <- round (DescritoresFinal, 2)
+#Fazendo uma tabela
+#library(gt)
+df <- DescritoresFinal
+ncol(df); nrow(df) #no. de N colunas x M linhas
+df <- cbind(UA = rownames(df), df)
+gt(df, caption = "Descritores da diversidade por Unidade Amostral (UA). Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou; H, índice de diversidade de Shannon; D, índice de diversidade de Simpson.")
+Normalidade1 <- cbind(Assimetria, Curtose)
+Normalidade1 <- as.data.frame(Normalidade1)
+Normalidade1 <- na.omit(Normalidade1) #remove NA e NaN
+Normalidade1
+SomaTotalN <- apply(Normalidade1,2,sum)
+SomaTotalN
+MediaTotalN <- apply(Normalidade1,2,mean)
+MediaTotalN
+DPTotalN <- apply(Normalidade1,2,sd)
+DPTotalN
+Normalidade2<-cbind(SomaTotalN, MediaTotalN, DPTotalN)
+Normalidade2<-as.data.frame(Normalidade2)
+Normalidade2 <- t(Normalidade2) #"t" transpoe a matriz
+Normalidade2
+NormalidadeFinal <- rbind(Normalidade1, Normalidade2)
+NormalidadeFinal
+NormalidadeFinal <- round(NormalidadeFinal, 2)
+#Fazendo uma tabela
+nf <- NormalidadeFinal
+ncol(nf); nrow(nf) #no. de N colunas x M linhas
+nf <- cbind(UA = rownames(nf), nf)
+gt(nf, caption = "Descritores da normalidade por Unidade Amostral (UA)")
+write.table(data.frame("Spp"=rownames(DescritoresFinal),
+                       DescritoresFinal),
+            "DescritoresUA.csv",
+            row.names=FALSE,
+            sep="\t")
+write.table(data.frame("Spp"=rownames(NormalidadeFinal),
+                       NormalidadeFinal),
+            "NormalidadeUA.txt",
+            row.names=FALSE,
+            sep="\t")
+```
+
+## Referências {-}
