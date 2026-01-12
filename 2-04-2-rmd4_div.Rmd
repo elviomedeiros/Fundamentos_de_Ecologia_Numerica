@@ -1,0 +1,888 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 4.2 - Decomposição da diversidade 
+
+### RESUMO {-}
+
+Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies.
+
+### Apresentação {-}
+
+Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies. Essas métricas são usadas para avaliar a diversidade e a estrutura de comunidades ecológicas. Elas podem fornecer informações importantes sobre como as diferentes espécies interagem em um ecossistema e como a diversidade de espécies pode ser afetada por mudanças ambientais ou distúrbios [@RN357].
+
+## Sobre os dados
+
+Usaremos para esse tutorial dois conjuntos de dados. A **Matriz comunitária** ([ppbio06c-peixes.xlsx](https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true)) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Esses são dados de espécies de peixes distribuidas em diversas unidades amostrais (UA's ou sítios). Essa é a **matriz bruta de dados**, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.
+
+Além disso usaremos a **tabela de agrupamentos** ([ppbio06-grupos](https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true))  
+
+**Revise as informações sobre as bases de dados no capítulo [Bases de Dados](\@ref(bases)). A matriz de dados para esse Módulo pode ser baixada na seção [Arquivos disponíveis](\@ref(arqs)). Revise o capítulo anterior [Estrutura da Comunidade](\@ref(estrcom))**
+
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console 
+```
+
+Instalando os pacotes necessários para esse módulo.
+
+```{r, eval=FALSE}
+install.packages("vegan")
+install.packages("moments")
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("tibble")
+install.packages("tidyverse") #atente para alguma msg de erro qdo executar essa linha
+install.packages("forcats")
+install.packages("iNEXT")
+install.packages("openxlsx")
+install.packages("gt")
+```
+
+Depois de instalados, carregue os pacotes a seguir no seu computador.
+
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+library(tibble); library(tidyverse); library(forcats); library(openxlsx); library(Rcpp)
+```
+
+Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R ([R CRAN](https://cran.r-project.org/), [@RN2774]) e [RStudio](https://posit.co/download/rstudio-desktop/) [@RN358]). No exemplo acima, o pacote `openxlsx` permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função `install.packages()`.
+
+Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função `library()`. Por exemplo, para carregar o pacote `openxlsx`, você precisa executar a função `library(openxlsx)`. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+## Importando a planilha
+
+Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.  
+	- Ajuste a primeira linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.  
+	- Ajuste o parâmetro `sheet = "Sheet1"` para refletir a aba correta do arquivo .xlsx a ser importado.
+
+```{r, results='hold'}
+#dir <- getwd() #criamos um vetor com o diretório  de trbalho 
+#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(ppbio)
+#View(ppbio)
+ppbio[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+```
+
+Exibindo os dados importados (esses comando são "case-sensitive" `ignore.case(object)`).
+
+```{r, eval=FALSE, results='hold'}
+#View(ppbio)
+print(ppbio[1:8,1:8])
+ppbio[1:10,1:10]
+str(ppbio)
+mode(ppbio)
+class(ppbio)
+```
+
+## REINÍCIO 1
+
+```{r, eval=TRUE}
+m_trab <- ppbio
+```
+Aqui cria-se um novo objeto do R (`m_trab`, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela \@ref(tab:rmd4-arqs)).
+
+#### Abreviações {-}
+
+No interesse de sistematizar o código R das várias matrizes que são comumente usadas em uma AMD, a tabela \@ref(tab:42tbl-m_2) resume seus tipos e abreviações.
+
+## Transpor a matriz para trabalhar com as espécies
+
+Vamos transpor a matriz para trabalharmos com as espécies. A função `t` transpõe a matriz. Só deve ser usada uma vez, pois se repetida com `Ctrl+Enter` continua "girando" a matriz. As espécies como colunas representam uma matriz comunitária e as espécies como linhas representam uma matriz (comunitária) transposta.
+
+```{r, results='hold'}
+m_trab <- t(ppbio)
+str(m_trab)
+#View(m_trab)
+m_trab
+print(m_trab[1:5,1:5])
+m_trab[1:5,1:5]
+str(m_trab)
+mode(m_trab)
+class(m_trab)
+```
+
+### Informações básicas da matriz
+
+Agora podemos pedir ao R as informações básicas da matriz de trabalho (`m_trab`), como o número de observações ou tamanho do vetor (depende do tipo da matriz), número de observações igual a zero, número de observaçõoes maiores que zero e proporção de zeros na matriz.
+
+```{r, results='hold'}
+range(m_trab) #menor e maior valores
+length(m_trab) #no. de colunas
+ncol(m_trab) #no. de N colunas
+nrow(m_trab) #no. de M linhas
+sum(lengths(m_trab)) #soma os nos. de colunas
+length(as.matrix(m_trab)) #tamanho da matriz m x n
+sum(m_trab == 0) #número de observações igual a zero
+sum(m_trab > 0) #número de observações maiores que zero
+#calculando a proporção de zeros na matriz
+zeros <- (sum(m_trab == 0)/length(as.matrix(m_trab)))*100
+zeros
+```
+
+Tabela que resume as informações geradas (Tabela \@ref(tab:4tbl-tam)).
+
+```{r 4tbl-tam, results='hold', echo=FALSE}
+tamanho <- data.frame(
+  Função = c("range", "lenght", "n cols", "m linhas", "Tamanho", "Tamanho",
+             "Zeros", "Nao zeros", "% Zeros"),
+  Resultado = c(paste(range(m_trab), collapse = " - "),
+                length(m_trab), ncol(m_trab),
+                nrow(m_trab), sum(lengths(m_trab)),
+                length(as.matrix(m_trab)), sum(m_trab == 0),
+                sum(m_trab > 0), round(zeros, 1)))
+tamanho
+knitr::kable(tamanho, format = "markdown", caption = "Resumo das informações sobre o tamanho da base de dados.")
+```
+
+Ou seja, temos uma matriz de tamanho `n x m` igual a `r nrow(m_trab)` objetos por `r ncol(m_trab)` atributos, onde `r round(zeros, 2)`% dos valores da matriz são iguais a zero!
+
+Agora de conhecimento dessas informações básicas podemos calcular os primeiros descritores da estrutura da comunidade a ser estudada.
+
+## Calculando os descritores da comunidade
+
+Entre outras métricas, calcularemos os seguintes índices:
+
+1. **Riqueza de Espécies**:  
+  - A riqueza de espécies simplesmente se refere ao número total de espécies diferentes em uma comunidade. É uma medida fundamental da diversidade ecológica e reflete a variedade de formas de vida coexistentes em um ecossistema. Comunidades com alta riqueza de espécies têm um grande número de espécies diferentes, enquanto comunidades com baixa riqueza têm menos espécies.
+
+2. **Índice de Diversidade de Simpson**:  
+  - O índice de diversidade de Simpson (ou índice de Simpson) mede a probabilidade de escolher aleatoriamente duas vezes o mesmo indivíduo de uma comunidade. Quanto mais próximo de 1 for o índice de Simpson, menor é a diversidade, indicando que uma ou algumas espécies dominam a comunidade. Quanto mais próximo de 0 for o índice de Simpson, maior é a diversidade, indicando uma comunidade mais equilibrada. 
+
+3. **Índice de Diversidade de Shannon-Wiener**:  
+  - O índice de Shannon-Wiener (ou índice de Shannon) leva em consideração a riqueza de espécies e a equitabilidade (distribuição uniforme das abundâncias das espécies). Ele mede a incerteza associada à identificação de uma espécie aleatória em uma comunidade. Quanto maior o índice de Shannon, maior é a diversidade, pois indica uma comunidade com várias espécies bem distribuídas em termos de abundância.
+
+4. **Equitabilidade**:
+  - A equitabilidade é uma medida que avalia o quão uniformemente as abundâncias das diferentes espécies estão distribuídas em uma comunidade. Quanto maior a equitabilidade, mais igual é a distribuição das abundâncias, o que indica uma comunidade mais equilibrada.
+
+5. **Abundância**:
+  - A abundância se refere ao número total de indivíduos de uma espécie em uma comunidade. É uma medida simples que indica quantos indivíduos de uma espécie específica estão presentes na comunidade.
+
+6. **Abundância Relativa**:
+  - A abundância relativa é a proporção ou a fração da abundância de uma espécie em relação à abundância total de todas as espécies na comunidade. É uma medida que ajuda a entender a importância relativa de cada espécie na comunidade.
+
+7. **Dominância de Espécies**:
+  - A dominância de espécies se refere à presença de uma ou algumas espécies que têm uma abundância significativamente maior do que as outras na comunidade. Comunidades com alta dominância são frequentemente menos diversas, pois algumas espécies dominantes podem suprimir o crescimento de outras.
+
+### Variabilidade
+
+Primeiro a variabilidade estatística
+
+```{r, results='hold'}
+#?apply
+Sum <- rowSums(m_trab)
+#ou
+Sum <- apply(m_trab,1,sum)
+Sum
+## Media
+Mean <- rowMeans(m_trab)
+Mean
+## Ou
+Mean <- apply(m_trab,1,mean)
+Mean
+## Desvio padrão
+DP <- apply(m_trab,1,sd)
+DP
+## Máximo
+Max <- apply(m_trab,1,max)
+Max 
+## Mínimo
+Min <- apply(m_trab,1,min)
+Min
+## Mínimo não-zero
+MinZ <- apply(m_trab, 1, function(row) {
+  non_zero_values <- row[row > 0]  # Filter out zero values
+  if (length(non_zero_values) == 0) {
+    return(0)  # If all values are zero, return 0
+  } else {
+    return(min(non_zero_values))  # Return the minimum of non-zero values
+  }
+})
+MinZ
+```
+
+### Riqueza
+
+Atente para o fato de que a riqueza será a frequencia de ocorrência na matrix transposta. Converte-se primeiro para matriz binária.
+
+```{r, results='hold'}
+library(vegan)
+bin <- decostand(m_trab,"pa")
+bin[1:10, 1:10]
+S <- apply(bin,1,sum)
+S
+#OU
+Riqueza <- specnumber(m_trab)
+Riqueza
+Riqueza_total <- specnumber(colSums(m_trab))
+Riqueza_total
+```
+
+## Índices de Diversidade
+
+```{r, results='hold'}
+H <- diversity(m_trab, index = "shannon")
+H
+D <- diversity(m_trab, "simpson")
+D
+D[is.na(D)] <- 0 #substitui NA ou NaN por 0
+D
+E <- H/log(specnumber(m_trab)) #pielou
+E
+E[is.na(E)] <- 0 #substitui NA ou NaN por 0
+E
+```
+
+##### Descritores da estrutura da comunidade: Espécies
+
+Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou [@RN465]; H, índice de diversidade de Shannon; D, índice de diversidade de Simpson [@RN1073]. [(Fórmulas aqui)](#formulas)
+
+```{r, results='hold'}
+Descritores1 <- cbind(Sum, Mean, DP, Max, Min, MinZ, S, E, H, D)
+Descritores1 <- as.data.frame(Descritores1)
+Descritores1
+#Descritores1 <- Descritores1 %>% rownames_to_column(var="Espécies") #da nome a primeira coluna
+SomaTotalD <- apply(Descritores1,2,sum)
+SomaTotalD
+MediaTotalD <- apply(Descritores1,2,mean)
+MediaTotalD
+DPTotalD <- apply(Descritores1,2,sd)
+DPTotalD
+Descritores2 <- cbind(SomaTotalD, MediaTotalD, DPTotalD)
+Descritores2 <- as.data.frame(Descritores2)
+Descritores2 <- t(Descritores2)
+Descritores2
+DescritoresFinal <- rbind(Descritores1, Descritores2)
+DescritoresFinal
+DescritoresFinal <- round (DescritoresFinal, 2)
+DescritoresFinal
+```
+
+```{r, results='hold'}
+#Fazendo uma tabela
+library(gt)
+df <- DescritoresFinal
+ncol(df); nrow(df) #no. de N colunas x M linhas
+df <- cbind(Spp = rownames(df), df)
+gt(df, rowname_col = "Espécie", caption = "Descritores da diversidade por espécie (colunas). Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; MinZ, menor valor não zero; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou; H, índice de diversidade de Shannon; D, índice de diversidade de Simpson.")
+```
+
+#### Lidando com células vazias
+
+Em R, `NaN` (Not a Number) e `NA` (Not Available) são valores especiais que representam dados ausentes ou valores inválidos em um vetor, matriz, data frame ou outra estrutura de dados.
+
+  - **NaN (Not a Number)**: É usado para representar resultados inválidos em operações matemáticas, como a divisão por zero ou a operação de raiz quadrada de um número negativo.
+
+  - **NA (Not Available)**: É usado para indicar dados ausentes. Pode ser usado em contextos onde o valor real está ausente ou desconhecido.
+
+Em muitas operações, o `NA` é tratado como um valor especial que propagará em outras operações. Isso significa que se uma operação é realizada com um ou mais valores `NA`, o resultado geralmente será `NA`. Por outro lado, `NaN` é um valor específico que indica um resultado matematicamente indefinido ou inválido.
+
+Por exemplo, ao realizar operações em um vetor que contém `NA`, o resultado será `NA` para qualquer operação que envolva um valor `NA`:
+
+```{r, results='hold'}
+x <- c(1, 2, NA, 4)
+mean(x) # Resultado será NA porque há um valor NA no vetor
+```
+
+Por outro lado, `NaN` resulta de operações matemáticas inválidas:
+
+```{r, results='hold'}
+0/0 # Resultado será NaN, pois a divisão por zero é indefinida
+sqrt(-1) # Resultado será NaN, pois não há raiz quadrada real de um número negativo
+```
+
+Em resumo, enquanto `NA` indica dados ausentes ou não disponíveis, `NaN` indica resultados de operações matematicamente inválidos.
+
+##### Salvando as tabelas criadas em .txt direto no diretório de trabalho
+
+```{r, results='hold'}
+write.table(data.frame("Spp"=rownames(DescritoresFinal),
+                       DescritoresFinal),
+            "DescritoresSPP.txt",
+            row.names=FALSE,
+            sep="\t")
+write.table(data.frame("Spp"=rownames(NormalidadeFinal),
+                       NormalidadeFinal),
+            "NormalidadeSPP.txt",
+            row.names=FALSE,
+            sep="\t")
+```
+
+Agora é necessário voltar à matriz comunitária (**antes de ter sido transposta**), antes de continuarmos a análise, porque as análises anteriores também precisam ser refeitas com a matriz não transposta. A seguir confere-se se está sendo usada a matriz comunitária com as espécies nas colunas.
+
+Para ver o código dos descritores da estrutura da comunidade para as Unidades Amostrais (UA's), matriz não transposta, veja [Descritores da estrutura da comunidade: UA's][Descritores da estrutura da comunidade: UA's] nos apêndices.
+
+```{r}
+m_trab
+m_trab <- ppbio
+```
+
+::: {#hello .greeting .message style="color: green;"}
+Note que em uma matriz comunitária (onde os atributos são as espécies), a matriz transposta vai conter as unidades amostrais como colunas e espécies como linhas. Não tendo a mesma interpretação de matriz transposta em matemática.
+:::
+
+## Espécies compartilhadas
+
+Instalando os pacotes necessários
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+install.packages("eulerr")
+install.packages("VennDiagram")
+install.packages("ggVennDiagram")
+install.packages("ggvenn")
+install.packages("gplots") 
+```
+
+Carregado a base de dados `teste` para ajudar no entendimento.
+
+```{r, eval=TRUE, results='hide'}
+teste <- read.table(text = "
+	SP1	SP2	SP3	SP4	SP5	SP6	SP7	SP8	SP9	SP10	SP11	SP12	SP13	SP14	SP15	SP16	SP17	SP18	SP19	SP20
+A1	1	0	0	1	0	1	1	1	0	0	1	0	0	1	0	1	1	1	0	0
+A2	1	0	0	1	0	1	1	0	0	0	1	0	0	1	0	1	1	0	0	0
+A3	1	0	0	1	0	1	1	0	0	0	1	0	0	1	0	1	1	0	0	0
+B1	0	1	0	1	1	0	1	0	1	0	0	1	0	1	1	0	1	0	1	0
+B2	0	1	0	1	1	0	1	0	0	0	0	1	0	1	1	0	1	0	0	0
+B3	0	1	0	1	1	0	1	0	0	0	0	1	0	1	1	0	1	0	0	0
+C1	0	0	1	0	1	1	1	0	0	1	0	0	1	0	1	1	1	0	0	1
+C2	0	0	1	0	1	1	1	0	0	0	0	0	1	0	1	1	1	0	0	0
+C3	0	0	1	0	1	1	1	0	0	0	0	0	1	0	1	1	1	0	0	0
+", header = TRUE, row.names = 1)
+teste
+```
+
+## REINÍCIO 2
+
+```{r, eval=TRUE}
+m_trab <- ppbio
+```
+
+### Separando a matriz `ppbio` em suas partes (S e B ou A e R)
+
+Separa-se `S-` e `B-`, e atribui-se, respectivamente, aos grupos G1 e G2 e remove-se as colunas zeradas.
+
+```{r, eval=FALSE}
+G1 <- m_trab[1:12,]
+names(which(colSums(G1) == 0)) #all-zero columns
+G1 <- G1[, colSums(G1 != 0) > 0]
+G2 <- m_trab[13:23,]
+names(which(colSums(G2) == 0)) #all-zero columns
+G2 <- G2[, colSums(G2 != 0) > 0]
+```
+
+#### Mesmo procedimento usando o comando `grepl()` do pacote `dplyr`
+
+Outra forma de separar grupos, mas agpra para `R-` e `A-`, atribuindo-se, respectivamente, aos grupos G3 e G4 e removendo-se as colunas zeradas.
+
+```{r, eval=FALSE}
+library(dplyr)
+G3 <- filter(m_trab, grepl("R-", row.names(m_trab)))
+names(which(colSums(G3) == 0)) #all-zero columns
+G3 <- G3[, colSums(G3 != 0) > 0]
+G4 <- filter(m_trab, grepl("A-", row.names(m_trab)))
+names(which(colSums(G4) == 0)) #all-zero columns
+G4 <- G4[, colSums(G4 != 0) > 0]
+```
+
+```{r 2codes, echo=FALSE}
+tblcodes <- tibble::tribble(
+    ~"Hierarquia", ~"n*=23", ~"",~"",~"",~"",
+    "Área", "", "", "", "", "",
+    "S-", "Ambiente", "Ponto", "Coleta", "Data", "",
+    "B-", "R-", "CT", "1", "01-04-2006", "",
+    "", "A-", "CP", "2", "26-06-2006", "",
+    "", "", "TA", "3", "22-09-2006", "",
+    "", "", "MU", "4", "17-12-2006", "",
+    "", "", "GU", "", "", "",
+    "", "", "PC", "", "", "",
+    "2", "x 2", "x 6", "x 4", "", "np**= 96"
+)
+library(knitr)
+library(kableExtra)
+x <- kable(tblcodes, row.names = FALSE, align = "l", booktabs = TRUE, caption = "Código para o delineamento amostral. *n, total amostrado = 23; **np, n planejado = 96.")
+x <- kable_styling(x)
+column_spec(x, 1:6)
+```
+
+## Taxa compartilhados pelas duas bases de dados
+
+### Bases de dados em arquivos diferentes `B` e `S`
+
+Nos códigos abaixo, a função `intersect()` é usada para se obter os nomes de colunas em comum entre `fixo` e `entorno`, que são guardados em um vetor. Esses vetores são repassados nos outros argumentos subsequentes. O propósito dos argumentos `setdiff()` e `\<- 0` não é preencher células vazias com zeros, mas  adicionar novas colunas em cada data frame com nomes de colunas que estão presentes em um data frame mas não em outro. Se uma coluna está faltando em um data frame, ela será adicionada aquele data frame com o termo `NA` ou `NULL`. Para substituir os valores rotulados de `NA` ou `NULL` usa-se a função `merged[is.na(merged)] <- 0`. Ver Apêndices.
+
+```{r, eval=FALSE, resul='hold'} 
+shared_spp <- intersect(names(G1), names(G2)) #get the common column names
+shared_spp
+G1_only <- setdiff(names(G1), names(G2))
+G1_only
+G2_only <- setdiff(names(G2), names(G1))
+G2_only
+Riqueza <- length(shared_spp) + length(G1_only) + length(G2_only)
+Riqueza
+```
+
+Criando um `data.frame` com todas as espécies compartilhadas e exclusivas.
+
+```{r, eval=FALSE, results='hide'}
+library(tidyverse)
+# Create a data frame with all species
+all_species <- data.frame(
+  type = c(rep("Shared", length(shared_spp)),
+           rep("G1_only", length(G1_only)),
+           rep("G2_only", length(G2_only))),
+  species = c(shared_spp, G1_only, G2_only)
+)
+# Create a table using the `table()` function
+species_table <- table(all_species$type, all_species$species)
+
+# Convert the table to a data frame and format it
+species_table_df <- as.data.frame.matrix(species_table)
+rownames(species_table_df) <- c("G1_only", "G2_only", "Shared")
+species_table_df <- t(species_table_df[, order(colnames(species_table_df))])
+species_table_df <- as.data.frame(species_table_df)
+species_table_df
+# Ordenando pelo nome da coluna
+species_table_df <- rownames_to_column(species_table_df, var = "Espécies")
+species_table_df <- species_table_df[order(species_table_df$G1_only, species_table_df$G2_only, species_table_df$Shared, decreasing = TRUE),]
+library(gt)
+gt(species_table_df)
+```
+
+## REINÍCIO 3
+
+```{r, eval=TRUE}
+m_bruta <- ppbio
+```
+
+Aqui cria-se o vertor da matriz bruta a partir da base de dados depois de feitos os ajustes necessários.
+
+## Criando uma matriz de médias
+
+```{r, eval=TRUE, results='hide'}
+#Inserindo coluna para agrupamentos
+ncol(m_bruta); nrow(m_bruta) #no. de N colunas x M linhas
+m_bruta_g <- cbind(Grupos = rownames(m_bruta), m_bruta)
+
+###Mudando nomes de linhas, ajuste em BB-EN
+#m_bruta_g$Grupos[m_bruta_g$Grupos == "EN11"] <- "BE11"
+#m_bruta_g$Grupos[m_bruta_g$Grupos == "EN14"] <- "BE14"
+#m_bruta_g$Grupos[m_bruta_g$Grupos == "EN15"] <- "BE15"
+###
+
+agrup1 <- substr(m_bruta_g[, 1], 1,1)
+agrup1
+m_bruta_g <- m_bruta_g %>% mutate(Grupos=c(agrup1))
+
+#m_avg_part <- aggregate(m_bruta_g[, 2:3], list(m_bruta_g$Grupos), mean)
+m_avg <- m_bruta_g %>% 
+  group_by(Grupos) %>%
+  summarise(across(.cols = everything(), ~ mean(.x, na.rm = TRUE)))
+#m_avg <- m_bruta_g %>% 
+#  group_by(Grupos) %>%
+#  summarise(across(.cols = everything(), list(mean = mean, sd = sd)))
+#?across
+
+#Primeira coluna para nomes das linhas 
+m_avg <- as.data.frame(m_avg)
+class(m_avg)
+rownames(m_avg) <- m_avg[,1]
+m_avg[,1] <- NULL
+m_avg
+#Salvando a matriz
+write.table(m_avg,
+            "m_avgcsv.csv",
+            append = F,
+            quote = TRUE,
+            sep = ";", dec = ",",
+            row.names = T)
+m_avg1_csv <- read.csv("m_avgcsv.csv",
+                    sep = ";", dec = ",",
+                    header = T,
+                    row.names = 1,
+                    na.strings = NA)
+```
+
+## Análise de Espécies Compartilhadas: Em arquivos diferentes
+
+```{r, eval=FALSE}
+#Espécies compartilhadas
+shared_spp1 <- intersect(names(G1), names(G2)) #get the common column names
+shared_spp1
+G1_only <- setdiff(names(G1), names(G2))
+G1_only
+G2_only <- setdiff(names(G2), names(G1))
+G2_only
+Riqueza <- length(shared_spp1) + length(G1_only) + length(G2_only)
+Riqueza
+```
+
+```{r, eval=FALSE}
+shared_spp2 <- intersect(names(G3), names(G4))
+shared_spp2
+G3_only <- setdiff(names(G3), names(G4))
+G3_only
+G4_only <- setdiff(names(G4), names(G3))
+G4_only
+Riqueza <- length(shared_spp2) + length(G3_only) + length(G4_only)
+Riqueza
+```
+
+## Bases de dados no mesmo arquivo `ppbio`
+
+Pode-se usar a matriz `teste.xlsx` para testar e verificar os resultados dos comandos em comparação com as matrizes reais. O comando `fix()` permite editar uma matriz. A matriz de teste tem `r nrow(teste)` linhas e `r ncol(teste)` colunas, com os nomes `r rownames(teste)` nas linhas e `r colnames(teste)` como os nomes das colunas. Códigos baseados nas letras A, B e C, portanto, se referem a matriz de teste. 
+
+A seguir separamos a matriz em suas partes.
+
+```{r, eval=FALSE}
+data <- (teste)
+data
+library(dplyr)
+A <- filter(data, grepl("A", row.names(data)))
+names(which(colSums(A) == 0)) #all-zero columns
+A <- A[, colSums(A != 0) > 0]
+B <- filter(data, grepl("B", row.names(data)))
+names(which(colSums(B) == 0)) #all-zero columns
+B <- B[, colSums(B != 0) > 0]
+C <- filter(data, grepl("C", row.names(data)))
+names(which(colSums(C) == 0)) #all-zero columns
+C <- C[, colSums(C != 0) > 0]
+```
+
+## REINÍCIO 4
+
+```{r, eval=TRUE}
+data <- (m_bruta)
+```
+
+## Encontrando espécies exclusivas
+
+### Escolhendo as **LINHAS OU GRUPOS** para comparar
+
+```{r rows, eval=FALSE}
+# Get the row indices where "A" occurs
+rownames(data)
+rows <- grep("S-", rownames(data))
+#rows <- grep("B-", rownames(data))
+#rows <- c(1:36)
+rows
+```
+
+#### Espécies exclusivas que ocorrem em **1 LINHA E OUTRA, OU EM 1 GRUPO E OUTRO** `(#EM TESTE)`
+
+Aqui procuramos espécies que ocorrem em todas as linhas do grupo definido pelo vetor `rows` no chunk anterior `rows`   
+
+```{r, eval=FALSE}
+# Initialize an empty vector to store species exclusive to 'A' rows
+species_only_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species occurs only in 'A' rows
+  if (all(data[rows, col] != 0) && !any(data[-rows, col] != 0)) {
+    species_only_in <- c(species_only_in, col)
+  }
+}
+# Print species that only occur in 'A' rows
+print(species_only_in)
+data
+```
+
+## Espécies exclusivas para **1 LINHA OU 1 GRUPO** - Baseado na soma dos grupos `(#FUNCIONA)`
+
+```{r, eval=FALSE}
+# Get the row indices where 'A' occurs
+rows
+# Calculate the sum of occurrences of each species in 'A' rows
+sum_of <- colSums(data[rows, ])
+sum_of
+# Initialize an empty vector to store species exclusive to 'A' rows
+species_only_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species occurs only in 'A' rows
+  if (sum(data[rows, col]) == sum_of[col] && !any(data[-rows, col] != 0)) {
+    species_only_in <- c(species_only_in, col)
+  }
+}
+# Print species that only occur in 'A' rows
+print(species_only_in)
+S_only
+data
+rows
+```
+
+## Espécies exclusivas para **2 LINHAS OU 2 GRUPOs** - Baseado na soma dos grupos `(#FUNCIONA)`
+
+```{r, eval=FALSE}
+# Get the row indices where 'A' occurs
+rows <- grep("S-", rownames(data))
+rows2 <- grep("B-", rownames(data))
+#rows <- as.vector(rbind(c(rows, rows2)))
+rows
+```
+
+```{r, eval=FALSE}
+# Calculate the sum of occurrences of each species in 'A' rows
+sum_of <- colSums(data[rows, ])
+sum_of
+# Initialize an empty vector to store species exclusive to 'A' rows
+species_only_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species occurs only in 'A' rows
+  if (sum(data[rows, col]) == sum_of[col] && !any(data[-rows, col] != 0)) {
+    species_only_in <- c(species_only_in, col)
+  }
+}
+# Print species that only occur in 'A' rows
+print(species_only_in)
+S_only
+data
+rows
+identical(S_only, species_only_in)
+intersect(S_only, species_only_in) #shared column names
+setdiff(S_only, species_only_in) #only in 1st vector
+length(intersect(S_only, species_only_in)) #how many
+```
+
+## Encontrando espécies compartilhadas ENTRE DOIS (OU MAIS) GRUPOS
+
+Encontra espécies que são compartilhadas (ocorrem em **TODAS AS LINHAS**) dentro do grupo analisado. Mas, não significa que elas estejam apenas nestas linhas. A função `any()` indica que  **QUALQUER** linha em comum entre duas colunas faz com que elas tenha esses colunas compartilhadas. Já a função `all()` indica que, para duas colunas terem linhas compartilhadas os grupos das colunas tem que compartilhar **TODAS** as suas linhas. Uma análise sobre esse `loop`. 
+Adicionamos `&& any(data[rows_G3, col] != 0)` para um terceiro grupo e assim sucessivamente.
+
+```{r, eval=FALSE}  
+# Get the rows corresponding to A and B (and C)
+rows_G1 <- grep("S-", rownames(data))
+rows_G2 <- grep("B-", rownames(data))
+rows_G3 <- grep("R-", rownames(data))
+rows_G4 <- grep("A-", rownames(data))
+#rows <- as.vector(cbind(c(rows_G1, rows_G2, rows_G3, rows_G4)))
+# Initialize an empty vector to store species that A and B have in common
+species_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species has at least one non-zero value in both A and B rows
+  if (any(data[rows_G1, col] != 0) && any(data[rows_G2, col] != 0)) {
+    species_in <- c(species_in, col)
+  }
+}
+# Print species that A and B have in common
+print(species_in)
+shared_spp
+data
+```
+
+Uma análise feita pelo ChatGPT sobre o `loop` "for...{...if{...}}" acima e os outros anteriores é apresentada [aqui](https://chat.openai.com/share/c58ca553-05f0-41f3-b000-be4d2b71d283) 
+
+## Diagrama de Venn
+
+Primeiro é necessário criar uma matriz binária para os valores das colunas nas linhas. Isso é feito a seguir.
+
+```{r, results='hold'}
+library("gt")
+m_venn <- as.data.frame(t(m_avg))
+m_venn
+gt(round(m_venn, 2), rownames_to_stub = TRUE)
+m_venn[m_venn !=0] <- 1 #matriz binária 
+```
+
+## Usando o pacote `eulerr`
+
+```{r, results='hold'}
+library("eulerr")
+#set.seed() #this seed changes the orientation of the sets        
+plot(euler(m_venn), counts = TRUE, fontface = 1)
+```
+
+## Usando o pacote [`VennDiagram`](https://rstudio-pubs-static.s3.amazonaws.com/13301_6641d73cfac741a59c0a851feb99e98b.html)
+
+```{r, results='hold'}
+# Load required libraries
+library(VennDiagram)
+library(ggvenn)
+G1 <- nrow(subset(m_venn, S==1))
+G2 <- nrow(subset(m_venn, B==1))
+#G3 <- nrow(subset(m_venn, R==1))
+#G4 <- nrow(subset(m_venn, A==1))
+G1_G2 <- nrow(subset(m_venn, G1==1 & G2==1))
+#G3_G4 <- nrow(subset(m_venn, G3==1 & G4==1))
+
+grid.newpage()
+draw.single.venn(area = G1, category = "G1")
+
+grid.newpage()
+draw.single.venn(G1, category = "G1",
+                 lty = "blank",
+                 fill = "cornflower blue", 
+                 alpha = 0.5)
+##lty - outline of cirlces, ## fill - colour, ## alpha - colour transparency
+
+grid.newpage()
+draw.pairwise.venn(G1, G2, G1_G2,
+                   category = c("G1","G2"))
+grid.newpage()
+draw.pairwise.venn(G1, G2, G1_G2,
+                   category = c("G1","G2"),
+                   lty = rep("blank",2),
+                   fill = c("light blue", "pink"),
+                   alpha = rep(0.5,2),
+                   cat.pos = c(0,0),
+                   cat.dist = rep(0.025,2))
+## cat.pos - position of category titles, represented by degree from the
+## middle of the circle
+## cat.dist - distance of the category titles from the edge of the circle
+
+grid.newpage()
+draw.pairwise.venn(G1, G2, G1_G2,
+                   category = c("G1", "G2"),
+                   lty = rep("blank",2),
+                   fill = c("light blue", "pink"),
+                   alpha = rep(0.5, 2),
+                   cat.pos = c(0,0),
+                   cat.dist = rep(0.025, 2),
+                   scaled = FALSE)
+## scaled - TRUE for scaled or FALSE for unscaled cirlces
+
+grid.newpage() #<--
+draw.pairwise.venn(area1 = G1, area2 = G2, cross.area = 0,
+                   category = c("G1","G2"),
+                   lty = rep("blank",2),
+                   fill = c("light blue", "green"),
+                   alpha = rep(0.5, 2),
+                   cat.pos = c(0, 180),
+                   euler.d = TRUE, sep.dist = 0.03, 
+                   rotation.degree = 45)
+## euler.d - TRUE for movable circles; FALSE for unmovable circles. Must be
+## TRUE to have space between non-overlapping circles.
+## sep.dist - distance between circles
+## rotation.degree - degrees the diagram is rotated
+
+#grid.newpage()
+#draw.triple.venn(area1 = BB, area2 = CA, area3 = EN,
+#                 n12 = BB_CA, n23 = CA_EN, n13 = BB_EN, 
+#                 n123 = BB_CA_EN,
+#                 category = c("Rio Barro Branco", #"Rio Caiana", "Entorno da REBio"),
+#                 lty = "blank", 
+#                 fill = c("skyblue", "pink1", #"mediumorchid"),
+#                 scaled = TRUE)
+#grid.newpage()
+#draw.quad.venn(area1 = BB, area2 = CA, area3 = EN, #area4 = RE,
+#               n12 = BB_CA, n23 = CA_EN, n13 = BB_EN,
+#               n14 = BB_RE, n24 = CA_RE, n34 = EN_RE,
+#               n123 = BB_CA_EN, n1234 = BB_CA_EN_RE,
+#               n124 = BB_CA_RE, n134 = BB_EN_RE,
+#               n234 = CA_EN_RE,
+#               category = c("BB", "CA", "EN", "RE"),
+#               lty = "blank",
+#               fill = c("skyblue", "pink1", #"mediumorchid", "orange"),
+#               scaled = TRUE)
+```
+
+## Diagrama de Venn - BASEADO EM PALAVRAS
+
+Cálculo do overlap [AQUI](https://stackoverflow.com/questions/70160554/how-to-get-list-of-unique-items-for-each-partition-in-venn-diagram) ou [AQUI](https://forum.posit.co/t/items-in-intersection-of-a-venn-diagram/62947)
+
+```{r, results='hold'}
+lista <- m_venn
+lista
+
+G1 <- rownames(lista)[which(lista$S !=0)]
+G2 <- rownames(lista)[which(lista$B !=0)]
+G3 <- rownames(lista)[which(lista$R !=0)]
+G4 <- rownames(lista)[which(lista$A !=0)]
+over = list(G1, G2)
+over
+
+venn.diagram(#salva o diagrama em um arquivo
+  x = list(G1, G2),
+  category.names = c("G1","G2"),
+  filename = 'fig-venn_diagramm2.png',
+  height = 3000, width = 3000, resolution = 500, 
+  disable.logging = T, scaled = T,
+  output = F,
+  lty = "blank",
+  fill = c("skyblue", "pink1"))
+
+overlap <- calculate.overlap(over)
+overlap
+VennDiagram::get.venn.partitions(over)
+```
+
+Mais opções [Aqui](https://www.datanovia.com/en/blog/beautiful-ggplot-venn-diagram-with-r/) e [Aqui](https://www.datanovia.com/en/blog/venn-diagram-with-r-or-rstudio-a-million-ways/)
+
+```{r, results='hold', eval=FALSE}
+library("ggVennDiagram")
+x <- list(
+  G1 = rownames(lista)[which(lista$S !=0)],
+  G2 = rownames(lista)[which(lista$B !=0)],
+  G3 = rownames(lista)[which(lista$R !=0)],
+  G4 = rownames(lista)[which(lista$A !=0)])
+
+ggvenn(
+  x, 
+  fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF", "#CD534CFF"),
+  stroke_size = 0.5, set_name_size = 4
+  )
+
+# Default plot
+ggVennDiagram(
+  x, label_alpha = 0,
+  category.names = c("G1","G2","G3","G4")
+  ) +
+  ggplot2::scale_fill_gradient(low="yellow",high = "green")
+
+grid.newpage()
+ggVennDiagram(x[1:2], label_alpha = 0)
+
+library("ggvenn")
+grid.newpage()
+ggvenn(x)
+
+library("gplots")
+grid.newpage()
+v.table <- venn(x)
+v.table <- as.data.frame(v.table)
+print(v.table)
+print(t(m_avg))
+```
+
+```{r, eval=FALSE}
+# Estrutura da comunidade
+system(paste("open", shQuote("D:/Elvio/OneDrive/MSS/_Zoo-Rebio/R_ZooRebio/strcom.qmd")))
+```
+
+## Apêndices {.unnumbered}
+
+### Sites consultados {.unnumbered}
+[Primeira coluna para nomes das linhas](www.link.com) 
+
+### Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "02-shared.Rmd", output = "script-rmd2-4-2.txt", documentation = 0)
+Script <- readLines("script-rmd2-4-2.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd2-4-2.txt")
+cat(Script, sep = "\n")
+```
+
+## Referências {-}
