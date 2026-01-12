@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Fundamentos de Ecologia Numérica</title>
+  <title> 11 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica</title>
   <meta name="description" content="…. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Fundamentos de Ecologia Numérica" />
+  <meta property="og:title" content=" 11 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="…. The output format for this example is bookdown::gitbook." />
   <meta name="github-repo" content="rstudio/fundamentos_de_ecologia_numerica" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Fundamentos de Ecologia Numérica" />
+  <meta name="twitter:title" content=" 11 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica" />
   
   <meta name="twitter:description" content="…. The output format for this example is bookdown::gitbook." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introdução-ao-rrstudio.html"/>
+<link rel="prev" href="estrcom.html"/>
+<link rel="next" href="bibliografia.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -60,6 +60,29 @@
 <style type="text/css">
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -344,45 +367,46 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Fundamentos de Ecologia Numérica</h1>
-<h2 class="subtitle"><em>Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</em></h2>
-<p class="author"><em>Prof. Elvio S. F. Medeiros</em></p>
-<p class="author"><em>Laboratório de Ecologia</em></p>
-<p class="author"><em>Universidade Estadual da Paraíba</em></p>
-<p class="author"><em>Campus V, João Pessoa, PB</em></p>
-<p class="date"><em>Last updated: 12/01/2026 13:02:15</em></p>
+<div id="partdiv" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number"> 11</span> R Modulo 4.2 - Decomposição da diversidade<a href="partdiv.html#partdiv" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="resumo-8" class="section level3 unnumbered hasAnchor">
+<h3>RESUMO<a href="partdiv.html#resumo-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies.</p>
 </div>
-<div id="apresentação" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number"> 1</span> Apresentação<a href="index.html#apresentação" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="motivação" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Motivação<a href="index.html#motivação" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Este é um site experimental da disciplina de graduação de Ecologia Numérica do Curso de Ciências Biológicas da Universidade Estadual da Paraíba.</p>
-<p>O site experimental da disciplina de Ecologia Numérica da UEPB é uma plataforma criada com o objetivo de apresentar exemplos didáticos aos alunos, explorando diferentes conceitos e técnicas utilizadas na análise de dados em Ecologia. É importante destacar que os exemplos apresentados no site podem conter imprecisões ou códigos demasiado extensos (aparentemente desnecessários para um ecólogo e programador de R mais experiente), mas isso é proposital, pois a finalidade é oferecer um material didático para os alunos, que possa facilitar a compreensão dos conceitos abordados durante as aulas. Dessa forma, o site é uma ferramenta complementar às aulas presenciais, que busca fornecer exemplos práticos e didáticos para os estudantes de Ecologia Numérica da UEPB.</p>
-<p>Como mencionado, a finalidade é didatica e de apresentar o tema seguindo passo-a-passo e contextualizando com dados ecológicos reais. Por isso, além das informações sobre o conteúdo do site experimental da disciplina de ecologia numérica da UEPB, é importante destacar que qualquer erro ou problema relacionado ao site pode ser reportado ao <a href="elviomedeiros@servidor.uepb.edu.br">responsável pelo site</a>.</p>
-<p>É fundamental que os usuários do site compreendam que plágio e outras formas de má conduta acadêmica são inaceitáveis e podem ter sérias consequências. O <a href="elviomedeiros@servidor.uepb.edu.br">responsável pelo site</a> se compromete a remover qualquer conteúdo ofensivo ou sem citar a devida fonte consultada, que possa ter sido publicado erroneamente ou por engano.</p>
+<div id="apresentação-8" class="section level3 unnumbered hasAnchor">
+<h3>Apresentação<a href="partdiv.html#apresentação-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies. Essas métricas são usadas para avaliar a diversidade e a estrutura de comunidades ecológicas. Elas podem fornecer informações importantes sobre como as diferentes espécies interagem em um ecossistema e como a diversidade de espécies pode ser afetada por mudanças ambientais ou distúrbios <span class="citation">(<a href="#ref-RN357" role="doc-biblioref">MAGURRAN, 1988</a>)</span>.</p>
 </div>
-<div id="organização-do-livro" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Organização do livro<a href="index.html#organização-do-livro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Este livro é organizado em <code>QUATRO</code> partes:</p>
-<p>Na <code>PARTE I</code>, são apresentadas as bases teóricas fundamentais sobre ecologia numérica e análise multivariada.</p>
-<p>Na <code>PARTE II</code>, é apresentada a fundamentação teórica para o entedimento dos conjuntos de dados que são trabalhados ao longo da <code>PARTE III</code> e execução das estatísticas descritas.</p>
-<p>Na <code>PARTE III</code>, são apresentados os Módulos do RStudio, na forma de tutoriais discutidos, que podem ser executados passo-a-passo.</p>
-<p>Por fim, na <code>PARTE IV</code>, são apresentadas informações gerais de apoio para o melhor entendimento do conteúdo, como uma lista geral das tabelas usadas na <code>PARTE II</code>, um glossário de termos, bibliografia geral, entre outras fontes de informação.</p>
+<div id="sobre-os-dados-4" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Sobre os dados<a href="partdiv.html#sobre-os-dados-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz comunitária</strong> (<a href="https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06c-peixes.xlsx</a>) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Esses são dados de espécies de peixes distribuidas em diversas unidades amostrais (UA’s ou sítios). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.</p>
+<p>Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06-grupos</a>)</p>
+<p><strong>Revise as informações sobre as bases de dados no capítulo <a href="<a href="bases.html#bases">3</a>">Bases de Dados</a>. A matriz de dados para esse Módulo pode ser baixada na seção <a href="<a href="bases.html#arqs">3.2</a>">Arquivos disponíveis</a>.</strong></p>
+<p><strong>Revise o capítulo anterior <a href="<a href="estrcom.html#estrcom">10</a>">Estrutura da Comunidade</a></strong></p>
 </div>
-<div id="como-estudar-por-esse-livro" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Como estudar por esse livro?<a href="index.html#como-estudar-por-esse-livro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Simples! Siga a sequência que é apresentada.</p>
-<ul>
-<li>Estude a teoria (<code>PARTE I</code>), certifique-se de que entende os conceitos e é capaz de tomar decisões fundamentadas na teoria. Revise/relembre do Ensino Médio a matemática necessária (Conjuntos, Matriz, Álgebra, Teorema de Pitágoras, etc.).</li>
-<li>Leia a fundamentação das bases de dados que usará subsequentemente (<code>PARTE II</code>). Mas lembre, você não precisa ser especialista nos grupos taxonômicos apresentados aqui como exemplo. O ecólogo trabalha com dados, e eles falam por si só.</li>
-<li>Parta para a ação (<code>PARTE III</code>), começe com os primeiros módulos do R, siga as instruções passo-a-passo, execute linha por linha de código, atente para os resultados.</li>
-<li>Consulte os detalhes e referências apresentados na <code>PARTE IV</code>.</li>
-</ul>
-<div id="para-um-estudo-aprofundado" class="section level3 hasAnchor" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> Para um estudo aprofundado<a href="index.html#para-um-estudo-aprofundado" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="organização-básica-5" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Organização básica<a href="partdiv.html#organização-básica-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="apêndices-8" class="section level2 unnumbered hasAnchor">
+<h2>Apêndices<a href="partdiv.html#apêndices-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sites-consultados-6" class="section level3 unnumbered hasAnchor">
+<h3>Sites consultados<a href="partdiv.html#sites-consultados-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="www.link.com">Primeira coluna para nomes das linhas</a></p>
+</div>
+<div id="script-limpo-5" class="section level3 unnumbered hasAnchor">
+<h3>Script limpo<a href="partdiv.html#script-limpo-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
+</div>
+</div>
+<div id="referências-9" class="section level2 unnumbered hasAnchor">
+<h2>Referências<a href="partdiv.html#referências-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
+</div>
+<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body" entry-spacing="1">
+<div id="ref-RN357" class="csl-entry">
+MAGURRAN, A. E. <strong>Ecological Diversity and Its Measurement</strong>. [S.l.]: Croom Helm Ltd, 1988. p. 179.
 </div>
 </div>
             </section>
@@ -390,8 +414,8 @@
           </div>
         </div>
       </div>
-
-<a href="introdução-ao-rrstudio.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estrcom.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -422,7 +446,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/2-04-2-rmd4_partdiv.Rmd",
 "text": "Edit"
 },
 "history": {
