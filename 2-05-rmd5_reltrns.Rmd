@@ -1,0 +1,590 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 5 - Relativizações e transformações {#reltrns}
+
+### RESUMO {-}
+
+Transformações e relativizações de dados são técnicas essenciais na análise de dados em Ecologia Numérica, permitindo comparar diferentes variáveis que estão em escalas diferentes ou que possuem unidades distintas.
+
+### Apresentação {-}
+
+O R é uma ferramenta poderosa para realização dessas operações, com diversos pacotes disponíveis para essa finalidade. Neste tutorial, iremos explorar algumas das principais funções do pacote vegan, que permite realizar transformações e relativizações de dados de forma simples e eficiente. Além disso, também utilizaremos outras bibliotecas importantes para reorganização e visualozação de dados. O tutorial irá abordar desde as operações básicas, como filtragem e seleção de dados, até as transformações mais complexas, como a normalização de dados e a relativização por medidas de biomassa ou área. Com exemplos práticos e ilustrações gráficas, o objetivo é permitir que os usuários do R possam aplicar essas técnicas em suas próprias análises e estudos de Ecologia Numérica. Ao final do tutorial, espera-se que o usuário esteja apto a realizar transformações e relativizações de dados em suas próprias análises, aumentando a qualidade e a precisão dos resultados obtidos.
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console 
+```
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("openxlsx") #importa arquivos do excel
+install.packages("moments") #calcula assimetria e curtose dos dados
+install.packages("vegan") #estatisticas para ecologia de comunidades
+```
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+Definindo o diretório de trabalho e installando os pacotes necessários:
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+### Importando a planilha
+
+Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.  
+	- Ajuste a primeira linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.  
+	- Ajuste o parâmetro `sheet = "Sheet1"` para refletir a aba correta do arquivo .xlsx a ser importado.
+
+```{r, results='hold'}
+library(openxlsx)
+#dir <- getwd() #criamos um vetor com o diretório  de trbalho 
+#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer
+m_bruta <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(m_bruta)
+#View(m_bruta)
+m_bruta[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+```
+
+Exibindo os dados importados (esses comando são "case-sensitive" `ignore.case(object)`).
+
+```{r, eval=FALSE, results='hold'}
+#View(m_bruta)
+print(m_bruta[1:8,1:8])
+m_bruta[1:10,1:10]
+str(m_bruta)
+mode(m_bruta)
+class(m_bruta)
+```
+
+Podemos exibir a planilha depois de ter sido importada para o ambiente R/RStudio usando as funções `View()`, `print()` ou `head()`. Note que essas funções são case-sensitive. A função `ignore.case()` é uma função do pacote `stringr` que modifica um padrão para que ele não considere o caso das letras nas correspondências. Por exemplo, se você quiser encontrar todas as ocorrências da letra “a” em um vetor de caracteres, independente de ser “A” ou “a”, você pode usar essa função.
+
+```{r, results='hide'}
+#View(m_bruta)
+print(m_bruta)
+head(m_bruta)
+```
+
+A função `head()` no RStudio é uma forma de ver as primeiras `(n=6)` linhas de um objeto, como um vetor, uma matriz, um data frame ou uma lista. Ela é útil para ter uma ideia do conteúdo e da estrutura do objeto.
+
+Também podemos explorar as características da planilha usando as funções `str()`, `mode()`, `class()` e `length()`. O número de observações ou tamanho do vetor depende do tipo de dados, se eles são uma matrix ou um data.frame.
+
+#### Abreviações {-}
+
+No interesse de sistematizar o código R das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (Tabela \@ref(tab:5tblm_2)) resume seus tipos e abreviações.
+
+```{r 5tblm_2, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)", ~"Abreviação no R",
+  "Matriz comunitaria", "Os atributos são táxons ou OTU's (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)", "m_com",
+  "Matriz ambiental", "Os atributos são dados ambientais e variáveis  físicas e químicas (ex. pH, condutividade, temperatura)", "m_amb",
+  "Matriz de habitat", "Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)", "m_hab",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)", "m_bruta",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas", "m_t",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)", "m_rel, m_relcol, m_rellin",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)", "m_trns, m_log10, m_asrq",
+  "Matriz de distâncias", "Matriz de m x m similaridades ou de distâncias (ex. Euclidiana, Manhattan, Bray-Curtis, etc)", "m_dists, m_euclid, m_bray",
+  "Matriz de trabalho", "Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)", "m_trab",
+  "Matriz particionada", "Foram removidas linhas ou colunas (ex. linhas que são outliers e espécies zeradas)", "m_part",
+  "Base de dados", "Arquivo do Excel planilhado a partir de dados de campo ou de laboratório. Será manejada e particionada no R, para criar a Matriz bruta", "ppbio06.xlsx, zoorebio.xlsx, bentos06.xlsx",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
+```
+
+## Tamanho da matriz
+
+Podemos agora calcular o número e a proporção de zeros na matriz usando as funções `sum()` e `length()` (Você pode pesquisar o que faz a função `length()` usando o comando `?length`).
+
+```{r, results='hold'}
+range(m_bruta) #menor e maior valores
+length(m_bruta) #no. de colunas
+ncol(m_bruta) #no. de N colunas
+nrow(m_bruta) #no. de M linhas
+sum(lengths(m_bruta)) #soma os nos. de colunas
+length(as.matrix(m_bruta)) #tamanho da matriz m x n
+sum(m_bruta == 0) # número de observações igual a zero
+sum(m_bruta > 0) # número de observações maiores que zero
+zeros <- (sum(m_bruta == 0)/length(as.matrix(m_bruta)))*100 # proporção de zeros na matriz
+zeros
+```
+
+Tabela que resume as informações geradas (\@ref(tab:tbl5-tam)).
+
+```{r, results='hold'}
+tamanho <- data.frame(
+  Função = c("range", "lenght", "m cols", "n linhas", "Tamanho", "Tamanho",
+             "Zeros", "Nao zeros", "% Zeros"),
+  Resultado = c(paste(range(m_bruta), collapse = " - "), length(m_bruta), ncol(m_bruta),
+                nrow(m_bruta), sum(lengths(m_bruta)), length(as.matrix(m_bruta)), sum(m_bruta == 0),
+                sum(m_bruta > 0), round(zeros, 1)))
+tamanho
+```
+
+```{r tbl5-tam, echo=FALSE, purl=FALSE}
+knitr::kable(tamanho, format = "markdown", caption = "Resumo das informações geradas.")
+```
+
+Ou seja, temos uma matriz de tamanho `m x n` igual a `r nrow(m_bruta)` objetos por `r ncol(m_bruta)` atributos, onde `r round(zeros, 2)`% dos valores da matriz são iguais a zero!
+
+## Reset point 1
+
+```{r, eval=TRUE}
+m_trab <- m_bruta
+```
+Aqui cria-se um novo objeto do R (`m_trab`, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela Tabela \@ref(tab:5tblm_2)).
+
+## Cálculo da matriz de distâncias
+
+Agora vamos calcular a matriz de distâncias euclidiana (@RN1278, @RN1336) entre as UA´s usando a função `dist()` (pesquise o que faz essa função usando o comando `?dist`).
+
+```{r}
+m_dists <- dist(m_trab, method = "euclidian", diag = TRUE, upper = FALSE)
+```
+
+Pronto, calculamos a matriz de distâncias (euclidiana). Agora podemos visualizar a matriz.
+
+```{r, results='hold'}
+#m_dists
+str(m_dists)
+mode(m_dists)
+class(m_dists)
+length(as.matrix(m_dists))
+as.matrix(m_dists)[1:10, 1:10]
+```
+
+Uma matriz do tipo `dist` no R é um objeto que armazena as distâncias entre as linhas de uma matriz ou um data frame. Ela é criada pela função `dist()`, que calcula as distâncias usando diferentes medidas, como “euclidean”, “manhattan”, “canberra”, “binary” ou “minkowski” [@RN419].
+
+```{r, results='hold'}
+range(m_trab)
+range(m_dists)
+min(m_dists)
+max(m_dists)
+mean(m_dists) #CENTROIDE!! ou Grand mean
+sd(m_dists)  #standard deviation
+centroide <- mean(m_dists)
+centroide
+```
+
+A função `mean()` calcula a média de todos os valores da matriz de distâncias, ou seja, a média multivariada, que é o centróide. Nesse caso o **centroide assume o valor de `r round(mean(m_dists), 1)`**. Usamos agora a fórmula `m*(m-1)/2`, onde `m` é o no. de objetos sendo comparados, para calcular quantas distâcias temos na nossa matriz.
+
+```{r, results='hold'}
+length(m_dists)
+m <- nrow(as.matrix(m_dists))
+m
+m*(m-1)/2
+summary(m_dists)
+```
+
+Temos então que m é `r m` objetos (ou linhas), e portanto, a matriz de distâncias tem `r m*(m-1)/2` valores. Fazemos agora um breve sumário do que foi calculado até agora com base na matriz de distâncias.
+
+```{r, results='hold'}
+Sumario1 <- cbind(min(m_dists),
+                  max(m_dists),
+                  sd(m_dists),
+                  mean(m_dists),
+                  length(m_dists))
+colnames(Sumario1) <- c("Minimo", "Maximo", "Desv.Padr", "Media", "m(m-1)/2")
+rownames(Sumario1) <- ("Valores")
+Sumario1
+```
+
+A matriz `m_dists` está como uma classe `dist`, mas podemos transformá-la em uma classe `matrix` usando a função `as.matrix()`.
+
+```{r, results='hold'}
+dist <- (as.matrix(m_dists))
+#View(dist)
+str(dist)
+mode(dist)
+class(dist)
+#head(dist)
+dist[1:5, 1:5] #mostra as 5 primeiras linhas e colunas da matriz
+```
+
+Visualizando a matriz de distâncias, observamos que ela é uma matriz quadrada que contém as distâncias entre cada par de elementos do conjuto de dados. A matriz de distâncias terá dimensão m x m, e cada elemento da matriz será a distância entre cada par de observações ou objetos. A matriz de distâncias é simétrica, pois a distância entre i e j é igual à distância entre j e i. A matriz de distâncias também tem diagonal zero, pois a distância entre uma observação e ela mesma é zero.
+
+## Distribuição de frequência da matriz de distâncias
+
+Por fim, vamos produzir uma distribuição de frequência da matriz de distâncias, mas antes vamos explorar alguns parâmetros básicos da matriz de distâncias, como o intervalo, a média e o desvio padrão. Para isso, usamos as funções `range()`, `mean()` e `sd()` do R.
+
+### Calculando alguns parâmetros básicos
+
+```{r, results='hold'}
+range(m_dists) # intervalo dos valores da matriz
+mean(m_dists) # média dos valores da matriz
+sd(m_dists) # desvio padrão dos valores da matriz
+```
+
+Esses comandos mostram que o `menor, maior` valores na matriz de distância foram `r round(range(m_dists),2)`, enquanto que a média foi de `r round(mean(m_dists),2)` com um desvio padrão de `r round(sd(m_dists),2)`.
+
+::: {#hello .greeting .message style="color: green;"}
+[IMPORTANTE]{style="color:red"}
+Lembre que no R e RStudio, a vírgula é usada como separador de decimal e o ponto é apenas indicador de milhar. Por exemplo, 2.500,50 lê-se dois mil e quinhentos e 50 décimos.
+:::
+
+Também podemos calcular a assimetria e a curtose da matriz de distâncias, que são medidas que indicam o grau de desvio da normalidade da distribuição. Para isso, precisamos carregar o pacote `moments`, que contém as funções `skewness()` (assimetria) e `kurtosis()` (curtose).
+
+### Calculando a assimetria e a curtose
+
+```{r, results='hold'}
+library(moments)
+sk <- skewness(as.matrix(m_dists)) #calcula a assimetria da matriz
+ku <- kurtosis(as.matrix(m_dists)) #calcula a curtose da matriz
+sku <- cbind(sk,ku) # junta os dois valores em um vetor
+colnames(sku) <- c("assimetria", "curtose") # nomeia as colunas do vetor
+sku[1:10, ] # mostra as primeiras 10 linhas desse vetor
+summary(sku) # mostra um resumo estatístico do vetor
+```
+
+## Distribuição de frequências da matriz de distâncias
+
+Agora que temos uma ideia dos parâmetros básicos da matriz de distâncias, vamos entender sua distribuição de frequência usando um histograma e um boxplot. O histograma mostra a frequência relativa de cada intervalo de valores da matriz, enquanto o boxplot mostra a mediana, os quartis e os valores extremos da matriz.
+
+Para fazer os gráficos, usamos as funções `hist()` e `boxplot.default()` do R. Também usamos a função `curve()` para sobrepor uma curva de normalidade ao histograma, e a função par para ajustar os parâmetros gráficos.
+
+Nas linhas `xlim = (), # limites dos eixos` do código abaixo, os limites dos eixos do gráfico a ser criado foram definidos entre `r min(dist)` e `r max(dist)`. No seu caso, você deve ajustar os valores de `xlim` para que eles sejam os limites dos valores da sua matriz, definidos pela linha `range(dist)` *(primeira linha do código abaixo)*.
+
+Em resumo, o código abaixo plota um histograma e um boxplot da distribuição de dados armazenada na matriz de distâncias. Também é adicionada uma curva normal teórica ao histograma utilizando a média e o desvio padrão dos dados (Figura \@ref(fig:5dists). As funções `floor(min(m_dists))` e `ceiling(max(m_dists))` definem os limites dos graficos pelo valores mínimo e máximo do objeto.
+
+```{r 5dists, results='hold', fig.height=6, fig.cap="Distribuições de frequências da matriz de distâncias"}
+range(m_dists)
+par(mfrow=c(2,1)) # esse comando faz os gráficos aparecerem um acima do outro
+hist(m_dists,
+     breaks = 20, # determina o número de colunas do histograma
+     xlim = range(floor(min(m_dists)), ceiling(max(m_dists))), # limites dos eixos
+     xlab = "Distr. de Frequências",
+     freq = FALSE, # mostra as frequências relativas em vez das absolutas
+     main = "Histograma e boxplot da matriz de distâncias")
+curve(dnorm(x, mean=mean(m_dists), sd=sd(m_dists)), add=TRUE) # sobrepõe a curva de normalidade
+boxplot.default(m_dists, horizontal = TRUE, frame = FALSE,
+                xlab="Distr. de Frequências",
+                ylim=c(floor(min(m_dists)), ceiling(max(m_dists)))) # limites dos eixos
+```
+
+::: {#hello .greeting .message style="color: green;"}
+[IMPORTANTE]{style="color:red"}
+[Atenção:] Se você recebeu a mensagem de erro ["Error in plot.new() : figure margins too large"]{style="color:red"}, aumente o tamanho da janela do gráfico e execute o bloco de comandos novamente.
+:::
+
+O comando abaixo apaga os gráficos.
+
+```{r, eval=FALSE}
+dev.off()
+```
+
+## Relativizando e transformando a base de dados
+
+Na sequencia de códigos a seguir o R realiza relativizações e transformações em dados biológicos (@RN67). Vamos ver passo a passo o que cada seção do código faz. Os códigos para as demais principais relativizações estão [AQUI][Relativizações]
+
+```{r}
+library(vegan)
+```
+
+Essa linha carrega o pacote `vegan` no ambiente R, permitindo o uso de suas funções. O pacote `vegan` é um pacote do R para análise de ecologia numérica e comunidades biológicas. Ele fornece uma ampla variedade de funções para análise de dados ecológicos, como análise de diversidade, ordenação de espécies, análise de similaridade, entre outras.
+
+A função `decostand()` é usada para relativizar os dados armazenados na matriz de trabalho (`m_trab`). O parâmetro `method` especifica o método de relativização, neste caso *“total”* (relativização pelo total de cada coluna). Outros métodos disponíveis são *max, normalize, range e rankm* (\@ref(tab:(5tbl-rel)). O parâmetro `MARGIN` especifica em qual dimensão os cálculos devem ser feitos *(1 para linhas, 2 para colunas)*. Neste caso, `MARGIN=2` (colunas). A variável `m_relcol` armazena o resultado da relativização. Sokal e Rohlf (@RN286) tratam dos diversos tipos de relativizações e transformações em dados ecológicos.
+
+### Relativização pelo total
+
+```{r}
+m_relcol <- decostand(m_trab,
+                         method="total",
+                         MARGIN = 2)
+#View(m_relcol)
+m_relcol
+#colSums(m_relcol)
+#range(m_relcol)
+```
+
+### Transformação pelo arcoseno da raiz quadrada
+
+A seguir é realizada a transformação pelo arcoseno da raiz quadrada, apropriada para ados em proporção como os ados previamente relativisados. Para cada transformação, a função é aplicada aos dados de interesse e o resultado é armazenado em uma nova variável. A função `View()` é usada para visualizar o resultado de cada transformação na forma de uma tabela. Os códigos para as demais principais transformações estão [AQUI][Transformações]
+    
+```{r}
+m_relcol_asrq <- asin(sqrt(m_relcol))
+#View(m_relcol_asrq)
+m_relcol_asrqpi <- 2/pi*(asin(sqrt(m_relcol)))
+#View(m_relcol_asrqpi)
+#colSums(m_relcol_asrqpi)
+#range(m_relcol_asrqpi)
+```
+
+## Reset point 2
+
+Aqui estabelecemos a matriz transformada depois de ter sido relativisada como `m_trns`.
+
+```{r, eval=TRUE}
+m_trns <- m_relcol_asrqpi
+#m_dists <- dist(m_trns, method = "euclidian", diag = TRUE, upper = FALSE)
+```
+
+Agora é com você...Refaça toda a análise com as relativizações  e transformações adequadas para a matriz de dados fornecida.
+
+## Apêndices {.unnumbered}
+
+### Relativizações {-}
+
+#### Total das colunas {-}
+
+```{r}
+#| eval: false
+m_relcol <- decostand(m_bruta,
+                         method="total",
+                         MARGIN = 2)
+View(m_relcol)
+m_relcol
+```
+
+A função `decostand()` é usada para relativizar os dados armazenados no vetor `m_bruta`. O parâmetro `method` especifica o método de relativização, neste caso "total" (relativização pelo total de cada coluna). Outros métodos disponíveis são `max`, `normalize`, `range` e `rankm` (Figura \@ref(tab:5rels)). O parâmetro `MARGIN` especifica em qual dimensão os cálculos devem ser feitos (1 para linhas, 2 para colunas). Neste caso, `MARGIN=2` (colunas). A variável `m_relcol` armazena o resultado da relativização. Sokal e Rohlf [-@RN67] tratam dos diversos tipos de relativizações e transformações em dados ecológicos.
+
+```{r 5rels, echo=FALSE, purl=FALSE}
+mytbls <- tibble::tribble(
+    ~"Função", ~"Descrição", ~"Uso adequado",
+      "max","Divide cada valor pela maior observação da coluna em que está localizado. Todos os valores resultantes serão menores ou iguais a 1. Adequada para análise em escala relativa", "Quando a escala de cada variável é conhecida e a análise deve ser feita em uma escala relativa",
+      "normalize",  "Divide cada valor pelo comprimento do vetor. Isso resulta em valores cujo comprimento é sempre igual a 1. Adequada para análise de dados de frequência",  "Para análise de dados de frequência",
+      "range",  "Subtrai o valor mínimo da coluna de cada valor e, em seguida, divide pelo intervalo (ou amplitude) dos valores da coluna. Isso resulta em valores entre 0 e 1.",  "Quando a amplitude dos valores em cada coluna é importante para a análise",
+      "rankm", "Transforma os valores em suas posições dentro da coluna, em ordem crescente. O menor valor recebe o valor 1 e o maior valor recebe o valor igual ao comprimento da coluna.", "Quando a escala absoluta dos valores não é importante, mas a ordem dos valores é significativa."
+  )
+library(knitr)
+library(kableExtra)
+x <- kable(mytbls, row.names = FALSE, align = "cll", booktabs = TRUE, caption = "Métodos de relativização da função `decostand`")
+x <- kable_styling(x)
+column_spec(x, 2:3, width = c("8cm","5cm"))
+```
+
+### Transformações {-}
+
+Essa seção mostra as diversas transformações nos dados armazenados no vetor `m_bruta`. Para cada transformação, a função é aplicada aos dados da matriz e o resultado é armazenado em uma nova variável. A função `View()` pode ser usada para visualizar o resultado de cada transformação na forma de uma tabela. Ela mostra o código que realiza diversas transformações na matriz de dados. Para cada transformação, a função é aplicada aos dados e o resultado é armazenado em uma nova variável.
+
+#### Log10 {.unnumbered}
+
+Não aceita zeros, porque o log de zero é indeterminado. Por isso devemos substituir os valores com erro (infinito negativo) por zero, usando a função `replace()`.
+
+```{r, eval=FALSE}
+m_lg10 <- log10(m_bruta)
+#View(m_lg10)
+m_lg10 <- replace(m_lg10, is.infinite(m_lg10), 0)
+head(m_lg10)
+```
+
+#### Log(x+1) {.unnumbered}
+
+Desaconselhavel para valores que variam entre 0-1.
+
+```{r, eval=FALSE}
+m_lgx1 <- log(m_bruta+1)
+#View(m_lgx1)
+```
+
+#### Exponenciais {.unnumbered}
+
+"Power transformations", onde o valor de `p` estabelece a compressão dos dados.
+
+```{r, eval=FALSE}
+m_bruta_P1 <- m_bruta^1 #p=1
+#View(m_bruta_P1)
+m_bruta_P05 <- m_bruta^0.5 #p=0,5
+#View(m_bruta_P05)
+m_bruta_P01 <- m_bruta^0.1 #p=0,1
+#View(m_bruta_P01)
+```
+
+#### Presença/Ausência {.unnumbered}
+
+```{r, eval=FALSE}
+m_pa <- (m_bruta>0)*1L
+#View(m_pa)
+```
+
+#### Raiz quadrada {.unnumbered}
+
+```{r, eval=FALSE}
+m_rq <- sqrt(m_bruta)
+#View(m_rq)
+```
+
+#### Arcoseno da raiz quadrada {.unnumbered}
+
+Os valores de entrada tem que variar entre 0 e 1. Ideal para matrizes relativizadas. Duas formulações estão disponíveis, com e sem a multiplicação por `2/pi`. A segunda opção costuma ter melhor efeito na normalização dos dados.
+
+```{r, eval=FALSE}
+m_asrq <- asin(sqrt(m_relcol))
+#View(m_asrq)
+m_asrqpi <- 2/pi*(asin(sqrt(m_relcol)))
+View(m_asrqpi)
+```
+
+## Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "05-rmd5_reltrns.Rmd", output = "script-rmd5.txt", documentation = 0)
+Script <- readLines("script-rmd5.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd5.txt")
+cat(Script, sep = "\n")
+```
+
+```{r,  eval=FALSE, echo=TRUE, purl=FALSE}
+## dev.off() #apaga os graficos, se houver algum
+## rm(list=ls(all=TRUE)) #limpa a memória
+## cat("\014") #limpa o console
+## install.packages("openxlsx") #importa arquivos do excel
+## install.packages("moments") #calcula assimetria e curtose dos dados
+## install.packages("vegan") #estatisticas para ecologia de comunidades
+## getwd()
+## setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+#dir <- getwd() #criamos um vetor com o diretório  de trbalho 
+#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer
+m_bruta <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/peixes06.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(m_bruta)
+#View(m_bruta)
+m_bruta[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+## #View(m_bruta)
+## print(m_bruta[1:8,1:8])
+## m_bruta[1:10,1:10]
+## str(m_bruta)
+## mode(m_bruta)
+## class(m_bruta)
+#View(m_bruta)
+print(m_bruta)
+head(m_bruta)
+range(m_bruta) #menor e maior valores
+length(m_bruta) #no. de colunas
+ncol(m_bruta) #no. de N colunas
+nrow(m_bruta) #no. de M linhas
+sum(lengths(m_bruta)) #soma os nos. de colunas
+length(as.matrix(m_bruta)) #tamanho da matriz m x n
+sum(m_bruta == 0) # número de observações igual a zero
+sum(m_bruta > 0) # número de observações maiores que zero
+zeros <- (sum(m_bruta == 0)/length(as.matrix(m_bruta)))*100 # proporção de zeros na matriz
+zeros
+tamanho <- data.frame(
+  Função = c("range", "lenght", "m cols", "n linhas", "Tamanho", "Tamanho",
+             "Zeros", "Nao zeros", "% Zeros"),
+  Resultado = c(paste(range(m_bruta), collapse = " - "), length(m_bruta), ncol(m_bruta),
+                nrow(m_bruta), sum(lengths(m_bruta)), length(as.matrix(m_bruta)), sum(m_bruta == 0),
+                sum(m_bruta > 0), round(zeros, 1)))
+tamanho
+m_trab <- m_bruta
+m_dists <- dist(m_trab, method = "euclidian", diag = TRUE, upper = FALSE)
+#m_dists
+str(m_dists)
+mode(m_dists)
+class(m_dists)
+length(as.matrix(m_dists))
+as.matrix(m_dists)[1:10, 1:10]
+range(m_trab)
+range(m_dists)
+min(m_dists)
+max(m_dists)
+mean(m_dists) #CENTROIDE!! ou Grand mean
+sd(m_dists)  #standard deviation
+centroide <- mean(m_dists)
+centroide
+length(m_dists)
+m <- nrow(as.matrix(m_dists))
+m
+m*(m-1)/2
+summary(m_dists)
+Sumario1 <- cbind(min(m_dists),
+                  max(m_dists),
+                  sd(m_dists),
+                  mean(m_dists),
+                  length(m_dists))
+colnames(Sumario1) <- c("Minimo", "Maximo", "Desv.Padr", "Media", "m(m-1)/2")
+rownames(Sumario1) <- ("Valores")
+Sumario1
+dist <- (as.matrix(m_dists))
+#View(dist)
+str(dist)
+mode(dist)
+class(dist)
+#head(dist)
+dist[1:5, 1:5] #mostra as 5 primeiras linhas e colunas da matriz
+range(m_dists) # intervalo dos valores da matriz
+mean(m_dists) # média dos valores da matriz
+sd(m_dists) # desvio padrão dos valores da matriz
+library(moments)
+sk <- skewness(as.matrix(m_dists)) #calcula a assimetria da matriz
+ku <- kurtosis(as.matrix(m_dists)) #calcula a curtose da matriz
+sku <- cbind(sk,ku) # junta os dois valores em um vetor
+colnames(sku) <- c("assimetria", "curtose") # nomeia as colunas do vetor
+sku[1:10, ] # mostra as primeiras 10 linhas desse vetor
+summary(sku) # mostra um resumo estatístico do vetor
+range(m_dists)
+par(mfrow=c(2,1)) # esse comando faz os gráficos aparecerem um acima do outro
+hist(m_dists,
+     breaks = 20, # determina o número de colunas do histograma
+     xlim = range(floor(min(m_dists)), ceiling(max(m_dists))), # limites dos eixos
+     xlab = "Distr. de Frequências",
+     freq = FALSE, # mostra as frequências relativas em vez das absolutas
+     main = "Histograma e boxplot da matriz de distâncias")
+curve(dnorm(x, mean=mean(m_dists), sd=sd(m_dists)), add=TRUE) # sobrepõe a curva de normalidade
+boxplot.default(m_dists, horizontal = TRUE, frame = FALSE,
+                xlab="Distr. de Frequências",
+                ylim=c(floor(min(m_dists)), ceiling(max(m_dists)))) # limites dos eixos
+## dev.off()
+library(vegan)
+m_relcol <- decostand(m_trab,
+                         method="total",
+                         MARGIN = 2)
+#View(m_relcol)
+m_relcol
+#colSums(m_relcol)
+#range(m_relcol)
+m_relcol_asrq <- asin(sqrt(m_relcol))
+#View(m_relcol_asrq)
+m_relcol_asrqpi <- 2/pi*(asin(sqrt(m_relcol)))
+#View(m_relcol_asrqpi)
+#colSums(m_relcol_asrqpi)
+#range(m_relcol_asrqpi)
+m_trns <- m_relcol_asrqpi
+#m_dists <- dist(m_trns, method = "euclidian", diag = TRUE, upper = FALSE)
+## m_relcol <- decostand(m_bruta,
+##                          method="total",
+##                          MARGIN = 2)
+## View(m_relcol)
+## m_relcol
+## m_lg10 <- log10(m_bruta)
+## #View(m_lg10)
+## m_lg10 <- replace(m_lg10, is.infinite(m_lg10), 0)
+## head(m_lg10)
+## m_lgx1 <- log(m_bruta+1)
+## #View(m_lgx1)
+## m_bruta_P1 <- m_bruta^1 #p=1
+## #View(m_bruta_P1)
+## m_bruta_P05 <- m_bruta^0.5 #p=0,5
+## #View(m_bruta_P05)
+## m_bruta_P01 <- m_bruta^0.1 #p=0,1
+## #View(m_bruta_P01)
+## m_pa <- (m_bruta>0)*1L
+## #View(m_pa)
+## m_rq <- sqrt(m_bruta)
+## #View(m_rq)
+## m_asrq <- asin(sqrt(m_relcol))
+## #View(m_asrq)
+## m_asrqpi <- 2/pi*(asin(sqrt(m_relcol)))
+## View(m_asrqpi)
+```
+
+## Referências {-}
+
