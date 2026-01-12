@@ -223,7 +223,7 @@ MinZ
 
 Atente para o fato de que a riqueza será a frequêcia de ocorrência na matrix transposta. Converte-se primeiro para matriz binária.
 
-```{r, results='hold'}
+```{r, results='hold', message=FALSE}
 m_pa <- m_trab
 m_pa[m_pa != 0] <- 1
 rowSums(m_pa)
@@ -339,7 +339,7 @@ A curtose descreve o pico ou a "pontiagudez" de uma distribuição. Uma distribu
 
 Essas medidas são úteis para compreender as propriedades e características de diferentes conjuntos de dados e distribuições de frequência. Elas ajudam a compreender a forma e o comportamento dos dados em uma amostra ou população [@RN158].
 
-```{r, results='hold'}
+```{r, results='hold', warning=FALSE}
 library(moments)
 Assimetria <- apply(m_trab,1,skewness)
 Assimetria
@@ -376,7 +376,7 @@ DescritoresFinal <- round (DescritoresFinal, 2)
 DescritoresFinal
 ```
 
-```{r, results='hold'}
+```{r, results='hold', warning=FALSE}
 #Fazendo uma tabela
 library(gt)
 df <- DescritoresFinal
@@ -572,7 +572,7 @@ A curva de rarefação vai ser construida para os sítios: "S-R-CT2","S-R-CP2","
 
 No código abaixo o valor de `q` pode ser mudado para `q=1` para comparar a diversidade de Shannon e para `q=2` para Simpson (Figura (\@ref(fig:241rare)). A função `endpoint=` define o tamanho da amostra para o qual se deseja extrapolar a curva de rarefação. Se `endpoint=NULL`, a extrapolação será feita para o dobro do valor amostrado.
 
-```{r 241rare, fig.show='hold', fig.cap="Curva de rafefação para sítios específicos. `q=0`, riqueza; `q=1`, diversidade de Shannon; `q=2`, diversidade de Simpson; `q=5`, equitabilidade."}
+```{r 241rare, warning=FALSE, fig.show='hold', fig.cap="Curva de rafefação para sítios específicos. `q=0`, riqueza; `q=1`, diversidade de Shannon; `q=2`, diversidade de Simpson; `q=5`, equitabilidade."}
 library(iNEXT)
 out <- iNEXT(rarefa, q = 0,
              datatype = "abundance",
