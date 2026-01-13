@@ -1,0 +1,641 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# (PART) ANÁLISES MULTIVARIADAS {-}
+
+# R Modulo 7 - Análise de Classificação Hierárquica - SAHN {#upgma}
+
+### RESUMO {-}
+
+Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em várias áreas, incluindo bioinformática, análise de dados espaciais, agronomia, entre outros. A análise de classificação hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.
+
+### Apresentação {-}
+
+Análise de Classificação Hierárquica (do inglês, "Hierarchical Agglomerative Clustering Analysis", ou simplesmente "SAHN") é um método de análise de dados utilizado para identificar grupos ou "clusters" de objetos com base em sua similaridade. Nessa análise, os objetos são inicialmente considerados como clusters individuais e, em seguida, os objetos mais similares são agrupados em um cluster maior, e assim por diante, até que todos os objetos estejam em um único cluster. Isso resulta em uma árvore hierárquica, conhecida como dendrograma, que mostra a relação de similaridade entre os objetos.
+
+Existem dois tipos principais de classificação hierárquica: aglomerativa e divisiva. O método aglomerativo é mais comum e começa com cada objeto em seu próprio cluster, e sucessivamente agrupa os objetos mais próximos, enquanto o método divisivo começa com todos os objetos em um único cluster e sucessivamente divide-os em grupos menores.
+
+Análises de classificação são amplamente utilizadas em várias áreas, incluindo bioinformática, análise de dados espaciais, agronomia, entre outros. Além disso, pode ser utilizada com diferentes medidas de distância e diferentes métodos de agrupamento, como, por exemplo, o método "complete-linkage", "single-linkage", "average-linkage", entre outros.
+
+A Análise de Classificação Hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) ##LIMPA A MEMORIA
+cat("\014") #limpa o console 
+#rm(list=ls(all=TRUE)); cat("\014"); dev.off() # tudo na mesma linha
+```
+
+### Pacotes
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+install.packages("openxlsx")
+install.packages("vegan")
+install.packages("dplyr")
+install.packages("RColorBrewer")
+install.packages("gplots")
+```
+
+```{r}
+library(tidyverse)
+```
+
+Os códigos acima, são usados para instalar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R ([R CRAN](https://cran.r-project.org/) e [RStudio](https://posit.co/download/rstudio-desktop/)). Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função `library()`. Por exemplo, no código acima, carregamos o pacote `tidyverse`, usando a função `library(openxlsx)`. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado. Os demais pacotes instalados serão carregados ao longo desse tutorial a medida que cada pacote for sendo necessário.
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+Definindo o diretório de trabalho e instalando os pacotes necessários:
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+Alternativamente você pode ir na barra de tarefas e escolhes as opções:\
+SESSION -\> SET WORKING DIRECTORY -\> CHOOSE DIRECTORY
+
+### Sobre os dados do PPBio
+
+A planilha `ppbio` contém os dados de abundância de espécies em diferentes unidades amostrais (UA's) (Figura \@ref(fig:27ppbio) (Veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Essa é a **matriz bruta de dados**, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.
+
+
+```{r 27ppbio, echo=FALSE, purl=FALSE, fig.cap="Parte da planilha de dados brutos do PPBio."}
+knitr::include_graphics("imagens/ppbio.png")
+```
+
+### Importando a planilha de trabalho
+
+Note que o sómbolo `#` em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+
+```{r, results='hide'}
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "Sheet1")
+str(ppbio)
+ppbio_ma <- as.matrix(ppbio) #lê ppbio como uma matriz
+str(ppbio_ma)
+#ppbio
+#ppbio_ma
+```
+
+## Reset point
+
+::: {#hello .greeting .message style="color: green;"}
+  [ATENÇÃO]{style="color:red"}
+  Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.
+:::
+
+```{r}
+m_trab <- (ppbio)   # <1>
+```
+1.  Aqui usaremos as matrizes transposta/relativizada/transformada/particionada
+
+#### Outra forma de achar e importar uma planilha
+
+```{r, eval=FALSE}
+getwd()
+ppbio <- read.xlsx(file.choose(),
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+```
+
+## Nomenclatura das matrizes em AMD
+
+No tocante aos tipos de atributos e seu tratamento pré-análises, uma matriz de de dados pode ser dos tipos apresentados na tabela abaixo (Tabela \@ref(tab:tbl-m_)).
+
+```{r tbl-m_, echo=FALSE, purl=FALSE} 
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)",
+  "Matriz comunitaria", "Os atributos são táxons (ex. espécies, gêneros, morfotipos)",
+  "Matriz ambiental", "Os atributos são dados ambientais (ex. pH, condutividade, temperatura)",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)"
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:2, width = c("2cm","5cm"))
+```
+
+## Cluster 1: Piloto automático
+
+::: {#hello .greeting .message style="color: red;"}
+  [ATENÇÃO]{style="color:red"}
+  NÃO RECOMENDADO
+:::
+
+Aqui fazemos uma Análise Cluster no piloto automático. Não decidimos nenhum dos parâmetros importântes para uma Classificação.
+
+```{r, results='hold', fig.show='hold'}
+cluster1 <- hclust(dist(m_trab))
+plot(cluster1, main = "Cluster Dendrogram - Piloto automatico")
+rect.hclust(cluster1, k=3, h = NULL)
+#?dist
+#?hclust
+```
+
+É possivel definir uma caixa mostrado os principais grupos formados. Isso pode ser feito estabelecendo quantos grupos se quer mostrar, usando a função `k = no. de grupos`. Ou pode-se definir os grupos formados até uma determinanda distância, usando a função `h = altura dos grupos` no eixo das distâncias.
+
+### Histórico das fusões
+
+```{r, results='hold'}
+library(dplyr)
+cluster1$merge #mostra o histórico das fusões
+idrow <- mutate(m_trab, id = row_number()) #cria um df com os numeros das linhas 
+idrow %>% relocate(id)
+#?relocate
+```
+
+#### Alguns ajustes para melhorar a visualização
+
+```{r, results='hold'}
+merge <- as.data.frame(cluster1$merge)
+merge[nrow(merge)+1,] = c("0","0")
+merge
+uas <- as.data.frame(rownames_to_column(m_trab,var = "UAs"))
+uas
+merges <- cbind(uas[c("UAs")], merge)
+merges
+```
+
+## Cluster 2: Criando a matriz de distâncias Euclidiana
+
+```{r, results='hold', fig.show='hold'}
+m_dists <- dist(m_trab, method = "euclidean",
+                  diag = TRUE,
+                  upper = FALSE)
+#m_dists
+cluster2 <- hclust(m_dists, method = "complete") #método de fusão
+plot (cluster2, main = "Cluster Dendrogram - Dist.Euclidiana")
+rect.hclust(cluster2, k = 3)
+#?dist
+#?hclust
+```
+
+O significado do argumento `method =` da função `dist()` usada no códico acima, depende do contexto em que ela é usada.
+
+-   A função `dist()` no R é usada para calcular as distâncias entre as observações em um conjunto de dados. Essa função tem vários métodos de cálculo de distância, que podem ser especificados pelo argumento `method =`, a exemplo de "euclidean", "manhattan", "canberra", entre outras.
+
+-   Quando o argumento `method = ` é usado em conjunto com a função `hclust()`, como no código acima, para realizar uma análise de classificação (ou cluster) hierárquica, então ela passa a representar um método de fusão, a exemplo de UPGMA, "nearest neighbour", "furtherst neighbour", entre outros.
+
+A tabela \@ref(tab:27fus) resume os métodos de fusão disponiveis na função `hclust()`.
+
+
+```{r 27fus, results='hold', echo=FALSE, purl=FALSE}
+fus <- tibble::tribble(
+  ~"Method=", ~"Método de fusão",
+  "ward.D", "Método de Ward com variância mínima",
+  "ward.D2", "Método de Ward com variância mínima ajustada",
+  "single", "Método de ligação simples (vizinho mais próximo)",
+  "complete", "Método de ligação completa (vizinho mais distante)",
+  "average", "Método de ligação baseado na média, equivale ao UPGMA",
+  "mcquitty", "Método de ligação de McQuitty, equivale ao WPGMA",
+  "median", "Método de ligação baseado na mediana, ou WPGMC",
+  "centroid", "Método de ligação baseado no centróide, ou UPGMC"
+)
+library(knitr)
+library(kableExtra)
+fus <- kable(fus, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Metodos de fusão disponiveis com o argumento `method=` da função `hclust`. Lembrando que UPGMA significa \"Unweighted Pairwise Group Method with Arithmetic Mean\"")
+fus <- kable_styling(fus)
+column_spec(fus, 1:2, width = c("2cm","5cm"))
+
+```
+
+### Comparação dos resultados obtidos até aqui
+
+```{r, results='hold', fig.height=9}
+#dev.off() #limpa os gráficos
+par(mfrow = c(2,1))
+plot(cluster1, main = "Cluster Dendrogram - Piloto automático")
+plot(cluster2, main = "Cluster Dendrogram - Dist. Euclidiana")
+par(mfrow = c(1,1))
+#dev.off()
+```
+
+## Cluster 3: Relativização pelo total da coluna
+
+```{r, results='hold'}
+library(vegan)
+m_relcol <- decostand(m_trab,
+                         method="total", ### OUTROS METODOS: total, max, normalize, range, rankm
+                         MARGIN = 2) #1-linha, 2-coluna
+#View(m_relcol)
+#m_relcol
+```
+
+### Gráfico de clustering relativizado
+
+Agora fazemos a classificação da matriz bruta após ter sido relativizada pelo total das colunas.
+
+```{r, results='hold'}
+cluster3 <- hclust(dist(m_relcol))
+plot(cluster3, main = "Cluster Dendrogram - Rel.Coluna")
+rect.hclust(cluster3, k = 3)
+```
+
+## Cluster 4: Transformação pelo arcoseno da raiz quadrada
+
+Agora aplicaremos a transformação do arcoseno da raiz quadrada na matriz relativizada por colunas. Lembre que em ambas as matrizes entramos dados que variam entre 0 e 1, e os resutados retornados também variam entre 0 e 1, mas em um nível de compressão de valores extremos mais desejável. Usaremos a matriz relativizada/transformada para fazermos a proxima classificação.
+
+```{r, results='hold'}
+m_trns <- asin(sqrt(m_relcol)) #valores de entrada tem que ser entre 0-1
+#View(m_trns)
+#m_trns
+```
+
+### Gráfico de clustering relativizado/transformado
+
+Aqui fazemos uma Análise Cluster no piloto automático, para comparar com os resultados da primeira classificação, que não havia sido relativizada/transformada.
+
+```{r, results='hold'}
+cluster4 <- hclust(dist(m_trns))
+plot(cluster4,  main = "Cluster Dendrogram - ArcSin.SQRT")
+rect.hclust(cluster4, k = 3)
+```
+
+## Cluster 5: Controle total dos parâmetros
+
+```{r, results='hold'}
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+as.matrix(vegdist)[1:7, 1:7]
+cluster5 <- hclust(vegdist, method = "average")
+plot(cluster5, main = "Cluster Dendrogram - Bray-Curtis")
+rect.hclust(cluster5, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+#vegdist
+cluster5$merge
+cluster5$height
+idrow <- mutate(m_trns, id = row_number()) 
+idrow %>% relocate(id)
+```
+
+No código acima, `h = 0.8` fornece os grupos formados na altura `h` do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, "h") representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo `height`, isso significa que a distancia entre esses objetos é 0.8.
+
+## Construindo uma prancha de gráficos comparativos
+
+```{r, results='hold', fig.height=9, fig.width=8}
+#dev.off()
+par(mfrow = c (2,2))
+plot(cluster1, main = "Dist.Euclidiana")
+plot(cluster3, main = "Rel.Coluna")
+plot(cluster4, main = "ArcSin.SQRT")
+plot(cluster5, main = "Bray-Curtis")
+par(mfrow=c(1,1))
+#dev.off()
+```
+
+## Construindo `heatmaps`
+
+Agora que vimos de forma comparativa a importância de se relativizar e transformar nossos dados, e também de escolher de forma consciente a medida de distância e o método de fusão, podemos avançar um pouco mais na interpretação dos nossos dados.
+
+Um "heatmap", ou mapa de calor, é uma imagem em cores (basicamente `image(t(x))`) com um dendrograma adicionado ao lado esquerdo e/ou ao topo. Normalmente, é realizado o reordenamento das linhas e colunas de acordo com algum conjunto de valores (médias de linha ou coluna) dentro das restrições impostas pelo dendrograma.
+
+Primeiro vamos rever o dendrograma final, usando a Distância de Bray-Curtis e o Método de Fusão UPGMA (ou "average"). 
+
+```{r, results='hold', fig.show='hold'}
+library("RColorBrewer")
+library("gplots")
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster5 <- hclust(vegdist, method = "average")
+plot(cluster5, main = "Cluster Dendrogram - Bray-Curtis")
+
+heatdist <- as.matrix(vegdist)
+#heatdist
+```
+
+Na sequência fazemos um `heatmap` **objetos x objetos**, ou seja a comparação bidimensional das clustereds entre unidades amostrais. 
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+col <- rev(heat.colors(999)) #rev() reverte as cores do heatmap
+heatmap.2(x=(as.matrix(vegdist)), #objetos x objetos
+          Rowv = as.dendrogram(cluster5),
+          Colv = as.dendrogram(cluster5),
+          key = T, tracecol = NA, revC = T,
+          col = heat.colors,  #dissimilaridade = 1 - similaridade
+          density.info = "none",
+          xlab = "UA´s", ylab = "UA´s",
+          mar = c(6, 6) + 0.2)
+```
+
+Agora vamos criar um novo dendrograma, para as espécies, mostrando sua similaridade em termos de em quais UA´s elas são mais comuns. 
+
+```{r, results='hold', fig.show='hold'}
+cluster6 <- hclust((vegdist(t(m_trns), method = "bray",
+                            diag = TRUE,
+                            upper = FALSE)), method = "average")
+plot(cluster6, main = "Dendrograma dos atributos")
+```
+
+Na sequencia, fazemos um novo `heatmap` **objetos x atributos**, com a comparação bidimensional das clustereds formadas entre unidades amostrais em relação as espécies mais comuns que ocorreram em cada unidade amostral.
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+heatmap.2(t(as.matrix(m_trns)), #objetos x atributos
+          Colv = as.dendrogram(cluster5),
+          Rowv = as.dendrogram(cluster6),
+          key = T, tracecol = NA, revC = T,
+          col = col,
+          density.info = "none",
+          xlab = "Unidades amostrais", ylab = "Espécies",
+          mar = c(6, 6) + 0.1)  # adjust margin size
+```
+
+### Percentual de encadeamento (% chaining)
+
+Dendrogram Chaining (ou encadeamento) é um termo usado em análises de cluster hierárquico para se referir ao processo de adição sequencial de pequenos grupos a um ou poucos grandes grupos. É possível usar a porcentagem de encadeamento para ajudar a avaliar a qualidade do dendrograma. Análises altamente encadeadas provavelmente não valem a pena serem exploradas em maiores detalhes, provavelmente há alguma falha nos passos anteriores da análise. Por outro lado, pequenas diferenças na porcentagem de encadeamento na extremidade inferior da escala são geralmente um critério pobre para selecionar um algoritmo de ligação em relação a outro [@RN1552].
+
+O método para calcular o grau de encadeamento compara o comprimento médio do caminho do dendrograma com o comprimento mínimo possível (sem encadeamento) e o comprimento máximo possível (encadeamento completo). O comprimento do caminho para cada item no dendrograma é o número de nós que o conectam ao nível mais alto do dendrograma. O encadeamento completo ocorre quando cada fusão envolve a adição de um único item a um único grupo, cada vez mais grande [@RN1552].
+
+Com esse código podemos calcular o percentual de encadeamento para cada fusão em `cluster1` e fazer um gráfico simples para observação.
+
+```{r}
+# calculate the percent chaining for each merge
+h <- cluster1$height
+n <- length(h)
+pc <- rep(NA, n-1)
+for (i in 1:(n-1)) {
+  pc[i] <- abs(h[i] - h[i+1]) / h[1] * 100
+}
+# plot the percent chaining
+plot(pc, type = "h", xlab = "Merge", ylab = "Percent chaining")
+```
+
+Para calcular o percentual geral de encadeamento em um dendrograma, é necessário calcular a diferença na altura entre cada nó e seus nós filhos e, em seguida, somar essas diferenças. Essa soma representa o comprimento total do dendrograma. Em seguida, é necessário calcular a soma das diferenças na altura entre cada nó que representa uma fusão e a altura de seus dois nós filhos. Essa soma representa o encadeamento total no dendrograma.
+
+Finalmente, você pode calcular o percentual geral de encadeamento como o encadeamento total dividido pelo comprimento total do dendrograma, multiplicado por 100. 
+
+O eixo Y do gráfico mostra a percentagem de encadeamento, que é a diferença na altura entre fusões sucessivas dividida pela altura total do dendrograma, multiplicada por 100. É possível que a percentagem de encadeamento seja superior a 100 se a altura das duas fusões comparadas for maior que a altura total do dendrograma. Nesse caso, a percentagem de encadeamento é truncada em 100.
+
+Isso pode acontecer, por exemplo, se a altura de uma fusão for negativa, o que pode ocorrer se a distância entre dois grupos for menor que zero, ou se o dendrograma for escalado ou truncado de alguma forma.
+
+### Função `loop` para comparar os encadeamentos
+
+```{r, results='hold', fig.height=10, fig.width=8}
+# create a list of the four cluster analyses
+cluster_list <- list(cluster1, cluster2, cluster3, cluster4, cluster5)
+
+par(mfrow=c(4,2)) #posicionamento dos gráficos
+
+# loop through the list and calculate percent chaining for each
+for (i in 1:5) {
+  h <- cluster_list[[i]]$height
+  n <- length(h)
+  pc <- rep(NA, n-1)
+  for (j in 1:(n-1)) {
+    pc[j] <- abs(h[j] - h[j+1]) / h[1] * 100
+  }
+# plot the percent chaining for each cluster analysis
+  plot(pc, type = "h", xlab = "Merge", ylab = "Percent chaining", main = paste0("Cluster ", i))
+}
+```
+
+## Apêndices {.unnumbered}
+
+## Sites consultados {-}
+https://copyprogramming.com/howto/how-to-color-labels-of-dendogram-with-dendextend-and-heatmap-2-using-pre-d#efined-sample-groups
+https://www.datacamp.com/tutorial/hierarchical-clustering-R
+
+### Outras formas de fazer a partição {.unnumbered}
+
+m_bruta_part2 \<- m_bruta_part\[colSums(abs(m_bruta_part), na.rm = F) \> 0\]
+m_bruta_part2 \<- subset(m_bruta_part, colSums != 0) m_bruta_part2 \<-
+m_bruta_part\[, colSums(m_bruta_part != 0) \> 0\]
+
+### Código {.unnumbered}
+
+range(euclidma) par(mfrow=c(2,1)) hist(euclidma, breaks = 15, #determina
+o no. de colunas do histograma xlim = range(floor(min(euclidma)),
+ceiling(max(euclidma))), xlab = "Distr. de Frequências", freq = FALSE)
+curve(dnorm(x, mean=mean(euclidma), sd=sd(euclidma)), add=TRUE)
+boxplot.default(euclidma, horizontal = TRUE, frame = FALSE, xlab="Distr.
+de Frequências", ylim=c(floor(min(euclidma)), ceiling(max(euclidma))))
+
+## Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "06-rmd6_outliers.Rmd", output = "script-rmd6.txt", documentation = 0)
+Script <- readLines("script-rmd6.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd6.txt")
+cat(Script, sep = "\n")
+```
+
+```{r,  eval=FALSE, echo=TRUE, purl=FALSE}
+## dev.off() #apaga os graficos, se houver algum
+## rm(list=ls(all=TRUE)) #limpa a memória
+## cat("\014") #limpa o console
+## install.packages("openxlsx") #importa arquivos do excel
+## install.packages("moments") #calcula assimetria e curtose dos dados
+## install.packages("matrixStats") #fornece funções rápidas para a estatística de matrizes
+## install.packages("gt") #ferramenta para criação de tabelas bonitas e personalizáveis
+## getwd()
+## setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+m_bruta <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/peixes06.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(m_bruta)
+m_bruta_ma <- as.matrix(m_bruta) #lê m_bruta como uma matriz
+str(m_bruta_ma)
+#m_bruta
+m_bruta_ma[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+#m_bruta <- (m_bruta)   # <1>
+#View(m_bruta)
+print(m_bruta)
+head(m_bruta)
+str(m_bruta)
+mode(m_bruta)
+class(m_bruta)
+#?str
+range(m_bruta) #menor e maior valores
+length(m_bruta) #no. de colunas
+ncol(m_bruta) #no. de N colunas
+nrow(m_bruta) #no. de M linhas
+sum(lengths(m_bruta)) #soma os nos. de colunas
+length(as.matrix(m_bruta)) #tamanho da matriz m x n
+sum(m_bruta == 0) # número de observações igual a zero
+sum(m_bruta > 0) # número de observações maiores que zero
+zeros <- (sum(m_bruta == 0)/length(as.matrix(m_bruta)))*100 # proporção de zeros na matriz
+zeros
+tamanho <- data.frame(
+  Função = c("range", "lenght", "m cols", "n linhas", "Tamanho", "Tamanho",
+             "Zeros", "Nao zeros", "% Zeros"),
+  Resultado = c(paste(range(m_bruta), collapse = " - "), length(m_bruta), ncol(m_bruta),
+                nrow(m_bruta), sum(lengths(m_bruta)), length(as.matrix(m_bruta)), sum(m_bruta == 0),
+                sum(m_bruta > 0), round(zeros, 1))
+)
+tamanho
+knitr::kable(tamanho, format = "markdown", caption = "Resumo das informações sobre o tamanho da matriz")
+euclid <- dist(m_bruta, method = "euclidian", diag = TRUE, upper = FALSE)
+#?dist
+#euclid
+str(euclid)
+mode(euclid)
+class(euclid)
+length(as.matrix(euclid))
+as.matrix(euclid)[1:6, 1:6] #mostra as 5 primeiras linhas e colunas da matriz
+euclid_ma <- (as.matrix(euclid))
+#View(euclid_ma)
+str(euclid_ma)
+mode(euclid_ma)
+class(euclid_ma)
+euclid_ma[1:5, 1:5] #mostra as 5 primeiras linhas e colunas da matriz
+range(m_bruta)
+range(euclid)
+min(euclid)
+max(euclid)
+mean(euclid) #CENTROIDE!! OU Grand mean
+sd(euclid)  #Standard deviation
+centroide <- mean(euclid)
+centroide
+length(euclid)
+m <- nrow(m_bruta)
+m
+m*(m-1)/2
+summary(euclid)
+Sumario1 <- cbind(min(euclid),
+                  max(euclid),
+                  sd(euclid),
+                  mean(euclid),
+                  length(euclid))
+colnames(Sumario1) <- c("Minimo", "Maximo", "Desv.Padr", "Media", "m(m-1)/2")
+rownames(Sumario1) <- ("Valores")
+Sumario1
+range(euclid)
+par(mfrow=c(2,1))
+hist(euclid,
+     breaks = 15, #determina o no. de colunas do histograma
+     xlim = range(floor(min(euclid)), ceiling(max(euclid))), 
+     xlab = "Distr. de Frequências",
+     freq = FALSE)
+curve(dnorm(x, mean=mean(euclid), sd=sd(euclid)), add=TRUE)
+boxplot.default(euclid, horizontal = TRUE, frame = FALSE,
+                xlab="Distr. de Frequências",
+                ylim=c(floor(min(euclid)), ceiling(max(euclid)))) #Limites do eixo Y
+## dev.off()
+library(matrixStats)
+library(moments)
+euclid_ma <- as.matrix(euclid)
+euclid_ma
+range(euclid_ma) #valor errado
+mean(euclid_ma) #valor errado
+sd(euclid_ma) #valor errado
+is.na(euclid_ma) <- euclid_ma==0 #atribui n.a. aos valores = 0
+mean(euclid_ma, na.rm=T)  #valor correto, omite valores n.a. do calculo
+mean(euclid_ma, na.rm=T) #valor correto, omite valores n.a. do calculo
+sd(euclid_ma, na.rm=T) #valor correto, omite valores n.a. do calculo
+#colMeans(euclid_ma, na.rm=T) #omite valores n.a. do calculo
+#rowMeans(euclid_ma, na.rm=T) #omite valores n.a. do calculo
+centroide_ma <- mean(euclid_ma, na.rm=T)
+av.dist <- (as.matrix(colMeans(euclid_ma, na.rm=T)))
+av.desvpad <- (as.matrix(colSds(euclid_ma, na.rm=T)))
+dp.centroide_ma <- (av.dist-centroide_ma)/(colSds(av.dist)) #ou z-scores
+list <- as.matrix(cbind(av.dist, av.desvpad, dp.centroide_ma))
+list
+colnames(list, do.NULL = FALSE)
+colnames(list) <- c("Av.Dist", "Av.StDev", "DP.Centroide")
+list2 <- list[order(list[,1], decreasing = TRUE),] #[,1] ou o nome da coluna
+list2
+par(mfrow=c(3,1))
+hist(list2[, "Av.Dist"],
+     breaks = 15, #determina o no. de colunas do histograma
+     xlab = "Distr. de Frequências das Distâncias (em dp) para o centroide",
+     main = "Distribuição de Frequência da distância média para o centroide",
+     xlim = range(floor(min(av.dist)), ceiling(max(av.dist))), #substitua aqui o menor e maior valor do `range()`
+     freq = T)
+hist(list2[, "Av.Dist"],
+     breaks = 15, #determina o no. de colunas do histograma
+     xlab = "Distr. de Frequências das Distâncias (em dp) para o centroide",
+     main = "Curva de normalidade ajustada para a Distribuição de Frequência",
+     xlim = range(floor(min(av.dist)), ceiling(max(av.dist))), #substitua aqui o menor e maior valor do `range()`
+     freq = F)
+curve(dnorm(x, mean=mean(list2[, "Av.Dist"]), sd=sd(list2[, "Av.Dist"])), add=TRUE)
+boxplot.default(list2[, "Av.Dist"], horizontal = TRUE, frame = FALSE,
+                xlab="Distr. de Frequências",
+                ylim=c(floor(min(av.dist)), ceiling(max(av.dist)))) #substitua aqui o menor e maior valor do `range()`
+par(mfrow=c(1,1))
+range(dp.centroide_ma)
+par(mfrow=c(3,1))
+hist(list2[, "DP.Centroide"],
+     breaks = 15, #determina o no. de colunas do histograma
+     xlab = "Distr. de Frequências das Distâncias dos desvios padões para o centroide",
+     main = "Distribuição de Frequência dos desvio padões das distâncias médias para o centroide",
+     xlim = range(floor(min(dp.centroide_ma)), ceiling(max(dp.centroide_ma))), #substitua aqui o menor e maior valor do `range()`
+     freq = T)
+hist(list2[, "DP.Centroide"],
+     breaks = 15, #determina o no. de colunas do histograma
+     xlab = "Distr. de Frequências das Distâncias dos desvios padrões das distâncias médias para o centroide",
+     main = "Curva de normalidade ajustada para a Distribuição de Frequência",
+     xlim = range(floor(min(dp.centroide_ma)), ceiling(max(dp.centroide_ma))), #substitua aqui o menor e maior valor do `range()`
+     freq = F)
+curve(dnorm(x, mean=mean(list2[, "DP.Centroide"]), sd=sd(list2[, "DP.Centroide"])), add=TRUE)
+boxplot.default(list2[, "DP.Centroide"], horizontal = TRUE, frame = FALSE,
+                xlab="Distr. de Frequências",
+                ylim=c(floor(min(dp.centroide_ma)), ceiling(max(dp.centroide_ma)))) #substitua aqui o menor e maior valor do `range()`
+par(mfrow=c(1,1))
+## dev.off()
+cutoff <- 2.0
+library(gt)
+format(cutoff, nsmall = 1)
+listf <- as.data.frame(list2)
+listf$Outliers <- ifelse(listf$DP.Centroide>-cutoff #CUTOFF MENOR QUE -'cutoff
+                         & listf$DP.Centroide<cutoff,  #CUTOFF MAIOR QUE 'cutoff'
+                         "", "OUT") 
+listf
+gt(cbind(Sitios=rownames(listf),listf))
+part <- c("B-A-MU4", "B-A-MU3", "S-A-TA4", "S-R-CT3")
+part
+m_bruta_part <- m_bruta[!(row.names(m_bruta) %in% c(part)),]
+#m_bruta_part
+sum <- colSums(m_bruta_part)
+sum
+zero_sum_cols <- names(which(colSums(m_bruta_part) == 0))
+zero_sum_cols #nomes das espécies zeradas
+m_bruta_part2 <- m_bruta_part[(colSums(m_bruta_part) != 0)] #em != a exclamação inverte o sentido
+zero_sum_cols2 <- names(which(colSums(m_bruta_part2) == 0))
+zero_sum_cols2 #nomes das espécies zeradas
+sum<-colSums(m_bruta_part2)
+sum
+#m_bruta_part2
+#m_bruta_part2 <- as.matrix(m_bruta_part2)
+str(m_bruta_part2)
+length(as.matrix(m_bruta_part2))
+## df <- data.frame(Sites = rownames(m_bruta), m_bruta,
+##                  row.names = NULL,
+##                  check.names = FALSE) #add titulo a primeira coluna
+## 
+## write.table(m_bruta_part2, "m_trabcsv.csv",
+##             sep = ";", dec = ".", #"\t",
+##             row.names = TRUE,
+##             quote = TRUE,
+##             append = FALSE)
+## 
+## m_trab <- read.csv("m_trabcsv.csv",
+##                    sep = ";", dec = ".",
+##                    row.names = 1,
+##                    header = TRUE,
+##                    na.strings = NA,
+##                    check.names = FALSE, #impede que o R mude os nomes das colunas
+##                    col.names = gsub("(^|_)([a-z])", "\\1\\U\\2",
+##                                     names(m_trab), perl = TRUE))
+```
+
+## Referências {-}
