@@ -1,546 +1,122 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 12 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica</title>
-  <meta name="description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
-
-  <meta property="og:title" content=" 12 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/fundamentos_de_ecologia_numerica" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 12 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica" />
-  
-  <meta name="twitter:description" content="…. The output format for this example is bookdown::gitbook." />
-  
-
-<meta name="author" content="Prof. Elvio S. F. Medeiros" />
-<meta name="author" content="Laboratório de Ecologia" />
-<meta name="author" content="Universidade Estadual da Paraíba" />
-<meta name="author" content="Campus V, João Pessoa, PB" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="estrcom.html"/>
-<link rel="next" href="estrhab.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 12 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content=" 12 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 12 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 1em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style2.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Fundamentos de Ecologia Numérica</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apresentação</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#motivação"><i class="fa fa-check"></i><b>1.1</b> Motivação</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#organização-do-livro"><i class="fa fa-check"></i><b>1.2</b> Organização do livro</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#como-estudar-por-esse-livro"><i class="fa fa-check"></i><b>1.3</b> Como estudar por esse livro?</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#para-um-estudo-aprofundado"><i class="fa fa-check"></i><b>1.3.1</b> Para um estudo aprofundado</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introdução ao R/RStudio</a>
-<ul>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#resumo"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#plano-de-estudo"><i class="fa fa-check"></i><b>2.1</b> Plano de estudo</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#pré-requisitos"><i class="fa fa-check"></i><b>2.2</b> Pré-requisitos</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#principais-conceitos"><i class="fa fa-check"></i><b>2.3</b> Principais conceitos</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#o-ambiente-de-programação-do-r"><i class="fa fa-check"></i><b>2.3.1</b> O ambiente de programação do R</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#o-que-é-o-r-studio"><i class="fa fa-check"></i><b>2.4</b> O que é o R Studio?</a></li>
-<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#o-essencial"><i class="fa fa-check"></i><b>2.5</b> O essencial</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="intro.html"><a href="intro.html#licença-de-software"><i class="fa fa-check"></i><b>2.5.1</b> Licença de software</a></li>
-<li class="chapter" data-level="2.5.2" data-path="intro.html"><a href="intro.html#interface-do-usuário"><i class="fa fa-check"></i><b>2.5.2</b> Interface do usuário</a></li>
-<li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#interface-do-usuário-do-rstudio"><i class="fa fa-check"></i><b>2.5.3</b> Interface do usuário do RStudio</a></li>
-<li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#projetos"><i class="fa fa-check"></i><b>2.5.4</b> Projetos</a></li>
-<li class="chapter" data-level="2.5.5" data-path="intro.html"><a href="intro.html#nomes-de-arquivos"><i class="fa fa-check"></i><b>2.5.5</b> Nomes de arquivos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#preparação-dos-arquivos"><i class="fa fa-check"></i><b>2.6</b> Preparação dos arquivos</a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="intro.html"><a href="intro.html#formatos-de-arquivo-de-dados"><i class="fa fa-check"></i><b>2.6.1</b> Formatos de arquivo de dados</a></li>
-<li class="chapter" data-level="2.6.2" data-path="intro.html"><a href="intro.html#o-arquivo-de-espécies"><i class="fa fa-check"></i><b>2.6.2</b> O arquivo de espécies</a></li>
-<li class="chapter" data-level="2.6.3" data-path="intro.html"><a href="intro.html#formato-de-valores-separados-por-vírgula-.csv"><i class="fa fa-check"></i><b>2.6.3</b> Formato de valores separados por vírgula (.csv)</a></li>
-<li class="chapter" data-level="2.6.4" data-path="intro.html"><a href="intro.html#editando-a-matriz-de-dados"><i class="fa fa-check"></i><b>2.6.4</b> Editando a matriz de dados</a></li>
-<li class="chapter" data-level="2.6.5" data-path="intro.html"><a href="intro.html#arquivos-de-resultados"><i class="fa fa-check"></i><b>2.6.5</b> Arquivos de resultados</a></li>
-<li class="chapter" data-level="2.6.6" data-path="intro.html"><a href="intro.html#gráficos"><i class="fa fa-check"></i><b>2.6.6</b> Gráficos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#conclusão"><i class="fa fa-check"></i><b>2.7</b> Conclusão</a></li>
-<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#sequência-típica-na-preparação-e-análise-de-dados"><i class="fa fa-check"></i><b>2.8</b> Sequência típica na preparação e análise de dados</a></li>
-<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#material-de-apoio"><i class="fa fa-check"></i><b>2.9</b> Material de apoio</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#apêndices"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#sites-consultados"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#leitura-suplementar"><i class="fa fa-check"></i>Leitura suplementar</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#referências"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>I BASES DE DADOS</b></span></li>
-<li class="chapter" data-level="3" data-path="bases.html"><a href="bases.html"><i class="fa fa-check"></i><b>3</b> Bases de Dados. Dados do PPBio Semiárido</a>
-<ul>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#exemplos-de-conjunto-de-dados-ecológicos-do-programa-de-pesquisa-em-biodiversidade-ppbio-do-semiárido"><i class="fa fa-check"></i>Exemplos de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido</a></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#resumo-1"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="3.1" data-path="bases.html"><a href="bases.html#sobre-os-dados-do-ppbio"><i class="fa fa-check"></i><b>3.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="3.2" data-path="bases.html"><a href="bases.html#arqs"><i class="fa fa-check"></i><b>3.2</b> Arquivos disponíveis</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="bases.html"><a href="bases.html#codificação-das-variáveis"><i class="fa fa-check"></i><b>3.2.1</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="3.2.2" data-path="bases.html"><a href="bases.html#abrev"><i class="fa fa-check"></i><b>3.2.2</b> Abreviações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#referências-1"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="basepeixes.html"><a href="basepeixes.html"><i class="fa fa-check"></i><b>4</b> Base de Dados I - Peixes</a>
-<ul>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#estrutura-da-comunidade-peixes-no-semiárido"><i class="fa fa-check"></i>Estrutura da Comunidade: Peixes no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apresentação-1"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#resumo-2"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="4.1" data-path="basepeixes.html"><a href="basepeixes.html#introdução"><i class="fa fa-check"></i><b>4.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="basepeixes.html"><a href="basepeixes.html#desenho-amostral"><i class="fa fa-check"></i><b>4.1.1</b> Desenho Amostral</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="basepeixes.html"><a href="basepeixes.html#codificação-das-variáveis-1"><i class="fa fa-check"></i><b>4.2</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="4.3" data-path="basepeixes.html"><a href="basepeixes.html#amostragem-dos-dados"><i class="fa fa-check"></i><b>4.3</b> Amostragem dos dados</a></li>
-<li class="chapter" data-level="4.4" data-path="basepeixes.html"><a href="basepeixes.html#análises-estatísticas"><i class="fa fa-check"></i><b>4.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="4.5" data-path="basepeixes.html"><a href="basepeixes.html#discussão"><i class="fa fa-check"></i><b>4.5</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apêndices-1"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="basepeixes.html"><a href="basepeixes.html#tabelas-e-figuras"><i class="fa fa-check"></i><b>4.5.1</b> Tabelas e Figuras</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#referências-2"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="basehab.html"><a href="basehab.html"><i class="fa fa-check"></i><b>5</b> Base de Dados II - Habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#estrutura-do-habitat-variáveis-ambientais-no-semiárido"><i class="fa fa-check"></i>Estrutura do Habitat: Variáveis ambientais no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apresentação-2"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#resumo-3"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="5.1" data-path="basehab.html"><a href="basehab.html#introdução-1"><i class="fa fa-check"></i><b>5.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="basehab.html"><a href="basehab.html#desenho-amostral-1"><i class="fa fa-check"></i><b>5.1.1</b> Desenho Amostral</a></li>
-<li class="chapter" data-level="5.1.2" data-path="basehab.html"><a href="basehab.html#sobre-os-dados-do-ppbio-1"><i class="fa fa-check"></i><b>5.1.2</b> Sobre os dados do PPBio</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="basehab.html"><a href="basehab.html#codificação-para-variáveis"><i class="fa fa-check"></i><b>5.2</b> Codificação para variáveis</a></li>
-<li class="chapter" data-level="5.3" data-path="basehab.html"><a href="basehab.html#área-de-estudo-e-amostragem-dos-dados"><i class="fa fa-check"></i><b>5.3</b> Área de estudo e amostragem dos dados</a></li>
-<li class="chapter" data-level="5.4" data-path="basehab.html"><a href="basehab.html#análises-estatísticas-1"><i class="fa fa-check"></i><b>5.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="5.5" data-path="basehab.html"><a href="basehab.html#resultados"><i class="fa fa-check"></i><b>5.5</b> Resultados</a></li>
-<li class="chapter" data-level="5.6" data-path="basehab.html"><a href="basehab.html#discussão-1"><i class="fa fa-check"></i><b>5.6</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apêndices-2"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#referências-3"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>II ESTATÍSTICAS DESCRITIVAS</b></span></li>
-<li class="chapter" data-level="6" data-path="xls.html"><a href="xls.html"><i class="fa fa-check"></i><b>6</b> R Modulo 1 - Importando planilhas de dados</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#resumo-4"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apresentação-3"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="6.1" data-path="xls.html"><a href="xls.html#instalação-do-r-e-rstudio"><i class="fa fa-check"></i><b>6.1</b> Instalação do R e RStudio</a></li>
-<li class="chapter" data-level="6.2" data-path="xls.html"><a href="xls.html#r-base"><i class="fa fa-check"></i><b>6.2</b> R base</a></li>
-<li class="chapter" data-level="6.3" data-path="xls.html"><a href="xls.html#rstudio"><i class="fa fa-check"></i><b>6.3</b> RStudio</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="xls.html"><a href="xls.html#rstudio-na-nuvem"><i class="fa fa-check"></i><b>6.3.1</b> RStudio na nuvem</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="xls.html"><a href="xls.html#sobre-os-dados-do-ppbio-2"><i class="fa fa-check"></i><b>6.4</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="6.5" data-path="xls.html"><a href="xls.html#importando-a-planilha-de-trabalho"><i class="fa fa-check"></i><b>6.5</b> Importando a planilha de trabalho</a></li>
-<li class="chapter" data-level="6.6" data-path="xls.html"><a href="xls.html#mensagens-de-erro-e-avisos-no-r"><i class="fa fa-check"></i><b>6.6</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="6.7" data-path="xls.html"><a href="xls.html#organização-básica"><i class="fa fa-check"></i><b>6.7</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="6.7.1" data-path="xls.html"><a href="xls.html#prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r"><i class="fa fa-check"></i><b>6.7.1</b> Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></li>
-</ul></li>
-<li class="chapter" data-level="6.8" data-path="xls.html"><a href="xls.html#importando-a-planilha"><i class="fa fa-check"></i><b>6.8</b> Importando a planilha</a>
-<ul>
-<li class="chapter" data-level="6.8.1" data-path="xls.html"><a href="xls.html#outra-forma-de-achar-e-importar-uma-planilha"><i class="fa fa-check"></i><b>6.8.1</b> Outra forma de achar e importar uma planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="6.9" data-path="xls.html"><a href="xls.html#importando-.ods-do-libreoffice-calc"><i class="fa fa-check"></i><b>6.9</b> Importando <code>.ods</code> do LibreOffice Calc</a>
-<ul>
-<li class="chapter" data-level="6.9.1" data-path="xls.html"><a href="xls.html#colunas-com-o-mesmo-nome"><i class="fa fa-check"></i><b>6.9.1</b> Colunas com o mesmo nome</a></li>
-<li class="chapter" data-level="6.9.2" data-path="xls.html"><a href="xls.html#removendo-linhas-ou-colunas-por-nome"><i class="fa fa-check"></i><b>6.9.2</b> Removendo linhas ou colunas por nome</a></li>
-<li class="chapter" data-level="6.9.3" data-path="xls.html"><a href="xls.html#criando-uma-matriz-de-médias"><i class="fa fa-check"></i><b>6.9.3</b> Criando uma matriz de médias</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apêndices-3"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#sites-consultados-1"><i class="fa fa-check"></i>Sites consultados</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#script-limpo"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#referências-4"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="tiposR.html"><a href="tiposR.html"><i class="fa fa-check"></i><b>7</b> R Modulo 2 - Tipos de Dados no R</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apresentação-4"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="7.1" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.1</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.2" data-path="tiposR.html"><a href="tiposR.html#mensagens-de-erro-e-avisos-no-r-1"><i class="fa fa-check"></i><b>7.2</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="7.3" data-path="tiposR.html"><a href="tiposR.html#o-que-é-um-script-e-qual-sua-diferença-para-um-código"><i class="fa fa-check"></i><b>7.3</b> O que é um <code>script</code> e qual sua diferença para um <code>código</code>?</a></li>
-<li class="chapter" data-level="7.4" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r-1"><i class="fa fa-check"></i><b>7.4</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.5" data-path="tiposR.html"><a href="tiposR.html#tipos-de-dados-no-r"><i class="fa fa-check"></i><b>7.5</b> Tipos de dados no R</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="tiposR.html"><a href="tiposR.html#variáveis-e-tipos-básicos-de-dados-figura-reffignucleos"><i class="fa fa-check"></i><b>7.5.1</b> Variáveis e tipos básicos de dados (Figura @ref(fig:nucleos))</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="tiposR.html"><a href="tiposR.html#estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.6</b> Estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.7" data-path="tiposR.html"><a href="tiposR.html#como-pedir-ajuda"><i class="fa fa-check"></i><b>7.7</b> Como pedir ajuda?</a>
-<ul>
-<li class="chapter" data-level="7.7.1" data-path="tiposR.html"><a href="tiposR.html#dentro-do-r"><i class="fa fa-check"></i><b>7.7.1</b> Dentro do R</a></li>
-<li class="chapter" data-level="7.7.2" data-path="tiposR.html"><a href="tiposR.html#fora-do-r"><i class="fa fa-check"></i><b>7.7.2</b> Fora do R</a></li>
-<li class="chapter" data-level="7.7.3" data-path="tiposR.html"><a href="tiposR.html#chatgpt"><i class="fa fa-check"></i><b>7.7.3</b> ChatGPT</a></li>
-</ul></li>
-<li class="chapter" data-level="7.8" data-path="tiposR.html"><a href="tiposR.html#work-flow"><i class="fa fa-check"></i><b>7.8</b> Work flow</a></li>
-<li class="chapter" data-level="7.9" data-path="tiposR.html"><a href="tiposR.html#reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada"><i class="fa fa-check"></i><b>7.9</b> Reconhecendo a estrutura dos dados do R em uma matriz multivariada</a>
-<ul>
-<li class="chapter" data-level="7.9.1" data-path="tiposR.html"><a href="tiposR.html#organização-básica-1"><i class="fa fa-check"></i><b>7.9.1</b> Organização básica</a></li>
-</ul></li>
-<li class="chapter" data-level="7.10" data-path="tiposR.html"><a href="tiposR.html#importando-a-planilha-1"><i class="fa fa-check"></i><b>7.10</b> Importando a planilha</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apêndices-4"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#snippet-e-chunk"><i class="fa fa-check"></i>Snippet e chunk</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#sites-consultados-2"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#script-limpo-1"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#referências-5"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="univ.html"><a href="univ.html"><i class="fa fa-check"></i><b>8</b> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#resumo-5"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apresentação-5"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="8.1" data-path="univ.html"><a href="univ.html#sobre-os-dados"><i class="fa fa-check"></i><b>8.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="8.2" data-path="univ.html"><a href="univ.html#organização-básica-2"><i class="fa fa-check"></i><b>8.2</b> Organização básica</a></li>
-<li class="chapter" data-level="8.3" data-path="univ.html"><a href="univ.html#importando-a-planilha-2"><i class="fa fa-check"></i><b>8.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="8.4" data-path="univ.html"><a href="univ.html#gráficos-de-histograma-e-boxplot"><i class="fa fa-check"></i><b>8.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="8.5" data-path="univ.html"><a href="univ.html#sumário-estatístico-geral"><i class="fa fa-check"></i><b>8.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apêndices-5"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#sites-consultados-3"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#script-limpo-2"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#referências-6"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="univ2.html"><a href="univ2.html"><i class="fa fa-check"></i><b>9</b> R Modulo 3.2 - Testes Estatísticos</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#resumo-6"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apresentação-6"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="9.1" data-path="univ2.html"><a href="univ2.html#sobre-os-dados-1"><i class="fa fa-check"></i><b>9.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="9.2" data-path="univ2.html"><a href="univ2.html#organização-básica-3"><i class="fa fa-check"></i><b>9.2</b> Organização básica</a></li>
-<li class="chapter" data-level="9.3" data-path="univ2.html"><a href="univ2.html#importando-a-planilha-3"><i class="fa fa-check"></i><b>9.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="9.4" data-path="univ2.html"><a href="univ2.html#gráficos-de-histograma-e-boxplot-1"><i class="fa fa-check"></i><b>9.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="9.5" data-path="univ2.html"><a href="univ2.html#sumário-estatístico-geral-1"><i class="fa fa-check"></i><b>9.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="9.6" data-path="univ2.html"><a href="univ2.html#testando-normalidade"><i class="fa fa-check"></i><b>9.6</b> Testando normalidade</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="univ2.html"><a href="univ2.html#q-q-plots"><i class="fa fa-check"></i><b>9.6.1</b> Q-Q plots</a></li>
-<li class="chapter" data-level="9.6.2" data-path="univ2.html"><a href="univ2.html#testes-de-shapiro-wilk-e-kolmogorov-smirnov"><i class="fa fa-check"></i><b>9.6.2</b> Testes de Shapiro-Wilk e Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="9.7" data-path="univ2.html"><a href="univ2.html#testando-diferenças-entre-médias"><i class="fa fa-check"></i><b>9.7</b> Testando diferenças entre médias</a>
-<ul>
-<li class="chapter" data-level="9.7.1" data-path="univ2.html"><a href="univ2.html#testando-homogeneidade-de-variâncias"><i class="fa fa-check"></i><b>9.7.1</b> Testando homogeneidade de variâncias</a></li>
-<li class="chapter" data-level="9.7.2" data-path="univ2.html"><a href="univ2.html#teste-entre-duas-médias-t-student"><i class="fa fa-check"></i><b>9.7.2</b> Teste entre duas médias (t-Student)</a></li>
-<li class="chapter" data-level="9.7.3" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-anova"><i class="fa fa-check"></i><b>9.7.3</b> Teste entre três médias (ANOVA)</a></li>
-<li class="chapter" data-level="9.7.4" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-e-dois-fatores-two-way-anova"><i class="fa fa-check"></i><b>9.7.4</b> Teste entre três médias e dois fatores (Two-Way ANOVA)</a></li>
-</ul></li>
-<li class="chapter" data-level="9.8" data-path="univ2.html"><a href="univ2.html#correlação-e-regressão-simples"><i class="fa fa-check"></i><b>9.8</b> Correlação e regressão simples</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apêndices-6"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#sites-consultados-4"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#script-limpo-3"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#referências-7"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="unigr.html"><a href="unigr.html"><i class="fa fa-check"></i><b>10</b> R Modulo 3.3 - Gráficos univariados</a>
-<ul>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#resumo-7"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apresentação-7"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="10.1" data-path="unigr.html"><a href="unigr.html#sobre-os-dados-2"><i class="fa fa-check"></i><b>10.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="10.2" data-path="unigr.html"><a href="unigr.html#organização-básica-4"><i class="fa fa-check"></i><b>10.2</b> Organização básica</a></li>
-<li class="chapter" data-level="10.3" data-path="unigr.html"><a href="unigr.html#importando-a-planilha-4"><i class="fa fa-check"></i><b>10.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="10.4" data-path="unigr.html"><a href="unigr.html#reset-point"><i class="fa fa-check"></i><b>10.4</b> Reset point</a></li>
-<li class="chapter" data-level="10.5" data-path="unigr.html"><a href="unigr.html#gráficos-de-dispersão"><i class="fa fa-check"></i><b>10.5</b> Gráficos de dispersão</a></li>
-<li class="chapter" data-level="10.6" data-path="unigr.html"><a href="unigr.html#gráficos-de-linha"><i class="fa fa-check"></i><b>10.6</b> Gráficos de linha</a></li>
-<li class="chapter" data-level="10.7" data-path="unigr.html"><a href="unigr.html#gráficos-de-barra"><i class="fa fa-check"></i><b>10.7</b> Gráficos de barra</a></li>
-<li class="chapter" data-level="10.8" data-path="unigr.html"><a href="unigr.html#gráficos-de-grupos"><i class="fa fa-check"></i><b>10.8</b> Gráficos de grupos</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apêndices-7"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#sites-consultados-5"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#script-limpo-4"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#referências-8"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="estrcom.html"><a href="estrcom.html"><i class="fa fa-check"></i><b>11</b> R Modulo 4.1 - Estrutura da Comunidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#resumo-8"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apresentação-8"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="11.1" data-path="estrcom.html"><a href="estrcom.html#sobre-os-dados-3"><i class="fa fa-check"></i><b>11.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="11.2" data-path="estrcom.html"><a href="estrcom.html#organização-básica-5"><i class="fa fa-check"></i><b>11.2</b> Organização básica</a></li>
-<li class="chapter" data-level="11.3" data-path="estrcom.html"><a href="estrcom.html#importando-a-planilha-5"><i class="fa fa-check"></i><b>11.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="11.4" data-path="estrcom.html"><a href="estrcom.html#reset-point-1"><i class="fa fa-check"></i><b>11.4</b> Reset point</a></li>
-<li class="chapter" data-level="11.5" data-path="estrcom.html"><a href="estrcom.html#transpor-a-matriz-para-trabalhar-com-as-espécies"><i class="fa fa-check"></i><b>11.5</b> Transpor a matriz para trabalhar com as espécies</a>
-<ul>
-<li class="chapter" data-level="11.5.1" data-path="estrcom.html"><a href="estrcom.html#informações-básicas-da-matriz"><i class="fa fa-check"></i><b>11.5.1</b> Informações básicas da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="11.6" data-path="estrcom.html"><a href="estrcom.html#calculando-os-descritores-da-comunidade"><i class="fa fa-check"></i><b>11.6</b> Calculando os descritores da comunidade</a>
-<ul>
-<li class="chapter" data-level="11.6.1" data-path="estrcom.html"><a href="estrcom.html#variabilidade"><i class="fa fa-check"></i><b>11.6.1</b> Variabilidade</a></li>
-<li class="chapter" data-level="11.6.2" data-path="estrcom.html"><a href="estrcom.html#riqueza"><i class="fa fa-check"></i><b>11.6.2</b> Riqueza</a></li>
-</ul></li>
-<li class="chapter" data-level="11.7" data-path="estrcom.html"><a href="estrcom.html#índices-de-diversidade"><i class="fa fa-check"></i><b>11.7</b> Índices de Diversidade</a>
-<ul>
-<li class="chapter" data-level="11.7.1" data-path="estrcom.html"><a href="estrcom.html#shannon"><i class="fa fa-check"></i><b>11.7.1</b> Shannon</a></li>
-<li class="chapter" data-level="11.7.2" data-path="estrcom.html"><a href="estrcom.html#simpson"><i class="fa fa-check"></i><b>11.7.2</b> Simpson</a></li>
-<li class="chapter" data-level="11.7.3" data-path="estrcom.html"><a href="estrcom.html#equitabilidade-de-pielou"><i class="fa fa-check"></i><b>11.7.3</b> Equitabilidade de Pielou</a></li>
-</ul></li>
-<li class="chapter" data-level="11.8" data-path="estrcom.html"><a href="estrcom.html#gráficos-descritivos"><i class="fa fa-check"></i><b>11.8</b> Gráficos descritivos</a>
-<ul>
-<li class="chapter" data-level="11.8.1" data-path="estrcom.html"><a href="estrcom.html#série-de-hill-e-pefil-da-diversidade"><i class="fa fa-check"></i><b>11.8.1</b> Série de Hill e pefil da diversidade</a></li>
-</ul></li>
-<li class="chapter" data-level="11.9" data-path="estrcom.html"><a href="estrcom.html#distribuição-de-abundância"><i class="fa fa-check"></i><b>11.9</b> Distribuição de abundância</a></li>
-<li class="chapter" data-level="11.10" data-path="estrcom.html"><a href="estrcom.html#curva-de-rarefação"><i class="fa fa-check"></i><b>11.10</b> Curva de rarefação</a>
-<ul>
-<li class="chapter" data-level="11.10.1" data-path="estrcom.html"><a href="estrcom.html#interpretando-a-curva-de-rarefação"><i class="fa fa-check"></i><b>11.10.1</b> Interpretando a curva de rarefação</a></li>
-</ul></li>
-<li class="chapter" data-level="11.11" data-path="estrcom.html"><a href="estrcom.html#curva-de-acumulação-de-espécies"><i class="fa fa-check"></i><b>11.11</b> Curva de acumulação de espécies</a>
-<ul>
-<li class="chapter" data-level="11.11.1" data-path="estrcom.html"><a href="estrcom.html#plot-locais"><i class="fa fa-check"></i><b>11.11.1</b> Plot locais</a></li>
-</ul></li>
-<li class="chapter" data-level="11.12" data-path="estrcom.html"><a href="estrcom.html#plot-indivíduos"><i class="fa fa-check"></i><b>11.12</b> Plot indivíduos</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apêndices-8"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#criando-uma-tabela-de-espécies"><i class="fa fa-check"></i>Criando uma tabela de espécies</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descruas"><i class="fa fa-check"></i>Descritores da estrutura da comunidade: UA’s</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descritores-da-normalidade-1"><i class="fa fa-check"></i>Descritores da normalidade</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#salvando-as-tabelas-criadas-em-txt-direto-no-diretório-de-trabalho"><i class="fa fa-check"></i>Salvando as tabelas criadas em txt direto no diretório de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#sites-consultados-6"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#script-limpo-5"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#referências-9"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="partdiv.html"><a href="partdiv.html"><i class="fa fa-check"></i><b>12</b> R Modulo 4.2 - Decomposição da diversidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#resumo-9"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apresentação-9"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="12.1" data-path="partdiv.html"><a href="partdiv.html#sobre-os-dados-4"><i class="fa fa-check"></i><b>12.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="12.2" data-path="partdiv.html"><a href="partdiv.html#organização-básica-6"><i class="fa fa-check"></i><b>12.2</b> Organização básica</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apêndices-9"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#sites-consultados-7"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#script-limpo-6"><i class="fa fa-check"></i>Script limpo</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#referências-10"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="estrhab.html"><a href="estrhab.html"><i class="fa fa-check"></i><b>13</b> R Modulo 4.2 - Estrutura do habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#resumo-10"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apresentação-10"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="13.1" data-path="estrhab.html"><a href="estrhab.html#sobre-os-dados-5"><i class="fa fa-check"></i><b>13.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="13.2" data-path="estrhab.html"><a href="estrhab.html#organização-básica-7"><i class="fa fa-check"></i><b>13.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="estrhab.html"><a href="estrhab.html#instalando-os-pacotes-necessários-para-esse-módulo."><i class="fa fa-check"></i><b>13.2.1</b> Instalando os pacotes necessários para esse módulo.</a></li>
-</ul></li>
-<li class="chapter" data-level="13.3" data-path="estrhab.html"><a href="estrhab.html#importando-a-planilha-6"><i class="fa fa-check"></i><b>13.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="13.4" data-path="estrhab.html"><a href="estrhab.html#reset-point-2"><i class="fa fa-check"></i><b>13.4</b> Reset point</a></li>
-<li class="chapter" data-level="13.5" data-path="estrhab.html"><a href="estrhab.html#correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias"><i class="fa fa-check"></i><b>13.5</b> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
-<li class="chapter" data-level="13.6" data-path="estrhab.html"><a href="estrhab.html#deletando-variáveis-colineares"><i class="fa fa-check"></i><b>13.6</b> Deletando variáveis colineares</a></li>
-<li class="chapter" data-level="13.7" data-path="estrhab.html"><a href="estrhab.html#somando-variáveis-redundantes"><i class="fa fa-check"></i><b>13.7</b> Somando variáveis redundantes</a></li>
-<li class="chapter" data-level="13.8" data-path="estrhab.html"><a href="estrhab.html#tabela-de-dados-ambientais"><i class="fa fa-check"></i><b>13.8</b> Tabela de dados ambientais</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apêndices-10"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#sites-consultados-8"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#script-limpo-7"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#referências-11"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="reltrns.html"><a href="reltrns.html"><i class="fa fa-check"></i><b>14</b> R Modulo 5 - Relativizações e transformações</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#resumo-11"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apresentação-11"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="14.1" data-path="reltrns.html"><a href="reltrns.html#organização-básica-8"><i class="fa fa-check"></i><b>14.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="reltrns.html"><a href="reltrns.html#importando-a-planilha-7"><i class="fa fa-check"></i><b>14.1.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="reltrns.html"><a href="reltrns.html#tamanho-da-matriz"><i class="fa fa-check"></i><b>14.2</b> Tamanho da matriz</a></li>
-<li class="chapter" data-level="14.3" data-path="reltrns.html"><a href="reltrns.html#reset-point-1-1"><i class="fa fa-check"></i><b>14.3</b> Reset point 1</a></li>
-<li class="chapter" data-level="14.4" data-path="reltrns.html"><a href="reltrns.html#cálculo-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.4</b> Cálculo da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.5" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequência-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.5</b> Distribuição de frequência da matriz de distâncias</a>
-<ul>
-<li class="chapter" data-level="14.5.1" data-path="reltrns.html"><a href="reltrns.html#calculando-alguns-parâmetros-básicos"><i class="fa fa-check"></i><b>14.5.1</b> Calculando alguns parâmetros básicos</a></li>
-<li class="chapter" data-level="14.5.2" data-path="reltrns.html"><a href="reltrns.html#calculando-a-assimetria-e-a-curtose"><i class="fa fa-check"></i><b>14.5.2</b> Calculando a assimetria e a curtose</a></li>
-</ul></li>
-<li class="chapter" data-level="14.6" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequências-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.6</b> Distribuição de frequências da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.7" data-path="reltrns.html"><a href="reltrns.html#relativizando-e-transformando-a-base-de-dados"><i class="fa fa-check"></i><b>14.7</b> Relativizando e transformando a base de dados</a>
-<ul>
-<li class="chapter" data-level="14.7.1" data-path="reltrns.html"><a href="reltrns.html#relativização-pelo-total"><i class="fa fa-check"></i><b>14.7.1</b> Relativização pelo total</a></li>
-<li class="chapter" data-level="14.7.2" data-path="reltrns.html"><a href="reltrns.html#transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>14.7.2</b> Transformação pelo arcoseno da raiz quadrada</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="reltrns.html"><a href="reltrns.html#reset-point-2-1"><i class="fa fa-check"></i><b>14.8</b> Reset point 2</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apêndices-11"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#relativizações"><i class="fa fa-check"></i>Relativizações</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#transformações"><i class="fa fa-check"></i>Transformações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#script-limpo-8"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#referências-12"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="outcentr.html"><a href="outcentr.html"><i class="fa fa-check"></i><b>15</b> R Modulo 6 - Análise de outliers baseada no desvio padrão do centróide</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apresentação-12"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="15.1" data-path="outcentr.html"><a href="outcentr.html#sobre-os-dados-do-ppbio-3"><i class="fa fa-check"></i><b>15.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="15.2" data-path="outcentr.html"><a href="outcentr.html#organização-básica-9"><i class="fa fa-check"></i><b>15.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="outcentr.html"><a href="outcentr.html#importando-a-planilha-8"><i class="fa fa-check"></i><b>15.2.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="outcentr.html"><a href="outcentr.html#reset-point-3"><i class="fa fa-check"></i><b>15.3</b> Reset point</a>
-<ul>
-<li class="chapter" data-level="15.3.1" data-path="outcentr.html"><a href="outcentr.html#tamanho-da-matriz-1"><i class="fa fa-check"></i><b>15.3.1</b> Tamanho da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="15.4" data-path="outcentr.html"><a href="outcentr.html#cálculo-de-matriz-de-distâncias-euclidiana-euclid"><i class="fa fa-check"></i><b>15.4</b> Cálculo de matriz de distâncias Euclidiana (<code>euclid</code>)</a></li>
-<li class="chapter" data-level="15.5" data-path="outcentr.html"><a href="outcentr.html#calculando-o-centróide-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.5</b> Calculando o centróide da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.6" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.6</b> Distribuição de frequências da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.7" data-path="outcentr.html"><a href="outcentr.html#procurando-outliers"><i class="fa fa-check"></i><b>15.7</b> Procurando outliers</a>
-<ul>
-<li class="chapter" data-level="15.7.1" data-path="outcentr.html"><a href="outcentr.html#listas-de-distâncias"><i class="fa fa-check"></i><b>15.7.1</b> Listas de distâncias</a></li>
-<li class="chapter" data-level="15.7.2" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-das-distâncias-médias-para-o-centróide-av.dist"><i class="fa fa-check"></i><b>15.7.2</b> Distribuição de frequências das distâncias médias para o centróide <code>av.dist</code></a></li>
-</ul></li>
-<li class="chapter" data-level="15.8" data-path="outcentr.html"><a href="outcentr.html#lista-final-de-outliers"><i class="fa fa-check"></i><b>15.8</b> Lista final de outliers</a></li>
-<li class="chapter" data-level="15.9" data-path="outcentr.html"><a href="outcentr.html#particionando-a-matriz"><i class="fa fa-check"></i><b>15.9</b> Particionando a matriz</a></li>
-<li class="chapter" data-level="15.10" data-path="outcentr.html"><a href="outcentr.html#exportando-a-matrix-final-de-trabalho"><i class="fa fa-check"></i><b>15.10</b> Exportando a matrix final de trabalho</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apêndices-12"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#outras-formas-de-fazer-a-partição"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#código"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#script-limpo-9"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#referências-13"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>III ANÁLISES MULTIVARIADAS</b></span></li>
-<li class="chapter" data-level="16" data-path="upgma.html"><a href="upgma.html"><i class="fa fa-check"></i><b>16</b> R Modulo 7 - Análise de Classificação Hierárquica - SAHN</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#resumo-12"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apresentação-13"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="16.1" data-path="upgma.html"><a href="upgma.html#organização-básica-10"><i class="fa fa-check"></i><b>16.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="upgma.html"><a href="upgma.html#pacotes"><i class="fa fa-check"></i><b>16.1.1</b> Pacotes</a></li>
-<li class="chapter" data-level="16.1.2" data-path="upgma.html"><a href="upgma.html#sobre-os-dados-do-ppbio-4"><i class="fa fa-check"></i><b>16.1.2</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="16.1.3" data-path="upgma.html"><a href="upgma.html#importando-a-planilha-de-trabalho-1"><i class="fa fa-check"></i><b>16.1.3</b> Importando a planilha de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="16.2" data-path="upgma.html"><a href="upgma.html#reset-point-4"><i class="fa fa-check"></i><b>16.2</b> Reset point</a></li>
-<li class="chapter" data-level="16.3" data-path="upgma.html"><a href="upgma.html#nomenclatura-das-matrizes-em-amd"><i class="fa fa-check"></i><b>16.3</b> Nomenclatura das matrizes em AMD</a></li>
-<li class="chapter" data-level="16.4" data-path="upgma.html"><a href="upgma.html#cluster-1-piloto-automático"><i class="fa fa-check"></i><b>16.4</b> Cluster 1: Piloto automático</a>
-<ul>
-<li class="chapter" data-level="16.4.1" data-path="upgma.html"><a href="upgma.html#histórico-das-fusões"><i class="fa fa-check"></i><b>16.4.1</b> Histórico das fusões</a></li>
-</ul></li>
-<li class="chapter" data-level="16.5" data-path="upgma.html"><a href="upgma.html#cluster-2-criando-a-matriz-de-distâncias-euclidiana"><i class="fa fa-check"></i><b>16.5</b> Cluster 2: Criando a matriz de distâncias Euclidiana</a>
-<ul>
-<li class="chapter" data-level="16.5.1" data-path="upgma.html"><a href="upgma.html#comparação-dos-resultados-obtidos-até-aqui"><i class="fa fa-check"></i><b>16.5.1</b> Comparação dos resultados obtidos até aqui</a></li>
-</ul></li>
-<li class="chapter" data-level="16.6" data-path="upgma.html"><a href="upgma.html#cluster-3-relativização-pelo-total-da-coluna"><i class="fa fa-check"></i><b>16.6</b> Cluster 3: Relativização pelo total da coluna</a>
-<ul>
-<li class="chapter" data-level="16.6.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizado"><i class="fa fa-check"></i><b>16.6.1</b> Gráfico de clustering relativizado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.7" data-path="upgma.html"><a href="upgma.html#cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>16.7</b> Cluster 4: Transformação pelo arcoseno da raiz quadrada</a>
-<ul>
-<li class="chapter" data-level="16.7.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizadotransformado"><i class="fa fa-check"></i><b>16.7.1</b> Gráfico de clustering relativizado/transformado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.8" data-path="upgma.html"><a href="upgma.html#cluster-5-controle-total-dos-parâmetros"><i class="fa fa-check"></i><b>16.8</b> Cluster 5: Controle total dos parâmetros</a></li>
-<li class="chapter" data-level="16.9" data-path="upgma.html"><a href="upgma.html#construindo-uma-prancha-de-gráficos-comparativos"><i class="fa fa-check"></i><b>16.9</b> Construindo uma prancha de gráficos comparativos</a></li>
-<li class="chapter" data-level="16.10" data-path="upgma.html"><a href="upgma.html#construindo-heatmaps"><i class="fa fa-check"></i><b>16.10</b> Construindo <code>heatmaps</code></a>
-<ul>
-<li class="chapter" data-level="16.10.1" data-path="upgma.html"><a href="upgma.html#percentual-de-encadeamento-chaining"><i class="fa fa-check"></i><b>16.10.1</b> Percentual de encadeamento (% chaining)</a></li>
-<li class="chapter" data-level="16.10.2" data-path="upgma.html"><a href="upgma.html#função-loop-para-comparar-os-encadeamentos"><i class="fa fa-check"></i><b>16.10.2</b> Função <code>loop</code> para comparar os encadeamentos</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apêndices-13"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#sites-consultados-9"><i class="fa fa-check"></i>Sites consultados</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#outras-formas-de-fazer-a-partição-1"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#código-1"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#script-limpo-10"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#referências-14"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentos de Ecologia Numérica</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="active" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li class="book-part">ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="partdiv" class="section level1 hasAnchor" number="12">
-<h1><span class="header-section-number"> 12</span> R Modulo 4.2 - Decomposição da diversidade<a href="partdiv.html#partdiv" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="resumo-9" class="section level3 unnumbered hasAnchor">
-<h3>RESUMO<a href="partdiv.html#resumo-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="partdiv" class="section level1" number="12">
+<h1>
+<span class="header-section-number"> 12</span> R Modulo 4.2 - Decomposição da diversidade<a class="anchor" aria-label="anchor" href="#partdiv"><i class="fas fa-link"></i></a>
+</h1>
+<div id="resumo-9" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-9"><i class="fas fa-link"></i></a>
+</h3>
 <p>Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies.</p>
 </div>
-<div id="apresentação-9" class="section level3 unnumbered hasAnchor">
-<h3>Apresentação<a href="partdiv.html#apresentação-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="apresentação-9" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-9"><i class="fas fa-link"></i></a>
+</h3>
 <p>Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies. Essas métricas são usadas para avaliar a diversidade e a estrutura de comunidades ecológicas. Elas podem fornecer informações importantes sobre como as diferentes espécies interagem em um ecossistema e como a diversidade de espécies pode ser afetada por mudanças ambientais ou distúrbios <span class="citation">(<a href="#ref-RN357" role="doc-biblioref">MAGURRAN, 1988</a>)</span>.</p>
 </div>
-<div id="sobre-os-dados-4" class="section level2 hasAnchor" number="12.1">
-<h2><span class="header-section-number">12.1</span> Sobre os dados<a href="partdiv.html#sobre-os-dados-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sobre-os-dados-4" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-4"><i class="fas fa-link"></i></a>
+</h2>
 <p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz comunitária</strong> (<a href="https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06c-peixes.xlsx</a>) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Esses são dados de espécies de peixes distribuidas em diversas unidades amostrais (UA’s ou sítios). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.</p>
 <p>Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06-grupos</a>)</p>
 <p><strong>Revise as informações sobre as bases de dados no capítulo
@@ -548,91 +124,110 @@ div.csl-indent {
 <a href="bases.html#arqs">Arquivos disponíveis</a>.</strong></p>
 <p><strong>Revise o módulo anterior <a href="estrcom.html#estrcom">Estrutura da Comunidade</a></strong></p>
 </div>
-<div id="organização-básica-6" class="section level2 hasAnchor" number="12.2">
-<h2><span class="header-section-number">12.2</span> Organização básica<a href="partdiv.html#organização-básica-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="organização-básica-6" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><i class="fas fa-link"></i></a>
+</h2>
 </div>
-<div id="apêndices-9" class="section level2 unnumbered hasAnchor">
-<h2>Apêndices<a href="partdiv.html#apêndices-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="sites-consultados-7" class="section level3 unnumbered hasAnchor">
-<h3>Sites consultados<a href="partdiv.html#sites-consultados-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="apêndices-9" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-9"><i class="fas fa-link"></i></a>
+</h2>
+<div id="sites-consultados-7" class="section level3 unnumbered">
+<h3>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-7"><i class="fas fa-link"></i></a>
+</h3>
 <p><a href="www.link.com">Primeira coluna para nomes das linhas</a></p>
 </div>
-<div id="script-limpo-6" class="section level3 unnumbered hasAnchor">
-<h3>Script limpo<a href="partdiv.html#script-limpo-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="script-limpo-6" class="section level3 unnumbered">
+<h3>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-6"><i class="fas fa-link"></i></a>
+</h3>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
 </div>
 </div>
-<div id="referências-10" class="section level2 unnumbered hasAnchor">
-<h2>Referências<a href="partdiv.html#referências-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="referências-10" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-10"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
-<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Bibliografia Geral</h3>
 <div id="refs" class="references csl-bib-body" entry-spacing="1">
 <div id="ref-RN357" class="csl-entry">
-MAGURRAN, A. E. <strong>Ecological Diversity and Its Measurement</strong>. [S.l.]: Croom Helm Ltd, 1988. p. 179.
+MAGURRAN, A. E. <strong>Ecological Diversity and Its Measurement</strong>. [s.l.] : Croom Helm Ltd, 1988. p. 179
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></div>
+<div class="next"><a href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#partdiv"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-9">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-9">Apresentação</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#sobre-os-dados-4"><span class="header-section-number">12.1</span> Sobre os dados</a></li>
+<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><span class="header-section-number">12.2</span> Organização básica</a></li>
+<li>
+<a class="nav-link" href="#ap%C3%AAndices-9">Apêndices</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sites-consultados-7">Sites consultados</a></li>
+<li><a class="nav-link" href="#script-limpo-6">Script limpo</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#refer%C3%AAncias-10">Referências</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="estrcom.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="estrhab.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/3-04-2-rmd4_partdiv.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["fundamentos_de_ecologia_numerica.pdf", "fundamentos_de_ecologia_numerica.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
 }
-});
-});
 </script>
-
 </body>
-
 </html>

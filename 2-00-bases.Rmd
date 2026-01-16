@@ -20,7 +20,7 @@ Para entender a distribuição das espécies de peixes e seu uso de habitat, uma
 
 Usaremos ao longo desse livro dados que fazem parte de um estudo mais amplo sobre ecologia de rios do semiárido, coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Parte desses dados está armazenada em planilhas de Excel `ppbio**.xlsx` (Figura \@ref(fig:200ppbio)). Essas matrizes de dados são descritas na Tabela \@ref(tab:200arqs). As planilhas `ppbio**.xlsx` contém vários tipos de dados arranjados em matrizes `n x m` que incluem dados de abundância de espécies em diferentes unidades amostrais (UA's), dados da estrutura do habitat físico, e variáveis em escala de bacia hidrográfica, dados de contagem de indivíduos ajustados para Captura Por Unidade de Esforço (CPUE), etc (Figura \@ref(fig:200ppbio)).
 
-```{r 200ppbio, echo=FALSE, purl=FALSE, fig.cap="Parte da planilha de dados brutos do PPBio."}
+```{r 200ppbio, echo=FALSE, purl=FALSE, out.width = if (knitr::is_html_output()) "550" else "0.8\\textwidth", fig.asp = 1, fig.cap="Parte da planilha de dados brutos do PPBio."}
 knitr::include_graphics("imagens/ppbio.png")
 ```
 
@@ -28,28 +28,28 @@ Por exemplo, essa é a **matriz bruta de dados**, porque os valores ainda não f
 
 Várias das espécies nessa matriz tem grande importância ecológica, como é o caso de *Astyanax bimaculatus*^[A etimologia do gênero *Astyanax* vem da mitologia Grega. Heitor personagem da "Ilíada", tinha um filho chamado Astíanax.] (Figura \@ref(fig:200asbim)), que é muito comum em rios intermitentes e serve de alimento para predadores maiores [@RN2908] como a espécie *Hoplias malabaricus*^[Do Grego, *hoplon*, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.] (Figura \@ref(fig:200hmala)) [@RN2724].
 
-```{r 200asbim, echo=FALSE, purl=FALSE, fig.cap="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>"}
+```{r 200asbim, echo=FALSE, purl=FALSE, out.width = if (knitr::is_html_output()) "450px" else "0.8\\textwidth", fig.asp = 1, fig.cap="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>"}
 knitr::include_graphics("imagens/spp/Asbim_u4.jpg")
 ```
 
-```{r 200hmala, echo=FALSE, purl=FALSE, fig.cap="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>"}
+```{r 200hmala, echo=FALSE, purl=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>"}
 knitr::include_graphics("imagens/spp/Homal_u6.jpg")
 ```
 
 Outras espécies como *Apareiodon hasemani*^[A etimologia do nome *Apareiodon* vem do Grego, *a*, sem, *pareia*, lateral ou bochecha, e *odous* dentição, em referência a ausência de dentes laterais no aparato bucal dessa espécie."] (Figura \@ref(fig:200apdavis) tem importância trófica por estar na base da cadeia alimentar, enquanto espécies da família Loricariidae, como *Pseudancistrus genisetiger*^[A etimologia do nome *Pseudancistrus* vem do Grego, *pseudes*, falso, e *agkistron*, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.] (Figura \@ref(fig:200pgen)), tem importância para taxonomia.
 
-```{r 200apdavis, echo=FALSE, purl=FALSE, fig.cap="*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Apareiodon-davisi.html>"}
+```{r 200apdavis, echo=FALSE, purl=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Apareiodon-davisi.html>"}
 knitr::include_graphics("imagens/spp/Apdav_u0.jpg")
 ```
 
-```{r 200pgen, echo=FALSE, purl=FALSE, out.width="320px", fig.cap="*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal"}
+```{r 200pgen, echo=FALSE, purl=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal"}
 knitr::include_graphics("imagens/spp/genis.jpg")
 ```
 
 As planilhas `ppbio**.xlsx` contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \@ref(fig:200del). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela \@ref(tab:200arqs)). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.  
 Qual desses tipos de dados você acha que é apresentado na planilha?
 
-```{r 200del, echo=FALSE, purl=FALSE, fig.cap="Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo."}
+```{r 200del, echo=FALSE, purl=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo."}
 knitr::include_graphics("imagens/rm1.fig3.png")
 ```
 
@@ -76,7 +76,7 @@ column_spec(arqsx, 1:4, width = c("2cm","2cm","7cm","5cm"))
 
 Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo `ppbio06-*.xlsx`, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (m=linhas ou objetos) em estações do ano diferentes, e cerca de 35 espécies (n=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores são contagens de indivíduos, e apresentam uma alta amplitude de variação, portanto, o uso de uma matriz relativizada é sugerido (Figura \@ref(tab:200arqs)). Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura \@ref(fig:200codes).
 
-```{r 200codes, echo=FALSE, purl=FALSE, fig.cap="Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem"}
+```{r 200codes, echo=FALSE, purl=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem"}
 knitr::include_graphics("imagens/bases/com-codes.png")
 ```
 
@@ -101,7 +101,7 @@ m_ <- tibble::tribble(
   )
 library(knitr)
 library(kableExtra)
-m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas e suas abreviações nos códigos do R.")
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas e suas abreviações nos códigos do R.", format = if (knitr::is_latex_output()) "latex" else "html")
 m_x <- kable_styling(m_x)
 column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
 ```

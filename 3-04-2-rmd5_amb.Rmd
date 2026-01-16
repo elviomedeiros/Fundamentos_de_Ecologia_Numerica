@@ -191,7 +191,7 @@ str(t_grps)
 t_grps[1:4,1:4] #[1:4,1:4] mostra apenas as linhas e colunas de 1 a 4.
 ```
 
-```{r, eval=TRUE, results='hold'}
+```{r erro_amb-select, eval=FALSE, results='hold'}
 library(dplyr)
 library(tidyr)
 m_trab <- m_amb_part %>%
@@ -216,7 +216,7 @@ m_wide <- m %>%
                               paste0(round(mean, 3), "(", round(min, 3), "-", round(max, 3), ")"),
                               paste0(round(mean, 1), "(", round(min, 1), "-", round(max, 1), ")"))) %>%
   unite("Location", Area, Habitat, Ponto, sep = "_") %>%
-  select(Variable, Location, stat_string) %>%
+  dplyr::select(Variable, Location, stat_string) %>% # find("select"), dplyr::select evita conflito entre package:MASS  package:dplyr
   pivot_wider(names_from = Location, values_from = stat_string)
 
 m_wide

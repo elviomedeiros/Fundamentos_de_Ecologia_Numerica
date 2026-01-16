@@ -82,10 +82,10 @@ Também podemos explorar as características da planilha usando as funções `st
 
 #### Abreviações {-}
 
-No interesse de sistematizar o código R das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (Tabela \@ref(tab:5tblm_2)) resume seus tipos e abreviações.
+No interesse de sistematizar o código R das várias matrizes que são comumente usadas em uma AMD, a tabela \@ref(tab:5tblm-2), a seguir, resume seus tipos e abreviações.
 
-```{r 5tblm_2, echo=FALSE, purl=FALSE}
-m_ <- tibble::tribble(
+```{r 5tblm-2, echo=FALSE, purl=FALSE}
+mm <- tibble::tribble(
   ~"Nome", ~"Atributos (colunas)", ~"Abreviação no R",
   "Matriz comunitaria", "Os atributos são táxons ou OTU's (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)", "m_com",
   "Matriz ambiental", "Os atributos são dados ambientais e variáveis  físicas e químicas (ex. pH, condutividade, temperatura)", "m_amb",
@@ -101,9 +101,9 @@ m_ <- tibble::tribble(
   )
 library(knitr)
 library(kableExtra)
-m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas")
-m_x <- kable_styling(m_x)
-column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
+mx <- kable(mm, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas", format = if (knitr::is_latex_output()) "latex" else "html")
+mx <- kable_styling(mx)
+column_spec(mx, 1:3, width = c("2cm","5cm","2cm"))
 ```
 
 ## Tamanho da matriz
@@ -127,7 +127,7 @@ Tabela que resume as informações geradas (\@ref(tab:tbl5-tam)).
 
 ```{r, results='hold'}
 tamanho <- data.frame(
-  Função = c("range", "lenght", "m cols", "n linhas", "Tamanho", "Tamanho",
+  Comando = c("range", "lenght", "m cols", "n linhas", "Tamanho", "Tamanho",
              "Zeros", "Nao zeros", "% Zeros"),
   Resultado = c(paste(range(m_bruta), collapse = " - "), length(m_bruta), ncol(m_bruta),
                 nrow(m_bruta), sum(lengths(m_bruta)), length(as.matrix(m_bruta)), sum(m_bruta == 0),
@@ -136,7 +136,7 @@ tamanho
 ```
 
 ```{r tbl5-tam, echo=FALSE, purl=FALSE}
-knitr::kable(tamanho, format = "markdown", caption = "Resumo das informações geradas.")
+knitr::kable(tamanho, caption = "Resumo das informações geradas.", format = if (knitr::is_latex_output()) "latex" else "html")
 ```
 
 Ou seja, temos uma matriz de tamanho `m x n` igual a `r nrow(m_bruta)` objetos por `r ncol(m_bruta)` atributos, onde `r round(zeros, 2)`% dos valores da matriz são iguais a zero!

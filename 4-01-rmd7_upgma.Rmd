@@ -6,7 +6,7 @@ editor_options:
 
 # (PART) ANÁLISES MULTIVARIADAS {-}
 
-# R Modulo 7 - Análise de Classificação Hierárquica - SAHN {#upgma}
+# R Módulo 7 - Análise de Classificação Hierárquica - SAHN {#upgma}
 
 ### RESUMO {-}
 
@@ -111,9 +111,9 @@ ppbio <- read.xlsx(file.choose(),
 
 ## Nomenclatura das matrizes em AMD
 
-No tocante aos tipos de atributos e seu tratamento pré-análises, uma matriz de de dados pode ser dos tipos apresentados na tabela abaixo (Tabela \@ref(tab:tbl-m_)).
+No tocante aos tipos de atributos e seu tratamento pré-análises, uma matriz de de dados pode ser dos tipos apresentados na tabela \@ref(tab:tbl-mm), abaixo.
 
-```{r tbl-m_, echo=FALSE, purl=FALSE} 
+```{r tbl-mm, echo=FALSE, purl=FALSE} 
 m_ <- tibble::tribble(
   ~"Nome", ~"Atributos (colunas)",
   "Matriz comunitaria", "Os atributos são táxons (ex. espécies, gêneros, morfotipos)",
@@ -125,7 +125,7 @@ m_ <- tibble::tribble(
   )
 library(knitr)
 library(kableExtra)
-m_x <- kable(m_, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas.")
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas.", format = if (knitr::is_latex_output()) "latex" else "html")
 m_x <- kable_styling(m_x)
 column_spec(m_x, 1:2, width = c("2cm","5cm"))
 ```

@@ -1,624 +1,207 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 4 Base de Dados I - Peixes | Fundamentos de Ecologia Numérica</title>
-  <meta name="description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
-
-  <meta property="og:title" content=" 4 Base de Dados I - Peixes | Fundamentos de Ecologia Numérica" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/fundamentos_de_ecologia_numerica" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 4 Base de Dados I - Peixes | Fundamentos de Ecologia Numérica" />
-  
-  <meta name="twitter:description" content="…. The output format for this example is bookdown::gitbook." />
-  
-
-<meta name="author" content="Prof. Elvio S. F. Medeiros" />
-<meta name="author" content="Laboratório de Ecologia" />
-<meta name="author" content="Universidade Estadual da Paraíba" />
-<meta name="author" content="Campus V, João Pessoa, PB" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="bases.html"/>
-<link rel="next" href="basehab.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 4 Base de Dados I - Peixes | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="Estrutura da Comunidade: Peixes no semiárido  Apresentação Exemplo de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido. Ano de 2006. Peixes5 Autor: -...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content=" 4 Base de Dados I - Peixes | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Estrutura da Comunidade: Peixes no semiárido  Apresentação Exemplo de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido. Ano de 2006. Peixes5 Autor: -...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 4 Base de Dados I - Peixes | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="Estrutura da Comunidade: Peixes no semiárido  Apresentação Exemplo de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido. Ano de 2006. Peixes5 Autor: -...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 1em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style2.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Fundamentos de Ecologia Numérica</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apresentação</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#motivação"><i class="fa fa-check"></i><b>1.1</b> Motivação</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#organização-do-livro"><i class="fa fa-check"></i><b>1.2</b> Organização do livro</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#como-estudar-por-esse-livro"><i class="fa fa-check"></i><b>1.3</b> Como estudar por esse livro?</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#para-um-estudo-aprofundado"><i class="fa fa-check"></i><b>1.3.1</b> Para um estudo aprofundado</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introdução ao R/RStudio</a>
-<ul>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#resumo"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#plano-de-estudo"><i class="fa fa-check"></i><b>2.1</b> Plano de estudo</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#pré-requisitos"><i class="fa fa-check"></i><b>2.2</b> Pré-requisitos</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#principais-conceitos"><i class="fa fa-check"></i><b>2.3</b> Principais conceitos</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#o-ambiente-de-programação-do-r"><i class="fa fa-check"></i><b>2.3.1</b> O ambiente de programação do R</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#o-que-é-o-r-studio"><i class="fa fa-check"></i><b>2.4</b> O que é o R Studio?</a></li>
-<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#o-essencial"><i class="fa fa-check"></i><b>2.5</b> O essencial</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="intro.html"><a href="intro.html#licença-de-software"><i class="fa fa-check"></i><b>2.5.1</b> Licença de software</a></li>
-<li class="chapter" data-level="2.5.2" data-path="intro.html"><a href="intro.html#interface-do-usuário"><i class="fa fa-check"></i><b>2.5.2</b> Interface do usuário</a></li>
-<li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#interface-do-usuário-do-rstudio"><i class="fa fa-check"></i><b>2.5.3</b> Interface do usuário do RStudio</a></li>
-<li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#projetos"><i class="fa fa-check"></i><b>2.5.4</b> Projetos</a></li>
-<li class="chapter" data-level="2.5.5" data-path="intro.html"><a href="intro.html#nomes-de-arquivos"><i class="fa fa-check"></i><b>2.5.5</b> Nomes de arquivos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#preparação-dos-arquivos"><i class="fa fa-check"></i><b>2.6</b> Preparação dos arquivos</a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="intro.html"><a href="intro.html#formatos-de-arquivo-de-dados"><i class="fa fa-check"></i><b>2.6.1</b> Formatos de arquivo de dados</a></li>
-<li class="chapter" data-level="2.6.2" data-path="intro.html"><a href="intro.html#o-arquivo-de-espécies"><i class="fa fa-check"></i><b>2.6.2</b> O arquivo de espécies</a></li>
-<li class="chapter" data-level="2.6.3" data-path="intro.html"><a href="intro.html#formato-de-valores-separados-por-vírgula-.csv"><i class="fa fa-check"></i><b>2.6.3</b> Formato de valores separados por vírgula (.csv)</a></li>
-<li class="chapter" data-level="2.6.4" data-path="intro.html"><a href="intro.html#editando-a-matriz-de-dados"><i class="fa fa-check"></i><b>2.6.4</b> Editando a matriz de dados</a></li>
-<li class="chapter" data-level="2.6.5" data-path="intro.html"><a href="intro.html#arquivos-de-resultados"><i class="fa fa-check"></i><b>2.6.5</b> Arquivos de resultados</a></li>
-<li class="chapter" data-level="2.6.6" data-path="intro.html"><a href="intro.html#gráficos"><i class="fa fa-check"></i><b>2.6.6</b> Gráficos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#conclusão"><i class="fa fa-check"></i><b>2.7</b> Conclusão</a></li>
-<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#sequência-típica-na-preparação-e-análise-de-dados"><i class="fa fa-check"></i><b>2.8</b> Sequência típica na preparação e análise de dados</a></li>
-<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#material-de-apoio"><i class="fa fa-check"></i><b>2.9</b> Material de apoio</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#apêndices"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#sites-consultados"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#leitura-suplementar"><i class="fa fa-check"></i>Leitura suplementar</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#referências"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>I BASES DE DADOS</b></span></li>
-<li class="chapter" data-level="3" data-path="bases.html"><a href="bases.html"><i class="fa fa-check"></i><b>3</b> Bases de Dados. Dados do PPBio Semiárido</a>
-<ul>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#exemplos-de-conjunto-de-dados-ecológicos-do-programa-de-pesquisa-em-biodiversidade-ppbio-do-semiárido"><i class="fa fa-check"></i>Exemplos de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido</a></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#resumo-1"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="3.1" data-path="bases.html"><a href="bases.html#sobre-os-dados-do-ppbio"><i class="fa fa-check"></i><b>3.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="3.2" data-path="bases.html"><a href="bases.html#arqs"><i class="fa fa-check"></i><b>3.2</b> Arquivos disponíveis</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="bases.html"><a href="bases.html#codificação-das-variáveis"><i class="fa fa-check"></i><b>3.2.1</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="3.2.2" data-path="bases.html"><a href="bases.html#abrev"><i class="fa fa-check"></i><b>3.2.2</b> Abreviações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#referências-1"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="basepeixes.html"><a href="basepeixes.html"><i class="fa fa-check"></i><b>4</b> Base de Dados I - Peixes</a>
-<ul>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#estrutura-da-comunidade-peixes-no-semiárido"><i class="fa fa-check"></i>Estrutura da Comunidade: Peixes no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apresentação-1"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#resumo-2"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="4.1" data-path="basepeixes.html"><a href="basepeixes.html#introdução"><i class="fa fa-check"></i><b>4.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="basepeixes.html"><a href="basepeixes.html#desenho-amostral"><i class="fa fa-check"></i><b>4.1.1</b> Desenho Amostral</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="basepeixes.html"><a href="basepeixes.html#codificação-das-variáveis-1"><i class="fa fa-check"></i><b>4.2</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="4.3" data-path="basepeixes.html"><a href="basepeixes.html#amostragem-dos-dados"><i class="fa fa-check"></i><b>4.3</b> Amostragem dos dados</a></li>
-<li class="chapter" data-level="4.4" data-path="basepeixes.html"><a href="basepeixes.html#análises-estatísticas"><i class="fa fa-check"></i><b>4.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="4.5" data-path="basepeixes.html"><a href="basepeixes.html#discussão"><i class="fa fa-check"></i><b>4.5</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apêndices-1"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="basepeixes.html"><a href="basepeixes.html#tabelas-e-figuras"><i class="fa fa-check"></i><b>4.5.1</b> Tabelas e Figuras</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#referências-2"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="basehab.html"><a href="basehab.html"><i class="fa fa-check"></i><b>5</b> Base de Dados II - Habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#estrutura-do-habitat-variáveis-ambientais-no-semiárido"><i class="fa fa-check"></i>Estrutura do Habitat: Variáveis ambientais no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apresentação-2"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#resumo-3"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="5.1" data-path="basehab.html"><a href="basehab.html#introdução-1"><i class="fa fa-check"></i><b>5.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="basehab.html"><a href="basehab.html#desenho-amostral-1"><i class="fa fa-check"></i><b>5.1.1</b> Desenho Amostral</a></li>
-<li class="chapter" data-level="5.1.2" data-path="basehab.html"><a href="basehab.html#sobre-os-dados-do-ppbio-1"><i class="fa fa-check"></i><b>5.1.2</b> Sobre os dados do PPBio</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="basehab.html"><a href="basehab.html#codificação-para-variáveis"><i class="fa fa-check"></i><b>5.2</b> Codificação para variáveis</a></li>
-<li class="chapter" data-level="5.3" data-path="basehab.html"><a href="basehab.html#área-de-estudo-e-amostragem-dos-dados"><i class="fa fa-check"></i><b>5.3</b> Área de estudo e amostragem dos dados</a></li>
-<li class="chapter" data-level="5.4" data-path="basehab.html"><a href="basehab.html#análises-estatísticas-1"><i class="fa fa-check"></i><b>5.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="5.5" data-path="basehab.html"><a href="basehab.html#resultados"><i class="fa fa-check"></i><b>5.5</b> Resultados</a></li>
-<li class="chapter" data-level="5.6" data-path="basehab.html"><a href="basehab.html#discussão-1"><i class="fa fa-check"></i><b>5.6</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apêndices-2"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#referências-3"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>II ESTATÍSTICAS DESCRITIVAS</b></span></li>
-<li class="chapter" data-level="6" data-path="xls.html"><a href="xls.html"><i class="fa fa-check"></i><b>6</b> R Modulo 1 - Importando planilhas de dados</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#resumo-4"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apresentação-3"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="6.1" data-path="xls.html"><a href="xls.html#instalação-do-r-e-rstudio"><i class="fa fa-check"></i><b>6.1</b> Instalação do R e RStudio</a></li>
-<li class="chapter" data-level="6.2" data-path="xls.html"><a href="xls.html#r-base"><i class="fa fa-check"></i><b>6.2</b> R base</a></li>
-<li class="chapter" data-level="6.3" data-path="xls.html"><a href="xls.html#rstudio"><i class="fa fa-check"></i><b>6.3</b> RStudio</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="xls.html"><a href="xls.html#rstudio-na-nuvem"><i class="fa fa-check"></i><b>6.3.1</b> RStudio na nuvem</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="xls.html"><a href="xls.html#sobre-os-dados-do-ppbio-2"><i class="fa fa-check"></i><b>6.4</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="6.5" data-path="xls.html"><a href="xls.html#importando-a-planilha-de-trabalho"><i class="fa fa-check"></i><b>6.5</b> Importando a planilha de trabalho</a></li>
-<li class="chapter" data-level="6.6" data-path="xls.html"><a href="xls.html#mensagens-de-erro-e-avisos-no-r"><i class="fa fa-check"></i><b>6.6</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="6.7" data-path="xls.html"><a href="xls.html#organização-básica"><i class="fa fa-check"></i><b>6.7</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="6.7.1" data-path="xls.html"><a href="xls.html#prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r"><i class="fa fa-check"></i><b>6.7.1</b> Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></li>
-</ul></li>
-<li class="chapter" data-level="6.8" data-path="xls.html"><a href="xls.html#importando-a-planilha"><i class="fa fa-check"></i><b>6.8</b> Importando a planilha</a>
-<ul>
-<li class="chapter" data-level="6.8.1" data-path="xls.html"><a href="xls.html#outra-forma-de-achar-e-importar-uma-planilha"><i class="fa fa-check"></i><b>6.8.1</b> Outra forma de achar e importar uma planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="6.9" data-path="xls.html"><a href="xls.html#importando-.ods-do-libreoffice-calc"><i class="fa fa-check"></i><b>6.9</b> Importando <code>.ods</code> do LibreOffice Calc</a>
-<ul>
-<li class="chapter" data-level="6.9.1" data-path="xls.html"><a href="xls.html#colunas-com-o-mesmo-nome"><i class="fa fa-check"></i><b>6.9.1</b> Colunas com o mesmo nome</a></li>
-<li class="chapter" data-level="6.9.2" data-path="xls.html"><a href="xls.html#removendo-linhas-ou-colunas-por-nome"><i class="fa fa-check"></i><b>6.9.2</b> Removendo linhas ou colunas por nome</a></li>
-<li class="chapter" data-level="6.9.3" data-path="xls.html"><a href="xls.html#criando-uma-matriz-de-médias"><i class="fa fa-check"></i><b>6.9.3</b> Criando uma matriz de médias</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apêndices-3"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#sites-consultados-1"><i class="fa fa-check"></i>Sites consultados</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#script-limpo"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#referências-4"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="tiposR.html"><a href="tiposR.html"><i class="fa fa-check"></i><b>7</b> R Modulo 2 - Tipos de Dados no R</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apresentação-4"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="7.1" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.1</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.2" data-path="tiposR.html"><a href="tiposR.html#mensagens-de-erro-e-avisos-no-r-1"><i class="fa fa-check"></i><b>7.2</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="7.3" data-path="tiposR.html"><a href="tiposR.html#o-que-é-um-script-e-qual-sua-diferença-para-um-código"><i class="fa fa-check"></i><b>7.3</b> O que é um <code>script</code> e qual sua diferença para um <code>código</code>?</a></li>
-<li class="chapter" data-level="7.4" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r-1"><i class="fa fa-check"></i><b>7.4</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.5" data-path="tiposR.html"><a href="tiposR.html#tipos-de-dados-no-r"><i class="fa fa-check"></i><b>7.5</b> Tipos de dados no R</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="tiposR.html"><a href="tiposR.html#variáveis-e-tipos-básicos-de-dados-figura-reffignucleos"><i class="fa fa-check"></i><b>7.5.1</b> Variáveis e tipos básicos de dados (Figura @ref(fig:nucleos))</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="tiposR.html"><a href="tiposR.html#estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.6</b> Estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.7" data-path="tiposR.html"><a href="tiposR.html#como-pedir-ajuda"><i class="fa fa-check"></i><b>7.7</b> Como pedir ajuda?</a>
-<ul>
-<li class="chapter" data-level="7.7.1" data-path="tiposR.html"><a href="tiposR.html#dentro-do-r"><i class="fa fa-check"></i><b>7.7.1</b> Dentro do R</a></li>
-<li class="chapter" data-level="7.7.2" data-path="tiposR.html"><a href="tiposR.html#fora-do-r"><i class="fa fa-check"></i><b>7.7.2</b> Fora do R</a></li>
-<li class="chapter" data-level="7.7.3" data-path="tiposR.html"><a href="tiposR.html#chatgpt"><i class="fa fa-check"></i><b>7.7.3</b> ChatGPT</a></li>
-</ul></li>
-<li class="chapter" data-level="7.8" data-path="tiposR.html"><a href="tiposR.html#work-flow"><i class="fa fa-check"></i><b>7.8</b> Work flow</a></li>
-<li class="chapter" data-level="7.9" data-path="tiposR.html"><a href="tiposR.html#reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada"><i class="fa fa-check"></i><b>7.9</b> Reconhecendo a estrutura dos dados do R em uma matriz multivariada</a>
-<ul>
-<li class="chapter" data-level="7.9.1" data-path="tiposR.html"><a href="tiposR.html#organização-básica-1"><i class="fa fa-check"></i><b>7.9.1</b> Organização básica</a></li>
-</ul></li>
-<li class="chapter" data-level="7.10" data-path="tiposR.html"><a href="tiposR.html#importando-a-planilha-1"><i class="fa fa-check"></i><b>7.10</b> Importando a planilha</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apêndices-4"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#snippet-e-chunk"><i class="fa fa-check"></i>Snippet e chunk</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#sites-consultados-2"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#script-limpo-1"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#referências-5"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="univ.html"><a href="univ.html"><i class="fa fa-check"></i><b>8</b> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#resumo-5"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apresentação-5"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="8.1" data-path="univ.html"><a href="univ.html#sobre-os-dados"><i class="fa fa-check"></i><b>8.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="8.2" data-path="univ.html"><a href="univ.html#organização-básica-2"><i class="fa fa-check"></i><b>8.2</b> Organização básica</a></li>
-<li class="chapter" data-level="8.3" data-path="univ.html"><a href="univ.html#importando-a-planilha-2"><i class="fa fa-check"></i><b>8.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="8.4" data-path="univ.html"><a href="univ.html#gráficos-de-histograma-e-boxplot"><i class="fa fa-check"></i><b>8.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="8.5" data-path="univ.html"><a href="univ.html#sumário-estatístico-geral"><i class="fa fa-check"></i><b>8.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apêndices-5"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#sites-consultados-3"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#script-limpo-2"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#referências-6"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="univ2.html"><a href="univ2.html"><i class="fa fa-check"></i><b>9</b> R Modulo 3.2 - Testes Estatísticos</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#resumo-6"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apresentação-6"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="9.1" data-path="univ2.html"><a href="univ2.html#sobre-os-dados-1"><i class="fa fa-check"></i><b>9.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="9.2" data-path="univ2.html"><a href="univ2.html#organização-básica-3"><i class="fa fa-check"></i><b>9.2</b> Organização básica</a></li>
-<li class="chapter" data-level="9.3" data-path="univ2.html"><a href="univ2.html#importando-a-planilha-3"><i class="fa fa-check"></i><b>9.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="9.4" data-path="univ2.html"><a href="univ2.html#gráficos-de-histograma-e-boxplot-1"><i class="fa fa-check"></i><b>9.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="9.5" data-path="univ2.html"><a href="univ2.html#sumário-estatístico-geral-1"><i class="fa fa-check"></i><b>9.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="9.6" data-path="univ2.html"><a href="univ2.html#testando-normalidade"><i class="fa fa-check"></i><b>9.6</b> Testando normalidade</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="univ2.html"><a href="univ2.html#q-q-plots"><i class="fa fa-check"></i><b>9.6.1</b> Q-Q plots</a></li>
-<li class="chapter" data-level="9.6.2" data-path="univ2.html"><a href="univ2.html#testes-de-shapiro-wilk-e-kolmogorov-smirnov"><i class="fa fa-check"></i><b>9.6.2</b> Testes de Shapiro-Wilk e Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="9.7" data-path="univ2.html"><a href="univ2.html#testando-diferenças-entre-médias"><i class="fa fa-check"></i><b>9.7</b> Testando diferenças entre médias</a>
-<ul>
-<li class="chapter" data-level="9.7.1" data-path="univ2.html"><a href="univ2.html#testando-homogeneidade-de-variâncias"><i class="fa fa-check"></i><b>9.7.1</b> Testando homogeneidade de variâncias</a></li>
-<li class="chapter" data-level="9.7.2" data-path="univ2.html"><a href="univ2.html#teste-entre-duas-médias-t-student"><i class="fa fa-check"></i><b>9.7.2</b> Teste entre duas médias (t-Student)</a></li>
-<li class="chapter" data-level="9.7.3" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-anova"><i class="fa fa-check"></i><b>9.7.3</b> Teste entre três médias (ANOVA)</a></li>
-<li class="chapter" data-level="9.7.4" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-e-dois-fatores-two-way-anova"><i class="fa fa-check"></i><b>9.7.4</b> Teste entre três médias e dois fatores (Two-Way ANOVA)</a></li>
-</ul></li>
-<li class="chapter" data-level="9.8" data-path="univ2.html"><a href="univ2.html#correlação-e-regressão-simples"><i class="fa fa-check"></i><b>9.8</b> Correlação e regressão simples</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apêndices-6"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#sites-consultados-4"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#script-limpo-3"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#referências-7"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="unigr.html"><a href="unigr.html"><i class="fa fa-check"></i><b>10</b> R Modulo 3.3 - Gráficos univariados</a>
-<ul>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#resumo-7"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apresentação-7"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="10.1" data-path="unigr.html"><a href="unigr.html#sobre-os-dados-2"><i class="fa fa-check"></i><b>10.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="10.2" data-path="unigr.html"><a href="unigr.html#organização-básica-4"><i class="fa fa-check"></i><b>10.2</b> Organização básica</a></li>
-<li class="chapter" data-level="10.3" data-path="unigr.html"><a href="unigr.html#importando-a-planilha-4"><i class="fa fa-check"></i><b>10.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="10.4" data-path="unigr.html"><a href="unigr.html#reset-point"><i class="fa fa-check"></i><b>10.4</b> Reset point</a></li>
-<li class="chapter" data-level="10.5" data-path="unigr.html"><a href="unigr.html#gráficos-de-dispersão"><i class="fa fa-check"></i><b>10.5</b> Gráficos de dispersão</a></li>
-<li class="chapter" data-level="10.6" data-path="unigr.html"><a href="unigr.html#gráficos-de-linha"><i class="fa fa-check"></i><b>10.6</b> Gráficos de linha</a></li>
-<li class="chapter" data-level="10.7" data-path="unigr.html"><a href="unigr.html#gráficos-de-barra"><i class="fa fa-check"></i><b>10.7</b> Gráficos de barra</a></li>
-<li class="chapter" data-level="10.8" data-path="unigr.html"><a href="unigr.html#gráficos-de-grupos"><i class="fa fa-check"></i><b>10.8</b> Gráficos de grupos</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apêndices-7"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#sites-consultados-5"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#script-limpo-4"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#referências-8"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="estrcom.html"><a href="estrcom.html"><i class="fa fa-check"></i><b>11</b> R Modulo 4.1 - Estrutura da Comunidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#resumo-8"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apresentação-8"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="11.1" data-path="estrcom.html"><a href="estrcom.html#sobre-os-dados-3"><i class="fa fa-check"></i><b>11.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="11.2" data-path="estrcom.html"><a href="estrcom.html#organização-básica-5"><i class="fa fa-check"></i><b>11.2</b> Organização básica</a></li>
-<li class="chapter" data-level="11.3" data-path="estrcom.html"><a href="estrcom.html#importando-a-planilha-5"><i class="fa fa-check"></i><b>11.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="11.4" data-path="estrcom.html"><a href="estrcom.html#reset-point-1"><i class="fa fa-check"></i><b>11.4</b> Reset point</a></li>
-<li class="chapter" data-level="11.5" data-path="estrcom.html"><a href="estrcom.html#transpor-a-matriz-para-trabalhar-com-as-espécies"><i class="fa fa-check"></i><b>11.5</b> Transpor a matriz para trabalhar com as espécies</a>
-<ul>
-<li class="chapter" data-level="11.5.1" data-path="estrcom.html"><a href="estrcom.html#informações-básicas-da-matriz"><i class="fa fa-check"></i><b>11.5.1</b> Informações básicas da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="11.6" data-path="estrcom.html"><a href="estrcom.html#calculando-os-descritores-da-comunidade"><i class="fa fa-check"></i><b>11.6</b> Calculando os descritores da comunidade</a>
-<ul>
-<li class="chapter" data-level="11.6.1" data-path="estrcom.html"><a href="estrcom.html#variabilidade"><i class="fa fa-check"></i><b>11.6.1</b> Variabilidade</a></li>
-<li class="chapter" data-level="11.6.2" data-path="estrcom.html"><a href="estrcom.html#riqueza"><i class="fa fa-check"></i><b>11.6.2</b> Riqueza</a></li>
-</ul></li>
-<li class="chapter" data-level="11.7" data-path="estrcom.html"><a href="estrcom.html#índices-de-diversidade"><i class="fa fa-check"></i><b>11.7</b> Índices de Diversidade</a>
-<ul>
-<li class="chapter" data-level="11.7.1" data-path="estrcom.html"><a href="estrcom.html#shannon"><i class="fa fa-check"></i><b>11.7.1</b> Shannon</a></li>
-<li class="chapter" data-level="11.7.2" data-path="estrcom.html"><a href="estrcom.html#simpson"><i class="fa fa-check"></i><b>11.7.2</b> Simpson</a></li>
-<li class="chapter" data-level="11.7.3" data-path="estrcom.html"><a href="estrcom.html#equitabilidade-de-pielou"><i class="fa fa-check"></i><b>11.7.3</b> Equitabilidade de Pielou</a></li>
-</ul></li>
-<li class="chapter" data-level="11.8" data-path="estrcom.html"><a href="estrcom.html#gráficos-descritivos"><i class="fa fa-check"></i><b>11.8</b> Gráficos descritivos</a>
-<ul>
-<li class="chapter" data-level="11.8.1" data-path="estrcom.html"><a href="estrcom.html#série-de-hill-e-pefil-da-diversidade"><i class="fa fa-check"></i><b>11.8.1</b> Série de Hill e pefil da diversidade</a></li>
-</ul></li>
-<li class="chapter" data-level="11.9" data-path="estrcom.html"><a href="estrcom.html#distribuição-de-abundância"><i class="fa fa-check"></i><b>11.9</b> Distribuição de abundância</a></li>
-<li class="chapter" data-level="11.10" data-path="estrcom.html"><a href="estrcom.html#curva-de-rarefação"><i class="fa fa-check"></i><b>11.10</b> Curva de rarefação</a>
-<ul>
-<li class="chapter" data-level="11.10.1" data-path="estrcom.html"><a href="estrcom.html#interpretando-a-curva-de-rarefação"><i class="fa fa-check"></i><b>11.10.1</b> Interpretando a curva de rarefação</a></li>
-</ul></li>
-<li class="chapter" data-level="11.11" data-path="estrcom.html"><a href="estrcom.html#curva-de-acumulação-de-espécies"><i class="fa fa-check"></i><b>11.11</b> Curva de acumulação de espécies</a>
-<ul>
-<li class="chapter" data-level="11.11.1" data-path="estrcom.html"><a href="estrcom.html#plot-locais"><i class="fa fa-check"></i><b>11.11.1</b> Plot locais</a></li>
-</ul></li>
-<li class="chapter" data-level="11.12" data-path="estrcom.html"><a href="estrcom.html#plot-indivíduos"><i class="fa fa-check"></i><b>11.12</b> Plot indivíduos</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apêndices-8"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#criando-uma-tabela-de-espécies"><i class="fa fa-check"></i>Criando uma tabela de espécies</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descruas"><i class="fa fa-check"></i>Descritores da estrutura da comunidade: UA’s</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descritores-da-normalidade-1"><i class="fa fa-check"></i>Descritores da normalidade</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#salvando-as-tabelas-criadas-em-txt-direto-no-diretório-de-trabalho"><i class="fa fa-check"></i>Salvando as tabelas criadas em txt direto no diretório de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#sites-consultados-6"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#script-limpo-5"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#referências-9"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="partdiv.html"><a href="partdiv.html"><i class="fa fa-check"></i><b>12</b> R Modulo 4.2 - Decomposição da diversidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#resumo-9"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apresentação-9"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="12.1" data-path="partdiv.html"><a href="partdiv.html#sobre-os-dados-4"><i class="fa fa-check"></i><b>12.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="12.2" data-path="partdiv.html"><a href="partdiv.html#organização-básica-6"><i class="fa fa-check"></i><b>12.2</b> Organização básica</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apêndices-9"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#sites-consultados-7"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#script-limpo-6"><i class="fa fa-check"></i>Script limpo</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#referências-10"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="estrhab.html"><a href="estrhab.html"><i class="fa fa-check"></i><b>13</b> R Modulo 4.2 - Estrutura do habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#resumo-10"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apresentação-10"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="13.1" data-path="estrhab.html"><a href="estrhab.html#sobre-os-dados-5"><i class="fa fa-check"></i><b>13.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="13.2" data-path="estrhab.html"><a href="estrhab.html#organização-básica-7"><i class="fa fa-check"></i><b>13.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="estrhab.html"><a href="estrhab.html#instalando-os-pacotes-necessários-para-esse-módulo."><i class="fa fa-check"></i><b>13.2.1</b> Instalando os pacotes necessários para esse módulo.</a></li>
-</ul></li>
-<li class="chapter" data-level="13.3" data-path="estrhab.html"><a href="estrhab.html#importando-a-planilha-6"><i class="fa fa-check"></i><b>13.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="13.4" data-path="estrhab.html"><a href="estrhab.html#reset-point-2"><i class="fa fa-check"></i><b>13.4</b> Reset point</a></li>
-<li class="chapter" data-level="13.5" data-path="estrhab.html"><a href="estrhab.html#correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias"><i class="fa fa-check"></i><b>13.5</b> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
-<li class="chapter" data-level="13.6" data-path="estrhab.html"><a href="estrhab.html#deletando-variáveis-colineares"><i class="fa fa-check"></i><b>13.6</b> Deletando variáveis colineares</a></li>
-<li class="chapter" data-level="13.7" data-path="estrhab.html"><a href="estrhab.html#somando-variáveis-redundantes"><i class="fa fa-check"></i><b>13.7</b> Somando variáveis redundantes</a></li>
-<li class="chapter" data-level="13.8" data-path="estrhab.html"><a href="estrhab.html#tabela-de-dados-ambientais"><i class="fa fa-check"></i><b>13.8</b> Tabela de dados ambientais</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apêndices-10"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#sites-consultados-8"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#script-limpo-7"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#referências-11"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="reltrns.html"><a href="reltrns.html"><i class="fa fa-check"></i><b>14</b> R Modulo 5 - Relativizações e transformações</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#resumo-11"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apresentação-11"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="14.1" data-path="reltrns.html"><a href="reltrns.html#organização-básica-8"><i class="fa fa-check"></i><b>14.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="reltrns.html"><a href="reltrns.html#importando-a-planilha-7"><i class="fa fa-check"></i><b>14.1.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="reltrns.html"><a href="reltrns.html#tamanho-da-matriz"><i class="fa fa-check"></i><b>14.2</b> Tamanho da matriz</a></li>
-<li class="chapter" data-level="14.3" data-path="reltrns.html"><a href="reltrns.html#reset-point-1-1"><i class="fa fa-check"></i><b>14.3</b> Reset point 1</a></li>
-<li class="chapter" data-level="14.4" data-path="reltrns.html"><a href="reltrns.html#cálculo-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.4</b> Cálculo da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.5" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequência-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.5</b> Distribuição de frequência da matriz de distâncias</a>
-<ul>
-<li class="chapter" data-level="14.5.1" data-path="reltrns.html"><a href="reltrns.html#calculando-alguns-parâmetros-básicos"><i class="fa fa-check"></i><b>14.5.1</b> Calculando alguns parâmetros básicos</a></li>
-<li class="chapter" data-level="14.5.2" data-path="reltrns.html"><a href="reltrns.html#calculando-a-assimetria-e-a-curtose"><i class="fa fa-check"></i><b>14.5.2</b> Calculando a assimetria e a curtose</a></li>
-</ul></li>
-<li class="chapter" data-level="14.6" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequências-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.6</b> Distribuição de frequências da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.7" data-path="reltrns.html"><a href="reltrns.html#relativizando-e-transformando-a-base-de-dados"><i class="fa fa-check"></i><b>14.7</b> Relativizando e transformando a base de dados</a>
-<ul>
-<li class="chapter" data-level="14.7.1" data-path="reltrns.html"><a href="reltrns.html#relativização-pelo-total"><i class="fa fa-check"></i><b>14.7.1</b> Relativização pelo total</a></li>
-<li class="chapter" data-level="14.7.2" data-path="reltrns.html"><a href="reltrns.html#transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>14.7.2</b> Transformação pelo arcoseno da raiz quadrada</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="reltrns.html"><a href="reltrns.html#reset-point-2-1"><i class="fa fa-check"></i><b>14.8</b> Reset point 2</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apêndices-11"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#relativizações"><i class="fa fa-check"></i>Relativizações</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#transformações"><i class="fa fa-check"></i>Transformações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#script-limpo-8"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#referências-12"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="outcentr.html"><a href="outcentr.html"><i class="fa fa-check"></i><b>15</b> R Modulo 6 - Análise de outliers baseada no desvio padrão do centróide</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apresentação-12"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="15.1" data-path="outcentr.html"><a href="outcentr.html#sobre-os-dados-do-ppbio-3"><i class="fa fa-check"></i><b>15.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="15.2" data-path="outcentr.html"><a href="outcentr.html#organização-básica-9"><i class="fa fa-check"></i><b>15.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="outcentr.html"><a href="outcentr.html#importando-a-planilha-8"><i class="fa fa-check"></i><b>15.2.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="outcentr.html"><a href="outcentr.html#reset-point-3"><i class="fa fa-check"></i><b>15.3</b> Reset point</a>
-<ul>
-<li class="chapter" data-level="15.3.1" data-path="outcentr.html"><a href="outcentr.html#tamanho-da-matriz-1"><i class="fa fa-check"></i><b>15.3.1</b> Tamanho da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="15.4" data-path="outcentr.html"><a href="outcentr.html#cálculo-de-matriz-de-distâncias-euclidiana-euclid"><i class="fa fa-check"></i><b>15.4</b> Cálculo de matriz de distâncias Euclidiana (<code>euclid</code>)</a></li>
-<li class="chapter" data-level="15.5" data-path="outcentr.html"><a href="outcentr.html#calculando-o-centróide-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.5</b> Calculando o centróide da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.6" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.6</b> Distribuição de frequências da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.7" data-path="outcentr.html"><a href="outcentr.html#procurando-outliers"><i class="fa fa-check"></i><b>15.7</b> Procurando outliers</a>
-<ul>
-<li class="chapter" data-level="15.7.1" data-path="outcentr.html"><a href="outcentr.html#listas-de-distâncias"><i class="fa fa-check"></i><b>15.7.1</b> Listas de distâncias</a></li>
-<li class="chapter" data-level="15.7.2" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-das-distâncias-médias-para-o-centróide-av.dist"><i class="fa fa-check"></i><b>15.7.2</b> Distribuição de frequências das distâncias médias para o centróide <code>av.dist</code></a></li>
-</ul></li>
-<li class="chapter" data-level="15.8" data-path="outcentr.html"><a href="outcentr.html#lista-final-de-outliers"><i class="fa fa-check"></i><b>15.8</b> Lista final de outliers</a></li>
-<li class="chapter" data-level="15.9" data-path="outcentr.html"><a href="outcentr.html#particionando-a-matriz"><i class="fa fa-check"></i><b>15.9</b> Particionando a matriz</a></li>
-<li class="chapter" data-level="15.10" data-path="outcentr.html"><a href="outcentr.html#exportando-a-matrix-final-de-trabalho"><i class="fa fa-check"></i><b>15.10</b> Exportando a matrix final de trabalho</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apêndices-12"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#outras-formas-de-fazer-a-partição"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#código"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#script-limpo-9"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#referências-13"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>III ANÁLISES MULTIVARIADAS</b></span></li>
-<li class="chapter" data-level="16" data-path="upgma.html"><a href="upgma.html"><i class="fa fa-check"></i><b>16</b> R Modulo 7 - Análise de Classificação Hierárquica - SAHN</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#resumo-12"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apresentação-13"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="16.1" data-path="upgma.html"><a href="upgma.html#organização-básica-10"><i class="fa fa-check"></i><b>16.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="upgma.html"><a href="upgma.html#pacotes"><i class="fa fa-check"></i><b>16.1.1</b> Pacotes</a></li>
-<li class="chapter" data-level="16.1.2" data-path="upgma.html"><a href="upgma.html#sobre-os-dados-do-ppbio-4"><i class="fa fa-check"></i><b>16.1.2</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="16.1.3" data-path="upgma.html"><a href="upgma.html#importando-a-planilha-de-trabalho-1"><i class="fa fa-check"></i><b>16.1.3</b> Importando a planilha de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="16.2" data-path="upgma.html"><a href="upgma.html#reset-point-4"><i class="fa fa-check"></i><b>16.2</b> Reset point</a></li>
-<li class="chapter" data-level="16.3" data-path="upgma.html"><a href="upgma.html#nomenclatura-das-matrizes-em-amd"><i class="fa fa-check"></i><b>16.3</b> Nomenclatura das matrizes em AMD</a></li>
-<li class="chapter" data-level="16.4" data-path="upgma.html"><a href="upgma.html#cluster-1-piloto-automático"><i class="fa fa-check"></i><b>16.4</b> Cluster 1: Piloto automático</a>
-<ul>
-<li class="chapter" data-level="16.4.1" data-path="upgma.html"><a href="upgma.html#histórico-das-fusões"><i class="fa fa-check"></i><b>16.4.1</b> Histórico das fusões</a></li>
-</ul></li>
-<li class="chapter" data-level="16.5" data-path="upgma.html"><a href="upgma.html#cluster-2-criando-a-matriz-de-distâncias-euclidiana"><i class="fa fa-check"></i><b>16.5</b> Cluster 2: Criando a matriz de distâncias Euclidiana</a>
-<ul>
-<li class="chapter" data-level="16.5.1" data-path="upgma.html"><a href="upgma.html#comparação-dos-resultados-obtidos-até-aqui"><i class="fa fa-check"></i><b>16.5.1</b> Comparação dos resultados obtidos até aqui</a></li>
-</ul></li>
-<li class="chapter" data-level="16.6" data-path="upgma.html"><a href="upgma.html#cluster-3-relativização-pelo-total-da-coluna"><i class="fa fa-check"></i><b>16.6</b> Cluster 3: Relativização pelo total da coluna</a>
-<ul>
-<li class="chapter" data-level="16.6.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizado"><i class="fa fa-check"></i><b>16.6.1</b> Gráfico de clustering relativizado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.7" data-path="upgma.html"><a href="upgma.html#cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>16.7</b> Cluster 4: Transformação pelo arcoseno da raiz quadrada</a>
-<ul>
-<li class="chapter" data-level="16.7.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizadotransformado"><i class="fa fa-check"></i><b>16.7.1</b> Gráfico de clustering relativizado/transformado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.8" data-path="upgma.html"><a href="upgma.html#cluster-5-controle-total-dos-parâmetros"><i class="fa fa-check"></i><b>16.8</b> Cluster 5: Controle total dos parâmetros</a></li>
-<li class="chapter" data-level="16.9" data-path="upgma.html"><a href="upgma.html#construindo-uma-prancha-de-gráficos-comparativos"><i class="fa fa-check"></i><b>16.9</b> Construindo uma prancha de gráficos comparativos</a></li>
-<li class="chapter" data-level="16.10" data-path="upgma.html"><a href="upgma.html#construindo-heatmaps"><i class="fa fa-check"></i><b>16.10</b> Construindo <code>heatmaps</code></a>
-<ul>
-<li class="chapter" data-level="16.10.1" data-path="upgma.html"><a href="upgma.html#percentual-de-encadeamento-chaining"><i class="fa fa-check"></i><b>16.10.1</b> Percentual de encadeamento (% chaining)</a></li>
-<li class="chapter" data-level="16.10.2" data-path="upgma.html"><a href="upgma.html#função-loop-para-comparar-os-encadeamentos"><i class="fa fa-check"></i><b>16.10.2</b> Função <code>loop</code> para comparar os encadeamentos</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apêndices-13"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#sites-consultados-9"><i class="fa fa-check"></i>Sites consultados</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#outras-formas-de-fazer-a-partição-1"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#código-1"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#script-limpo-10"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#referências-14"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentos de Ecologia Numérica</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
+<li><a class="active" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li class="book-part">ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="basepeixes" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number"> 4</span> Base de Dados I - Peixes<a href="basepeixes.html#basepeixes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="estrutura-da-comunidade-peixes-no-semiárido" class="section level3 unnumbered hasAnchor">
-<h3>Estrutura da Comunidade: Peixes no semiárido<a href="basepeixes.html#estrutura-da-comunidade-peixes-no-semiárido" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+      </nav>
 </div>
-<div id="apresentação-1" class="section level3 unnumbered hasAnchor">
-<h3>Apresentação<a href="basepeixes.html#apresentação-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Exemplo de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido. Ano de 2006. Peixes<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>Autor:<br />
-- Prof. Elvio S. F. Medeiros<br />
-- Laboratório de Ecologia<br />
-- Universidade Estadual da Paraíba<br />
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="basepeixes" class="section level1" number="4">
+<h1>
+<span class="header-section-number"> 4</span> Base de Dados I - Peixes<a class="anchor" aria-label="anchor" href="#basepeixes"><i class="fas fa-link"></i></a>
+</h1>
+<div id="estrutura-da-comunidade-peixes-no-semiárido" class="section level3 unnumbered">
+<h3>Estrutura da Comunidade: Peixes no semiárido<a class="anchor" aria-label="anchor" href="#estrutura-da-comunidade-peixes-no-semi%C3%A1rido"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="apresentação-1" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Exemplo de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido. Ano de 2006. Peixes<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Projeto financiado pelo CNPq/UEPB/DCR Proc.350082/2006-5, UEPB/FAPESQ Proc.68.0006/2006.0 e Projeto de Pesquisa em Biodiversidade do Semiárido (PPBio Semi-Árido).&lt;/p&gt;"><sup>5</sup></a></p>
+<p>Autor:<br>
+- Prof. Elvio S. F. Medeiros<br>
+- Laboratório de Ecologia<br>
+- Universidade Estadual da Paraíba<br>
 - Campus V, João Pessoa, PB</p>
 <p>Para entender a distribuição das espécies de peixes e seu uso de habitat, uma série de variáveis ambientais foram avaliadas como preditores da composição e riqueza da assembleia de peixes em sistemas aquáticos tropicais semiáridos. Nós pesquisamos a composição de espécies de assembleias de peixes em sistemas aquáticos semiáridos e estabelecemos seu grau de associação com a estrutura do habitat aquático. Os locais consistiam em trechos de riachos com fluxo de água superficial, poças temporárias isoladas e reservatórios artificiais (açudes). A amostragem de peixes foi realizada em quatro ocasiões durante as estações chuvosa (abril e junho de 2006) e seca (setembro e dezembro de 2006).</p>
-<p><strong>Texto modificado de <span class="citation">MEDEIROS <em>et al.</em> (<a href="#ref-RN1965" role="doc-biblioref">2024</a>)</span></strong>: Environmental variables as predictors of fish community composition in semiarid aquatic systems. Acta Limnologica Brasiliensia, 2024, vol. 36, e4. <a href="https://doi.org/10.1590/S2179-975X3023" class="uri">https://doi.org/10.1590/S2179-975X3023</a>. ISSN 2179-975X on-line version. Tradução: Google Translator.</p>
+<p><strong>Texto modificado de <span class="citation">MEDEIROS et al. (<a href="#ref-RN1965" role="doc-biblioref">2024</a>)</span></strong>: Environmental variables as predictors of fish community composition in semiarid aquatic systems. Acta Limnologica Brasiliensia, 2024, vol. 36, e4. <a href="https://doi.org/10.1590/S2179-975X3023" class="uri">https://doi.org/10.1590/S2179-975X3023</a>. ISSN 2179-975X on-line version. Tradução: Google Translator.</p>
 <p>Elvio Sergio Figueredo Medeiros<sup>1</sup>, Marcio Joaquim da Silva<sup>2</sup>, Telton Pedro Anselmo Ramos<sup>2</sup> e Robson Tamar Costa Ramos<sup>1,3</sup></p>
 <p><sup>1</sup> Grupo Ecologia de Rios do Semiárido, Universidade Estadual da Paraíba, Depto. de Biologia. Campus V. CEP 58070-450 João Pessoa - PB. Brazil. <sup>2</sup> Universidade Federal do Rio Grande do Norte, Depto. de Biologia, Centro de Biociências, CEP 59078-900 – Natal - RN. <sup>3</sup> Laboratório de Sistemática e Morfologia de Peixes, Universidade Federal da Paraíba, Depto. de Sistemática e Ecologia, CCEN, CEP 58059-900, João Pessoa - PB.</p>
 <ul>
 <li>Autor correspondente: Dr. Elvio Medeiros <a href="https://orcid.org/0000-0002-7472-8147" class="uri">https://orcid.org/0000-0002-7472-8147</a>. Universidade Estadual da Paraíba, João Pessoa - Paraíba – Brasil - CEP 58.070-450. E-mail: elviomedeiros@servidor.uepb.edu.br</li>
 </ul>
 </div>
-<div id="resumo-2" class="section level3 unnumbered hasAnchor">
-<h3>RESUMO<a href="basepeixes.html#resumo-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="resumo-2" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-2"><i class="fas fa-link"></i></a>
+</h3>
 <p>Para compreender a distribuição das espécies de peixes e o uso do habitat, uma série de variáveis ambientais foram avaliadas como preditores da composição de montagem de peixes e riqueza em sistemas aquáticos semiáridos tropicais. Pesquisamos a composição das espécies de conjuntos de peixes em sistemas aquáticos semiáridos e estabelecemos seu grau de associação com a estrutura do habitat aquático. Os locais consistiam em córregos com fluxo de água superficial, piscinas temporárias isoladas e reservatórios feitos pelo homem. A amostragem de peixes foi realizada em quatro ocasiões durante as estações úmidas (abril e junho de 2006) e secas (setembro e dezembro de 2006). A regressão múltipla de tepwise mostrou que as variáveis morfométricas, largura de alcance do córrego, comprimento do córrego e elevação explicaram 75,6% da variação da riqueza dos peixes. Cobertura de macrófitas e vegetação pendente somado ao poder preditivo da equação do modelo, onde o modelo final explicou 86,9% da variação da riqueza dos peixes. A Análise de Correspondência Canônica mostrou uma relação significativa entre os dados de composição do peixe e a morfologia do local (altitude, inclinação do banco e profundidade litorânea). Entre a qualidade da água, a composição do habitat e as variáveis substrato, temperatura, areia e cascalho apresentaram maior correlação com os eixos CCA. Esses resultados indicam que as comunidades de peixes assumem diferentes estruturas e composições em diferentes tipos de habitat, de acordo com a heterogeneidade ambiental nos sistemas aquáticos de terra seca.</p>
 <p><strong>Palavras-chave</strong>: fluxos intermitentes, reservatórios, conservação, composição de substratos.</p>
 </div>
-<div id="introdução" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Introdução<a href="basepeixes.html#introdução" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introdução" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Introdução<a class="anchor" aria-label="anchor" href="#introdu%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h2>
 <p>Padrões de distribuição de espécies de peixes dentro dos ecossistemas são frequentemente explicados em termos da estrutura do habitat disponível (Junqueira et al., 2016). O habitat é frequentemente relatado como estruturas subaquáticas físicas, como rochas, madeira submersa, macrófitas, algas, etc, e como cobertura (ou proteção aérea) fornecida por características litorâneas, que incluem vegetação costeira ou troncos pendurados nas margens do córrego (Stewart-Koster et al., 2007). Indiscutivelmente, a qualidade e a quantidade do habitat afetam a estrutura e a composição das comunidades de peixes (Vono e Barbosa, 2001), por mudanças nas profundidades da água, velocidade e, consequentemente, tipo substrato, características litorâneas (como vegetação suspensa) e estruturas subaquáticas (Stewart-Koster et al., 2007, Medeiros e Arthington, 2011). Comumente, esses fatores são integrados e os habitats tendem a variar e segregar-se em manchas hierárquicas discretas (Frissell et al., 1986). Apesar disso, o habitat físico dos sistemas aquáticos de água doce em todo o mundo foi degradado ou modificado pelas atividades humanas (Hall et al., 2002). Tal interferência muitas vezes resulta da conversão de sistemas lóticos em lênticos, que mudam a dinâmica do habitat e seu funcionamento (Bunn e
 Arthington, 2002).</p>
 <p>Uma série de estudos relacionam a estrutura da comunidade biótica (número de espécies e distribuição de abundância) e o habitat marginal físico. Tais estudos mostram que tipos de habitat mais complexos fornecem condições favoráveis para os peixes, como substrato de crescimento, locais de desova, bem como alimentos e proteção contra predação (Pusey e Arthington, 2003, Cucherousset et al., 2007, Jeffres et al., 2008) e, portanto, uma maior diversidade de microhabitats associados às características litorâneas tem sido ligada a uma maior diversidade de espécies (Casatti et al., 2012). Como resultado, o fato de diferentes espécies de peixes apresentarem preferências particulares para diferentes tipos de habitat, cria padrões locais de composição de conjuntos de espécies (Junqueira et al., 2016). No entanto, o que leva a presença de espécies a tipos específicos de habitat muitas vezes não é claro.</p>
 <p>Nos sistemas de riacho em regiões secas, espera-se que suas amplas variações espaciais e temporais levem a habitats físicos variáveis e, portanto, padrões específicos de estrutura de habitat (Hodges e Magoulick, 2011). Espera-se que a riqueza e a composição dos peixes sigam tais mudanças. Nesses sistemas, o habitat físico é espacial e temporalmente dinâmico devido à interação da morfologia do canal de córrego (por exemplo, largura, profundidade e substrato) e da variabilidade hidrológica (Medeiros et al., 2008, Farias et al., 2012). O estado do habitat físico a um determinado alcance será, portanto, influenciado por fatores que operam em diferentes escalas (Meninos e Thoms, 2006). No nível de captação, geomorfologia e clima afetam hidrologia, deposição de sedimentos, insumos de nutrientes e morfologia do canal (Davies et al., 2000, Mugodo et al., 2006). A nível local, características físicas e químicas da água, o uso da terra e o manejo da terra influenciarão o habitat de alcance do córrego (Hodges e Magoulick, 2011).</p>
 <p>É importante ressaltar que a relação entre variáveis de habitat físico e riqueza e distribuição de espécies de peixes tem sido investigada em sistemas lúdicos e loticos tropicais (por exemplo, Vono e Barbosa, 2001, Casatti et al., 2012), mas essa relação para as comunidades de peixes semiáridos permanece amplamente desconhecida. Este trabalho mede a riqueza de peixes e a composição de espécies em diversos habitats aquáticos em córregos intermitentes do Semiárido Brasil, a fim de avaliar a composição das espécies de conjuntos de peixes e estabelecer seu grau de associação com a estrutura do habitat aquático. Temos a hipótese de que a fauna de peixes é irregular com as montagens representando características locais do habitat e que as variáveis ambientais serão elementos importantes explicando a distribuição de peixes.</p>
-<div id="desenho-amostral" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Desenho Amostral<a href="basepeixes.html#desenho-amostral" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="desenho-amostral" class="section level3" number="4.1.1">
+<h3>
+<span class="header-section-number">4.1.1</span> Desenho Amostral<a class="anchor" aria-label="anchor" href="#desenho-amostral"><i class="fas fa-link"></i></a>
+</h3>
 <p>Este estudo foi realizado na região semiárida brasileira, em bacias hidrográficas que fluem através de uma floresta aberta arbustiva seca decidual (a “Caatinga”). A amplitude térmica é baixa na área de estudo, com médias variando de aproximadamente 25 a 30 °C, e a precipitação média anual varia entre 600 e 1100 mm. As altitudes variam entre 100 e 1000 m (Figura <a href="basepeixes.html#fig:201mapa1">4.1</a>).</p>
-<div class="figure"><span style="display:block;" id="fig:201mapa1"></span>
-<img src="imagens/bases/com-mapa.png" alt="Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão." width="689" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:201mapa1"></span>
+<img src="imagens/bases/com-mapa.png" alt="Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão." width="689"><p class="caption">
 Figura 4.1: Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.
 </p>
 </div>
 <p><strong>Duas regiões</strong> de importância biológica (<strong>Seridó, S</strong> e <strong>Buíque, B</strong>) foram escolhidas e nelas, <strong>seis locais</strong> ou sítios de coleta (<strong>TA</strong>, <strong>CP</strong>, <strong>CT</strong>, <strong>PC</strong>, <strong>MU</strong>, e <strong>GU</strong>) foram selecionados para representar ambientes Unidades Amostrais de ambientes temporários naturais e artificiais típicos (Figura <a href="basepeixes.html#fig:201mapa1">4.1</a> e Figura <a href="basepeixes.html#fig:201comcodes">4.6</a>).</p>
 <p>Os locais consistiam em trechos de <strong>riachos (-R)</strong> com fluxo de água superficial (durante a estação chuvosa) ou poças temporárias isoladas (durante a estação seca) e <strong>reservatórios ou açudes (-A)</strong> artificiais criados a partir do represamento de riachos. A amostragem foi realizada durante o ano de 2006 em <strong>quatro ocasiões</strong> durante as estações chuvosa (<strong>abril, 1</strong> e <strong>junho, 2</strong>) e seca (<strong>setembro, 3</strong> e <strong>dezembro, 4</strong>) (Figura <a href="basepeixes.html#fig:201mapa1">4.1</a> e Figura <a href="basepeixes.html#fig:201comcodes">4.6</a>).</p>
-<p>Várias das espécies desse estudo tem grande importância ecológica, como é o caso de <em>Astyanax bimaculatus</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> (Figura <a href="basepeixes.html#fig:201asbim">4.2</a>), que é muito comum em rios intermitentes e serve de alimento para predadores maiores como a espécie <em>Hoplias malabaricus</em><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> (Figura <a href="basepeixes.html#fig:201hmala">4.3</a>).</p>
-<div class="figure"><span style="display:block;" id="fig:201asbim"></span>
-<img src="imagens/spp/Asbim_u4.jpg" alt="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: &lt;https://www.fishbase.se/summary/Astianax-bimaculatus.html&gt;" width="320" />
-<p class="caption">
+<p>Várias das espécies desse estudo tem grande importância ecológica, como é o caso de <em>Astyanax bimaculatus</em><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;A etimologia do gênero &lt;em&gt;Astyanax&lt;/em&gt; vem da mitologia Grega. Heitor personagem da “Ilíada”, tinha um filho chamado Astíanax.&lt;/p&gt;"><sup>6</sup></a> (Figura <a href="basepeixes.html#fig:201asbim">4.2</a>), que é muito comum em rios intermitentes e serve de alimento para predadores maiores como a espécie <em>Hoplias malabaricus</em><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Do Grego, &lt;em&gt;hoplon&lt;/em&gt;, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.&lt;/p&gt;"><sup>7</sup></a> (Figura <a href="basepeixes.html#fig:201hmala">4.3</a>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:201asbim"></span>
+<img src="imagens/spp/Asbim_u4.jpg" alt="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: &lt;https://www.fishbase.se/summary/Astianax-bimaculatus.html&gt;" width="320"><p class="caption">
 Figura 4.2: <em>Astyanax bimaculatus</em>, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <a href="https://www.fishbase.se/summary/Astianax-bimaculatus.html" class="uri">https://www.fishbase.se/summary/Astianax-bimaculatus.html</a>
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:201hmala"></span>
-<img src="imagens/spp/Homal_u6.jpg" alt="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: &lt;https://www.fishbase.se/summary/Hoplias-malabaricus.html&gt;" width="320" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:201hmala"></span>
+<img src="imagens/spp/Homal_u6.jpg" alt="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: &lt;https://www.fishbase.se/summary/Hoplias-malabaricus.html&gt;" width="320"><p class="caption">
 Figura 4.3: <em>Hoplias malabaricus</em>, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <a href="https://www.fishbase.se/summary/Hoplias-malabaricus.html" class="uri">https://www.fishbase.se/summary/Hoplias-malabaricus.html</a>
 </p>
 </div>
-<p>Outras espécies como <em>Apareiodon hasemani</em><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> (Figura <a href="basepeixes.html#fig:201apdavis">4.4</a> tem importância trófica por estar na base da cadeia alimentar, enquanto espécies da família Loricariidae, como <em>Pseudancistrus genisetiger</em><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> (Figura <a href="basepeixes.html#fig:201pgen">4.5</a>), tem importância para taxonomia.</p>
-<div class="figure"><span style="display:block;" id="fig:201apdavis"></span>
-<img src="imagens/spp/Apdav_u0.jpg" alt="*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: &lt;https://www.fishbase.se/summary/Apareiodon-davisi.html&gt;" width="320" />
-<p class="caption">
+<p>Outras espécies como <em>Apareiodon hasemani</em><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;A etimologia do nome &lt;em&gt;Apareiodon&lt;/em&gt; vem do Grego, &lt;em&gt;a&lt;/em&gt;, sem, &lt;em&gt;pareia&lt;/em&gt;, lateral ou bochecha, e &lt;em&gt;odous&lt;/em&gt; dentição, em referência a ausência de dentes laterais no aparato bucal dessa espécie.&lt;/p&gt;"><sup>8</sup></a> (Figura <a href="basepeixes.html#fig:201apdavis">4.4</a> tem importância trófica por estar na base da cadeia alimentar, enquanto espécies da família Loricariidae, como <em>Pseudancistrus genisetiger</em><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;A etimologia do nome &lt;em&gt;Pseudancistrus&lt;/em&gt; vem do Grego, &lt;em&gt;pseudes&lt;/em&gt;, falso, e &lt;em&gt;agkistron&lt;/em&gt;, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.&lt;/p&gt;"><sup>9</sup></a> (Figura <a href="basepeixes.html#fig:201pgen">4.5</a>), tem importância para taxonomia.</p>
+<div class="figure">
+<span style="display:block;" id="fig:201apdavis"></span>
+<img src="imagens/spp/Apdav_u0.jpg" alt="*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: &lt;https://www.fishbase.se/summary/Apareiodon-davisi.html&gt;" width="320"><p class="caption">
 Figura 4.4: <em>Apareiodon sp.</em>, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <a href="https://www.fishbase.se/summary/Apareiodon-davisi.html" class="uri">https://www.fishbase.se/summary/Apareiodon-davisi.html</a>
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:201pgen"></span>
-<img src="imagens/spp/genis.jpg" alt="*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal" width="320px" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:201pgen"></span>
+<img src="imagens/spp/genis.jpg" alt="*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal" width="450"><p class="caption">
 Figura 4.5: <em>Pseudancistrus genisetiger</em>, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal
 </p>
 </div>
 </div>
 </div>
-<div id="codificação-das-variáveis-1" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Codificação das variáveis<a href="basepeixes.html#codificação-das-variáveis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="codificação-das-variáveis-1" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Codificação das variáveis<a class="anchor" aria-label="anchor" href="#codifica%C3%A7%C3%A3o-das-vari%C3%A1veis-1"><i class="fas fa-link"></i></a>
+</h2>
 <p>Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo <code>ppbio06*-peixes.xlsx</code>, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (n=linhas ou objetos) em estações do ano diferentes, e cerca de 35 espécies (m=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores são contagens de indivíduos, e apresentam uma alta amplitude de variação, portanto, o uso de uma matriz relativizada é sugerido. Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura <a href="basepeixes.html#fig:201comcodes">4.6</a>.</p>
-<div class="figure"><span style="display:block;" id="fig:201comcodes"></span>
-<img src="imagens/bases/com-codes.png" alt="Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem." width="534" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:201comcodes"></span>
+<img src="imagens/bases/com-codes.png" alt="Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem." width="534"><p class="caption">
 Figura 4.6: Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem.
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
-<img src="imagens/bases/lista.png" alt="Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.) de espécies coletadas nos locais de estudo (codificados conforme a Figura \@ref(fig:201comcodes)) no semiárido do Brasil. \* = Espécies não nativas." width="827" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="imagens/bases/lista.png" alt="Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.) de espécies coletadas nos locais de estudo (codificados conforme a Figura \@ref(fig:201comcodes)) no semiárido do Brasil. \* = Espécies não nativas." width="827"><p class="caption">
 Figura 4.7: Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.) de espécies coletadas nos locais de estudo (codificados conforme a Figura <a href="basepeixes.html#fig:201comcodes">4.6</a>) no semiárido do Brasil. * = Espécies não nativas.
 </p>
 </div>
 </div>
-<div id="amostragem-dos-dados" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Amostragem dos dados<a href="basepeixes.html#amostragem-dos-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="amostragem-dos-dados" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Amostragem dos dados<a class="anchor" aria-label="anchor" href="#amostragem-dos-dados"><i class="fas fa-link"></i></a>
+</h2>
 <p>As coletas de peixes foram realizadas utilizando-se quatro tipos diferentes de equipamentos de amostragem, durante o dia, e de acordo com Medeiros et al (2010):</p>
 <ul>
 <li><p>uma rede de arrasto curta (4 m de comprimento, 1,5 m de malha de altura e 5 mm),</p></li>
@@ -645,35 +228,42 @@ Figura 4.7: Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.
 </ul>
 <p>As variáveis físicas e químicas foram medidas utilizando-se equipamentos portáteis para pH (TECNOPON MPA-210), condutividade (μS/cm) (TECNOPON MCS-150), oxigênio dissolvido (mg/L) e temperatura (°C) (Lutron DO-5510). A transparência (cm) foi medida utilizando-se um disco secchi, e a velocidade da água (m/s) foi estimada usando o método flutuante (Maitland, 1990). O alcance do córrego ou morfologia do local foi avaliado pela largura média (cm) e profundidade (cm) retiradas de três transectos colocados ao longo do alcance do córrego, piscina ou reservatório. A composição do substrato e a estrutura do habitat foram estimadas em 9 a 12 pontos de pesquisa de 1 m2 medidos nas margens (ver Medeiros et al., 2008). Em cada ponto de pesquisa, foram estimadas as proporções (%) da composição de sedimentos (classificados como lama, areia, cascalho e seixos) e estruturas litorâneas e subaquáticas (por exemplo, macrófitas, capim, vegetação submersa, vegetação suspensa, folhiço, algas e galhos) (Pusey et al., 2004, Medeiros et al., 2008).</p>
 </div>
-<div id="análises-estatísticas" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Análises estatísticas<a href="basepeixes.html#análises-estatísticas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="análises-estatísticas" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Análises estatísticas<a class="anchor" aria-label="anchor" href="#an%C3%A1lises-estat%C3%ADsticas"><i class="fas fa-link"></i></a>
+</h2>
 <p>Foram realizadas análises estatísticas univariadas sobre riqueza e abundância. A abundância foi padronizada por Unidade de Esforço de Captura (CPUE), onde o número de peixes capturados foi dividido pelo número de horas ou réplicas de cada técnica amostral em cada ocasião amostral e local (a partir de agora denominado abundância CPUE) (Medeiros et al., 2010). A riqueza dos peixes foi corrigida utilizando-se análises rarefação para o número médio de indivíduos de todas as ocasiões de amostragem utilizando PRIMER-e 5.0 (Clarke e Gorley, 2001). A abundância CPUE e a riqueza rarefacionada foram comparadas entre os locais de estudo usando a ANOVA one-way seguida de comparações múltiplas pós-hoc usando o teste HSD de Tukey (α=0,05) (Zar, 1999). A abundância CPUE foi transformada pela raiz quadrada, e as variáveis ambientais foram log10 (x+1) transformadas para aumentar a normalidade e a homogeneidade das variâncias (Sokal e Rohlf, 1969, Maltchik et al., 2010). A correlação entre a riqueza rarefacionada e a abundância CPUE (variáveis dependentes) com a estrutura de habitat (variáveis independentes) foi avaliada utilizando-se a regressão múltipla (RM) com “forward selection”, onde as variáveis são inseridas no modelo com base na significância (probabilidade) do valor F (Sheridan e Lyndall, 2001, Maltchik et al., 2010).</p>
 <p>Os padrões de variação na composição da comunidade de peixes entre os locais foram avaliados utilizando-se de Escalonamento Multidimensional Não-Métrico (NMDS), com base na distância relativizada de Bray-Curtis da matriz de dados transformada pelo arco-seno da raiz quadrada. O Procedimento de Permutação Multiresposta (MRPP) (Biondini et al., 1985, McCune e Grace, 2002) foi utilizado para testar a significância das diferenças na composição dos peixes entre locais/ocasiões de amostragem. O valor de “A” é apresentado como medida do grau de homogeneidade entre os grupos em comparação com a expectativa aleatória. Utilizou-se a Análise de Espécies Indicadoras (ISA) para determinar quais espécies foram indicadores significativos dos locais. O Valor Indicativo (IV) para cada espécie foi calculado utilizando-se o método de Dufrene e Legendre (1997). Este valor é testado para significância usando o teste de Monte Carlo (999 permutações). Para estabelecer correlações multivariadas entre a composição dos peixes e as variáveis ambientais, foi realizada uma Análise de Correspondência Canônica (CCA) (McCune e Grace, 2002). A matriz de dados foi centrada e normalizada, e as correlações testadas pelo teste de Monte Carlo com 999 permutações. As variáveis ambientais foram transformadas pelo log10(x+1) (Maltchik et al., 2010). As análises estatísticas (α=0,05) foram realizadas no PC-ORD 7.0 (McCune e Mefford, 1999).</p>
 </div>
-<div id="discussão" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Discussão<a href="basepeixes.html#discussão" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="discussão" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Discussão<a class="anchor" aria-label="anchor" href="#discuss%C3%A3o"><i class="fas fa-link"></i></a>
+</h2>
 <p>A riqueza das espécies e a composição comunitária dos peixes observados no presente estudo estão de acordo com outros estudos realizados no semiárido do Brasil (Medeiros e Maltchik, 2001a, Medeiros et al., 2010) com a família Characidae sendo a mais representativa em termos de riqueza e abundância. Somado ao fato de que a ordem Characiformes inclui um grande número de espécies de peixes do semiárido brasileiro (Rosa et al., 2003), a maioria das espécies de Characidae observadas no presente estudo são de pequeno porte com taxas relativamente altas de fecundidade e crescimento (Medeiros e Maltchik, 2000, 2001b) e generalistas em hábitos alimentares e no uso de habitat ( Silva et al., 2010, Silva, 2012). Em comparação com outros sistemas de rios secos, os locais de estudo mostraram águas bem oxigenadas, transparentes e relativamente quentes ao longo do período de estudo (ver, por exemplo, Medeiros e Arthington, 2011). A morfologia do alcance do rio variou principalmente de acordo com a natureza do local de estudo, fluxo, piscina isolada ou reservatório, e o habitat aquático era diversificado com uma gama de elementos de habitat disponíveis para colonização pela biota aquática. Os córregos e piscinas de fluxo apresentaram uma maior variedade de elementos de habitat marginal e composição de substratos quando comparados aos reservatórios. Estudos no Semiárido Brasil têm demonstrado que o habitat aquático tende a ser mais rico em córregos, quando comparado aos reservatórios e defende que essa riqueza em estruturas subaquáticas e a natureza mais variável dos córregos intermitentes melhorem a diversidade de peixes (Medeiros et al., 2006, Medeiros et al., 2008).</p>
 <p>A regressão múltipla mostrou que o rio atinge morfologia e a estrutura do habitat teve a maioria das variáveis explicando a riqueza dos peixes. O fato de que a morfologia do local é um fator importante que explica a riqueza dos peixes (principalmente largura, comprimento e elevação) indica que esses fatores espaciais estão associados a diferentes faixas de variáveis ambientais que suportam um número de espécies de peixes. Isso é apoiado pelas análises multivariadas que mostraram forte segregação espacial da comunidade de peixes em padrões de montagem espacial. Foi demonstrado que diferentes conjuntos de espécies de peixes exibem preferências por tipos específicos de habitat (Martin-Smith, 1998). No presente estudo, a ausência de fluxo de água na maioria dos locais e a falta de conectividade longitudinal levaram a condições ambientais específicas, segregando assim a comunidade de peixes aos padrões locais de composição das espécies. Portanto, na ausência de fluxo de água, espera-se que a comunidade de peixes assuma diferentes composições entre os tipos de habitat (ou seja, fluxo de vazão de córrego, piscina e reservatório) de acordo com a heterogeneidade ambiental. Isso é ainda mais apoiado pela riqueza significativamente diferente entre os locais, principalmente no que diz respeito aos córregos Seridó (SE) e Escama-Peixe (EP), que apresentaram maior riqueza média. Os resultados de abundância são menos conclusivos, uma vez que a ANOVA não mostrou diferença significativa entre os locais e a regressão múltipla relatou apenas oxigênio dissolvido e vegetação pendente como preditores importantes da abundância de peixes. As abundâncias naturais de peixes nos sistemas aquáticos semiáridos brasileiros variam muito, tanto espacialmente quanto temporalmente (Medeiros et al., 2010). Isso provavelmente está associado ao movimento de indivíduos dentro de pequenos trechos do rio e entre áreas mais rasas e mais profundas em piscinas ou reservatórios maiores durante inundações (Medeiros e Arthington, 2008), bem como com padrões de recrutamento e desova de peixes (Medeiros e Maltchik, 2000).</p>
 <p>A importância da vegetação ribeirinha e sua influência no habitat aquático é bem reconhecida (Gregory et al., 1991), pois contribui com sombra e estruturas subaquáticas para refúgio de peixes, bem como locais de desova (Pusey e Arthington, 2003). No presente estudo, variáveis associadas à presença de vegetação ribeirinha foram importantes preditores da riqueza dos peixes (vegetação pendente) e associadas à composição da montagem (detritos lenhosos e temperatura da água). Essas variáveis provavelmente estão contribuindo com condições ambientais adequadas aos peixes, bem como criando embalagens locais de condições ambientais que contribuem com a segregação espacial observada na comunidade de peixes. A presença de macrófitos aquáticos em locais de reservatórios e córregos e sua importância como preditores para a riqueza e composição de espécies também é uma indicação do papel desempenhado pelas estruturas de habitat subaquático na criação de habitats locais espacialmente segregados disponíveis para uso de peixes (Xie et al., 2001). O habitat pode ser visto como um quadro onde variáveis ambientais afetam comunidades biológicas (Southwood, 1977). No entanto, em sistemas hidrologicamente variáveis, a variabilidade do fluxo tem sido sugerida como um grande eixo influenciando no modelo de habitat (Minshall, 1988, Poff e Ward, 1989). Os sistemas aquáticos de terra seca no Brasil são altamente variáveis no que diz respeito à presença e magnitude do fluxo de água (Maltchik e Florin, 2002) e, embora os resultados indiquem que a estrutura do habitat e da morfologia do local são importantes preditores da fauna de peixes, o modelo de habitat é multidimensional (Southwood, 1977) e as diversas variáveis ambientais medidas interagem entre si. Nos sistemas semiáridos do Brasil, a estrutura do habitat está sendo conduzida por muitos componentes em diferentes escalas (Medeiros et al., 2008), onde o papel das características de captação e morfologia local aumentaria na predominância em suas respectivas escalas. Isso destaca a importância da ligação entre a estrutura do habitat e a diversidade biótica no nível do habitat local.</p>
 <p>Alterações nos padrões naturais de vazão de água com base na construção de reservatórios e açudes, decorrentes das políticas de gestão atuais dos sistemas semiáridos aquáticos no Brasil, modificam as características hidrológicas dos córregos intermitentes altamente variáveis (Leal et al., 2005, Maltchik e Medeiros, 2006). Com as mudanças na dinâmica natural do fluxo de água vêm também mudanças na estrutura de montagem de macofículas, dinâmica de nutrientes e conectividade longitudinal, todas associadas à conversão de sistemas loticos para lenticos (Bunn e Arthington, 2002). Os dados do presente estudo mostram que essas modificações afetarão as comunidades de peixes (riqueza e composição), uma vez que variáveis altamente associadas ao fluxo de água, como largura de alcance do córrego, cobertura de macrofito, vegetação suspensa e concentração de oxigênio dissolvida foram importantes preditores da montagem de peixes. Portanto, a modificação dos padrões naturais de vazão da água e promoção de condições lenéticas tem o potencial de interferir na fauna de peixes, favorecendo espécies mais oportunistas mais adaptadas a condições de fluxo. Isso é corroborado pelo fato de que os locais dos reservatórios apresentaram menos espécies indicadoras que foram introduzidas principalmente, como Poecilia reticulata e Parachromis managuensis, ou tipicamente lenticas como <em>Geophagus brasiliensis</em>.</p>
 <p>O presente estudo mostra que as comunidades de peixes assumem diferentes estruturas e composições em diferentes tipos de habitat, de acordo com a heterogeneidade ambiental associada à natureza do habitat (reservatórios, córregos e piscinas). A riqueza e a composição dos peixes foram influenciadas principalmente por dois conjuntos de variáveis ambientais, sendo morfologia do local e características do habitat. O primeiro conjunto de variáveis relaciona-se com os níveis hierárquicos espaciais de captação, uma vez que o comprimento e a elevação do rio estão tipicamente associados à hierarquia do rio. O segundo conjunto de variáveis é tipicamente local, com estruturas subaquáticas sendo resultado de processos locais como o fluxo de água de alcance do rio e o uso da terra/vegetação ribeirinha.</p>
 </div>
-<div id="apêndices-1" class="section level2 unnumbered hasAnchor">
-<h2>Apêndices<a href="basepeixes.html#apêndices-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="tabelas-e-figuras" class="section level3 hasAnchor" number="4.5.1">
-<h3><span class="header-section-number">4.5.1</span> Tabelas e Figuras<a href="basepeixes.html#tabelas-e-figuras" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="apêndices-1" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="tabelas-e-figuras" class="section level3" number="4.5.1">
+<h3>
+<span class="header-section-number">4.5.1</span> Tabelas e Figuras<a class="anchor" aria-label="anchor" href="#tabelas-e-figuras"><i class="fas fa-link"></i></a>
+</h3>
 <p>Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.) de espécies coletadas nos locais de estudo (codificados conforme a Figura <a href="basepeixes.html#fig:201comcodes">4.6</a>) no semiárido do Brasil. * = Espécies não nativas.”</p>
-<p><img src="imagens/bases/lista.png" width="827" /></p>
+<div class="inline-figure"><img src="imagens/bases/lista.png" width="827"></div>
 <p>Tabela 2. Variáveis ambientais (average ± SD) coletadas nos locais de estudo no semiárido do Brasil.</p>
-<p><img src="imagens/bases/com_1.png" width="auto" height="600px" /></p>
+<div class="inline-figure"><img src="imagens/bases/com_1.png" width="450"></div>
 <p>Tabela 3. São apresentadas as variáveis ambientais e a composição dos peixes no presente estudo (apenas variáveis correlacionadas com um determinado eixo são mostradas).</p>
-<p><img src="imagens/bases/com_2.png" width="538" /></p>
+<div class="inline-figure"><img src="imagens/bases/com_2.png" width="538"></div>
 <p>Figura 1. Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e locais de amostragem no semiárido do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.</p>
-<p><img src="imagens/bases/com-mapa.png" width="689" /></p>
+<div class="inline-figure"><img src="imagens/bases/com-mapa.png" width="689"></div>
 <p>Figura 2. Os resultados da NMDS para a composição dos peixes em todo o estudo chegam ao semiárido do Brasil. Vetores (caixa de entrada) mostram taxa correlacionada (r2 &gt; 0,2) com amostras em espaço de ordenação. As letras após os códigos do site indicam ocasião de amostragem (A=Abril, J=Junho, S=Setembro e D=Dezembro).</p>
-<p><img src="imagens/bases/com_3.png" width="530" /></p>
+<div class="inline-figure"><img src="imagens/bases/com_3.png" width="530"></div>
 <p>Figura 3. Biplot de CCA mostrando a composição de conjuntos de peixes nos locais e ocasiões de amostragem () e as variáveis ambientais explicativas definidas pela CCA.</p>
-<p><img src="imagens/bases/com_4.png" width="524" /></p>
+<div class="inline-figure"><img src="imagens/bases/com_4.png" width="524"></div>
 <p>Arquivos fornecidos
 ppbio06.xlsx - O arquivo ppbio06.xlsx traz os dados brutos que serão usados nas análises. A
 matriz de dados brutos contem mais de 20 localidades em estações do ano diferentes (objetos) x
@@ -682,87 +272,95 @@ indivíduos com uma alta amplitude de variação, portanto, o uso de uma matriz 
 sugerido.</p>
 </div>
 </div>
-<div id="referências-2" class="section level2 unnumbered hasAnchor">
-<h2>Referências<a href="basepeixes.html#referências-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="referências-2" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-2"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
-<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Bibliografia Geral</h3>
 <div id="refs" class="references csl-bib-body" entry-spacing="1">
 <div id="ref-RN1965" class="csl-entry">
-MEDEIROS, E. S. F. <em>et al.</em> <a href="https://doi.org/10.1590/S2179-975X3023">Environmental variables as predictors of fish community composition in semiarid aquatic systems</a>. <strong>Acta Limnologica Brasiliensia</strong>, 2024. v. 36, n. e4, p. 1–13.
+MEDEIROS, E. S. F.; SILVA, M. J. da; RAMOS, T. P. A.; RAMOS, R. T. C. <a href="https://doi.org/10.1590/S2179-975X3023">Environmental variables as predictors of fish community composition in semiarid aquatic systems</a>. <strong>Acta Limnologica Brasiliensia</strong>, [s. l.], v. 36, n. e4, p. 1–13, 2024.
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>Projeto financiado pelo CNPq/UEPB/DCR Proc.350082/2006-5, UEPB/FAPESQ Proc.68.0006/2006.0 e Projeto de Pesquisa em Biodiversidade do Semiárido (PPBio Semi-Árido).<a href="basepeixes.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>A etimologia do gênero <em>Astyanax</em> vem da mitologia Grega. Heitor personagem da “Ilíada”, tinha um filho chamado Astíanax.<a href="basepeixes.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Do Grego, <em>hoplon</em>, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.<a href="basepeixes.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>A etimologia do nome <em>Apareiodon</em> vem do Grego, <em>a</em>, sem, <em>pareia</em>, lateral ou bochecha, e <em>odous</em> dentição, em referência a ausência de dentes laterais no aparato bucal dessa espécie.<a href="basepeixes.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>A etimologia do nome <em>Pseudancistrus</em> vem do Grego, <em>pseudes</em>, falso, e <em>agkistron</em>, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.<a href="basepeixes.html#fnref5" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="bases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="basehab.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+  <div class="chapter-nav">
+<div class="prev"><a href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></div>
+<div class="next"><a href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#basepeixes"><span class="header-section-number">4</span> Base de Dados I - Peixes</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#estrutura-da-comunidade-peixes-no-semi%C3%A1rido">Estrutura da Comunidade: Peixes no semiárido</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-1">Apresentação</a></li>
+<li><a class="nav-link" href="#resumo-2">RESUMO</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#introdu%C3%A7%C3%A3o"><span class="header-section-number">4.1</span> Introdução</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#desenho-amostral"><span class="header-section-number">4.1.1</span> Desenho Amostral</a></li></ul>
+</li>
+<li><a class="nav-link" href="#codifica%C3%A7%C3%A3o-das-vari%C3%A1veis-1"><span class="header-section-number">4.2</span> Codificação das variáveis</a></li>
+<li><a class="nav-link" href="#amostragem-dos-dados"><span class="header-section-number">4.3</span> Amostragem dos dados</a></li>
+<li><a class="nav-link" href="#an%C3%A1lises-estat%C3%ADsticas"><span class="header-section-number">4.4</span> Análises estatísticas</a></li>
+<li><a class="nav-link" href="#discuss%C3%A3o"><span class="header-section-number">4.5</span> Discussão</a></li>
+<li>
+<a class="nav-link" href="#ap%C3%AAndices-1">Apêndices</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#tabelas-e-figuras"><span class="header-section-number">4.5.1</span> Tabelas e Figuras</a></li></ul>
+</li>
+<li><a class="nav-link" href="#refer%C3%AAncias-2">Referências</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/2-01-base_peixes.rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["fundamentos_de_ecologia_numerica.pdf", "fundamentos_de_ecologia_numerica.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
 }
-});
-});
 </script>
-
 </body>
-
 </html>

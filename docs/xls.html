@@ -1,666 +1,181 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 6 R Modulo 1 - Importando planilhas de dados | Fundamentos de Ecologia Numérica</title>
-  <meta name="description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
-
-  <meta property="og:title" content=" 6 R Modulo 1 - Importando planilhas de dados | Fundamentos de Ecologia Numérica" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/fundamentos_de_ecologia_numerica" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 6 R Modulo 1 - Importando planilhas de dados | Fundamentos de Ecologia Numérica" />
-  
-  <meta name="twitter:description" content="…. The output format for this example is bookdown::gitbook." />
-  
-
-<meta name="author" content="Prof. Elvio S. F. Medeiros" />
-<meta name="author" content="Laboratório de Ecologia" />
-<meta name="author" content="Universidade Estadual da Paraíba" />
-<meta name="author" content="Campus V, João Pessoa, PB" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="basehab.html"/>
-<link rel="next" href="tiposR.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 6 R Modulo 1 - Importando planilhas de dados | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="RESUMO A importação de planilhas do Excel para o ambiente de programação R é uma tarefa fundamental para análise de dados e estatísticas. Através da importação de planilhas do Excel, é possível...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content=" 6 R Modulo 1 - Importando planilhas de dados | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="RESUMO A importação de planilhas do Excel para o ambiente de programação R é uma tarefa fundamental para análise de dados e estatísticas. Através da importação de planilhas do Excel, é possível...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 6 R Modulo 1 - Importando planilhas de dados | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO A importação de planilhas do Excel para o ambiente de programação R é uma tarefa fundamental para análise de dados e estatísticas. Através da importação de planilhas do Excel, é possível...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 1em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style2.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Fundamentos de Ecologia Numérica</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apresentação</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#motivação"><i class="fa fa-check"></i><b>1.1</b> Motivação</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#organização-do-livro"><i class="fa fa-check"></i><b>1.2</b> Organização do livro</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#como-estudar-por-esse-livro"><i class="fa fa-check"></i><b>1.3</b> Como estudar por esse livro?</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#para-um-estudo-aprofundado"><i class="fa fa-check"></i><b>1.3.1</b> Para um estudo aprofundado</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introdução ao R/RStudio</a>
-<ul>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#resumo"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#plano-de-estudo"><i class="fa fa-check"></i><b>2.1</b> Plano de estudo</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#pré-requisitos"><i class="fa fa-check"></i><b>2.2</b> Pré-requisitos</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#principais-conceitos"><i class="fa fa-check"></i><b>2.3</b> Principais conceitos</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#o-ambiente-de-programação-do-r"><i class="fa fa-check"></i><b>2.3.1</b> O ambiente de programação do R</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#o-que-é-o-r-studio"><i class="fa fa-check"></i><b>2.4</b> O que é o R Studio?</a></li>
-<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#o-essencial"><i class="fa fa-check"></i><b>2.5</b> O essencial</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="intro.html"><a href="intro.html#licença-de-software"><i class="fa fa-check"></i><b>2.5.1</b> Licença de software</a></li>
-<li class="chapter" data-level="2.5.2" data-path="intro.html"><a href="intro.html#interface-do-usuário"><i class="fa fa-check"></i><b>2.5.2</b> Interface do usuário</a></li>
-<li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#interface-do-usuário-do-rstudio"><i class="fa fa-check"></i><b>2.5.3</b> Interface do usuário do RStudio</a></li>
-<li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#projetos"><i class="fa fa-check"></i><b>2.5.4</b> Projetos</a></li>
-<li class="chapter" data-level="2.5.5" data-path="intro.html"><a href="intro.html#nomes-de-arquivos"><i class="fa fa-check"></i><b>2.5.5</b> Nomes de arquivos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#preparação-dos-arquivos"><i class="fa fa-check"></i><b>2.6</b> Preparação dos arquivos</a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="intro.html"><a href="intro.html#formatos-de-arquivo-de-dados"><i class="fa fa-check"></i><b>2.6.1</b> Formatos de arquivo de dados</a></li>
-<li class="chapter" data-level="2.6.2" data-path="intro.html"><a href="intro.html#o-arquivo-de-espécies"><i class="fa fa-check"></i><b>2.6.2</b> O arquivo de espécies</a></li>
-<li class="chapter" data-level="2.6.3" data-path="intro.html"><a href="intro.html#formato-de-valores-separados-por-vírgula-.csv"><i class="fa fa-check"></i><b>2.6.3</b> Formato de valores separados por vírgula (.csv)</a></li>
-<li class="chapter" data-level="2.6.4" data-path="intro.html"><a href="intro.html#editando-a-matriz-de-dados"><i class="fa fa-check"></i><b>2.6.4</b> Editando a matriz de dados</a></li>
-<li class="chapter" data-level="2.6.5" data-path="intro.html"><a href="intro.html#arquivos-de-resultados"><i class="fa fa-check"></i><b>2.6.5</b> Arquivos de resultados</a></li>
-<li class="chapter" data-level="2.6.6" data-path="intro.html"><a href="intro.html#gráficos"><i class="fa fa-check"></i><b>2.6.6</b> Gráficos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#conclusão"><i class="fa fa-check"></i><b>2.7</b> Conclusão</a></li>
-<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#sequência-típica-na-preparação-e-análise-de-dados"><i class="fa fa-check"></i><b>2.8</b> Sequência típica na preparação e análise de dados</a></li>
-<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#material-de-apoio"><i class="fa fa-check"></i><b>2.9</b> Material de apoio</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#apêndices"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#sites-consultados"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#leitura-suplementar"><i class="fa fa-check"></i>Leitura suplementar</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#referências"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>I BASES DE DADOS</b></span></li>
-<li class="chapter" data-level="3" data-path="bases.html"><a href="bases.html"><i class="fa fa-check"></i><b>3</b> Bases de Dados. Dados do PPBio Semiárido</a>
-<ul>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#exemplos-de-conjunto-de-dados-ecológicos-do-programa-de-pesquisa-em-biodiversidade-ppbio-do-semiárido"><i class="fa fa-check"></i>Exemplos de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido</a></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#resumo-1"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="3.1" data-path="bases.html"><a href="bases.html#sobre-os-dados-do-ppbio"><i class="fa fa-check"></i><b>3.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="3.2" data-path="bases.html"><a href="bases.html#arqs"><i class="fa fa-check"></i><b>3.2</b> Arquivos disponíveis</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="bases.html"><a href="bases.html#codificação-das-variáveis"><i class="fa fa-check"></i><b>3.2.1</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="3.2.2" data-path="bases.html"><a href="bases.html#abrev"><i class="fa fa-check"></i><b>3.2.2</b> Abreviações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#referências-1"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="basepeixes.html"><a href="basepeixes.html"><i class="fa fa-check"></i><b>4</b> Base de Dados I - Peixes</a>
-<ul>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#estrutura-da-comunidade-peixes-no-semiárido"><i class="fa fa-check"></i>Estrutura da Comunidade: Peixes no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apresentação-1"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#resumo-2"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="4.1" data-path="basepeixes.html"><a href="basepeixes.html#introdução"><i class="fa fa-check"></i><b>4.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="basepeixes.html"><a href="basepeixes.html#desenho-amostral"><i class="fa fa-check"></i><b>4.1.1</b> Desenho Amostral</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="basepeixes.html"><a href="basepeixes.html#codificação-das-variáveis-1"><i class="fa fa-check"></i><b>4.2</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="4.3" data-path="basepeixes.html"><a href="basepeixes.html#amostragem-dos-dados"><i class="fa fa-check"></i><b>4.3</b> Amostragem dos dados</a></li>
-<li class="chapter" data-level="4.4" data-path="basepeixes.html"><a href="basepeixes.html#análises-estatísticas"><i class="fa fa-check"></i><b>4.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="4.5" data-path="basepeixes.html"><a href="basepeixes.html#discussão"><i class="fa fa-check"></i><b>4.5</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apêndices-1"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="basepeixes.html"><a href="basepeixes.html#tabelas-e-figuras"><i class="fa fa-check"></i><b>4.5.1</b> Tabelas e Figuras</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#referências-2"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="basehab.html"><a href="basehab.html"><i class="fa fa-check"></i><b>5</b> Base de Dados II - Habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#estrutura-do-habitat-variáveis-ambientais-no-semiárido"><i class="fa fa-check"></i>Estrutura do Habitat: Variáveis ambientais no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apresentação-2"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#resumo-3"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="5.1" data-path="basehab.html"><a href="basehab.html#introdução-1"><i class="fa fa-check"></i><b>5.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="basehab.html"><a href="basehab.html#desenho-amostral-1"><i class="fa fa-check"></i><b>5.1.1</b> Desenho Amostral</a></li>
-<li class="chapter" data-level="5.1.2" data-path="basehab.html"><a href="basehab.html#sobre-os-dados-do-ppbio-1"><i class="fa fa-check"></i><b>5.1.2</b> Sobre os dados do PPBio</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="basehab.html"><a href="basehab.html#codificação-para-variáveis"><i class="fa fa-check"></i><b>5.2</b> Codificação para variáveis</a></li>
-<li class="chapter" data-level="5.3" data-path="basehab.html"><a href="basehab.html#área-de-estudo-e-amostragem-dos-dados"><i class="fa fa-check"></i><b>5.3</b> Área de estudo e amostragem dos dados</a></li>
-<li class="chapter" data-level="5.4" data-path="basehab.html"><a href="basehab.html#análises-estatísticas-1"><i class="fa fa-check"></i><b>5.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="5.5" data-path="basehab.html"><a href="basehab.html#resultados"><i class="fa fa-check"></i><b>5.5</b> Resultados</a></li>
-<li class="chapter" data-level="5.6" data-path="basehab.html"><a href="basehab.html#discussão-1"><i class="fa fa-check"></i><b>5.6</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apêndices-2"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#referências-3"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>II ESTATÍSTICAS DESCRITIVAS</b></span></li>
-<li class="chapter" data-level="6" data-path="xls.html"><a href="xls.html"><i class="fa fa-check"></i><b>6</b> R Modulo 1 - Importando planilhas de dados</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#resumo-4"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apresentação-3"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="6.1" data-path="xls.html"><a href="xls.html#instalação-do-r-e-rstudio"><i class="fa fa-check"></i><b>6.1</b> Instalação do R e RStudio</a></li>
-<li class="chapter" data-level="6.2" data-path="xls.html"><a href="xls.html#r-base"><i class="fa fa-check"></i><b>6.2</b> R base</a></li>
-<li class="chapter" data-level="6.3" data-path="xls.html"><a href="xls.html#rstudio"><i class="fa fa-check"></i><b>6.3</b> RStudio</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="xls.html"><a href="xls.html#rstudio-na-nuvem"><i class="fa fa-check"></i><b>6.3.1</b> RStudio na nuvem</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="xls.html"><a href="xls.html#sobre-os-dados-do-ppbio-2"><i class="fa fa-check"></i><b>6.4</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="6.5" data-path="xls.html"><a href="xls.html#importando-a-planilha-de-trabalho"><i class="fa fa-check"></i><b>6.5</b> Importando a planilha de trabalho</a></li>
-<li class="chapter" data-level="6.6" data-path="xls.html"><a href="xls.html#mensagens-de-erro-e-avisos-no-r"><i class="fa fa-check"></i><b>6.6</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="6.7" data-path="xls.html"><a href="xls.html#organização-básica"><i class="fa fa-check"></i><b>6.7</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="6.7.1" data-path="xls.html"><a href="xls.html#prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r"><i class="fa fa-check"></i><b>6.7.1</b> Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></li>
-</ul></li>
-<li class="chapter" data-level="6.8" data-path="xls.html"><a href="xls.html#importando-a-planilha"><i class="fa fa-check"></i><b>6.8</b> Importando a planilha</a>
-<ul>
-<li class="chapter" data-level="6.8.1" data-path="xls.html"><a href="xls.html#outra-forma-de-achar-e-importar-uma-planilha"><i class="fa fa-check"></i><b>6.8.1</b> Outra forma de achar e importar uma planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="6.9" data-path="xls.html"><a href="xls.html#importando-.ods-do-libreoffice-calc"><i class="fa fa-check"></i><b>6.9</b> Importando <code>.ods</code> do LibreOffice Calc</a>
-<ul>
-<li class="chapter" data-level="6.9.1" data-path="xls.html"><a href="xls.html#colunas-com-o-mesmo-nome"><i class="fa fa-check"></i><b>6.9.1</b> Colunas com o mesmo nome</a></li>
-<li class="chapter" data-level="6.9.2" data-path="xls.html"><a href="xls.html#removendo-linhas-ou-colunas-por-nome"><i class="fa fa-check"></i><b>6.9.2</b> Removendo linhas ou colunas por nome</a></li>
-<li class="chapter" data-level="6.9.3" data-path="xls.html"><a href="xls.html#criando-uma-matriz-de-médias"><i class="fa fa-check"></i><b>6.9.3</b> Criando uma matriz de médias</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apêndices-3"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#sites-consultados-1"><i class="fa fa-check"></i>Sites consultados</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#script-limpo"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#referências-4"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="tiposR.html"><a href="tiposR.html"><i class="fa fa-check"></i><b>7</b> R Modulo 2 - Tipos de Dados no R</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apresentação-4"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="7.1" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.1</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.2" data-path="tiposR.html"><a href="tiposR.html#mensagens-de-erro-e-avisos-no-r-1"><i class="fa fa-check"></i><b>7.2</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="7.3" data-path="tiposR.html"><a href="tiposR.html#o-que-é-um-script-e-qual-sua-diferença-para-um-código"><i class="fa fa-check"></i><b>7.3</b> O que é um <code>script</code> e qual sua diferença para um <code>código</code>?</a></li>
-<li class="chapter" data-level="7.4" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r-1"><i class="fa fa-check"></i><b>7.4</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.5" data-path="tiposR.html"><a href="tiposR.html#tipos-de-dados-no-r"><i class="fa fa-check"></i><b>7.5</b> Tipos de dados no R</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="tiposR.html"><a href="tiposR.html#variáveis-e-tipos-básicos-de-dados-figura-reffignucleos"><i class="fa fa-check"></i><b>7.5.1</b> Variáveis e tipos básicos de dados (Figura @ref(fig:nucleos))</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="tiposR.html"><a href="tiposR.html#estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.6</b> Estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.7" data-path="tiposR.html"><a href="tiposR.html#como-pedir-ajuda"><i class="fa fa-check"></i><b>7.7</b> Como pedir ajuda?</a>
-<ul>
-<li class="chapter" data-level="7.7.1" data-path="tiposR.html"><a href="tiposR.html#dentro-do-r"><i class="fa fa-check"></i><b>7.7.1</b> Dentro do R</a></li>
-<li class="chapter" data-level="7.7.2" data-path="tiposR.html"><a href="tiposR.html#fora-do-r"><i class="fa fa-check"></i><b>7.7.2</b> Fora do R</a></li>
-<li class="chapter" data-level="7.7.3" data-path="tiposR.html"><a href="tiposR.html#chatgpt"><i class="fa fa-check"></i><b>7.7.3</b> ChatGPT</a></li>
-</ul></li>
-<li class="chapter" data-level="7.8" data-path="tiposR.html"><a href="tiposR.html#work-flow"><i class="fa fa-check"></i><b>7.8</b> Work flow</a></li>
-<li class="chapter" data-level="7.9" data-path="tiposR.html"><a href="tiposR.html#reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada"><i class="fa fa-check"></i><b>7.9</b> Reconhecendo a estrutura dos dados do R em uma matriz multivariada</a>
-<ul>
-<li class="chapter" data-level="7.9.1" data-path="tiposR.html"><a href="tiposR.html#organização-básica-1"><i class="fa fa-check"></i><b>7.9.1</b> Organização básica</a></li>
-</ul></li>
-<li class="chapter" data-level="7.10" data-path="tiposR.html"><a href="tiposR.html#importando-a-planilha-1"><i class="fa fa-check"></i><b>7.10</b> Importando a planilha</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apêndices-4"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#snippet-e-chunk"><i class="fa fa-check"></i>Snippet e chunk</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#sites-consultados-2"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#script-limpo-1"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#referências-5"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="univ.html"><a href="univ.html"><i class="fa fa-check"></i><b>8</b> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#resumo-5"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apresentação-5"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="8.1" data-path="univ.html"><a href="univ.html#sobre-os-dados"><i class="fa fa-check"></i><b>8.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="8.2" data-path="univ.html"><a href="univ.html#organização-básica-2"><i class="fa fa-check"></i><b>8.2</b> Organização básica</a></li>
-<li class="chapter" data-level="8.3" data-path="univ.html"><a href="univ.html#importando-a-planilha-2"><i class="fa fa-check"></i><b>8.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="8.4" data-path="univ.html"><a href="univ.html#gráficos-de-histograma-e-boxplot"><i class="fa fa-check"></i><b>8.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="8.5" data-path="univ.html"><a href="univ.html#sumário-estatístico-geral"><i class="fa fa-check"></i><b>8.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apêndices-5"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#sites-consultados-3"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#script-limpo-2"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#referências-6"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="univ2.html"><a href="univ2.html"><i class="fa fa-check"></i><b>9</b> R Modulo 3.2 - Testes Estatísticos</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#resumo-6"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apresentação-6"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="9.1" data-path="univ2.html"><a href="univ2.html#sobre-os-dados-1"><i class="fa fa-check"></i><b>9.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="9.2" data-path="univ2.html"><a href="univ2.html#organização-básica-3"><i class="fa fa-check"></i><b>9.2</b> Organização básica</a></li>
-<li class="chapter" data-level="9.3" data-path="univ2.html"><a href="univ2.html#importando-a-planilha-3"><i class="fa fa-check"></i><b>9.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="9.4" data-path="univ2.html"><a href="univ2.html#gráficos-de-histograma-e-boxplot-1"><i class="fa fa-check"></i><b>9.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="9.5" data-path="univ2.html"><a href="univ2.html#sumário-estatístico-geral-1"><i class="fa fa-check"></i><b>9.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="9.6" data-path="univ2.html"><a href="univ2.html#testando-normalidade"><i class="fa fa-check"></i><b>9.6</b> Testando normalidade</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="univ2.html"><a href="univ2.html#q-q-plots"><i class="fa fa-check"></i><b>9.6.1</b> Q-Q plots</a></li>
-<li class="chapter" data-level="9.6.2" data-path="univ2.html"><a href="univ2.html#testes-de-shapiro-wilk-e-kolmogorov-smirnov"><i class="fa fa-check"></i><b>9.6.2</b> Testes de Shapiro-Wilk e Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="9.7" data-path="univ2.html"><a href="univ2.html#testando-diferenças-entre-médias"><i class="fa fa-check"></i><b>9.7</b> Testando diferenças entre médias</a>
-<ul>
-<li class="chapter" data-level="9.7.1" data-path="univ2.html"><a href="univ2.html#testando-homogeneidade-de-variâncias"><i class="fa fa-check"></i><b>9.7.1</b> Testando homogeneidade de variâncias</a></li>
-<li class="chapter" data-level="9.7.2" data-path="univ2.html"><a href="univ2.html#teste-entre-duas-médias-t-student"><i class="fa fa-check"></i><b>9.7.2</b> Teste entre duas médias (t-Student)</a></li>
-<li class="chapter" data-level="9.7.3" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-anova"><i class="fa fa-check"></i><b>9.7.3</b> Teste entre três médias (ANOVA)</a></li>
-<li class="chapter" data-level="9.7.4" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-e-dois-fatores-two-way-anova"><i class="fa fa-check"></i><b>9.7.4</b> Teste entre três médias e dois fatores (Two-Way ANOVA)</a></li>
-</ul></li>
-<li class="chapter" data-level="9.8" data-path="univ2.html"><a href="univ2.html#correlação-e-regressão-simples"><i class="fa fa-check"></i><b>9.8</b> Correlação e regressão simples</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apêndices-6"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#sites-consultados-4"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#script-limpo-3"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#referências-7"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="unigr.html"><a href="unigr.html"><i class="fa fa-check"></i><b>10</b> R Modulo 3.3 - Gráficos univariados</a>
-<ul>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#resumo-7"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apresentação-7"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="10.1" data-path="unigr.html"><a href="unigr.html#sobre-os-dados-2"><i class="fa fa-check"></i><b>10.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="10.2" data-path="unigr.html"><a href="unigr.html#organização-básica-4"><i class="fa fa-check"></i><b>10.2</b> Organização básica</a></li>
-<li class="chapter" data-level="10.3" data-path="unigr.html"><a href="unigr.html#importando-a-planilha-4"><i class="fa fa-check"></i><b>10.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="10.4" data-path="unigr.html"><a href="unigr.html#reset-point"><i class="fa fa-check"></i><b>10.4</b> Reset point</a></li>
-<li class="chapter" data-level="10.5" data-path="unigr.html"><a href="unigr.html#gráficos-de-dispersão"><i class="fa fa-check"></i><b>10.5</b> Gráficos de dispersão</a></li>
-<li class="chapter" data-level="10.6" data-path="unigr.html"><a href="unigr.html#gráficos-de-linha"><i class="fa fa-check"></i><b>10.6</b> Gráficos de linha</a></li>
-<li class="chapter" data-level="10.7" data-path="unigr.html"><a href="unigr.html#gráficos-de-barra"><i class="fa fa-check"></i><b>10.7</b> Gráficos de barra</a></li>
-<li class="chapter" data-level="10.8" data-path="unigr.html"><a href="unigr.html#gráficos-de-grupos"><i class="fa fa-check"></i><b>10.8</b> Gráficos de grupos</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apêndices-7"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#sites-consultados-5"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#script-limpo-4"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#referências-8"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="estrcom.html"><a href="estrcom.html"><i class="fa fa-check"></i><b>11</b> R Modulo 4.1 - Estrutura da Comunidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#resumo-8"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apresentação-8"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="11.1" data-path="estrcom.html"><a href="estrcom.html#sobre-os-dados-3"><i class="fa fa-check"></i><b>11.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="11.2" data-path="estrcom.html"><a href="estrcom.html#organização-básica-5"><i class="fa fa-check"></i><b>11.2</b> Organização básica</a></li>
-<li class="chapter" data-level="11.3" data-path="estrcom.html"><a href="estrcom.html#importando-a-planilha-5"><i class="fa fa-check"></i><b>11.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="11.4" data-path="estrcom.html"><a href="estrcom.html#reset-point-1"><i class="fa fa-check"></i><b>11.4</b> Reset point</a></li>
-<li class="chapter" data-level="11.5" data-path="estrcom.html"><a href="estrcom.html#transpor-a-matriz-para-trabalhar-com-as-espécies"><i class="fa fa-check"></i><b>11.5</b> Transpor a matriz para trabalhar com as espécies</a>
-<ul>
-<li class="chapter" data-level="11.5.1" data-path="estrcom.html"><a href="estrcom.html#informações-básicas-da-matriz"><i class="fa fa-check"></i><b>11.5.1</b> Informações básicas da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="11.6" data-path="estrcom.html"><a href="estrcom.html#calculando-os-descritores-da-comunidade"><i class="fa fa-check"></i><b>11.6</b> Calculando os descritores da comunidade</a>
-<ul>
-<li class="chapter" data-level="11.6.1" data-path="estrcom.html"><a href="estrcom.html#variabilidade"><i class="fa fa-check"></i><b>11.6.1</b> Variabilidade</a></li>
-<li class="chapter" data-level="11.6.2" data-path="estrcom.html"><a href="estrcom.html#riqueza"><i class="fa fa-check"></i><b>11.6.2</b> Riqueza</a></li>
-</ul></li>
-<li class="chapter" data-level="11.7" data-path="estrcom.html"><a href="estrcom.html#índices-de-diversidade"><i class="fa fa-check"></i><b>11.7</b> Índices de Diversidade</a>
-<ul>
-<li class="chapter" data-level="11.7.1" data-path="estrcom.html"><a href="estrcom.html#shannon"><i class="fa fa-check"></i><b>11.7.1</b> Shannon</a></li>
-<li class="chapter" data-level="11.7.2" data-path="estrcom.html"><a href="estrcom.html#simpson"><i class="fa fa-check"></i><b>11.7.2</b> Simpson</a></li>
-<li class="chapter" data-level="11.7.3" data-path="estrcom.html"><a href="estrcom.html#equitabilidade-de-pielou"><i class="fa fa-check"></i><b>11.7.3</b> Equitabilidade de Pielou</a></li>
-</ul></li>
-<li class="chapter" data-level="11.8" data-path="estrcom.html"><a href="estrcom.html#gráficos-descritivos"><i class="fa fa-check"></i><b>11.8</b> Gráficos descritivos</a>
-<ul>
-<li class="chapter" data-level="11.8.1" data-path="estrcom.html"><a href="estrcom.html#série-de-hill-e-pefil-da-diversidade"><i class="fa fa-check"></i><b>11.8.1</b> Série de Hill e pefil da diversidade</a></li>
-</ul></li>
-<li class="chapter" data-level="11.9" data-path="estrcom.html"><a href="estrcom.html#distribuição-de-abundância"><i class="fa fa-check"></i><b>11.9</b> Distribuição de abundância</a></li>
-<li class="chapter" data-level="11.10" data-path="estrcom.html"><a href="estrcom.html#curva-de-rarefação"><i class="fa fa-check"></i><b>11.10</b> Curva de rarefação</a>
-<ul>
-<li class="chapter" data-level="11.10.1" data-path="estrcom.html"><a href="estrcom.html#interpretando-a-curva-de-rarefação"><i class="fa fa-check"></i><b>11.10.1</b> Interpretando a curva de rarefação</a></li>
-</ul></li>
-<li class="chapter" data-level="11.11" data-path="estrcom.html"><a href="estrcom.html#curva-de-acumulação-de-espécies"><i class="fa fa-check"></i><b>11.11</b> Curva de acumulação de espécies</a>
-<ul>
-<li class="chapter" data-level="11.11.1" data-path="estrcom.html"><a href="estrcom.html#plot-locais"><i class="fa fa-check"></i><b>11.11.1</b> Plot locais</a></li>
-</ul></li>
-<li class="chapter" data-level="11.12" data-path="estrcom.html"><a href="estrcom.html#plot-indivíduos"><i class="fa fa-check"></i><b>11.12</b> Plot indivíduos</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apêndices-8"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#criando-uma-tabela-de-espécies"><i class="fa fa-check"></i>Criando uma tabela de espécies</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descruas"><i class="fa fa-check"></i>Descritores da estrutura da comunidade: UA’s</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descritores-da-normalidade-1"><i class="fa fa-check"></i>Descritores da normalidade</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#salvando-as-tabelas-criadas-em-txt-direto-no-diretório-de-trabalho"><i class="fa fa-check"></i>Salvando as tabelas criadas em txt direto no diretório de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#sites-consultados-6"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#script-limpo-5"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#referências-9"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="partdiv.html"><a href="partdiv.html"><i class="fa fa-check"></i><b>12</b> R Modulo 4.2 - Decomposição da diversidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#resumo-9"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apresentação-9"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="12.1" data-path="partdiv.html"><a href="partdiv.html#sobre-os-dados-4"><i class="fa fa-check"></i><b>12.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="12.2" data-path="partdiv.html"><a href="partdiv.html#organização-básica-6"><i class="fa fa-check"></i><b>12.2</b> Organização básica</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apêndices-9"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#sites-consultados-7"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#script-limpo-6"><i class="fa fa-check"></i>Script limpo</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#referências-10"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="estrhab.html"><a href="estrhab.html"><i class="fa fa-check"></i><b>13</b> R Modulo 4.2 - Estrutura do habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#resumo-10"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apresentação-10"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="13.1" data-path="estrhab.html"><a href="estrhab.html#sobre-os-dados-5"><i class="fa fa-check"></i><b>13.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="13.2" data-path="estrhab.html"><a href="estrhab.html#organização-básica-7"><i class="fa fa-check"></i><b>13.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="estrhab.html"><a href="estrhab.html#instalando-os-pacotes-necessários-para-esse-módulo."><i class="fa fa-check"></i><b>13.2.1</b> Instalando os pacotes necessários para esse módulo.</a></li>
-</ul></li>
-<li class="chapter" data-level="13.3" data-path="estrhab.html"><a href="estrhab.html#importando-a-planilha-6"><i class="fa fa-check"></i><b>13.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="13.4" data-path="estrhab.html"><a href="estrhab.html#reset-point-2"><i class="fa fa-check"></i><b>13.4</b> Reset point</a></li>
-<li class="chapter" data-level="13.5" data-path="estrhab.html"><a href="estrhab.html#correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias"><i class="fa fa-check"></i><b>13.5</b> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
-<li class="chapter" data-level="13.6" data-path="estrhab.html"><a href="estrhab.html#deletando-variáveis-colineares"><i class="fa fa-check"></i><b>13.6</b> Deletando variáveis colineares</a></li>
-<li class="chapter" data-level="13.7" data-path="estrhab.html"><a href="estrhab.html#somando-variáveis-redundantes"><i class="fa fa-check"></i><b>13.7</b> Somando variáveis redundantes</a></li>
-<li class="chapter" data-level="13.8" data-path="estrhab.html"><a href="estrhab.html#tabela-de-dados-ambientais"><i class="fa fa-check"></i><b>13.8</b> Tabela de dados ambientais</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apêndices-10"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#sites-consultados-8"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#script-limpo-7"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#referências-11"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="reltrns.html"><a href="reltrns.html"><i class="fa fa-check"></i><b>14</b> R Modulo 5 - Relativizações e transformações</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#resumo-11"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apresentação-11"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="14.1" data-path="reltrns.html"><a href="reltrns.html#organização-básica-8"><i class="fa fa-check"></i><b>14.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="reltrns.html"><a href="reltrns.html#importando-a-planilha-7"><i class="fa fa-check"></i><b>14.1.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="reltrns.html"><a href="reltrns.html#tamanho-da-matriz"><i class="fa fa-check"></i><b>14.2</b> Tamanho da matriz</a></li>
-<li class="chapter" data-level="14.3" data-path="reltrns.html"><a href="reltrns.html#reset-point-1-1"><i class="fa fa-check"></i><b>14.3</b> Reset point 1</a></li>
-<li class="chapter" data-level="14.4" data-path="reltrns.html"><a href="reltrns.html#cálculo-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.4</b> Cálculo da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.5" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequência-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.5</b> Distribuição de frequência da matriz de distâncias</a>
-<ul>
-<li class="chapter" data-level="14.5.1" data-path="reltrns.html"><a href="reltrns.html#calculando-alguns-parâmetros-básicos"><i class="fa fa-check"></i><b>14.5.1</b> Calculando alguns parâmetros básicos</a></li>
-<li class="chapter" data-level="14.5.2" data-path="reltrns.html"><a href="reltrns.html#calculando-a-assimetria-e-a-curtose"><i class="fa fa-check"></i><b>14.5.2</b> Calculando a assimetria e a curtose</a></li>
-</ul></li>
-<li class="chapter" data-level="14.6" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequências-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.6</b> Distribuição de frequências da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.7" data-path="reltrns.html"><a href="reltrns.html#relativizando-e-transformando-a-base-de-dados"><i class="fa fa-check"></i><b>14.7</b> Relativizando e transformando a base de dados</a>
-<ul>
-<li class="chapter" data-level="14.7.1" data-path="reltrns.html"><a href="reltrns.html#relativização-pelo-total"><i class="fa fa-check"></i><b>14.7.1</b> Relativização pelo total</a></li>
-<li class="chapter" data-level="14.7.2" data-path="reltrns.html"><a href="reltrns.html#transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>14.7.2</b> Transformação pelo arcoseno da raiz quadrada</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="reltrns.html"><a href="reltrns.html#reset-point-2-1"><i class="fa fa-check"></i><b>14.8</b> Reset point 2</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apêndices-11"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#relativizações"><i class="fa fa-check"></i>Relativizações</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#transformações"><i class="fa fa-check"></i>Transformações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#script-limpo-8"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#referências-12"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="outcentr.html"><a href="outcentr.html"><i class="fa fa-check"></i><b>15</b> R Modulo 6 - Análise de outliers baseada no desvio padrão do centróide</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apresentação-12"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="15.1" data-path="outcentr.html"><a href="outcentr.html#sobre-os-dados-do-ppbio-3"><i class="fa fa-check"></i><b>15.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="15.2" data-path="outcentr.html"><a href="outcentr.html#organização-básica-9"><i class="fa fa-check"></i><b>15.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="outcentr.html"><a href="outcentr.html#importando-a-planilha-8"><i class="fa fa-check"></i><b>15.2.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="outcentr.html"><a href="outcentr.html#reset-point-3"><i class="fa fa-check"></i><b>15.3</b> Reset point</a>
-<ul>
-<li class="chapter" data-level="15.3.1" data-path="outcentr.html"><a href="outcentr.html#tamanho-da-matriz-1"><i class="fa fa-check"></i><b>15.3.1</b> Tamanho da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="15.4" data-path="outcentr.html"><a href="outcentr.html#cálculo-de-matriz-de-distâncias-euclidiana-euclid"><i class="fa fa-check"></i><b>15.4</b> Cálculo de matriz de distâncias Euclidiana (<code>euclid</code>)</a></li>
-<li class="chapter" data-level="15.5" data-path="outcentr.html"><a href="outcentr.html#calculando-o-centróide-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.5</b> Calculando o centróide da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.6" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.6</b> Distribuição de frequências da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.7" data-path="outcentr.html"><a href="outcentr.html#procurando-outliers"><i class="fa fa-check"></i><b>15.7</b> Procurando outliers</a>
-<ul>
-<li class="chapter" data-level="15.7.1" data-path="outcentr.html"><a href="outcentr.html#listas-de-distâncias"><i class="fa fa-check"></i><b>15.7.1</b> Listas de distâncias</a></li>
-<li class="chapter" data-level="15.7.2" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-das-distâncias-médias-para-o-centróide-av.dist"><i class="fa fa-check"></i><b>15.7.2</b> Distribuição de frequências das distâncias médias para o centróide <code>av.dist</code></a></li>
-</ul></li>
-<li class="chapter" data-level="15.8" data-path="outcentr.html"><a href="outcentr.html#lista-final-de-outliers"><i class="fa fa-check"></i><b>15.8</b> Lista final de outliers</a></li>
-<li class="chapter" data-level="15.9" data-path="outcentr.html"><a href="outcentr.html#particionando-a-matriz"><i class="fa fa-check"></i><b>15.9</b> Particionando a matriz</a></li>
-<li class="chapter" data-level="15.10" data-path="outcentr.html"><a href="outcentr.html#exportando-a-matrix-final-de-trabalho"><i class="fa fa-check"></i><b>15.10</b> Exportando a matrix final de trabalho</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apêndices-12"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#outras-formas-de-fazer-a-partição"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#código"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#script-limpo-9"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#referências-13"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>III ANÁLISES MULTIVARIADAS</b></span></li>
-<li class="chapter" data-level="16" data-path="upgma.html"><a href="upgma.html"><i class="fa fa-check"></i><b>16</b> R Modulo 7 - Análise de Classificação Hierárquica - SAHN</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#resumo-12"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apresentação-13"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="16.1" data-path="upgma.html"><a href="upgma.html#organização-básica-10"><i class="fa fa-check"></i><b>16.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="upgma.html"><a href="upgma.html#pacotes"><i class="fa fa-check"></i><b>16.1.1</b> Pacotes</a></li>
-<li class="chapter" data-level="16.1.2" data-path="upgma.html"><a href="upgma.html#sobre-os-dados-do-ppbio-4"><i class="fa fa-check"></i><b>16.1.2</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="16.1.3" data-path="upgma.html"><a href="upgma.html#importando-a-planilha-de-trabalho-1"><i class="fa fa-check"></i><b>16.1.3</b> Importando a planilha de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="16.2" data-path="upgma.html"><a href="upgma.html#reset-point-4"><i class="fa fa-check"></i><b>16.2</b> Reset point</a></li>
-<li class="chapter" data-level="16.3" data-path="upgma.html"><a href="upgma.html#nomenclatura-das-matrizes-em-amd"><i class="fa fa-check"></i><b>16.3</b> Nomenclatura das matrizes em AMD</a></li>
-<li class="chapter" data-level="16.4" data-path="upgma.html"><a href="upgma.html#cluster-1-piloto-automático"><i class="fa fa-check"></i><b>16.4</b> Cluster 1: Piloto automático</a>
-<ul>
-<li class="chapter" data-level="16.4.1" data-path="upgma.html"><a href="upgma.html#histórico-das-fusões"><i class="fa fa-check"></i><b>16.4.1</b> Histórico das fusões</a></li>
-</ul></li>
-<li class="chapter" data-level="16.5" data-path="upgma.html"><a href="upgma.html#cluster-2-criando-a-matriz-de-distâncias-euclidiana"><i class="fa fa-check"></i><b>16.5</b> Cluster 2: Criando a matriz de distâncias Euclidiana</a>
-<ul>
-<li class="chapter" data-level="16.5.1" data-path="upgma.html"><a href="upgma.html#comparação-dos-resultados-obtidos-até-aqui"><i class="fa fa-check"></i><b>16.5.1</b> Comparação dos resultados obtidos até aqui</a></li>
-</ul></li>
-<li class="chapter" data-level="16.6" data-path="upgma.html"><a href="upgma.html#cluster-3-relativização-pelo-total-da-coluna"><i class="fa fa-check"></i><b>16.6</b> Cluster 3: Relativização pelo total da coluna</a>
-<ul>
-<li class="chapter" data-level="16.6.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizado"><i class="fa fa-check"></i><b>16.6.1</b> Gráfico de clustering relativizado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.7" data-path="upgma.html"><a href="upgma.html#cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>16.7</b> Cluster 4: Transformação pelo arcoseno da raiz quadrada</a>
-<ul>
-<li class="chapter" data-level="16.7.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizadotransformado"><i class="fa fa-check"></i><b>16.7.1</b> Gráfico de clustering relativizado/transformado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.8" data-path="upgma.html"><a href="upgma.html#cluster-5-controle-total-dos-parâmetros"><i class="fa fa-check"></i><b>16.8</b> Cluster 5: Controle total dos parâmetros</a></li>
-<li class="chapter" data-level="16.9" data-path="upgma.html"><a href="upgma.html#construindo-uma-prancha-de-gráficos-comparativos"><i class="fa fa-check"></i><b>16.9</b> Construindo uma prancha de gráficos comparativos</a></li>
-<li class="chapter" data-level="16.10" data-path="upgma.html"><a href="upgma.html#construindo-heatmaps"><i class="fa fa-check"></i><b>16.10</b> Construindo <code>heatmaps</code></a>
-<ul>
-<li class="chapter" data-level="16.10.1" data-path="upgma.html"><a href="upgma.html#percentual-de-encadeamento-chaining"><i class="fa fa-check"></i><b>16.10.1</b> Percentual de encadeamento (% chaining)</a></li>
-<li class="chapter" data-level="16.10.2" data-path="upgma.html"><a href="upgma.html#função-loop-para-comparar-os-encadeamentos"><i class="fa fa-check"></i><b>16.10.2</b> Função <code>loop</code> para comparar os encadeamentos</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apêndices-13"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#sites-consultados-9"><i class="fa fa-check"></i>Sites consultados</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#outras-formas-de-fazer-a-partição-1"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#código-1"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#script-limpo-10"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#referências-14"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentos de Ecologia Numérica</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="active" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li class="book-part">ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="xls" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number"> 6</span> R Modulo 1 - Importando planilhas de dados<a href="xls.html#xls" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="resumo-4" class="section level3 unnumbered hasAnchor">
-<h3>RESUMO<a href="xls.html#resumo-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="xls" class="section level1" number="6">
+<h1>
+<span class="header-section-number"> 6</span> R Modulo 1 - Importando planilhas de dados<a class="anchor" aria-label="anchor" href="#xls"><i class="fas fa-link"></i></a>
+</h1>
+<div id="resumo-4" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-4"><i class="fas fa-link"></i></a>
+</h3>
 <p>A importação de planilhas do Excel para o ambiente de programação R é uma tarefa fundamental para análise de dados e estatísticas. Através da importação de planilhas do Excel, é possível transformar dados armazenados em formatos familiares em estruturas que podem ser manipuladas e exploradas de maneira eficaz no R. Isso permite a aplicação de diversas técnicas estatísticas e criação de visualizações informativas, contribuindo para a tomada de decisões embasadas em dados. Neste contexto, entender como importar dados do Excel para o R é um passo crucial para realizar análises de alta qualidade e obter insights significativos a partir dos conjuntos de dados disponíveis.</p>
 </div>
-<div id="apresentação-3" class="section level3 unnumbered hasAnchor">
-<h3>Apresentação<a href="xls.html#apresentação-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="apresentação-3" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-3"><i class="fas fa-link"></i></a>
+</h3>
 <p>A importação de planilhas do Excel para o ambiente de programação R é uma tarefa fundamental para análise de dados e estatísticas. O R é uma linguagem de programação amplamente utilizada por cientistas de dados, pesquisadores e analistas para manipular, visualizar e modelar informações. Através da importação de planilhas do Excel, é possível transformar dados armazenados em formatos familiares em estruturas que podem ser manipuladas e exploradas de maneira eficaz no R. Isso permite a aplicação de diversas técnicas estatísticas e criação de visualizações informativas, contribuindo para a tomada de decisões embasadas em dados. Neste contexto, entender como importar dados do Excel para o R é um passo crucial para realizar análises de alta qualidade e obter insights significativos a partir dos conjuntos de dados disponíveis.</p>
 </div>
-<div id="instalação-do-r-e-rstudio" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Instalação do R e RStudio<a href="xls.html#instalação-do-r-e-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="instalação-do-r-e-rstudio" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Instalação do R e RStudio<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o-do-r-e-rstudio"><i class="fas fa-link"></i></a>
+</h2>
 </div>
-<div id="r-base" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> R base<a href="xls.html#r-base" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="r-base" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> R base<a class="anchor" aria-label="anchor" href="#r-base"><i class="fas fa-link"></i></a>
+</h2>
 <ol style="list-style-type: decimal">
-<li>O primeiro passo é entrar na página do projeto CRAN (Comprehensive R Archive Network) (<a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a>).<br />
+<li>O primeiro passo é entrar na página do projeto CRAN (Comprehensive R Archive Network) (<a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a>).<br>
 </li>
-<li>Do lado esquerdo da página clique sobre o link CRAN abaixo de Download. 3. Uma nova página com uma série de links irá se abrir. Esses links são chamados de “espelhos” e servem para que você possa escolher o local mais próximo de onde você está para fazer o download do programa. Escolha um espelho no Brasil.<br />
+<li>Do lado esquerdo da página clique sobre o link CRAN abaixo de Download. 3. Uma nova página com uma série de links irá se abrir. Esses links são chamados de “espelhos” e servem para que você possa escolher o local mais próximo de onde você está para fazer o download do programa. Escolha um espelho no Brasil.<br>
 </li>
-<li>Na seção Download and Install R, clique sobre o link <code>Download R for Windows</code> para baixar a versão para esse sistema… (MacOS??… o que é isso?)<br />
+<li>Na seção Download and Install R, clique sobre o link <code>Download R for Windows</code> para baixar a versão para esse sistema… (MacOS??… o que é isso?)<br>
 </li>
 <li>Clique sobre o link <code>base</code>.</li>
 <li>Clique sobre o link <code>Download R 4.x.x for Windows</code> para fazer o download do arquivo R.exe.</li>
 <li>A instalação segue o formato padrão de instalação de programas no Windows, e portanto não são necessários maiores detalhes.</li>
 </ol>
 </div>
-<div id="rstudio" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> RStudio<a href="xls.html#rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rstudio" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> RStudio<a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
+</h2>
 <ol style="list-style-type: decimal">
-<li>Para baixar o RStudio entre no endereço (<a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>)<br />
+<li>Para baixar o RStudio entre no endereço (<a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>)<br>
 </li>
-<li>Clique no link <code>Products &gt; RStudio</code><br />
+<li>Clique no link <code>Products &gt; RStudio</code><br>
 </li>
-<li>Selecione a versão Desktop.<br />
+<li>Selecione a versão Desktop.<br>
 </li>
-<li>Clique em <code>DOWNLOAD RSTUDIO DESKTOP</code><br />
+<li>Clique em <code>DOWNLOAD RSTUDIO DESKTOP</code><br>
 </li>
-<li>Será exibida uma página com a recomendação para você baixar o RStudio FREE versão mais recente - Windows<br />
+<li>Será exibida uma página com a recomendação para você baixar o RStudio FREE versão mais recente - Windows<br>
 </li>
 <li>Clicando nesse link, você irá baixar o arquivo RStudio atual (.exe)</li>
 <li>Depois é só clicar e instalar da forma convencional do Windows.</li>
 </ol>
 <p>Após a instalação, você pode abrir o <code>RStudio</code> pelo seu respectivo ícone, e o RStudio estará pronto para ser utilizado. O “R base” continuará instalado mas será acessado pelo RStudio. Não o desinstale.</p>
-<div id="rstudio-na-nuvem" class="section level3 hasAnchor" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> RStudio na nuvem<a href="xls.html#rstudio-na-nuvem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rstudio-na-nuvem" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> RStudio na nuvem<a class="anchor" aria-label="anchor" href="#rstudio-na-nuvem"><i class="fas fa-link"></i></a>
+</h3>
 <p>Usar o RStudio Cloud (<a href="https://login.rstudio.cloud/" class="uri">https://login.rstudio.cloud/</a>) é uma opção para quem não quer instalar a versão para PC. O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente.</p>
 </div>
 </div>
-<div id="sobre-os-dados-do-ppbio-2" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Sobre os dados do PPBio<a href="xls.html#sobre-os-dados-do-ppbio-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sobre-os-dados-do-ppbio-2" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Sobre os dados do PPBio<a class="anchor" aria-label="anchor" href="#sobre-os-dados-do-ppbio-2"><i class="fas fa-link"></i></a>
+</h2>
 <p>Usaremos para esse tutorial dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Nesta base de dados estão armazenadas informações sobre diversos grupos taxonômicos dstribuidos em diversas unidades amostrais (UA’s ou sítios), como peixes, macroinverbrebrados bentônicos, quironomídeos e zooplâncotn, além de dados do habitat, como variáveis físicas e químicas, morfologia do habitat, composição do substrato, estrutura de habitat marginal, entre outros (Figura <a href="xls.html#fig:301ppbio">6.1</a>). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados (Tabela <a href="xls.html#tab:301arqs">6.1</a>).</p>
-<div class="figure"><span style="display:block;" id="fig:301ppbio"></span>
-<img src="imagens/ppbio.png" alt="Parte da planilha de dados brutos do PPBio." width="476" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:301ppbio"></span>
+<img src="imagens/ppbio.png" alt="Parte da planilha de dados brutos do PPBio." width="476"><p class="caption">
 Figura 6.1: Parte da planilha de dados brutos do PPBio.
 </p>
 </div>
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:301arqs">Tabela 6.1: </span>Matrizes disponíveis para análises, com suas descrições e tipos de dados recomendados.
 </caption>
-<thead>
-<tr>
+<thead><tr>
 <th style="text-align:left;">
 Arquivo (.xlsx)
 </th>
@@ -673,8 +188,7 @@ Descrição
 <th style="text-align:left;">
 Tipo de dados
 </th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr>
 <td style="text-align:left;width: 2cm; ">
@@ -733,81 +247,96 @@ Densidades de indivíduos (no. de indivíduos por Unidade de Esforço de Captura
 </td>
 </tr>
 </tbody>
-</table>
-<p>A planilha <code>ppbio</code> contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura <a href="xls.html#fig:301rm1">6.2</a>). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA’s) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela <a href="xls.html#tab:301arqs">6.1</a>). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.<br />
+</table></div>
+<p>A planilha <code>ppbio</code> contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura <a href="xls.html#fig:301rm1">6.2</a>). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA’s) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela <a href="xls.html#tab:301arqs">6.1</a>). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.<br>
 Qual desses tipos de dados você acha que é apresentado na planilha?</p>
-<div class="figure"><span style="display:block;" id="fig:301rm1"></span>
-<img src="imagens/rm1.fig3.png" alt="Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo." width="556" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:301rm1"></span>
+<img src="imagens/rm1.fig3.png" alt="Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo." width="556"><p class="caption">
 Figura 6.2: Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo.
 </p>
 </div>
-<p>Várias das espécies nessa matriz tem grande importância ecológica, como é o caso de <em>Astyanax bimaculatus</em> <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> (Figura <a href="xls.html#fig:301asbim">6.3</a>), que é muito comum em rios intermitentes e serve de alimento para predadores maiores como a espécie <em>Hoplias malabaricus</em> <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> (Figura <a href="xls.html#fig:301hmala">6.4</a>).</p>
-<div class="figure"><span style="display:block;" id="fig:301asbim"></span>
-<img src="imagens/Asbim_u4.jpg" alt="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: &lt;https://www.fishbase.se/summary/Astianax-bimaculatus.html&gt;" width="320" />
-<p class="caption">
+<p>Várias das espécies nessa matriz tem grande importância ecológica, como é o caso de <em>Astyanax bimaculatus</em> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;A etimologia do gênero &lt;em&gt;Astyanax&lt;/em&gt; vem da mitologia Grega. Heitor personagem da “Ilíada”, tinha um filho chamado Astíanax.&lt;/p&gt;"><sup>11</sup></a> (Figura <a href="xls.html#fig:301asbim">6.3</a>), que é muito comum em rios intermitentes e serve de alimento para predadores maiores como a espécie <em>Hoplias malabaricus</em> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Do Grego, &lt;em&gt;hoplon&lt;/em&gt;, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.&lt;/p&gt;"><sup>12</sup></a> (Figura <a href="xls.html#fig:301hmala">6.4</a>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:301asbim"></span>
+<img src="imagens/Asbim_u4.jpg" alt="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: &lt;https://www.fishbase.se/summary/Astianax-bimaculatus.html&gt;" width="320"><p class="caption">
 Figura 6.3: <em>Astyanax bimaculatus</em>, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <a href="https://www.fishbase.se/summary/Astianax-bimaculatus.html" class="uri">https://www.fishbase.se/summary/Astianax-bimaculatus.html</a>
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:301hmala"></span>
-<img src="imagens/Homal_u6.jpg" alt="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: &lt;https://www.fishbase.se/summary/Hoplias-malabaricus.html&gt;" width="320" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:301hmala"></span>
+<img src="imagens/Homal_u6.jpg" alt="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: &lt;https://www.fishbase.se/summary/Hoplias-malabaricus.html&gt;" width="320"><p class="caption">
 Figura 6.4: <em>Hoplias malabaricus</em>, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <a href="https://www.fishbase.se/summary/Hoplias-malabaricus.html" class="uri">https://www.fishbase.se/summary/Hoplias-malabaricus.html</a>
 </p>
 </div>
 </div>
-<div id="importando-a-planilha-de-trabalho" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Importando a planilha de trabalho<a href="xls.html#importando-a-planilha-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="importando-a-planilha-de-trabalho" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho"><i class="fas fa-link"></i></a>
+</h2>
 <p>Para começar a usar o R e analisar os dados do Projeto PPBio, abra o RStudio, verifique sua interface (Figura <a href="xls.html#fig:301interface">6.5</a>) e siga as instruções a seguir.</p>
-<div class="figure"><span style="display:block;" id="fig:301interface"></span>
-<img src="imagens/interfaceR.png" alt="Interface típica do RStudio e nome dos paineis  ou janelas." width="648" />
-<p class="caption">
+<div class="figure">
+<span style="display:block;" id="fig:301interface"></span>
+<img src="imagens/interfaceR.png" alt="Interface típica do RStudio e nome dos paineis  ou janelas." width="648"><p class="caption">
 Figura 6.5: Interface típica do RStudio e nome dos paineis ou janelas.
 </p>
 </div>
 </div>
-<div id="mensagens-de-erro-e-avisos-no-r" class="section level2 hasAnchor" number="6.6">
-<h2><span class="header-section-number">6.6</span> Mensagens de erro e avisos no R<a href="xls.html#mensagens-de-erro-e-avisos-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mensagens-de-erro-e-avisos-no-r" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Mensagens de erro e avisos no R<a class="anchor" aria-label="anchor" href="#mensagens-de-erro-e-avisos-no-r"><i class="fas fa-link"></i></a>
+</h2>
 <p>No contexto da linguagem de programação R, mensagens de erro (errors) e mensagens de aviso (warnings) que <span style="color:red">aparecem em vermelho no painel de console</span>. Elas são formas de feedback do sistema que indicam problemas ou situações potencialmente problemáticas durante a execução do código. Aqui está uma breve explicação de cada um:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Erro (<span style="color:red">Error</span>):</strong>
+<li>
+<strong>Erro (<span style="color:red">Error</span>):</strong>
 <ul>
 <li>Um erro ocorre quando algo no código não está correto ou não pode ser executado como esperado.</li>
 <li>Isso pode ser causado por sintaxe incorreta, uso incorreto de funções, operações inválidas, referências a objetos que não existem, entre outros problemas.</li>
 <li>Quando ocorre um erro, a execução do código é interrompida e uma mensagem de erro é exibida no console em vermelho, indicando o tipo de erro e, muitas vezes, a linha onde ocorreu.</li>
-</ul></li>
-<li><strong>Aviso (<span style="color:red">Warning</span>):</strong>
+</ul>
+</li>
+<li>
+<strong>Aviso (<span style="color:red">Warning</span>):</strong>
 <ul>
 <li>Não indica erro. Um aviso é emitido quando algo no código pode resultar em um comportamento indesejado ou em resultados inesperados, mas não interrompe necessariamente a execução do código.</li>
 <li>Os avisos geralmente indicam situações que merecem atenção, como conversões de tipos de dados que podem perder informações ou funções que estão sendo usadas de maneira que pode levar a resultados questionáveis.</li>
 <li>Os avisos são exibidos em vermelho no console e fornecem informações sobre a natureza do aviso e, possivelmente, como abordá-lo.</li>
-</ul></li>
+</ul>
+</li>
 </ol>
 <p>É importante prestar atenção a mensagens de erro e avisos, pois eles fornecem insights sobre problemas em seu código ou potenciais fontes de comportamento inesperado. Resolver erros é fundamental para que o código funcione conforme o esperado. Embora os avisos não interrompam a execução, investigá-los pode ajudar a evitar problemas futuros ou melhorar a qualidade do código.</p>
 </div>
-<div id="organização-básica" class="section level2 hasAnchor" number="6.7">
-<h2><span class="header-section-number">6.7</span> Organização básica<a href="xls.html#organização-básica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="organização-básica" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica"><i class="fas fa-link"></i></a>
+</h2>
 <div id="hello" class="greeting message" style="color: green;">
 <p><span style="color:blue">ATENÇÃO</span>
 Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção <a href="#download401"><strong>??</strong></a></p>
 </div>
 <p>No ambiente do RStudio no painel de edição de código execute (<code>Ctrl+Enter</code> com o teclado ou <code>Run</code> no editor de código) os comandos a seguir, para instalar os pacotes necessários para este módulo.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="xls.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>) <span class="co">#importa arquivos do excel</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"readxl"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
 <p>E em seguida,</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="xls.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
-<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a>) <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, R. D. C., 2017</a>)</span>, e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, R. S., 2022</a>)</span>. No exemplo acima, o pacote <code>readxl</code> permite ler e escrever arquivos Excel no R.</p>
-<p>Para instalar um pacote no R, você precisa usar a função <code>install.packages()</code>. Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code>library()</code>.</p>
-<p>Por exemplo, para carregar o pacote <code>readxl</code>, você precisa executar a função <code>library(readxl)</code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
-<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code>getwd()</code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code>setwd()</code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span></code></pre></div>
+<p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a>) <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, 2017</a>)</span>, e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, 2022</a>)</span>. No exemplo acima, o pacote <code>readxl</code> permite ler e escrever arquivos Excel no R.</p>
+<p>Para instalar um pacote no R, você precisa usar a função <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p>
+<p>Por exemplo, para carregar o pacote <code>readxl</code>, você precisa executar a função <code><a href="https://readxl.tidyverse.org">library(readxl)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
+<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
 <p>Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do Projeto PPBio chamada ppbio**.xlsx que está no diretório <span style="color:blue">“C:/Meu/Diretório/De/Trabalho/Planilha.xlsx”</span></p>
 <p>Note que o símbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.</p>
 <p>Ajuste a segunda linha do código abaixo para refletir <span style="color:red">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
 <p>Definindo o diretório de trabalho e installando os pacotes necessários:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="xls.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb3-2"><a href="xls.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Seu/Diretório/De/Trabalho&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:\SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
-<div id="prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r" class="section level3 hasAnchor" number="6.7.1">
-<h3><span class="header-section-number">6.7.1</span> Prefira sempre códigos e scripts do que mouse e menus de janelas no R<a href="xls.html#prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r" class="section level3" number="6.7.1">
+<h3>
+<span class="header-section-number">6.7.1</span> Prefira sempre códigos e scripts do que mouse e menus de janelas no R<a class="anchor" aria-label="anchor" href="#prefira-sempre-c%C3%B3digos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r"><i class="fas fa-link"></i></a>
+</h3>
 <p>Optar pelo uso de scripts e comandos de teclado no R, em vez das opções baseadas em mouse e menus das janelas, oferece várias vantagens significativas para quem está envolvido em análises de dados e programação. Aqui estão algumas justificativas para essa abordagem:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Reprodutibilidade:</strong> O uso de scripts permite que todas as etapas de análise e manipulação de dados sejam documentadas em um único lugar. Isso facilita a reexecução de todo o processo, tornando a análise reprodutível e permitindo que outras pessoas compreendam e validem o trabalho realizado.</p></li>
@@ -824,152 +353,180 @@ Os links para baixar as planilhas necessárias para repetir esse tutorial podem 
 <p>Em resumo, a abordagem baseada em scripts e comandos de teclado oferece mais controle, flexibilidade, eficiência e reprodutibilidade, tornando-a a escolha preferida para profissionais que buscam análises de dados precisas, consistentes e de alta qualidade no ambiente R.</p>
 </div>
 </div>
-<div id="importando-a-planilha" class="section level2 hasAnchor" number="6.8">
-<h2><span class="header-section-number">6.8</span> Importando a planilha<a href="xls.html#importando-a-planilha" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="xls.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb4-2"><a href="xls.html#cb4-2" aria-hidden="true" tabindex="-1"></a>ppbio06 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx&quot;</span>,</span>
-<span id="cb4-3"><a href="xls.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sheet =</span> <span class="st">&quot;Sheet1&quot;</span>,</span>
-<span id="cb4-4"><a href="xls.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na =</span> <span class="st">&quot;NA&quot;</span>)</span>
-<span id="cb4-5"><a href="xls.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio06)</span>
-<span id="cb4-6"><a href="xls.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio06)</span></code></pre></div>
+<div id="importando-a-planilha" class="section level2" number="6.8">
+<h2>
+<span class="header-section-number">6.8</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio06</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx"</span>,</span>
+<span>                      sheet <span class="op">=</span> <span class="st">"Sheet1"</span>,</span>
+<span>                      na <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span></code></pre></div>
 <p>Com essas linhas de código a primeira coluna da matriz importada apresenta texto. Não queremos assim porque vamos fazer cálculos matemáticos na matriz.</p>
 <p>Resolvemos o problema com mais algumas linhas de código.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="xls.html#cb5-1" aria-hidden="true" tabindex="-1"></a>ppbio06 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ppbio06)</span>
-<span id="cb5-2"><a href="xls.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio06)</span>
-<span id="cb5-3"><a href="xls.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(ppbio06) <span class="ot">&lt;-</span> ppbio06[,<span class="dv">1</span>] <span class="co">#tem  que ser um df</span></span>
-<span id="cb5-4"><a href="xls.html#cb5-4" aria-hidden="true" tabindex="-1"></a>ppbio06[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ppbio06</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ppbio06</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="co">#tem  que ser um df</span></span>
+<span><span class="va">ppbio06</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
 <p>Ou podemos instalar esse pacote de importação de arquivos .xlsx para o R.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="xls.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="xls.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span></code></pre></div>
-<pre><code>## Warning: package &#39;openxlsx&#39; was built under R version 4.3.2</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="xls.html#cb9-1" aria-hidden="true" tabindex="-1"></a>ppbio <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx&quot;</span>,</span>
-<span id="cb9-2"><a href="xls.html#cb9-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rowNames =</span> T,</span>
-<span id="cb9-3"><a href="xls.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colNames =</span> T,</span>
-<span id="cb9-4"><a href="xls.html#cb9-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;Sheet1&quot;</span>)</span>
-<span id="cb9-5"><a href="xls.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
-<span id="cb9-6"><a href="xls.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio)</span>
-<span id="cb9-7"><a href="xls.html#cb9-7" aria-hidden="true" tabindex="-1"></a>ppbio_ma <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(ppbio) <span class="co">#lê ppbio como uma matriz</span></span>
-<span id="cb9-8"><a href="xls.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio_ma)</span>
-<span id="cb9-9"><a href="xls.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio_ma)</span>
-<span id="cb9-10"><a href="xls.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ppbio</span></span>
-<span id="cb9-11"><a href="xls.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ppbio_ma</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: package 'openxlsx' was built under R version 4.3.2</code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="va">ppbio_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span> <span class="co">#lê ppbio como uma matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio_ma</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio_ma</span><span class="op">)</span></span>
+<span><span class="co">#ppbio</span></span>
+<span><span class="co">#ppbio_ma</span></span></code></pre></div>
 <p>Compare as diferenças. Agora podemos exportar os dados como uma matriz de dados em formato de <code>valores separados por vírgula (.csv)</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="xls.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(ppbio, <span class="st">&quot;ppbiocsv.txt&quot;</span>, <span class="at">append =</span> F, <span class="at">quote =</span> T, <span class="st">&quot;;&quot;</span>, <span class="at">row.names =</span> T)</span>
-<span id="cb10-2"><a href="xls.html#cb10-2" aria-hidden="true" tabindex="-1"></a>dir <span class="ot">&lt;-</span> <span class="fu">getwd</span>()</span>
-<span id="cb10-3"><a href="xls.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shell.exec</span>(dir) <span class="co">#abre o diretorio de trabalho no Windows Explorer</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">ppbio</span>, <span class="st">"ppbiocsv.txt"</span>, append <span class="op">=</span> <span class="cn">F</span>, quote <span class="op">=</span> <span class="cn">T</span>, <span class="st">";"</span>, row.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/shell.exec.html">shell.exec</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span> <span class="co">#abre o diretorio de trabalho no Windows Explorer</span></span></code></pre></div>
 <p>Podemos abrir o arquivo .csv criado <code>ppbiocsv.txt</code> usando os códigos abaixo.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="xls.html#cb11-1" aria-hidden="true" tabindex="-1"></a>ppbiocsv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;ppbiocsv.txt&quot;</span>,</span>
-<span id="cb11-2"><a href="xls.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>, <span class="co">#definimos o dígito separador</span></span>
-<span id="cb11-3"><a href="xls.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">header =</span> T,</span>
-<span id="cb11-4"><a href="xls.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb11-5"><a href="xls.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">na.strings =</span> <span class="cn">NA</span>)</span>
-<span id="cb11-6"><a href="xls.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbiocsv)</span>
-<span id="cb11-7"><a href="xls.html#cb11-7" aria-hidden="true" tabindex="-1"></a>ppbiocsv</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ppbiocsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"ppbiocsv.txt"</span>,</span>
+<span>                     sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">","</span>, <span class="co">#definimos o dígito separador</span></span>
+<span>                     header <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                     row.names <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                     na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbiocsv</span><span class="op">)</span></span>
+<span><span class="va">ppbiocsv</span></span></code></pre></div>
 <p>Lembre de prestar atenção no dígito separador de decimais ” , ” ou ” . ” . Além disso, só estaamos usando <code>ppbio**.***</code> porque o diretório de trabalho ja fo definido no início. Se não deveríamos estar usando <code>C:/Seu/Diretório/De/Trabalho/ppbio**.***</code></p>
 <p>Alguns comandos para exibir a planilha são “case-sensitive” <code>(ignore.case(object))</code></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="xls.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
-<span id="cb12-2"><a href="xls.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ppbio)</span>
-<span id="cb12-3"><a href="xls.html#cb12-3" aria-hidden="true" tabindex="-1"></a>ppbio</span>
-<span id="cb12-4"><a href="xls.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
-<span id="cb12-5"><a href="xls.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#?View</span></span>
-<span id="cb12-6"><a href="xls.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#?view</span></span>
-<span id="cb12-7"><a href="xls.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#?remove</span></span></code></pre></div>
-<div id="outra-forma-de-achar-e-importar-uma-planilha" class="section level3 hasAnchor" number="6.8.1">
-<h3><span class="header-section-number">6.8.1</span> Outra forma de achar e importar uma planilha<a href="xls.html#outra-forma-de-achar-e-importar-uma-planilha" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Essa forma é desaconselhavel porque é demorada e sujeita a erros. Além de precisar ser refeita sempre que se quiser abrir uma nova planilha ou reabrir a última planilha importada. Veja o tópico <a href="xls.html#prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r">Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="xls.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb13-2"><a href="xls.html#cb13-2" aria-hidden="true" tabindex="-1"></a>ppbio <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="fu">file.choose</span>(),  <span class="co">#abre o windows explorer</span></span>
-<span id="cb13-3"><a href="xls.html#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rowNames =</span> T, <span class="at">colNames =</span> T,</span>
-<span id="cb13-4"><a href="xls.html#cb13-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;Sheet1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="va">ppbio</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="co">#?View</span></span>
+<span><span class="co">#?view</span></span>
+<span><span class="co">#?remove</span></span></code></pre></div>
+<div id="outra-forma-de-achar-e-importar-uma-planilha" class="section level3" number="6.8.1">
+<h3>
+<span class="header-section-number">6.8.1</span> Outra forma de achar e importar uma planilha<a class="anchor" aria-label="anchor" href="#outra-forma-de-achar-e-importar-uma-planilha"><i class="fas fa-link"></i></a>
+</h3>
+<p>Essa forma é desaconselhavel porque é demorada e sujeita a erros. Além de precisar ser refeita sempre que se quiser abrir uma nova planilha ou reabrir a última planilha importada. Veja o tópico <a href="xls.html#prefira-sempre-c%C3%B3digos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r">Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.choose.html">file.choose</a></span><span class="op">(</span><span class="op">)</span>,  <span class="co">#abre o windows explorer</span></span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="importando-.ods-do-libreoffice-calc" class="section level2 hasAnchor" number="6.9">
-<h2><span class="header-section-number">6.9</span> Importando <code>.ods</code> do LibreOffice Calc<a href="xls.html#importando-.ods-do-libreoffice-calc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="importando-.ods-do-libreoffice-calc" class="section level2" number="6.9">
+<h2>
+<span class="header-section-number">6.9</span> Importando <code>.ods</code> do LibreOffice Calc<a class="anchor" aria-label="anchor" href="#importando-.ods-do-libreoffice-calc"><i class="fas fa-link"></i></a>
+</h2>
 <p>A planilha a seguir pode ser baixada da seção <a href="#download401"><strong>??</strong></a></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="xls.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readODS&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="xls.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readODS)</span></code></pre></div>
-<pre><code>## Warning: package &#39;readODS&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="xls.html#cb17-1" aria-hidden="true" tabindex="-1"></a>rebio23.ods <span class="ot">&lt;-</span> <span class="fu">read_ods</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/rebio23-zoopl_5-20.ods&quot;</span>,</span>
-<span id="cb17-2"><a href="xls.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">row_names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-3"><a href="xls.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-4"><a href="xls.html#cb17-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;densidade_hab_indL&quot;</span>,</span>
-<span id="cb17-5"><a href="xls.html#cb17-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">as_tibble =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb17-6"><a href="xls.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="st">&quot;n/a&quot;</span>) <span class="co"># porque existem celulas vazias (n/a)</span></span>
-<span id="cb17-7"><a href="xls.html#cb17-7" aria-hidden="true" tabindex="-1"></a>rebio23.ods <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(rebio23.ods)</span>
-<span id="cb17-8"><a href="xls.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rebio23.ods)</span>
-<span id="cb17-9"><a href="xls.html#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rebio23.ods)</span>
-<span id="cb17-10"><a href="xls.html#cb17-10" aria-hidden="true" tabindex="-1"></a>rebio23.ods_ma <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(rebio23.ods) <span class="co">#lê como uma matriz</span></span>
-<span id="cb17-11"><a href="xls.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rebio23.ods_ma)</span>
-<span id="cb17-12"><a href="xls.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rebio23.ods_ma)</span>
-<span id="cb17-13"><a href="xls.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#rebio23.ods</span></span>
-<span id="cb17-14"><a href="xls.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#rebio23.ods_ma</span></span></code></pre></div>
-<div id="colunas-com-o-mesmo-nome" class="section level3 hasAnchor" number="6.9.1">
-<h3><span class="header-section-number">6.9.1</span> Colunas com o mesmo nome<a href="xls.html#colunas-com-o-mesmo-nome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"readODS"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/readODS">readODS</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: package 'readODS' was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rebio23.ods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/readODS/reference/read_ods.html">read_ods</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/rebio23-zoopl_5-20.ods"</span>,</span>
+<span>                   row_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   col_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"densidade_hab_indL"</span>,</span>
+<span>                   as_tibble <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                   na <span class="op">=</span> <span class="st">"n/a"</span><span class="op">)</span> <span class="co"># porque existem celulas vazias (n/a)</span></span>
+<span><span class="va">rebio23.ods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">rebio23.ods</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">rebio23.ods</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">rebio23.ods</span><span class="op">)</span></span>
+<span><span class="va">rebio23.ods_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">rebio23.ods</span><span class="op">)</span> <span class="co">#lê como uma matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">rebio23.ods_ma</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">rebio23.ods_ma</span><span class="op">)</span></span>
+<span><span class="co">#rebio23.ods</span></span>
+<span><span class="co">#rebio23.ods_ma</span></span></code></pre></div>
+<div id="colunas-com-o-mesmo-nome" class="section level3" number="6.9.1">
+<h3>
+<span class="header-section-number">6.9.1</span> Colunas com o mesmo nome<a class="anchor" aria-label="anchor" href="#colunas-com-o-mesmo-nome"><i class="fas fa-link"></i></a>
+</h3>
 <p>Em algumas situações é necessário encontrar colunas com o mesmo nome em um conjunto de dados e soma-las ou fazer sua média. Isso pode ocorrer quando se está trabalhando com dados de várias fontes e é necessário combinar esses diferentes conjuntos de dados.</p>
 <p>Considere por exemplo um cenário onde se está trabalhando em um projeto de análise de dados ecológicos e você recebeu conjuntos de dados de diferentes locais de amostragens enviados por diferentes pesquisadores, e cada pesquiador enviou seu conjunto de dados que contém informações sobre as mesmas espécies (ou variáveis ambientais). Devido a diferentes sistemas de registro ou a falta de comunicação entre os pesquisadores, pode haver repetição nos nomes das colunas.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="xls.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Dados de mamíferos roedores</span></span>
-<span id="cb18-2"><a href="xls.html#cb18-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb18-3"><a href="xls.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rato =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb18-4"><a href="xls.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Musaranho =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>),</span>
-<span id="cb18-5"><a href="xls.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rato =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="co">#nome duplicado</span></span>
-<span id="cb18-6"><a href="xls.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Esquilo =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb18-7"><a href="xls.html#cb18-7" aria-hidden="true" tabindex="-1"></a>  Ratão <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb18-8"><a href="xls.html#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Castor =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb18-9"><a href="xls.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  Tâmia <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>),</span>
-<span id="cb18-10"><a href="xls.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Marmota =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>),</span>
-<span id="cb18-11"><a href="xls.html#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Castor =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="co">#nome duplicado</span></span>
-<span id="cb18-12"><a href="xls.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-13"><a href="xls.html#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-14"><a href="xls.html#cb18-14" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Dados de mamíferos roedores</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Rato <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  Musaranho <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>  Rato <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, <span class="co">#nome duplicado</span></span>
+<span>  Esquilo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  Ratão <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  Castor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  Tâmia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">12</span>, <span class="fl">13</span><span class="op">)</span>,</span>
+<span>  Marmota <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  Castor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="co">#nome duplicado</span></span>
+<span>  check.names <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code></pre></div>
 <pre><code>##   Rato Musaranho Rato Esquilo Ratão Castor Tâmia Marmota Castor
 ## 1    1         4    7       0     1      1    11       1      2
 ## 2    2         5    8       0     1      0    12       2      1
 ## 3    3         6    9       1     0      0    13       0      1</code></pre>
 <p>Por exemplo, no estudo sobre mamíferos roedores acima, quando se combina o conjunto geral de dados para realizar uma análise abrangente, depara-se com colunas duplicadas, onde a matriz com o conjunto total de dados contém espécies repetidas.</p>
 <p>Nesse caso, encontrar e resolver colunas com o mesmo nome é crucial para garantir a integridade dos dados e realizar uma análise precisa. Você deve consolidar essas colunas duplicadas, somando-as ou fazendo sua média.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="xls.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Achando colunas com nomes duplicados</span></span>
-<span id="cb20-2"><a href="xls.html#cb20-2" aria-hidden="true" tabindex="-1"></a>dup_cols <span class="ot">&lt;-</span> <span class="fu">names</span>(df)[<span class="fu">duplicated</span>(<span class="fu">names</span>(df))]</span>
-<span id="cb20-3"><a href="xls.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Somando colunas com o mesmo nome</span></span>
-<span id="cb20-4"><a href="xls.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col_name <span class="cf">in</span> <span class="fu">unique</span>(dup_cols)) {</span>
-<span id="cb20-5"><a href="xls.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get indices of columns with the same name</span></span>
-<span id="cb20-6"><a href="xls.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  col_indices <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> col_name)</span>
-<span id="cb20-7"><a href="xls.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sum columns with the same name</span></span>
-<span id="cb20-8"><a href="xls.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  df[[col_name]] <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(df[, col_indices, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb20-9"><a href="xls.html#cb20-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-10"><a href="xls.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove as colunas duplicadas originais e mantem as novas colunas que são a soma (&quot;except for the first occurrence&quot;)</span></span>
-<span id="cb20-11"><a href="xls.html#cb20-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[, <span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">names</span>(df))]</span>
-<span id="cb20-12"><a href="xls.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostra a nova tabela com colunas repetidas somadas</span></span>
-<span id="cb20-13"><a href="xls.html#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Achando colunas com nomes duplicados</span></span>
+<span><span class="va">dup_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># Somando colunas com o mesmo nome</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">col_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">dup_cols</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Get indices of columns with the same name</span></span>
+<span>  <span class="va">col_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">==</span> <span class="va">col_name</span><span class="op">)</span></span>
+<span>  <span class="co"># Sum columns with the same name</span></span>
+<span>  <span class="va">df</span><span class="op">[[</span><span class="va">col_name</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="va">col_indices</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># Remove as colunas duplicadas originais e mantem as novas colunas que são a soma ("except for the first occurrence")</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># Mostra a nova tabela com colunas repetidas somadas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   Rato Musaranho Esquilo Ratão Castor Tâmia Marmota
 ## 1    8         4       0     1      3    11       1
 ## 2   10         5       0     1      1    12       2
 ## 3   12         6       1     0      1    13       0</code></pre>
 </div>
-<div id="removendo-linhas-ou-colunas-por-nome" class="section level3 hasAnchor" number="6.9.2">
-<h3><span class="header-section-number">6.9.2</span> Removendo linhas ou colunas por nome<a href="xls.html#removendo-linhas-ou-colunas-por-nome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="xls.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Colunas</span></span>
-<span id="cb22-2"><a href="xls.html#cb22-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, <span class="at">select =</span> <span class="sc">-</span>Lec.mono) <span class="co">#escolhendo uma coluna pelo nome</span></span>
-<span id="cb22-3"><a href="xls.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="xls.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Linhas</span></span>
-<span id="cb22-5"><a href="xls.html#cb22-5" aria-hidden="true" tabindex="-1"></a>del_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ST20&quot;</span>)</span>
-<span id="cb22-6"><a href="xls.html#cb22-6" aria-hidden="true" tabindex="-1"></a>del_rows</span>
-<span id="cb22-7"><a href="xls.html#cb22-7" aria-hidden="true" tabindex="-1"></a>m_part <span class="ot">&lt;-</span> df[<span class="sc">!</span>(<span class="fu">row.names</span>(entorno) <span class="sc">%in%</span> <span class="fu">c</span>(del_rows)),]</span>
-<span id="cb22-8"><a href="xls.html#cb22-8" aria-hidden="true" tabindex="-1"></a>m_part</span></code></pre></div>
+<div id="removendo-linhas-ou-colunas-por-nome" class="section level3" number="6.9.2">
+<h3>
+<span class="header-section-number">6.9.2</span> Removendo linhas ou colunas por nome<a class="anchor" aria-label="anchor" href="#removendo-linhas-ou-colunas-por-nome"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Colunas</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, select <span class="op">=</span> <span class="op">-</span><span class="va">Lec.mono</span><span class="op">)</span> <span class="co">#escolhendo uma coluna pelo nome</span></span>
+<span></span>
+<span><span class="co">#Linhas</span></span>
+<span><span class="va">del_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ST20"</span><span class="op">)</span></span>
+<span><span class="va">del_rows</span></span>
+<span><span class="va">m_part</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">entorno</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">del_rows</span><span class="op">)</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">m_part</span></span></code></pre></div>
 </div>
-<div id="criando-uma-matriz-de-médias" class="section level3 hasAnchor" number="6.9.3">
-<h3><span class="header-section-number">6.9.3</span> Criando uma matriz de médias<a href="xls.html#criando-uma-matriz-de-médias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="criando-uma-matriz-de-médias" class="section level3" number="6.9.3">
+<h3>
+<span class="header-section-number">6.9.3</span> Criando uma matriz de médias<a class="anchor" aria-label="anchor" href="#criando-uma-matriz-de-m%C3%A9dias"><i class="fas fa-link"></i></a>
+</h3>
 <p>Por razões diferentes o precedimento anterior pode vir a ser necessário de ser aplicado às linhas. Por exemplo, quando se quer somar ou fazer a média de amostras diferentes do mesmo ambiente de coleta. Veja a matriz abaixo.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="xls.html#cb23-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">text =</span> <span class="st">&quot;</span></span>
-<span id="cb23-2"><a href="xls.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="st">Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7 Sp8</span></span>
-<span id="cb23-3"><a href="xls.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="st">A1 0 0 0 0 0 0 6 1</span></span>
-<span id="cb23-4"><a href="xls.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="st">A2 0 0 0 2 0 0 10 2</span></span>
-<span id="cb23-5"><a href="xls.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="st">B1 93 2 0 177 0 260 2 5</span></span>
-<span id="cb23-6"><a href="xls.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="st">B2 0 4 0 8 0 0 83 7</span></span>
-<span id="cb23-7"><a href="xls.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="st">C1 0 0 0 0 1 0 0 1</span></span>
-<span id="cb23-8"><a href="xls.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="st">C2 0 0 1 0 0 1 0 1</span></span>
-<span id="cb23-9"><a href="xls.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="st">C3 0 2 0 2 0 0 0 1</span></span>
-<span id="cb23-10"><a href="xls.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb23-11"><a href="xls.html#cb23-11" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">"</span></span>
+<span><span class="st">Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7 Sp8</span></span>
+<span><span class="st">A1 0 0 0 0 0 0 6 1</span></span>
+<span><span class="st">A2 0 0 0 2 0 0 10 2</span></span>
+<span><span class="st">B1 93 2 0 177 0 260 2 5</span></span>
+<span><span class="st">B2 0 4 0 8 0 0 83 7</span></span>
+<span><span class="st">C1 0 0 0 0 1 0 0 1</span></span>
+<span><span class="st">C2 0 0 1 0 0 1 0 1</span></span>
+<span><span class="st">C3 0 2 0 2 0 0 0 1</span></span>
+<span><span class="st">"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">data</span></span></code></pre></div>
 <pre><code>##    Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7 Sp8
 ## A1   0   0   0   0   0   0   6   1
 ## A2   0   0   0   2   0   0  10   2
@@ -978,193 +535,223 @@ Os links para baixar as planilhas necessárias para repetir esse tutorial podem 
 ## C1   0   0   0   0   1   0   0   1
 ## C2   0   0   1   0   0   1   0   1
 ## C3   0   2   0   2   0   0   0   1</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="xls.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
-<span id="cb25-2"><a href="xls.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Inserindo coluna para agrupamentos</span></span>
-<span id="cb25-3"><a href="xls.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data); <span class="fu">ncol</span>(data) <span class="co">#no. de N colunas x M linhas</span></span>
-<span id="cb25-4"><a href="xls.html#cb25-4" aria-hidden="true" tabindex="-1"></a>data_g <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Grupos =</span> <span class="fu">rownames</span>(data), data)</span>
-<span id="cb25-5"><a href="xls.html#cb25-5" aria-hidden="true" tabindex="-1"></a>data_g</span>
-<span id="cb25-6"><a href="xls.html#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="xls.html#cb25-7" aria-hidden="true" tabindex="-1"></a>grps <span class="ot">&lt;-</span> <span class="fu">substr</span>(data_g[, <span class="dv">1</span>], <span class="dv">1</span>,<span class="dv">3</span>)</span>
-<span id="cb25-8"><a href="xls.html#cb25-8" aria-hidden="true" tabindex="-1"></a>grps</span>
-<span id="cb25-9"><a href="xls.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="xls.html#cb25-10" aria-hidden="true" tabindex="-1"></a>data_g <span class="ot">&lt;-</span> data_g <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Grupos=</span><span class="fu">c</span>(grps))</span>
-<span id="cb25-11"><a href="xls.html#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="xls.html#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#data_avg &lt;- aggregate(data_g[, 9:9], list(data_g$Grupos), mean)</span></span>
-<span id="cb25-13"><a href="xls.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#data_avg</span></span>
-<span id="cb25-14"><a href="xls.html#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="xls.html#cb25-15" aria-hidden="true" tabindex="-1"></a>data_avg <span class="ot">&lt;-</span> data_g <span class="sc">%&gt;%</span> </span>
-<span id="cb25-16"><a href="xls.html#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupos) <span class="sc">%&gt;%</span></span>
-<span id="cb25-17"><a href="xls.html#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb25-18"><a href="xls.html#cb25-18" aria-hidden="true" tabindex="-1"></a>data_avg</span>
-<span id="cb25-19"><a href="xls.html#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-20"><a href="xls.html#cb25-20" aria-hidden="true" tabindex="-1"></a>data_dp <span class="ot">&lt;-</span> data_g <span class="sc">%&gt;%</span> </span>
-<span id="cb25-21"><a href="xls.html#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupos) <span class="sc">%&gt;%</span></span>
-<span id="cb25-22"><a href="xls.html#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">everything</span>(), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd)))</span>
-<span id="cb25-23"><a href="xls.html#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co">#?across</span></span>
-<span id="cb25-24"><a href="xls.html#cb25-24" aria-hidden="true" tabindex="-1"></a>data_dp</span>
-<span id="cb25-25"><a href="xls.html#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-26"><a href="xls.html#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Primeira coluna para nomes das linhas </span></span>
-<span id="cb25-27"><a href="xls.html#cb25-27" aria-hidden="true" tabindex="-1"></a>data_dp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data_dp)</span>
-<span id="cb25-28"><a href="xls.html#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(data_dp)</span>
-<span id="cb25-29"><a href="xls.html#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data_dp) <span class="ot">&lt;-</span> data_dp[,<span class="dv">1</span>]</span>
-<span id="cb25-30"><a href="xls.html#cb25-30" aria-hidden="true" tabindex="-1"></a>data_dp[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb25-31"><a href="xls.html#cb25-31" aria-hidden="true" tabindex="-1"></a>data_dp <span class="ot">&lt;-</span> <span class="fu">round</span>(data_dp, <span class="dv">1</span>)</span>
-<span id="cb25-32"><a href="xls.html#cb25-32" aria-hidden="true" tabindex="-1"></a>data_dp</span>
-<span id="cb25-33"><a href="xls.html#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="co">#Salvando a matriz</span></span>
-<span id="cb25-34"><a href="xls.html#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(data_dp,</span>
-<span id="cb25-35"><a href="xls.html#cb25-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;data_dp.csv&quot;</span>,</span>
-<span id="cb25-36"><a href="xls.html#cb25-36" aria-hidden="true" tabindex="-1"></a>            <span class="at">append =</span> F,</span>
-<span id="cb25-37"><a href="xls.html#cb25-37" aria-hidden="true" tabindex="-1"></a>            <span class="at">quote =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-38"><a href="xls.html#cb25-38" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>,</span>
-<span id="cb25-39"><a href="xls.html#cb25-39" aria-hidden="true" tabindex="-1"></a>            <span class="at">row.names =</span> T)</span>
-<span id="cb25-40"><a href="xls.html#cb25-40" aria-hidden="true" tabindex="-1"></a>data_dp_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data_dp.csv&quot;</span>,</span>
-<span id="cb25-41"><a href="xls.html#cb25-41" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>,</span>
-<span id="cb25-42"><a href="xls.html#cb25-42" aria-hidden="true" tabindex="-1"></a>                    <span class="at">header =</span> T,</span>
-<span id="cb25-43"><a href="xls.html#cb25-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb25-44"><a href="xls.html#cb25-44" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.strings =</span> <span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
+<span><span class="co">#Inserindo coluna para agrupamentos</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co">#no. de N colunas x M linhas</span></span>
+<span><span class="va">data_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Grupos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>, <span class="va">data</span><span class="op">)</span></span>
+<span><span class="va">data_g</span></span>
+<span></span>
+<span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">data_g</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">grps</span></span>
+<span></span>
+<span><span class="va">data_g</span> <span class="op">&lt;-</span> <span class="va">data_g</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Grupos<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">grps</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#data_avg &lt;- aggregate(data_g[, 9:9], list(data_g$Grupos), mean)</span></span>
+<span><span class="co">#data_avg</span></span>
+<span></span>
+<span><span class="va">data_avg</span> <span class="op">&lt;-</span> <span class="va">data_g</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Grupos</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data_avg</span></span>
+<span></span>
+<span><span class="va">data_dp</span> <span class="op">&lt;-</span> <span class="va">data_g</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Grupos</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#?across</span></span>
+<span><span class="va">data_dp</span></span>
+<span></span>
+<span><span class="co">#Primeira coluna para nomes das linhas </span></span>
+<span><span class="va">data_dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">data_dp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">data_dp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data_dp</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">data_dp</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">data_dp</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="va">data_dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">data_dp</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">data_dp</span></span>
+<span><span class="co">#Salvando a matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">data_dp</span>,</span>
+<span>            <span class="st">"data_dp.csv"</span>,</span>
+<span>            append <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>            quote <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">","</span>,</span>
+<span>            row.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">data_dp_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data_dp.csv"</span>,</span>
+<span>                    sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">","</span>,</span>
+<span>                    header <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                    row.names <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                    na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="apêndices-3" class="section level2 unnumbered hasAnchor">
-<h2>Apêndices<a href="xls.html#apêndices-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="sites-consultados-1" class="section level3 unnumbered hasAnchor">
-<h3>Sites consultados<a href="xls.html#sites-consultados-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>[<a href="https://youtu.be/U6ksXvvY6Q0" class="uri">https://youtu.be/U6ksXvvY6Q0</a>]<br />
+<div id="apêndices-3" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-3"><i class="fas fa-link"></i></a>
+</h2>
+<div id="sites-consultados-1" class="section level3 unnumbered">
+<h3>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>[<a href="https://youtu.be/U6ksXvvY6Q0" class="uri">https://youtu.be/U6ksXvvY6Q0</a>]<br>
 [<a href="https://youtu.be/a7EJE_2mtGk" class="uri">https://youtu.be/a7EJE_2mtGk</a>]</p>
 </div>
 </div>
-<div id="script-limpo" class="section level2 unnumbered hasAnchor">
-<h2>Script limpo<a href="xls.html#script-limpo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="script-limpo" class="section level2 unnumbered">
+<h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo"><i class="fas fa-link"></i></a>
+</h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="xls.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages(&quot;readxl&quot;) #importa arquivos do excel</span></span>
-<span id="cb26-2"><a href="xls.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="do">## library(readxl)</span></span>
-<span id="cb26-3"><a href="xls.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="do">## getwd()</span></span>
-<span id="cb26-4"><a href="xls.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="do">## setwd(&quot;C:/Seu/Diretório/De/Trabalho&quot;)</span></span>
-<span id="cb26-5"><a href="xls.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb26-6"><a href="xls.html#cb26-6" aria-hidden="true" tabindex="-1"></a>ppbio06 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06.xlsx&quot;</span>,</span>
-<span id="cb26-7"><a href="xls.html#cb26-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sheet =</span> <span class="st">&quot;Sheet1&quot;</span>,</span>
-<span id="cb26-8"><a href="xls.html#cb26-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na =</span> <span class="st">&quot;NA&quot;</span>)</span>
-<span id="cb26-9"><a href="xls.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio06)</span>
-<span id="cb26-10"><a href="xls.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio06)</span>
-<span id="cb26-11"><a href="xls.html#cb26-11" aria-hidden="true" tabindex="-1"></a>ppbio06 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ppbio06)</span>
-<span id="cb26-12"><a href="xls.html#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio06)</span>
-<span id="cb26-13"><a href="xls.html#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(ppbio06) <span class="ot">&lt;-</span> ppbio06[,<span class="dv">1</span>] <span class="co">#tem  que ser um df</span></span>
-<span id="cb26-14"><a href="xls.html#cb26-14" aria-hidden="true" tabindex="-1"></a>ppbio06[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb26-15"><a href="xls.html#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;openxlsx&quot;)</span></span>
-<span id="cb26-16"><a href="xls.html#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb26-17"><a href="xls.html#cb26-17" aria-hidden="true" tabindex="-1"></a>ppbio <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/bentos06.xlsx&quot;</span>,</span>
-<span id="cb26-18"><a href="xls.html#cb26-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rowNames =</span> T,</span>
-<span id="cb26-19"><a href="xls.html#cb26-19" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colNames =</span> T,</span>
-<span id="cb26-20"><a href="xls.html#cb26-20" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;contagem&quot;</span>)</span>
-<span id="cb26-21"><a href="xls.html#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
-<span id="cb26-22"><a href="xls.html#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio)</span>
-<span id="cb26-23"><a href="xls.html#cb26-23" aria-hidden="true" tabindex="-1"></a>ppbio_ma <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(ppbio) <span class="co">#lê ppbio como uma matriz</span></span>
-<span id="cb26-24"><a href="xls.html#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio_ma)</span>
-<span id="cb26-25"><a href="xls.html#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio_ma)</span>
-<span id="cb26-26"><a href="xls.html#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="co">#ppbio</span></span>
-<span id="cb26-27"><a href="xls.html#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="co">#ppbio_ma</span></span>
-<span id="cb26-28"><a href="xls.html#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="do">## write.table(ppbio, &quot;ppbiocsv.txt&quot;, append = F, quote = T, &quot;;&quot;, row.names = T)</span></span>
-<span id="cb26-29"><a href="xls.html#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="do">## dir &lt;- getwd()</span></span>
-<span id="cb26-30"><a href="xls.html#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="do">## shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
-<span id="cb26-31"><a href="xls.html#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="do">## ppbiocsv &lt;- read.csv(&quot;ppbiocsv.txt&quot;,</span></span>
-<span id="cb26-32"><a href="xls.html#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="do">##                      sep = &quot;;&quot;, dec = &quot;,&quot;, #definimos o dígito separador</span></span>
-<span id="cb26-33"><a href="xls.html#cb26-33" aria-hidden="true" tabindex="-1"></a><span class="do">##                      header = T,</span></span>
-<span id="cb26-34"><a href="xls.html#cb26-34" aria-hidden="true" tabindex="-1"></a><span class="do">##                      row.names = 1,</span></span>
-<span id="cb26-35"><a href="xls.html#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="do">##                      na.strings = NA)</span></span>
-<span id="cb26-36"><a href="xls.html#cb26-36" aria-hidden="true" tabindex="-1"></a><span class="do">## str(ppbiocsv)</span></span>
-<span id="cb26-37"><a href="xls.html#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="do">## ppbiocsv</span></span>
-<span id="cb26-38"><a href="xls.html#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="do">## #View(ppbio)</span></span>
-<span id="cb26-39"><a href="xls.html#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="do">## print(ppbio)</span></span>
-<span id="cb26-40"><a href="xls.html#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="do">## ppbio</span></span>
-<span id="cb26-41"><a href="xls.html#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="do">## str(ppbio)</span></span>
-<span id="cb26-42"><a href="xls.html#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="do">## #?View</span></span>
-<span id="cb26-43"><a href="xls.html#cb26-43" aria-hidden="true" tabindex="-1"></a><span class="do">## #?view</span></span>
-<span id="cb26-44"><a href="xls.html#cb26-44" aria-hidden="true" tabindex="-1"></a><span class="do">## #?remove</span></span>
-<span id="cb26-45"><a href="xls.html#cb26-45" aria-hidden="true" tabindex="-1"></a><span class="do">## getwd()</span></span>
-<span id="cb26-46"><a href="xls.html#cb26-46" aria-hidden="true" tabindex="-1"></a><span class="do">## ppbio &lt;- read.xlsx(file.choose(),  #abre o windows explorer</span></span>
-<span id="cb26-47"><a href="xls.html#cb26-47" aria-hidden="true" tabindex="-1"></a><span class="do">##                    rowNames = T, colNames = T,</span></span>
-<span id="cb26-48"><a href="xls.html#cb26-48" aria-hidden="true" tabindex="-1"></a><span class="do">##                    sheet = &quot;Sheet1&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## install.packages("readxl") #importa arquivos do excel</span></span>
+<span><span class="co">## library(readxl)</span></span>
+<span><span class="co">## getwd()</span></span>
+<span><span class="co">## setwd("C:/Seu/Diretório/De/Trabalho")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio06</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06.xlsx"</span>,</span>
+<span>                      sheet <span class="op">=</span> <span class="st">"Sheet1"</span>,</span>
+<span>                      na <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
+<span><span class="va">ppbio06</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ppbio06</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="co">#tem  que ser um df</span></span>
+<span><span class="va">ppbio06</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="co">#install.packages("openxlsx")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/bentos06.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"contagem"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="va">ppbio_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span> <span class="co">#lê ppbio como uma matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio_ma</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio_ma</span><span class="op">)</span></span>
+<span><span class="co">#ppbio</span></span>
+<span><span class="co">#ppbio_ma</span></span>
+<span><span class="co">## write.table(ppbio, "ppbiocsv.txt", append = F, quote = T, ";", row.names = T)</span></span>
+<span><span class="co">## dir &lt;- getwd()</span></span>
+<span><span class="co">## shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
+<span><span class="co">## ppbiocsv &lt;- read.csv("ppbiocsv.txt",</span></span>
+<span><span class="co">##                      sep = ";", dec = ",", #definimos o dígito separador</span></span>
+<span><span class="co">##                      header = T,</span></span>
+<span><span class="co">##                      row.names = 1,</span></span>
+<span><span class="co">##                      na.strings = NA)</span></span>
+<span><span class="co">## str(ppbiocsv)</span></span>
+<span><span class="co">## ppbiocsv</span></span>
+<span><span class="co">## #View(ppbio)</span></span>
+<span><span class="co">## print(ppbio)</span></span>
+<span><span class="co">## ppbio</span></span>
+<span><span class="co">## str(ppbio)</span></span>
+<span><span class="co">## #?View</span></span>
+<span><span class="co">## #?view</span></span>
+<span><span class="co">## #?remove</span></span>
+<span><span class="co">## getwd()</span></span>
+<span><span class="co">## ppbio &lt;- read.xlsx(file.choose(),  #abre o windows explorer</span></span>
+<span><span class="co">##                    rowNames = T, colNames = T,</span></span>
+<span><span class="co">##                    sheet = "Sheet1")</span></span></code></pre></div>
 </div>
-<div id="referências-4" class="section level2 unnumbered hasAnchor">
-<h2>Referências<a href="xls.html#referências-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="referências-4" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-4"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
-<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Bibliografia Geral</h3>
 <div id="refs" class="references csl-bib-body" entry-spacing="1">
 <div id="ref-RN2774" class="csl-entry">
-TEAM, R. D. C. <strong><a href="https://www.r-project.org/">R: A language and environment for statistical computing</a></strong>. Austria: R Foundation for Statistical Computing, 2017.
+TEAM, R. D. C. <strong>R: A language and environment for statistical computing</strong>. Austria: R Foundation for Statistical Computing, 2017. Disponível em: &lt;<a href="https://www.r-project.org/">https://www.r-project.org/</a>&gt;
 </div>
 <div id="ref-RN358" class="csl-entry">
-TEAM, R. S. <strong><a href="https://posit.co/products/open-source/rstudio/">RStudio: Integrated Development Environment for R</a></strong>. Boston, MA: RStudio, PBC, 2022.
+TEAM, R. S. <strong>RStudio: Integrated Development Environment for R</strong>. Boston, MA: RStudio, PBC, 2022. Disponível em: &lt;<a href="https://posit.co/products/open-source/rstudio/">https://posit.co/products/open-source/rstudio/</a>&gt;
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>A etimologia do gênero <em>Astyanax</em> vem da mitologia Grega. Heitor personagem da “Ilíada”, tinha um filho chamado Astíanax.<a href="xls.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Do Grego, <em>hoplon</em>, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.<a href="xls.html#fnref2" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="basehab.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tiposR.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+  <div class="chapter-nav">
+<div class="prev"><a href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></div>
+<div class="next"><a href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#xls"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-4">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-3">Apresentação</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#instala%C3%A7%C3%A3o-do-r-e-rstudio"><span class="header-section-number">6.1</span> Instalação do R e RStudio</a></li>
+<li><a class="nav-link" href="#r-base"><span class="header-section-number">6.2</span> R base</a></li>
+<li>
+<a class="nav-link" href="#rstudio"><span class="header-section-number">6.3</span> RStudio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#rstudio-na-nuvem"><span class="header-section-number">6.3.1</span> RStudio na nuvem</a></li></ul>
+</li>
+<li><a class="nav-link" href="#sobre-os-dados-do-ppbio-2"><span class="header-section-number">6.4</span> Sobre os dados do PPBio</a></li>
+<li><a class="nav-link" href="#importando-a-planilha-de-trabalho"><span class="header-section-number">6.5</span> Importando a planilha de trabalho</a></li>
+<li><a class="nav-link" href="#mensagens-de-erro-e-avisos-no-r"><span class="header-section-number">6.6</span> Mensagens de erro e avisos no R</a></li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica"><span class="header-section-number">6.7</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#prefira-sempre-c%C3%B3digos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r"><span class="header-section-number">6.7.1</span> Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#importando-a-planilha"><span class="header-section-number">6.8</span> Importando a planilha</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#outra-forma-de-achar-e-importar-uma-planilha"><span class="header-section-number">6.8.1</span> Outra forma de achar e importar uma planilha</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#importando-.ods-do-libreoffice-calc"><span class="header-section-number">6.9</span> Importando .ods do LibreOffice Calc</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#colunas-com-o-mesmo-nome"><span class="header-section-number">6.9.1</span> Colunas com o mesmo nome</a></li>
+<li><a class="nav-link" href="#removendo-linhas-ou-colunas-por-nome"><span class="header-section-number">6.9.2</span> Removendo linhas ou colunas por nome</a></li>
+<li><a class="nav-link" href="#criando-uma-matriz-de-m%C3%A9dias"><span class="header-section-number">6.9.3</span> Criando uma matriz de médias</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#ap%C3%AAndices-3">Apêndices</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#sites-consultados-1">Sites consultados</a></li></ul>
+</li>
+<li><a class="nav-link" href="#script-limpo">Script limpo</a></li>
+<li><a class="nav-link" href="#refer%C3%AAncias-4">Referências</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/3-01-rmd1_xls.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["fundamentos_de_ecologia_numerica.pdf", "fundamentos_de_ecologia_numerica.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
 }
-});
-});
 </script>
-
 </body>
-
 </html>

@@ -1,643 +1,164 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
-  <meta name="description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
-
-  <meta property="og:title" content=" 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="…. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/fundamentos_de_ecologia_numerica" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica" />
-  
-  <meta name="twitter:description" content="…. The output format for this example is bookdown::gitbook." />
-  
-
-<meta name="author" content="Prof. Elvio S. F. Medeiros" />
-<meta name="author" content="Laboratório de Ecologia" />
-<meta name="author" content="Universidade Estadual da Paraíba" />
-<meta name="author" content="Campus V, João Pessoa, PB" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="partdiv.html"/>
-<link rel="next" href="reltrns.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="RESUMO  Apresentação   13.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content=" 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="RESUMO  Apresentação   13.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO  Apresentação   13.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 1em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style2.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Fundamentos de Ecologia Numérica</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apresentação</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#motivação"><i class="fa fa-check"></i><b>1.1</b> Motivação</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#organização-do-livro"><i class="fa fa-check"></i><b>1.2</b> Organização do livro</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#como-estudar-por-esse-livro"><i class="fa fa-check"></i><b>1.3</b> Como estudar por esse livro?</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#para-um-estudo-aprofundado"><i class="fa fa-check"></i><b>1.3.1</b> Para um estudo aprofundado</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introdução ao R/RStudio</a>
-<ul>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#resumo"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#plano-de-estudo"><i class="fa fa-check"></i><b>2.1</b> Plano de estudo</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#pré-requisitos"><i class="fa fa-check"></i><b>2.2</b> Pré-requisitos</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#principais-conceitos"><i class="fa fa-check"></i><b>2.3</b> Principais conceitos</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#o-ambiente-de-programação-do-r"><i class="fa fa-check"></i><b>2.3.1</b> O ambiente de programação do R</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#o-que-é-o-r-studio"><i class="fa fa-check"></i><b>2.4</b> O que é o R Studio?</a></li>
-<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#o-essencial"><i class="fa fa-check"></i><b>2.5</b> O essencial</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="intro.html"><a href="intro.html#licença-de-software"><i class="fa fa-check"></i><b>2.5.1</b> Licença de software</a></li>
-<li class="chapter" data-level="2.5.2" data-path="intro.html"><a href="intro.html#interface-do-usuário"><i class="fa fa-check"></i><b>2.5.2</b> Interface do usuário</a></li>
-<li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#interface-do-usuário-do-rstudio"><i class="fa fa-check"></i><b>2.5.3</b> Interface do usuário do RStudio</a></li>
-<li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#projetos"><i class="fa fa-check"></i><b>2.5.4</b> Projetos</a></li>
-<li class="chapter" data-level="2.5.5" data-path="intro.html"><a href="intro.html#nomes-de-arquivos"><i class="fa fa-check"></i><b>2.5.5</b> Nomes de arquivos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#preparação-dos-arquivos"><i class="fa fa-check"></i><b>2.6</b> Preparação dos arquivos</a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="intro.html"><a href="intro.html#formatos-de-arquivo-de-dados"><i class="fa fa-check"></i><b>2.6.1</b> Formatos de arquivo de dados</a></li>
-<li class="chapter" data-level="2.6.2" data-path="intro.html"><a href="intro.html#o-arquivo-de-espécies"><i class="fa fa-check"></i><b>2.6.2</b> O arquivo de espécies</a></li>
-<li class="chapter" data-level="2.6.3" data-path="intro.html"><a href="intro.html#formato-de-valores-separados-por-vírgula-.csv"><i class="fa fa-check"></i><b>2.6.3</b> Formato de valores separados por vírgula (.csv)</a></li>
-<li class="chapter" data-level="2.6.4" data-path="intro.html"><a href="intro.html#editando-a-matriz-de-dados"><i class="fa fa-check"></i><b>2.6.4</b> Editando a matriz de dados</a></li>
-<li class="chapter" data-level="2.6.5" data-path="intro.html"><a href="intro.html#arquivos-de-resultados"><i class="fa fa-check"></i><b>2.6.5</b> Arquivos de resultados</a></li>
-<li class="chapter" data-level="2.6.6" data-path="intro.html"><a href="intro.html#gráficos"><i class="fa fa-check"></i><b>2.6.6</b> Gráficos</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#conclusão"><i class="fa fa-check"></i><b>2.7</b> Conclusão</a></li>
-<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#sequência-típica-na-preparação-e-análise-de-dados"><i class="fa fa-check"></i><b>2.8</b> Sequência típica na preparação e análise de dados</a></li>
-<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#material-de-apoio"><i class="fa fa-check"></i><b>2.9</b> Material de apoio</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#apêndices"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#sites-consultados"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#leitura-suplementar"><i class="fa fa-check"></i>Leitura suplementar</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#referências"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>I BASES DE DADOS</b></span></li>
-<li class="chapter" data-level="3" data-path="bases.html"><a href="bases.html"><i class="fa fa-check"></i><b>3</b> Bases de Dados. Dados do PPBio Semiárido</a>
-<ul>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#exemplos-de-conjunto-de-dados-ecológicos-do-programa-de-pesquisa-em-biodiversidade-ppbio-do-semiárido"><i class="fa fa-check"></i>Exemplos de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido</a></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#resumo-1"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="3.1" data-path="bases.html"><a href="bases.html#sobre-os-dados-do-ppbio"><i class="fa fa-check"></i><b>3.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="3.2" data-path="bases.html"><a href="bases.html#arqs"><i class="fa fa-check"></i><b>3.2</b> Arquivos disponíveis</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="bases.html"><a href="bases.html#codificação-das-variáveis"><i class="fa fa-check"></i><b>3.2.1</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="3.2.2" data-path="bases.html"><a href="bases.html#abrev"><i class="fa fa-check"></i><b>3.2.2</b> Abreviações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bases.html"><a href="bases.html#referências-1"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="basepeixes.html"><a href="basepeixes.html"><i class="fa fa-check"></i><b>4</b> Base de Dados I - Peixes</a>
-<ul>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#estrutura-da-comunidade-peixes-no-semiárido"><i class="fa fa-check"></i>Estrutura da Comunidade: Peixes no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apresentação-1"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#resumo-2"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="4.1" data-path="basepeixes.html"><a href="basepeixes.html#introdução"><i class="fa fa-check"></i><b>4.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="basepeixes.html"><a href="basepeixes.html#desenho-amostral"><i class="fa fa-check"></i><b>4.1.1</b> Desenho Amostral</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="basepeixes.html"><a href="basepeixes.html#codificação-das-variáveis-1"><i class="fa fa-check"></i><b>4.2</b> Codificação das variáveis</a></li>
-<li class="chapter" data-level="4.3" data-path="basepeixes.html"><a href="basepeixes.html#amostragem-dos-dados"><i class="fa fa-check"></i><b>4.3</b> Amostragem dos dados</a></li>
-<li class="chapter" data-level="4.4" data-path="basepeixes.html"><a href="basepeixes.html#análises-estatísticas"><i class="fa fa-check"></i><b>4.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="4.5" data-path="basepeixes.html"><a href="basepeixes.html#discussão"><i class="fa fa-check"></i><b>4.5</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#apêndices-1"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="basepeixes.html"><a href="basepeixes.html#tabelas-e-figuras"><i class="fa fa-check"></i><b>4.5.1</b> Tabelas e Figuras</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="basepeixes.html"><a href="basepeixes.html#referências-2"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="basehab.html"><a href="basehab.html"><i class="fa fa-check"></i><b>5</b> Base de Dados II - Habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#estrutura-do-habitat-variáveis-ambientais-no-semiárido"><i class="fa fa-check"></i>Estrutura do Habitat: Variáveis ambientais no semiárido</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apresentação-2"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#resumo-3"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="5.1" data-path="basehab.html"><a href="basehab.html#introdução-1"><i class="fa fa-check"></i><b>5.1</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="basehab.html"><a href="basehab.html#desenho-amostral-1"><i class="fa fa-check"></i><b>5.1.1</b> Desenho Amostral</a></li>
-<li class="chapter" data-level="5.1.2" data-path="basehab.html"><a href="basehab.html#sobre-os-dados-do-ppbio-1"><i class="fa fa-check"></i><b>5.1.2</b> Sobre os dados do PPBio</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="basehab.html"><a href="basehab.html#codificação-para-variáveis"><i class="fa fa-check"></i><b>5.2</b> Codificação para variáveis</a></li>
-<li class="chapter" data-level="5.3" data-path="basehab.html"><a href="basehab.html#área-de-estudo-e-amostragem-dos-dados"><i class="fa fa-check"></i><b>5.3</b> Área de estudo e amostragem dos dados</a></li>
-<li class="chapter" data-level="5.4" data-path="basehab.html"><a href="basehab.html#análises-estatísticas-1"><i class="fa fa-check"></i><b>5.4</b> Análises estatísticas</a></li>
-<li class="chapter" data-level="5.5" data-path="basehab.html"><a href="basehab.html#resultados"><i class="fa fa-check"></i><b>5.5</b> Resultados</a></li>
-<li class="chapter" data-level="5.6" data-path="basehab.html"><a href="basehab.html#discussão-1"><i class="fa fa-check"></i><b>5.6</b> Discussão</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#apêndices-2"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="basehab.html"><a href="basehab.html#referências-3"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>II ESTATÍSTICAS DESCRITIVAS</b></span></li>
-<li class="chapter" data-level="6" data-path="xls.html"><a href="xls.html"><i class="fa fa-check"></i><b>6</b> R Modulo 1 - Importando planilhas de dados</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#resumo-4"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apresentação-3"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="6.1" data-path="xls.html"><a href="xls.html#instalação-do-r-e-rstudio"><i class="fa fa-check"></i><b>6.1</b> Instalação do R e RStudio</a></li>
-<li class="chapter" data-level="6.2" data-path="xls.html"><a href="xls.html#r-base"><i class="fa fa-check"></i><b>6.2</b> R base</a></li>
-<li class="chapter" data-level="6.3" data-path="xls.html"><a href="xls.html#rstudio"><i class="fa fa-check"></i><b>6.3</b> RStudio</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="xls.html"><a href="xls.html#rstudio-na-nuvem"><i class="fa fa-check"></i><b>6.3.1</b> RStudio na nuvem</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="xls.html"><a href="xls.html#sobre-os-dados-do-ppbio-2"><i class="fa fa-check"></i><b>6.4</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="6.5" data-path="xls.html"><a href="xls.html#importando-a-planilha-de-trabalho"><i class="fa fa-check"></i><b>6.5</b> Importando a planilha de trabalho</a></li>
-<li class="chapter" data-level="6.6" data-path="xls.html"><a href="xls.html#mensagens-de-erro-e-avisos-no-r"><i class="fa fa-check"></i><b>6.6</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="6.7" data-path="xls.html"><a href="xls.html#organização-básica"><i class="fa fa-check"></i><b>6.7</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="6.7.1" data-path="xls.html"><a href="xls.html#prefira-sempre-códigos-e-scripts-do-que-mouse-e-menus-de-janelas-no-r"><i class="fa fa-check"></i><b>6.7.1</b> Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></li>
-</ul></li>
-<li class="chapter" data-level="6.8" data-path="xls.html"><a href="xls.html#importando-a-planilha"><i class="fa fa-check"></i><b>6.8</b> Importando a planilha</a>
-<ul>
-<li class="chapter" data-level="6.8.1" data-path="xls.html"><a href="xls.html#outra-forma-de-achar-e-importar-uma-planilha"><i class="fa fa-check"></i><b>6.8.1</b> Outra forma de achar e importar uma planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="6.9" data-path="xls.html"><a href="xls.html#importando-.ods-do-libreoffice-calc"><i class="fa fa-check"></i><b>6.9</b> Importando <code>.ods</code> do LibreOffice Calc</a>
-<ul>
-<li class="chapter" data-level="6.9.1" data-path="xls.html"><a href="xls.html#colunas-com-o-mesmo-nome"><i class="fa fa-check"></i><b>6.9.1</b> Colunas com o mesmo nome</a></li>
-<li class="chapter" data-level="6.9.2" data-path="xls.html"><a href="xls.html#removendo-linhas-ou-colunas-por-nome"><i class="fa fa-check"></i><b>6.9.2</b> Removendo linhas ou colunas por nome</a></li>
-<li class="chapter" data-level="6.9.3" data-path="xls.html"><a href="xls.html#criando-uma-matriz-de-médias"><i class="fa fa-check"></i><b>6.9.3</b> Criando uma matriz de médias</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#apêndices-3"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#sites-consultados-1"><i class="fa fa-check"></i>Sites consultados</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#script-limpo"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="xls.html"><a href="xls.html#referências-4"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="tiposR.html"><a href="tiposR.html"><i class="fa fa-check"></i><b>7</b> R Modulo 2 - Tipos de Dados no R</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apresentação-4"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="7.1" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.1</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.2" data-path="tiposR.html"><a href="tiposR.html#mensagens-de-erro-e-avisos-no-r-1"><i class="fa fa-check"></i><b>7.2</b> Mensagens de erro e avisos no R</a></li>
-<li class="chapter" data-level="7.3" data-path="tiposR.html"><a href="tiposR.html#o-que-é-um-script-e-qual-sua-diferença-para-um-código"><i class="fa fa-check"></i><b>7.3</b> O que é um <code>script</code> e qual sua diferença para um <code>código</code>?</a></li>
-<li class="chapter" data-level="7.4" data-path="tiposR.html"><a href="tiposR.html#tipos-e-estruturas-de-dados-no-r-1"><i class="fa fa-check"></i><b>7.4</b> Tipos e estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.5" data-path="tiposR.html"><a href="tiposR.html#tipos-de-dados-no-r"><i class="fa fa-check"></i><b>7.5</b> Tipos de dados no R</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="tiposR.html"><a href="tiposR.html#variáveis-e-tipos-básicos-de-dados-figura-reffignucleos"><i class="fa fa-check"></i><b>7.5.1</b> Variáveis e tipos básicos de dados (Figura @ref(fig:nucleos))</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="tiposR.html"><a href="tiposR.html#estruturas-de-dados-no-r"><i class="fa fa-check"></i><b>7.6</b> Estruturas de dados no R</a></li>
-<li class="chapter" data-level="7.7" data-path="tiposR.html"><a href="tiposR.html#como-pedir-ajuda"><i class="fa fa-check"></i><b>7.7</b> Como pedir ajuda?</a>
-<ul>
-<li class="chapter" data-level="7.7.1" data-path="tiposR.html"><a href="tiposR.html#dentro-do-r"><i class="fa fa-check"></i><b>7.7.1</b> Dentro do R</a></li>
-<li class="chapter" data-level="7.7.2" data-path="tiposR.html"><a href="tiposR.html#fora-do-r"><i class="fa fa-check"></i><b>7.7.2</b> Fora do R</a></li>
-<li class="chapter" data-level="7.7.3" data-path="tiposR.html"><a href="tiposR.html#chatgpt"><i class="fa fa-check"></i><b>7.7.3</b> ChatGPT</a></li>
-</ul></li>
-<li class="chapter" data-level="7.8" data-path="tiposR.html"><a href="tiposR.html#work-flow"><i class="fa fa-check"></i><b>7.8</b> Work flow</a></li>
-<li class="chapter" data-level="7.9" data-path="tiposR.html"><a href="tiposR.html#reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada"><i class="fa fa-check"></i><b>7.9</b> Reconhecendo a estrutura dos dados do R em uma matriz multivariada</a>
-<ul>
-<li class="chapter" data-level="7.9.1" data-path="tiposR.html"><a href="tiposR.html#organização-básica-1"><i class="fa fa-check"></i><b>7.9.1</b> Organização básica</a></li>
-</ul></li>
-<li class="chapter" data-level="7.10" data-path="tiposR.html"><a href="tiposR.html#importando-a-planilha-1"><i class="fa fa-check"></i><b>7.10</b> Importando a planilha</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#apêndices-4"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#snippet-e-chunk"><i class="fa fa-check"></i>Snippet e chunk</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#sites-consultados-2"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#script-limpo-1"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="tiposR.html"><a href="tiposR.html#referências-5"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="univ.html"><a href="univ.html"><i class="fa fa-check"></i><b>8</b> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#resumo-5"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apresentação-5"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="8.1" data-path="univ.html"><a href="univ.html#sobre-os-dados"><i class="fa fa-check"></i><b>8.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="8.2" data-path="univ.html"><a href="univ.html#organização-básica-2"><i class="fa fa-check"></i><b>8.2</b> Organização básica</a></li>
-<li class="chapter" data-level="8.3" data-path="univ.html"><a href="univ.html#importando-a-planilha-2"><i class="fa fa-check"></i><b>8.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="8.4" data-path="univ.html"><a href="univ.html#gráficos-de-histograma-e-boxplot"><i class="fa fa-check"></i><b>8.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="8.5" data-path="univ.html"><a href="univ.html#sumário-estatístico-geral"><i class="fa fa-check"></i><b>8.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#apêndices-5"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#sites-consultados-3"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#script-limpo-2"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ.html"><a href="univ.html#referências-6"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="univ2.html"><a href="univ2.html"><i class="fa fa-check"></i><b>9</b> R Modulo 3.2 - Testes Estatísticos</a>
-<ul>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#resumo-6"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apresentação-6"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="9.1" data-path="univ2.html"><a href="univ2.html#sobre-os-dados-1"><i class="fa fa-check"></i><b>9.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="9.2" data-path="univ2.html"><a href="univ2.html#organização-básica-3"><i class="fa fa-check"></i><b>9.2</b> Organização básica</a></li>
-<li class="chapter" data-level="9.3" data-path="univ2.html"><a href="univ2.html#importando-a-planilha-3"><i class="fa fa-check"></i><b>9.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="9.4" data-path="univ2.html"><a href="univ2.html#gráficos-de-histograma-e-boxplot-1"><i class="fa fa-check"></i><b>9.4</b> Gráficos de histograma e boxplot</a></li>
-<li class="chapter" data-level="9.5" data-path="univ2.html"><a href="univ2.html#sumário-estatístico-geral-1"><i class="fa fa-check"></i><b>9.5</b> Sumário estatístico geral</a></li>
-<li class="chapter" data-level="9.6" data-path="univ2.html"><a href="univ2.html#testando-normalidade"><i class="fa fa-check"></i><b>9.6</b> Testando normalidade</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="univ2.html"><a href="univ2.html#q-q-plots"><i class="fa fa-check"></i><b>9.6.1</b> Q-Q plots</a></li>
-<li class="chapter" data-level="9.6.2" data-path="univ2.html"><a href="univ2.html#testes-de-shapiro-wilk-e-kolmogorov-smirnov"><i class="fa fa-check"></i><b>9.6.2</b> Testes de Shapiro-Wilk e Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="9.7" data-path="univ2.html"><a href="univ2.html#testando-diferenças-entre-médias"><i class="fa fa-check"></i><b>9.7</b> Testando diferenças entre médias</a>
-<ul>
-<li class="chapter" data-level="9.7.1" data-path="univ2.html"><a href="univ2.html#testando-homogeneidade-de-variâncias"><i class="fa fa-check"></i><b>9.7.1</b> Testando homogeneidade de variâncias</a></li>
-<li class="chapter" data-level="9.7.2" data-path="univ2.html"><a href="univ2.html#teste-entre-duas-médias-t-student"><i class="fa fa-check"></i><b>9.7.2</b> Teste entre duas médias (t-Student)</a></li>
-<li class="chapter" data-level="9.7.3" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-anova"><i class="fa fa-check"></i><b>9.7.3</b> Teste entre três médias (ANOVA)</a></li>
-<li class="chapter" data-level="9.7.4" data-path="univ2.html"><a href="univ2.html#teste-entre-três-médias-e-dois-fatores-two-way-anova"><i class="fa fa-check"></i><b>9.7.4</b> Teste entre três médias e dois fatores (Two-Way ANOVA)</a></li>
-</ul></li>
-<li class="chapter" data-level="9.8" data-path="univ2.html"><a href="univ2.html#correlação-e-regressão-simples"><i class="fa fa-check"></i><b>9.8</b> Correlação e regressão simples</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#apêndices-6"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#sites-consultados-4"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#script-limpo-3"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="univ2.html"><a href="univ2.html#referências-7"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="unigr.html"><a href="unigr.html"><i class="fa fa-check"></i><b>10</b> R Modulo 3.3 - Gráficos univariados</a>
-<ul>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#resumo-7"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apresentação-7"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="10.1" data-path="unigr.html"><a href="unigr.html#sobre-os-dados-2"><i class="fa fa-check"></i><b>10.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="10.2" data-path="unigr.html"><a href="unigr.html#organização-básica-4"><i class="fa fa-check"></i><b>10.2</b> Organização básica</a></li>
-<li class="chapter" data-level="10.3" data-path="unigr.html"><a href="unigr.html#importando-a-planilha-4"><i class="fa fa-check"></i><b>10.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="10.4" data-path="unigr.html"><a href="unigr.html#reset-point"><i class="fa fa-check"></i><b>10.4</b> Reset point</a></li>
-<li class="chapter" data-level="10.5" data-path="unigr.html"><a href="unigr.html#gráficos-de-dispersão"><i class="fa fa-check"></i><b>10.5</b> Gráficos de dispersão</a></li>
-<li class="chapter" data-level="10.6" data-path="unigr.html"><a href="unigr.html#gráficos-de-linha"><i class="fa fa-check"></i><b>10.6</b> Gráficos de linha</a></li>
-<li class="chapter" data-level="10.7" data-path="unigr.html"><a href="unigr.html#gráficos-de-barra"><i class="fa fa-check"></i><b>10.7</b> Gráficos de barra</a></li>
-<li class="chapter" data-level="10.8" data-path="unigr.html"><a href="unigr.html#gráficos-de-grupos"><i class="fa fa-check"></i><b>10.8</b> Gráficos de grupos</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#apêndices-7"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#sites-consultados-5"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#script-limpo-4"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="unigr.html"><a href="unigr.html#referências-8"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="estrcom.html"><a href="estrcom.html"><i class="fa fa-check"></i><b>11</b> R Modulo 4.1 - Estrutura da Comunidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#resumo-8"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apresentação-8"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="11.1" data-path="estrcom.html"><a href="estrcom.html#sobre-os-dados-3"><i class="fa fa-check"></i><b>11.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="11.2" data-path="estrcom.html"><a href="estrcom.html#organização-básica-5"><i class="fa fa-check"></i><b>11.2</b> Organização básica</a></li>
-<li class="chapter" data-level="11.3" data-path="estrcom.html"><a href="estrcom.html#importando-a-planilha-5"><i class="fa fa-check"></i><b>11.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="11.4" data-path="estrcom.html"><a href="estrcom.html#reset-point-1"><i class="fa fa-check"></i><b>11.4</b> Reset point</a></li>
-<li class="chapter" data-level="11.5" data-path="estrcom.html"><a href="estrcom.html#transpor-a-matriz-para-trabalhar-com-as-espécies"><i class="fa fa-check"></i><b>11.5</b> Transpor a matriz para trabalhar com as espécies</a>
-<ul>
-<li class="chapter" data-level="11.5.1" data-path="estrcom.html"><a href="estrcom.html#informações-básicas-da-matriz"><i class="fa fa-check"></i><b>11.5.1</b> Informações básicas da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="11.6" data-path="estrcom.html"><a href="estrcom.html#calculando-os-descritores-da-comunidade"><i class="fa fa-check"></i><b>11.6</b> Calculando os descritores da comunidade</a>
-<ul>
-<li class="chapter" data-level="11.6.1" data-path="estrcom.html"><a href="estrcom.html#variabilidade"><i class="fa fa-check"></i><b>11.6.1</b> Variabilidade</a></li>
-<li class="chapter" data-level="11.6.2" data-path="estrcom.html"><a href="estrcom.html#riqueza"><i class="fa fa-check"></i><b>11.6.2</b> Riqueza</a></li>
-</ul></li>
-<li class="chapter" data-level="11.7" data-path="estrcom.html"><a href="estrcom.html#índices-de-diversidade"><i class="fa fa-check"></i><b>11.7</b> Índices de Diversidade</a>
-<ul>
-<li class="chapter" data-level="11.7.1" data-path="estrcom.html"><a href="estrcom.html#shannon"><i class="fa fa-check"></i><b>11.7.1</b> Shannon</a></li>
-<li class="chapter" data-level="11.7.2" data-path="estrcom.html"><a href="estrcom.html#simpson"><i class="fa fa-check"></i><b>11.7.2</b> Simpson</a></li>
-<li class="chapter" data-level="11.7.3" data-path="estrcom.html"><a href="estrcom.html#equitabilidade-de-pielou"><i class="fa fa-check"></i><b>11.7.3</b> Equitabilidade de Pielou</a></li>
-</ul></li>
-<li class="chapter" data-level="11.8" data-path="estrcom.html"><a href="estrcom.html#gráficos-descritivos"><i class="fa fa-check"></i><b>11.8</b> Gráficos descritivos</a>
-<ul>
-<li class="chapter" data-level="11.8.1" data-path="estrcom.html"><a href="estrcom.html#série-de-hill-e-pefil-da-diversidade"><i class="fa fa-check"></i><b>11.8.1</b> Série de Hill e pefil da diversidade</a></li>
-</ul></li>
-<li class="chapter" data-level="11.9" data-path="estrcom.html"><a href="estrcom.html#distribuição-de-abundância"><i class="fa fa-check"></i><b>11.9</b> Distribuição de abundância</a></li>
-<li class="chapter" data-level="11.10" data-path="estrcom.html"><a href="estrcom.html#curva-de-rarefação"><i class="fa fa-check"></i><b>11.10</b> Curva de rarefação</a>
-<ul>
-<li class="chapter" data-level="11.10.1" data-path="estrcom.html"><a href="estrcom.html#interpretando-a-curva-de-rarefação"><i class="fa fa-check"></i><b>11.10.1</b> Interpretando a curva de rarefação</a></li>
-</ul></li>
-<li class="chapter" data-level="11.11" data-path="estrcom.html"><a href="estrcom.html#curva-de-acumulação-de-espécies"><i class="fa fa-check"></i><b>11.11</b> Curva de acumulação de espécies</a>
-<ul>
-<li class="chapter" data-level="11.11.1" data-path="estrcom.html"><a href="estrcom.html#plot-locais"><i class="fa fa-check"></i><b>11.11.1</b> Plot locais</a></li>
-</ul></li>
-<li class="chapter" data-level="11.12" data-path="estrcom.html"><a href="estrcom.html#plot-indivíduos"><i class="fa fa-check"></i><b>11.12</b> Plot indivíduos</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#apêndices-8"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#criando-uma-tabela-de-espécies"><i class="fa fa-check"></i>Criando uma tabela de espécies</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descruas"><i class="fa fa-check"></i>Descritores da estrutura da comunidade: UA’s</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#descritores-da-normalidade-1"><i class="fa fa-check"></i>Descritores da normalidade</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#salvando-as-tabelas-criadas-em-txt-direto-no-diretório-de-trabalho"><i class="fa fa-check"></i>Salvando as tabelas criadas em txt direto no diretório de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#sites-consultados-6"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#script-limpo-5"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrcom.html"><a href="estrcom.html#referências-9"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="partdiv.html"><a href="partdiv.html"><i class="fa fa-check"></i><b>12</b> R Modulo 4.2 - Decomposição da diversidade</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#resumo-9"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apresentação-9"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="12.1" data-path="partdiv.html"><a href="partdiv.html#sobre-os-dados-4"><i class="fa fa-check"></i><b>12.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="12.2" data-path="partdiv.html"><a href="partdiv.html#organização-básica-6"><i class="fa fa-check"></i><b>12.2</b> Organização básica</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#apêndices-9"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#sites-consultados-7"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#script-limpo-6"><i class="fa fa-check"></i>Script limpo</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="partdiv.html"><a href="partdiv.html#referências-10"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="estrhab.html"><a href="estrhab.html"><i class="fa fa-check"></i><b>13</b> R Modulo 4.2 - Estrutura do habitat</a>
-<ul>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#resumo-10"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apresentação-10"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="13.1" data-path="estrhab.html"><a href="estrhab.html#sobre-os-dados-5"><i class="fa fa-check"></i><b>13.1</b> Sobre os dados</a></li>
-<li class="chapter" data-level="13.2" data-path="estrhab.html"><a href="estrhab.html#organização-básica-7"><i class="fa fa-check"></i><b>13.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="estrhab.html"><a href="estrhab.html#instalando-os-pacotes-necessários-para-esse-módulo."><i class="fa fa-check"></i><b>13.2.1</b> Instalando os pacotes necessários para esse módulo.</a></li>
-</ul></li>
-<li class="chapter" data-level="13.3" data-path="estrhab.html"><a href="estrhab.html#importando-a-planilha-6"><i class="fa fa-check"></i><b>13.3</b> Importando a planilha</a></li>
-<li class="chapter" data-level="13.4" data-path="estrhab.html"><a href="estrhab.html#reset-point-2"><i class="fa fa-check"></i><b>13.4</b> Reset point</a></li>
-<li class="chapter" data-level="13.5" data-path="estrhab.html"><a href="estrhab.html#correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias"><i class="fa fa-check"></i><b>13.5</b> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
-<li class="chapter" data-level="13.6" data-path="estrhab.html"><a href="estrhab.html#deletando-variáveis-colineares"><i class="fa fa-check"></i><b>13.6</b> Deletando variáveis colineares</a></li>
-<li class="chapter" data-level="13.7" data-path="estrhab.html"><a href="estrhab.html#somando-variáveis-redundantes"><i class="fa fa-check"></i><b>13.7</b> Somando variáveis redundantes</a></li>
-<li class="chapter" data-level="13.8" data-path="estrhab.html"><a href="estrhab.html#tabela-de-dados-ambientais"><i class="fa fa-check"></i><b>13.8</b> Tabela de dados ambientais</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#apêndices-10"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#sites-consultados-8"><i class="fa fa-check"></i>Sites consultados</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#script-limpo-7"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="estrhab.html"><a href="estrhab.html#referências-11"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="reltrns.html"><a href="reltrns.html"><i class="fa fa-check"></i><b>14</b> R Modulo 5 - Relativizações e transformações</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#resumo-11"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apresentação-11"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="14.1" data-path="reltrns.html"><a href="reltrns.html#organização-básica-8"><i class="fa fa-check"></i><b>14.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="reltrns.html"><a href="reltrns.html#importando-a-planilha-7"><i class="fa fa-check"></i><b>14.1.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="reltrns.html"><a href="reltrns.html#tamanho-da-matriz"><i class="fa fa-check"></i><b>14.2</b> Tamanho da matriz</a></li>
-<li class="chapter" data-level="14.3" data-path="reltrns.html"><a href="reltrns.html#reset-point-1-1"><i class="fa fa-check"></i><b>14.3</b> Reset point 1</a></li>
-<li class="chapter" data-level="14.4" data-path="reltrns.html"><a href="reltrns.html#cálculo-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.4</b> Cálculo da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.5" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequência-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.5</b> Distribuição de frequência da matriz de distâncias</a>
-<ul>
-<li class="chapter" data-level="14.5.1" data-path="reltrns.html"><a href="reltrns.html#calculando-alguns-parâmetros-básicos"><i class="fa fa-check"></i><b>14.5.1</b> Calculando alguns parâmetros básicos</a></li>
-<li class="chapter" data-level="14.5.2" data-path="reltrns.html"><a href="reltrns.html#calculando-a-assimetria-e-a-curtose"><i class="fa fa-check"></i><b>14.5.2</b> Calculando a assimetria e a curtose</a></li>
-</ul></li>
-<li class="chapter" data-level="14.6" data-path="reltrns.html"><a href="reltrns.html#distribuição-de-frequências-da-matriz-de-distâncias"><i class="fa fa-check"></i><b>14.6</b> Distribuição de frequências da matriz de distâncias</a></li>
-<li class="chapter" data-level="14.7" data-path="reltrns.html"><a href="reltrns.html#relativizando-e-transformando-a-base-de-dados"><i class="fa fa-check"></i><b>14.7</b> Relativizando e transformando a base de dados</a>
-<ul>
-<li class="chapter" data-level="14.7.1" data-path="reltrns.html"><a href="reltrns.html#relativização-pelo-total"><i class="fa fa-check"></i><b>14.7.1</b> Relativização pelo total</a></li>
-<li class="chapter" data-level="14.7.2" data-path="reltrns.html"><a href="reltrns.html#transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>14.7.2</b> Transformação pelo arcoseno da raiz quadrada</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="reltrns.html"><a href="reltrns.html#reset-point-2-1"><i class="fa fa-check"></i><b>14.8</b> Reset point 2</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#apêndices-11"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#relativizações"><i class="fa fa-check"></i>Relativizações</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#transformações"><i class="fa fa-check"></i>Transformações</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#script-limpo-8"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="reltrns.html"><a href="reltrns.html#referências-12"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="outcentr.html"><a href="outcentr.html"><i class="fa fa-check"></i><b>15</b> R Modulo 6 - Análise de outliers baseada no desvio padrão do centróide</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apresentação-12"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="15.1" data-path="outcentr.html"><a href="outcentr.html#sobre-os-dados-do-ppbio-3"><i class="fa fa-check"></i><b>15.1</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="15.2" data-path="outcentr.html"><a href="outcentr.html#organização-básica-9"><i class="fa fa-check"></i><b>15.2</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="outcentr.html"><a href="outcentr.html#importando-a-planilha-8"><i class="fa fa-check"></i><b>15.2.1</b> Importando a planilha</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="outcentr.html"><a href="outcentr.html#reset-point-3"><i class="fa fa-check"></i><b>15.3</b> Reset point</a>
-<ul>
-<li class="chapter" data-level="15.3.1" data-path="outcentr.html"><a href="outcentr.html#tamanho-da-matriz-1"><i class="fa fa-check"></i><b>15.3.1</b> Tamanho da matriz</a></li>
-</ul></li>
-<li class="chapter" data-level="15.4" data-path="outcentr.html"><a href="outcentr.html#cálculo-de-matriz-de-distâncias-euclidiana-euclid"><i class="fa fa-check"></i><b>15.4</b> Cálculo de matriz de distâncias Euclidiana (<code>euclid</code>)</a></li>
-<li class="chapter" data-level="15.5" data-path="outcentr.html"><a href="outcentr.html#calculando-o-centróide-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.5</b> Calculando o centróide da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.6" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-da-matriz-de-distâncias-euclid"><i class="fa fa-check"></i><b>15.6</b> Distribuição de frequências da matriz de distâncias <code>euclid</code></a></li>
-<li class="chapter" data-level="15.7" data-path="outcentr.html"><a href="outcentr.html#procurando-outliers"><i class="fa fa-check"></i><b>15.7</b> Procurando outliers</a>
-<ul>
-<li class="chapter" data-level="15.7.1" data-path="outcentr.html"><a href="outcentr.html#listas-de-distâncias"><i class="fa fa-check"></i><b>15.7.1</b> Listas de distâncias</a></li>
-<li class="chapter" data-level="15.7.2" data-path="outcentr.html"><a href="outcentr.html#distribuição-de-frequências-das-distâncias-médias-para-o-centróide-av.dist"><i class="fa fa-check"></i><b>15.7.2</b> Distribuição de frequências das distâncias médias para o centróide <code>av.dist</code></a></li>
-</ul></li>
-<li class="chapter" data-level="15.8" data-path="outcentr.html"><a href="outcentr.html#lista-final-de-outliers"><i class="fa fa-check"></i><b>15.8</b> Lista final de outliers</a></li>
-<li class="chapter" data-level="15.9" data-path="outcentr.html"><a href="outcentr.html#particionando-a-matriz"><i class="fa fa-check"></i><b>15.9</b> Particionando a matriz</a></li>
-<li class="chapter" data-level="15.10" data-path="outcentr.html"><a href="outcentr.html#exportando-a-matrix-final-de-trabalho"><i class="fa fa-check"></i><b>15.10</b> Exportando a matrix final de trabalho</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#apêndices-12"><i class="fa fa-check"></i>Apêndices</a>
-<ul>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#outras-formas-de-fazer-a-partição"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#código"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#script-limpo-9"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="outcentr.html"><a href="outcentr.html#referências-13"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="part"><span><b>III ANÁLISES MULTIVARIADAS</b></span></li>
-<li class="chapter" data-level="16" data-path="upgma.html"><a href="upgma.html"><i class="fa fa-check"></i><b>16</b> R Modulo 7 - Análise de Classificação Hierárquica - SAHN</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#resumo-12"><i class="fa fa-check"></i>RESUMO</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apresentação-13"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="16.1" data-path="upgma.html"><a href="upgma.html#organização-básica-10"><i class="fa fa-check"></i><b>16.1</b> Organização básica</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="upgma.html"><a href="upgma.html#pacotes"><i class="fa fa-check"></i><b>16.1.1</b> Pacotes</a></li>
-<li class="chapter" data-level="16.1.2" data-path="upgma.html"><a href="upgma.html#sobre-os-dados-do-ppbio-4"><i class="fa fa-check"></i><b>16.1.2</b> Sobre os dados do PPBio</a></li>
-<li class="chapter" data-level="16.1.3" data-path="upgma.html"><a href="upgma.html#importando-a-planilha-de-trabalho-1"><i class="fa fa-check"></i><b>16.1.3</b> Importando a planilha de trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="16.2" data-path="upgma.html"><a href="upgma.html#reset-point-4"><i class="fa fa-check"></i><b>16.2</b> Reset point</a></li>
-<li class="chapter" data-level="16.3" data-path="upgma.html"><a href="upgma.html#nomenclatura-das-matrizes-em-amd"><i class="fa fa-check"></i><b>16.3</b> Nomenclatura das matrizes em AMD</a></li>
-<li class="chapter" data-level="16.4" data-path="upgma.html"><a href="upgma.html#cluster-1-piloto-automático"><i class="fa fa-check"></i><b>16.4</b> Cluster 1: Piloto automático</a>
-<ul>
-<li class="chapter" data-level="16.4.1" data-path="upgma.html"><a href="upgma.html#histórico-das-fusões"><i class="fa fa-check"></i><b>16.4.1</b> Histórico das fusões</a></li>
-</ul></li>
-<li class="chapter" data-level="16.5" data-path="upgma.html"><a href="upgma.html#cluster-2-criando-a-matriz-de-distâncias-euclidiana"><i class="fa fa-check"></i><b>16.5</b> Cluster 2: Criando a matriz de distâncias Euclidiana</a>
-<ul>
-<li class="chapter" data-level="16.5.1" data-path="upgma.html"><a href="upgma.html#comparação-dos-resultados-obtidos-até-aqui"><i class="fa fa-check"></i><b>16.5.1</b> Comparação dos resultados obtidos até aqui</a></li>
-</ul></li>
-<li class="chapter" data-level="16.6" data-path="upgma.html"><a href="upgma.html#cluster-3-relativização-pelo-total-da-coluna"><i class="fa fa-check"></i><b>16.6</b> Cluster 3: Relativização pelo total da coluna</a>
-<ul>
-<li class="chapter" data-level="16.6.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizado"><i class="fa fa-check"></i><b>16.6.1</b> Gráfico de clustering relativizado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.7" data-path="upgma.html"><a href="upgma.html#cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada"><i class="fa fa-check"></i><b>16.7</b> Cluster 4: Transformação pelo arcoseno da raiz quadrada</a>
-<ul>
-<li class="chapter" data-level="16.7.1" data-path="upgma.html"><a href="upgma.html#gráfico-de-clustering-relativizadotransformado"><i class="fa fa-check"></i><b>16.7.1</b> Gráfico de clustering relativizado/transformado</a></li>
-</ul></li>
-<li class="chapter" data-level="16.8" data-path="upgma.html"><a href="upgma.html#cluster-5-controle-total-dos-parâmetros"><i class="fa fa-check"></i><b>16.8</b> Cluster 5: Controle total dos parâmetros</a></li>
-<li class="chapter" data-level="16.9" data-path="upgma.html"><a href="upgma.html#construindo-uma-prancha-de-gráficos-comparativos"><i class="fa fa-check"></i><b>16.9</b> Construindo uma prancha de gráficos comparativos</a></li>
-<li class="chapter" data-level="16.10" data-path="upgma.html"><a href="upgma.html#construindo-heatmaps"><i class="fa fa-check"></i><b>16.10</b> Construindo <code>heatmaps</code></a>
-<ul>
-<li class="chapter" data-level="16.10.1" data-path="upgma.html"><a href="upgma.html#percentual-de-encadeamento-chaining"><i class="fa fa-check"></i><b>16.10.1</b> Percentual de encadeamento (% chaining)</a></li>
-<li class="chapter" data-level="16.10.2" data-path="upgma.html"><a href="upgma.html#função-loop-para-comparar-os-encadeamentos"><i class="fa fa-check"></i><b>16.10.2</b> Função <code>loop</code> para comparar os encadeamentos</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#apêndices-13"><i class="fa fa-check"></i>Apêndices</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#sites-consultados-9"><i class="fa fa-check"></i>Sites consultados</a>
-<ul>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#outras-formas-de-fazer-a-partição-1"><i class="fa fa-check"></i>Outras formas de fazer a partição</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#código-1"><i class="fa fa-check"></i>Código</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#script-limpo-10"><i class="fa fa-check"></i>Script limpo</a></li>
-<li class="chapter" data-level="" data-path="upgma.html"><a href="upgma.html#referências-14"><i class="fa fa-check"></i>Referências</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentos de Ecologia Numérica</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="active" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li class="book-part">ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="estrhab" class="section level1 hasAnchor" number="13">
-<h1><span class="header-section-number"> 13</span> R Modulo 4.2 - Estrutura do habitat<a href="estrhab.html#estrhab" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="resumo-10" class="section level3 unnumbered hasAnchor">
-<h3>RESUMO<a href="estrhab.html#resumo-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+      </nav>
 </div>
-<div id="apresentação-10" class="section level3 unnumbered hasAnchor">
-<h3>Apresentação<a href="estrhab.html#apresentação-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estrhab" class="section level1" number="13">
+<h1>
+<span class="header-section-number"> 13</span> R Modulo 4.2 - Estrutura do habitat<a class="anchor" aria-label="anchor" href="#estrhab"><i class="fas fa-link"></i></a>
+</h1>
+<div id="resumo-10" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-10"><i class="fas fa-link"></i></a>
+</h3>
 </div>
-<div id="sobre-os-dados-5" class="section level2 hasAnchor" number="13.1">
-<h2><span class="header-section-number">13.1</span> Sobre os dados<a href="estrhab.html#sobre-os-dados-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="apresentação-10" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-10"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="sobre-os-dados-5" class="section level2" number="13.1">
+<h2>
+<span class="header-section-number">13.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-5"><i class="fas fa-link"></i></a>
+</h2>
 <p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz ambiental</strong> (<a href="https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06p-amb.xlsx</a>) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Esses são dados de <strong>variáveis ambientais</strong> distribuidas em diversas unidades amostrais (UA’s ou sítios). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram transformados <span class="citation">(<a href="#ref-RN67" role="doc-biblioref">SOKAL; ROHLF, 1995</a>)</span>. Note que as variáveis foram medidas em diferentes unidades (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.
 Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06-grupos</a>).</p>
 <p><strong>Revise as informações sobre as bases de dados no Capítulo <a href="bases.html#bases">3</a>. As dases de dados para esse Módulo podem ser baixadam na Seção <a href="bases.html#arqs">3.2</a>.</strong></p>
 </div>
-<div id="organização-básica-7" class="section level2 hasAnchor" number="13.2">
-<h2><span class="header-section-number">13.2</span> Organização básica<a href="estrhab.html#organização-básica-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="estrhab.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>() <span class="co">#apaga os graficos, se houver algum</span></span>
-<span id="cb1-2"><a href="estrhab.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>)) <span class="co">#limpa a memória</span></span>
-<span id="cb1-3"><a href="estrhab.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\014</span><span class="st">&quot;</span>) <span class="co">#limpa o console </span></span></code></pre></div>
-<div id="instalando-os-pacotes-necessários-para-esse-módulo." class="section level3 hasAnchor" number="13.2.1">
-<h3><span class="header-section-number">13.2.1</span> Instalando os pacotes necessários para esse módulo.<a href="estrhab.html#instalando-os-pacotes-necessários-para-esse-módulo." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="organização-básica-7" class="section level2" number="13.2">
+<h2>
+<span class="header-section-number">13.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-7"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
+<div id="instalando-os-pacotes-necessários-para-esse-módulo." class="section level3" number="13.2.1">
+<h3>
+<span class="header-section-number">13.2.1</span> Instalando os pacotes necessários para esse módulo.<a class="anchor" aria-label="anchor" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><i class="fas fa-link"></i></a>
+</h3>
 <p>Se você ja fez o módulo anterior, não vai precisar instalar nenhum pacote novo. Os pacotes necessários serão carregados ao longo desse módulo.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="estrhab.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;psych&quot;</span>)</span>
-<span id="cb2-2"><a href="estrhab.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;corrplot&quot;</span>)</span></code></pre></div>
-<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code>getwd()</code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code>setwd()</code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="estrhab.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb3-2"><a href="estrhab.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Seu/Diretório/De/Trabalho&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"psych"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"corrplot"</span><span class="op">)</span></span></code></pre></div>
+<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="importando-a-planilha-6" class="section level2 hasAnchor" number="13.3">
-<h2><span class="header-section-number">13.3</span> Importando a planilha<a href="estrhab.html#importando-a-planilha-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br />
-- Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br />
+<div id="importando-a-planilha-6" class="section level2" number="13.3">
+<h2>
+<span class="header-section-number">13.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
+- Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado. Vamos trabalhar com os dados do ano 1.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="estrhab.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
-<span id="cb4-2"><a href="estrhab.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
-<span id="cb4-3"><a href="estrhab.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span></code></pre></div>
-<pre><code>## Warning: package &#39;openxlsx&#39; was built under R version 4.3.2</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="estrhab.html#cb6-1" aria-hidden="true" tabindex="-1"></a>ppbio <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-amb.xlsx&quot;</span>,</span>
-<span id="cb6-2"><a href="estrhab.html#cb6-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rowNames =</span> T, <span class="at">colNames =</span> T,</span>
-<span id="cb6-3"><a href="estrhab.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;ano1&quot;</span>)</span>
-<span id="cb6-4"><a href="estrhab.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
-<span id="cb6-5"><a href="estrhab.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
-<span id="cb6-6"><a href="estrhab.html#cb6-6" aria-hidden="true" tabindex="-1"></a>ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co">#[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.</span></span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    23 obs. of  30 variables:
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
+<span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-amb.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"ano1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="co">#View(ppbio)</span></span>
+<span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="co">#[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.</span></span></code></pre></div>
+<pre><code>## 'data.frame':    23 obs. of  30 variables:
 ##  $ h.macroph   : num  8.33 0 5.83 0 0 ...
 ##  $ h.grass     : num  20 23.3 0 20 0 ...
 ##  $ h.subveg    : num  10 3 16.7 0 0 ...
@@ -675,47 +196,67 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## S-R-CT2  0.000000 20.00000  0.00000    0.00000  0.0000000
 ## S-R-CP2  0.000000  0.00000  0.00000   33.33333  1.0000000</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="estrhab.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
-<span id="cb8-2"><a href="estrhab.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb8-3"><a href="estrhab.html#cb8-3" aria-hidden="true" tabindex="-1"></a>ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb8-4"><a href="estrhab.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
-<span id="cb8-5"><a href="estrhab.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span>(ppbio)</span>
-<span id="cb8-6"><a href="estrhab.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ppbio)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="reset-point-2" class="section level2 hasAnchor" number="13.4">
-<h2><span class="header-section-number">13.4</span> Reset point<a href="estrhab.html#reset-point-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="estrhab.html#cb9-1" aria-hidden="true" tabindex="-1"></a>m_amb <span class="ot">&lt;-</span> ppbio</span>
-<span id="cb9-2"><a href="estrhab.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#pat &lt;- &quot;^S&quot;</span></span>
-<span id="cb9-3"><a href="estrhab.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#m_amb &lt;- m_amb[!grepl(pat, rownames(m_amb)), ] #exclui quem começa com pat</span></span></code></pre></div>
-<p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela <a href="#tab:200arqs"><strong>??</strong></a>).</p>
+<div id="reset-point-2" class="section level2" number="13.4">
+<h2>
+<span class="header-section-number">13.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point-2"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_amb</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span>
+<span><span class="co">#pat &lt;- "^S"</span></span>
+<span><span class="co">#m_amb &lt;- m_amb[!grepl(pat, rownames(m_amb)), ] #exclui quem começa com pat</span></span></code></pre></div>
+<p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela <a href="bases.html#tab:200arqs">3.1</a>).</p>
 <p><strong>Revise Seção <a href="bases.html#abrev">3.2.2</a> e a Tabela de Abreviações (@ref(tab:200m_2)) na mesma Seção que resumem os tipos de matrizes e suas abreviações, para os nossos códigos.</strong></p>
 </div>
-<div id="correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias" class="section level2 hasAnchor" number="13.5">
-<h2><span class="header-section-number">13.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias<a href="estrhab.html#correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="estrhab.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb10-2"><a href="estrhab.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(m_amb)</span>
-<span id="cb10-3"><a href="estrhab.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(m_amb[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],</span>
-<span id="cb10-4"><a href="estrhab.html#cb10-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="co"># correlation method</span></span>
-<span id="cb10-5"><a href="estrhab.html#cb10-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">lm =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb10-6"><a href="estrhab.html#cb10-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">hist.col =</span> <span class="st">&quot;#00AFBB&quot;</span>, <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb10-7"><a href="estrhab.html#cb10-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">density =</span> <span class="cn">TRUE</span>,  <span class="co"># show density plots</span></span>
-<span id="cb10-8"><a href="estrhab.html#cb10-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">ellipses =</span> <span class="cn">TRUE</span>, <span class="co"># show correlation ellipses</span></span>
-<span id="cb10-9"><a href="estrhab.html#cb10-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
-<span id="cb10-10"><a href="estrhab.html#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="estrhab.html#cb10-11" aria-hidden="true" tabindex="-1"></a>cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(m_amb)</span>
-<span id="cb10-12"><a href="estrhab.html#cb10-12" aria-hidden="true" tabindex="-1"></a>cor</span>
-<span id="cb10-13"><a href="estrhab.html#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div>
+<div id="correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias" class="section level2" number="13.5">
+<h2>
+<span class="header-section-number">13.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Attaching package: 'psych'</code></pre>
+<pre><code>## The following object is masked from 'package:mdatools':
+## 
+##     pca</code></pre>
+<pre><code>## The following object is masked from 'package:car':
+## 
+##     logit</code></pre>
+<pre><code>## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha</code></pre>
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/pairs.panels.html">pairs.panels</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>,</span>
+<span>             method <span class="op">=</span> <span class="st">"pearson"</span>, <span class="co"># correlation method</span></span>
+<span>             scale <span class="op">=</span> <span class="cn">FALSE</span>, lm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>             hist.col <span class="op">=</span> <span class="st">"#00AFBB"</span>, pch <span class="op">=</span> <span class="fl">19</span>,</span>
+<span>             density <span class="op">=</span> <span class="cn">TRUE</span>,  <span class="co"># show density plots</span></span>
+<span>             ellipses <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># show correlation ellipses</span></span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
+<span><span class="va">cor</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## corrplot 0.92 loaded</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="estrhab.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(cor, <span class="at">method =</span> <span class="st">&quot;circle&quot;</span>)</span>
-<span id="cb12-2"><a href="estrhab.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#win.print()</span></span>
-<span id="cb12-3"><a href="estrhab.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#corrplot(cor, method = &quot;circle&quot;)</span></span>
-<span id="cb12-4"><a href="estrhab.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.off()</span></span></code></pre></div>
-<pre><code>##  [1] &quot;h.macroph&quot;    &quot;h.grass&quot;      &quot;h.subveg&quot;     &quot;h.overhveg&quot;   &quot;h.litter&quot;    
-##  [6] &quot;h.filalgae&quot;   &quot;h.attalgae&quot;   &quot;h.roots&quot;      &quot;h.lrgdeb&quot;     &quot;h.smldeb&quot;    
-## [11] &quot;s.mud&quot;        &quot;s.sand&quot;       &quot;s.smlgrav&quot;    &quot;s.lrggrav&quot;    &quot;s.cobbles&quot;   
-## [16] &quot;s.rocks&quot;      &quot;s.bedrock&quot;    &quot;m.elev&quot;       &quot;m.river&quot;      &quot;m.stream&quot;    
-## [21] &quot;m.distsource&quot; &quot;m.distmouth&quot;  &quot;m.maxslope&quot;   &quot;m.maxdepth&quot;   &quot;m.habdepth&quot;  
-## [26] &quot;m.width&quot;      &quot;a.veloc&quot;      &quot;a.temp&quot;       &quot;a.do&quot;         &quot;a.transp&quot;    
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">cor</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span>
+<span><span class="co">#win.print()</span></span>
+<span><span class="co">#corrplot(cor, method = "circle")</span></span>
+<span><span class="co">#dev.off()</span></span></code></pre></div>
+<pre><code>##  [1] "h.macroph"    "h.grass"      "h.subveg"     "h.overhveg"   "h.litter"    
+##  [6] "h.filalgae"   "h.attalgae"   "h.roots"      "h.lrgdeb"     "h.smldeb"    
+## [11] "s.mud"        "s.sand"       "s.smlgrav"    "s.lrggrav"    "s.cobbles"   
+## [16] "s.rocks"      "s.bedrock"    "m.elev"       "m.river"      "m.stream"    
+## [21] "m.distsource" "m.distmouth"  "m.maxslope"   "m.maxdepth"   "m.habdepth"  
+## [26] "m.width"      "a.veloc"      "a.temp"       "a.do"         "a.transp"    
 ##                h.macroph      h.grass    h.subveg    h.overhveg     h.litter
 ## h.macroph     1.00000000 -0.246531504 -0.13690655 -0.0460990189 -0.062637491
 ## h.grass      -0.24653150  1.000000000  0.48407509 -0.1460764735 -0.001721976
@@ -902,28 +443,31 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## a.temp       -0.516411771  0.641968008  1.00000000 -0.072530252 -0.241797672
 ## a.do         -0.002086238  0.063666386 -0.07253025  1.000000000  0.109896052
 ## a.transp      0.232399977 -0.111321669 -0.24179767  0.109896052  1.000000000</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-7-1.png" width="672" /><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-153-1.png" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-153-2.png" width="672"></p>
 </div>
-<div id="deletando-variáveis-colineares" class="section level2 hasAnchor" number="13.6">
-<h2><span class="header-section-number">13.6</span> Deletando variáveis colineares<a href="estrhab.html#deletando-variáveis-colineares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="deletando-variáveis-colineares" class="section level2" number="13.6">
+<h2>
+<span class="header-section-number">13.6</span> Deletando variáveis colineares<a class="anchor" aria-label="anchor" href="#deletando-vari%C3%A1veis-colineares"><i class="fas fa-link"></i></a>
+</h2>
 <p>Primeiro vamos listar as variáveis com correlação maior que 70% ou r &gt; 0.7.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="estrhab.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get upper triangle (to avoid duplicate pairs)</span></span>
-<span id="cb14-2"><a href="estrhab.html#cb14-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
-<span id="cb14-3"><a href="estrhab.html#cb14-3" aria-hidden="true" tabindex="-1"></a>cor_pairs <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">abs</span>(cor) <span class="sc">&gt;</span> r <span class="sc">&amp;</span> <span class="fu">abs</span>(cor) <span class="sc">&lt;</span> <span class="dv">1</span>, <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-4"><a href="estrhab.html#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="estrhab.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract unique variable pairs</span></span>
-<span id="cb14-6"><a href="estrhab.html#cb14-6" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb14-7"><a href="estrhab.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="fu">rownames</span>(cor)[cor_pairs[, <span class="dv">1</span>]],</span>
-<span id="cb14-8"><a href="estrhab.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="fu">colnames</span>(cor)[cor_pairs[, <span class="dv">2</span>]],</span>
-<span id="cb14-9"><a href="estrhab.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> cor[cor_pairs]</span>
-<span id="cb14-10"><a href="estrhab.html#cb14-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-11"><a href="estrhab.html#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="estrhab.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicates (e.g. A-B and B-A)</span></span>
-<span id="cb14-13"><a href="estrhab.html#cb14-13" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[results<span class="sc">$</span>var1 <span class="sc">&lt;</span> results<span class="sc">$</span>var2, ]</span>
-<span id="cb14-14"><a href="estrhab.html#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="estrhab.html#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by absolute correlation (descending)</span></span>
-<span id="cb14-16"><a href="estrhab.html#cb14-16" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[<span class="fu">order</span>(<span class="sc">-</span><span class="fu">abs</span>(results<span class="sc">$</span>correlation)), ]</span>
-<span id="cb14-17"><a href="estrhab.html#cb14-17" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get upper triangle (to avoid duplicate pairs)</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
+<span><span class="va">cor_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">r</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Extract unique variable pairs</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  var1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">[</span><span class="va">cor_pairs</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>  var2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">[</span><span class="va">cor_pairs</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>  correlation <span class="op">=</span> <span class="va">cor</span><span class="op">[</span><span class="va">cor_pairs</span><span class="op">]</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Remove duplicates (e.g. A-B and B-A)</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">[</span><span class="va">results</span><span class="op">$</span><span class="va">var1</span> <span class="op">&lt;</span> <span class="va">results</span><span class="op">$</span><span class="va">var2</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Sort by absolute correlation (descending)</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">correlation</span><span class="op">)</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">results</span></span></code></pre></div>
 <pre><code>##            var1      var2 correlation
 ## 12 m.distsource  m.stream   0.9875536
 ## 5         s.mud    s.sand  -0.9573283
@@ -933,39 +477,43 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## 11       m.elev   m.river   0.8525104
 ## 3    h.overhveg   h.roots   0.7224571</code></pre>
 <p>Agora que temos as variáveis correlacionadas, prosseguimos para deleta-las.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="estrhab.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(m_amb)</span>
-<span id="cb16-2"><a href="estrhab.html#cb16-2" aria-hidden="true" tabindex="-1"></a>del_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;m.distsource&quot;</span>, <span class="st">&quot;m.elev&quot;</span>) <span class="co">#exemplo, &quot;g.river_length&quot;,&quot;g.altitude&quot;</span></span>
-<span id="cb16-3"><a href="estrhab.html#cb16-3" aria-hidden="true" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb) <span class="sc">%in%</span> del_cols)]</span></code></pre></div>
-<pre><code>##  [1] &quot;h.macroph&quot;    &quot;h.grass&quot;      &quot;h.subveg&quot;     &quot;h.overhveg&quot;   &quot;h.litter&quot;    
-##  [6] &quot;h.filalgae&quot;   &quot;h.attalgae&quot;   &quot;h.roots&quot;      &quot;h.lrgdeb&quot;     &quot;h.smldeb&quot;    
-## [11] &quot;s.mud&quot;        &quot;s.sand&quot;       &quot;s.smlgrav&quot;    &quot;s.lrggrav&quot;    &quot;s.cobbles&quot;   
-## [16] &quot;s.rocks&quot;      &quot;s.bedrock&quot;    &quot;m.elev&quot;       &quot;m.river&quot;      &quot;m.stream&quot;    
-## [21] &quot;m.distsource&quot; &quot;m.distmouth&quot;  &quot;m.maxslope&quot;   &quot;m.maxdepth&quot;   &quot;m.habdepth&quot;  
-## [26] &quot;m.width&quot;      &quot;a.veloc&quot;      &quot;a.temp&quot;       &quot;a.do&quot;         &quot;a.transp&quot;</code></pre>
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
+<span><span class="va">del_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"m.distsource"</span>, <span class="st">"m.elev"</span><span class="op">)</span> <span class="co">#exemplo, "g.river_length","g.altitude"</span></span>
+<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">del_cols</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##  [1] "h.macroph"    "h.grass"      "h.subveg"     "h.overhveg"   "h.litter"    
+##  [6] "h.filalgae"   "h.attalgae"   "h.roots"      "h.lrgdeb"     "h.smldeb"    
+## [11] "s.mud"        "s.sand"       "s.smlgrav"    "s.lrggrav"    "s.cobbles"   
+## [16] "s.rocks"      "s.bedrock"    "m.elev"       "m.river"      "m.stream"    
+## [21] "m.distsource" "m.distmouth"  "m.maxslope"   "m.maxdepth"   "m.habdepth"  
+## [26] "m.width"      "a.veloc"      "a.temp"       "a.do"         "a.transp"</code></pre>
 </div>
-<div id="somando-variáveis-redundantes" class="section level2 hasAnchor" number="13.7">
-<h2><span class="header-section-number">13.7</span> Somando variáveis redundantes<a href="estrhab.html#somando-variáveis-redundantes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="somando-variáveis-redundantes" class="section level2" number="13.7">
+<h2>
+<span class="header-section-number">13.7</span> Somando variáveis redundantes<a class="anchor" aria-label="anchor" href="#somando-vari%C3%A1veis-redundantes"><i class="fas fa-link"></i></a>
+</h2>
 <p>Algumas dessa variáveis são redundantes, vamos soma-las.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="estrhab.html#cb18-1" aria-hidden="true" tabindex="-1"></a>m_amb_part<span class="sc">$</span>s.gravel <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>s.smlgrav <span class="sc">+</span> m_amb_part<span class="sc">$</span>s.lrggrav <span class="sc">+</span> m_amb_part<span class="sc">$</span>s.cobbles</span>
-<span id="cb18-2"><a href="estrhab.html#cb18-2" aria-hidden="true" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
-<span id="cb18-3"><a href="estrhab.html#cb18-3" aria-hidden="true" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;s.smlgrav&quot;</span>, <span class="st">&quot;s.lrggrav&quot;</span>, <span class="st">&quot;s.cobbles&quot;</span>))]</span>
-<span id="cb18-4"><a href="estrhab.html#cb18-4" aria-hidden="true" tabindex="-1"></a>m_amb_part<span class="sc">$</span>s.rock <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>s.rocks <span class="sc">+</span> m_amb_part<span class="sc">$</span>s.bedrock</span>
-<span id="cb18-5"><a href="estrhab.html#cb18-5" aria-hidden="true" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
-<span id="cb18-6"><a href="estrhab.html#cb18-6" aria-hidden="true" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;s.rocks&quot;</span>, <span class="st">&quot;s.bedrock&quot;</span>))]</span>
-<span id="cb18-7"><a href="estrhab.html#cb18-7" aria-hidden="true" tabindex="-1"></a>m_amb_part<span class="sc">$</span>h.algae <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>h.filalgae <span class="sc">+</span> m_amb_part<span class="sc">$</span>h.attalgae</span>
-<span id="cb18-8"><a href="estrhab.html#cb18-8" aria-hidden="true" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
-<span id="cb18-9"><a href="estrhab.html#cb18-9" aria-hidden="true" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;h.filalgae&quot;</span>, <span class="st">&quot;h.attalgae&quot;</span>))]</span>
-<span id="cb18-10"><a href="estrhab.html#cb18-10" aria-hidden="true" tabindex="-1"></a>m_amb_part<span class="sc">$</span>h.debris <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>h.smldeb <span class="sc">+</span> m_amb_part<span class="sc">$</span>h.lrgdeb</span>
-<span id="cb18-11"><a href="estrhab.html#cb18-11" aria-hidden="true" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
-<span id="cb18-12"><a href="estrhab.html#cb18-12" aria-hidden="true" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;h.smldeb&quot;</span>, <span class="st">&quot;h.lrgdeb&quot;</span>))]</span>
-<span id="cb18-13"><a href="estrhab.html#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="estrhab.html#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(m_amb_part)</span>
-<span id="cb18-15"><a href="estrhab.html#cb18-15" aria-hidden="true" tabindex="-1"></a>m_amb_part</span></code></pre></div>
-<pre><code>##  [1] &quot;h.macroph&quot;   &quot;h.grass&quot;     &quot;h.subveg&quot;    &quot;h.overhveg&quot;  &quot;h.litter&quot;   
-##  [6] &quot;h.roots&quot;     &quot;s.mud&quot;       &quot;s.sand&quot;      &quot;m.river&quot;     &quot;m.stream&quot;   
-## [11] &quot;m.distmouth&quot; &quot;m.maxslope&quot;  &quot;m.maxdepth&quot;  &quot;m.habdepth&quot;  &quot;m.width&quot;    
-## [16] &quot;a.veloc&quot;     &quot;a.temp&quot;      &quot;a.do&quot;        &quot;a.transp&quot;    &quot;s.gravel&quot;   
-## [21] &quot;s.rock&quot;      &quot;h.algae&quot;     &quot;h.debris&quot;   
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.gravel</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.smlgrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.lrggrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.cobbles</span></span>
+<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
+<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s.smlgrav"</span>, <span class="st">"s.lrggrav"</span>, <span class="st">"s.cobbles"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.rock</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.rocks</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.bedrock</span></span>
+<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
+<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s.rocks"</span>, <span class="st">"s.bedrock"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.algae</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.filalgae</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.attalgae</span></span>
+<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
+<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"h.filalgae"</span>, <span class="st">"h.attalgae"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.debris</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.smldeb</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.lrgdeb</span></span>
+<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
+<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"h.smldeb"</span>, <span class="st">"h.lrgdeb"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
+<span><span class="va">m_amb_part</span></span></code></pre></div>
+<pre><code>##  [1] "h.macroph"   "h.grass"     "h.subveg"    "h.overhveg"  "h.litter"   
+##  [6] "h.roots"     "s.mud"       "s.sand"      "m.river"     "m.stream"   
+## [11] "m.distmouth" "m.maxslope"  "m.maxdepth"  "m.habdepth"  "m.width"    
+## [16] "a.veloc"     "a.temp"      "a.do"        "a.transp"    "s.gravel"   
+## [21] "s.rock"      "h.algae"     "h.debris"   
 ##         h.macroph    h.grass  h.subveg h.overhveg   h.litter  h.roots
 ## S-R-CT1  8.333333 20.0000000 10.000000   0.000000  0.6666667 0.000000
 ## S-R-CP1  0.000000 23.3333340  3.000000  26.666666  2.3333333 3.333333
@@ -1063,457 +611,212 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## B-A-MU4  0.0000000  5.000000 30.0000000 10.4444447
 ## B-A-GU4  1.4166667  0.000000 43.3333333  3.7500000</code></pre>
 <p>Salvando a matriz final particionada de dados ambientais.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="estrhab.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(m_amb_part, <span class="st">&quot;m_amb_part.csv&quot;</span>,</span>
-<span id="cb20-2"><a href="estrhab.html#cb20-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="co">#&quot;\t&quot;,</span></span>
-<span id="cb20-3"><a href="estrhab.html#cb20-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb20-4"><a href="estrhab.html#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">quote =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb20-5"><a href="estrhab.html#cb20-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">append =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb20-6"><a href="estrhab.html#cb20-6" aria-hidden="true" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;m_amb_part.csv&quot;</span>,</span>
-<span id="cb20-7"><a href="estrhab.html#cb20-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>,</span>
-<span id="cb20-8"><a href="estrhab.html#cb20-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb20-9"><a href="estrhab.html#cb20-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb20-10"><a href="estrhab.html#cb20-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">na.strings =</span> <span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">m_amb_part</span>, <span class="st">"m_amb_part.csv"</span>,</span>
+<span>            sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>, <span class="co">#"\t",</span></span>
+<span>            row.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            quote <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"m_amb_part.csv"</span>,</span>
+<span>                  sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>                  row.names <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                  header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="tabela-de-dados-ambientais" class="section level2 hasAnchor" number="13.8">
-<h2><span class="header-section-number">13.8</span> Tabela de dados ambientais<a href="estrhab.html#tabela-de-dados-ambientais" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tabela-de-dados-ambientais" class="section level2" number="13.8">
+<h2>
+<span class="header-section-number">13.8</span> Tabela de dados ambientais<a class="anchor" aria-label="anchor" href="#tabela-de-dados-ambientais"><i class="fas fa-link"></i></a>
+</h2>
 <p>Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba <code>ambientalp</code>, porque nela constam os agrupamentos <em>a-priori</em> para os dados ambientais.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="estrhab.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb21-2"><a href="estrhab.html#cb21-2" aria-hidden="true" tabindex="-1"></a>t_grps <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx&quot;</span>,</span>
-<span id="cb21-3"><a href="estrhab.html#cb21-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rowNames =</span> T, <span class="at">colNames =</span> T,</span>
-<span id="cb21-4"><a href="estrhab.html#cb21-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;ambientalp&quot;</span>)</span>
-<span id="cb21-5"><a href="estrhab.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(t_grps)</span>
-<span id="cb21-6"><a href="estrhab.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
-<span id="cb21-7"><a href="estrhab.html#cb21-7" aria-hidden="true" tabindex="-1"></a>t_grps[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="co">#[1:4,1:4] mostra apenas as linhas e colunas de 1 a 4.</span></span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    23 obs. of  4 variables:
-##  $ area    : chr  &quot;Serido&quot; &quot;Serido&quot; &quot;Serido&quot; &quot;Serido&quot; ...
-##  $ ambiente: chr  &quot;rio&quot; &quot;rio&quot; &quot;acude&quot; &quot;rio&quot; ...
-##  $ UA      : chr  &quot;CT&quot; &quot;CP&quot; &quot;TA&quot; &quot;CT&quot; ...
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">t_grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"ambientalp"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">t_grps</span><span class="op">)</span></span>
+<span><span class="co">#View(ppbio)</span></span>
+<span><span class="va">t_grps</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="co">#[1:4,1:4] mostra apenas as linhas e colunas de 1 a 4.</span></span></code></pre></div>
+<pre><code>## 'data.frame':    23 obs. of  4 variables:
+##  $ area    : chr  "Serido" "Serido" "Serido" "Serido" ...
+##  $ ambiente: chr  "rio" "rio" "acude" "rio" ...
+##  $ UA      : chr  "CT" "CP" "TA" "CT" ...
 ##  $ coleta  : num  1 1 1 2 2 2 3 3 3 4 ...
 ##           area ambiente UA coleta
 ## S-R-CT1 Serido      rio CT      1
 ## S-R-CP1 Serido      rio CP      1
 ## S-A-TA1 Serido    acude TA      1
 ## S-R-CT2 Serido      rio CT      2</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="estrhab.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="estrhab.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb27-2"><a href="estrhab.html#cb27-2" aria-hidden="true" tabindex="-1"></a>m_trab <span class="ot">&lt;-</span> m_amb_part <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="estrhab.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot;.&quot;</span>, .)) <span class="co">#apenas troquei o underscore pelo ponto. </span></span>
-<span id="cb27-4"><a href="estrhab.html#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="estrhab.html#cb27-5" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> m_trab <span class="sc">%&gt;%</span></span>
-<span id="cb27-6"><a href="estrhab.html#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">Area =</span> t_grps<span class="sc">$</span>area,</span>
-<span id="cb27-7"><a href="estrhab.html#cb27-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">Habitat =</span> t_grps<span class="sc">$</span>ambiente,</span>
-<span id="cb27-8"><a href="estrhab.html#cb27-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">Ponto =</span> t_grps<span class="sc">$</span>UA) <span class="sc">%&gt;%</span></span>
-<span id="cb27-9"><a href="estrhab.html#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric),</span>
-<span id="cb27-10"><a href="estrhab.html#cb27-10" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">min =</span> min, <span class="at">max =</span> max)),</span>
-<span id="cb27-11"><a href="estrhab.html#cb27-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-12"><a href="estrhab.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb27-13"><a href="estrhab.html#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(Area, Habitat, Ponto),</span>
-<span id="cb27-14"><a href="estrhab.html#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;Variable&quot;</span>, <span class="st">&quot;.value&quot;</span>),</span>
-<span id="cb27-15"><a href="estrhab.html#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span></span>
-<span id="cb27-16"><a href="estrhab.html#cb27-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-17"><a href="estrhab.html#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="estrhab.html#cb27-18" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(m)</span>
-<span id="cb27-19"><a href="estrhab.html#cb27-19" aria-hidden="true" tabindex="-1"></a>m_wide <span class="ot">&lt;-</span> m <span class="sc">%&gt;%</span></span>
-<span id="cb27-20"><a href="estrhab.html#cb27-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stat_string =</span> <span class="fu">ifelse</span>(Variable <span class="sc">==</span> <span class="fu">c</span>(<span class="st">&quot;fq.w.vel&quot;</span>),</span>
-<span id="cb27-21"><a href="estrhab.html#cb27-21" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">paste0</span>(<span class="fu">round</span>(mean, <span class="dv">3</span>), <span class="st">&quot;(&quot;</span>, <span class="fu">round</span>(min, <span class="dv">3</span>), <span class="st">&quot;-&quot;</span>, <span class="fu">round</span>(max, <span class="dv">3</span>), <span class="st">&quot;)&quot;</span>),</span>
-<span id="cb27-22"><a href="estrhab.html#cb27-22" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">paste0</span>(<span class="fu">round</span>(mean, <span class="dv">1</span>), <span class="st">&quot;(&quot;</span>, <span class="fu">round</span>(min, <span class="dv">1</span>), <span class="st">&quot;-&quot;</span>, <span class="fu">round</span>(max, <span class="dv">1</span>), <span class="st">&quot;)&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb27-23"><a href="estrhab.html#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;Location&quot;</span>, Area, Habitat, Ponto, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-24"><a href="estrhab.html#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Variable, Location, stat_string) <span class="sc">%&gt;%</span></span>
-<span id="cb27-25"><a href="estrhab.html#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Location, <span class="at">values_from =</span> stat_string)</span>
-<span id="cb27-26"><a href="estrhab.html#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-27"><a href="estrhab.html#cb27-27" aria-hidden="true" tabindex="-1"></a>m_wide</span>
-<span id="cb27-28"><a href="estrhab.html#cb27-28" aria-hidden="true" tabindex="-1"></a>m_wide <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(m_wide)</span>
-<span id="cb27-29"><a href="estrhab.html#cb27-29" aria-hidden="true" tabindex="-1"></a>m_wide</span>
-<span id="cb27-30"><a href="estrhab.html#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="estrhab.html#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando dados para Excel----</span></span>
-<span id="cb27-32"><a href="estrhab.html#cb27-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb27-33"><a href="estrhab.html#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(m_wide, <span class="at">file =</span> <span class="st">&quot;tabela de habitat.xlsx&quot;</span>, <span class="at">rowNames =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb27-34"><a href="estrhab.html#cb27-34" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">loadWorkbook</span>(<span class="st">&quot;tabela de habitat.xlsx&quot;</span>)</span>
-<span id="cb27-35"><a href="estrhab.html#cb27-35" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="at">sheet =</span> <span class="st">&quot;Sheet 1&quot;</span>, <span class="at">x =</span> m_wide)</span>
-<span id="cb27-36"><a href="estrhab.html#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="fu">saveWorkbook</span>(wb, <span class="st">&quot;tabela de habitat.xlsx&quot;</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-37"><a href="estrhab.html#cb27-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-38"><a href="estrhab.html#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="co">#Escolher sumário de uma variavel----</span></span>
-<span id="cb27-39"><a href="estrhab.html#cb27-39" aria-hidden="true" tabindex="-1"></a>m</span>
-<span id="cb27-40"><a href="estrhab.html#cb27-40" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="st">&quot;h.roots&quot;</span></span>
-<span id="cb27-41"><a href="estrhab.html#cb27-41" aria-hidden="true" tabindex="-1"></a>m[m<span class="sc">$</span>Variable <span class="sc">==</span> var, <span class="st">&quot;mean&quot;</span>] <span class="co">#cada valor de var</span></span>
-<span id="cb27-42"><a href="estrhab.html#cb27-42" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m[m<span class="sc">$</span>Variable <span class="sc">==</span> var, <span class="st">&quot;mean&quot;</span>]) <span class="co">#sumário dos valores de var</span></span>
-<span id="cb27-43"><a href="estrhab.html#cb27-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-44"><a href="estrhab.html#cb27-44" aria-hidden="true" tabindex="-1"></a><span class="co">#Escolher sumário de um grupo de variáveis do df m----</span></span>
-<span id="cb27-45"><a href="estrhab.html#cb27-45" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">grep</span>(<span class="st">&quot;^h</span><span class="sc">\\</span><span class="st">.&quot;</span>, m<span class="sc">$</span>Variable, <span class="at">value =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb27-46"><a href="estrhab.html#cb27-46" aria-hidden="true" tabindex="-1"></a>summaries <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co">#criam uma lista vazia para guardar os sumários</span></span>
-<span id="cb27-47"><a href="estrhab.html#cb27-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop para cada variável do grupo e guarda em summaries</span></span>
-<span id="cb27-48"><a href="estrhab.html#cb27-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="cf">in</span> vars) {</span>
-<span id="cb27-49"><a href="estrhab.html#cb27-49" aria-hidden="true" tabindex="-1"></a>  summaries[[var]] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m[m<span class="sc">$</span>Variable <span class="sc">==</span> var, <span class="st">&quot;mean&quot;</span>])</span>
-<span id="cb27-50"><a href="estrhab.html#cb27-50" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-51"><a href="estrhab.html#cb27-51" aria-hidden="true" tabindex="-1"></a><span class="co"># var is a temporary variable used in the for loop to iterate through</span></span>
-<span id="cb27-52"><a href="estrhab.html#cb27-52" aria-hidden="true" tabindex="-1"></a><span class="co"># each variable name that starts with &quot;h.&quot;</span></span>
-<span id="cb27-53"><a href="estrhab.html#cb27-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-54"><a href="estrhab.html#cb27-54" aria-hidden="true" tabindex="-1"></a>summaries</span>
-<span id="cb27-55"><a href="estrhab.html#cb27-55" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(summaries, as.data.frame.list))</span>
-<span id="cb27-56"><a href="estrhab.html#cb27-56" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(summary_table, <span class="dv">2</span>)</span>
-<span id="cb27-57"><a href="estrhab.html#cb27-57" aria-hidden="true" tabindex="-1"></a><span class="co">#sink(file = &quot;summary_h.txt&quot;, split = TRUE)</span></span>
-<span id="cb27-58"><a href="estrhab.html#cb27-58" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(summary_table[<span class="fu">order</span>(summary_table<span class="sc">$</span>Mean, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ], <span class="dv">2</span>)</span>
-<span id="cb27-59"><a href="estrhab.html#cb27-59" aria-hidden="true" tabindex="-1"></a><span class="co">#sink()</span></span>
-<span id="cb27-60"><a href="estrhab.html#cb27-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-61"><a href="estrhab.html#cb27-61" aria-hidden="true" tabindex="-1"></a><span class="co">#Tabela limpa</span></span>
-<span id="cb27-62"><a href="estrhab.html#cb27-62" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Variable =</span> <span class="fu">rownames</span>(summary_table), summary_table)</span>
-<span id="cb27-63"><a href="estrhab.html#cb27-63" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(summary_table) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb27-64"><a href="estrhab.html#cb27-64" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(summary_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Variable&quot;</span>, <span class="st">&quot;Min&quot;</span>, <span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;Median&quot;</span>, <span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;Max&quot;</span>)</span>
-<span id="cb27-65"><a href="estrhab.html#cb27-65" aria-hidden="true" tabindex="-1"></a>summary_table</span></code></pre></div>
-<pre><code>## # A tibble: 23 × 7
-##    Variable   Buique_acude_GU    Buique_acude_MU Buique_rio_PC   Serido_acude_TA
-##    &lt;chr&gt;      &lt;chr&gt;              &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          
-##  1 h.macroph  12.8(0-46.7)       0(0-0)          0(0-0)          35.7(5.8-54.8) 
-##  2 h.grass    5.2(0-13.3)        34.5(5.6-54)    0.7(0-2)        2.1(0-8.1)     
-##  3 h.subveg   7.3(0-26)          11.2(0-36.6)    0(0-0)          4.2(0-16.7)    
-##  4 h.overhveg 0.9(0-3.3)         0(0-0)          0(0-0)          10.4(0-33.3)   
-##  5 h.litter   0(0-0)             1.9(0.4-5)      0.4(0.3-0.5)    6.5(0.6-23.7)  
-##  6 h.roots    0(0-0)             0(0-0)          0(0-0)          0(0-0)         
-##  7 s.mud      94.4(87.8-98)      52.7(20.6-91.8) 40.5(33.7-48.9) 48.1(5-81.7)   
-##  8 s.sand     3.9(2-6.7)         45.1(3.2-77)    55.6(47.9-63)   45.5(8.3-95)   
-##  9 m.river    212.7(212.7-212.7) 214(214-214)    196.8(196.8-19… 110.2(110.2-11…
-## 10 m.stream   32.3(32.3-32.3)    19.8(19.8-19.8) 13.8(13.8-13.8) 37.1(37.1-37.1)
-## # ℹ 13 more rows
-## # ℹ 2 more variables: Serido_rio_CP &lt;chr&gt;, Serido_rio_CT &lt;chr&gt;
-##       Variable    Buique_acude_GU    Buique_acude_MU      Buique_rio_PC
-## 1    h.macroph       12.8(0-46.7)             0(0-0)             0(0-0)
-## 2      h.grass        5.2(0-13.3)       34.5(5.6-54)           0.7(0-2)
-## 3     h.subveg          7.3(0-26)       11.2(0-36.6)             0(0-0)
-## 4   h.overhveg         0.9(0-3.3)             0(0-0)             0(0-0)
-## 5     h.litter             0(0-0)         1.9(0.4-5)       0.4(0.3-0.5)
-## 6      h.roots             0(0-0)             0(0-0)             0(0-0)
-## 7        s.mud      94.4(87.8-98)    52.7(20.6-91.8)    40.5(33.7-48.9)
-## 8       s.sand         3.9(2-6.7)       45.1(3.2-77)      55.6(47.9-63)
-## 9      m.river 212.7(212.7-212.7)       214(214-214) 196.8(196.8-196.8)
-## 10    m.stream    32.3(32.3-32.3)    19.8(19.8-19.8)    13.8(13.8-13.8)
-## 11 m.distmouth 203.8(203.8-203.8) 290.9(290.9-290.9) 401.7(401.7-401.7)
-## 12  m.maxslope          30(30-30)          30(30-30)          90(90-90)
-## 13  m.maxdepth          65(60-69)       124(112-152)         95(80-110)
-## 14  m.habdepth       6.7(4.7-8.2)      30.4(22-41.3)    50.7(49.3-52.8)
-## 15     m.width   313.7(289.5-330)   247.8(234.5-270)      25.6(20-29.6)
-## 16     a.veloc             0(0-0)             0(0-0)             0(0-0)
-## 17      a.temp      26.7(24-29.2)      27.7(26-29.8)        29(28.9-29)
-## 18        a.do       6.1(1.9-8.8)       5.1(1.8-7.3)         5.2(5-5.6)
-## 19    a.transp      42.1(25.7-55)        60.8(43-89)        37.4(30-50)
-## 20    s.gravel         1.7(0-5.6)           1(0-2.4)           3.1(2-4)
-## 21      s.rock             0(0-0)           1.2(0-5)         0.8(0-1.2)
-## 22     h.algae       17.3(0-43.3)          7.8(0-30)         0.1(0-0.4)
-## 23    h.debris         0.9(0-3.8)        15.5(10-30)       1.1(0.4-2.5)
-##       Serido_acude_TA      Serido_rio_CP      Serido_rio_CT
-## 1      35.7(5.8-54.8)             0(0-0)         2.1(0-8.3)
-## 2          2.1(0-8.1)        5.8(0-23.3)       11.1(0.1-20)
-## 3         4.2(0-16.7)           0.8(0-3)          2.5(0-10)
-## 4        10.4(0-33.3)       17.1(0-33.3)             0(0-0)
-## 5       6.5(0.6-23.7)         1.5(1-2.3)         0.4(0-0.8)
-## 6              0(0-0)           2.3(0-5)             0(0-0)
-## 7        48.1(5-81.7)     17.8(0.7-48.8)        66.4(40-95)
-## 8        45.5(8.3-95)      60(22.5-87.7)       23.7(1.8-40)
-## 9  110.2(110.2-110.2)          83(83-83) 163.2(163.2-163.2)
-## 10    37.1(37.1-37.1)    13.6(13.6-13.6) 163.2(163.2-163.2)
-## 11 254.6(254.6-254.6) 185.6(185.6-185.6) 217.2(217.2-217.2)
-## 12          60(60-60)          60(60-60)          30(30-30)
-## 13        117(87-154)        67.8(60-79)       98.8(74-110)
-## 14    36.2(22.3-54.7)    33.3(22.7-45.3)    53.2(32.3-81.3)
-## 15     90.6(72.2-102)    15.4(10.7-18.5)     11.8(5.4-19.6)
-## 16           0(0-0.1)           0(0-0.2)         0.1(0-0.2)
-## 17        31.6(29-34)    30.4(27.6-35.2)    31.4(28.3-32.9)
-## 18       7.1(4.8-9.4)         4.9(3-6.9)         6(5.4-6.5)
-## 19      67.4(51.7-90)        42.3(26-60)        30.8(16-46)
-## 20        4.3(0-13.3)    19.7(11.7-28.8)        6.2(0.3-20)
-## 21         2.1(0-8.3)          2.5(0-10)         3.6(0-8.3)
-## 22       17.7(0-33.3)         21.4(0-75)          5.1(0-12)
-## 23      7.2(1.7-13.7)        4.7(1-10.3)           2.6(0-5)
-##       Area Habitat Ponto    Variable         mean         min         max
-## 1   Buique   acude    GU   h.macroph  12.83750027   0.0000000  46.6666679
-## 2   Buique   acude    GU     h.grass   5.20833325   0.0000000  13.3333330
-## 3   Buique   acude    GU    h.subveg   7.33333331   0.0000000  26.0000000
-## 4   Buique   acude    GU  h.overhveg   0.93333331   0.0000000   3.3333333
-## 5   Buique   acude    GU    h.litter   0.00000000   0.0000000   0.0000000
-## 6   Buique   acude    GU     h.roots   0.00000000   0.0000000   0.0000000
-## 7   Buique   acude    GU       s.mud  94.40277672  87.7777786  98.0000000
-## 8   Buique   acude    GU      s.sand   3.85416663   2.0000000   6.6666665
-## 9   Buique   acude    GU     m.river 212.66666667 212.6666667 212.6666667
-## 10  Buique   acude    GU    m.stream  32.33333333  32.3333333  32.3333333
-## 11  Buique   acude    GU m.distmouth 203.83333333 203.8333333 203.8333333
-## 12  Buique   acude    GU  m.maxslope  30.00000000  30.0000000  30.0000000
-## 13  Buique   acude    GU  m.maxdepth  65.00000000  60.0000000  69.0000000
-## 14  Buique   acude    GU  m.habdepth   6.66666667   4.6666667   8.1666667
-## 15  Buique   acude    GU     m.width 313.67500000 289.5000000 330.0000000
-## 16  Buique   acude    GU     a.veloc   0.00000000   0.0000000   0.0000000
-## 17  Buique   acude    GU      a.temp  26.73333333  24.0000000  29.2333333
-## 18  Buique   acude    GU        a.do   6.13416667   1.8500000   8.8000000
-## 19  Buique   acude    GU    a.transp  42.08333333  25.6666667  55.0000000
-## 20  Buique   acude    GU    s.gravel   1.74305557   0.0000000   5.5555556
-## 21  Buique   acude    GU      s.rock   0.00000000   0.0000000   0.0000000
-## 22  Buique   acude    GU     h.algae  17.33333333   0.0000000  43.3333333
-## 23  Buique   acude    GU    h.debris   0.93750000   0.0000000   3.7500000
-## 24  Buique   acude    MU   h.macroph   0.00000000   0.0000000   0.0000000
-## 25  Buique   acude    MU     h.grass  34.47222233   5.5555553  54.0000000
-## 26  Buique   acude    MU    h.subveg  11.23333287   0.0000000  36.5999985
-## 27  Buique   acude    MU  h.overhveg   0.00000000   0.0000000   0.0000000
-## 28  Buique   acude    MU    h.litter   1.86111111   0.4444444   5.0000000
-## 29  Buique   acude    MU     h.roots   0.00000000   0.0000000   0.0000000
-## 30  Buique   acude    MU       s.mud  52.67777777  20.6000004  91.7777786
-## 31  Buique   acude    MU      s.sand  45.05555558   3.2222223  77.0000000
-## 32  Buique   acude    MU     m.river 214.02000000 214.0200000 214.0200000
-## 33  Buique   acude    MU    m.stream  19.83333333  19.8333333  19.8333333
-## 34  Buique   acude    MU m.distmouth 290.87666667 290.8766667 290.8766667
-## 35  Buique   acude    MU  m.maxslope  30.00000000  30.0000000  30.0000000
-## 36  Buique   acude    MU  m.maxdepth 124.00000000 112.0000000 152.0000000
-## 37  Buique   acude    MU  m.habdepth  30.41666667  22.0000000  41.3333333
-## 38  Buique   acude    MU     m.width 247.79000000 234.5300000 270.0000000
-## 39  Buique   acude    MU     a.veloc   0.00000000   0.0000000   0.0000000
-## 40  Buique   acude    MU      a.temp  27.69583333  25.9500000  29.8333333
-## 41  Buique   acude    MU        a.do   5.12041667   1.8150000   7.3000000
-## 42  Buique   acude    MU    a.transp  60.75000000  43.0000000  89.0000000
-## 43  Buique   acude    MU    s.gravel   1.01666668   0.0000000   2.4000001
-## 44  Buique   acude    MU      s.rock   1.25000000   0.0000000   5.0000000
-## 45  Buique   acude    MU     h.algae   7.83333334   0.0000000  30.0000000
-## 46  Buique   acude    MU    h.debris  15.52777779  10.0000000  30.0000000
-## 47  Buique     rio    PC   h.macroph   0.00000000   0.0000000   0.0000000
-## 48  Buique     rio    PC     h.grass   0.66666667   0.0000000   2.0000000
-## 49  Buique     rio    PC    h.subveg   0.00000000   0.0000000   0.0000000
-## 50  Buique     rio    PC  h.overhveg   0.00000000   0.0000000   0.0000000
-## 51  Buique     rio    PC    h.litter   0.41111112   0.3333333   0.5000000
-## 52  Buique     rio    PC     h.roots   0.00000000   0.0000000   0.0000000
-## 53  Buique     rio    PC       s.mud  40.51388931  33.6666679  48.8750000
-## 54  Buique     rio    PC      s.sand  55.62500000  47.8750000  63.0000000
-## 55  Buique     rio    PC     m.river 196.83333333 196.8333333 196.8333333
-## 56  Buique     rio    PC    m.stream  13.75000000  13.7500000  13.7500000
-## 57  Buique     rio    PC m.distmouth 401.66666667 401.6666667 401.6666667
-## 58  Buique     rio    PC  m.maxslope  90.00000000  90.0000000  90.0000000
-## 59  Buique     rio    PC  m.maxdepth  95.00000000  80.0000000 110.0000000
-## 60  Buique     rio    PC  m.habdepth  50.72222222  49.3333333  52.8333333
-## 61  Buique     rio    PC     m.width  25.63333333  20.0000000  29.6000000
-## 62  Buique     rio    PC     a.veloc   0.00000000   0.0000000   0.0000000
-## 63  Buique     rio    PC      a.temp  28.95000000  28.8500000  29.0000000
-## 64  Buique     rio    PC        a.do   5.24500000   5.0000000   5.6350000
-## 65  Buique     rio    PC    a.transp  37.44444444  30.0000000  50.0000000
-## 66  Buique     rio    PC    s.gravel   3.11111108   2.0000000   4.0000000
-## 67  Buique     rio    PC      s.rock   0.75000000   0.0000000   1.2500000
-## 68  Buique     rio    PC     h.algae   0.13333334   0.0000000   0.4000000
-## 69  Buique     rio    PC    h.debris   1.11481482   0.4000000   2.5000000
-## 70  Serido   acude    TA   h.macroph  35.65145528   5.8333335  54.8333321
-## 71  Serido   acude    TA     h.grass   2.11111101   0.0000000   8.1111107
-## 72  Serido   acude    TA    h.subveg   4.16666651   0.0000000  16.6666660
-## 73  Serido   acude    TA  h.overhveg  10.41666627   0.0000000  33.3333321
-## 74  Serido   acude    TA    h.litter   6.47619033   0.5714286  23.6666660
-## 75  Serido   acude    TA     h.roots   0.00000000   0.0000000   0.0000000
-## 76  Serido   acude    TA       s.mud  48.11904716   5.0000000  81.6666641
-## 77  Serido   acude    TA      s.sand  45.51190495   8.3333330  95.0000000
-## 78  Serido   acude    TA     m.river 110.20000000 110.2000000 110.2000000
-## 79  Serido   acude    TA    m.stream  37.10000000  37.1000000  37.1000000
-## 80  Serido   acude    TA m.distmouth 254.55000000 254.5500000 254.5500000
-## 81  Serido   acude    TA  m.maxslope  60.00000000  60.0000000  60.0000000
-## 82  Serido   acude    TA  m.maxdepth 117.00000000  87.0000000 154.0000000
-## 83  Serido   acude    TA  m.habdepth  36.25000000  22.3333333  54.6666667
-## 84  Serido   acude    TA     m.width  90.55000000  72.2000000 102.0000000
-## 85  Serido   acude    TA     a.veloc   0.02500000   0.0000000   0.1000000
-## 86  Serido   acude    TA      a.temp  31.63333333  29.0000000  34.0000000
-## 87  Serido   acude    TA        a.do   7.06333333   4.8200000   9.4333333
-## 88  Serido   acude    TA    a.transp  67.41666667  51.6666667  90.0000000
-## 89  Serido   acude    TA    s.gravel   4.28571418   0.0000000  13.3333330
-## 90  Serido   acude    TA      s.rock   2.08333325   0.0000000   8.3333330
-## 91  Serido   acude    TA     h.algae  17.66666633   0.0000000  33.3333321
-## 92  Serido   acude    TA    h.debris   7.15476188   1.6666666  13.6666665
-## 93  Serido     rio    CP   h.macroph   0.00000000   0.0000000   0.0000000
-## 94  Serido     rio    CP     h.grass   5.83333349   0.0000000  23.3333340
-## 95  Serido     rio    CP    h.subveg   0.75000000   0.0000000   3.0000000
-## 96  Serido     rio    CP  h.overhveg  17.08333278   0.0000000  33.3333321
-## 97  Serido     rio    CP    h.litter   1.45833331   1.0000000   2.3333333
-## 98  Serido     rio    CP     h.roots   2.33333331   0.0000000   5.0000000
-## 99  Serido     rio    CP       s.mud  17.77083318   0.6666667  48.7500000
-## 100 Serido     rio    CP      s.sand  60.04166603  22.5000000  87.6666641
-## 101 Serido     rio    CP     m.river  83.05000000  83.0500000  83.0500000
-## 102 Serido     rio    CP    m.stream  13.55000000  13.5500000  13.5500000
-## 103 Serido     rio    CP m.distmouth 185.55000000 185.5500000 185.5500000
-## 104 Serido     rio    CP  m.maxslope  60.00000000  60.0000000  60.0000000
-## 105 Serido     rio    CP  m.maxdepth  67.75000000  60.0000000  79.0000000
-## 106 Serido     rio    CP  m.habdepth  33.33333333  22.6666667  45.3333333
-## 107 Serido     rio    CP     m.width  15.37750000  10.7000000  18.4700000
-## 108 Serido     rio    CP     a.veloc   0.03978780   0.0000000   0.1591512
-## 109 Serido     rio    CP      a.temp  30.36666667  27.6000000  35.2000000
-## 110 Serido     rio    CP        a.do   4.94458333   3.0150000   6.8633333
-## 111 Serido     rio    CP    a.transp  42.33333333  26.0000000  60.0000000
-## 112 Serido     rio    CP    s.gravel  19.68749994  11.6666665  28.7500000
-## 113 Serido     rio    CP      s.rock   2.50000000   0.0000000  10.0000000
-## 114 Serido     rio    CP     h.algae  21.43749999   0.0000000  75.0000000
-## 115 Serido     rio    CP    h.debris   4.66666664   1.0000000  10.3333333
-## 116 Serido     rio    CT   h.macroph   2.08333325   0.0000000   8.3333330
-## 117 Serido     rio    CT     h.grass  11.06944440   0.1111111  20.0000000
-## 118 Serido     rio    CT    h.subveg   2.50000000   0.0000000  10.0000000
-## 119 Serido     rio    CT  h.overhveg   0.00000000   0.0000000   0.0000000
-## 120 Serido     rio    CT    h.litter   0.37500000   0.0000000   0.8333333
-## 121 Serido     rio    CT     h.roots   0.00000000   0.0000000   0.0000000
-## 122 Serido     rio    CT       s.mud  66.38888931  40.0000000  95.0000000
-## 123 Serido     rio    CT      s.sand  23.73611102   1.8333334  40.0000000
-## 124 Serido     rio    CT     m.river 163.20000000 163.2000000 163.2000000
-## 125 Serido     rio    CT    m.stream 163.20000000 163.2000000 163.2000000
-## 126 Serido     rio    CT m.distmouth 217.15000000 217.1500000 217.1500000
-## 127 Serido     rio    CT  m.maxslope  30.00000000  30.0000000  30.0000000
-## 128 Serido     rio    CT  m.maxdepth  98.75000000  74.0000000 110.0000000
-## 129 Serido     rio    CT  m.habdepth  53.25000000  32.3333333  81.3333333
-## 130 Serido     rio    CT     m.width  11.83500000   5.4000000  19.6400000
-## 131 Serido     rio    CT     a.veloc   0.07291667   0.0000000   0.1666667
-## 132 Serido     rio    CT      a.temp  31.44166667  28.2666667  32.9000000
-## 133 Serido     rio    CT        a.do   5.97125000   5.3750000   6.5100000
-## 134 Serido     rio    CT    a.transp  30.83333333  16.0000000  46.0000000
-## 135 Serido     rio    CT    s.gravel   6.24999999   0.3333333  20.0000000
-## 136 Serido     rio    CT      s.rock   3.62499988   0.0000000   8.3333330
-## 137 Serido     rio    CT     h.algae   5.12500000   0.0000000  12.0000000
-## 138 Serido     rio    CT    h.debris   2.63888890   0.0000000   5.0000000
-## [1] 0.000000 0.000000 0.000000 0.000000 2.333333 0.000000
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.0000  0.0000  0.0000  0.3889  0.0000  2.3333 
-## $h.macroph
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   0.000   1.042   8.429  10.149  35.651 
-## 
-## $h.grass
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.6667  2.8854  5.5208  9.8935  9.7604 34.4722 
-## 
-## $h.subveg
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   1.188   3.333   4.331   6.542  11.233 
-## 
-## $h.overhveg
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.0000  0.0000  0.4667  4.7389  8.0458 17.0833 
-## 
-## $h.litter
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.0000  0.3840  0.9347  1.7636  1.7604  6.4762 
-## 
-## $h.roots
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.0000  0.0000  0.0000  0.3889  0.0000  2.3333 
-## 
-## $h.algae
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.1333  5.8021 12.5833 11.5882 17.5833 21.4375 
-## 
-## $h.debris
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.9375  1.4958  3.6528  5.3401  6.5327 15.5278 
-## 
-##            Min. X1st.Qu. Median  Mean X3rd.Qu.  Max.
-## h.macroph  0.00     0.00   1.04  8.43    10.15 35.65
-## h.grass    0.67     2.89   5.52  9.89     9.76 34.47
-## h.subveg   0.00     1.19   3.33  4.33     6.54 11.23
-## h.overhveg 0.00     0.00   0.47  4.74     8.05 17.08
-## h.litter   0.00     0.38   0.93  1.76     1.76  6.48
-## h.roots    0.00     0.00   0.00  0.39     0.00  2.33
-## h.algae    0.13     5.80  12.58 11.59    17.58 21.44
-## h.debris   0.94     1.50   3.65  5.34     6.53 15.53
-##            Min. X1st.Qu. Median  Mean X3rd.Qu.  Max.
-## h.roots    0.00     0.00   0.00  0.39     0.00  2.33
-## h.litter   0.00     0.38   0.93  1.76     1.76  6.48
-## h.subveg   0.00     1.19   3.33  4.33     6.54 11.23
-## h.overhveg 0.00     0.00   0.47  4.74     8.05 17.08
-## h.debris   0.94     1.50   3.65  5.34     6.53 15.53
-## h.macroph  0.00     0.00   1.04  8.43    10.15 35.65
-## h.grass    0.67     2.89   5.52  9.89     9.76 34.47
-## h.algae    0.13     5.80  12.58 11.59    17.58 21.44
-##     Variable       Min        Q1     Median       Mean        Q3       Max
-## 1  h.macroph 0.0000000 0.0000000  1.0416666  8.4287148 10.148959 35.651455
-## 2    h.grass 0.6666667 2.8854166  5.5208334  9.8935185  9.760417 34.472222
-## 3   h.subveg 0.0000000 1.1875000  3.3333333  4.3305554  6.541667 11.233333
-## 4 h.overhveg 0.0000000 0.0000000  0.4666667  4.7388887  8.045833 17.083333
-## 5   h.litter 0.0000000 0.3840278  0.9347222  1.7636243  1.760417  6.476190
-## 6    h.roots 0.0000000 0.0000000  0.0000000  0.3888889  0.000000  2.333333
-## 7    h.algae 0.1333333 5.8020833 12.5833333 11.5881944 17.583333 21.437500
-## 8   h.debris 0.9375000 1.4958333  3.6527778  5.3400683  6.532738 15.527778</code></pre>
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
+<span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"_"</span>, <span class="st">"."</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="co">#apenas troquei o underscore pelo ponto. </span></span>
+<span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="va">m_trab</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span>Area <span class="op">=</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">area</span>,</span>
+<span>           Habitat <span class="op">=</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">ambiente</span>,</span>
+<span>           Ponto <span class="op">=</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">UA</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>,</span>
+<span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, min <span class="op">=</span> <span class="va">min</span>, max <span class="op">=</span> <span class="va">max</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>    cols <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Area</span>, <span class="va">Habitat</span>, <span class="va">Ponto</span><span class="op">)</span>,</span>
+<span>    names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>, <span class="st">".value"</span><span class="op">)</span>,</span>
+<span>    names_sep <span class="op">=</span> <span class="st">"_"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
+<span><span class="va">m_wide</span> <span class="op">&lt;-</span> <span class="va">m</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>stat_string <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Variable</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fq.w.vel"</span><span class="op">)</span>,</span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"("</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">min</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">max</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">")"</span><span class="op">)</span>,</span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"("</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">min</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">max</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="st">"Location"</span>, <span class="va">Area</span>, <span class="va">Habitat</span>, <span class="va">Ponto</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Variable</span>, <span class="va">Location</span>, <span class="va">stat_string</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># find("select"), dplyr::select evita conflito entre package:MASS  package:dplyr</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Location</span>, values_from <span class="op">=</span> <span class="va">stat_string</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">m_wide</span></span>
+<span><span class="va">m_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m_wide</span><span class="op">)</span></span>
+<span><span class="va">m_wide</span></span>
+<span></span>
+<span><span class="co">#Exportando dados para Excel----</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">m_wide</span>, file <span class="op">=</span> <span class="st">"tabela de habitat.xlsx"</span>, rowNames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/loadWorkbook.html">loadWorkbook</a></span><span class="op">(</span><span class="st">"tabela de habitat.xlsx"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"Sheet 1"</span>, x <span class="op">=</span> <span class="va">m_wide</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"tabela de habitat.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Escolher sumário de uma variavel----</span></span>
+<span><span class="va">m</span></span>
+<span><span class="va">var</span> <span class="op">&lt;-</span> <span class="st">"h.roots"</span></span>
+<span><span class="va">m</span><span class="op">[</span><span class="va">m</span><span class="op">$</span><span class="va">Variable</span> <span class="op">==</span> <span class="va">var</span>, <span class="st">"mean"</span><span class="op">]</span> <span class="co">#cada valor de var</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">m</span><span class="op">$</span><span class="va">Variable</span> <span class="op">==</span> <span class="va">var</span>, <span class="st">"mean"</span><span class="op">]</span><span class="op">)</span> <span class="co">#sumário dos valores de var</span></span>
+<span></span>
+<span><span class="co">#Escolher sumário de um grupo de variáveis do df m----</span></span>
+<span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^h\\."</span>, <span class="va">m</span><span class="op">$</span><span class="va">Variable</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">summaries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#criam uma lista vazia para guardar os sumários</span></span>
+<span><span class="co"># Loop para cada variável do grupo e guarda em summaries</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">var</span> <span class="kw">in</span> <span class="va">vars</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">summaries</span><span class="op">[[</span><span class="va">var</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">m</span><span class="op">$</span><span class="va">Variable</span> <span class="op">==</span> <span class="va">var</span>, <span class="st">"mean"</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># var is a temporary variable used in the for loop to iterate through</span></span>
+<span><span class="co"># each variable name that starts with "h."</span></span>
+<span></span>
+<span><span class="va">summaries</span></span>
+<span><span class="va">summary_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">summaries</span>, <span class="va">as.data.frame.list</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">summary_table</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#sink(file = "summary_h.txt", split = TRUE)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">$</span><span class="va">Mean</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#sink()</span></span>
+<span></span>
+<span><span class="co">#Tabela limpa</span></span>
+<span><span class="va">summary_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span>, <span class="va">summary_table</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>, <span class="st">"Min"</span>, <span class="st">"Q1"</span>, <span class="st">"Median"</span>, <span class="st">"Mean"</span>, <span class="st">"Q3"</span>, <span class="st">"Max"</span><span class="op">)</span></span>
+<span><span class="va">summary_table</span></span></code></pre></div>
 </div>
-<div id="apêndices-10" class="section level2 unnumbered hasAnchor">
-<h2>Apêndices<a href="estrhab.html#apêndices-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="apêndices-10" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-10"><i class="fas fa-link"></i></a>
+</h2>
 </div>
-<div id="sites-consultados-8" class="section level2 unnumbered hasAnchor">
-<h2>Sites consultados<a href="estrhab.html#sites-consultados-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sites-consultados-8" class="section level2 unnumbered">
+<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-8"><i class="fas fa-link"></i></a>
+</h2>
 </div>
-<div id="script-limpo-7" class="section level2 unnumbered hasAnchor">
-<h2>Script limpo<a href="estrhab.html#script-limpo-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="script-limpo-7" class="section level2 unnumbered">
+<h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-7"><i class="fas fa-link"></i></a>
+</h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
 </div>
-<div id="referências-11" class="section level2 unnumbered hasAnchor">
-<h2>Referências<a href="estrhab.html#referências-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="referências-11" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-11"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
-<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Bibliografia Geral</h3>
 <div id="refs" class="references csl-bib-body" entry-spacing="1">
 <div id="ref-RN67" class="csl-entry">
-SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Statistics in Biological Research</strong>. 3. ed. New York: W.H. Freeman; Company, 1995. p. 776.
+SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Statistics in Biological Research</strong>. 3. ed. New York: W.H. Freeman; Company, 1995. p. 776
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></div>
+<div class="next"><a href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#estrhab"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-10">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-10">Apresentação</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#sobre-os-dados-5"><span class="header-section-number">13.1</span> Sobre os dados</a></li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-7"><span class="header-section-number">13.2</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><span class="header-section-number">13.2.1</span> Instalando os pacotes necessários para esse módulo.</a></li></ul>
+</li>
+<li><a class="nav-link" href="#importando-a-planilha-6"><span class="header-section-number">13.3</span> Importando a planilha</a></li>
+<li><a class="nav-link" href="#reset-point-2"><span class="header-section-number">13.4</span> Reset point</a></li>
+<li><a class="nav-link" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><span class="header-section-number">13.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
+<li><a class="nav-link" href="#deletando-vari%C3%A1veis-colineares"><span class="header-section-number">13.6</span> Deletando variáveis colineares</a></li>
+<li><a class="nav-link" href="#somando-vari%C3%A1veis-redundantes"><span class="header-section-number">13.7</span> Somando variáveis redundantes</a></li>
+<li><a class="nav-link" href="#tabela-de-dados-ambientais"><span class="header-section-number">13.8</span> Tabela de dados ambientais</a></li>
+<li><a class="nav-link" href="#ap%C3%AAndices-10">Apêndices</a></li>
+<li><a class="nav-link" href="#sites-consultados-8">Sites consultados</a></li>
+<li><a class="nav-link" href="#script-limpo-7">Script limpo</a></li>
+<li><a class="nav-link" href="#refer%C3%AAncias-11">Referências</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="partdiv.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="reltrns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/3-04-2-rmd5_amb.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["fundamentos_de_ecologia_numerica.pdf", "fundamentos_de_ecologia_numerica.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
 }
-});
-});
 </script>
-
 </body>
-
 </html>

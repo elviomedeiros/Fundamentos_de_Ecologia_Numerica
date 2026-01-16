@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 nocite: |
-  @RN1552, @RN2092, @RN182
+  @RN1552, @RN2092, @RN182 #include these references in the bibliography even if they are never cited in the text
 ---
 
 # Introdução ao R/RStudio {#intro}
@@ -81,7 +81,7 @@ Os softwares disponíveis para análise multivariada são diversificados. A maio
 
 O RStudio é um ambiente integrado de desenvolvimento (IDE) para a linguagem de programação R, projetado para ajudar os usuários a trabalhar com dados de forma mais eficiente e produtiva (Figura \@ref(fig:rm1fig1)). Ele oferece uma ampla variedade de recursos e ferramentas para análise de dados, incluindo edição de código, visualização de gráficos, depuração, gerenciamento de projetos e colaboração. O RStudio é gratuito e de código aberto, disponível para Windows, Mac e Linux, e é usado por uma comunidade crescente de cientistas de dados, pesquisadores, analistas e desenvolvedores em todo o mundo. Ele oferece suporte para várias bibliotecas e pacotes do R, incluindo o `tidyverse`, que é uma coleção popular de pacotes para manipulação de dados e visualização. Com o RStudio, os usuários podem facilmente importar, manipular e visualizar dados, executar análises estatísticas e criar visualizações gráficas interativas. Além disso, o RStudio oferece a possibilidade de publicar relatórios e apresentações dinâmicas em diversos formatos, como HTML, PDF e Word, facilitando a comunicação e colaboração entre os usuários.
 
-```{r rm1fig1, echo=FALSE, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R."}
+```{r rm1fig1, echo=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R."}
 knitr::include_graphics("imagens/rm1.fig1.png")
 ```
 
@@ -111,7 +111,7 @@ Linguagens de programação estatística de código aberto tem sido amplamente u
 
 A interface de usuário do RStudio é composta por várias janelas e painéis que permitem a interação com o R de forma organizada e intuitiva. A janela principal é dividida em quatro painéis (Figura \@ref(fig:R-eng)):
 
-```{r R-eng, echo=FALSE, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/"}
+```{r R-eng, echo=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/"}
 knitr::include_graphics("imagens/interfaceR-eng.png")
 ```
 
@@ -151,7 +151,7 @@ Você pode usar qualquer editor de texto, processador de texto ou planilha para 
 
 A seguir é apresentada a estrutura básica de uma matriz comunitária e como importar um arquivo XLS/XLSX para o RStudio usando a programação R (Figura \@ref(fig:ppbio2)). Como tudo no R, existem várias formas para se ler os arquivos Excel. Usaremos primeiro pacote readxl (que já vem instalado com o R base) (veja https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/)
 
-```{r ppbio2, echo=FALSE, fig.cap="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada"}
+```{r ppbio2, echo=FALSE, out.width = if (knitr::is_html_output()) "600" else "0.8\\textwidth", fig.asp = 1, fig.cap="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada"}
 knitr::include_graphics("imagens/rm1.fig3.png")
 ```
 

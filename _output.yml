@@ -13,7 +13,10 @@ bookdown::pdf_book:
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
-  citation_package: natbib
+  citation_package: none
   keep_tex: yes
 bookdown::epub_book: default
-bookdown::bs4_book: default
+bookdown::bs4_book:
+    split_by: chapter
+    split_bib: yes
+    css: style2.css
