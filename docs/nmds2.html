@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 18 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíba">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="RESUMO O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content=" 18 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="RESUMO O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 18 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">II. BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
+<li class="book-part">III. ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
+<li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li class="book-part">IV. ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="nmds.html"><span class="header-section-number">17</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></li>
+<li><a class="active" href="nmds2.html"><span class="header-section-number">18</span> R Modulo 10.2 - Análise de Ordenação - NMDS</a></li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nmds2" class="section level1" number="18">
+<h1>
+<span class="header-section-number"> 18</span> R Modulo 10.2 - Análise de Ordenação - NMDS<a class="anchor" aria-label="anchor" href="#nmds2"><i class="fas fa-link"></i></a>
+</h1>
+<div id="resumo-14" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-14"><i class="fas fa-link"></i></a>
+</h3>
+<p>O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.</p>
+</div>
+<div id="apresentação-15" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-15"><i class="fas fa-link"></i></a>
+</h3>
+<p>O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística utilizada para representar dados com muitas dimensões em um espaço dimensional menor, de forma que a estrutura dos dados originais seja preservada o máximo possível.</p>
+<p>Ao contrário do MDS métrico, que preserva as distâncias entre os pontos, o MDS não-métrico preserva apenas as relações de ordem ou similaridade entre os pontos, sem assumir uma relação linear com as distâncias reais. Em outras palavras, ele se concentra em preservar as relações de proximidade entre os pontos, mas não necessariamente suas distâncias exatas.</p>
+<p>A técnica funciona construindo uma matriz de similaridade a partir dos dados originais e, em seguida, posicionando os pontos em um espaço de menor dimensão de forma que as distâncias ou similaridades relativas sejam mantidas o mais fiel possível à matriz original.</p>
+<p>O MDS não-métrico é útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.</p>
+</div>
+<div id="algoritmo-da-nmds-1" class="section level2" number="18.1">
+<h2>
+<span class="header-section-number">18.1</span> Algoritmo da NMDS<a class="anchor" aria-label="anchor" href="#algoritmo-da-nmds-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>O algoritmo de uma NMDS (Non-Metric Multidimensional Scaling) funciona de maneira a posicionar os pontos de dados em um espaço de menor dimensão de forma que as relações de ordem ou similaridade entre os pontos sejam preservadas o máximo possível.</p>
+<p>Aqui está uma visão geral de como o algoritmo de NMDS opera:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Matriz de Similaridade</strong>: O algoritmo começa com uma matriz de similaridade ou dissimilaridade que captura as relações entre os pontos de dados. Essa matriz pode ser baseada em diferentes medidas, como correlações, coeficientes de similaridade, distâncias euclidianas, entre outras.</p></li>
+<li><p><strong>Inicialização</strong>: Inicialmente, os pontos são atribuídos a posições aleatórias ou em uma configuração inicial no espaço de menor dimensão.</p></li>
+<li><p><strong>Ajuste Iterativo</strong>: O algoritmo itera para melhorar as posições dos pontos no espaço de menor dimensão. Durante cada iteração, os pontos são movidos em direção a uma configuração que melhor preserve as relações de similaridade ou dissimilaridade conforme definido pela matriz de similaridade.</p></li>
+<li><p><strong>Critério de Convergência</strong>: O processo iterativo continua até que um critério de convergência seja alcançado. Isso pode ser baseado na estabilidade das posições dos pontos ou na convergência de uma função de custo que quantifica a discrepância entre as relações de similaridade na configuração original e na configuração reduzida.</p></li>
+<li><p><strong>Saída</strong>: Uma vez que o algoritmo convergiu, as posições finais dos pontos no espaço de menor dimensão são utilizadas como representações dos dados para visualização ou análise.</p></li>
+</ol>
+<div id="hello" class="greeting message" style="color: green;">
+<p>É importante notar que, embora o NMDS preserve as relações de ordem ou similaridade entre os pontos, não há garantia de que as distâncias absolutas entre os pontos no espaço de menor dimensão correspondam às distâncias reais entre os pontos nos dados originais. O objetivo principal é preservar a estrutura relativa dos dados em um espaço de menor dimensão, facilitando a interpretação e visualização dos padrões nos dados.</p>
+</div>
+</div>
+<div id="organização-básica-12" class="section level2" number="18.2">
+<h2>
+<span class="header-section-number">18.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-12"><i class="fas fa-link"></i></a>
+</h2>
+<p>Apagamos os gráficos, se houver algum, limpamos a memória e o console.</p>
+<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span></span>
+<span><span class="co">#apaga os graficos, se houver algum, limpa a memória e o console</span></span></code></pre></div>
+</div>
+<div id="pacotes-do-módulo-1" class="section level2" number="18.3">
+<h2>
+<span class="header-section-number">18.3</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Instalando os pacotes necessários para esse módulo. Nos computadores do Laboratório de Ecologia não instale esses pacotes, eles já estão instalados.</p>
+<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rgl"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
+<span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="co">#View(ppbio)</span></span>
+<span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="co">#[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.</span></span>
+<span><span class="va">t_grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"peixesp"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="reinício-1-1" class="section level2" number="18.4">
+<h2>
+<span class="header-section-number">18.4</span> REINÍCIO 1<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-1-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="hello" class="greeting message" style="color: green;">
+<p>Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.</p>
+</div>
+<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Substitua a nova matriz aqui. Caso seja necessário.</li>
+</ol>
+</div>
+<div id="classificação-1-matriz-comunitária-1" class="section level2" number="18.5">
+<h2>
+<span class="header-section-number">18.5</span> Classificação 1: Matriz comunitária<a class="anchor" aria-label="anchor" href="#classifica%C3%A7%C3%A3o-1-matriz-comunit%C3%A1ria-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para conhecermos os dados, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir das matrizes de dados de interesse <code>ppbio**</code> com suas devidas relativizações e transformações.</p>
+<div id="dendrograma-e-heatmap-1-1" class="section level3" number="18.5.1">
+<h3>
+<span class="header-section-number">18.5.1</span> Dendrograma e Heatmap 1<a class="anchor" aria-label="anchor" href="#dendrograma-e-heatmap-1-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Dendrograma</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span>
+<span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
+<span>                               method<span class="op">=</span><span class="st">"total"</span>, MARGIN <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#m_trns &lt;- sqrt(m_trab)</span></span>
+<span><span class="va">vegdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                   diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">cluster_uas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">vegdist</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">cluster_uas</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Bray-Curtis da Matriz Comunitária"</span>,</span>
+<span>      hang <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="co">#testar com -.01</span></span>
+<span><span class="co">#rect.hclust(cluster_uas, k = 3, h = NULL) </span></span>
+<span><span class="co">#h = 0.8 fornece os grupos formados na altura h</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">#Heatmap</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/talgalili/gplots">"gplots"</a></span><span class="op">)</span></span>
+<span><span class="va">heatdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span></span>
+<span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span><span class="op">)</span> <span class="co">#rev() reverte as cores do heatmap</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span>x<span class="op">=</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x objetos</span></span>
+<span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">)</span>,</span>
+<span>          Colv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">)</span>,</span>
+<span>          key <span class="op">=</span> <span class="cn">T</span>, tracecol <span class="op">=</span> <span class="cn">NA</span>, revC <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          col <span class="op">=</span> <span class="va">heat.colors</span>,  <span class="co">#dissimilaridade = 1 - similaridade</span></span>
+<span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>          xlab <span class="op">=</span> <span class="st">"UA´s"</span>, ylab <span class="op">=</span> <span class="st">"UA´s"</span>,</span>
+<span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="va">cluster_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                            diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                            upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">cluster_spp</span>, main <span class="op">=</span> <span class="st">"Dendrograma dos atributos"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x atributos</span></span>
+<span>          Colv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">)</span>,</span>
+<span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_spp</span><span class="op">)</span>,</span>
+<span>          key <span class="op">=</span> <span class="cn">T</span>, tracecol <span class="op">=</span> <span class="cn">NA</span>, revC <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          col <span class="op">=</span> <span class="va">col</span>,</span>
+<span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>          xlab <span class="op">=</span> <span class="st">"Unidades amostrais"</span>, ylab <span class="op">=</span> <span class="st">"Espécies"</span>,</span>
+<span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span>  <span class="co"># adjust margin size</span></span></code></pre></div>
+<pre><code>##           S-R-CT1   S-R-CP1   S-A-TA1   S-R-CT2   S-R-CP2   S-A-TA2
+## S-R-CT1 0.0000000 0.8743721 0.9338269 0.6274997 0.8106894 0.9420728
+## S-R-CP1 0.8743721 0.0000000 0.6833816 0.7759468 0.7726098 0.7342613
+## S-A-TA1 0.9338269 0.6833816 0.0000000 0.8789631 0.9178304 0.5700984
+## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068
+## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271
+## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000</code></pre>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-1.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-2.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-3.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-4.png" width="768"></p>
+</div>
+<div id="histórico-das-fusões-1-1" class="section level3" number="18.5.2">
+<h3>
+<span class="header-section-number">18.5.2</span> Histórico das fusões 1<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es-1-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de “-”) ou grupo de objetos (indicado pela ausência do sinall de “-”) que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a <code>m-1</code> última fusão entre os dois últimos grupos. Nesse caso, 22.</p>
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
+<span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
+<span><span class="va">merge</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">merge</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>,<span class="st">"0"</span><span class="op">)</span></span>
+<span><span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">height</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">height</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1.0"</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Cluster_uas <span class="op">=</span> <span class="va">merge</span>, Height <span class="op">=</span> <span class="va">height</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cluster1"</span>, <span class="st">"Cluster2"</span>, <span class="st">"Height"</span><span class="op">)</span></span>
+<span><span class="va">UA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>, <span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">UA</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UAs"</span><span class="op">)</span></span>
+<span><span class="va">No.UA</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">No.UA</span>, <span class="va">UA</span>, <span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span><span class="op">$</span><span class="va">Histórico</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="co">#fusoes</span></span>
+<span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span></span></code></pre></div>
+<div id="slyvxbniyk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#slyvxbniyk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#slyvxbniyk thead, #slyvxbniyk tbody, #slyvxbniyk tfoot, #slyvxbniyk tr, #slyvxbniyk td, #slyvxbniyk th {
+  border-style: none;
+}
+
+#slyvxbniyk p {
+  margin: 0;
+  padding: 0;
+}
+
+#slyvxbniyk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#slyvxbniyk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#slyvxbniyk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#slyvxbniyk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#slyvxbniyk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#slyvxbniyk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#slyvxbniyk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#slyvxbniyk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#slyvxbniyk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#slyvxbniyk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#slyvxbniyk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#slyvxbniyk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#slyvxbniyk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#slyvxbniyk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#slyvxbniyk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#slyvxbniyk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#slyvxbniyk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#slyvxbniyk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#slyvxbniyk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#slyvxbniyk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#slyvxbniyk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#slyvxbniyk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#slyvxbniyk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#slyvxbniyk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#slyvxbniyk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#slyvxbniyk .gt_left {
+  text-align: left;
+}
+
+#slyvxbniyk .gt_center {
+  text-align: center;
+}
+
+#slyvxbniyk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#slyvxbniyk .gt_font_normal {
+  font-weight: normal;
+}
+
+#slyvxbniyk .gt_font_bold {
+  font-weight: bold;
+}
+
+#slyvxbniyk .gt_font_italic {
+  font-style: italic;
+}
+
+#slyvxbniyk .gt_super {
+  font-size: 65%;
+}
+
+#slyvxbniyk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#slyvxbniyk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#slyvxbniyk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#slyvxbniyk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#slyvxbniyk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#slyvxbniyk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#slyvxbniyk .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="No.UA">No.UA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="UAs">UAs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Cluster1">Cluster1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Cluster2">Cluster2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Height">Height</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Histórico">Histórico</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="No.UA" class="gt_row gt_right">1</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT1</td>
+<td headers="Cluster1" class="gt_row gt_right">-20</td>
+<td headers="Cluster2" class="gt_row gt_right">-23</td>
+<td headers="Height" class="gt_row gt_right">0.14</td>
+<td headers="Histórico" class="gt_row gt_right">1</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">2</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP1</td>
+<td headers="Cluster1" class="gt_row gt_right">-8</td>
+<td headers="Cluster2" class="gt_row gt_right">-11</td>
+<td headers="Height" class="gt_row gt_right">0.26</td>
+<td headers="Histórico" class="gt_row gt_right">2</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">3</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA1</td>
+<td headers="Cluster1" class="gt_row gt_right">-17</td>
+<td headers="Cluster2" class="gt_row gt_right">1</td>
+<td headers="Height" class="gt_row gt_right">0.28</td>
+<td headers="Histórico" class="gt_row gt_right">3</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">4</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT2</td>
+<td headers="Cluster1" class="gt_row gt_right">-19</td>
+<td headers="Cluster2" class="gt_row gt_right">-22</td>
+<td headers="Height" class="gt_row gt_right">0.37</td>
+<td headers="Histórico" class="gt_row gt_right">4</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">5</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP2</td>
+<td headers="Cluster1" class="gt_row gt_right">-6</td>
+<td headers="Cluster2" class="gt_row gt_right">-12</td>
+<td headers="Height" class="gt_row gt_right">0.41</td>
+<td headers="Histórico" class="gt_row gt_right">5</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">6</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA2</td>
+<td headers="Cluster1" class="gt_row gt_right">-4</td>
+<td headers="Cluster2" class="gt_row gt_right">-10</td>
+<td headers="Height" class="gt_row gt_right">0.46</td>
+<td headers="Histórico" class="gt_row gt_right">6</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">7</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT3</td>
+<td headers="Cluster1" class="gt_row gt_right">-16</td>
+<td headers="Cluster2" class="gt_row gt_right">4</td>
+<td headers="Height" class="gt_row gt_right">0.48</td>
+<td headers="Histórico" class="gt_row gt_right">7</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">8</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP3</td>
+<td headers="Cluster1" class="gt_row gt_right">-5</td>
+<td headers="Cluster2" class="gt_row gt_right">2</td>
+<td headers="Height" class="gt_row gt_right">0.53</td>
+<td headers="Histórico" class="gt_row gt_right">8</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">9</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA3</td>
+<td headers="Cluster1" class="gt_row gt_right">-13</td>
+<td headers="Cluster2" class="gt_row gt_right">7</td>
+<td headers="Height" class="gt_row gt_right">0.56</td>
+<td headers="Histórico" class="gt_row gt_right">9</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">10</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT4</td>
+<td headers="Cluster1" class="gt_row gt_right">-9</td>
+<td headers="Cluster2" class="gt_row gt_right">5</td>
+<td headers="Height" class="gt_row gt_right">0.57</td>
+<td headers="Histórico" class="gt_row gt_right">10</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">11</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP4</td>
+<td headers="Cluster1" class="gt_row gt_right">-7</td>
+<td headers="Cluster2" class="gt_row gt_right">6</td>
+<td headers="Height" class="gt_row gt_right">0.59</td>
+<td headers="Histórico" class="gt_row gt_right">11</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">12</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA4</td>
+<td headers="Cluster1" class="gt_row gt_right">-14</td>
+<td headers="Cluster2" class="gt_row gt_right">3</td>
+<td headers="Height" class="gt_row gt_right">0.61</td>
+<td headers="Histórico" class="gt_row gt_right">12</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">13</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU1</td>
+<td headers="Cluster1" class="gt_row gt_right">-2</td>
+<td headers="Cluster2" class="gt_row gt_right">-3</td>
+<td headers="Height" class="gt_row gt_right">0.68</td>
+<td headers="Histórico" class="gt_row gt_right">13</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">14</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU1</td>
+<td headers="Cluster1" class="gt_row gt_right">-1</td>
+<td headers="Cluster2" class="gt_row gt_right">11</td>
+<td headers="Height" class="gt_row gt_right">0.68</td>
+<td headers="Histórico" class="gt_row gt_right">14</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">15</td>
+<td headers="UAs" class="gt_row gt_left">B-R-PC2</td>
+<td headers="Cluster1" class="gt_row gt_right">-15</td>
+<td headers="Cluster2" class="gt_row gt_right">-18</td>
+<td headers="Height" class="gt_row gt_right">0.69</td>
+<td headers="Histórico" class="gt_row gt_right">15</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">16</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU2</td>
+<td headers="Cluster1" class="gt_row gt_right">-21</td>
+<td headers="Cluster2" class="gt_row gt_right">14</td>
+<td headers="Height" class="gt_row gt_right">0.75</td>
+<td headers="Histórico" class="gt_row gt_right">16</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">17</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU2</td>
+<td headers="Cluster1" class="gt_row gt_right">10</td>
+<td headers="Cluster2" class="gt_row gt_right">13</td>
+<td headers="Height" class="gt_row gt_right">0.76</td>
+<td headers="Histórico" class="gt_row gt_right">17</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">18</td>
+<td headers="UAs" class="gt_row gt_left">B-R-PC3</td>
+<td headers="Cluster1" class="gt_row gt_right">9</td>
+<td headers="Cluster2" class="gt_row gt_right">12</td>
+<td headers="Height" class="gt_row gt_right">0.79</td>
+<td headers="Histórico" class="gt_row gt_right">18</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">19</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU3</td>
+<td headers="Cluster1" class="gt_row gt_right">8</td>
+<td headers="Cluster2" class="gt_row gt_right">16</td>
+<td headers="Height" class="gt_row gt_right">0.8</td>
+<td headers="Histórico" class="gt_row gt_right">19</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">20</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU3</td>
+<td headers="Cluster1" class="gt_row gt_right">17</td>
+<td headers="Cluster2" class="gt_row gt_right">19</td>
+<td headers="Height" class="gt_row gt_right">0.85</td>
+<td headers="Histórico" class="gt_row gt_right">20</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">21</td>
+<td headers="UAs" class="gt_row gt_left">B-R-PC4</td>
+<td headers="Cluster1" class="gt_row gt_right">15</td>
+<td headers="Cluster2" class="gt_row gt_right">20</td>
+<td headers="Height" class="gt_row gt_right">0.89</td>
+<td headers="Histórico" class="gt_row gt_right">21</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">22</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU4</td>
+<td headers="Cluster1" class="gt_row gt_right">18</td>
+<td headers="Cluster2" class="gt_row gt_right">21</td>
+<td headers="Height" class="gt_row gt_right">0.91</td>
+<td headers="Histórico" class="gt_row gt_right">22</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">23</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU4</td>
+<td headers="Cluster1" class="gt_row gt_right">0</td>
+<td headers="Cluster2" class="gt_row gt_right">0</td>
+<td headers="Height" class="gt_row gt_right">1.0</td>
+<td headers="Histórico" class="gt_row gt_right">23</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div id="ordenação-1" class="section level2" number="18.6">
+<h2>
+<span class="header-section-number">18.6</span> Ordenação<a class="anchor" aria-label="anchor" href="#ordena%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>O Escalonamento Multidimensional Não-Métrico (NMS ou NMDS) é uma ferramenta comumente usada para examinar a composição da comunidade. Vamos estabelecer algumas bases conceituais. Considere um único eixo de abundância representando uma única espécie <a href="https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/">Fonte</a>:</p>
+<p>O objetivo do NMDS é representar a posição original das comunidades em um espaço multidimensional da forma mais precisa possível, usando um número reduzido de dimensões que podem ser facilmente plotadas e visualizadas.</p>
+<p>Por ser uma ordenação <strong>não-métrica</strong> o NMDS não utiliza as abundâncias absolutas das espécies nas comunidades, mas sim a ordem do seu “rank” estatístico (ou sua “ordenação). O uso de”ranks” ou ordenações omite alguns dos problemas associados ao uso de distâncias absolutas (por exemplo, sensibilidade à transformação) e, como resultado, é uma técnica muito mais flexível, que aceita uma variedade de tipos de dados.</p>
+<p>O procedimento NMDS segue um algorítimo iterativo que ocorre em várias etapas:</p>
+<ol style="list-style-type: decimal">
+<li>Definir as posições originais das comunidades em espaço multidimensional</li>
+<li>Especificar o número m de dimensões reduzidas (tipicamente 2)</li>
+<li>Construir uma configuração inicial das amostras em 2 dimensões</li>
+<li>Regressar distâncias nesta configuração inicial contra as distâncias observadas (medidas)</li>
+<li>Determinar o stress (discordância entre a configuração 2-D e os valores previstos da regressão).
+Se a configuração 2-D preservar perfeitamente os ranks originais de classificação, então um gráfico de um vs. o outro deve ser monotonicamente crescente (gráfico de Shepard). A extensão com que os pontos na configuração 2-D diferem dessa linha monotonicamente crescente determina o grau de stress</li>
+<li>Se o stress for alto, reposicione os pontos em m dimensões na direção do stress decrescente e repita até que o stress esteja abaixo de um certo limite.</li>
+</ol>
+<p>Geralmente, stress &lt; 0.05 fornece uma excelente representação em dimensões reduzidas, &lt; 0.1 é ótimo, &lt; 0.2 é bom, e stress &gt; 0.3 fornece uma representação ruim.</p>
+<p>NOTA: A configuração final pode diferir dependendo da configuração inicial (que normalmente é aleatória) e do número de iterações do algorítmo, então é aconselhável executar o NMDS várias vezes e comparar a interpretação das soluções de menor stress.</p>
+<p>Para começar, o NMDS requer uma matriz de distâncias (ou uma matriz de dissimilaridades). Distâncias Euclidianas brutas não são ideais para este propósito: elas são sensíveis às abundâncias totais, então podem tratar locais com um número semelhante de espécies como mais semelhantes, mesmo que as identidades das espécies sejam diferentes. Elas também são sensíveis às ausências de espécies, então podem tratar locais com o mesmo número de espécies ausentes como mais semelhantes.</p>
+<p>Consequentemente, os ecologistas usam o cálculo de dissimilaridade de Bray-Curtis, que possui muitas propriedades ideais:</p>
+<ul>
+<li>É invariante a mudanças em unidades</li>
+<li>Não é afetado por adições/remoções de espécies que não estão presentes em duas comunidades</li>
+<li>Não é afetado pela adição de uma nova comunidade</li>
+<li>Pode reconhecer diferenças nas abundâncias totais quando as abundâncias relativas são iguais.</li>
+</ul>
+<p>Para executar a NMDS, usa-se a função <code>metaMDS</code> do pacote <code>vegan</code>.</p>
+<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span></code></pre></div>
+<p>Para executar a NMDS, usa-se a função <code>metaMDS</code> do pacote <code>vegan</code>. <code>metaMDS</code> requer uma matriz de comunidade-por-espécies (CPE, “community-by-species”). De momento, cria-se essa matrizcom dados amostradoes aleatóriamente de um cojunto arbitrário de valores.</p>
+<p>A função <code>metaMDS</code> vai calcular as distâncias, executar o algorítimo iterativo, determna o stress ou fitting entre os conjuntos de dados e etc. Precisa-se apenas definir a matriz de comunidade-por-espécies. Nesse caso:</p>
+<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nmds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span><span class="va">m_trns</span>, <span class="co">#matriz CPE, definida anteriormente</span></span>
+<span>                k<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co">#no. de redução de dimensões</span></span></code></pre></div>
+<pre><code>## Run 0 stress 0.1601399 
+## Run 1 stress 0.1601399 
+## ... New best solution
+## ... Procrustes: rmse 1.48636e-06  max resid 4.762426e-06 
+## ... Similar to previous best
+## Run 2 stress 0.1601399 
+## ... Procrustes: rmse 2.380709e-06  max resid 6.886123e-06 
+## ... Similar to previous best
+## Run 3 stress 0.1601399 
+## ... New best solution
+## ... Procrustes: rmse 1.355828e-06  max resid 4.689067e-06 
+## ... Similar to previous best
+## Run 4 stress 0.1601399 
+## ... Procrustes: rmse 1.784654e-06  max resid 6.269961e-06 
+## ... Similar to previous best
+## Run 5 stress 0.1601399 
+## ... New best solution
+## ... Procrustes: rmse 1.091364e-06  max resid 3.175341e-06 
+## ... Similar to previous best
+## Run 6 stress 0.1601399 
+## ... Procrustes: rmse 3.000764e-06  max resid 9.853888e-06 
+## ... Similar to previous best
+## Run 7 stress 0.1601399 
+## ... Procrustes: rmse 1.191157e-06  max resid 3.000012e-06 
+## ... Similar to previous best
+## Run 8 stress 0.1601399 
+## ... Procrustes: rmse 9.141497e-07  max resid 2.101769e-06 
+## ... Similar to previous best
+## Run 9 stress 0.2078279 
+## Run 10 stress 0.1601399 
+## ... Procrustes: rmse 2.650655e-06  max resid 8.83245e-06 
+## ... Similar to previous best
+## Run 11 stress 0.1972675 
+## Run 12 stress 0.1601399 
+## ... Procrustes: rmse 1.185218e-06  max resid 2.096014e-06 
+## ... Similar to previous best
+## Run 13 stress 0.1601399 
+## ... New best solution
+## ... Procrustes: rmse 8.104786e-07  max resid 1.805247e-06 
+## ... Similar to previous best
+## Run 14 stress 0.1601399 
+## ... Procrustes: rmse 1.657221e-06  max resid 3.540145e-06 
+## ... Similar to previous best
+## Run 15 stress 0.2199318 
+## Run 16 stress 0.1601399 
+## ... Procrustes: rmse 1.565273e-06  max resid 3.692174e-06 
+## ... Similar to previous best
+## Run 17 stress 0.1601399 
+## ... Procrustes: rmse 8.341295e-07  max resid 1.419309e-06 
+## ... Similar to previous best
+## Run 18 stress 0.1601399 
+## ... New best solution
+## ... Procrustes: rmse 6.606092e-07  max resid 1.34269e-06 
+## ... Similar to previous best
+## Run 19 stress 0.1601399 
+## ... Procrustes: rmse 6.394982e-07  max resid 9.480347e-07 
+## ... Similar to previous best
+## Run 20 stress 0.2078279 
+## *** Best solution repeated 2 times</code></pre>
+<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nmds</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## metaMDS(comm = m_trns, k = 2) 
+## 
+## global Multidimensional Scaling using monoMDS
+## 
+## Data:     m_trns 
+## Distance: bray 
+## 
+## Dimensions: 2 
+## Stress:     0.1601399 
+## Stress type 1, weak ties
+## Best solution was repeated 2 times in 20 tries
+## The best solution was from try 18 (random start)
+## Scaling: centring, PC rotation, halfchange scaling 
+## Species: expanded scores based on 'm_trns'</code></pre>
+<p>Nesse exemplo, <code>metaMDS</code> aplicou automaticamente uma transformação da raiz quadrada e calculou as distâncias de Bray-Curtis para a matriz de comunidade-por-local.</p>
+<p>Deve-se observar cada iteração do NMDS até que uma solução seja alcançada (ou seja, o stress foi minimizado após algum número de reconfigurações dos pontos em 2 dimensões). Pode-se aumentar o número padrão de iterações usando o argumento <code>trymax =</code>. Isso pode ajudar a aliviar problemas de não convergência. Se o stress for alto, pode-se aumentar o número de dimensões para <code>k = 3</code>.</p>
+<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">321</span><span class="op">)</span></span>
+<span><span class="va">nmds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span><span class="va">m_trns</span>, distance <span class="op">=</span> <span class="st">"bray"</span>, k <span class="op">=</span> <span class="fl">3</span>, trymax <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Run 0 stress 0.1105304 
+## Run 1 stress 0.1111279 
+## Run 2 stress 0.1111282 
+## Run 3 stress 0.1073495 
+## ... New best solution
+## ... Procrustes: rmse 0.07078509  max resid 0.1956867 
+## Run 4 stress 0.1072835 
+## ... New best solution
+## ... Procrustes: rmse 0.0221437  max resid 0.07183978 
+## Run 5 stress 0.1072833 
+## ... New best solution
+## ... Procrustes: rmse 0.0001479742  max resid 0.0003523263 
+## ... Similar to previous best
+## Run 6 stress 0.1091695 
+## Run 7 stress 0.1073496 
+## ... Procrustes: rmse 0.02217784  max resid 0.07198735 
+## Run 8 stress 0.1105306 
+## Run 9 stress 0.1072837 
+## ... Procrustes: rmse 0.0003378354  max resid 0.0008339771 
+## ... Similar to previous best
+## Run 10 stress 0.1072836 
+## ... Procrustes: rmse 0.0002426655  max resid 0.0006080793 
+## ... Similar to previous best
+## Run 11 stress 0.1072835 
+## ... Procrustes: rmse 0.0002310946  max resid 0.0005813784 
+## ... Similar to previous best
+## Run 12 stress 0.1148151 
+## Run 13 stress 0.1148151 
+## Run 14 stress 0.1072894 
+## ... Procrustes: rmse 0.00180887  max resid 0.004939432 
+## ... Similar to previous best
+## Run 15 stress 0.1072833 
+## ... Procrustes: rmse 4.431772e-05  max resid 0.0001068513 
+## ... Similar to previous best
+## Run 16 stress 0.1105303 
+## Run 17 stress 0.1073493 
+## ... Procrustes: rmse 0.02213488  max resid 0.07189392 
+## Run 18 stress 0.1163012 
+## Run 19 stress 0.1073495 
+## ... Procrustes: rmse 0.02206039  max resid 0.07161019 
+## Run 20 stress 0.1105304 
+## *** Best solution repeated 6 times</code></pre>
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#distance = "manhattan", "euclidean", "canberra", "clark", "bray", "kulczynski", "jaccard", "gower", #"altGower", "morisita", "horn", "mountford", "raup", "binomial", "chao", "cao", "mahalanobis", "chisq", #"chord", "hellinger", "aitchison", or "robust.aitchison".</span></span></code></pre></div>
+<p>Pode-se agora examinar o objeto NMDS.</p>
+<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nmds</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## metaMDS(comm = m_trns, distance = "bray", k = 3, trymax = 100) 
+## 
+## global Multidimensional Scaling using monoMDS
+## 
+## Data:     m_trns 
+## Distance: bray 
+## 
+## Dimensions: 3 
+## Stress:     0.1072833 
+## Stress type 1, weak ties
+## Best solution was repeated 6 times in 20 tries
+## The best solution was from try 5 (random start)
+## Scaling: centring, PC rotation, halfchange scaling 
+## Species: expanded scores based on 'm_trns'</code></pre>
+<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html">scores</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $sites
+##               NMDS1       NMDS2       NMDS3
+## S-R-CT1 -0.55184543 -0.92903240  0.67309796
+## S-R-CP1 -0.64422074  0.39586762 -0.57609214
+## S-A-TA1  0.06337462  0.75014403 -1.01396726
+## S-R-CT2 -0.56368016 -0.28369854  0.32785273
+## S-R-CP2 -1.32840867 -0.28533277 -0.09972257
+## S-A-TA2 -0.39321633  1.12251908 -0.52649396
+## S-R-CT3 -0.67162538 -0.58469847  0.85296793
+## S-R-CP3 -1.18931582  0.19592847  0.07278880
+## S-A-TA3 -0.59855686  1.28335380  0.04516662
+## S-R-CT4 -0.40624697 -0.94037183  0.11916157
+## S-R-CP4 -1.22928790  0.02480186  0.24910852
+## S-A-TA4 -0.55105041  0.53647766  0.29599403
+## B-A-MU1  1.25467513  0.51187249  0.16278582
+## B-A-GU1  1.34839255  0.15921423 -0.47982251
+## B-R-PC2  0.09554426 -1.11267181 -1.15925174
+## B-A-MU2  0.36190986  0.59036596  0.04099380
+## B-A-GU2  1.62884577 -0.33425248  0.26202181
+## B-R-PC3 -0.14377797 -1.10299453 -0.55148164
+## B-A-MU3  0.44792178  0.44744275  0.37859882
+## B-A-GU3  1.43419849 -0.34992690  0.24554745
+## B-R-PC4 -0.14448803 -0.38054762 -0.40790080
+## B-A-MU4  0.42559878  0.61216902  0.97820004
+## B-A-GU4  1.35525942 -0.32662963  0.11044671
+## 
+## $species
+##                 NMDS1       NMDS2       NMDS3
+## ap-davis  -0.01495781 -1.29218956 -0.96364825
+## as-bimac  -0.08444554  0.30195697  0.19874224
+## as-fasci  -0.43902511 -0.45212432  0.29464859
+## ch-bimac  -0.51882751  1.25772500 -0.14816822
+## ci-ocela  -1.19637071 -0.25077439 -0.21174896
+## ci-orien  -0.92500918 -0.30670709  0.38457115
+## co-macro  -0.66116054  1.73538798  0.01457586
+## co-heter  -0.60339636 -1.06826261  0.81358642
+## cr-menez  -0.62927305 -0.63683147  0.68773870
+## cu-lepid  -0.09877286 -1.28871644 -0.74462857
+## cy-gilbe  -0.23688285 -0.67396301 -0.27760072
+## ge-brasi   0.86109311  0.34796611  0.37321852
+## he-margi  -0.52068904 -0.66654728  0.24150508
+## ho-malab  -0.72853442  0.13648153  0.15635968
+## hy-pusar  -0.67090831 -0.50993573  0.35553226
+## le-melan   0.19717728 -1.30097999 -1.51798498
+## le-piau   -0.91818363 -0.20152000  0.31048506
+## le-taeni   0.19717728 -1.30097999 -1.51798498
+## mo-costa  -0.09877286 -1.28871644 -0.74462857
+## mo-lepid  -0.60487570 -0.98559718  0.76918012
+## or-nilot   0.54252119 -0.46950438  0.21583318
+## pa-manag   1.86833019 -0.27353658  0.15207511
+## pimel-sp  -0.60339636 -1.06826261  0.81358642
+## po-retic   0.37060324  0.61094304  0.84311236
+## po-vivip  -0.49863780 -0.07688495  0.54090975
+## pr-brevi  -0.53177683 -0.56816610  0.27214584
+## ps-rhomb  -0.75151837 -0.63190478  1.04246178
+## ps-genise -0.75151837 -0.63190478  1.04246178
+## se-heter  -0.41072279 -0.60159464 -0.11643558
+## se-piaba  -0.60339636 -1.06826261  0.81358642
+## se-spilo  -0.75151837 -0.63190478  1.04246178
+## st-noton  -0.61618486 -0.71853327  0.60948738
+## sy-marmo  -1.56370831 -0.25253303 -0.16978823
+## te-chalc   0.06189483 -1.29537417 -1.16447425
+## tr-signa  -0.38328723 -0.92884690  0.02246739</code></pre>
+<p>Nesse exemplo, aplicamos uma transformação do acro seno da raiz quadrada e calculamos as distâncias de Bray-Curtis para a matriz de comunidade-por-local.</p>
+<p>É necessário examinar o <strong>Gráfico de Shepard</strong> (Figura <a href="nmds2.html#fig:2102stress">18.1</a>), que mostra a dispersão em torno da regressão entre as distâncias entre pontos da configuração final (distâncias entre cada par de comunidades) <em>versus</em> as dissimilaridades originais.</p>
+<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/goodness.metaMDS.html">stressplot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span>
+<span><span class="va">gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/goodness.cca.html">goodness</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span>
+<span><span class="va">gof</span></span></code></pre></div>
+<pre><code>##  [1] 0.023394858 0.021796449 0.020305239 0.015585419 0.019854879 0.020036890
+##  [7] 0.021347243 0.020983981 0.033130717 0.024022238 0.027214601 0.018339083
+## [13] 0.020496519 0.023942786 0.028588009 0.021345701 0.013227181 0.028408153
+## [19] 0.016844756 0.009815131 0.028353169 0.027209022 0.014701342</code></pre>
+<div class="figure">
+<span style="display:block;" id="fig:2102stress"></span>
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/2102stress-1.png" alt="Stress da análise de ordenação da matriz CBE, baseada na dissimilaridade de Bray-Curtis." width="672"><p class="caption">
+Figura 18.1: Stress da análise de ordenação da matriz CBE, baseada na dissimilaridade de Bray-Curtis.
+</p>
+</div>
+<p>Uma dispersão grande ao redor da linha sugere que as dissimilaridades originais não são bem preservadas no número reduzido de dimensões.</p>
+<div id="gráficos-de-ordenação" class="section level3" number="18.6.1">
+<h3>
+<span class="header-section-number">18.6.1</span> Gráficos de ordenação<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-ordena%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h3>
+<p>Agora podemos plotar a NMDS</p>
+<div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, cex <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="va">gof</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gof</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:ord2102"></span>
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/ord2102-1.png" alt="Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis." width="672"><p class="caption">
+Figura 18.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
+</p>
+</div>
+<p>A ordenação mostra tanto as comunidades (“locais”, círculos abertos) quanto as espécies (cruzes vermelhas).</p>
+<p>Aqui, pode-se usar as funções <code>ordiplot</code> e <code>orditorp</code> para adicionar texto ao gráfico no lugar dos pontos.</p>
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-285-1.png" width="672"></div>
+<div class="sourceCode" id="cb571"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col<span class="op">=</span><span class="st">"red"</span>, air<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, cex<span class="op">=</span><span class="fl">1.25</span>, air<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-285-2.png" width="672"></div>
+<p>A função <code>choices = c(1,2)</code> escolhe quais eixos da ordenação serão mostrados.</p>
+<p>Existem algumas funções adicionais que podem ser de interesse. Pode-se desenhar polígonos convexos conectando os vértices dos pontos feitos por certos grupos de comunidades no gráfico.</p>
+<p>Para isso, cria-se um vetor de valores de tratamento.</p>
+<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-286-1.png" width="672"></div>
+<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span> <span class="op">&lt;-</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">area</span></span>
+<span><span class="va">grupos</span></span></code></pre></div>
+<pre><code>##  [1] "Serido" "Serido" "Serido" "Serido" "Serido" "Serido" "Serido" "Serido"
+##  [9] "Serido" "Serido" "Serido" "Serido" "Buique" "Buique" "Buique" "Buique"
+## [17] "Buique" "Buique" "Buique" "Buique" "Buique" "Buique" "Buique"</code></pre>
+<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">grupos</span> <span class="op">==</span> <span class="st">"Serido"</span>, <span class="st">"green"</span>, </span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">grupos</span> <span class="op">==</span> <span class="st">"Buique"</span>, <span class="st">"blue"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#           ifelse(grupos == "Rio", "red", "black")))</span></span>
+<span><span class="va">colors</span></span></code></pre></div>
+<pre><code>##  [1] "green" "green" "green" "green" "green" "green" "green" "green" "green"
+## [10] "green" "green" "green" "blue"  "blue"  "blue"  "blue"  "blue"  "blue" 
+## [19] "blue"  "blue"  "blue"  "blue"  "blue"</code></pre>
+<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordihull</a></span><span class="op">(</span><span class="va">nmds</span>, groups <span class="op">=</span> <span class="va">grupos</span>, draw <span class="op">=</span> <span class="st">"polygon"</span>, col<span class="op">=</span> <span class="st">"grey90"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-286-2.png" width="672"></div>
+<p>Essa é uma maneira intuitiva de entender como as comunidades e espécies se agrupam com base nos tratamentos possveis. Nesse caso, grupos com cores diferentes. Também é possível plotar elipses e “gráficos de aranha” usando as funções <code>ordiellipse</code> e <code>orderspider</code>, que enfatizam o centróide das comunidades em cada agrupamento.</p>
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordihull</a></span><span class="op">(</span><span class="va">nmds</span>, groups <span class="op">=</span> <span class="va">grupos</span>, draw <span class="op">=</span> <span class="st">"polygon"</span>, col <span class="op">=</span> <span class="st">"grey90"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordiellipse</a></span><span class="op">(</span><span class="va">nmds</span>, groups <span class="op">=</span> <span class="va">grupos</span>, display <span class="op">=</span> <span class="st">"sites"</span>, draw <span class="op">=</span> <span class="st">"polygon"</span>, col <span class="op">=</span> <span class="st">"grey90"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordibar</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="va">grupos</span>, display <span class="op">=</span> <span class="st">"sites"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordispider</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="va">grupos</span>, display<span class="op">=</span><span class="st">"sites"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordicluster</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="va">cluster_uas</span>, prune <span class="op">=</span> <span class="fl">0</span>, display <span class="op">=</span> <span class="st">"sites"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-287-1.png" width="864"></div>
+<p>Outra alternativa é plotar uma “árvore de abrangência mínima” (da função <code>hclust</code>), que agrupa as comunidades com base em suas dissimilaridades originais e projeta o dendrograma no gráfico 2D.</p>
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-288-1.png" width="672"></div>
+<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordicluster</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, <span class="st">"bray"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-288-2.png" width="672"></div>
+<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#?ordicluster</span></span></code></pre></div>
+<p>Observe que o agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.</p>
+<p>Pode-se ainda plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos agrupamentos. Lembrar que deve-se ter criado um vetor de valores de cor com a mesma extensão do vetor de valores de agrupamento.</p>
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-289-1.png" width="672"></div>
+<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="co">#Plot convex hulls with colors baesd on treatment</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">grupos</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordihull</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">$</span><span class="va">point</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="va">i</span>,<span class="va">grupos</span><span class="op">)</span>,<span class="op">]</span>,draw<span class="op">=</span><span class="st">"polygon"</span>,groups<span class="op">=</span><span class="va">grupos</span><span class="op">[</span><span class="va">grupos</span><span class="op">==</span><span class="va">i</span><span class="op">]</span>,col<span class="op">=</span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="va">i</span>,<span class="va">grupos</span><span class="op">)</span><span class="op">]</span>,label<span class="op">=</span><span class="cn">F</span><span class="op">)</span> <span class="op">}</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col<span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-289-2.png" width="672"></div>
+<p>Esse agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.</p>
+<p>Pode-se plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos tratamentos. Primeiro, cria-se um vetor de valores de cor com a mesma extensão do vetor de valores de tratamento.</p>
+<p>Se o tratamento for uma variável contínua, deve-se considerar linhas de mapeamento de contorno sobrepostas no gráfico. Para este exemplo, considera-se que os tratamentos foram aplicados ao longo de um gradiente de elevação. Podemos definir elevações aleatórias para o mesmo exemplo.</p>
+<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
+<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">m</span><span class="op">)</span></span>
+<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">height</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">knots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span></code></pre></div>
+<p>Agora usa-se a função <code>ordisurf</code> para plotar as linhas de contorno. A quantidade de linhas de contorno é definida pelo comando <code>knots =</code>. Se <code>knots = 0</code> ou <code>knots = 1</code> a função <code>ordisurf</code> ajustará uma tendencia linear a superfície, e se <code>knots = 2</code> a função ajustará uma tendência quadrática, ao inves de linhas retas. E por fim, exibe-se as espécies no gráfico.</p>
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-291-1.png" width="672"></div>
+<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordisurf.html">ordisurf</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="va">surf</span>, main <span class="op">=</span> <span class="st">""</span>, col <span class="op">=</span> <span class="st">"forestgreen"</span>, knots <span class="op">=</span> <span class="va">knots</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Family: gaussian 
+## Link function: identity 
+## 
+## Formula:
+## y ~ s(x1, x2, k = 23, bs = "tp", fx = FALSE)
+## 
+## Estimated degrees of freedom:
+## 5.63  total = 6.63 
+## 
+## REML score: -2.960328</code></pre>
+<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="st">"grey30"</span>, air <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"grey30"</span>, air <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-291-2.png" width="672"></div>
+</div>
+</div>
+<div id="apêndices-14" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-14"><i class="fas fa-link"></i></a>
+</h2>
+<div id="videos-consultados" class="section level3 unnumbered">
+<h3>Videos consultados<a class="anchor" aria-label="anchor" href="#videos-consultados"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://youtu.be/OMrtxobDhrM" class="uri">https://youtu.be/OMrtxobDhrM</a>
+<a href="https://youtu.be/zjxE2KwNO0M" class="uri">https://youtu.be/zjxE2KwNO0M</a>
+<a href="https://youtu.be/Kl49qI3XJKY" class="uri">https://youtu.be/Kl49qI3XJKY</a>
+<a href="https://youtu.be/paO9-PLXwD0" class="uri">https://youtu.be/paO9-PLXwD0</a>
+<a href="https://youtu.be/QljEeBei-JA" class="uri">https://youtu.be/QljEeBei-JA</a>
+<a href="https://youtu.be/4tQJI-g9wao" class="uri">https://youtu.be/4tQJI-g9wao</a>
+<a href="https://youtu.be/M-Ing955VEI" class="uri">https://youtu.be/M-Ing955VEI</a></p>
+</div>
+<div id="script-limpo-11" class="section level3 unnumbered">
+<h3>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-11"><i class="fas fa-link"></i></a>
+</h3>
+<p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
+</div>
+</div>
+<div id="referências-16" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-16"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="nmds.html"><span class="header-section-number">17</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></div>
+<div class="next"><a href="bibliografia-geral.html">Bibliografia Geral</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#nmds2"><span class="header-section-number">18</span> R Modulo 10.2 - Análise de Ordenação - NMDS</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-14">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-15">Apresentação</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#algoritmo-da-nmds-1"><span class="header-section-number">18.1</span> Algoritmo da NMDS</a></li>
+<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-12"><span class="header-section-number">18.2</span> Organização básica</a></li>
+<li><a class="nav-link" href="#pacotes-do-m%C3%B3dulo-1"><span class="header-section-number">18.3</span> Pacotes do módulo</a></li>
+<li><a class="nav-link" href="#rein%C3%ADcio-1-1"><span class="header-section-number">18.4</span> REINÍCIO 1</a></li>
+<li>
+<a class="nav-link" href="#classifica%C3%A7%C3%A3o-1-matriz-comunit%C3%A1ria-1"><span class="header-section-number">18.5</span> Classificação 1: Matriz comunitária</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dendrograma-e-heatmap-1-1"><span class="header-section-number">18.5.1</span> Dendrograma e Heatmap 1</a></li>
+<li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es-1-1"><span class="header-section-number">18.5.2</span> Histórico das fusões 1</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#ordena%C3%A7%C3%A3o-1"><span class="header-section-number">18.6</span> Ordenação</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1ficos-de-ordena%C3%A7%C3%A3o"><span class="header-section-number">18.6.1</span> Gráficos de ordenação</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#ap%C3%AAndices-14">Apêndices</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#videos-consultados">Videos consultados</a></li>
+<li><a class="nav-link" href="#script-limpo-11">Script limpo</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#refer%C3%AAncias-16">Referências</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 18:22:43.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
