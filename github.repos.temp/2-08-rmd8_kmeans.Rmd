@@ -1,0 +1,348 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 8
+
+### Análise de Classificação Não-hierárquica - K-Means {-}
+
+### RESUMO {-}
+
+O método K-means é um algoritmo de aprendizado de máquina não supervisionado utilizado para agrupar dados em clusters. Ele é um dos métodos mais populares e amplamente utilizados para tarefas de clustering. O objetivo do algoritmo K-means é particionar um conjunto de dados em K clusters, onde K é um valor pré-definido pelo usuário. Cada cluster é representado por seu centróide, que é o ponto médio dos dados pertencentes a esse cluster. O algoritmo busca minimizar a variância intra-cluster, ou seja, a soma dos quadrados das distâncias entre os pontos de um cluster e o centróide desse cluster.
+
+### Apresentação {-}
+
+O método K-means é um algoritmo de aprendizado de máquina não supervisionado utilizado para agrupar dados em clusters. Ele é um dos métodos mais populares e amplamente utilizados para tarefas de clustering.
+
+O objetivo do algoritmo K-means é particionar um conjunto de dados em K clusters, onde K é um valor pré-definido pelo usuário. Cada cluster é representado por seu centróide, que é o ponto médio dos dados pertencentes a esse cluster. O algoritmo busca minimizar a variância intra-cluster, ou seja, a soma dos quadrados das distâncias entre os pontos de um cluster e o centróide desse cluster.
+
+O processo de clustering pelo K-means envolve os seguintes passos:
+
+1. Inicialização: Seleção aleatória de K centróides iniciais ou usando outros métodos de inicialização.
+
+2. Atribuição: Cada ponto de dados é atribuído ao cluster cujo centróide está mais próximo.
+
+3. Atualização: Recalcula-se o centróide de cada cluster com base nos pontos de dados atribuídos a ele.
+
+4. Repetição: Os passos 2 e 3 são repetidos até que os centróides dos clusters se estabilizem ou um critério de parada seja atingido.
+
+O algoritmo K-means é iterativo e pode convergir para uma solução ótima local. Portanto, é comum executar o algoritmo várias vezes com diferentes inicializações aleatórias para melhorar a qualidade do clustering. A escolha do número de clusters (K) é um parâmetro importante e pode afetar os resultados.
+
+O K-means é amplamente aplicado em diversas áreas, como análise de dados, mineração de dados, reconhecimento de padrões e segmentação de imagens. Ele é eficiente e escalável, tornando-o uma opção popular para clustering de grandes conjuntos de dados. No entanto, é importante ressaltar que o K-means assume que os clusters são esféricos e de tamanho similar, o que nem sempre é o caso em todos os conjuntos de dados.
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) ##LIMPA A MEMORIA
+cat("\014") #limpa o console 
+```
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+install.packages("openxlsx")
+install.packages("vegan")
+```
+
+```{r}
+library(tidyverse)
+```
+
+Os códigos acima, são usados para instalar os pacotes necessários para este módulo. Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função `library()`. Por exemplo, no código acima, carregamos o pacote `tidyverse`, usando a função `library(tidyverse)`.
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+```{r}
+#| eval: false
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+Alternativamente você pode ir na barra de tarefas e escolhes as opções:\
+SESSION -\> SET WORKING DIRECTORY -\> CHOOSE DIRECTORY
+
+### Sobre os dados do PPBio
+
+A planilha `ppbio` contém os dados de abundância de espécies em diferentes unidades amostrais (UA's). A base teórica dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+### Importando a planilha de trabalho
+
+Note que o sómbolo `#` em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+
+```{r, results='hide'}
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "Sheet1")
+str(ppbio)
+ppbio_ma <- as.matrix(ppbio) #lê ppbio como uma matriz
+str(ppbio_ma)
+#ppbio
+#ppbio_ma
+```
+
+## Reset point 1
+
+::: {#hello .greeting .message style="color: green;"}
+  [ATENÇÃO]{style="color:red"}
+  Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.
+:::
+
+```{r}
+m_bruta <- (ppbio)   # <1>
+```
+1.  Substitua a nova matriz aqui. Caso seja necessário.
+
+No interesse de sistematizar o uso das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (\@ref(tab:8tbl-m_) resume seus tipos e abreviações.
+
+```{r 8tbl-m_, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)", ~"Abreviação no R",
+  "Matriz comunitaria", "Os atributos são táxons ou OTU's (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)", "m_com",
+  "Matriz ambiental", "Os atributos são dados ambientais e variáveis  físicas e químicas (ex. pH, condutividade, temperatura)", "m_amb",
+  "Matriz de habitat", "Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)", "m_hab",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)", "m_brt",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas", "m_t",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)", "m_rel",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)", "m_trns",
+  "Matriz de trabalho", "Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)", "m_trab",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
+```
+
+### Outra forma de achar e importar uma planilha
+
+```{r, eval=FALSE}
+getwd()
+ppbio <- read.xlsx(file.choose(),
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+```
+
+## Classificação
+
+Criando uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, criada a partir da matriz de dados relativizada pelo total das colunas e transformada pelo arco seno da raiz quadrada.
+
+```{r, results='hold', fig.show='hold'}
+library(vegan)
+m_trns <- asin(sqrt(decostand(m_bruta,
+                               method="total", MARGIN = 2)))
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster <- hclust(vegdist, method = "average")
+plot (cluster, main = "Cluster Dendrogram - Bray-Curtis")
+rect.hclust(cluster, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+as.matrix(vegdist)[1:6, 1:6]
+```
+
+## Histórico das fusões
+
+Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de "-") ou grupo de objetos (indicado pela ausência do sinal de "-") que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a `m-1` última fusão entre os dois últimos grupos. Nesse caso, `r nrow(as.matrix(vegdist))-1`.
+
+```{r, results='hold'}
+merge <- as.data.frame(cluster$merge)
+merge[nrow(merge)+1,] = c("0","0")
+height <- as.data.frame(round(cluster$height, 2))
+height[nrow(height)+1,] = c("1.0")
+fusoes <- data.frame(Cluster = merge, Height = height)
+colnames(fusoes) <- c("Cluster1", "Cluster2", "Height")
+UA <- rownames_to_column(as.data.frame(m_trns[, 0]))
+colnames(UA) <- c("No. e UA")
+fusoes <- cbind(UA, fusoes)
+fusoes$Histórico <- 1:nrow(fusoes)
+fusoes
+```
+
+No código acima, `h = 0.8` fornece os grupos formados na altura `h` do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, "h") representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo `height`, isso significa que a distancia entre esses objetos é 0.8.
+
+## Algoritmo K-Means - Versão simplificada
+
+Este [vídeo do YouTube](https://youtu.be/6qleqPsrBqI) é um bom exemplo de como fazer uma Classificação K-Means.
+
+### Organização básica primeiro
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos
+```
+
+### Instalar pacotes necessários
+
+```{r, eval=FALSE}
+install.packages("factoextra")
+install.packages("FactoMineR")
+install.packages("cluster")
+install.packages("gridExtra")
+```
+
+### Importando matriz
+
+```{r}
+library(openxlsx)
+ppbioh <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-habitat.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "ano1")
+colnames(ppbioh)
+ppbioh_part <- subset(ppbioh,
+                      select = c("s.mud","s.sand","s.smlgrav","s.lrggrav","s.cobbles","s.rocks","s.bedrock"))
+names(which(colSums(ppbioh_part) == 0))
+```
+
+## Reset point 2
+
+::: {#hello .greeting .message style="color: green;"}
+  [ATENÇÃO]{style="color:red"}
+  Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.
+:::
+
+```{r}
+m_trab <- (ppbioh_part)   # <1>
+#m_bruta <- (ppbioh)
+```
+1.  Substitua a nova matriz aqui. Caso seja necessário.
+
+### Algumas análises exploatórias
+
+Dados brutos
+
+```{r, results='hold', fig.show='hold'}
+range(m_trab)
+boxplot(t(m_trab))
+```
+
+#### Relativização e transformação
+
+Dados transformados pela função expressa em `m_trns`.
+
+```{r, results='hold', fig.show='hold'}
+m_trns <- sqrt(m_trab)
+
+range(m_trns)
+boxplot(t(m_trns))
+```
+
+#### Gráficos comparativos
+
+```{r, results='hold', fig.show='hold'}
+par(mfrow = c(1,2))
+boxplot(t(m_trab), log = "", las = 2,
+        ylim = c(floor(min(m_trab)), ceiling(max(m_trab))),
+        main = "Dados brutos")
+boxplot(t(m_trns), log = "", las = 2,
+        ylim = c(floor(min(m_trns)), ceiling(max(m_trns))),
+        main = "Dados relativizados e transformados")
+par(mfrow=c(1,1))
+```
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos
+```
+
+## Determinando o número ideal de clusteres
+
+### Reescalar os dados primeiro usando a função `scale()`
+
+```{r, results='hide'}
+library(factoextra)
+library(gridExtra)
+
+m_trns_s <- scale(m_trns)
+
+# Definindo uma função que envolve o algoritmo k-means
+kmeans_fun <- function(data, k) {
+  kmeans(data, centers = k, nstart = 25)
+}
+methods <- c("silhouette", "wss", "gap_stat")
+plots <- list()
+for (method in methods) {
+  plot_title <- paste("No. de clusters método ", method)
+  
+  plot <- fviz_nbclust(m_trns_s, FUNcluster = kmeans_fun, method = method) +
+    ggtitle(plot_title)
+  
+  plots[[method]] <- plot
+}
+```
+
+No código acima, as funções `scale()`, reescala a matriz, `fviz_` cria um gráfico que sugere o número ideal de clusteres para serem usados, e o argumento `method=` indica o método usado para propor o número de clusteres, que podem ser "silhouette", "wss" e "gap_stat" (Veja [Métodos de determinação de clusters em `k-means`][Métodos de determinação de clusters em `k-means`] nos Apêndices).
+
+Aqui criamos uma figura com os resultados dos gráficos para cada método de proposição para o número de clusteres (Figura \@ref(fig:28prop)).
+
+```{r 28prop, fig.height=9, fig.cap="Gráficos para cada método de proposição para o número de clusteres."}
+grid.arrange(grobs = plots, nrow = 3)
+```
+
+Com os dados reescalados, agora fazemos uma primeira tentativa. A função `set.seed()` estabelece um número inicial de partida de onde serã feitas as permutações aleatórias. Nesse caso, foi usado `centers=n` centros para calcular os agrupamentos K-Means.
+
+```{r, results='hold'}
+library(factoextra)
+library(gridExtra)
+m_trns_s <- scale(m_trns)
+set.seed(666)
+kmeans <- kmeans(m_trns_s, centers = 3)
+kmeans #resultados descritivos da análise
+
+fviz_cluster(kmeans, data = m_trns_s, outlier.color = "black", outlier.shape = 19,
+             ellipse.type = "convex") #ou "confidence"
+```
+
+#### Usando os agrupamentos do `kmeans$cluster`
+
+```{r, results='hold'}
+kmeans
+kmeans$cluster
+grupos <- kmeans$cluster
+grupos
+grupos2 <- cbind(grupos, m_trab)
+grupos2
+```
+
+##### Descendo os nomes das UA's
+
+Agora vamos criar duas tabelas cruzadas entre as unidades amostrais e seu pertencimento a um dos agrupamentos criados pela análises de K-Means. Essas tabelas mostram a contagem de ocorrências de cada UA para cada cluster.
+
+```{r, results='hold'}
+unid.as <- rownames_to_column(m_trab, var = "UAs")
+agrup <- substr(unid.as[, 1], 5,6)
+uas2 <- unid.as %>% mutate(spp=c(agrup),.before=UAs)
+table(unid.as$UAs, kmeans$cluster)
+table(uas2$spp, kmeans$cluster)
+```
+
+## Apêndices {.unnumbered}
+
+### Restos de códigos {-}
+
+Código simples para a função fviz/no. de clusteres ppbioh_rqs \<- scale(ppbioh_rq) #reescala a matriz ?scale fviz_nbclust(ppbioh_rqs, kmeans, #sugere o no. ideal de clusteres method = "silhouette") #outros métodos são "wss" e "gap_stat"
+
+### Métodos de determinação de clusters em `k-means` {-}
+
+Os métodos "silhouette", "wss" e "gap_stat" são usados para determinar o número ideal de clusters em uma análise de cluster utilizando o algoritmo K-means.
+
+Método "silhouette":
+
+-   O método "silhouette" avalia a qualidade dos clusters formados pelo K-means. Ele calcula a medida de silhouette para diferentes números de clusters e identifica o número de clusters com a maior média de silhouette, indicando uma melhor separação e compactação dos clusters.
+Método "wss" (Within-Cluster Sum of Squares):
+
+O método "wss":
+
+-   O método "wss" calcula a soma dos quadrados das distâncias dos pontos em cada cluster em relação ao centróide desse cluster. Ele avalia a variabilidade dentro de cada cluster. O objetivo é encontrar o número de clusters que minimiza o valor do WSS, indicando uma melhor compactação dos pontos dentro dos clusters.
+Método "gap_stat" (Gap statistic):
+
+O método "gap_stat":
+
+-   O método "gap_stat" compara a variação da dispersão dos dados dentro dos clusters em relação àquela esperada em um conjunto de dados aleatórios (dados de referência sem estrutura de cluster). Ele calcula a diferença entre a métrica de dispersão intra-cluster dos dados reais e dos dados de referência para diferentes números de clusters. O número de clusters com o maior valor de lacuna estatística indica um melhor ajuste dos dados reais em relação aos dados aleatórios, sugerindo a presença de estrutura de cluster.
+
+Esses métodos ajudam a determinar o número ideal de clusters de forma objetiva, utilizando diferentes critérios de avaliação. Cada método tem suas próprias vantagens e pode ser mais adequado dependendo do conjunto de dados e do objetivo da análise.
+
+## Referências {-}

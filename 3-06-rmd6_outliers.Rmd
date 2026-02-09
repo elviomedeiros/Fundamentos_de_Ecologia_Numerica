@@ -49,11 +49,11 @@ Várias das espécies nessa matriz tem grande importância ecológica, como é o
 [^2]: Do Grego, *hoplon*, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça. 
 
 ```{r 6asbim, echo=FALSE, purl=FALSE, fig.cap="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>"}
-knitr::include_graphics("imagens/Asbim_u4.jpg")
+knitr::include_graphics("imagens/spp/Asbim_u4.jpg")
 ```
 
 ```{r 6hmala, echo=FALSE, purl=FALSE, fig.cap="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>"}
-knitr::include_graphics("imagens/Homal_u6.jpg")
+knitr::include_graphics("imagens/spp/Homal_u6.jpg")
 ```
 
 ## Organização básica
@@ -93,7 +93,7 @@ SESSION -\> SET WORKING DIRECTORY -\> CHOOSE DIRECTORY
 
 ```{r, results='hold'}
 library(openxlsx)
-m_bruta <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx",
+m_bruta <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx",
                    rowNames = T, colNames = T,
                    sheet = "Sheet1")
 str(m_bruta)
@@ -448,11 +448,11 @@ Quando deletamos linhas ou colunas da matriz de dados comunitária, precisamos v
 [^4]: A etimologia do nome *Pseudancistrus* vem do Grego, *pseudes*, falso, e *agkistron*, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.
 
 ```{r 6apdavis, echo=FALSE, purl=FALSE, fig.cap="*Apareiodon davisi*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>"}
-knitr::include_graphics("imagens/Apdav_u0.jpg")
+knitr::include_graphics("imagens/spp/Apdav_u0.jpg")
 ```
 
 ```{r 6pgen, echo=FALSE, purl=FALSE, fig.cap="*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By eplanetcatfish.com. Fonte: <https://www.planetcatfish.com> (Provável identificação errada do espécime da foto)](eplanetcatfish.jpg)"}
-knitr::include_graphics("imagens/genis.jpg")
+knitr::include_graphics("imagens/spp/genis.jpg")
 ```
 
 Use o a função `View(m_bruta_part)` e procure linhas ou colunas na matriz `m_bruta_part` onde todos os valores são zero. Quais espécies você encontrou que deixaram de ocorrer na comunidade depois que as UA's outliers foram removidas?.

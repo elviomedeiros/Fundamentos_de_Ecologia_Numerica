@@ -1,0 +1,584 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 13
+
+### Análise de Redundância - RDA {-}
+
+### RESUMO
+
+A Análise de Redundância (RDA - Redundancy Analysis) é uma técnica estatística multivariada que visa identificar a contribuição relativa de diferentes conjuntos de variáveis para a variação observada em uma variável resposta. Ela é amplamente utilizada em estudos de ecologia, biologia e outras áreas relacionadas, onde existe interesse em entender quais variáveis explicam melhor os padrões de variação em um conjunto de dados.
+
+### Apresentação {-}
+
+A Análise de Redundância (RDA - Redundancy Analysis) é uma extensão da Análise de Componentes Principais (PCA - Principal Component Analysis), que combina técnicas de análise de regressão multivariada com métodos de análise de componentes principais.
+
+O objetivo da RDA é encontrar uma combinação linear de variáveis explicativas (geralmente uma matriz  ambiental) que maximize a correlação com a variável resposta (geralmente uma matriz comunitária). Essa combinação linear é conhecida como eixos canônicos. Além disso, a RDA também pode identificar outros eixos canônicos, cada um representando uma nova combinação linear de variáveis explicativas que é ortogonal aos eixos anteriores e também tem alta correlação com a variável resposta.
+
+Ao realizar uma análise de redundância, é possível avaliar a importância relativa de diferentes conjuntos de variáveis explicativas e identificar quais variáveis contribuem de forma significativa para a variação na variável resposta. Essa técnica é especialmente útil quando há muitas variáveis explicativas disponíveis e é necessário identificar quais delas são as mais relevantes para o fenômeno em estudo.
+
+A RDA oferece uma abordagem poderosa para entender os padrões de variação em dados multivariados, ajudando os pesquisadores a explorar a redundância nas informações e identificar os principais fatores que influenciam uma variável resposta específica.
+
+## RDA x PCA
+
+A Análise de Redundância e a Análise de Componentes Principais são técnicas estatísticas multivariadas que têm abordagens diferentes e são aplicadas em contextos distintos. Vamos explorar as principais diferenças entre elas.  
+
+
+1\. Objetivos:
+
+:   - RDA: A RDA é usada para analisar a contribuição relativa de diferentes conjuntos de variáveis explicativas para a variação observada em um conjunto de variáveis resposta. Seu objetivo é encontrar combinações lineares de variáveis explicativas que tenham alta correlação com a variável resposta.
+
+:   - PCA: A PCA é utilizada para explorar a estrutura de variação em um conjunto de dados multivariado sem a presença de uma variável resposta específica. Seu objetivo é reduzir a dimensionalidade dos dados, identificando as principais direções (componentes principais) ao longo das quais os dados variam.
+
+2\. Uso de variável resposta:
+
+:   - RDA: A RDA requer um conjunto de variáveis resposta que sejam consideradas as variáveis dependentes do estudo (geralmente uma matriz ambiental). Ela é usada para avaliar como os conjuntos de variáveis explicativas (geralmente uma matriz comunitária) contribuem para a variação nessa variável resposta específica.
+
+:   - PCA: A PCA não requer uma variável resposta. Ele analisa apenas as relações entre as variáveis explicativas e não está focada em explicar variações em uma variável resposta específica.
+
+3\. Tipo de variáveis:
+
+:   - RDA: A RDA é adequada para dados em que há uma combinação de variáveis explicativas numéricas (contínuas) e categóricas (qualitativas).
+
+:   - PCA: A PCA é mais adequada para dados numéricos (contínuos). Ele lida bem com variáveis contínuas, mas não é apropriado para variáveis categóricas.
+
+4\. Análise de correlação:
+
+:   - RDA: A RDA busca encontrar a correlação entre os conjuntos de variáveis explicativas e a variável resposta. Ela avalia a importância relativa de cada conjunto de variáveis explicativas.
+
+:   - PCA: A PCA não busca uma correlação específica com uma variável resposta. Ele busca identificar as direções ao longo das quais os dados apresentam maior variação.
+
+5\. Estrutura de dimensionamento:
+
+:   - RDA: A RDA permite que seja realizada uma **análise canônica** ^[São estimadas combinações lineares de variáveis explicativas que estão maximamente correlacionadas com a variável resposta. Essas combinações lineares são chamadas de eixos canônicos. Os eixos canônicos são calculados de forma a serem ortogonais uns aos outros, ou seja, eles não estão correlacionados entre si.] que encontre combinações lineares de variáveis explicativas para maximizar a correlação com a variável resposta. Isso significa que a RDA pode identificar múltiplos eixos canônicos, cada um representando uma combinação linear diferente.
+
+:   - PCA: A PCA busca os componentes principais que explicam a maior parte da variação total nos dados, mas não está relacionado a uma variável resposta específica. Ele gera um conjunto de componentes principais ortogonais entre si.
+
+::: {#hello .greeting .message style="color: green;"}
+Em resumo, a RDA é adequada para analisar a relação entre variáveis explicativas e uma variável resposta específica, enquanto a PCA é mais útil para entender a estrutura de variação em um conjunto de dados multivariados sem considerar uma variável resposta. Ambas as técnicas têm suas aplicações distintas e podem fornecer insights valiosos em diferentes contextos de análise de dados.
+:::
+
+### Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console
+```
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("openxlsx")
+install.packages("tidyverse")
+install.packages("vegan")
+install.packages("gplots")
+install.packages("psych")
+install.packages("gt")
+install.packages("ggplot2")
+```
+
+```{r}
+library(tidyverse)
+```
+
+Os códigos acima, são usados para instalar os pacotes necessários para este módulo. O  comando `library()` será usado para carregarmos esses pacote a medida que eles forem sendo necessários.
+
+Para definir o diretório de trabalho usa-se os códigos abaixo. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+Alternativamente você pode ir na barra de tarefas e escolhes as opções:\
+SESSION -\> SET WORKING DIRECTORY -\> CHOOSE DIRECTORY
+
+Usar o [RStudio Cloud](https://login.rstudio.cloud/) é uma opção para quem não quer instalar a versão para PC ^[O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente].
+
+### Sobre os dados do PPBio
+
+A planilha `ppbio` contém os dados de abundância de espécies em diferentes unidades amostrais (UA's). A base teórica dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+#### A planilha PPBio Habitat
+
+Para esse módulo também usaremos a planilha `ppbioh`. Esta é uma **matriz de dados ambiental**, guardados no arquivo `ppbio06h.xlsx`, que traz os dados brutos de 26 localidades (UAs) em períodos diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação. As unidades de medição incluem cm, m, °C, mg/L, %, entre outros (dados publicados por [@RN2491]. Esses dados tem uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada. As bases teóricas dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+### Importando a planilha de trabalho
+
+Note que o símbolo `#` em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+
+** Em uma RDA trabalhamos com duas matrizes, uma comunitária e outra ambiental**
+
+```{r, results='hide'}
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "Sheet1")
+ppbio_a <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-habitat.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "ano1")
+#ppbio
+#str(ppbio)
+#ppbio_ma <- as.matrix(ppbio) #lê ppbio como uma matrix
+#ppbio_ma
+#str(ppbio_ma)
+```
+
+#### Outra forma de achar e importar uma planilha
+
+```{r, eval=FALSE}
+getwd()
+ppbio <- read.xlsx(file.choose(),
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+```
+
+### Particionando as variáveis de interesse
+
+Para escolher quais variáveis entrar na análise:
+
+```{r, results='hide'}
+#Lista as colunas
+colnames(ppbio)
+#Escolher quais colunas usar por nome
+colnames(ppbio)[rev(order(colSums(ppbio)))] #ordena por maior soma
+#Usar a função subset()
+#m_part <- subset(ppbio_a[, c("a.veloc", "a.temp", "a.do", "a.transp")])
+m_part <- subset(ppbio_a[, 18:26])
+```
+
+## REINÍCIO 1
+
+::: {#hello .greeting .message style="color: green;"}
+Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.
+:::
+
+```{r}
+m_trab <- (ppbio)   # <1>
+#m_trab <- (m_part)   # <1>
+#m_trab
+```
+1.  Substitua a nova matriz aqui. Caso seja necessário.
+
+No interesse de sistematizar o uso das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (Tabela \@ref(Tab:213tbl) resume seus tipos e abreviações.
+
+```{r 213tbl, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)", ~"Abreviação no R",
+  "Matriz comunitaria", "Os atributos são táxons ou OTU's (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)", "m_com",
+  "Matriz ambiental", "Os atributos são dados ambientais e variáveis  físicas e químicas (ex. pH, condutividade, temperatura)", "m_amb",
+  "Matriz de habitat", "Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)", "m_hab",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)", "m_brt",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas", "m_t",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)", "m_rel",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)", "m_trns",
+  "Matriz de trabalho", "Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)", "m_trab",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
+```
+
+## Classificação 1: Matriz comunitária
+
+Para conhecermos os dados, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir das matrizes de dados de interesse `ppbio**` com suas devidas relativizações e transformações (Veja @tbl-term).
+
+### Dendrograma e Heatmap 1
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+#Dendrograma
+library(vegan)
+m_trns <- asin(sqrt(decostand(m_trab,
+                               method="total", MARGIN = 2)))
+#m_trns <- sqrt(m_trab)
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster_uas <- hclust(vegdist, method = "average")
+plot(cluster_uas, main = "Cluster Dendrogram - Bray-Curtis da Matriz Comunitária",
+      hang = 0.1) #testar com -.01
+rect.hclust(cluster_uas, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+as.matrix(vegdist)[1:6, 1:6]
+
+#Heatmap
+library("gplots")
+heatdist <- as.matrix(vegdist)
+col <- rev(heat.colors(999)) #rev() reverte as cores do heatmap
+heatmap.2(x=(as.matrix(vegdist)), #objetos x objetos
+          Rowv = as.dendrogram(cluster_uas),
+          Colv = as.dendrogram(cluster_uas),
+          key = T, tracecol = NA, revC = T,
+          col = heat.colors,  #dissimilaridade = 1 - similaridade
+          density.info = "none",
+          xlab = "UA´s", ylab = "UA´s",
+          main = "Comunidade",
+          mar = c(6, 6) + 0.2)
+cluster_spp <- hclust((vegdist(t(m_trns), method = "bray",
+                            diag = TRUE,
+                            upper = FALSE)), method = "average")
+plot(cluster_spp, main = "Dendrograma dos atributos")
+heatmap.2(t(as.matrix(m_trns)), #objetos x atributos
+          Colv = as.dendrogram(cluster_uas),
+          Rowv = as.dendrogram(cluster_spp),
+          key = T, tracecol = NA, revC = T,
+          col = col,
+          density.info = "none",
+          xlab = "Unidades amostrais", ylab = "Espécies",
+          mar = c(6, 6) + 0.1)  # adjust margin size
+```
+
+### Histórico das fusões 1
+
+Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de "-") ou grupo de objetos (indicado pela ausência do sinall de "-") que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a `m-1` última fusão entre os dois últimos grupos. Nesse caso, `r nrow(as.matrix(vegdist))-1`.
+
+```{r, results='hold'}
+library(gt)
+merge <- as.data.frame(cluster_uas$merge)
+merge[nrow(merge)+1,] = c("0","0")
+height <- as.data.frame(round(cluster_uas$height, 2))
+height[nrow(height)+1,] = c("1.0")
+fusoes <- data.frame(Cluster_uas = merge, Height = height)
+colnames(fusoes) <- c("Cluster1", "Cluster2", "Height")
+UA <- rownames_to_column(as.data.frame(m_trns[, 0]))
+colnames(UA) <- c("UAs")
+No.UA <- 1:nrow(fusoes)
+fusoes <- cbind(No.UA, UA, fusoes)
+fusoes$Histórico <- 1:nrow(fusoes)
+#fusoes
+gt(fusoes)
+```
+
+No código acima, `h = 0.8` fornece os grupos formados na altura `h` do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, "h") representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo `height`, isso significa que a distancia entre esses objetos é 0.8.
+
+::: {#hello .greeting .message style="color: green;"}
+Note que, no R, escalar os dados (argumento `scale=TRUE`) já significa centrar (argumento `center=TRUE`) e escalar, uma vez que no ambiente de programação do R base, ao  escalar os dados são primeiro centrados (argumento `center=TRUE` como o padrão) (mas veja também a Tabela \@ref(Tab:213tbl-term).
+:::
+
+```{r 213tbl-term, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Termo", ~"Descrição",
+  "Transformar (ou ponderar)", "Aplicação de uma única função matemática a todos os valores. Ex. Log, Raiz, etc.",
+  "Relativizar", "≅ Normalizar", 
+  "Padronizar (✓)", "Reescalar os dados para apresentarem uma média = 0 e um desvio padrão = 1, subtraindo a média de cada valor e dividindo pelo desvio padrão",
+  "Normalizar (✓)", "Dividir pela norma. Reescalar os valores para variar entre 0 e 1",
+  "Centrar", "≅ Padronizar",
+  "Reescalar", "Adicionar ou subtrair uma constante, e então multiplicar ou dividir por uma constante. Significa mudar a unidade de medida. Ex. Celsius para Fahrenheit",
+  "Escalar (X)",  "≅ Relativizar. Dividir cada variável por um fator. Variáveis diferentes têm fatores de escalar diferentes",
+  "'center' (no R*)", "Um valor lógico (TRUE, FALSE) indicando se as variáveis devem ser deslocadas para serem centradas em zero. O valor é passado para a função 'scale'",
+  "'scale' (no R*)", "Um valor lógico (TRUE, FALSE) indicando se as variáveis devem ser re-escaladas para terem variância unitária antes da análise, é recomendável fazer a escala. Ao re-escalar, os dados também são automáticamente centrados",
+  "(✓) termo consistente na literatura; (X) termo pode ter mais de um significado diferente; (≅) equivalente a", "(*no R), note que escalar os dados (argumento 'scale=TRUE') já significa centrar (argumento 'center=TRUE') e escalar, uma vez que no ambiente de programação do R base, ao  escalar os dados são primeiro centrados (argumento 'center=TRUE' como o padrão)",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Resumo sobre terminologia usada conforme definido para fins de consistência.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:2, width = c("2cm","5cm"))
+```
+
+## Classificação 2: Matriz ambiental
+
+Para conhecermos os dados da matriz ambiental do  PPBio, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir das matrizes de dados de interesse `ppbio**` com suas devidas relativizações e transformações (Veja a Tabela \@ref(Tab:213tbl-term).
+
+### Dendrograma e Heatmap 2
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+#Dendrograma
+library(vegan)
+#m_trns <- asin(sqrt(decostand(m_trab,
+#                               method="total", MARGIN = 2)))
+m_trns <- sqrt(m_part)
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster_uas <- hclust(vegdist, method = "average")
+plot(cluster_uas, main = "Cluster Dendrogram - Bray-Curtis para a Matriz Ambiental",
+      hang = 0.1) #testar com -.01
+rect.hclust(cluster_uas, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+as.matrix(vegdist)[1:6, 1:6]
+
+#Heatmap
+library("gplots")
+heatdist <- as.matrix(vegdist)
+col <- rev(heat.colors(999)) #rev() reverte as cores do heatmap
+heatmap.2(x=(as.matrix(vegdist)), #objetos x objetos
+          Rowv = as.dendrogram(cluster_uas),
+          Colv = as.dendrogram(cluster_uas),
+          key = T, tracecol = NA, revC = T,
+          col = heat.colors,  #dissimilaridade = 1 - similaridade
+          density.info = "none",
+          xlab = "UA´s", ylab = "UA´s",
+          main = "Dados ambientais",
+          mar = c(6, 6) + 0.2)
+cluster_spp <- hclust((vegdist(t(m_trns), method = "bray",
+                            diag = TRUE,
+                            upper = FALSE)), method = "average")
+plot(cluster_spp, main = "Dendrograma dos atributos")
+heatmap.2(t(as.matrix(m_trns)), #objetos x atributos
+          Colv = as.dendrogram(cluster_uas),
+          Rowv = as.dendrogram(cluster_spp),
+          key = T, tracecol = NA, revC = T,
+          col = col,
+          density.info = "none",
+          xlab = "Unidades amostrais", ylab = "Espécies", main = "Dados ambientais",
+          mar = c(6, 6) + 0.1)  # adjust margin size
+```
+
+## Histórico das fusões
+
+Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de "-") ou grupo de objetos (indicado pela ausência do sinal de "-") que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a `m-1` última fusão entre os dois últimos grupos. Nesse caso, `r nrow(as.matrix(vegdist))-1`.
+
+```{r, results='hold'}
+library(gt)
+merge <- as.data.frame(cluster_uas$merge)
+merge[nrow(merge)+1,] = c("0","0")
+height <- as.data.frame(round(cluster_uas$height, 2))
+height[nrow(height)+1,] = c("1.0")
+fusoes <- data.frame(Cluster_uas = merge, Height = height)
+colnames(fusoes) <- c("Cluster1", "Cluster2", "Height")
+UA <- rownames_to_column(as.data.frame(m_trns[, 0]))
+colnames(UA) <- c("UAs")
+No.UA <- 1:nrow(fusoes)
+fusoes <- cbind(No.UA, UA, fusoes)
+fusoes$Histórico <- 1:nrow(fusoes)
+#fusoes
+gt(fusoes)
+```
+
+## Classificação 3: Heatmap Matriz comunitária *vs.* Matriz ambiental
+
+### Dendrograma e Heatmap 3
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+#Dendrograma
+library(vegan)
+library(gplots)
+# Dendrograma para as UA's da matriz comunitária
+m_trns_c <- asin(sqrt(decostand(ppbio,
+                               method="total", MARGIN = 2)))
+vegdist_c <- vegdist(m_trns_c, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster_uas_c <- hclust(vegdist_c, method = "average")
+plot(cluster_uas_c, main = "Cluster Dendrogram - Bray-Curtis da Matriz Comunitária",
+      hang = 0.1) #testar com -.01
+rect.hclust(cluster_uas_c, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+as.matrix(vegdist_c)[1:6, 1:6]
+
+# Dendrograma para as variáveis particionadas da matriz ambiental
+m_trns_a <- sqrt(m_part)
+cluster_mpart_a <- hclust((vegdist(t(m_trns_a),
+                            method = "bray",
+                            diag = TRUE,
+                            upper = FALSE)), method = "average")
+plot(cluster_mpart_a, main = "Dendrograma dos atributos")
+
+# Heatmap Comunidade vs. Morfologia
+heatmap.2(t(as.matrix(m_trns_a)), #objetos x atributos
+          Colv = as.dendrogram(cluster_uas_c),
+          Rowv = as.dendrogram(cluster_mpart_a),
+          key = T, tracecol = NA, revC = T,
+          col = col,
+          density.info = "none",
+          xlab = "Unidades amostrais", ylab = "Varíáveis ambientais",
+          mar = c(6, 9) + 0.1)  # adjust margin size
+```
+
+## Explorando correlações multivariadas da matriz de habitat
+
+Colinearidade entre variáveis é um fenômeno em que duas ou mais variáveis independentes em uma análise de redundância (RDA) estão altamente correlacionadas entre si. Isso significa que existe uma relação linear forte entre essas variáveis, tornando difícil distinguir o efeito individual de cada uma delas na variável dependente.
+
+A colinearidade pode afetar negativamente a análise de redundância, pois torna os resultados menos confiáveis e interpretações mais difíceis. Quando as variáveis independentes estão altamente correlacionadas, os coeficientes de regressão (**R^2^**) associados a cada variável podem se tornar instáveis ou mesmo incoerentes.
+
+A colinearidade pode ser detectada por meio de várias medidas, como o coeficiente de correlação (**R^2^**) entre as variáveis independentes ou o fator de inflação da variância (VIF). Se for identificada colinearidade, é necessário tomar medidas para lidar com ela. Isso pode incluir a remoção de uma ou mais variáveis independentes altamente correlacionadas ou a combinação de variáveis em um único fator.
+
+```{r, results='hold', fig.show='hold'}
+plot(m_trns_a$"m.elev", m_trns_a$"m.river")
+plot(scale(m_trns_a$"m.elev"), scale(m_trns_a$"m.river"))
+plot((m_trns_a$"m.elev" - mean(m_trns_a$"m.elev")) / sd(m_trns_a$"m.elev"))
+
+library(psych)
+pairs.panels(m_trns_a[,1:9], 
+             method = "pearson", # correlation method
+             scale = FALSE, lm = FALSE,
+             hist.col = "#00AFBB", pch = 19,
+             density = TRUE,  # show density plots
+             ellipses = TRUE, # show correlation ellipses
+             alpha = 0.5
+             )
+```
+
+## Análise de Redundância
+
+## Transformando os dados de comunidade com o método de `hellinger` 
+
+```{r, results='hold'}
+#| results: hold
+hell <- decostand(ppbio, method = "hellinger")
+m_trns_a <- sqrt(m_part)
+```
+
+A transformação usando o **método the Hellinger** calcula uma padronização total da matriz de dados comunitária, onde, se as unidades amostrais são linhas e as espécies são colunas, todos os valores em uma linha são divididos pela soma da linha e, em seguida, é tirada a raiz quadrada do valores. A padronização de Hellinger é uma padronização convexa que simultaneamente ajuda a minimizar os efeitos unidades amostrais com valores totais muito diferentes entre espécies.
+
+### Fazendo a RDA
+
+```{r, results='hold'}
+rda <- rda(hell ~ ., m_trns_a) # variavel de resposta ~ variavel explanatória 
+summary(rda)
+#str(rda)
+modelo_rda <- rda$call
+modelo_rda
+```
+
+Note que o modelo proposto para a RDA para as principais variáveis explanatórias da matriz de comunidades é dado por `modelo_rda`.
+
+### Gráficos de RDA
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+#Gráfico triplot basico
+plot(rda, choices = c(1,2))
+plot(rda, display = c("sp","bp"))
+
+#Ajustes no gráfico triplot
+model <- ordiplot(rda, type = "none", scaling = 2, xlab = "RDA1", ylab = "RDA2") # type="points" ou "text"
+##UAs
+points(rda, col = "black", pch = 21, bg = "gray", cex = 1)
+text(rda, col = "black", cex = 0.7, pos = 1)
+##vetores
+points(rda, dis = "bp", col = "red", pch = 21, cex = 1)
+text(rda, dis = "bp", col = "red", cex = 0.9, pos = 2)
+##espécies
+points(rda, dis = "sp", col = "blue", pch = 3, cex = 1)
+text(rda, dis = "sp", col = "blue", cex = 0.8, pos = 1)
+
+# Show only the first 5 species with higher values
+high_species <- order(abs(scores(rda, display = "species")[, 1]), decreasing = TRUE)[1:9]
+# Get the indices of the first 5 species with higher values on the first axis
+text(rda, display = "species", select = high_species, col = "darkblue", pos = 4)  # Display the selected species
+```
+
+# Interpretando o `biplot` gerado no código anterior
+
+Um gráfico de Análise de Redundância (RDA) é uma representação visual das relações entre as variáveis explicativas e as variáveis resposta em um modelo de RDA. Ele permite entender a estrutura dos dados e identificar padrões e relações importantes.
+
+Existem diferentes tipos de gráficos que podem ser gerados a partir de uma análise de RDA, mas aqui vamos nos concentrar em um dos mais comuns: o gráfico de dispersão dos pontos (biplot) das amostras no espaço dos primeiros dois eixos canônicos (RDA1 e RDA2).
+
+No gráfico de RDA, cada amostra é representada como um ponto no espaço bidimensional, onde os eixos representam combinações lineares das variáveis explicativas que maximizam a correlação com as variáveis resposta. Os pontos podem ser coloridos ou rotulados de acordo com outras variáveis de interesse.
+
+Ao interpretar um gráfico de RDA, você deve observar os seguintes aspectos:
+
+1. Posicionamento das amostras: As amostras que estão próximas umas das outras no gráfico tendem a ser semelhantes em termos de suas respostas às variáveis explicativas. Amostras que estão distantes umas das outras indicam diferenças significativas nas respostas.
+
+2. Direção e ângulo dos vetores: Os vetores representam as variáveis explicativas no espaço do gráfico. Eles indicam a direção e a força da relação entre cada variável explicativa e as variáveis resposta. Um vetor mais longo e mais alinhado com uma direção específica indica uma relação mais forte. Aproximadamente, o ângulo entre dois vetores reflete a correlação entre as duas variáveis explicativas.
+
+3. Contribuição das variáveis explicativas: As variáveis explicativas que estão localizadas mais próximas das amostras no gráfico têm uma contribuição mais importante na explicação das variações nas variáveis resposta. Portanto, você pode identificar quais variáveis têm um papel mais relevante no modelo.
+
+4. Grupos ou padrões: Padrões, agrupamentos ou estruturas identificáveis no gráfico podem revelar relações importantes entre as variáveis explicativas e a variável resposta. Por exemplo, grupos de amostras próximas podem indicar uma resposta semelhante a determinadas variáveis explicativas.
+
+É importante lembrar que a interpretação de um gráfico de RDA deve ser feita considerando o contexto específico do estudo e o conhecimento sobre as variáveis envolvidas. Além disso, é recomendado realizar análises estatísticas complementares para confirmar e validar as interpretações obtidas a partir do gráfico de RDA.
+
+## Testando a significância dos resultados da RDA
+
+```{r, results='hold'}
+RsquareAdj(rda)
+anova.cca(rda) #significância global
+anova.cca(rda, by="axis") #sign. dos eixos da RDA
+anova.cca(rda, by="terms") #sign. das var. explanatórias
+```
+INTERPRETAÇÃO("https://chatgpt.com/share/698232ca-1d10-800f-97eb-d9729ca70e35")
+
+## RDA passos importantes
+
+### Avaliando colinearidade
+
+Colinearidade entre variáveis inflaciona sua importância conjunta.
+Função variance inflation factors. Como regra geral, **valores de colinearidade acima de 20 são considerados altos** ([@RN1092], pag.101).
+
+```{r}
+#Função variance inflation factors
+vif.cca(rda)
+# remover valores com colinearidade maior que 20
+```
+
+## Escolhendo as principais variáveis do modelo da RDA
+
+Extract AIC from a Fitted Model
+Description
+Computes the (generalized) Akaike An Information Criterion for a fitted parametric model.
+
+Entramos a nossa RDA como um objeto representando um modelo GLM[^Um Modelo Linear Generalizado (GLM), é um framework estatístico que permite modelar relações entre variáveis dependentes e independentes, mesmo quando os dados não seguem uma distribuição normal. O GLM estende o modelo de regressão linear tradicional para lidar com diferentes tipos de respostas, incluindo variáveis binárias, contagens, proporções e outras distribuições não gaussianas. No GLM, a resposta é modelada em relação a uma combinação linear das variáveis independentes, usando uma função de ligação que relaciona a média da resposta à combinação linear das variáveis preditoras. Além disso, o GLM permite que a variância da resposta seja modelada em termos de funções de variância, que são específicas para cada tipo de distribuição.] que será usado como modelo inicial na Regressão Múltipla Stepwise (SMR).
+
+```{r}
+# GLM
+rda1 <- step(rda, scope = formula(rda), scale = 0, direction = "both", steps = 1000, test = "perm")
+summary(rda1)
+modelo_rda1 <- rda1$call
+modelo_rda1
+```
+
+Aqui fizemos uma regressão multipla com o comando `step()` e escolhemos ambas `forward selection` e `backward selection` (argumento `direction = "both"`) para a criação de um modelo de entrada das variáveis que melhor explicam a matriz comunitária. Outras opções são, `direction = "backward"` ou `direction = "forward"`. 
+
+Note que o modelo proposto pela RDA para as principais variáveis explanatórias da matriz de comunidades é dado por `modelo_rda1`
+
+### Variáveis sugeridas pelo modelo
+
+Criamos uma nova RDA com apenas as variáveis explanatórias sugeridas pelo modelo.
+
+```{r, results='hold'}
+
+#(matriz de dados comunitária ~ variáveis da matriz ambiental)
+rda2 <- rda(formula = hell ~ m.elev + m.river + m.stream + m.distsource + m.distmouth, data = m_trns_a)
+#(variáveis de resposta ~ variaveis explanatórias sugeridas pelo modelo stepwise regression)
+summary(rda2)
+#str(rda2)
+```
+
+Avaliamos a colinearidade do novo modelo de RDA e testamos a significância dos novos resultados
+
+```{r, results='hold'}
+#Colinearidade
+vif.cca(rda2)
+#ANOVAS
+anova(rda2, perm.max = 999)
+anova(rda2, by="axis", perm.max = 999)
+anova(rda2, by="terms", perm.max = 999)
+anova(rda2, by="margin", perm.max = 999)
+summary(rda2)
+#Triplot
+simplified_model <- ordiplot(rda2, type = "points", scaling = 2)  
+```
+
+Fizemos uma RDA. Pergunta... Existe uma alta colinearidade, acima de 20, entre algumas das variáveis explicativas do modelo sugerido pela SMR. É recomendavel que essas variáveis sejam removidas. 
+
+## Apêndices {.unnumbered}
+
+### Sites consultados {.unnumbered}
+
+https://youtu.be/_bpQ16uUqs4  
+https://youtu.be/O5HFxgl2WA4  
+https://youtu.be/wXFDIgaTdLw  
+https://youtu.be/YkpO2ESf0qo  
+
+### Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "2-13-rmd13_rda.Rmd", output = "script-rmd13.txt", documentation = 0)
+Script <- readLines("script-rmd13.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd13.txt")
+cat(Script, sep = "\n")
+```
+
+## Referências {-}

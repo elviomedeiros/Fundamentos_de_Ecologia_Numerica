@@ -1,0 +1,44 @@
+## rm(list=ls(all=TRUE)) #limpa a memória
+## install.packages("openxlsx") #importa arquivos do excel
+## install.packages("fdth")
+library(openxlsx)
+## getwd()
+## setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+brotos <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/brotos.xlsx",
+                    rowNames = F, colNames = F,
+                    sheet = "Planilha1")
+head(brotos,10)
+head(brotos[, 1:5], 10)
+## #View(brotos)
+## print(brotos[1:5,1:5])
+## brotos
+## str(brotos)
+## mode(brotos)
+## class(brotos)
+brotos_v <- c(t(brotos))
+brotos_v
+## #View(brotos_v)
+## print(brotos_v)
+## brotos_v
+## str(brotos_v)
+## mode(brotos_v)
+## class(brotos_v)
+set.seed(666)
+brotos_sub <- sample(brotos_v, size = 500, replace = F) #atualize o valor de 'size=' se necessário
+brotos_sub
+library(fdth)
+range(brotos_sub) #retorna o valor máximo e mínimo
+#?range
+tf <- fdt(brotos_sub, start=10, end=45, h=5) #tabela de frequência
+#?fdt #atente para o uso de k, por exemplo tf <- fdt(brotosv, k=5)
+print(tf)
+par(mfrow = c(1,2)) #gráficos lado a lado
+plot(tf) #distribuição de frequências
+boxplot(brotos_sub, horizontal = TRUE,
+        xlab="Class limits") #boxplot
+par(mfrow = c(1,1)) #gráficos de volta ao normal
+summary(brotos_v)
+#?summary
+sd(brotos_v) #desvio padrão
+var(brotos_v) #variância

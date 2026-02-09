@@ -4,25 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 16 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica</title>
+<title> 17 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em...">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content=" 16 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 17 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 16 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 17 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -49,7 +50,7 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -75,22 +76,23 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
 <li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
-<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
-<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
 <li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
 <li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></li>
 <li class="book-part">ANÁLISES MULTIVARIADAS</li>
-<li><a class="active" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="active" href="upgma.html"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -99,73 +101,73 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="upgma" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="upgma" class="section level1" number="17">
 <h1>
-<span class="header-section-number"> 16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN<a class="anchor" aria-label="anchor" href="#upgma"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN<a class="anchor" aria-label="anchor" href="#upgma"><i class="fas fa-link"></i></a>
 </h1>
-<div id="resumo-12" class="section level3 unnumbered">
-<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-12"><i class="fas fa-link"></i></a>
+<div id="resumo-13" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-13"><i class="fas fa-link"></i></a>
 </h3>
 <p>Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em várias áreas, incluindo bioinformática, análise de dados espaciais, agronomia, entre outros. A análise de classificação hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.</p>
 </div>
-<div id="apresentação-13" class="section level3 unnumbered">
-<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-13"><i class="fas fa-link"></i></a>
+<div id="apresentação-14" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-14"><i class="fas fa-link"></i></a>
 </h3>
 <p>Análise de Classificação Hierárquica (do inglês, “Hierarchical Agglomerative Clustering Analysis”, ou simplesmente “SAHN”) é um método de análise de dados utilizado para identificar grupos ou “clusters” de objetos com base em sua similaridade. Nessa análise, os objetos são inicialmente considerados como clusters individuais e, em seguida, os objetos mais similares são agrupados em um cluster maior, e assim por diante, até que todos os objetos estejam em um único cluster. Isso resulta em uma árvore hierárquica, conhecida como dendrograma, que mostra a relação de similaridade entre os objetos.</p>
 <p>Existem dois tipos principais de classificação hierárquica: aglomerativa e divisiva. O método aglomerativo é mais comum e começa com cada objeto em seu próprio cluster, e sucessivamente agrupa os objetos mais próximos, enquanto o método divisivo começa com todos os objetos em um único cluster e sucessivamente divide-os em grupos menores.</p>
 <p>Análises de classificação são amplamente utilizadas em várias áreas, incluindo bioinformática, análise de dados espaciais, agronomia, entre outros. Além disso, pode ser utilizada com diferentes medidas de distância e diferentes métodos de agrupamento, como, por exemplo, o método “complete-linkage”, “single-linkage”, “average-linkage”, entre outros.</p>
 <p>A Análise de Classificação Hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.</p>
 </div>
-<div id="organização-básica-10" class="section level2" number="16.1">
+<div id="organização-básica-11" class="section level2" number="17.1">
 <h2>
-<span class="header-section-number">16.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-11"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">##LIMPA A MEMORIA</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
 <span><span class="co">#rm(list=ls(all=TRUE)); cat("\014"); dev.off() # tudo na mesma linha</span></span></code></pre></div>
-<div id="pacotes" class="section level3" number="16.1.1">
+<div id="pacotes" class="section level3" number="17.1.1">
 <h3>
-<span class="header-section-number">16.1.1</span> Pacotes<a class="anchor" aria-label="anchor" href="#pacotes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1.1</span> Pacotes<a class="anchor" aria-label="anchor" href="#pacotes"><i class="fas fa-link"></i></a>
 </h3>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"RColorBrewer"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gplots"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>). Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, no código acima, carregamos o pacote <code>tidyverse</code>, usando a função <code><a href="https://ycphs.github.io/openxlsx/index.html">library(openxlsx)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado. Os demais pacotes instalados serão carregados ao longo desse tutorial a medida que cada pacote for sendo necessário.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
 <p>Definindo o diretório de trabalho e instalando os pacotes necessários:</p>
-<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:<br>
 SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 </div>
-<div id="sobre-os-dados-do-ppbio-4" class="section level3" number="16.1.2">
+<div id="sobre-os-dados-do-ppbio-4" class="section level3" number="17.1.2">
 <h3>
-<span class="header-section-number">16.1.2</span> Sobre os dados do PPBio<a class="anchor" aria-label="anchor" href="#sobre-os-dados-do-ppbio-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1.2</span> Sobre os dados do PPBio<a class="anchor" aria-label="anchor" href="#sobre-os-dados-do-ppbio-4"><i class="fas fa-link"></i></a>
 </h3>
-<p>A planilha <code>ppbio</code> contém os dados de abundância de espécies em diferentes unidades amostrais (UA’s) (Figura <a href="upgma.html#fig:27ppbio">16.1</a> (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.</p>
+<p>A planilha <code>ppbio</code> contém os dados de abundância de espécies em diferentes unidades amostrais (UA’s) (Figura <a href="upgma.html#fig:27ppbio">17.1</a> (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.</p>
 <div class="figure">
 <span style="display:block;" id="fig:27ppbio"></span>
 <img src="imagens/ppbio.png" alt="Parte da planilha de dados brutos do PPBio." width="476"><p class="caption">
-Figura 16.1: Parte da planilha de dados brutos do PPBio.
+Figura 17.1: Parte da planilha de dados brutos do PPBio.
 </p>
 </div>
 </div>
-<div id="importando-a-planilha-de-trabalho-1" class="section level3" number="16.1.3">
+<div id="importando-a-planilha-de-trabalho-1" class="section level3" number="17.1.3">
 <h3>
-<span class="header-section-number">16.1.3</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1.3</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -178,38 +180,38 @@ Figura 16.1: Parte da planilha de dados brutos do PPBio.
 <span><span class="co">#ppbio_ma</span></span></code></pre></div>
 </div>
 </div>
-<div id="reset-point-4" class="section level2" number="16.2">
+<div id="reset-point-4" class="section level2" number="17.2">
 <h2>
-<span class="header-section-number">16.2</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point-4"><i class="fas fa-link"></i></a>
 </h2>
 <div id="hello" class="greeting message" style="color: green;">
 <p><span style="color:red">ATENÇÃO</span>
 Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.</p>
 </div>
-<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Aqui usaremos as matrizes transposta/relativizada/transformada/particionada</li>
 </ol>
-<div id="outra-forma-de-achar-e-importar-uma-planilha-1" class="section level4" number="16.2.0.1">
+<div id="outra-forma-de-achar-e-importar-uma-planilha-1" class="section level4" number="17.2.0.1">
 <h4>
-<span class="header-section-number">16.2.0.1</span> Outra forma de achar e importar uma planilha<a class="anchor" aria-label="anchor" href="#outra-forma-de-achar-e-importar-uma-planilha-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2.0.1</span> Outra forma de achar e importar uma planilha<a class="anchor" aria-label="anchor" href="#outra-forma-de-achar-e-importar-uma-planilha-1"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.choose.html">file.choose</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="nomenclatura-das-matrizes-em-amd" class="section level2" number="16.3">
+<div id="nomenclatura-das-matrizes-em-amd" class="section level2" number="17.3">
 <h2>
-<span class="header-section-number">16.3</span> Nomenclatura das matrizes em AMD<a class="anchor" aria-label="anchor" href="#nomenclatura-das-matrizes-em-amd"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.3</span> Nomenclatura das matrizes em AMD<a class="anchor" aria-label="anchor" href="#nomenclatura-das-matrizes-em-amd"><i class="fas fa-link"></i></a>
 </h2>
-<p>No tocante aos tipos de atributos e seu tratamento pré-análises, uma matriz de de dados pode ser dos tipos apresentados na tabela <a href="upgma.html#tab:tbl-mm">16.1</a>, abaixo.</p>
+<p>No tocante aos tipos de atributos e seu tratamento pré-análises, uma matriz de de dados pode ser dos tipos apresentados na tabela <a href="upgma.html#tab:tbl-mm">17.1</a>, abaixo.</p>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:tbl-mm">Tabela 16.1: </span>Nomenclatura das matrizes em AMD em relação aos atributos das colunas.
+<span id="tab:tbl-mm">Tabela 17.1: </span>Nomenclatura das matrizes em AMD em relação aos atributos das colunas.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -271,28 +273,28 @@ Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, lo
 </tbody>
 </table></div>
 </div>
-<div id="cluster-1-piloto-automático" class="section level2" number="16.4">
+<div id="cluster-1-piloto-automático" class="section level2" number="17.4">
 <h2>
-<span class="header-section-number">16.4</span> Cluster 1: Piloto automático<a class="anchor" aria-label="anchor" href="#cluster-1-piloto-autom%C3%A1tico"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4</span> Cluster 1: Piloto automático<a class="anchor" aria-label="anchor" href="#cluster-1-piloto-autom%C3%A1tico"><i class="fas fa-link"></i></a>
 </h2>
 <div id="hello" class="greeting message" style="color: red;">
 <p><span style="color:red">ATENÇÃO</span>
 NÃO RECOMENDADO</p>
 </div>
 <p>Aqui fazemos uma Análise Cluster no piloto automático. Não decidimos nenhum dos parâmetros importântes para uma Classificação.</p>
-<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cluster1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster1</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Piloto automatico"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster1</span>, k<span class="op">=</span><span class="fl">3</span>, h <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="co">#?dist</span></span>
 <span><span class="co">#?hclust</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-226-1.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-256-1.png" width="672"></div>
 <p>É possivel definir uma caixa mostrado os principais grupos formados. Isso pode ser feito estabelecendo quantos grupos se quer mostrar, usando a função <code>k = no. de grupos</code>. Ou pode-se definir os grupos formados até uma determinanda distância, usando a função <code>h = altura dos grupos</code> no eixo das distâncias.</p>
-<div id="histórico-das-fusões" class="section level3" number="16.4.1">
+<div id="histórico-das-fusões" class="section level3" number="17.4.1">
 <h3>
-<span class="header-section-number">16.4.1</span> Histórico das fusões<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4.1</span> Histórico das fusões<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">cluster1</span><span class="op">$</span><span class="va">merge</span> <span class="co">#mostra o histórico das fusões</span></span>
 <span><span class="va">idrow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">m_trab</span>, id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co">#cria um df com os numeros das linhas </span></span>
@@ -441,11 +443,11 @@ NÃO RECOMENDADO</p>
 ## B-R-PC4        0        0        0        0        4
 ## B-A-MU4        0        0        0        0        0
 ## B-A-GU4        0        0        0        0        0</code></pre>
-<div id="alguns-ajustes-para-melhorar-a-visualização" class="section level4" number="16.4.1.1">
+<div id="alguns-ajustes-para-melhorar-a-visualização" class="section level4" number="17.4.1.1">
 <h4>
-<span class="header-section-number">16.4.1.1</span> Alguns ajustes para melhorar a visualização<a class="anchor" aria-label="anchor" href="#alguns-ajustes-para-melhorar-a-visualiza%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4.1.1</span> Alguns ajustes para melhorar a visualização<a class="anchor" aria-label="anchor" href="#alguns-ajustes-para-melhorar-a-visualiza%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster1</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
 <span><span class="va">merge</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">merge</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>,<span class="st">"0"</span><span class="op">)</span></span>
 <span><span class="va">merge</span></span>
@@ -624,11 +626,11 @@ NÃO RECOMENDADO</p>
 </div>
 </div>
 </div>
-<div id="cluster-2-criando-a-matriz-de-distâncias-euclidiana" class="section level2" number="16.5">
+<div id="cluster-2-criando-a-matriz-de-distâncias-euclidiana" class="section level2" number="17.5">
 <h2>
-<span class="header-section-number">16.5</span> Cluster 2: Criando a matriz de distâncias Euclidiana<a class="anchor" aria-label="anchor" href="#cluster-2-criando-a-matriz-de-dist%C3%A2ncias-euclidiana"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.5</span> Cluster 2: Criando a matriz de distâncias Euclidiana<a class="anchor" aria-label="anchor" href="#cluster-2-criando-a-matriz-de-dist%C3%A2ncias-euclidiana"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trab</span>, method <span class="op">=</span> <span class="st">"euclidean"</span>,</span>
 <span>                  diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                  upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -638,16 +640,16 @@ NÃO RECOMENDADO</p>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster2</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#?dist</span></span>
 <span><span class="co">#?hclust</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-229-1.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-259-1.png" width="672"></div>
 <p>O significado do argumento <code>method =</code> da função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> usada no códico acima, depende do contexto em que ela é usada.</p>
 <ul>
 <li><p>A função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> no R é usada para calcular as distâncias entre as observações em um conjunto de dados. Essa função tem vários métodos de cálculo de distância, que podem ser especificados pelo argumento <code>method =</code>, a exemplo de “euclidean”, “manhattan”, “canberra”, entre outras.</p></li>
 <li><p>Quando o argumento <code>method =</code> é usado em conjunto com a função <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>, como no código acima, para realizar uma análise de classificação (ou cluster) hierárquica, então ela passa a representar um método de fusão, a exemplo de UPGMA, “nearest neighbour”, “furtherst neighbour”, entre outros.</p></li>
 </ul>
-<p>A tabela <a href="upgma.html#tab:27fus">16.2</a> resume os métodos de fusão disponiveis na função <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>.</p>
+<p>A tabela <a href="upgma.html#tab:27fus">17.2</a> resume os métodos de fusão disponiveis na função <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>.</p>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:27fus">Tabela 16.2: </span>Metodos de fusão disponiveis com o argumento <code>method=</code> da função <code>hclust</code>. Lembrando que UPGMA significa “Unweighted Pairwise Group Method with Arithmetic Mean”
+<span id="tab:27fus">Tabela 17.2: </span>Metodos de fusão disponiveis com o argumento <code>method=</code> da função <code>hclust</code>. Lembrando que UPGMA significa “Unweighted Pairwise Group Method with Arithmetic Mean”
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -724,70 +726,70 @@ Método de ligação baseado no centróide, ou UPGMC
 </tr>
 </tbody>
 </table></div>
-<div id="comparação-dos-resultados-obtidos-até-aqui" class="section level3" number="16.5.1">
+<div id="comparação-dos-resultados-obtidos-até-aqui" class="section level3" number="17.5.1">
 <h3>
-<span class="header-section-number">16.5.1</span> Comparação dos resultados obtidos até aqui<a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%A3o-dos-resultados-obtidos-at%C3%A9-aqui"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.5.1</span> Comparação dos resultados obtidos até aqui<a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%A3o-dos-resultados-obtidos-at%C3%A9-aqui"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dev.off() #limpa os gráficos</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster1</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Piloto automático"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster2</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Dist. Euclidiana"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-230-1.png" width="672"></div>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-260-1.png" width="672"></div>
+<div class="sourceCode" id="cb531"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
 </div>
 </div>
-<div id="cluster-3-relativização-pelo-total-da-coluna" class="section level2" number="16.6">
+<div id="cluster-3-relativização-pelo-total-da-coluna" class="section level2" number="17.6">
 <h2>
-<span class="header-section-number">16.6</span> Cluster 3: Relativização pelo total da coluna<a class="anchor" aria-label="anchor" href="#cluster-3-relativiza%C3%A7%C3%A3o-pelo-total-da-coluna"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.6</span> Cluster 3: Relativização pelo total da coluna<a class="anchor" aria-label="anchor" href="#cluster-3-relativiza%C3%A7%C3%A3o-pelo-total-da-coluna"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span>
 <span><span class="va">m_relcol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
 <span>                         method<span class="op">=</span><span class="st">"total"</span>, <span class="co">### OUTROS METODOS: total, max, normalize, range, rankm</span></span>
 <span>                         MARGIN <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#1-linha, 2-coluna</span></span>
 <span><span class="co">#View(m_relcol)</span></span>
 <span><span class="co">#m_relcol</span></span></code></pre></div>
-<div id="gráfico-de-clustering-relativizado" class="section level3" number="16.6.1">
+<div id="gráfico-de-clustering-relativizado" class="section level3" number="17.6.1">
 <h3>
-<span class="header-section-number">16.6.1</span> Gráfico de clustering relativizado<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-clustering-relativizado"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.6.1</span> Gráfico de clustering relativizado<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-clustering-relativizado"><i class="fas fa-link"></i></a>
 </h3>
 <p>Agora fazemos a classificação da matriz bruta após ter sido relativizada pelo total das colunas.</p>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cluster3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster3</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Rel.Coluna"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster3</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-232-1.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-262-1.png" width="672"></div>
 </div>
 </div>
-<div id="cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada" class="section level2" number="16.7">
+<div id="cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada" class="section level2" number="17.7">
 <h2>
-<span class="header-section-number">16.7</span> Cluster 4: Transformação pelo arcoseno da raiz quadrada<a class="anchor" aria-label="anchor" href="#cluster-4-transforma%C3%A7%C3%A3o-pelo-arcoseno-da-raiz-quadrada"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.7</span> Cluster 4: Transformação pelo arcoseno da raiz quadrada<a class="anchor" aria-label="anchor" href="#cluster-4-transforma%C3%A7%C3%A3o-pelo-arcoseno-da-raiz-quadrada"><i class="fas fa-link"></i></a>
 </h2>
 <p>Agora aplicaremos a transformação do arcoseno da raiz quadrada na matriz relativizada por colunas. Lembre que em ambas as matrizes entramos dados que variam entre 0 e 1, e os resutados retornados também variam entre 0 e 1, mas em um nível de compressão de valores extremos mais desejável. Usaremos a matriz relativizada/transformada para fazermos a proxima classificação.</p>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span> <span class="co">#valores de entrada tem que ser entre 0-1</span></span>
 <span><span class="co">#View(m_trns)</span></span>
 <span><span class="co">#m_trns</span></span></code></pre></div>
-<div id="gráfico-de-clustering-relativizadotransformado" class="section level3" number="16.7.1">
+<div id="gráfico-de-clustering-relativizadotransformado" class="section level3" number="17.7.1">
 <h3>
-<span class="header-section-number">16.7.1</span> Gráfico de clustering relativizado/transformado<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-clustering-relativizadotransformado"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.7.1</span> Gráfico de clustering relativizado/transformado<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-clustering-relativizadotransformado"><i class="fas fa-link"></i></a>
 </h3>
 <p>Aqui fazemos uma Análise Cluster no piloto automático, para comparar com os resultados da primeira classificação, que não havia sido relativizada/transformada.</p>
-<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cluster4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster4</span>,  main <span class="op">=</span> <span class="st">"Cluster Dendrogram - ArcSin.SQRT"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster4</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-234-1.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-264-1.png" width="672"></div>
 </div>
 </div>
-<div id="cluster-5-controle-total-dos-parâmetros" class="section level2" number="16.8">
+<div id="cluster-5-controle-total-dos-parâmetros" class="section level2" number="17.8">
 <h2>
-<span class="header-section-number">16.8</span> Cluster 5: Controle total dos parâmetros<a class="anchor" aria-label="anchor" href="#cluster-5-controle-total-dos-par%C3%A2metros"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.8</span> Cluster 5: Controle total dos parâmetros<a class="anchor" aria-label="anchor" href="#cluster-5-controle-total-dos-par%C3%A2metros"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vegdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
 <span>                   diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                   upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -795,8 +797,8 @@ Método de ligação baseado no centróide, ou UPGMC
 <span><span class="va">cluster5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">vegdist</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster5</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Bray-Curtis"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster5</span>, k <span class="op">=</span> <span class="fl">3</span>, h <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-235-1.png" width="672"></div>
-<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-265-1.png" width="672"></div>
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#h = 0.8 fornece os grupos formados na altura h</span></span>
 <span><span class="co">#vegdist</span></span>
 <span><span class="va">cluster5</span><span class="op">$</span><span class="va">merge</span></span>
@@ -984,30 +986,30 @@ Método de ligação baseado no centróide, ou UPGMC
 ## B-A-GU4 0.0000000</code></pre>
 <p>No código acima, <code>h = 0.8</code> fornece os grupos formados na altura <code>h</code> do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, “h”) representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo <code>height</code>, isso significa que a distancia entre esses objetos é 0.8.</p>
 </div>
-<div id="construindo-uma-prancha-de-gráficos-comparativos" class="section level2" number="16.9">
+<div id="construindo-uma-prancha-de-gráficos-comparativos" class="section level2" number="17.9">
 <h2>
-<span class="header-section-number">16.9</span> Construindo uma prancha de gráficos comparativos<a class="anchor" aria-label="anchor" href="#construindo-uma-prancha-de-gr%C3%A1ficos-comparativos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.9</span> Construindo uma prancha de gráficos comparativos<a class="anchor" aria-label="anchor" href="#construindo-uma-prancha-de-gr%C3%A1ficos-comparativos"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dev.off()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span> <span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster1</span>, main <span class="op">=</span> <span class="st">"Dist.Euclidiana"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster3</span>, main <span class="op">=</span> <span class="st">"Rel.Coluna"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster4</span>, main <span class="op">=</span> <span class="st">"ArcSin.SQRT"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster5</span>, main <span class="op">=</span> <span class="st">"Bray-Curtis"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-236-1.png" width="768"></div>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-266-1.png" width="768"></div>
+<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
 </div>
-<div id="construindo-heatmaps" class="section level2" number="16.10">
+<div id="construindo-heatmaps" class="section level2" number="17.10">
 <h2>
-<span class="header-section-number">16.10</span> Construindo <code>heatmaps</code><a class="anchor" aria-label="anchor" href="#construindo-heatmaps"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.10</span> Construindo <code>heatmaps</code><a class="anchor" aria-label="anchor" href="#construindo-heatmaps"><i class="fas fa-link"></i></a>
 </h2>
 <p>Agora que vimos de forma comparativa a importância de se relativizar e transformar nossos dados, e também de escolher de forma consciente a medida de distância e o método de fusão, podemos avançar um pouco mais na interpretação dos nossos dados.</p>
 <p>Um “heatmap”, ou mapa de calor, é uma imagem em cores (basicamente <code>image(t(x))</code>) com um dendrograma adicionado ao lado esquerdo e/ou ao topo. Normalmente, é realizado o reordenamento das linhas e colunas de acordo com algum conjunto de valores (médias de linha ou coluna) dentro das restrições impostas pelo dendrograma.</p>
 <p>Primeiro vamos rever o dendrograma final, usando a Distância de Bray-Curtis e o Método de Fusão UPGMA (ou “average”).</p>
-<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"RColorBrewer"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/talgalili/gplots">"gplots"</a></span><span class="op">)</span></span>
 <span><span class="va">vegdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
@@ -1018,9 +1020,9 @@ Método de ligação baseado no centróide, ou UPGMC
 <span></span>
 <span><span class="va">heatdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span></span>
 <span><span class="co">#heatdist</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-237-1.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-267-1.png" width="672"></div>
 <p>Na sequência fazemos um <code>heatmap</code> <strong>objetos x objetos</strong>, ou seja a comparação bidimensional das clustereds entre unidades amostrais.</p>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span><span class="op">)</span> <span class="co">#rev() reverte as cores do heatmap</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span>x<span class="op">=</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x objetos</span></span>
 <span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster5</span><span class="op">)</span>,</span>
@@ -1030,16 +1032,16 @@ Método de ligação baseado no centróide, ou UPGMC
 <span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>          xlab <span class="op">=</span> <span class="st">"UA´s"</span>, ylab <span class="op">=</span> <span class="st">"UA´s"</span>,</span>
 <span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-238-1.png" width="768"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-268-1.png" width="768"></div>
 <p>Agora vamos criar um novo dendrograma, para as espécies, mostrando sua similaridade em termos de em quais UA´s elas são mais comuns.</p>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cluster6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
 <span>                            diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                            upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster6</span>, main <span class="op">=</span> <span class="st">"Dendrograma dos atributos"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-239-1.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-269-1.png" width="672"></div>
 <p>Na sequencia, fazemos um novo <code>heatmap</code> <strong>objetos x atributos</strong>, com a comparação bidimensional das clustereds formadas entre unidades amostrais em relação as espécies mais comuns que ocorreram em cada unidade amostral.</p>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x atributos</span></span>
 <span>          Colv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster5</span><span class="op">)</span>,</span>
 <span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster6</span><span class="op">)</span>,</span>
@@ -1048,15 +1050,15 @@ Método de ligação baseado no centróide, ou UPGMC
 <span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>          xlab <span class="op">=</span> <span class="st">"Unidades amostrais"</span>, ylab <span class="op">=</span> <span class="st">"Espécies"</span>,</span>
 <span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span>  <span class="co"># adjust margin size</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-240-1.png" width="768"></div>
-<div id="percentual-de-encadeamento-chaining" class="section level3" number="16.10.1">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-270-1.png" width="768"></div>
+<div id="percentual-de-encadeamento-chaining" class="section level3" number="17.10.1">
 <h3>
-<span class="header-section-number">16.10.1</span> Percentual de encadeamento (% chaining)<a class="anchor" aria-label="anchor" href="#percentual-de-encadeamento-chaining"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.10.1</span> Percentual de encadeamento (% chaining)<a class="anchor" aria-label="anchor" href="#percentual-de-encadeamento-chaining"><i class="fas fa-link"></i></a>
 </h3>
 <p>Dendrogram Chaining (ou encadeamento) é um termo usado em análises de cluster hierárquico para se referir ao processo de adição sequencial de pequenos grupos a um ou poucos grandes grupos. É possível usar a porcentagem de encadeamento para ajudar a avaliar a qualidade do dendrograma. Análises altamente encadeadas provavelmente não valem a pena serem exploradas em maiores detalhes, provavelmente há alguma falha nos passos anteriores da análise. Por outro lado, pequenas diferenças na porcentagem de encadeamento na extremidade inferior da escala são geralmente um critério pobre para selecionar um algoritmo de ligação em relação a outro <span class="citation">(<a href="#ref-RN1552" role="doc-biblioref">MCCUNE; GRACE, 2002</a>)</span>.</p>
 <p>O método para calcular o grau de encadeamento compara o comprimento médio do caminho do dendrograma com o comprimento mínimo possível (sem encadeamento) e o comprimento máximo possível (encadeamento completo). O comprimento do caminho para cada item no dendrograma é o número de nós que o conectam ao nível mais alto do dendrograma. O encadeamento completo ocorre quando cada fusão envolve a adição de um único item a um único grupo, cada vez mais grande <span class="citation">(<a href="#ref-RN1552" role="doc-biblioref">MCCUNE; GRACE, 2002</a>)</span>.</p>
 <p>Com esse código podemos calcular o percentual de encadeamento para cada fusão em <code>cluster1</code> e fazer um gráfico simples para observação.</p>
-<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># calculate the percent chaining for each merge</span></span>
 <span><span class="va">h</span> <span class="op">&lt;-</span> <span class="va">cluster1</span><span class="op">$</span><span class="va">height</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
@@ -1066,17 +1068,17 @@ Método de ligação baseado no centróide, ou UPGMC
 <span><span class="op">}</span></span>
 <span><span class="co"># plot the percent chaining</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pc</span>, type <span class="op">=</span> <span class="st">"h"</span>, xlab <span class="op">=</span> <span class="st">"Merge"</span>, ylab <span class="op">=</span> <span class="st">"Percent chaining"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-241-1.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-271-1.png" width="672"></div>
 <p>Para calcular o percentual geral de encadeamento em um dendrograma, é necessário calcular a diferença na altura entre cada nó e seus nós filhos e, em seguida, somar essas diferenças. Essa soma representa o comprimento total do dendrograma. Em seguida, é necessário calcular a soma das diferenças na altura entre cada nó que representa uma fusão e a altura de seus dois nós filhos. Essa soma representa o encadeamento total no dendrograma.</p>
 <p>Finalmente, você pode calcular o percentual geral de encadeamento como o encadeamento total dividido pelo comprimento total do dendrograma, multiplicado por 100.</p>
 <p>O eixo Y do gráfico mostra a percentagem de encadeamento, que é a diferença na altura entre fusões sucessivas dividida pela altura total do dendrograma, multiplicada por 100. É possível que a percentagem de encadeamento seja superior a 100 se a altura das duas fusões comparadas for maior que a altura total do dendrograma. Nesse caso, a percentagem de encadeamento é truncada em 100.</p>
 <p>Isso pode acontecer, por exemplo, se a altura de uma fusão for negativa, o que pode ocorrer se a distância entre dois grupos for menor que zero, ou se o dendrograma for escalado ou truncado de alguma forma.</p>
 </div>
-<div id="função-loop-para-comparar-os-encadeamentos" class="section level3" number="16.10.2">
+<div id="função-loop-para-comparar-os-encadeamentos" class="section level3" number="17.10.2">
 <h3>
-<span class="header-section-number">16.10.2</span> Função <code>loop</code> para comparar os encadeamentos<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%A3o-loop-para-comparar-os-encadeamentos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.10.2</span> Função <code>loop</code> para comparar os encadeamentos<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%A3o-loop-para-comparar-os-encadeamentos"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a list of the four cluster analyses</span></span>
 <span><span class="va">cluster_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">cluster1</span>, <span class="va">cluster2</span>, <span class="va">cluster3</span>, <span class="va">cluster4</span>, <span class="va">cluster5</span><span class="op">)</span></span>
 <span></span>
@@ -1093,7 +1095,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <span><span class="co"># plot the percent chaining for each cluster analysis</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pc</span>, type <span class="op">=</span> <span class="st">"h"</span>, xlab <span class="op">=</span> <span class="st">"Merge"</span>, ylab <span class="op">=</span> <span class="st">"Percent chaining"</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Cluster "</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-242-1.png" width="768"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-272-1.png" width="768"></div>
 </div>
 </div>
 <div id="apêndices-13" class="section level2 unnumbered">
@@ -1127,7 +1129,7 @@ de Frequências”, ylim=c(floor(min(euclidma)), ceiling(max(euclidma))))</p>
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-10"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## dev.off() #apaga os graficos, se houver algum</span></span>
 <span><span class="co">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co">## cat("\014") #limpa o console</span></span>
@@ -1326,8 +1328,8 @@ de Frequências”, ylim=c(floor(min(euclidma)), ceiling(max(euclidma))))</p>
 <span><span class="co">##                    col.names = gsub("(^|_)([a-z])", "\\1\\U\\2",</span></span>
 <span><span class="co">##                                     names(m_trab), perl = TRUE))</span></span></code></pre></div>
 </div>
-<div id="referências-14" class="section level2 unnumbered">
-<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-14"><i class="fas fa-link"></i></a>
+<div id="referências-15" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-15"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
@@ -1339,44 +1341,44 @@ MCCUNE, B.; GRACE, J. B. <strong>Analysis of Ecological Communities</strong>. Gl
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></div>
+<div class="prev"><a href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></div>
 <div class="next"><a href="bibliografia-geral.html">Bibliografia Geral</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#upgma"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#resumo-12">RESUMO</a></li>
-<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-13">Apresentação</a></li>
+<a class="nav-link" href="#upgma"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-13">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-14">Apresentação</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-10"><span class="header-section-number">16.1</span> Organização básica</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#pacotes"><span class="header-section-number">16.1.1</span> Pacotes</a></li>
-<li><a class="nav-link" href="#sobre-os-dados-do-ppbio-4"><span class="header-section-number">16.1.2</span> Sobre os dados do PPBio</a></li>
-<li><a class="nav-link" href="#importando-a-planilha-de-trabalho-1"><span class="header-section-number">16.1.3</span> Importando a planilha de trabalho</a></li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-11"><span class="header-section-number">17.1</span> Organização básica</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pacotes"><span class="header-section-number">17.1.1</span> Pacotes</a></li>
+<li><a class="nav-link" href="#sobre-os-dados-do-ppbio-4"><span class="header-section-number">17.1.2</span> Sobre os dados do PPBio</a></li>
+<li><a class="nav-link" href="#importando-a-planilha-de-trabalho-1"><span class="header-section-number">17.1.3</span> Importando a planilha de trabalho</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#reset-point-4"><span class="header-section-number">16.2</span> Reset point</a></li>
-<li><a class="nav-link" href="#nomenclatura-das-matrizes-em-amd"><span class="header-section-number">16.3</span> Nomenclatura das matrizes em AMD</a></li>
+<li><a class="nav-link" href="#reset-point-4"><span class="header-section-number">17.2</span> Reset point</a></li>
+<li><a class="nav-link" href="#nomenclatura-das-matrizes-em-amd"><span class="header-section-number">17.3</span> Nomenclatura das matrizes em AMD</a></li>
 <li>
-<a class="nav-link" href="#cluster-1-piloto-autom%C3%A1tico"><span class="header-section-number">16.4</span> Cluster 1: Piloto automático</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es"><span class="header-section-number">16.4.1</span> Histórico das fusões</a></li></ul>
+<a class="nav-link" href="#cluster-1-piloto-autom%C3%A1tico"><span class="header-section-number">17.4</span> Cluster 1: Piloto automático</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es"><span class="header-section-number">17.4.1</span> Histórico das fusões</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#cluster-2-criando-a-matriz-de-dist%C3%A2ncias-euclidiana"><span class="header-section-number">16.5</span> Cluster 2: Criando a matriz de distâncias Euclidiana</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#compara%C3%A7%C3%A3o-dos-resultados-obtidos-at%C3%A9-aqui"><span class="header-section-number">16.5.1</span> Comparação dos resultados obtidos até aqui</a></li></ul>
+<a class="nav-link" href="#cluster-2-criando-a-matriz-de-dist%C3%A2ncias-euclidiana"><span class="header-section-number">17.5</span> Cluster 2: Criando a matriz de distâncias Euclidiana</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#compara%C3%A7%C3%A3o-dos-resultados-obtidos-at%C3%A9-aqui"><span class="header-section-number">17.5.1</span> Comparação dos resultados obtidos até aqui</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#cluster-3-relativiza%C3%A7%C3%A3o-pelo-total-da-coluna"><span class="header-section-number">16.6</span> Cluster 3: Relativização pelo total da coluna</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1fico-de-clustering-relativizado"><span class="header-section-number">16.6.1</span> Gráfico de clustering relativizado</a></li></ul>
+<a class="nav-link" href="#cluster-3-relativiza%C3%A7%C3%A3o-pelo-total-da-coluna"><span class="header-section-number">17.6</span> Cluster 3: Relativização pelo total da coluna</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1fico-de-clustering-relativizado"><span class="header-section-number">17.6.1</span> Gráfico de clustering relativizado</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#cluster-4-transforma%C3%A7%C3%A3o-pelo-arcoseno-da-raiz-quadrada"><span class="header-section-number">16.7</span> Cluster 4: Transformação pelo arcoseno da raiz quadrada</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1fico-de-clustering-relativizadotransformado"><span class="header-section-number">16.7.1</span> Gráfico de clustering relativizado/transformado</a></li></ul>
+<a class="nav-link" href="#cluster-4-transforma%C3%A7%C3%A3o-pelo-arcoseno-da-raiz-quadrada"><span class="header-section-number">17.7</span> Cluster 4: Transformação pelo arcoseno da raiz quadrada</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1fico-de-clustering-relativizadotransformado"><span class="header-section-number">17.7.1</span> Gráfico de clustering relativizado/transformado</a></li></ul>
 </li>
-<li><a class="nav-link" href="#cluster-5-controle-total-dos-par%C3%A2metros"><span class="header-section-number">16.8</span> Cluster 5: Controle total dos parâmetros</a></li>
-<li><a class="nav-link" href="#construindo-uma-prancha-de-gr%C3%A1ficos-comparativos"><span class="header-section-number">16.9</span> Construindo uma prancha de gráficos comparativos</a></li>
+<li><a class="nav-link" href="#cluster-5-controle-total-dos-par%C3%A2metros"><span class="header-section-number">17.8</span> Cluster 5: Controle total dos parâmetros</a></li>
+<li><a class="nav-link" href="#construindo-uma-prancha-de-gr%C3%A1ficos-comparativos"><span class="header-section-number">17.9</span> Construindo uma prancha de gráficos comparativos</a></li>
 <li>
-<a class="nav-link" href="#construindo-heatmaps"><span class="header-section-number">16.10</span> Construindo heatmaps</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#percentual-de-encadeamento-chaining"><span class="header-section-number">16.10.1</span> Percentual de encadeamento (% chaining)</a></li>
-<li><a class="nav-link" href="#fun%C3%A7%C3%A3o-loop-para-comparar-os-encadeamentos"><span class="header-section-number">16.10.2</span> Função loop para comparar os encadeamentos</a></li>
+<a class="nav-link" href="#construindo-heatmaps"><span class="header-section-number">17.10</span> Construindo heatmaps</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#percentual-de-encadeamento-chaining"><span class="header-section-number">17.10.1</span> Percentual de encadeamento (% chaining)</a></li>
+<li><a class="nav-link" href="#fun%C3%A7%C3%A3o-loop-para-comparar-os-encadeamentos"><span class="header-section-number">17.10.2</span> Função loop para comparar os encadeamentos</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#ap%C3%AAndices-13">Apêndices</a></li>
@@ -1387,7 +1389,7 @@ MCCUNE, B.; GRACE, J. B. <strong>Analysis of Ecological Communities</strong>. Gl
 </ul>
 </li>
 <li><a class="nav-link" href="#script-limpo-10">Script limpo</a></li>
-<li><a class="nav-link" href="#refer%C3%AAncias-14">Referências</a></li>
+<li><a class="nav-link" href="#refer%C3%AAncias-15">Referências</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1404,7 +1406,7 @@ MCCUNE, B.; GRACE, J. B. <strong>Analysis of Ecological Communities</strong>. Gl
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 12:56:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

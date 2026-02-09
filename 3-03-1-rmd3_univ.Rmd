@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# R Modulo 3.1 - Estatísticas descritivas e Normalidade {#univ}
+# R Modulo 3.1 - Estatísticas descritivas e normalidade {#univ}
 
 ### RESUMO {-}
 
@@ -20,7 +20,7 @@ Considere os dados sobre o comprimento dos brotos de *Banksia ericifolia* de cha
 
 [^1]: Charneiras, ou charnecas, são tipos de paisagens ou ecossistemas encontrados principalmente em regiões temperadas, como na Europa e América do Norte, embora também possam ser encontrados em outros lugares do mundo. São caracterizados por uma combinação de vegetação herbácea (gramíneas e ervas) e arbustos resistentes, muitas vezes adaptados a condições de solo pobre e clima adverso. Eles desempenham um papel importante na conservação da biodiversidade e na ecologia das áreas onde são encontrados.
 
-```{r rmd3banks, echo=FALSE, purl=FALSE, fig.cap="Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália."}
+```{r rmd3banks, echo=FALSE, purl=FALSE, fig.cap="Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/banksia.png")
 ```
   
@@ -54,7 +54,20 @@ setwd("C:/Seu/Diretório/De/Trabalho")
 
 ## Importando a planilha
 
-Note que o sómbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+:::: {.infobox2 .stopred data-latex=""}
+
+::: {.center data-latex=""}
+**[ATENÇÃO]{style="color:white"}**
+:::
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção [Arquivos disponíveis](#arqs) do Capítulo [Bases de dados](#bases).
+
+::: {.center data-latex=""}
+Ou, baixe aqui o arquivo [brotos.xlsx](https://docs.google.com/spreadsheets/d/1iSJeR726dCc-ia3G5jzSBg__mSUsb-91/edit?usp=sharing&ouid=101766125969589673518&rtpof=true&sd=true)
+:::
+::::
+
+Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
 
 ```{r, results='hold'}
 library(openxlsx)
@@ -104,7 +117,7 @@ brotos_sub
 
 Para fazermos uma tabela de frequência do comprimento dos brotos carregamos o pacote `fdth` e pedimos a função `range` que retorna o valor máximo e mínimo no vetor.
 
-```{r, results='hold', warning=FALSE}
+```{r, results='hold', warning=FALSE, message=FALSE}
 library(fdth)
 range(brotos_sub) #retorna o valor máximo e mínimo
 #?range
@@ -126,7 +139,7 @@ Se contarmos o número de brotos que se encontram em cada um dos sete intervalos
 
 No código abaixo se define o layout dos gráficos para serem exibidos lado a lado, e na sequência criamos um gráfico de histograma com base na tabela de frequência `tf`. O comando `boxplot()` cria um gráfico de boxplot para os valores em `brotos_v`. O argumento "horizontal = TRUE" indica que o boxplot deve ser horizontal.
 
-```{r, results='hold'}
+```{r, results='hold', fig.show='hold'}
 par(mfrow = c(1,2)) #gráficos lado a lado
 plot(tf) #distribuição de frequências
 boxplot(brotos_sub, horizontal = TRUE,
@@ -154,10 +167,10 @@ var(brotos_v) #variância
 Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
 
 ```{r, eval=FALSE, echo=FALSE, purl=FALSE}
-knitr::purl(input = "03-rmd3_univ.Rmd", output = "script-rmd3.txt", documentation = 0)
-Script <- readLines("script-rmd3.txt")
+knitr::purl(input = "3-03-1-rmd3_univ.Rmd", output = "script-3-03-1-rmd3_univ.txt", documentation = 0)
+Script <- readLines("script-3-03-1-rmd3_univ.txt")
 Script <- Script[Script != ""]
-writeLines(Script, "script-rmd3.txt")
+writeLines(Script, "script-3-03-1-rmd3_univ.txt")
 cat(Script, sep = "\n")
 ```
 

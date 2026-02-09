@@ -131,13 +131,80 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+
+\usepackage{color}
+\usepackage{framed}
+\setlength{\fboxsep}{.8em}
+
+\newenvironment{blackbox}{
+  \definecolor{shadecolor}{rgb}{0, 0, 0}  % black
+  \color{white}
+  \begin{shaded}}
+ {\end{shaded}}
+ 
+ \usepackage{tcolorbox}
+
+\newtcolorbox{blackbox2}{
+  colback=black,
+  colframe=orange,
+  coltext=white,
+  boxsep=5pt,
+  arc=4pt}
+  
+\newenvironment{infobox}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}
+        \includegraphics{imagens/note.png}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{blackbox}
+  \item
+  }
+  {
+  \end{blackbox}
+  \end{itemize}
+  }
+  
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\newenvironment{infobox2}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}
+        \includegraphics{imagens/note.png}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{blackbox}
+  \item
+  }
+  {
+  \end{blackbox}
+  \end{itemize}
+  }
+  
 \usepackage{booktabs}
+\usepackage{caption}
 \usepackage{longtable}
+\usepackage{colortbl}
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{wrapfig}
 \usepackage{float}
-\usepackage{colortbl}
 \usepackage{pdflscape}
 \usepackage{tabu}
 \usepackage{threeparttable}
@@ -145,7 +212,6 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\usepackage{caption}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -154,7 +220,7 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Fundamentos de Ecologia Numérica},
-  pdfauthor={Prof.~Elvio S. F. Medeiros; Laboratório de Ecologia; Universidade Estadual da Paraíbal; Campus V, João Pessoa, PB},
+  pdfauthor={Prof.~Elvio S. F. Medeiros; Laboratório de Ecologia; Universidade Estadual da Paraíba; Campus V, João Pessoa, PB},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -166,8 +232,8 @@
 }
 \makeatother
 \subtitle{Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB}
-\author{Prof.~Elvio S. F. Medeiros \and Laboratório de Ecologia \and Universidade Estadual da Paraíbal \and Campus V, João Pessoa, PB}
-\date{Last updated: 16/01/2026 14:12:53}
+\author{Prof.~Elvio S. F. Medeiros \and Laboratório de Ecologia \and Universidade Estadual da Paraíba \and Campus V, João Pessoa, PB}
+\date{Last updated: 09/02/2026 12:52:13}
 
 \begin{document}
 \maketitle
@@ -309,7 +375,7 @@ Os softwares disponíveis para análise multivariada são diversificados. A maio
 O RStudio é um ambiente integrado de desenvolvimento (IDE) para a linguagem de programação R, projetado para ajudar os usuários a trabalhar com dados de forma mais eficiente e produtiva (Figura \ref{fig:rm1fig1}). Ele oferece uma ampla variedade de recursos e ferramentas para análise de dados, incluindo edição de código, visualização de gráficos, depuração, gerenciamento de projetos e colaboração. O RStudio é gratuito e de código aberto, disponível para Windows, Mac e Linux, e é usado por uma comunidade crescente de cientistas de dados, pesquisadores, analistas e desenvolvedores em todo o mundo. Ele oferece suporte para várias bibliotecas e pacotes do R, incluindo o \texttt{tidyverse}, que é uma coleção popular de pacotes para manipulação de dados e visualização. Com o RStudio, os usuários podem facilmente importar, manipular e visualizar dados, executar análises estatísticas e criar visualizações gráficas interativas. Além disso, o RStudio oferece a possibilidade de publicar relatórios e apresentações dinâmicas em diversos formatos, como HTML, PDF e Word, facilitando a comunicação e colaboração entre os usuários.
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/rm1.fig1} \caption{Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R.}\label{fig:rm1fig1}
+\includegraphics[width=10cm]{imagens/rm1.fig1} \caption{Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R.}\label{fig:rm1fig1}
 \end{figure}
 
 O RStudio oferece diversas vantagens em relação ao uso do R base. Algumas dessas vantagens incluem:
@@ -330,6 +396,58 @@ O RStudio oferece diversas vantagens em relação ao uso do R base. Algumas dess
 \end{enumerate}
 
 Essas são apenas algumas das vantagens que o RStudio oferece em relação ao R. É importante notar que, embora o RStudio seja uma ferramenta poderosa para análise de dados, ele não substitui a necessidade de conhecimento em R e estatística para obter resultados precisos e significativos.
+
+\hypertarget{instala_r}{%
+\section{Instalação do R e RStudio}\label{instala_r}}
+
+\hypertarget{r-base}{%
+\subsection{R base}\label{r-base}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  O primeiro passo é entrar na página do projeto CRAN (Comprehensive R Archive Network) (\url{https://www.r-project.org/}).\\
+\item
+  Do lado esquerdo da página clique sobre o link CRAN abaixo de Download. 3. Uma nova página com uma série de links irá se abrir. Esses links são chamados de ``espelhos'' e servem para que você possa escolher o local mais próximo de onde você está para fazer o download do programa. Escolha um espelho no Brasil.\\
+\item
+  Na seção Download and Install R, clique sobre o link \texttt{Download\ R\ for\ Windows} para baixar a versão para esse sistema\ldots{} (MacOS??\ldots{} o que é isso?)\\
+\item
+  Clique sobre o link \texttt{base}.
+\item
+  Clique sobre o link \texttt{Download\ R\ 4.x.x\ for\ Windows} para fazer o download do arquivo R.exe.
+\item
+  A instalação segue o formato padrão de instalação de programas no Windows, e portanto não são necessários maiores detalhes.
+\end{enumerate}
+
+\hypertarget{rstudio}{%
+\subsection{RStudio}\label{rstudio}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Para baixar o RStudio entre no endereço (\url{https://posit.co/download/rstudio-desktop/})\\
+\item
+  Clique no link \texttt{Products\ \textgreater{}\ RStudio}\\
+\item
+  Selecione a versão Desktop.\\
+\item
+  Clique em \texttt{DOWNLOAD\ RSTUDIO\ DESKTOP}\\
+\item
+  Será exibida uma página com a recomendação para você baixar o RStudio FREE versão mais recente - Windows\\
+\item
+  Clicando nesse link, você irá baixar o arquivo RStudio atual (.exe)
+\item
+  Depois é só clicar e instalar da forma convencional do Windows.
+\end{enumerate}
+
+Após a instalação, você pode abrir o \texttt{RStudio} pelo seu respectivo ícone, e o RStudio estará pronto para ser utilizado. O ``R base'' continuará instalado mas será acessado pelo RStudio. Não o desinstale.
+
+\hypertarget{rstudio-na-nuvem}{%
+\subsection{RStudio na nuvem}\label{rstudio-na-nuvem}}
+
+Usar o RStudio Cloud (\url{https://login.rstudio.cloud/}) é uma opção para quem não quer instalar a versão para PC. O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente.
 
 \hypertarget{o-essencial}{%
 \section{O essencial}\label{o-essencial}}
@@ -352,7 +470,7 @@ Linguagens de programação estatística de código aberto tem sido amplamente u
 A interface de usuário do RStudio é composta por várias janelas e painéis que permitem a interação com o R de forma organizada e intuitiva. A janela principal é dividida em quatro painéis (Figura \ref{fig:R-eng}):
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/interfaceR-eng} \caption{Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/}\label{fig:R-eng}
+\includegraphics[width=10cm]{imagens/interfaceR} \caption{Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos).}\label{fig:R-eng}
 \end{figure}
 
 \textbf{Editor de código}: é onde o usuário pode criar, editar e salvar scripts R. O editor fornece recursos como destaque de sintaxe, indentação automática, autocompletar e outras ferramentas úteis para a programação.
@@ -396,7 +514,7 @@ Você pode usar qualquer editor de texto, processador de texto ou planilha para 
 A seguir é apresentada a estrutura básica de uma matriz comunitária e como importar um arquivo XLS/XLSX para o RStudio usando a programação R (Figura \ref{fig:ppbio2}). Como tudo no R, existem várias formas para se ler os arquivos Excel. Usaremos primeiro pacote readxl (que já vem instalado com o R base) (veja \url{https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/})
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/rm1.fig3} \caption{Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada}\label{fig:ppbio2}
+\includegraphics[width=13cm]{imagens/rm1.fig3} \caption{Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada}\label{fig:ppbio2}
 \end{figure}
 
 \hypertarget{o-arquivo-de-espuxe9cies}{%
@@ -502,7 +620,7 @@ Genetic markers in the playground of multivariate analysis (\url{https://www.nat
 \part{BASES DE DADOS}\label{part-bases-de-dados}}
 
 \hypertarget{bases}{%
-\chapter{Bases de Dados. Dados do PPBio Semiárido}\label{bases}}
+\chapter{Bases de dados. Dados do PPBio Semiárido}\label{bases}}
 
 \hypertarget{exemplos-de-conjunto-de-dados-ecoluxf3gicos-do-programa-de-pesquisa-em-biodiversidade-ppbio-do-semiuxe1rido}{%
 \subsection*{Exemplos de conjunto de dados ecológicos do Programa de Pesquisa em Biodiversidade (PPBio) do Semiárido}\label{exemplos-de-conjunto-de-dados-ecoluxf3gicos-do-programa-de-pesquisa-em-biodiversidade-ppbio-do-semiuxe1rido}}
@@ -519,10 +637,14 @@ Para entender a distribuição das espécies de peixes e seu uso de habitat, uma
 \hypertarget{sobre-os-dados-do-ppbio}{%
 \section{Sobre os dados do PPBio}\label{sobre-os-dados-do-ppbio}}
 
-Usaremos ao longo desse livro dados que fazem parte de um estudo mais amplo sobre ecologia de rios do semiárido, coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja \href{https://ppbio.inpa.gov.br/Sobre}{Programa de Pesquisa em Biodiversidade -- PPBio}). Parte desses dados está armazenada em planilhas de Excel \texttt{ppbio**.xlsx} (Figura \ref{fig:200ppbio}). Essas matrizes de dados são descritas na Tabela \ref{tab:200arqs}. As planilhas \texttt{ppbio**.xlsx} contém vários tipos de dados arranjados em matrizes \texttt{n\ x\ m} que incluem dados de abundância de espécies em diferentes unidades amostrais (UA's), dados da estrutura do habitat físico, e variáveis em escala de bacia hidrográfica, dados de contagem de indivíduos ajustados para Captura Por Unidade de Esforço (CPUE), etc (Figura \ref{fig:200ppbio}).
+Usaremos ao longo desse livro dados que fazem parte de um estudo mais amplo sobre ecologia de rios do semiárido, coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja \href{https://ppbio.inpa.gov.br/Sobre}{Programa de Pesquisa em Biodiversidade -- PPBio}).
+
+Nesta base de dados estão armazenadas informações sobre diversos grupos taxonômicos dstribuidos em diversas unidades amostrais (UA's ou sítios), como peixes, macroinverbrebrados bentônicos, quironomídeos e zooplâncotn, além de dados do habitat, como variáveis físicas e químicas, morfologia do habitat, composição do substrato, estrutura de habitat marginal, entre outros (veja a seção \protect\hyperlink{arqs}{Arquivos disponíveis}, a seguir).
+
+Parte desses dados está armazenada em planilhas de Excel \texttt{ppbio**.xlsx} (Figura \ref{fig:200ppbio}). Essas matrizes de dados são descritas na Tabela \ref{tab:200arqs}. As planilhas \texttt{ppbio**.xlsx} contém vários tipos de dados arranjados em matrizes \texttt{n\ x\ m} que incluem dados de abundância de espécies em diferentes unidades amostrais (UA's), dados da estrutura do habitat físico, e variáveis em escala de bacia hidrográfica, dados de contagem de indivíduos ajustados para Captura Por Unidade de Esforço (CPUE), etc (Figura \ref{fig:200ppbio}).
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/ppbio} \caption{Parte da planilha de dados brutos do PPBio.}\label{fig:200ppbio}
+\includegraphics[width=10cm]{imagens/ppbio} \caption{Parte da planilha de dados brutos do PPBio.}\label{fig:200ppbio}
 \end{figure}
 
 Por exemplo, essa é a \textbf{matriz bruta de dados}, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados. Outros tipos de arquivos existem sobre esses dados (Tabela \ref{tab:200arqs}).
@@ -530,64 +652,61 @@ Por exemplo, essa é a \textbf{matriz bruta de dados}, porque os valores ainda n
 Várias das espécies nessa matriz tem grande importância ecológica, como é o caso de \emph{Astyanax bimaculatus}\footnote{A etimologia do gênero \emph{Astyanax} vem da mitologia Grega. Heitor personagem da ``Ilíada'', tinha um filho chamado Astíanax.} (Figura \ref{fig:200asbim}), que é muito comum em rios intermitentes e serve de alimento para predadores maiores (\protect\hyperlink{ref-RN2908}{SILVA; DUARTE; MEDEIROS, 2018}) como a espécie \emph{Hoplias malabaricus}\footnote{Do Grego, \emph{hoplon}, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.} (Figura \ref{fig:200hmala}) (\protect\hyperlink{ref-RN2724}{SILVA et al., 2010}).
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/spp/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:200asbim}
+\includegraphics[width=10cm]{imagens/spp/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:200asbim}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/spp/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:200hmala}
+\includegraphics[width=10cm]{imagens/spp/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:200hmala}
 \end{figure}
 
 Outras espécies como \emph{Apareiodon hasemani}\footnote{A etimologia do nome \emph{Apareiodon} vem do Grego, \emph{a}, sem, \emph{pareia}, lateral ou bochecha, e \emph{odous} dentição, em referência a ausência de dentes laterais no aparato bucal dessa espécie.''} (Figura \ref{fig:200apdavis} tem importância trófica por estar na base da cadeia alimentar, enquanto espécies da família Loricariidae, como \emph{Pseudancistrus genisetiger}\footnote{A etimologia do nome \emph{Pseudancistrus} vem do Grego, \emph{pseudes}, falso, e \emph{agkistron}, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.} (Figura \ref{fig:200pgen}), tem importância para taxonomia.
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/spp/Apdav_u0} \caption{*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Apareiodon-davisi.html>}\label{fig:200apdavis}
+\includegraphics[width=10cm]{imagens/spp/Apdav_u0} \caption{*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Apareiodon-davisi.html>}\label{fig:200apdavis}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/spp/genis} \caption{*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal}\label{fig:200pgen}
+\includegraphics[width=10cm]{imagens/spp/genis} \caption{*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal}\label{fig:200pgen}
 \end{figure}
 
-As planilhas \texttt{ppbio**.xlsx} contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \ref{fig:200del}. Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela \ref{tab:200arqs}). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.\\
+As planilhas \texttt{ppbio**.xlsx} contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \ref{fig:200del}). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela \ref{tab:200arqs}). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.\\
 Qual desses tipos de dados você acha que é apresentado na planilha?
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/rm1.fig3} \caption{Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo.}\label{fig:200del}
+\includegraphics[width=13cm]{imagens/rm1.fig3} \caption{Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo.}\label{fig:200del}
 \end{figure}
 
 \hypertarget{arqs}{%
 \section{Arquivos disponíveis}\label{arqs}}
 
-A seguir, apresento uma tabela com as informações essenciais sobre as matrizes de dados que serão utilizadas ao longo deste livro (Tabela \ref{tab:200arqs}). Nela, estão descritos os diferentes tipos de matrizes, suas finalidades analíticas e o tipo de dado para cada uma delas. Essas informações servirão de referência para compreender a origem, a estrutura e o tratamento recomendado para os dados empregados nas análises subsequentes. Você pode baixar essas matrizes clicando no link para o arquivo em \texttt{.xlsx} na coluna \texttt{Arquivo}. Ao vizualizar a matriz que deseja baixar, clique em \texttt{Arquivo} \textgreater{} \texttt{Baixar} \textgreater{} \texttt{Microsoft\ Excel\ (.xlsx)}. Atente para a pasta onde seu computador baixa o arquivo desejado, você vai precisar dessa informação depois.
+A seguir, apresento uma tabela com as informações essenciais sobre as matrizes de dados que serão utilizadas ao longo deste livro (Tabela \ref{tab:200arqs}). Nela, estão descritos os diferentes tipos de matrizes, suas finalidades analíticas e o tipo de dado para cada uma delas. Essas informações servirão de referência para compreender a origem, a estrutura e o tratamento recomendado para os dados empregados nas análises subsequentes.
 
-\begin{verbatim}
-## Warning in table_info$align_vector[column] <-
-## unlist(lapply(table_info$align_vector_origin[column], : número de itens para
-## para substituir não é um múltiplo do comprimento do substituto
-\end{verbatim}
+Você pode baixar essas matrizes clicando no link para o arquivo em \texttt{.xlsx} na coluna \texttt{Arquivo}. Ao vizualizar a matriz que deseja baixar, clique em \texttt{Arquivo} \textgreater{} \texttt{Baixar} \textgreater{} \texttt{Microsoft\ Excel\ (.xlsx)}. Atente para a pasta onde seu computador baixa o arquivo desejado, você vai precisar dessa informação depois.
 
-\begin{table}
+\newlength\holdLTleft\newlength\holdLTright\setlength\holdLTleft{\LTleft}\relax\setlength\holdLTright{\LTright}\relax\setlength\LTleft{0\linewidth}
 
-\caption{\label{tab:200arqs}Matrizes disponíveis para análises, com suas descrições e tipos de dados recomendados.}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{2cm}>{\raggedright\arraybackslash}p{2cm}>{\raggedright\arraybackslash}p{7cm}>{\raggedright\arraybackslash}p{5cm}}
+\setlength\LTright{0\linewidth}
+
+\begin{longtable}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{\dimexpr 0.12\linewidth-2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 0.38\linewidth-2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 0.3\linewidth-2\tabcolsep-1.5\arrayrulewidth}}
 \toprule
-Arquivo (.xlsx) & Tipo de matriz & Descrição & Tipo de dados\\
-\midrule
-{}[ppbio06c-peixes](https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive\_link\&ouid=101766125969589673518\&rtpof=true\&sd=true) & Matriz comunitária & O arquivo ppbio06 traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.\\
-{}[ppbio06p-amb](https://docs.google.com/spreadsheets/d/1V\_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive\_link\&ouid=101766125969589673518\&rtpof=true\&sd=true) & Matriz ambiental & O arquivo ppbio06h traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação. & Unidades de medição diferentes (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.\\
-{}[ppbio06-grupos](https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive\_link\&ouid=101766125969589673518\&rtpof=true\&sd=true) & Matriz de grupos & O arquivo ppbio06 traz os dados brutos que serão usados nessa análise. A matriz de dados brutos contendo 26 locais/ocasiões (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.\\
-ppbio06cpue & Matriz comunitária & O arquivo ppbio06cpue traz os valores depois de terem sidos ajustados pela Captura Por Unidade de Esforço (CPUE), onde o número de indivíduos de cada espécie em uma determinada UA é dividido pelo esforço de captura daquela UA. Isso significa que os dados foram relativizados pela CPUE. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Densidades de indivíduos (no. de indivíduos por Unidade de Esforço de Captura) com alta amplitude de variação, sugerido uso de matriz relativizada.\\
+Arquivo & Tipo de matriz & Descrição & Tipo de dados \\ 
+\midrule\addlinespace[2.5pt]
+\href{https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06c-peixes.xlsx}; \href{https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06c-peixes.ods} & Matriz comunitária & O arquivo ppbio06 traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada. \\ 
+\href{https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06p-amb} & Matriz ambiental & O arquivo ppbio06h traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações diferentes (objetos) x 35 variáveis ambientais (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação. & Unidades de medição diferentes (cm, m, °C, mg/L, etc.), com alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada. \\ 
+\href{https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06-grupos} & Matriz de grupos & O arquivo ppbio06 traz os dados brutos que serão usados nessa análise. A matriz de dados brutos contendo 26 locais/ocasiões (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada. \\ 
+\href{https://docs.google.com/spreadsheets/d/1hXSKaJlLhzMhfMUs1jXR1ynttcr4n14P/edit?usp=sharing\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06cpue-peixes.xlsx} & Matriz comunitária & O arquivo ppbio06cpue traz os valores após ajuste pela Captura Por Unidade de Esforço (CPUE). & Densidades de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada. \\ 
 \bottomrule
-\end{tabular}
-\end{table}
+\end{longtable}
+\setlength\LTleft{\holdLTleft}
+\setlength\LTright{\holdLTright}
 
 \hypertarget{codificauxe7uxe3o-das-variuxe1veis}{%
 \subsection{Codificação das variáveis}\label{codificauxe7uxe3o-das-variuxe1veis}}
 
-Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo \texttt{ppbio06-*.xlsx}, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (m=linhas ou objetos) em estações do ano diferentes, e cerca de 35 espécies (n=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores são contagens de indivíduos, e apresentam uma alta amplitude de variação, portanto, o uso de uma matriz relativizada é sugerido (Figura \ref{tab:200arqs}). Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura \ref{fig:200codes}.
+Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo \texttt{ppbio06-*.xlsx}, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (m=linhas ou objetos) em estações do ano diferentes, e cerca de 35 espécies (n=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores são contagens de indivíduos, e apresentam uma alta amplitude de variação, portanto, o uso de uma matriz relativizada é sugerido (Tabela \ref{tab:200arqs}). Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura \ref{fig:200codes}.
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/bases/com-codes} \caption{Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem}\label{fig:200codes}
+\includegraphics[width=10cm]{imagens/bases/com-codes} \caption{Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem}\label{fig:200codes}
 \end{figure}
 
 \hypertarget{abrev}{%
@@ -631,7 +750,7 @@ Base de dados & Arquivo do Excel planilhado a partir de dados de campo ou de lab
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{basepeixes}{%
-\chapter{Base de Dados I - Peixes}\label{basepeixes}}
+\chapter{Base de dados I - Peixes}\label{basepeixes}}
 
 \hypertarget{estrutura-da-comunidade-peixes-no-semiuxe1rido}{%
 \subsection*{Estrutura da Comunidade: Peixes no semiárido}\label{estrutura-da-comunidade-peixes-no-semiuxe1rido}}
@@ -689,7 +808,7 @@ Nos sistemas de riacho em regiões secas, espera-se que suas amplas variações 
 Este estudo foi realizado na região semiárida brasileira, em bacias hidrográficas que fluem através de uma floresta aberta arbustiva seca decidual (a ``Caatinga''). A amplitude térmica é baixa na área de estudo, com médias variando de aproximadamente 25 a 30 °C, e a precipitação média anual varia entre 600 e 1100 mm. As altitudes variam entre 100 e 1000 m (Figura \ref{fig:201mapa1}).
 
 \begin{figure}
-\includegraphics[width=19.14in]{imagens/bases/com-mapa} \caption{Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.}\label{fig:201mapa1}
+\includegraphics[width=10cm]{imagens/bases/com-mapa} \caption{Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.}\label{fig:201mapa1}
 \end{figure}
 
 \textbf{Duas regiões} de importância biológica (\textbf{Seridó, S} e \textbf{Buíque, B}) foram escolhidas e nelas, \textbf{seis locais} ou sítios de coleta (\textbf{TA}, \textbf{CP}, \textbf{CT}, \textbf{PC}, \textbf{MU}, e \textbf{GU}) foram selecionados para representar ambientes Unidades Amostrais de ambientes temporários naturais e artificiais típicos (Figura \ref{fig:201mapa1} e Figura \ref{fig:201comcodes}).
@@ -699,21 +818,21 @@ Os locais consistiam em trechos de \textbf{riachos (-R)} com fluxo de água supe
 Várias das espécies desse estudo tem grande importância ecológica, como é o caso de \emph{Astyanax bimaculatus}\footnote{A etimologia do gênero \emph{Astyanax} vem da mitologia Grega. Heitor personagem da ``Ilíada'', tinha um filho chamado Astíanax.} (Figura \ref{fig:201asbim}), que é muito comum em rios intermitentes e serve de alimento para predadores maiores como a espécie \emph{Hoplias malabaricus}\footnote{Do Grego, \emph{hoplon}, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.} (Figura \ref{fig:201hmala}).
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/spp/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:201asbim}
+\includegraphics[width=10cm]{imagens/spp/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:201asbim}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/spp/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:201hmala}
+\includegraphics[width=10cm]{imagens/spp/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:201hmala}
 \end{figure}
 
 Outras espécies como \emph{Apareiodon hasemani}\footnote{A etimologia do nome \emph{Apareiodon} vem do Grego, \emph{a}, sem, \emph{pareia}, lateral ou bochecha, e \emph{odous} dentição, em referência a ausência de dentes laterais no aparato bucal dessa espécie.} (Figura \ref{fig:201apdavis} tem importância trófica por estar na base da cadeia alimentar, enquanto espécies da família Loricariidae, como \emph{Pseudancistrus genisetiger}\footnote{A etimologia do nome \emph{Pseudancistrus} vem do Grego, \emph{pseudes}, falso, e \emph{agkistron}, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.} (Figura \ref{fig:201pgen}), tem importância para taxonomia.
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/spp/Apdav_u0} \caption{*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Apareiodon-davisi.html>}\label{fig:201apdavis}
+\includegraphics[width=10cm]{imagens/spp/Apdav_u0} \caption{*Apareiodon sp.*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Apareiodon-davisi.html>}\label{fig:201apdavis}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/spp/genis} \caption{*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal}\label{fig:201pgen}
+\includegraphics[width=10cm]{imagens/spp/genis} \caption{*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By Medeiros, E.S.F. Fonte: Arquivo pessoal}\label{fig:201pgen}
 \end{figure}
 
 \hypertarget{codificauxe7uxe3o-das-variuxe1veis-1}{%
@@ -722,11 +841,11 @@ Outras espécies como \emph{Apareiodon hasemani}\footnote{A etimologia do nome \
 Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo \texttt{ppbio06*-peixes.xlsx}, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (n=linhas ou objetos) em estações do ano diferentes, e cerca de 35 espécies (m=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores são contagens de indivíduos, e apresentam uma alta amplitude de variação, portanto, o uso de uma matriz relativizada é sugerido. Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura \ref{fig:201comcodes}.
 
 \begin{figure}
-\includegraphics[width=14.82in]{imagens/bases/com-codes} \caption{Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem.}\label{fig:201comcodes}
+\includegraphics[width=10cm]{imagens/bases/com-codes} \caption{Codificação para as variáveis, espécies de peixes, sítios de amostragem e período de amostragem.}\label{fig:201comcodes}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=22.97in]{imagens/bases/lista} \caption{Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.) de espécies coletadas nos locais de estudo (codificados conforme a Figura \\ref{fig:201comcodes}) no semiárido do Brasil. \* = Espécies não nativas.}\label{fig:unnamed-chunk-1}
+\includegraphics[width=10cm]{imagens/bases/lista} \caption{Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.) de espécies coletadas nos locais de estudo (codificados conforme a Figura \\ref{fig:201comcodes}) no semiárido do Brasil. \* = Espécies não nativas.}\label{fig:unnamed-chunk-1}
 \end{figure}
 
 \hypertarget{amostragem-dos-dados}{%
@@ -817,46 +936,39 @@ O presente estudo mostra que as comunidades de peixes assumem diferentes estrutu
 Tabela 1. Abundância, percentual e frequência de ocorrência (F.O.) de espécies coletadas nos locais de estudo (codificados conforme a Figura \ref{fig:201comcodes}) no semiárido do Brasil. * = Espécies não nativas.''
 
 \begin{figure}
-\includegraphics[width=22.97in]{imagens/bases/lista} \end{figure}
+\includegraphics[width=10cm]{imagens/bases/lista} \end{figure}
 
 Tabela 2. Variáveis ambientais (average ± SD) coletadas nos locais de estudo no semiárido do Brasil.
 
 \begin{figure}
-\includegraphics[width=0.8\textwidth]{imagens/bases/com_1} \end{figure}
+\includegraphics[width=10cm]{imagens/bases/com_1} \end{figure}
 
 Tabela 3. São apresentadas as variáveis ambientais e a composição dos peixes no presente estudo (apenas variáveis correlacionadas com um determinado eixo são mostradas).
 
 \begin{figure}
-\includegraphics[width=14.94in]{imagens/bases/com_2} \end{figure}
+\includegraphics[width=10cm]{imagens/bases/com_2} \end{figure}
 
 Figura 1. Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e locais de amostragem no semiárido do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.
 
 \begin{figure}
-\includegraphics[width=19.14in]{imagens/bases/com-mapa} \end{figure}
+\includegraphics[width=10cm]{imagens/bases/com-mapa} \end{figure}
 
 Figura 2. Os resultados da NMDS para a composição dos peixes em todo o estudo chegam ao semiárido do Brasil. Vetores (caixa de entrada) mostram taxa correlacionada (r2 \textgreater{} 0,2) com amostras em espaço de ordenação. As letras após os códigos do site indicam ocasião de amostragem (A=Abril, J=Junho, S=Setembro e D=Dezembro).
 
 \begin{figure}
-\includegraphics[width=14.74in]{imagens/bases/com_3} \end{figure}
+\includegraphics[width=10cm]{imagens/bases/com_3} \end{figure}
 
 Figura 3. Biplot de CCA mostrando a composição de conjuntos de peixes nos locais e ocasiões de amostragem () e as variáveis ambientais explicativas definidas pela CCA.
 
 \begin{figure}
-\includegraphics[width=14.56in]{imagens/bases/com_4} \end{figure}
-
-Arquivos fornecidos
-ppbio06.xlsx - O arquivo ppbio06.xlsx traz os dados brutos que serão usados nas análises. A
-matriz de dados brutos contem mais de 20 localidades em estações do ano diferentes (objetos) x
-cerca de 35 espécies (atributos), antes de qualquer modificação. Os valores são contagens de
-indivíduos com uma alta amplitude de variação, portanto, o uso de uma matriz relativizada é
-sugerido.
+\includegraphics[width=10cm]{imagens/bases/com_4} \end{figure}
 
 \hypertarget{referuxeancias-2}{%
 \section*{Referências}\label{referuxeancias-2}}
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{basehab}{%
-\chapter{Base de Dados II - Habitat}\label{basehab}}
+\chapter{Base de dados II - Habitat}\label{basehab}}
 
 \hypertarget{estrutura-do-habitat-variuxe1veis-ambientais-no-semiuxe1rido}{%
 \subsection*{Estrutura do Habitat: Variáveis ambientais no semiárido}\label{estrutura-do-habitat-variuxe1veis-ambientais-no-semiuxe1rido}}
@@ -916,7 +1028,7 @@ Este trabalho mede a diversidade e disponibilidade do habitat físico em sistema
 Este estudo foi realizado na região semiárida brasileira, em bacias hidrográficas que fluem através de uma floresta aberta arbustiva seca decidual (a ``Caatinga''). A amplitude térmica é baixa na área de estudo, com médias variando de aproximadamente 25 a 30 °C, e a precipitação média anual varia entre 600 e 1100 mm. As altitudes variam entre 100 e 1000 m (Figura \ref{fig:202mapa} e Figura \ref{fig:202hab1}).
 
 \begin{figure}
-\includegraphics[width=19.14in]{imagens/bases/com-mapa} \caption{Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.}\label{fig:202mapa}
+\includegraphics[width=10cm]{imagens/bases/com-mapa} \caption{Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.}\label{fig:202mapa}
 \end{figure}
 
 \textbf{Duas regiões} de importância biológica (\textbf{Seridó, S} e \textbf{Buíque, B}) foram escolhidas e nelas, \textbf{seis locais} ou sítios de coleta (\textbf{TA}, \textbf{CP}, \textbf{CT}, \textbf{PC}, \textbf{MU}, e \textbf{GU}) foram selecionados para representar ambientes Unidades Amostrais de ambientes temporários naturais e artificiais típicos (Figura \ref{fig:202mapa} e Figura \ref{fig:202habcodes}).
@@ -924,7 +1036,7 @@ Este estudo foi realizado na região semiárida brasileira, em bacias hidrográf
 Os locais consistiam em trechos de \textbf{riachos (-R)} com fluxo de água superficial (durante a estação chuvosa) ou poças temporárias isoladas (durante a estação seca) e \textbf{reservatórios ou açudes (-A)} artificiais criados a partir do represamento de riachos. A amostragem foi realizada durante o ano de 2006 em \textbf{quatro ocasiões} durante as estações chuvosa (\textbf{abril, 1} e \textbf{junho, 2}) e seca (\textbf{setembro, 3} e \textbf{dezembro, 4}) (Figura \ref{fig:202mapa} e Figura \ref{fig:202habcodes}).
 
 \begin{figure}
-\includegraphics[width=11.39in]{imagens/bases/hab1} \caption{Características gerais dos locais de estudo. Os critérios a priori para agrupar a estrutura do habitat no DCA são indicados com um (*).}\label{fig:202hab1}
+\includegraphics[width=10cm]{imagens/bases/hab1} \caption{Características gerais dos locais de estudo. Os critérios a priori para agrupar a estrutura do habitat no DCA são indicados com um (*).}\label{fig:202hab1}
 \end{figure}
 
 \hypertarget{sobre-os-dados-do-ppbio-1}{%
@@ -933,7 +1045,7 @@ Os locais consistiam em trechos de \textbf{riachos (-R)} com fluxo de água supe
 A planilha \texttt{ppbio} contém os dados das variáveis ambientais em diferentes unidades amostrais (UA's) (Figura \ref{fig:202habitat}) (Veja \href{https://ppbio.inpa.gov.br/Sobre}{Programa de Pesquisa em Biodiversidade -- PPBio}). Essa é a \textbf{matriz bruta de dados}, porque os valores ainda não foram ajustados (não foram relativizados ou transformados). Outros tipos de arquivos existem para os dados do PPBio (\ref{arqs}), que fazem parte de um estudo mais amplo sobre ecologia de rios do semiárido.
 
 \begin{figure}
-\includegraphics[width=18.19in]{imagens/bases/habitat} \caption{Parte da planilha de dados brutos do PPBio para o habitat.}\label{fig:202habitat}
+\includegraphics[width=10cm]{imagens/bases/habitat} \caption{Parte da planilha de dados brutos do PPBio para o habitat.}\label{fig:202habitat}
 \end{figure}
 
 \hypertarget{codificauxe7uxe3o-para-variuxe1veis}{%
@@ -942,11 +1054,11 @@ A planilha \texttt{ppbio} contém os dados das variáveis ambientais em diferent
 Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo \texttt{ppbio06*-habitat.xlsx}, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (n=linhas ou objetos) em estações do ano diferentes, e cerca de 30 variáveis ambientais (m=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores incluem diversis tipos de variáveis medidas em unidades diferentes (\%, °C, mg/L, etc), e apresentam uma alta amplitude de variação, portanto, a aplicação de uma transformação é recomendado (Figura \ref{fig:202habitat}). Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura \ref{fig:202habcodes}.
 
 \begin{figure}
-\includegraphics[width=15.51in]{imagens/bases/hab-codes} \caption{Codificação para as variáveis ambentais descritoras da estrutura do habitat (atributos) e os sítios e períodos de amostragem (objetos).}\label{fig:202habcodes}
+\includegraphics[width=10cm]{imagens/bases/hab-codes} \caption{Codificação para as variáveis ambentais descritoras da estrutura do habitat (atributos) e os sítios e períodos de amostragem (objetos).}\label{fig:202habcodes}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=15.56in]{imagens/bases/hab-str} \caption{Imagem representativa da codificação das variáveis, para a medição da estrutura do habitat (atributos).}\label{fig:202habstr}
+\includegraphics[width=10cm]{imagens/bases/hab-str} \caption{Imagem representativa da codificação das variáveis, para a medição da estrutura do habitat (atributos).}\label{fig:202habstr}
 \end{figure}
 
 \hypertarget{uxe1rea-de-estudo-e-amostragem-dos-dados}{%
@@ -969,31 +1081,31 @@ A variação na composição do habitat entre os locais e as ocasiões de amostr
 A estrutura do habitat para todos os locais de estudo consistiu geralmente em plantas C4 crescendo nas margens do litoral (nomeadamente gramíneas), macrófitas aquáticas, incluindo plantas flutuantes (geralmente \emph{Salvinia} sp., \emph{Pistia} sp. e \emph{Azolla} sp.), plantas emergentes (\emph{Nymphaea} spp.) e plantas submersas (\emph{Ceratophyllum} sp. e \emph{Egeria} sp.) e algas (aderidas ao substrato e filamentosas) (Figura \ref{fig:202hab2}). Vegetação ciliar pendendo, restos lenhosos, serapilheira e massas de raízes também estiveram presentes nos locais estudados.
 
 \begin{figure}
-\includegraphics[width=7.57in]{imagens/bases/hab2} \caption{Percentagens (± desvio padrão) dos elementos do habitat de ambos os elementos marginais e composição do substrato que ocupam o perímetro molhado marginal dos locais de estudo e parâmetros médios de qualidade da água.}\label{fig:202hab2}
+\includegraphics[width=10cm]{imagens/bases/hab2} \caption{Percentagens (± desvio padrão) dos elementos do habitat de ambos os elementos marginais e composição do substrato que ocupam o perímetro molhado marginal dos locais de estudo e parâmetros médios de qualidade da água.}\label{fig:202hab2}
 \end{figure}
 
 A composição do substrato foi composta principalmente de lama e areia, com menor contribuição de seixos, pedras e cascalho (Figura \ref{fig:202hab2}). A diversidade de estruturas de habitat foi geralmente maior nos locais dos rios, na área do Seridó e durante a estação chuvosa, apesar de uma maior riqueza de elementos de habitat nos locais dos reservatórios (Figura \ref{fig:202hab3}). A composição do substrato também foi mais diversa e rica nos locais do rio e na área do Seridó, enquanto o substrato foi mais rico e diversificado durante a estação seca (Figura \ref{fig:202hab3}). A análise de correspondência sem tendência (Figura \ref{fig:202hab4}) mostrou que as diferenças na estrutura do habitat foram significativas apenas entre os locais de riachos e reservatórios (MRPP, A = 0,06, p = 0,03) e estações (MRPP, A = 0,06, p = 0,03).
 
 \begin{figure}
-\includegraphics[width=7.56in]{imagens/bases/hab3} \caption{Diversidade e riqueza de elementos do habitat em locais de estudo em todos os tipos de habitat, área de estudo e estações do ano.}\label{fig:202hab3}
+\includegraphics[width=10cm]{imagens/bases/hab3} \caption{Diversidade e riqueza de elementos do habitat em locais de estudo em todos os tipos de habitat, área de estudo e estações do ano.}\label{fig:202hab3}
 \end{figure}
 
 Diferenças na estrutura do habitat entre as duas áreas de estudo não foram significativas (MRPP, A = 0,01, p = 0,26). A análise do valor indicador mostrou que os elementos importantes que separam esses grupos foram macrófitas para reservatórios (IV = 53,2, p = 0,01) e areia e pedras para locais fluviais (IV = 61,8, p = 0,02 e IV = 82,6, p = 0,002, respectivamente). Importantes características de habitat que separam as estações foram vegetação submersa (IV = 48,4, 0,01) e vegetação pendente (IV = 48,9, p = 0,02) para a estação chuvosa. Nenhum elemento do substrato foi significativamente importante na separação dos locais de acordo com as estações do ano (Figura \ref{fig:202hab4}).
 
 \begin{figure}
-\includegraphics[width=7.58in]{imagens/bases/hab4} \caption{Resultados da DCA para a composição do habitat nos locais de estudo. A caixa de inserção mostra elementos de habitat correlacionados (r2>0,2) com locais/ocasiões de amostragem no espaço de ordenação (indicados por vetores). A direção e o comprimento dos vetores indicam a força da correlação. Consulte a Tabela 2 para obter os nomes completos dos elementos do habitat. Os locais (S1-S6) são codificados de acordo com a Tabela 1 e a ocasião da amostragem. Abreviaturas: APR, abril; JUN, junho; SET, setembro; DEZ, dezembro.}\label{fig:202hab4}
+\includegraphics[width=10cm]{imagens/bases/hab4} \caption{Resultados da DCA para a composição do habitat nos locais de estudo. A caixa de inserção mostra elementos de habitat correlacionados (r2>0,2) com locais/ocasiões de amostragem no espaço de ordenação (indicados por vetores). A direção e o comprimento dos vetores indicam a força da correlação. Consulte a Tabela 2 para obter os nomes completos dos elementos do habitat. Os locais (S1-S6) são codificados de acordo com a Tabela 1 e a ocasião da amostragem. Abreviaturas: APR, abril; JUN, junho; SET, setembro; DEZ, dezembro.}\label{fig:202hab4}
 \end{figure}
 
 A análise de correspondência canônica mostrou que as variáveis de alcance e escala de captação não estavam fortemente correlacionadas, exceto para a distância do local à nascente do rio e comprimento do córrego da localização do local (correlação de Pearson = 0,965), elevação e comprimento do rio principal (Correlação de Pearson = 0,853) e elevação e largura do local (correlação de Pearson = 0,906). A variância total dos dados (``inércia'') foi de 1,19. A variância total explicada pela CCA foi de 46,2\%, sendo a maior parte dessa variação explicada pelo primeiro eixo (18,4\%) (Figura \ref{fig:202hab5}. No entanto, os eixos 2 e 3 não podem ser desconsiderados, pois também explicaram parte substancial da variação do conjunto de dados. Os resultados da análise mostram uma relação significativa entre os dados de estrutura do habitat e as variáveis de alcance e escala de captação, com o autovalor do primeiro eixo muito alto para ser esperado por acaso (Figura \ref{fig:202hab5}, valores de p para autovalor e correlação para o primeiro eixo = 0,01). O primeiro eixo foi fortemente correlacionado com variáveis morfológicas da escala de captação, nomeadamente comprimento do rio principal, elevação e a distância altamente correlacionada do local à nascente do rio e comprimento do córrego da localização do local. O primeiro eixo também foi correlacionado com a inclinação da margem, uma variável morfológica da escala de alcance. Eixos 2 e 3 foram correlacionados com variáveis de escala de alcance de morfologia (largura do local, eixo 2) e qualidade da água (velocidade da água e oxigênio dissolvido, eixo 3) (Figura \ref{fig:202hab5}).
 
 \begin{figure}
-\includegraphics[width=7.62in]{imagens/bases/hab5} \caption{Estatísticas de sumário dos eixos da Análise de Correspondência Canônica para a estrutura do habitat e variáveis de escala de captação e alcance. Correlações para variáveis de escala de captação e alcance com os eixos de ordenação após Análise de Correspondência Canônica.}\label{fig:202hab5}
+\includegraphics[width=10cm]{imagens/bases/hab5} \caption{Estatísticas de sumário dos eixos da Análise de Correspondência Canônica para a estrutura do habitat e variáveis de escala de captação e alcance. Correlações para variáveis de escala de captação e alcance com os eixos de ordenação após Análise de Correspondência Canônica.}\label{fig:202hab5}
 \end{figure}
 
 A Figura \ref{fig:202hab6} indica que o eixo 1 representa um gradiente de sítios com estrutura de habitat influenciada por variáveis de escala de captação e o eixo 2 representa sítios influenciados por variáveis de escala de alcance.
 
 \begin{figure}
-\includegraphics[width=6.69in]{imagens/bases/hab6} \caption{Biplot de locais de ordenação (Δ) (com base na estrutura do habitat) na bacia e alcance- variáveis de escala espaço, conforme definido pelo CCA. Os vetores representam o comprimento do rio (RIVER), distância do local da fonte (DISTSOUR), elevação, inclinação da margem (SLOPE) e largura do local (WIDTH). (+) indica a posição dos elementos do habitat no espaço de ordenação.}\label{fig:202hab6}
+\includegraphics[width=10cm]{imagens/bases/hab6} \caption{Biplot de locais de ordenação (Δ) (com base na estrutura do habitat) na bacia e alcance- variáveis de escala espaço, conforme definido pelo CCA. Os vetores representam o comprimento do rio (RIVER), distância do local da fonte (DISTSOUR), elevação, inclinação da margem (SLOPE) e largura do local (WIDTH). (+) indica a posição dos elementos do habitat no espaço de ordenação.}\label{fig:202hab6}
 \end{figure}
 
 \hypertarget{discussuxe3o-1}{%
@@ -1006,10 +1118,6 @@ Apesar das diferenças na diversidade e riqueza de elementos de habitat entre Se
 No contexto do presente estudo, a Análise de Correspondência Canônica identificou vários níveis de variáveis de captação e alcance de riachos correlacionados com a estrutura do habitat. Ao nível da bacia, as variáveis que representam a ordem do riacho, como comprimento do rio, comprimento do córrego da localização do local e distância do local da fonte, foram importantes determinantes da estrutura do habitat. Na escala de alcance do córrego, a estrutura do habitat foi relacionada com a inclinação da margem e a largura do local, enquanto a profundidade não foi um determinante importante da estrutura do habitat. Como todas as variáveis de habitat foram medidas nas margens, não se deve esperar que a profundidade geral do local seja um elemento importante que afete a estrutura do habitat (a profundidade média foi de 34,4 ± 19,4 cm). Entretanto, a inclinação e a largura podem afetar o habitat físico através de sua influência no grau de conectividade entre o habitat aquático e terrestre. É importante lembrar que a declividade foi medida nas margens, compreendendo a porção terrestre das margens. Os parâmetros de qualidade da água em escala local também foram considerados importantes descritores da estrutura do habitat, principalmente aqueles associados ao conteúdo de oxigênio dissolvido na água (nomeadamente, oxigênio dissolvido e velocidade da água). Embora a temperatura e a transparência também possam estar relacionadas ao oxigênio dissolvido, a primeira foi relativamente constante em todos os locais de estudo (a temperatura média da água foi de 29,5 ± 2,9 °C) e a última (estimada a partir das profundidades de Secchi) foi muito alta em todas as áreas de estudo. como com médias por local variando de 16 a 90 cm. O modelo de habitat foi sugerido como uma estrutura onde fatores bióticos influenciam a biota (Southwood, 1977). Em ecossistemas de riachos, a inundação e a variabilidade do fluxo têm sido sugeridas como os principais eixos no modelo de habitat (Minshall, 1988; Poff e Ward, 1989). Embora os resultados apresentados neste estudo indiquem que as variações sazonais associadas ao regime de inundação e fluxo são elementos importantes que afetam a estrutura do habitat, há indícios de que o modelo de habitat pode ser multidimensional. Nos sistemas semiáridos do Brasil, a estrutura do habitat está sendo impulsionada por muitos componentes em diferentes níveis, onde o papel das características de captação e morfologia local e variáveis de água aumentariam em predominância em suas respectivas escalas. Isto realça a importância da ligação entre a estrutura do habitat e a diversidade biótica a nível local e regional.
 
 O presente estudo mostra que a estrutura do habitat em sistemas semiáridos no nordeste do Brasil é composta por uma gama de elementos que variam de acordo com o tipo de habitat e estação do ano, enquanto a heterogeneidade do habitat foi mais forte nas escalas local e de captação do que entre áreas de captação. Portanto, vários níveis da hierarquia de captação são importantes para a estrutura do habitat, desde variáveis de escala de captação, como tamanho e elevação do rio, até características locais, como largura, inclinação e oxigênio dissolvido na água. Tais feições devem ser avaliadas e utilizadas como uma estrutura básica para caracterização e avaliação de habitats aquáticos no semiárido brasileiro. Os resultados apresentados têm implicações para a conservação e manejo dos sistemas semiáridos brasileiros. Dado que o habitat é a estrutura básica para a colonização de organismos aquáticos, os mecanismos potenciais que mantêm a diversidade biótica estão em todos os níveis da bacia hidrográfica. É fundamental, portanto, identificar as partes dos ecossistemas ribeirinhos que são vitais para a manutenção de sua saúde.
-
-\hypertarget{apuxeandices-2}{%
-\section*{Apêndices}\label{apuxeandices-2}}
-\addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{referuxeancias-3}{%
 \section*{Referências}\label{referuxeancias-3}}
@@ -1033,113 +1141,80 @@ A importação de planilhas do Excel para o ambiente de programação R é uma t
 
 A importação de planilhas do Excel para o ambiente de programação R é uma tarefa fundamental para análise de dados e estatísticas. O R é uma linguagem de programação amplamente utilizada por cientistas de dados, pesquisadores e analistas para manipular, visualizar e modelar informações. Através da importação de planilhas do Excel, é possível transformar dados armazenados em formatos familiares em estruturas que podem ser manipuladas e exploradas de maneira eficaz no R. Isso permite a aplicação de diversas técnicas estatísticas e criação de visualizações informativas, contribuindo para a tomada de decisões embasadas em dados. Neste contexto, entender como importar dados do Excel para o R é um passo crucial para realizar análises de alta qualidade e obter insights significativos a partir dos conjuntos de dados disponíveis.
 
-\hypertarget{instalauxe7uxe3o-do-r-e-rstudio}{%
-\section{Instalação do R e RStudio}\label{instalauxe7uxe3o-do-r-e-rstudio}}
-
-\hypertarget{r-base}{%
-\section{R base}\label{r-base}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  O primeiro passo é entrar na página do projeto CRAN (Comprehensive R Archive Network) (\url{https://www.r-project.org/}).\\
-\item
-  Do lado esquerdo da página clique sobre o link CRAN abaixo de Download. 3. Uma nova página com uma série de links irá se abrir. Esses links são chamados de ``espelhos'' e servem para que você possa escolher o local mais próximo de onde você está para fazer o download do programa. Escolha um espelho no Brasil.\\
-\item
-  Na seção Download and Install R, clique sobre o link \texttt{Download\ R\ for\ Windows} para baixar a versão para esse sistema\ldots{} (MacOS??\ldots{} o que é isso?)\\
-\item
-  Clique sobre o link \texttt{base}.
-\item
-  Clique sobre o link \texttt{Download\ R\ 4.x.x\ for\ Windows} para fazer o download do arquivo R.exe.
-\item
-  A instalação segue o formato padrão de instalação de programas no Windows, e portanto não são necessários maiores detalhes.
-\end{enumerate}
-
-\hypertarget{rstudio}{%
-\section{RStudio}\label{rstudio}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Para baixar o RStudio entre no endereço (\url{https://posit.co/download/rstudio-desktop/})\\
-\item
-  Clique no link \texttt{Products\ \textgreater{}\ RStudio}\\
-\item
-  Selecione a versão Desktop.\\
-\item
-  Clique em \texttt{DOWNLOAD\ RSTUDIO\ DESKTOP}\\
-\item
-  Será exibida uma página com a recomendação para você baixar o RStudio FREE versão mais recente - Windows\\
-\item
-  Clicando nesse link, você irá baixar o arquivo RStudio atual (.exe)
-\item
-  Depois é só clicar e instalar da forma convencional do Windows.
-\end{enumerate}
-
-Após a instalação, você pode abrir o \texttt{RStudio} pelo seu respectivo ícone, e o RStudio estará pronto para ser utilizado. O ``R base'' continuará instalado mas será acessado pelo RStudio. Não o desinstale.
-
-\hypertarget{rstudio-na-nuvem}{%
-\subsection{RStudio na nuvem}\label{rstudio-na-nuvem}}
-
-Usar o RStudio Cloud (\url{https://login.rstudio.cloud/}) é uma opção para quem não quer instalar a versão para PC. O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente.
-
 \hypertarget{sobre-os-dados-do-ppbio-2}{%
 \section{Sobre os dados do PPBio}\label{sobre-os-dados-do-ppbio-2}}
 
-Usaremos para esse tutorial dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (veja \href{https://ppbio.inpa.gov.br/Sobre}{Programa de Pesquisa em Biodiversidade -- PPBio}). Nesta base de dados estão armazenadas informações sobre diversos grupos taxonômicos dstribuidos em diversas unidades amostrais (UA's ou sítios), como peixes, macroinverbrebrados bentônicos, quironomídeos e zooplâncotn, além de dados do habitat, como variáveis físicas e químicas, morfologia do habitat, composição do substrato, estrutura de habitat marginal, entre outros (Figura \ref{fig:301ppbio}). Essa é a \textbf{matriz bruta de dados}, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados (Tabela \ref{tab:301arqs}).
+Usaremos para esse tutorial dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (veja \href{https://ppbio.inpa.gov.br/Sobre}{Programa de Pesquisa em Biodiversidade -- PPBio}). Nesta base de dados estão armazenadas informações sobre diversos grupos taxonômicos dstribuidos em diversas unidades amostrais (UA's ou sítios), como peixes, macroinverbrebrados bentônicos, quironomídeos e zooplâncotn, além de dados do habitat, como variáveis físicas e químicas, morfologia do habitat, composição do substrato, estrutura de habitat marginal, entre outros (Figura \ref{fig:301ppbio}).
+
+Essa é a \textbf{matriz bruta de dados}, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.
 
 \begin{figure}
-\includegraphics[width=13.21in]{imagens/ppbio} \caption{Parte da planilha de dados brutos do PPBio.}\label{fig:301ppbio}
+\includegraphics[width=10cm]{imagens/ppbio} \caption{Parte da planilha de dados brutos do PPBio.}\label{fig:301ppbio}
 \end{figure}
 
-\begin{verbatim}
-## Warning in table_info$align_vector[column] <-
-## unlist(lapply(table_info$align_vector_origin[column], : número de itens para
-## para substituir não é um múltiplo do comprimento do substituto
-\end{verbatim}
+\begin{infobox}
 
-\begin{table}
+\begin{center}
+\textbf{IMPORTANTE}
 
-\caption{\label{tab:301arqs}Matrizes disponíveis para análises, com suas descrições e tipos de dados recomendados.}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{2cm}>{\raggedright\arraybackslash}p{2cm}>{\raggedright\arraybackslash}p{7cm}>{\raggedright\arraybackslash}p{5cm}}
-\toprule
-Arquivo (.xlsx) & Tipo de matriz & Descrição & Tipo de dados\\
-\midrule
-ppbio06c & Matriz comunitária & O arquivo ppbio06 traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.\\
-ppbio06h & Matriz ambiental & O arquivo ppbio06h traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação. & Unidades de medição diferentes (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.\\
-ppbio06 & Matriz comunitária & O arquivo ppbio06 traz os dados brutos que serão usados nessa análise. A matriz de dados brutos contendo 26 locais/ocasiões (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.\\
-ppbio06cpue & Matriz comunitária & O arquivo ppbio06cpue traz os valores depois de terem sidos ajustados pela Captura Por Unidade de Esforço (CPUE), onde o número de indivíduos de cada espécie em uma determinada UA é dividido pelo esforço de captura daquela UA. Isso significa que os dados foram relativizados pela CPUE. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação. & Densidades de indivíduos (no. de indivíduos por Unidade de Esforço de Captura) com alta amplitude de variação, sugerido uso de matriz relativizada.\\
-\bottomrule
-\end{tabular}
-\end{table}
+\end{center}
 
-A planilha \texttt{ppbio} contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \ref{fig:301rm1}). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela \ref{tab:301arqs}). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.\\
+Veja as matrizes de dados disponíveis para análises, suas descrições e tipos de dados, na seção \protect\hyperlink{arqs}{Arquivos disponíveis} do Capítulo \protect\hyperlink{bases}{Bases de dados}.
+
+\end{infobox}
+
+A planilha \texttt{ppbio*-peixes.***} contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \ref{fig:301rm1}). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária. No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.
+
 Qual desses tipos de dados você acha que é apresentado na planilha?
 
 \begin{figure}
-\includegraphics[width=15.44in]{imagens/rm1.fig3} \caption{Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo.}\label{fig:301rm1}
+\includegraphics[width=10cm]{imagens/rm1.fig3} \caption{Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo.}\label{fig:301rm1}
 \end{figure}
 
 Várias das espécies nessa matriz tem grande importância ecológica, como é o caso de \emph{Astyanax bimaculatus} \footnote{A etimologia do gênero \emph{Astyanax} vem da mitologia Grega. Heitor personagem da ``Ilíada'', tinha um filho chamado Astíanax.} (Figura \ref{fig:301asbim}), que é muito comum em rios intermitentes e serve de alimento para predadores maiores como a espécie \emph{Hoplias malabaricus} \footnote{Do Grego, \emph{hoplon}, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.} (Figura \ref{fig:301hmala}).
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:301asbim}
+\includegraphics[width=10cm]{imagens/spp/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:301asbim}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:301hmala}
+\includegraphics[width=10cm]{imagens/spp/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:301hmala}
 \end{figure}
+
+\begin{infobox}
+
+\begin{center}
+\textbf{NOTA}
+
+\end{center}
+
+Se você ainda não tem o R e o RStudio instalados veja a seção \protect\hyperlink{instala_r}{Instalação do R e RStudio} do Capítulo \protect\hyperlink{intro}{Introdução ao R/RStudio}
+
+\end{infobox}
 
 \hypertarget{importando-a-planilha-de-trabalho}{%
 \section{Importando a planilha de trabalho}\label{importando-a-planilha-de-trabalho}}
 
+\begin{infobox2}
+
+\begin{center}
+\textbf{{ATENÇÃO}}
+
+\end{center}
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção \protect\hyperlink{arqs}{Arquivos disponíveis} do Capítulo \protect\hyperlink{bases}{Bases de dados}.
+
+\begin{center}
+Ou, baixe aqui o arquivo \href{https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06c-peixes.xlsx}
+
+\end{center}
+
+\end{infobox2}
+
 Para começar a usar o R e analisar os dados do Projeto PPBio, abra o RStudio, verifique sua interface (Figura \ref{fig:301interface}) e siga as instruções a seguir.
 
 \begin{figure}
-\includegraphics[width=18in]{imagens/interfaceR} \caption{Interface típica do RStudio e nome dos paineis  ou janelas.}\label{fig:301interface}
+\includegraphics[width=10cm]{imagens/interfaceR} \caption{Interface típica do RStudio e nome dos paineis  ou janelas.}\label{fig:301interface}
 \end{figure}
 
 \hypertarget{mensagens-de-erro-e-avisos-no-r}{%
@@ -1180,10 +1255,6 @@ No contexto da linguagem de programação R, mensagens de erro (errors) e mensag
 
 \hypertarget{organizauxe7uxe3o-buxe1sica}{%
 \section{Organização básica}\label{organizauxe7uxe3o-buxe1sica}}
-
-\leavevmode\vadjust pre{\hypertarget{hello}{}}%
-{ATENÇÃO}
-Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção \ref{download401}
 
 No ambiente do RStudio no painel de edição de código execute (\texttt{Ctrl+Enter} com o teclado ou \texttt{Run} no editor de código) os comandos a seguir, para instalar os pacotes necessários para este módulo.
 
@@ -1263,7 +1334,7 @@ Em resumo, a abordagem baseada em scripts e comandos de teclado oferece mais con
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(readxl)}
-\NormalTok{ppbio06 }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06{-}peixes.xlsx"}\NormalTok{,}
+\NormalTok{ppbio06 }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06c{-}peixes.xlsx"}\NormalTok{,}
                       \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{,}
                       \AttributeTok{na =} \StringTok{"NA"}\NormalTok{)}
 \FunctionTok{str}\NormalTok{(ppbio06)}
@@ -1304,7 +1375,7 @@ Ou podemos instalar esse pacote de importação de arquivos .xlsx para o R.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ppbio }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06{-}peixes.xlsx"}\NormalTok{,}
+\NormalTok{ppbio }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06c{-}peixes.xlsx"}\NormalTok{,}
                    \AttributeTok{rowNames =}\NormalTok{ T,}
                    \AttributeTok{colNames =}\NormalTok{ T,}
                    \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{)}
@@ -1379,36 +1450,27 @@ A planilha a seguir pode ser baixada da seção \ref{download401}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"readODS"}\NormalTok{)}
+\CommentTok{\#install.packages("readODS")}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(readODS)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: package 'readODS' was built under R version 4.3.3
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{rebio23.ods }\OtherTok{\textless{}{-}} \FunctionTok{read\_ods}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/rebio23{-}zoopl\_5{-}20.ods"}\NormalTok{,}
+\NormalTok{ppbio06.ods }\OtherTok{\textless{}{-}} \FunctionTok{read\_ods}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06c{-}peixes.ods"}\NormalTok{,}
                    \AttributeTok{row\_names =} \ConstantTok{TRUE}\NormalTok{,}
                    \AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{,}
-                   \AttributeTok{sheet =} \StringTok{"densidade\_hab\_indL"}\NormalTok{,}
+                   \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{,}
                    \AttributeTok{as\_tibble =} \ConstantTok{FALSE}\NormalTok{,}
                    \AttributeTok{na =} \StringTok{"n/a"}\NormalTok{) }\CommentTok{\# porque existem celulas vazias (n/a)}
-\NormalTok{rebio23.ods }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(rebio23.ods)}
-\FunctionTok{str}\NormalTok{(rebio23.ods)}
-\FunctionTok{class}\NormalTok{(rebio23.ods)}
-\NormalTok{rebio23.ods\_ma }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(rebio23.ods) }\CommentTok{\#lê como uma matriz}
-\FunctionTok{str}\NormalTok{(rebio23.ods\_ma)}
-\FunctionTok{class}\NormalTok{(rebio23.ods\_ma)}
-\CommentTok{\#rebio23.ods}
-\CommentTok{\#rebio23.ods\_ma}
+\NormalTok{ppbio06.ods }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(ppbio06.ods)}
+\FunctionTok{str}\NormalTok{(ppbio06.ods)}
+\FunctionTok{class}\NormalTok{(ppbio06.ods)}
+\NormalTok{ppbio06.ods\_ma }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(ppbio06.ods) }\CommentTok{\#lê como uma matriz}
+\FunctionTok{str}\NormalTok{(ppbio06.ods\_ma)}
+\FunctionTok{class}\NormalTok{(ppbio06.ods\_ma)}
+\CommentTok{\#ppbio06.ods}
+\CommentTok{\#ppbio06.ods\_ma}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1571,8 +1633,8 @@ Por razões diferentes o precedimento anterior pode vir a ser necessário de ser
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{apuxeandices-3}{%
-\section*{Apêndices}\label{apuxeandices-3}}
+\hypertarget{apuxeandices-2}{%
+\section*{Apêndices}\label{apuxeandices-2}}
 \addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{sites-consultados-1}{%
@@ -1646,7 +1708,7 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{tiposR}{%
-\chapter{R Modulo 2 - Tipos de Dados no R}\label{tiposR}}
+\chapter{R Modulo 2 - Tipos de dados no R}\label{tiposR}}
 
 \hypertarget{apresentauxe7uxe3o-4}{%
 \subsection*{Apresentação}\label{apresentauxe7uxe3o-4}}
@@ -1678,7 +1740,7 @@ No R, uma linguagem de programação amplamente utilizada para análise de dados
 Para começar a usar o R e analisar os dados do Projeto PPBio, abra o RStudio, verifique sua interface (Figura \ref{fig:interface2}) e siga as instruções a seguir.
 
 \begin{figure}
-\includegraphics[width=18in]{imagens/interfaceR} \caption{Interface típica do RStudio e nome dos paineis  ou janelas.}\label{fig:interface2}
+\includegraphics[width=10cm]{imagens/interfaceR} \caption{Interface típica do RStudio e nome dos paineis  ou janelas.}\label{fig:interface2}
 \end{figure}
 
 \hypertarget{mensagens-de-erro-e-avisos-no-r-1}{%
@@ -2204,16 +2266,16 @@ Ou
 
 \begin{verbatim}
 ##    a  b  c
-## 1  0 10  0
-## 2  1 20  0
-## 3  1  0 10
-## 4  0 10 10
-## 5  1 10 10
-## 6  5 10  0
-## 7  0 20  0
-## 8  1  0  5
-## 9  5 10  5
-## 10 5  0  5
+## 1  1 10 10
+## 2  0  0  0
+## 3  1 10  0
+## 4  5 10  0
+## 5  0 10 10
+## 6  5 20 10
+## 7  5  0 10
+## 8  1 20  0
+## 9  0 10 10
+## 10 1  0  5
 \end{verbatim}
 
 Na primeira forma, definimos os elementos da matriz, o número de linhas e colunas através dos \texttt{argumentos} \texttt{nrow} e \texttt{ncol}, e se os elementos serão preenchidos ao longo das linhas (\texttt{byrow\ =\ TRUE}) ou ao longo das colunas (\texttt{byrow\ =\ FALSE}).
@@ -3016,11 +3078,11 @@ Listas são um tipo especial de vetor, que podem conter elementos de diferentes 
 • Funcões: objetos criados pelo usuário e reutilizados para realizar operações específicas.
 
 \begin{figure}
-\includegraphics[width=10.71in]{imagens/nucleos} \caption{Resumo visual dos tipos de dados no ambiente de programação R. (De: https://www.tutorialkart.com/r-tutorial/r-data-types)}\label{fig:nucleos}
+\includegraphics[width=10cm]{imagens/nucleos} \caption{Resumo visual dos tipos de dados no ambiente de programação R. (De: https://www.tutorialkart.com/r-tutorial/r-data-types)}\label{fig:nucleos}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=9.82in]{imagens/tipos} \caption{Resumo visual dos tipos de dados no ambiente de programação R. (De: https://lhmet.github.io/adar-ebook/estrutura-dados.html)}\label{fig:tipos}
+\includegraphics[width=10cm]{imagens/tipos} \caption{Resumo visual dos tipos de dados no ambiente de programação R. (De: https://lhmet.github.io/adar-ebook/estrutura-dados.html)}\label{fig:tipos}
 \end{figure}
 
 \hypertarget{como-pedir-ajuda}{%
@@ -3148,7 +3210,7 @@ Detalhe, o texto acima foi gerado pelo próprio ChatGPT (Figura \ref{fig:22chat}
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=10.24in]{imagens/chatgpt} \caption{Usando o ChatGPT para pedir ajuda sobre o R.}\label{fig:22chat}
+\includegraphics[width=10cm]{imagens/chatgpt} \caption{Usando o ChatGPT para pedir ajuda sobre o R.}\label{fig:22chat}
 \end{figure}
 
 \hypertarget{work-flow}{%
@@ -3165,7 +3227,7 @@ Por isso é necessário que o usuário tenha um workflow que permita o reconheci
 • Comunicar o resultado
 
 \begin{figure}
-\includegraphics[width=19.32in]{imagens/wf} \caption{Exemplo de workflow para análises no R (modificada de [@RN2941])}\label{fig:22wf}
+\includegraphics[width=10cm]{imagens/wf} \caption{Exemplo de workflow para análises no R (modificada de [@RN2941])}\label{fig:22wf}
 \end{figure}
 
 \hypertarget{reconhecendo-a-estrutura-dos-dados-do-r-em-uma-matriz-multivariada}{%
@@ -3225,7 +3287,7 @@ Note que o sómbolo \texttt{\#} em programação R significa que o texto que vem
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(openxlsx)}
-\NormalTok{ppbio }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06{-}peixes.xlsx"}\NormalTok{,}
+\NormalTok{ppbio }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06c{-}peixes.xlsx"}\NormalTok{,}
                    \AttributeTok{rowNames =}\NormalTok{ T,}
                    \AttributeTok{colNames =}\NormalTok{ T,}
                    \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{)}
@@ -3343,8 +3405,8 @@ Atente para os resultados dos comandos a seguir.
 ##   ..$ : chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
 \end{verbatim}
 
-\hypertarget{apuxeandices-4}{%
-\section*{Apêndices}\label{apuxeandices-4}}
+\hypertarget{apuxeandices-3}{%
+\section*{Apêndices}\label{apuxeandices-3}}
 \addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{snippet-e-chunk}{%
@@ -3501,7 +3563,7 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{univ}{%
-\chapter{R Modulo 3.1 - Estatísticas descritivas e Normalidade}\label{univ}}
+\chapter{R Modulo 3.1 - Estatísticas descritivas e normalidade}\label{univ}}
 
 \hypertarget{resumo-5}{%
 \subsection*{RESUMO}\label{resumo-5}}
@@ -3521,7 +3583,7 @@ A estatística descritiva tem um papel importante a desempenhar na ciência. Qua
 Considere os dados sobre o comprimento dos brotos de \emph{Banksia ericifolia} de charnecas\footnote{A etimologia do gênero \emph{Astyanax} vem da mitologia Grega. Heitor personagem da ``Ilíada'', tinha um filho chamado Astíanax.} na Baía de Jervis, Austrália (\protect\hyperlink{ref-RN146}{BRADSTOCK; TOZER; KEITH, 1997}) (Figura \ref{fig:rmd3banks}). Existem 500 medições, um conjunto de dados formidável. Por inspeção, o comprimento mínimo do broto é 10,0 e o máximo é 44,9 cm. Esses valores definem o intervalo da amostra. Agora precisamos subdividir o intervalo em intervalos ou classes, cada um com o mesmo tamanho. Geralmente, é aconselhável arredondar o valor mínimo para baixo e o valor máximo para valores apropriados ao decidir as classes de intervalos. Nesse caso, parece sensato dividir a faixa de 10 a 45 cm em sete intervalos a cada 5 cm de largura. Se contarmos o número de brotos que se encontram em cada um dos sete intervalos, temos a base para a tabulação da frequência. A coluna de frequência foi obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual foi obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas foram obtidas somando progressivamente as frequências correspondentes.
 
 \begin{figure}
-\includegraphics[width=8.5in]{imagens/banksia} \caption{Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália.}\label{fig:rmd3banks}
+\includegraphics[width=10cm]{imagens/banksia} \caption{Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália.}\label{fig:rmd3banks}
 \end{figure}
 
 \hypertarget{organizauxe7uxe3o-buxe1sica-2}{%
@@ -3564,7 +3626,23 @@ Agora vamos \textbf{definir o diretório de trabalho}. Esse código é usado par
 \hypertarget{importando-a-planilha-2}{%
 \section{Importando a planilha}\label{importando-a-planilha-2}}
 
-Note que o sómbolo {\texttt{\#}} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir {``C:/Seu/Diretório/De/Trabalho/Planilha.xlsx''}.
+\begin{infobox2}
+
+\begin{center}
+\textbf{{ATENÇÃO}}
+
+\end{center}
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção \protect\hyperlink{arqs}{Arquivos disponíveis} do Capítulo \protect\hyperlink{bases}{Bases de dados}.
+
+\begin{center}
+Ou, baixe aqui o arquivo \href{https://docs.google.com/spreadsheets/d/1iSJeR726dCc-ia3G5jzSBg__mSUsb-91/edit?usp=sharing\&ouid=101766125969589673518\&rtpof=true\&sd=true}{brotos.xlsx}
+
+\end{center}
+
+\end{infobox2}
+
+Note que o símbolo {\texttt{\#}} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir {``C:/Seu/Diretório/De/Trabalho/Planilha.xlsx''}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3726,22 +3804,6 @@ Para fazermos uma tabela de frequência do comprimento dos brotos carregamos o p
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(fdth)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Attaching package: 'fdth'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:stats':
-## 
-##     sd, var
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{range}\NormalTok{(brotos\_sub) }\CommentTok{\#retorna o valor máximo e mínimo}
 \CommentTok{\#?range}
 \end{Highlighting}
@@ -3787,16 +3849,11 @@ No código abaixo se define o layout dos gráficos para serem exibidos lado a la
 \FunctionTok{plot}\NormalTok{(tf) }\CommentTok{\#distribuição de frequências}
 \FunctionTok{boxplot}\NormalTok{(brotos\_sub, }\AttributeTok{horizontal =} \ConstantTok{TRUE}\NormalTok{,}
         \AttributeTok{xlab=}\StringTok{"Class limits"}\NormalTok{) }\CommentTok{\#boxplot}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\CommentTok{\#gráficos de volta ao normal}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-72-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\CommentTok{\#gráficos de volta ao normal}
-\end{Highlighting}
-\end{Shaded}
 
 Se você recebeu a mensagem de erro {``Error in plot.new() : figure margins too large''}, aumente o tamanho da janela do gráfico e execute as últimas três linhas de comando novamente.
 
@@ -3819,8 +3876,8 @@ Se você recebeu a mensagem de erro {``Error in plot.new() : figure margins too 
 ## [1] 40.62254
 \end{verbatim}
 
-\hypertarget{apuxeandices-5}{%
-\section*{Apêndices}\label{apuxeandices-5}}
+\hypertarget{apuxeandices-4}{%
+\section*{Apêndices}\label{apuxeandices-4}}
 \addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{sites-consultados-3}{%
@@ -3887,7 +3944,7 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{univ2}{%
-\chapter{R Modulo 3.2 - Testes Estatísticos}\label{univ2}}
+\chapter{R Modulo 3.2 - Testes estatísticos}\label{univ2}}
 
 \hypertarget{resumo-6}{%
 \subsection*{RESUMO}\label{resumo-6}}
@@ -3904,10 +3961,10 @@ A estatística descritiva tem um papel importante a desempenhar na ciência. Qua
 \hypertarget{sobre-os-dados-1}{%
 \section{Sobre os dados}\label{sobre-os-dados-1}}
 
-Considere os dados merísticos (ou médições morfológicas) da espécie de peixe \emph{Cichla ocellaris} (tucunaré amarelo) do reservatório da barragem de Gramame, PB (\protect\hyperlink{ref-RN146}{BRADSTOCK; TOZER; KEITH, 1997}) (Figura \ref{fig:rmd32tucu}). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da pespécie, um conjunto de dados formidável.
+Considere os dados merísticos (ou médições morfológicas) da espécie de peixe \emph{Cichla ocellaris} (tucunaré amarelo) do reservatório da barragem de Gramame, PB (\protect\hyperlink{ref-RN3024}{MEDEIROS; ROSA, 1994}) (Figura \ref{fig:rmd32tucu}). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da pespécie, um conjunto de dados formidável.
 
 \begin{figure}
-\includegraphics[width=7.24in]{imagens/tucuna} \caption{Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB.}\label{fig:rmd232tucu}
+\includegraphics[width=10cm]{imagens/tucuna} \caption{Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB.}\label{fig:rmd232tucu}
 \end{figure}
 
 \hypertarget{organizauxe7uxe3o-buxe1sica-3}{%
@@ -3954,12 +4011,28 @@ Agora vamos \textbf{definir o diretório de trabalho}. Esse código é usado par
 \hypertarget{importando-a-planilha-3}{%
 \section{Importando a planilha}\label{importando-a-planilha-3}}
 
-Vamos importar a planilha de dados univariados \texttt{univ*.xlsx}. Note que o símbolo {\texttt{\#}} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir {``C:/Seu/Diretório/De/Trabalho/Planilha.xlsx''}.
+\begin{infobox2}
+
+\begin{center}
+\textbf{{ATENÇÃO}}
+
+\end{center}
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção \protect\hyperlink{arqs}{Arquivos disponíveis} do Capítulo \protect\hyperlink{bases}{Bases de dados}.
+
+\begin{center}
+Ou, baixe aqui o arquivo \href{https://docs.google.com/spreadsheets/d/1CXcIx3vzNmVlaq87Mp_FLcmymLncb8P_/edit?usp=sharing\&ouid=101766125969589673518\&rtpof=true\&sd=true}{tucuna.xlsx}
+
+\end{center}
+
+\end{infobox2}
+
+Vamos importar a planilha de dados univariados \texttt{tucuna.xlsx}. Note que o símbolo {\texttt{\#}} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir {``C:/Seu/Diretório/De/Trabalho/Planilha.xlsx''}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(openxlsx)}
-\NormalTok{univ }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/univ.xlsx"}\NormalTok{,}
+\NormalTok{univ }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/tucuna.xlsx"}\NormalTok{,}
                     \AttributeTok{rowNames =}\NormalTok{ F, }\AttributeTok{colNames =}\NormalTok{ T,}
                     \AttributeTok{sheet =} \StringTok{"tucuna"}\NormalTok{)}
 \FunctionTok{head}\NormalTok{(univ,}\DecValTok{10}\NormalTok{)}
@@ -5077,8 +5150,8 @@ Se você recebeu a mensagem de erro {``Error in plot.new() : figure margins too 
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
-\hypertarget{apuxeandices-6}{%
-\section*{Apêndices}\label{apuxeandices-6}}
+\hypertarget{apuxeandices-5}{%
+\section*{Apêndices}\label{apuxeandices-5}}
 \addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{sites-consultados-4}{%
@@ -5112,7 +5185,7 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 Considere os dados merísticos (ou médições morfológicas) da espécie de peixe \emph{Cichla ocellaris} (tucunaré amarelo) do reservatório da barragem de Gramame, PB (\protect\hyperlink{ref-RN3024}{MEDEIROS; ROSA, 1994}) (Figura \ref{fig:rmd32tucu}). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da espécie, um conjunto de dados formidável.
 
 \begin{figure}
-\includegraphics[width=7.24in]{imagens/tucuna} \caption{Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB.}\label{fig:rmd32tucu}
+\includegraphics[width=10cm]{imagens/tucuna} \caption{Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB.}\label{fig:rmd32tucu}
 \end{figure}
 
 \hypertarget{organizauxe7uxe3o-buxe1sica-4}{%
@@ -5156,12 +5229,28 @@ Agora vamos \textbf{definir o diretório de trabalho}. Esse código é usado par
 \hypertarget{importando-a-planilha-4}{%
 \section{Importando a planilha}\label{importando-a-planilha-4}}
 
-Vamos importar a planilha de dados univariados \texttt{univ*.xlsx}. Note que o símbolo {\texttt{\#}} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir {``C:/Seu/Diretório/De/Trabalho/Planilha.xlsx''}.
+\begin{infobox2}
+
+\begin{center}
+\textbf{{ATENÇÃO}}
+
+\end{center}
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção \protect\hyperlink{arqs}{Arquivos disponíveis} do Capítulo \protect\hyperlink{bases}{Bases de dados}.
+
+\begin{center}
+Ou, baixe aqui o arquivo \href{https://docs.google.com/spreadsheets/d/1CXcIx3vzNmVlaq87Mp_FLcmymLncb8P_/edit?usp=sharing\&ouid=101766125969589673518\&rtpof=true\&sd=true}{tucuna.xlsx}
+
+\end{center}
+
+\end{infobox2}
+
+Vamos importar a planilha de dados univariados \texttt{tucuna.xlsx}. Note que o símbolo {\texttt{\#}} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir {``C:/Seu/Diretório/De/Trabalho/Planilha.xlsx''}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(openxlsx)}
-\NormalTok{univ\_all }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/univ.xlsx"}\NormalTok{,}
+\NormalTok{univ\_all }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/tucuna.xlsx"}\NormalTok{,}
                     \AttributeTok{rowNames =}\NormalTok{ T, }\AttributeTok{colNames =}\NormalTok{ T,}
                     \AttributeTok{sheet =} \StringTok{"tucuna"}\NormalTok{)}
 \FunctionTok{head}\NormalTok{(univ\_all,}\DecValTok{10}\NormalTok{)}
@@ -5545,13 +5634,13 @@ Exibindo os dados importados (esses comando são ``case-sensitive'' \texttt{igno
 
 \includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-107-5.pdf}
 
-\hypertarget{apuxeandices-7}{%
-\section*{Apêndices}\label{apuxeandices-7}}
+\hypertarget{apuxeandices-6}{%
+\section*{Apêndices}\label{apuxeandices-6}}
 \addcontentsline{toc}{section}{Apêndices}
 
-\hypertarget{sites-consultados-5}{%
-\section*{Sites consultados}\label{sites-consultados-5}}
-\addcontentsline{toc}{section}{Sites consultados}
+\hypertarget{sites-para-consulta}{%
+\section*{Sites para consulta}\label{sites-para-consulta}}
+\addcontentsline{toc}{section}{Sites para consulta}
 
 \url{https://www.geeksforgeeks.org/break-axis-of-plot-in-r/}
 \url{https://stackoverflow.com/questions/72498597/add-a-break-to-a-bar-chart-when-one-value-is-very-large}
@@ -5567,7 +5656,7 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{estrcom}{%
-\chapter{R Modulo 4.1 - Estrutura da Comunidade}\label{estrcom}}
+\chapter{R Modulo 4.1 - Estrutura da comunidade}\label{estrcom}}
 
 \hypertarget{resumo-8}{%
 \subsection*{RESUMO}\label{resumo-8}}
@@ -5651,7 +5740,7 @@ Note que o símbolo {\texttt{\#}} em programação R significa que o texto que v
 \begin{Highlighting}[]
 \CommentTok{\#dir \textless{}{-} getwd() \#criamos um vetor com o diretório  de trbalho }
 \CommentTok{\#shell.exec(dir) \#abre o diretorio de trabalho no Windows Explorer}
-\NormalTok{ppbio }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06{-}peixes.xlsx"}\NormalTok{,}
+\NormalTok{ppbio }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06c{-}peixes.xlsx"}\NormalTok{,}
                    \AttributeTok{rowNames =}\NormalTok{ T, }\AttributeTok{colNames =}\NormalTok{ T,}
                    \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{)}
 \FunctionTok{str}\NormalTok{(ppbio)}
@@ -7800,8 +7889,8 @@ Agora podemos plotar uma curva de acumulação de espécies melhorada.
 
 \includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-138-1.pdf}
 
-\hypertarget{apuxeandices-8}{%
-\section*{Apêndices}\label{apuxeandices-8}}
+\hypertarget{apuxeandices-7}{%
+\section*{Apêndices}\label{apuxeandices-7}}
 \addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{criando-uma-tabela-de-espuxe9cies}{%
@@ -8417,8 +8506,8 @@ A função \texttt{fix(nome\ da\ matriz)} dá acesso ao grid da matriz criada pa
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{sites-consultados-6}{%
-\section*{Sites consultados}\label{sites-consultados-6}}
+\hypertarget{sites-consultados-5}{%
+\section*{Sites consultados}\label{sites-consultados-5}}
 \addcontentsline{toc}{section}{Sites consultados}
 
 \hypertarget{script-limpo-5}{%
@@ -8808,12 +8897,12 @@ Além disso usaremos a \textbf{tabela de agrupamentos} (\href{https://docs.googl
 \hypertarget{organizauxe7uxe3o-buxe1sica-6}{%
 \section{Organização básica}\label{organizauxe7uxe3o-buxe1sica-6}}
 
-\hypertarget{apuxeandices-9}{%
-\section*{Apêndices}\label{apuxeandices-9}}
+\hypertarget{apuxeandices-8}{%
+\section*{Apêndices}\label{apuxeandices-8}}
 \addcontentsline{toc}{section}{Apêndices}
 
-\hypertarget{sites-consultados-7}{%
-\subsection*{Sites consultados}\label{sites-consultados-7}}
+\hypertarget{sites-consultados-6}{%
+\subsection*{Sites consultados}\label{sites-consultados-6}}
 \addcontentsline{toc}{subsection}{Sites consultados}
 
 \href{www.link.com}{Primeira coluna para nomes das linhas}
@@ -8829,7 +8918,7 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{estrhab}{%
-\chapter{R Modulo 4.2 - Estrutura do habitat}\label{estrhab}}
+\chapter{R Modulo 4.3 - Estrutura do habitat}\label{estrhab}}
 
 \hypertarget{resumo-10}{%
 \subsection*{RESUMO}\label{resumo-10}}
@@ -8842,7 +8931,7 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \hypertarget{sobre-os-dados-5}{%
 \section{Sobre os dados}\label{sobre-os-dados-5}}
 
-Usaremos para esse tutorial dois conjuntos de dados. A \textbf{Matriz ambiental} (\href{https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06p-amb.xlsx}) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja \href{https://ppbio.inpa.gov.br/Sobre}{Programa de Pesquisa em Biodiversidade -- PPBio}). Esses são dados de \textbf{variáveis ambientais} distribuidas em diversas unidades amostrais (UA's ou sítios). Essa é a \textbf{matriz bruta de dados}, porque os valores ainda não foram transformados (\protect\hyperlink{ref-RN67}{SOKAL; ROHLF, 1995}). Note que as variáveis foram medidas em diferentes unidades (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.
+Usaremos para esse tutorial dois conjuntos de dados. A \textbf{Matriz ambiental} (\href{https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06p-amb.xlsx}) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja \href{https://ppbio.inpa.gov.br/Sobre}{Programa de Pesquisa em Biodiversidade -- PPBio}) (\protect\hyperlink{ref-RN2491}{MEDEIROS; SILVA; RAMOS, 2008}). Esses são dados de \textbf{variáveis ambientais} distribuidas em diversas unidades amostrais (UA's ou sítios). Essa é a \textbf{matriz bruta de dados}, porque os valores ainda não foram transformados (\protect\hyperlink{ref-RN67}{SOKAL; ROHLF, 1995}). Note que as variáveis foram medidas em diferentes unidades (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.
 Além disso usaremos a \textbf{tabela de agrupamentos} (\href{https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link\&ouid=101766125969589673518\&rtpof=true\&sd=true}{ppbio06-grupos}).
 
 \textbf{Revise as informações sobre as bases de dados no Capítulo \ref{bases}. As dases de dados para esse Módulo podem ser baixadam na Seção \ref{arqs}.}
@@ -8974,34 +9063,6 @@ Aqui cria-se um novo objeto do R (\texttt{m\_trab}, ou a matriz de trabalho, par
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(psych)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Attaching package: 'psych'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:mdatools':
-## 
-##     pca
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:car':
-## 
-##     logit
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:ggplot2':
-## 
-##     %+%, alpha
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{colnames}\NormalTok{(m\_amb)}
 \FunctionTok{pairs.panels}\NormalTok{(m\_amb[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{],}
              \AttributeTok{method =} \StringTok{"pearson"}\NormalTok{, }\CommentTok{\# correlation method}
@@ -9014,15 +9075,6 @@ Aqui cria-se um novo objeto do R (\texttt{m\_trab}, ou a matriz de trabalho, par
 \NormalTok{cor }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(m\_amb)}
 \NormalTok{cor}
 \FunctionTok{library}\NormalTok{(corrplot)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## corrplot 0.92 loaded
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{corrplot}\NormalTok{(cor, }\AttributeTok{method =} \StringTok{"circle"}\NormalTok{)}
 \CommentTok{\#win.print()}
 \CommentTok{\#corrplot(cor, method = "circle")}
@@ -9531,12 +9583,12 @@ Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba \texttt{ambient
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{apuxeandices-10}{%
-\section*{Apêndices}\label{apuxeandices-10}}
+\hypertarget{apuxeandices-9}{%
+\section*{Apêndices}\label{apuxeandices-9}}
 \addcontentsline{toc}{section}{Apêndices}
 
-\hypertarget{sites-consultados-8}{%
-\section*{Sites consultados}\label{sites-consultados-8}}
+\hypertarget{sites-consultados-7}{%
+\section*{Sites consultados}\label{sites-consultados-7}}
 \addcontentsline{toc}{section}{Sites consultados}
 
 \hypertarget{script-limpo-7}{%
@@ -9608,7 +9660,7 @@ Note que o símbolo {\texttt{\#}} em programação R significa que o texto que v
 \FunctionTok{library}\NormalTok{(openxlsx)}
 \CommentTok{\#dir \textless{}{-} getwd() \#criamos um vetor com o diretório  de trbalho }
 \CommentTok{\#shell.exec(dir) \#abre o diretorio de trabalho no Windows Explorer}
-\NormalTok{m\_bruta }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06{-}peixes.xlsx"}\NormalTok{,}
+\NormalTok{m\_bruta }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06c{-}peixes.xlsx"}\NormalTok{,}
                    \AttributeTok{rowNames =}\NormalTok{ T, }\AttributeTok{colNames =}\NormalTok{ T,}
                    \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{)}
 \FunctionTok{str}\NormalTok{(m\_bruta)}
@@ -10328,8 +10380,8 @@ Aqui estabelecemos a matriz transformada depois de ter sido relativisada como \t
 
 Agora é com você\ldots Refaça toda a análise com as relativizações e transformações adequadas para a matriz de dados fornecida.
 
-\hypertarget{apuxeandices-11}{%
-\section*{Apêndices}\label{apuxeandices-11}}
+\hypertarget{apuxeandices-10}{%
+\section*{Apêndices}\label{apuxeandices-10}}
 \addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{relativizauxe7uxf5es}{%
@@ -10672,11 +10724,11 @@ Qual desses tipos de dados você acha que é apresentado na planilha?
 Várias das espécies nessa matriz tem grande importância ecológica, como é o caso de \emph{Astyanax bimaculatus} \footnote{A etimologia do gênero \emph{Astyanax} vem da mitologia Grega. Heitor personagem da ``Ilíada'', tinha um filho chamado Astíanax.} (Figura \ref{fig:6asbim}), que é muito comum em rios intermitentes e serve de alimento para predadores maiores como a espécie \emph{Hoplias malabaricus} \footnote{Do Grego, \emph{hoplon}, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça.} (Figura \ref{fig:6hmala}).
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:6asbim}
+\includegraphics[width=8.89in]{imagens/spp/Asbim_u4} \caption{*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:6asbim}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:6hmala}
+\includegraphics[width=8.89in]{imagens/spp/Homal_u6} \caption{*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>}\label{fig:6hmala}
 \end{figure}
 
 \hypertarget{organizauxe7uxe3o-buxe1sica-9}{%
@@ -10725,7 +10777,7 @@ SESSION -\textgreater{} SET WORKING DIRECTORY -\textgreater{} CHOOSE DIRECTORY
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(openxlsx)}
-\NormalTok{m\_bruta }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06{-}peixes.xlsx"}\NormalTok{,}
+\NormalTok{m\_bruta }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06c{-}peixes.xlsx"}\NormalTok{,}
                    \AttributeTok{rowNames =}\NormalTok{ T, }\AttributeTok{colNames =}\NormalTok{ T,}
                    \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{)}
 \FunctionTok{str}\NormalTok{(m\_bruta)}
@@ -11654,11 +11706,11 @@ Criamos uma nova matriz particionada \texttt{m\_bruta\_part} sem \textbf{B-A-MU4
 Quando deletamos linhas ou colunas da matriz de dados comunitária, precisamos ver se isso não gerou linhas ou colunas vazias. Observe por exemplo a espécie \emph{Apareiodon davisi} \footnote{A etimologia do nome \emph{Apareiodon} vem do Grego, \emph{a}, sem, \emph{pareia}, lateral ou bochecha, e \emph{odous} dentição, em referencia a ausência de tentes laterais no aparato bucal dessa espécie.} (Figura \ref{fig:6apdavis}). Por exemplo, se uma determinada espécie só ocorre em uma UA, e aquela UA foi removida, essa espécie não consta mais em nenhuma UA e por isso a sua soma vai ser igual a zero. Isso aconteceu com a espécie \emph{Pseudancistrus genisetiger} \footnote{A etimologia do nome \emph{Pseudancistrus} vem do Grego, \emph{pseudes}, falso, e \emph{agkistron}, gancho, em referência a falsos ganchos presentes na cabeça em algumas espécies do gênero.} (Figura \ref{fig:6pgen}). Essa espécie precisará ser removida.
 
 \begin{figure}
-\includegraphics[width=8.89in]{imagens/Apdav_u0} \caption{*Apareiodon davisi*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:6apdavis}
+\includegraphics[width=8.89in]{imagens/spp/Apdav_u0} \caption{*Apareiodon davisi*, importante espécie bentopelágica das bacias dos rios Jaguaribe e Paraíba. Brazil, by Ramos, T.P.A. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>}\label{fig:6apdavis}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=22.22in]{imagens/genis} \caption{*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By eplanetcatfish.com. Fonte: <https://www.planetcatfish.com> (Provável identificação errada do espécime da foto)](eplanetcatfish.jpg)}\label{fig:6pgen}
+\includegraphics[width=22.22in]{imagens/spp/genis} \caption{*Pseudancistrus genisetiger*, uma espécie endêmica das bacias hidrográfcas do nordeste. By eplanetcatfish.com. Fonte: <https://www.planetcatfish.com> (Provável identificação errada do espécime da foto)](eplanetcatfish.jpg)}\label{fig:6pgen}
 \end{figure}
 
 Use o a função \texttt{View(m\_bruta\_part)} e procure linhas ou colunas na matriz \texttt{m\_bruta\_part} onde todos os valores são zero. Quais espécies você encontrou que deixaram de ocorrer na comunidade depois que as UA's outliers foram removidas?.
@@ -11780,8 +11832,8 @@ Agora vamos exportar a matrix de trabalho, nesse casso a matrix \texttt{m\_bruta
 
 Agora é com você\ldots Refaça toda a análise com a matriz bruta particionada \texttt{m\_bruta\_part2}
 
-\hypertarget{apuxeandices-12}{%
-\section*{Apêndices}\label{apuxeandices-12}}
+\hypertarget{apuxeandices-11}{%
+\section*{Apêndices}\label{apuxeandices-11}}
 \addcontentsline{toc}{section}{Apêndices}
 
 \hypertarget{outras-formas-de-fazer-a-partiuxe7uxe3o}{%
@@ -12015,20 +12067,898 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \section*{Referências}\label{referuxeancias-13}}
 \addcontentsline{toc}{section}{Referências}
 
+\hypertarget{r-modulo-10-1}{%
+\chapter{R Modulo 10-1}\label{r-modulo-10-1}}
+
+\hypertarget{anuxe1lise-de-ordenauxe7uxe3o---nmds}{%
+\subsection*{Análise de Ordenação - NMDS}\label{anuxe1lise-de-ordenauxe7uxe3o---nmds}}
+\addcontentsline{toc}{subsection}{Análise de Ordenação - NMDS}
+
+\hypertarget{resumo-12}{%
+\subsection*{RESUMO}\label{resumo-12}}
+\addcontentsline{toc}{subsection}{RESUMO}
+
+O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.
+
+\hypertarget{apresentauxe7uxe3o-13}{%
+\subsection*{Apresentação}\label{apresentauxe7uxe3o-13}}
+\addcontentsline{toc}{subsection}{Apresentação}
+
+O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística utilizada para representar dados com muitas dimensões em um espaço dimensional menor, de forma que a estrutura dos dados originais seja preservada o máximo possível.
+
+Ao contrário do MDS métrico, que preserva as distâncias entre os pontos, o MDS não-métrico preserva apenas as relações de ordem ou similaridade entre os pontos, sem assumir uma relação linear com as distâncias reais. Em outras palavras, ele se concentra em preservar as relações de proximidade entre os pontos, mas não necessariamente suas distâncias exatas.
+
+A técnica funciona construindo uma matriz de similaridade a partir dos dados originais e, em seguida, posicionando os pontos em um espaço de menor dimensão de forma que as distâncias ou similaridades relativas sejam mantidas o mais fiel possível à matriz original.
+
+O MDS não-métrico é útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.
+
+\hypertarget{algoritmo-da-nmds}{%
+\section{Algoritmo da NMDS}\label{algoritmo-da-nmds}}
+
+O algoritmo de uma NMDS (Non-Metric Multidimensional Scaling) funciona de maneira a posicionar os pontos de dados em um espaço de menor dimensão de forma que as relações de ordem ou similaridade entre os pontos sejam preservadas o máximo possível.
+
+Aqui está uma visão geral de como o algoritmo de NMDS opera:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Matriz de Similaridade}: O algoritmo começa com uma matriz de similaridade ou dissimilaridade que captura as relações entre os pontos de dados. Essa matriz pode ser baseada em diferentes medidas, como correlações, coeficientes de similaridade, distâncias euclidianas, entre outras.
+\item
+  \textbf{Inicialização}: Inicialmente, os pontos são atribuídos a posições aleatórias ou em uma configuração inicial no espaço de menor dimensão.
+\item
+  \textbf{Ajuste Iterativo}: O algoritmo itera para melhorar as posições dos pontos no espaço de menor dimensão. Durante cada iteração, os pontos são movidos em direção a uma configuração que melhor preserve as relações de similaridade ou dissimilaridade conforme definido pela matriz de similaridade.
+\item
+  \textbf{Critério de Convergência}: O processo iterativo continua até que um critério de convergência seja alcançado. Isso pode ser baseado na estabilidade das posições dos pontos ou na convergência de uma função de custo que quantifica a discrepância entre as relações de similaridade na configuração original e na configuração reduzida.
+\item
+  \textbf{Saída}: Uma vez que o algoritmo convergiu, as posições finais dos pontos no espaço de menor dimensão são utilizadas como representações dos dados para visualização ou análise.
+\end{enumerate}
+
+\leavevmode\vadjust pre{\hypertarget{hello}{}}%
+É importante notar que, embora o NMDS preserve as relações de ordem ou similaridade entre os pontos, não há garantia de que as distâncias absolutas entre os pontos no espaço de menor dimensão correspondam às distâncias reais entre os pontos nos dados originais. O objetivo principal é preservar a estrutura relativa dos dados em um espaço de menor dimensão, facilitando a interpretação e visualização dos padrões nos dados.
+
+\hypertarget{organizauxe7uxe3o-buxe1sica-10}{%
+\section{Organização básica}\label{organizauxe7uxe3o-buxe1sica-10}}
+
+Apagamos os gráficos, se houver algum, limpamos a memória e o console.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dev.off}\NormalTok{()}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{(}\AttributeTok{all=}\ConstantTok{TRUE}\NormalTok{))}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}014}\StringTok{"}\NormalTok{)}
+\CommentTok{\#apaga os graficos, se houver algum, limpa a memória e o console}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pacotes-do-muxf3dulo}{%
+\section{Pacotes do módulo}\label{pacotes-do-muxf3dulo}}
+
+Instalando os pacotes necessários para esse módulo. Nos computadores do Laboratório de Ecologia não instale esses pacotes, eles já estão instalados.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"openxlsx"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"rgl"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#dir \textless{}{-} getwd() \#criamos um vetor com o diretório  de trbalho }
+\CommentTok{\#shell.exec(dir) \#abre o diretorio de trabalho no Windows Explorer}
+\FunctionTok{library}\NormalTok{(openxlsx)}
+\NormalTok{ppbio }\OtherTok{\textless{}{-}} \FunctionTok{read.xlsx}\NormalTok{(}\StringTok{"D:/Elvio/OneDrive/Disciplinas/\_EcoNumerica/5.Matrizes/ppbio06p{-}peixes.xlsx"}\NormalTok{,}
+                   \AttributeTok{rowNames =}\NormalTok{ T, }\AttributeTok{colNames =}\NormalTok{ T,}
+                   \AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(ppbio)}
+\CommentTok{\#View(ppbio)}
+\NormalTok{ppbio[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{] }\CommentTok{\#[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{reinuxedcio-1}{%
+\section{REINÍCIO 1}\label{reinuxedcio-1}}
+
+\leavevmode\vadjust pre{\hypertarget{hello}{}}%
+Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_trab }\OtherTok{\textless{}{-}}\NormalTok{ (ppbio)   }\CommentTok{\# \textless{}1\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Substitua a nova matriz aqui. Caso seja necessário.
+\end{enumerate}
+
+\hypertarget{classificauxe7uxe3o-1-matriz-comunituxe1ria}{%
+\section{Classificação 1: Matriz comunitária}\label{classificauxe7uxe3o-1-matriz-comunituxe1ria}}
+
+Para conhecermos os dados, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir das matrizes de dados de interesse \texttt{ppbio**} com suas devidas relativizações e transformações.
+
+\hypertarget{dendrograma-e-heatmap-1}{%
+\subsection{Dendrograma e Heatmap 1}\label{dendrograma-e-heatmap-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Dendrograma}
+\FunctionTok{library}\NormalTok{(vegan)}
+\NormalTok{m\_trns }\OtherTok{\textless{}{-}} \FunctionTok{asin}\NormalTok{(}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{decostand}\NormalTok{(m\_trab,}
+                               \AttributeTok{method=}\StringTok{"total"}\NormalTok{, }\AttributeTok{MARGIN =} \DecValTok{2}\NormalTok{)))}
+\CommentTok{\#m\_trns \textless{}{-} sqrt(m\_trab)}
+\NormalTok{vegdist }\OtherTok{\textless{}{-}} \FunctionTok{vegdist}\NormalTok{(m\_trns, }\AttributeTok{method =} \StringTok{"bray"}\NormalTok{,}
+                   \AttributeTok{diag =} \ConstantTok{TRUE}\NormalTok{,}
+                   \AttributeTok{upper =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{cluster\_uas }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(vegdist, }\AttributeTok{method =} \StringTok{"average"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{ (cluster\_uas, }\AttributeTok{main =} \StringTok{"Cluster Dendrogram {-} Bray{-}Curtis da Matriz Comunitária"}\NormalTok{,}
+      \AttributeTok{hang =} \FloatTok{0.1}\NormalTok{) }\CommentTok{\#testar com {-}.01}
+\CommentTok{\#rect.hclust(cluster\_uas, k = 3, h = NULL) }
+\CommentTok{\#h = 0.8 fornece os grupos formados na altura h}
+\FunctionTok{as.matrix}\NormalTok{(vegdist)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{]}
+
+\CommentTok{\#Heatmap}
+\FunctionTok{library}\NormalTok{(}\StringTok{"gplots"}\NormalTok{)}
+\NormalTok{heatdist }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(vegdist)}
+\NormalTok{col }\OtherTok{\textless{}{-}} \FunctionTok{rev}\NormalTok{(}\FunctionTok{heat.colors}\NormalTok{(}\DecValTok{999}\NormalTok{)) }\CommentTok{\#rev() reverte as cores do heatmap}
+\FunctionTok{heatmap.2}\NormalTok{(}\AttributeTok{x=}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(vegdist)), }\CommentTok{\#objetos x objetos}
+          \AttributeTok{Rowv =} \FunctionTok{as.dendrogram}\NormalTok{(cluster\_uas),}
+          \AttributeTok{Colv =} \FunctionTok{as.dendrogram}\NormalTok{(cluster\_uas),}
+          \AttributeTok{key =}\NormalTok{ T, }\AttributeTok{tracecol =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{revC =}\NormalTok{ T,}
+          \AttributeTok{col =}\NormalTok{ heat.colors,  }\CommentTok{\#dissimilaridade = 1 {-} similaridade}
+          \AttributeTok{density.info =} \StringTok{"none"}\NormalTok{,}
+          \AttributeTok{xlab =} \StringTok{"UA´s"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"UA´s"}\NormalTok{,}
+          \AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{) }\SpecialCharTok{+} \FloatTok{0.2}\NormalTok{)}
+\NormalTok{cluster\_spp }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{((}\FunctionTok{vegdist}\NormalTok{(}\FunctionTok{t}\NormalTok{(m\_trns), }\AttributeTok{method =} \StringTok{"bray"}\NormalTok{,}
+                            \AttributeTok{diag =} \ConstantTok{TRUE}\NormalTok{,}
+                            \AttributeTok{upper =} \ConstantTok{FALSE}\NormalTok{)), }\AttributeTok{method =} \StringTok{"average"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{ (cluster\_spp, }\AttributeTok{main =} \StringTok{"Dendrograma dos atributos"}\NormalTok{)}
+\FunctionTok{heatmap.2}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(m\_trns)), }\CommentTok{\#objetos x atributos}
+          \AttributeTok{Colv =} \FunctionTok{as.dendrogram}\NormalTok{(cluster\_uas),}
+          \AttributeTok{Rowv =} \FunctionTok{as.dendrogram}\NormalTok{(cluster\_spp),}
+          \AttributeTok{key =}\NormalTok{ T, }\AttributeTok{tracecol =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{revC =}\NormalTok{ T,}
+          \AttributeTok{col =}\NormalTok{ col,}
+          \AttributeTok{density.info =} \StringTok{"none"}\NormalTok{,}
+          \AttributeTok{xlab =} \StringTok{"Unidades amostrais"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Espécies"}\NormalTok{,}
+          \AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{) }\SpecialCharTok{+} \FloatTok{0.1}\NormalTok{)  }\CommentTok{\# adjust margin size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           S-R-CT1   S-R-CP1   S-A-TA1   S-R-CT2   S-R-CP2   S-A-TA2
+## S-R-CT1 0.0000000 0.8743721 0.9338269 0.6274997 0.8106894 0.9420728
+## S-R-CP1 0.8743721 0.0000000 0.6833816 0.7759468 0.7726098 0.7342613
+## S-A-TA1 0.9338269 0.6833816 0.0000000 0.8789631 0.9178304 0.5700984
+## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068
+## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271
+## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000
+\end{verbatim}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-223-1.pdf} \includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-223-2.pdf} \includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-223-3.pdf} \includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-223-4.pdf}
+
+\hypertarget{histuxf3rico-das-fusuxf5es-1}{%
+\subsection{Histórico das fusões 1}\label{histuxf3rico-das-fusuxf5es-1}}
+
+Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No.~e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de ``-'') ou grupo de objetos (indicado pela ausência do sinall de ``-'') que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a \texttt{m-1} última fusão entre os dois últimos grupos. Nesse caso, 22.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(gt)}
+\NormalTok{merge }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(cluster\_uas}\SpecialCharTok{$}\NormalTok{merge)}
+\NormalTok{merge[}\FunctionTok{nrow}\NormalTok{(merge)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,] }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"0"}\NormalTok{,}\StringTok{"0"}\NormalTok{)}
+\NormalTok{height }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{round}\NormalTok{(cluster\_uas}\SpecialCharTok{$}\NormalTok{height, }\DecValTok{2}\NormalTok{))}
+\NormalTok{height[}\FunctionTok{nrow}\NormalTok{(height)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,] }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"1.0"}\NormalTok{)}
+\NormalTok{fusoes }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Cluster\_uas =}\NormalTok{ merge, }\AttributeTok{Height =}\NormalTok{ height)}
+\FunctionTok{colnames}\NormalTok{(fusoes) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Cluster1"}\NormalTok{, }\StringTok{"Cluster2"}\NormalTok{, }\StringTok{"Height"}\NormalTok{)}
+\NormalTok{UA }\OtherTok{\textless{}{-}} \FunctionTok{rownames\_to\_column}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(m\_trns[, }\DecValTok{0}\NormalTok{]))}
+\FunctionTok{colnames}\NormalTok{(UA) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UAs"}\NormalTok{)}
+\NormalTok{No.UA }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(fusoes)}
+\NormalTok{fusoes }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(No.UA, UA, fusoes)}
+\NormalTok{fusoes}\SpecialCharTok{$}\NormalTok{Histórico }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(fusoes)}
+\CommentTok{\#fusoes}
+\FunctionTok{gt}\NormalTok{(fusoes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}{rlrrrr}
+\toprule
+No.UA & UAs & Cluster1 & Cluster2 & Height & Histórico \\ 
+\midrule\addlinespace[2.5pt]
+1 & S-R-CT1 & -20 & -23 & 0.14 & 1 \\ 
+2 & S-R-CP1 & -8 & -11 & 0.26 & 2 \\ 
+3 & S-A-TA1 & -17 & 1 & 0.28 & 3 \\ 
+4 & S-R-CT2 & -19 & -22 & 0.37 & 4 \\ 
+5 & S-R-CP2 & -6 & -12 & 0.41 & 5 \\ 
+6 & S-A-TA2 & -4 & -10 & 0.46 & 6 \\ 
+7 & S-R-CT3 & -16 & 4 & 0.48 & 7 \\ 
+8 & S-R-CP3 & -5 & 2 & 0.53 & 8 \\ 
+9 & S-A-TA3 & -13 & 7 & 0.56 & 9 \\ 
+10 & S-R-CT4 & -9 & 5 & 0.57 & 10 \\ 
+11 & S-R-CP4 & -7 & 6 & 0.59 & 11 \\ 
+12 & S-A-TA4 & -14 & 3 & 0.61 & 12 \\ 
+13 & B-A-MU1 & -2 & -3 & 0.68 & 13 \\ 
+14 & B-A-GU1 & -1 & 11 & 0.68 & 14 \\ 
+15 & B-R-PC2 & -15 & -18 & 0.69 & 15 \\ 
+16 & B-A-MU2 & -21 & 14 & 0.75 & 16 \\ 
+17 & B-A-GU2 & 10 & 13 & 0.76 & 17 \\ 
+18 & B-R-PC3 & 9 & 12 & 0.79 & 18 \\ 
+19 & B-A-MU3 & 8 & 16 & 0.8 & 19 \\ 
+20 & B-A-GU3 & 17 & 19 & 0.85 & 20 \\ 
+21 & B-R-PC4 & 15 & 20 & 0.89 & 21 \\ 
+22 & B-A-MU4 & 18 & 21 & 0.91 & 22 \\ 
+23 & B-A-GU4 & 0 & 0 & 1.0 & 23 \\ 
+\bottomrule
+\end{longtable}
+
+\hypertarget{ordenauxe7uxe3o}{%
+\section{Ordenação}\label{ordenauxe7uxe3o}}
+
+O Escalonamento Multidimensional Não-Métrico (NMS ou NMDS) é uma ferramenta comumente usada para examinar a composição da comunidade. Vamos estabelecer algumas bases conceituais. Considere um único eixo de abundância representando uma única espécie \href{https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/}{Fonte}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{,}\AttributeTok{axes=}\NormalTok{F,}\AttributeTok{xlab=}\StringTok{"Abundância da Espécie 1"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{)}
+\FunctionTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{0}\NormalTok{, }\AttributeTok{pch=}\DecValTok{19}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{); }\FunctionTok{text}\NormalTok{(}\FloatTok{8.5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\AttributeTok{labels=}\StringTok{"Comunidade A"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{0}\NormalTok{, }\AttributeTok{pch=}\DecValTok{19}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{); }\FunctionTok{text}\NormalTok{(}\FloatTok{3.5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\AttributeTok{labels=}\StringTok{"Comunidade B"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{, }\AttributeTok{pch=}\DecValTok{19}\NormalTok{,}\AttributeTok{col=}\StringTok{"green"}\NormalTok{ ); }\FunctionTok{text}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\AttributeTok{labels=}\StringTok{"Comunidade C"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-225-1.pdf}
+
+Podemos plotar cada comunidade nesse eixo dependendo da abundância da espécie 1 dentro dela.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| Comunidade | Sp1 |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| A (verm)   |  8  |}
+\StringTok{| B (azul)   |  3  |}
+\StringTok{| C (verde)  |  0  |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## |------------|-----|
+## | Comunidade | Sp1 |
+## |------------|-----|
+## | A (verm)   |  8  |
+## | B (azul)   |  3  |
+## | C (verde)  |  0  |
+## |------------|-----|
+\end{verbatim}
+
+Agora, considere um segundo eixo de abundância representando uma espécie diferente. As comunidades podem ser plotadas ao longo de ambos os eixos dependendo da abundância das espécies dentro delas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| Comunidade | Sp1 | Sp2 |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| A (verm)   |  8  |  6  |}
+\StringTok{| B (azul)   |  3  |  3  |}
+\StringTok{| C (verde)  |  0  |  5  |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbar------------\textbar-----\textbar-----\textbar{}
+\textbar{} Comunidade \textbar{} Sp1 \textbar{} Sp2 \textbar{}
+\textbar------------\textbar-----\textbar-----\textbar{}
+\textbar{} A (verm) \textbar{} 8 \textbar{} 6 \textbar{}
+\textbar{} B (azul) \textbar{} 3 \textbar{} 3 \textbar{}
+\textbar{} C (verde) \textbar{} 0 \textbar{} 5 \textbar{}
+\textbar------------\textbar-----\textbar-----\textbar{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"Abundância da Espécie 1"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"Abundância da Espécie 2"}\NormalTok{, }\AttributeTok{frame.plot =}\NormalTok{ F)}
+\FunctionTok{points}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{6}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{); }\FunctionTok{text}\NormalTok{(}\FloatTok{8.5}\NormalTok{,}\DecValTok{9}\NormalTok{,}\AttributeTok{labels=}\StringTok{"Comunidade A"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{); }\FunctionTok{text}\NormalTok{(}\FloatTok{3.5}\NormalTok{,}\DecValTok{4}\NormalTok{,}\AttributeTok{labels=}\StringTok{"Comunidade B"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{); }\FunctionTok{text}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\DecValTok{6}\NormalTok{,}\AttributeTok{labels=}\StringTok{"Comunidade C"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-228-1.pdf}
+
+Agora, considere um TERCEIRO eixo de abundância representando mais uma espécie.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| Comunidade | Sp1 | Sp2 | Sp3 |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| A (verm)   |  8  |  6  |  7  |}
+\StringTok{| B (azul)   |  3  |  3  |  3  |}
+\StringTok{| C (verde)  |  0  |  5  |  5  |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbar------------\textbar-----\textbar-----\textbar-----\textbar{}
+\textbar{} Comunidade \textbar{} Sp1 \textbar{} Sp2 \textbar{} Sp3 \textbar{}
+\textbar------------\textbar-----\textbar-----\textbar-----\textbar{}
+\textbar{} A (verm) \textbar{} 8 \textbar{} 6 \textbar{} 7 \textbar{}
+\textbar{} B (azul) \textbar{} 3 \textbar{} 3 \textbar{} 3 \textbar{}
+\textbar{} C (verde) \textbar{} 0 \textbar{} 5 \textbar{} 5 \textbar{}
+\textbar------------\textbar-----\textbar-----\textbar-----\textbar{}
+
+Para isso, precisaremos carregar outro pacote. Para instalar o pacote, utiliza-se o seguinte comando:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"scatterplot3d"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Este comando instalará o pacote ``scatterplot3d'' em seu ambiente R, permitindo que você crie gráficos tridimensionais para explorar a abundância de múltiplas espécies em suas comunidades.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(scatterplot3d)}
+\NormalTok{d}\OtherTok{=}\FunctionTok{scatterplot3d}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{,}
+                \AttributeTok{xlab=}\StringTok{"Abundância da Espécie 1"}\NormalTok{,}
+                \AttributeTok{ylab=}\StringTok{"Abundância da Espécie 3"}\NormalTok{,}
+                \AttributeTok{zlab=}\StringTok{"Abundância da Espécie 2"}\NormalTok{,}
+                \AttributeTok{angle =} \DecValTok{40}\NormalTok{)}
+\NormalTok{d}\SpecialCharTok{$}\FunctionTok{points3d}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{); }\FunctionTok{text}\NormalTok{(d}\SpecialCharTok{$}\FunctionTok{xyz.convert}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{),}\AttributeTok{labels=}\StringTok{"Comunidade A"}\NormalTok{)}
+\NormalTok{d}\SpecialCharTok{$}\FunctionTok{points3d}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{); }\FunctionTok{text}\NormalTok{(d}\SpecialCharTok{$}\FunctionTok{xyz.convert}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}\AttributeTok{labels=}\StringTok{"Comunidade B"}\NormalTok{)}
+\NormalTok{d}\SpecialCharTok{$}\FunctionTok{points3d}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{); }\FunctionTok{text}\NormalTok{(d}\SpecialCharTok{$}\FunctionTok{xyz.convert}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{),}\AttributeTok{labels=}\StringTok{"Comunidade C"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-231-1.pdf}
+
+Agora, em uma matriz n x m,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| Comunidade | Sp1 | Sp2 | Sp3 | Sp4 | Sp5 |  m  |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{| A (azul)   |  8  |  6  |  7  |  3  |  5  |  .  |}
+\StringTok{| B (verde)  |  3  |  3  |  3  |  2  |  1  |  .  |}
+\StringTok{| C (verm)   |  0  |  5  |  5  |  1  |  0  |  .  |}
+\StringTok{| D (roxo)   |  2  |  4  |  3  |  0  |  1  |  .  |}
+\StringTok{| n          |  .  |  .  |  .  |  .  |  .  |  .  |}
+\StringTok{|{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|{-}{-}{-}{-}{-}|}
+\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbar------------\textbar-----\textbar-----\textbar-----\textbar-----\textbar-----\textbar-----\textbar{}
+\textbar{} Comunidade \textbar{} Sp1 \textbar{} Sp2 \textbar{} Sp3 \textbar{} Sp4 \textbar{} Sp5 \textbar{} m \textbar{}
+\textbar------------\textbar-----\textbar-----\textbar-----\textbar-----\textbar-----\textbar-----\textbar{}
+\textbar{} A (azul) \textbar{} 8 \textbar{} 6 \textbar{} 7 \textbar{} 3 \textbar{} 5 \textbar{} . \textbar{}
+\textbar{} B (verde) \textbar{} 3 \textbar{} 3 \textbar{} 3 \textbar{} 2 \textbar{} 1 \textbar{} . \textbar{}
+\textbar{} C (verm) \textbar{} 0 \textbar{} 5 \textbar{} 5 \textbar{} 1 \textbar{} 0 \textbar{} . \textbar{}
+\textbar{} D (roxo) \textbar{} 2 \textbar{} 4 \textbar{} 3 \textbar{} 0 \textbar{} 1 \textbar{} . \textbar{}
+\textbar{} n \textbar{} . \textbar{} . \textbar{} . \textbar{} . \textbar{} . \textbar{} . \textbar{}
+\textbar------------\textbar-----\textbar-----\textbar-----\textbar-----\textbar-----\textbar-----\textbar{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rgl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rgl' was built under R version 4.3.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the scatterplot3d object}
+\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{scatterplot3d}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{type =} \StringTok{"n"}\NormalTok{,}
+                   \AttributeTok{xlab =} \StringTok{"Abundância da Espécie 1"}\NormalTok{,}
+                   \AttributeTok{ylab =} \StringTok{"Abundância da Espécie 3"}\NormalTok{,}
+                   \AttributeTok{zlab =} \StringTok{"Abundância da Espécie 2"}\NormalTok{,}
+                   \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{), }\AttributeTok{zlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{), }\AttributeTok{angle =} \DecValTok{40}\NormalTok{)}
+\CommentTok{\# Add points and labels}
+\NormalTok{d}\SpecialCharTok{$}\FunctionTok{points3d}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(d}\SpecialCharTok{$}\FunctionTok{xyz.convert}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{), }\AttributeTok{labels =} \StringTok{"Comunidade A"}\NormalTok{)}
+\NormalTok{d}\SpecialCharTok{$}\FunctionTok{points3d}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(d}\SpecialCharTok{$}\FunctionTok{xyz.convert}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{), }\AttributeTok{labels =} \StringTok{"Comunidade B"}\NormalTok{)}
+\NormalTok{d}\SpecialCharTok{$}\FunctionTok{points3d}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(d}\SpecialCharTok{$}\FunctionTok{xyz.convert}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{), }\AttributeTok{labels =} \StringTok{"Comunidade C"}\NormalTok{)}
+\NormalTok{d}\SpecialCharTok{$}\FunctionTok{points3d}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(d}\SpecialCharTok{$}\FunctionTok{xyz.convert}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{labels =} \StringTok{"Comunidade D"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-233-1.pdf}
+
+Podemos tentar um plot em 3D\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot the 3D plot}
+\CommentTok{\# Open a new rgl device}
+\FunctionTok{open3d}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## wgl 
+##   1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add points and labels to the 3D plot}
+\FunctionTok{material3d}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{id =} \ConstantTok{NULL}\NormalTok{)}
+\FunctionTok{points3d}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\FunctionTok{text3d}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\StringTok{"Comunidade A"}\NormalTok{, }\AttributeTok{adj =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\FunctionTok{points3d}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\FunctionTok{text3d}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\StringTok{"Comunidade B"}\NormalTok{, }\AttributeTok{adj =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\FunctionTok{points3d}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+\FunctionTok{text3d}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\StringTok{"Comunidade C"}\NormalTok{, }\AttributeTok{adj =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\FunctionTok{points3d}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"white"}\NormalTok{)}
+\FunctionTok{points3d}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"white"}\NormalTok{)}
+\FunctionTok{points3d}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{)}
+\FunctionTok{text3d}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{, }\StringTok{"Comunidade D"}\NormalTok{, }\AttributeTok{adj =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\CommentTok{\# Add axes}
+\CommentTok{\#?axes3d}
+\CommentTok{\#axes3d()}
+\CommentTok{\# Put 4 x{-}axes on the plot}
+\CommentTok{\#axes3d(c(\textquotesingle{}x{-}{-}\textquotesingle{}, \textquotesingle{}x{-}+\textquotesingle{}, \textquotesingle{}x+{-}\textquotesingle{}, \textquotesingle{}x++\textquotesingle{}))}
+\DocumentationTok{\#\# Use fixed axes}
+\FunctionTok{axes3d}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{))}
+\FunctionTok{axis3d}\NormalTok{(}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }\AttributeTok{pos =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\ConstantTok{NA}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\FunctionTok{title3d}\NormalTok{(}\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Abundancia da Especie 1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Abundancia da Especie 3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Abundancia da Especie 2\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# Rotate the plot interactively}
+\FunctionTok{rglwidget}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=6.5in]{../../Users/Elvio Medeiros/AppData/Local/Temp/RtmpOiFilJ/file67a4e73ce9}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Origin"}\NormalTok{, }\StringTok{"Sp1"}\NormalTok{, }\StringTok{"Sp3"}\NormalTok{, }\StringTok{"Sp2"}\NormalTok{)}
+\NormalTok{i }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{A }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{)}
+\NormalTok{B }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{C }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\CommentTok{\#*3d interface}
+\FunctionTok{open3d}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## wgl 
+##   5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{text3d}\NormalTok{(x,y,z,labels)}
+\FunctionTok{points3d}\NormalTok{(A,}\AttributeTok{col =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+\FunctionTok{points3d}\NormalTok{(B,}\AttributeTok{col =} \StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{)}
+\FunctionTok{points3d}\NormalTok{(C,}\AttributeTok{col =} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\FunctionTok{text3d}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{, }\StringTok{"Comunidade A"}\NormalTok{, }\AttributeTok{adj =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\FunctionTok{text3d}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{, }\StringTok{"Comunidade B"}\NormalTok{, }\AttributeTok{adj =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\FunctionTok{text3d}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{, }\StringTok{"Comunidade C"}\NormalTok{, }\AttributeTok{adj =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\FunctionTok{segments3d}\NormalTok{(x[i], y[i], z[i])}
+\FunctionTok{rglwidget}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=6.5in]{../../Users/Elvio Medeiros/AppData/Local/Temp/RtmpOiFilJ/file67a46bcb570f}
+
+considere tantos eixos quanto espécies existentes em uma comunidade. Obviamente, não podemos visualizar isso além de 3 dimensões.
+
+O objetivo do NMDS é representar a posição original das comunidades em um espaço multidimensional da forma mais precisa possível, usando um número reduzido de dimensões que podem ser facilmente plotadas e visualizadas.
+
+Por ser uma ordenação \textbf{não-métrica} o NMDS não utiliza as abundâncias absolutas das espécies nas comunidades, mas sim a ordem do seu ``rank'' estatístico (ou sua ``ordenação). O uso de''ranks'' ou ordenações omite alguns dos problemas associados ao uso de distâncias absolutas (por exemplo, sensibilidade à transformação) e, como resultado, é uma técnica muito mais flexível, que aceita uma variedade de tipos de dados.
+
+O procedimento NMDS segue um algorítimo iterativo que ocorre em várias etapas:
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  Definir as posições originais das comunidades em espaço multidimensional
+\item
+  Especificar o número m de dimensões reduzidas (tipicamente 2)
+\item
+  Construir uma configuração inicial das amostras em 2 dimensões
+\item
+  Regressar distâncias nesta configuração inicial contra as distâncias observadas (medidas)
+\item
+  Determinar o stress (discordância entre a configuração 2-D e os valores previstos da regressão).
+  Se a configuração 2-D preservar perfeitamente os ranks originais de classificação, então um gráfico de um vs.~o outro deve ser monotonicamente crescente (gráfico de Shepard). A extensão com que os pontos na configuração 2-D diferem dessa linha monotonicamente crescente determina o grau de stress
+\item
+  Se o stress for alto, reposicione os pontos em m dimensões na direção do stress decrescente e repita até que o stress esteja abaixo de um certo limite.
+\end{enumerate}
+
+Geralmente, stress \textless{} 0.05 fornece uma excelente representação em dimensões reduzidas, \textless{} 0.1 é ótimo, \textless{} 0.2 é bom, e stress \textgreater{} 0.3 fornece uma representação ruim.
+
+NOTA: A configuração final pode diferir dependendo da configuração inicial (que normalmente é aleatória) e do número de iterações do algorítmo, então é aconselhável executar o NMDS várias vezes e comparar a interpretação das soluções de menor stress.
+
+Para começar, o NMDS requer uma matriz de distâncias (ou uma matriz de dissimilaridades). Distâncias Euclidianas brutas não são ideais para este propósito: elas são sensíveis às abundâncias totais, então podem tratar locais com um número semelhante de espécies como mais semelhantes, mesmo que as identidades das espécies sejam diferentes. Elas também são sensíveis às ausências de espécies, então podem tratar locais com o mesmo número de espécies ausentes como mais semelhantes.
+
+Consequentemente, os ecologistas usam o cálculo de dissimilaridade de Bray-Curtis, que possui muitas propriedades ideais:
+
+\begin{itemize}
+\tightlist
+\item
+  É invariante a mudanças em unidades
+\item
+  Não é afetado por adições/remoções de espécies que não estão presentes em duas comunidades
+\item
+  Não é afetado pela adição de uma nova comunidade
+\item
+  Pode reconhecer diferenças nas abundâncias totais quando as abundâncias relativas são iguais.
+\end{itemize}
+
+Para executar a NMDS, usa-se a função \texttt{metaMDS} do pacote \texttt{vegan}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(vegan)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{metaMDS} requer uma matriz de comunidade-por-espécies (CBE, ``community-by-species''). De momento, cria-se essa matrizcom dados amostradoes aleatóriamente de um cojunto arbitrário de valores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{community\_matrix}\OtherTok{=}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{,}\DecValTok{300}\NormalTok{,}\AttributeTok{replace=}\NormalTok{T),}\AttributeTok{nrow=}\DecValTok{10}\NormalTok{,}
+                        \AttributeTok{dimnames=}\FunctionTok{list}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"community"}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{),}
+                                      \FunctionTok{paste}\NormalTok{(}\StringTok{"sp"}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+A função \texttt{metaMDS} vai calcular as distâncias, executar o algorítimo iterativo, determna o stress ou fitting entre os conjuntos de dados e etc. Precisa-se apenas definir a matriz de comunidade-por-espécies. Nesse caso:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{example\_NMDS}\OtherTok{=}\FunctionTok{metaMDS}\NormalTok{(community\_matrix, }\CommentTok{\#matriz CBS, definida anteriormente}
+                     \AttributeTok{k=}\DecValTok{2}\NormalTok{) }\CommentTok{\#no. de redução de dimensões}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Square root transformation
+## Wisconsin double standardization
+## Run 0 stress 0.1486475 
+## Run 1 stress 0.1913689 
+## Run 2 stress 0.1908303 
+## Run 3 stress 0.1908305 
+## Run 4 stress 0.1849153 
+## Run 5 stress 0.1906937 
+## Run 6 stress 0.1486477 
+## ... Procrustes: rmse 0.0002739181  max resid 0.000426955 
+## ... Similar to previous best
+## Run 7 stress 0.1849759 
+## Run 8 stress 0.1688829 
+## Run 9 stress 0.1650751 
+## Run 10 stress 0.1486475 
+## ... Procrustes: rmse 8.715875e-05  max resid 0.0001400462 
+## ... Similar to previous best
+## Run 11 stress 0.164544 
+## Run 12 stress 0.3153591 
+## Run 13 stress 0.2198889 
+## Run 14 stress 0.2237308 
+## Run 15 stress 0.1699872 
+## Run 16 stress 0.1650804 
+## Run 17 stress 0.1906937 
+## Run 18 stress 0.1906937 
+## Run 19 stress 0.1494912 
+## Run 20 stress 0.1650751 
+## *** Best solution repeated 2 times
+\end{verbatim}
+
+Deve-se observar cada iteração do NMDS até que uma solução seja alcançada (ou seja, o stress foi minimizado após algum número de reconfigurações dos pontos em 2 dimensões). Pode-se aumentar o número padrão de iterações usando o argumento \texttt{trymax\ =}. Isso pode ajudar a aliviar problemas de não convergência. Se o stress for alto, pode-se aumentar o número de dimensões para \texttt{k\ =\ 3}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{example\_NMDS}\OtherTok{=}\FunctionTok{metaMDS}\NormalTok{(community\_matrix,}\AttributeTok{k=}\DecValTok{2}\NormalTok{,}\AttributeTok{trymax=}\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Square root transformation
+## Wisconsin double standardization
+## Run 0 stress 0.1486475 
+## Run 1 stress 0.1906937 
+## Run 2 stress 0.1486475 
+## ... New best solution
+## ... Procrustes: rmse 4.504062e-05  max resid 7.46737e-05 
+## ... Similar to previous best
+## Run 3 stress 0.164544 
+## Run 4 stress 0.2043556 
+## Run 5 stress 0.1486475 
+## ... New best solution
+## ... Procrustes: rmse 3.786411e-05  max resid 5.798541e-05 
+## ... Similar to previous best
+## Run 6 stress 0.1686179 
+## Run 7 stress 0.1486487 
+## ... Procrustes: rmse 0.001296765  max resid 0.002408379 
+## ... Similar to previous best
+## Run 8 stress 0.1881025 
+## Run 9 stress 0.1751078 
+## Run 10 stress 0.1650804 
+## Run 11 stress 0.1486475 
+## ... Procrustes: rmse 0.0001191068  max resid 0.0001867147 
+## ... Similar to previous best
+## Run 12 stress 0.1663641 
+## Run 13 stress 0.1744082 
+## Run 14 stress 0.1717124 
+## Run 15 stress 0.1751081 
+## Run 16 stress 0.1769791 
+## Run 17 stress 0.1906937 
+## Run 18 stress 0.1974143 
+## Run 19 stress 0.1650751 
+## Run 20 stress 0.1486475 
+## ... Procrustes: rmse 0.0001122687  max resid 0.0001737893 
+## ... Similar to previous best
+## *** Best solution repeated 4 times
+\end{verbatim}
+
+Pode-se agora examinar o objeto NMDS.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{example\_NMDS }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## metaMDS(comm = community_matrix, k = 2, trymax = 100) 
+## 
+## global Multidimensional Scaling using monoMDS
+## 
+## Data:     wisconsin(sqrt(community_matrix)) 
+## Distance: bray 
+## 
+## Dimensions: 2 
+## Stress:     0.1486475 
+## Stress type 1, weak ties
+## Best solution was repeated 4 times in 20 tries
+## The best solution was from try 5 (random start)
+## Scaling: centring, PC rotation, halfchange scaling 
+## Species: expanded scores based on 'wisconsin(sqrt(community_matrix))'
+\end{verbatim}
+
+Nesse exemplo, \texttt{metaMDS} aplicou automaticamente uma transformação da raiz quadrada e calculou as distâncias de Bray-Curtis para a matriz de comunidade-por-local.
+
+É necessário examinar o \textbf{Gráfico de Shepard}, que mostra a dispersão em torno da regressão entre as distâncias entre pontos da configuração final (distâncias entre cada par de comunidades) \emph{versus} as dissimilaridades originais.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{stressplot}\NormalTok{(example\_NMDS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-240-1.pdf}
+
+Uma dispersão grande ao redor da linha sugere que as dissimilaridades originais não são bem preservadas no número reduzido de dimensões.
+
+Agora podemos plotar a NMDS
+
+A ordenação mostra tanto as comunidades (``locais'', círculos abertos) quanto as espécies (cruzes vermelhas).
+
+Aqui, pode-se usar as funções \texttt{ordiplot} e \texttt{orditorp} para adicionar texto ao gráfico no lugar dos pontos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(example\_NMDS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-242-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ordiplot}\NormalTok{(example\_NMDS,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"species"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{air=}\FloatTok{0.01}\NormalTok{)}
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"sites"}\NormalTok{,}\AttributeTok{cex=}\FloatTok{1.25}\NormalTok{,}\AttributeTok{air=}\FloatTok{0.01}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-242-2.pdf}
+
+Existem algumas funções adicionais que podem ser de interesse. Pode-se desenhar polígonos convexos conectando os vértices dos pontos feitos por certos grupos de comunidades no gráfico.
+
+Para isso, cria-se um vetor de valores de tratamento.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(example\_NMDS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-243-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treat}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"Treatment1"}\NormalTok{,}\DecValTok{5}\NormalTok{),}\FunctionTok{rep}\NormalTok{(}\StringTok{"Treatment2"}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\FunctionTok{ordiplot}\NormalTok{(example\_NMDS,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{ordihull}\NormalTok{(example\_NMDS,}\AttributeTok{groups=}\NormalTok{treat,}\AttributeTok{draw=}\StringTok{"polygon"}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey90"}\NormalTok{,}
+         \AttributeTok{label=}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"species"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{air=}\FloatTok{0.01}\NormalTok{)}
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"sites"}\NormalTok{,}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"green"}\NormalTok{,}\DecValTok{5}\NormalTok{),}\FunctionTok{rep}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\DecValTok{5}\NormalTok{)),}
+         \AttributeTok{air=}\FloatTok{0.01}\NormalTok{,}\AttributeTok{cex=}\FloatTok{1.25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-243-2.pdf}
+
+Essa é uma maneira intuitiva de entender como as comunidades e espécies se agrupam com base nos tratamentos possveis. Nesse caso, comunidades 1-5 em verde e comunidades 6-10 em azul. Também é possível plotar elipses e ``gráficos de aranha'' usando as funções \texttt{ordiellipse} e \texttt{orderspider}, que enfatizam o centróide das comunidades em cada tratamento.
+
+Outra alternativa é plotar uma ``árvore de abrangência mínima'' (da função \texttt{hclust}), que agrupa as comunidades com base em suas dissimilaridades originais e projeta o dendrograma no gráfico 2D.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(example\_NMDS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-244-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ordiplot}\NormalTok{(example\_NMDS,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"species"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{air=}\FloatTok{0.01}\NormalTok{)}
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"sites"}\NormalTok{,}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"green"}\NormalTok{,}\DecValTok{5}\NormalTok{),}\FunctionTok{rep}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\DecValTok{5}\NormalTok{)),}
+         \AttributeTok{air=}\FloatTok{0.01}\NormalTok{,}\AttributeTok{cex=}\FloatTok{1.25}\NormalTok{)}
+\FunctionTok{ordicluster}\NormalTok{(example\_NMDS,}\FunctionTok{hclust}\NormalTok{(}\FunctionTok{vegdist}\NormalTok{(community\_matrix,}\StringTok{"bray"}\NormalTok{))) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-244-2.pdf}
+
+Observe que o agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.
+
+Pode-se ainda plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos tratamentos. Mas primeiro, cria-se um vetor de valores de cor com a mesma extensão do vetor de valores de tratamento.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(example\_NMDS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-245-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{colors}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\DecValTok{5}\NormalTok{),}\FunctionTok{rep}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\FunctionTok{ordiplot}\NormalTok{(example\_NMDS,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{)}
+\CommentTok{\#Plot convex hulls with colors baesd on treatment}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(treat)) \{}
+  \FunctionTok{ordihull}\NormalTok{(example\_NMDS}\SpecialCharTok{$}\NormalTok{point[}\FunctionTok{grep}\NormalTok{(i,treat),],}\AttributeTok{draw=}\StringTok{"polygon"}\NormalTok{,}\AttributeTok{groups=}\NormalTok{treat[treat}\SpecialCharTok{==}\NormalTok{i],}\AttributeTok{col=}\NormalTok{colors[}\FunctionTok{grep}\NormalTok{(i,treat)],}\AttributeTok{label=}\NormalTok{F) \} }
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"species"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{air=}\FloatTok{0.01}\NormalTok{)}
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"sites"}\NormalTok{,}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"green"}\NormalTok{,}\DecValTok{5}\NormalTok{),}\FunctionTok{rep}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\DecValTok{5}\NormalTok{)),}
+         \AttributeTok{air=}\FloatTok{0.01}\NormalTok{,}\AttributeTok{cex=}\FloatTok{1.25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-245-2.pdf}
+
+Esse agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.
+
+Pode-se plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos tratamentos. Primeiro, cria-se um vetor de valores de cor com a mesma extensão do vetor de valores de tratamento.
+
+Se o tratamento for uma variável contínua, deve-se considerar linhas de mapeamento de contorno sobrepostas no gráfico. Para este exemplo, considera-se que os tratamentos foram aplicados ao longo de um gradiente de elevação. Podemos definir elevações aleatórias para o mesmo exemplo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(example\_NMDS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-246-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{elevation}\OtherTok{=}\FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{1.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Agora usa-se a função \texttt{ordisurf} para plotar as linhas de contorno. A quantidade de linhas de contorno é definida pelo comando \texttt{knots\ =}. Se \texttt{knots\ =\ 0} ou \texttt{knots\ =\ 1} a função \texttt{ordisurf} ajustará uma tendencia linear a superfície, e se \texttt{knots\ =\ 2} a função ajustará uma tendência quadrática, ao inves de linhas retas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(example\_NMDS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-247-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ordisurf}\NormalTok{(example\_NMDS,elevation,}\AttributeTok{main=}\StringTok{""}\NormalTok{,}\AttributeTok{col=}\StringTok{"forestgreen"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-247-2.pdf}
+
+\begin{verbatim}
+## 
+## Family: gaussian 
+## Link function: identity 
+## 
+## Formula:
+## y ~ s(x1, x2, k = 10, bs = "tp", fx = FALSE)
+## 
+## Estimated degrees of freedom:
+## 0.189  total = 1.19 
+## 
+## REML score: 1.428577
+\end{verbatim}
+
+Por fim, exibe-se as espécies no gráfico.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(example\_NMDS)}
+
+\FunctionTok{orditorp}\NormalTok{(example\_NMDS,}\AttributeTok{display=}\StringTok{"species"}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey30"}\NormalTok{,}\AttributeTok{air=}\FloatTok{0.1}\NormalTok{,}\AttributeTok{cex=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-248-1.pdf}
+
+Refaça a análise com os dados fornecidos.
+
+\hypertarget{apuxeandices-12}{%
+\section*{Apêndices}\label{apuxeandices-12}}
+\addcontentsline{toc}{section}{Apêndices}
+
+\hypertarget{sites-consultados-8}{%
+\section*{Sites consultados}\label{sites-consultados-8}}
+\addcontentsline{toc}{section}{Sites consultados}
+
+\url{https://youtu.be/OMrtxobDhrM}
+\url{https://youtu.be/zjxE2KwNO0M}
+\url{https://youtu.be/Kl49qI3XJKY}
+\url{https://youtu.be/paO9-PLXwD0}
+\url{https://youtu.be/QljEeBei-JA}
+\url{https://youtu.be/4tQJI-g9wao}
+\url{https://youtu.be/M-Ing955VEI}
+
+\hypertarget{referuxeancias-14}{%
+\section*{Referências}\label{referuxeancias-14}}
+\addcontentsline{toc}{section}{Referências}
+
 \hypertarget{part-anuxe1lises-multivariadas}{%
 \part{ANÁLISES MULTIVARIADAS}\label{part-anuxe1lises-multivariadas}}
 
 \hypertarget{upgma}{%
 \chapter{R Módulo 7 - Análise de Classificação Hierárquica - SAHN}\label{upgma}}
 
-\hypertarget{resumo-12}{%
-\subsection*{RESUMO}\label{resumo-12}}
+\hypertarget{resumo-13}{%
+\subsection*{RESUMO}\label{resumo-13}}
 \addcontentsline{toc}{subsection}{RESUMO}
 
 Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em várias áreas, incluindo bioinformática, análise de dados espaciais, agronomia, entre outros. A análise de classificação hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.
 
-\hypertarget{apresentauxe7uxe3o-13}{%
-\subsection*{Apresentação}\label{apresentauxe7uxe3o-13}}
+\hypertarget{apresentauxe7uxe3o-14}{%
+\subsection*{Apresentação}\label{apresentauxe7uxe3o-14}}
 \addcontentsline{toc}{subsection}{Apresentação}
 
 Análise de Classificação Hierárquica (do inglês, ``Hierarchical Agglomerative Clustering Analysis'', ou simplesmente ``SAHN'') é um método de análise de dados utilizado para identificar grupos ou ``clusters'' de objetos com base em sua similaridade. Nessa análise, os objetos são inicialmente considerados como clusters individuais e, em seguida, os objetos mais similares são agrupados em um cluster maior, e assim por diante, até que todos os objetos estejam em um único cluster. Isso resulta em uma árvore hierárquica, conhecida como dendrograma, que mostra a relação de similaridade entre os objetos.
@@ -12039,8 +12969,8 @@ Análises de classificação são amplamente utilizadas em várias áreas, inclu
 
 A Análise de Classificação Hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.
 
-\hypertarget{organizauxe7uxe3o-buxe1sica-10}{%
-\section{Organização básica}\label{organizauxe7uxe3o-buxe1sica-10}}
+\hypertarget{organizauxe7uxe3o-buxe1sica-11}{%
+\section{Organização básica}\label{organizauxe7uxe3o-buxe1sica-11}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -12199,7 +13129,7 @@ Aqui fazemos uma Análise Cluster no piloto automático. Não decidimos nenhum d
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-226-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-256-1.pdf}
 
 É possivel definir uma caixa mostrado os principais grupos formados. Isso pode ser feito estabelecendo quantos grupos se quer mostrar, usando a função \texttt{k\ =\ no.\ de\ grupos}. Ou pode-se definir os grupos formados até uma determinanda distância, usando a função \texttt{h\ =\ altura\ dos\ grupos} no eixo das distâncias.
 
@@ -12565,7 +13495,7 @@ Aqui fazemos uma Análise Cluster no piloto automático. Não decidimos nenhum d
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-229-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-259-1.pdf}
 
 O significado do argumento \texttt{method\ =} da função \texttt{dist()} usada no códico acima, depende do contexto em que ela é usada.
 
@@ -12617,7 +13547,7 @@ centroid & Método de ligação baseado no centróide, ou UPGMC\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-230-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-260-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -12653,7 +13583,7 @@ Agora fazemos a classificação da matriz bruta após ter sido relativizada pelo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-232-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-262-1.pdf}
 
 \hypertarget{cluster-4-transformauxe7uxe3o-pelo-arcoseno-da-raiz-quadrada}{%
 \section{Cluster 4: Transformação pelo arcoseno da raiz quadrada}\label{cluster-4-transformauxe7uxe3o-pelo-arcoseno-da-raiz-quadrada}}
@@ -12681,7 +13611,7 @@ Aqui fazemos uma Análise Cluster no piloto automático, para comparar com os re
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-234-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-264-1.pdf}
 
 \hypertarget{cluster-5-controle-total-dos-paruxe2metros}{%
 \section{Cluster 5: Controle total dos parâmetros}\label{cluster-5-controle-total-dos-paruxe2metros}}
@@ -12698,7 +13628,7 @@ Aqui fazemos uma Análise Cluster no piloto automático, para comparar com os re
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-235-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-265-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -12909,7 +13839,7 @@ No código acima, \texttt{h\ =\ 0.8} fornece os grupos formados na altura \textt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-236-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-266-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -12942,7 +13872,7 @@ Primeiro vamos rever o dendrograma final, usando a Distância de Bray-Curtis e o
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-237-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-267-1.pdf}
 
 Na sequência fazemos um \texttt{heatmap} \textbf{objetos x objetos}, ou seja a comparação bidimensional das clustereds entre unidades amostrais.
 
@@ -12960,7 +13890,7 @@ Na sequência fazemos um \texttt{heatmap} \textbf{objetos x objetos}, ou seja a 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-238-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-268-1.pdf}
 
 Agora vamos criar um novo dendrograma, para as espécies, mostrando sua similaridade em termos de em quais UA´s elas são mais comuns.
 
@@ -12973,7 +13903,7 @@ Agora vamos criar um novo dendrograma, para as espécies, mostrando sua similari
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-239-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-269-1.pdf}
 
 Na sequencia, fazemos um novo \texttt{heatmap} \textbf{objetos x atributos}, com a comparação bidimensional das clustereds formadas entre unidades amostrais em relação as espécies mais comuns que ocorreram em cada unidade amostral.
 
@@ -12990,7 +13920,7 @@ Na sequencia, fazemos um novo \texttt{heatmap} \textbf{objetos x atributos}, com
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-240-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-270-1.pdf}
 
 \hypertarget{percentual-de-encadeamento-chaining}{%
 \subsection{Percentual de encadeamento (\% chaining)}\label{percentual-de-encadeamento-chaining}}
@@ -13015,7 +13945,7 @@ Com esse código podemos calcular o percentual de encadeamento para cada fusão 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-241-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-271-1.pdf}
 
 Para calcular o percentual geral de encadeamento em um dendrograma, é necessário calcular a diferença na altura entre cada nó e seus nós filhos e, em seguida, somar essas diferenças. Essa soma representa o comprimento total do dendrograma. Em seguida, é necessário calcular a soma das diferenças na altura entre cada nó que representa uma fusão e a altura de seus dois nós filhos. Essa soma representa o encadeamento total no dendrograma.
 
@@ -13049,7 +13979,7 @@ Isso pode acontecer, por exemplo, se a altura de uma fusão for negativa, o que 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-242-1.pdf}
+\includegraphics{fundamentos_de_ecologia_numerica_files/figure-latex/unnamed-chunk-272-1.pdf}
 
 \hypertarget{apuxeandices-13}{%
 \section*{Apêndices}\label{apuxeandices-13}}
@@ -13289,8 +14219,8 @@ Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você p
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{referuxeancias-14}{%
-\section*{Referências}\label{referuxeancias-14}}
+\hypertarget{referuxeancias-15}{%
+\section*{Referências}\label{referuxeancias-15}}
 \addcontentsline{toc}{section}{Referências}
 
 \hypertarget{refs}{}

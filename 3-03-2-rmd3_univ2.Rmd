@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# R Modulo 3.2 - Testes Estatísticos {#univ2}
+# R Modulo 3.2 - Testes estatísticos {#univ2}
 
 ### RESUMO {-}
 
@@ -16,9 +16,9 @@ A estatística descritiva tem um papel importante a desempenhar na ciência. Qua
 
 ## Sobre os dados
 
-Considere os dados merísticos (ou médições morfológicas) da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB [@RN146] (Figura \@ref(fig:rmd32tucu)). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da pespécie, um conjunto de dados formidável. 
+Considere os dados merísticos (ou médições morfológicas) da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB [@RN3024] (Figura \@ref(fig:rmd32tucu)). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da pespécie, um conjunto de dados formidável. 
 
-```{r rmd232tucu, echo=FALSE, purl=FALSE, fig.cap="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB."}
+```{r rmd232tucu, echo=FALSE, purl=FALSE, fig.cap="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/tucuna.png")
 ```
   
@@ -56,11 +56,24 @@ setwd("C:/Seu/Diretório/De/Trabalho")
 
 ## Importando a planilha
 
-Vamos importar a planilha de dados univariados `univ*.xlsx`. Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+:::: {.infobox2 .stopred data-latex=""}
+
+::: {.center data-latex=""}
+**[ATENÇÃO]{style="color:white"}**
+:::
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção [Arquivos disponíveis](#arqs) do Capítulo [Bases de dados](#bases).
+
+::: {.center data-latex=""}
+Ou, baixe aqui o arquivo [tucuna.xlsx](https://docs.google.com/spreadsheets/d/1CXcIx3vzNmVlaq87Mp_FLcmymLncb8P_/edit?usp=sharing&ouid=101766125969589673518&rtpof=true&sd=true)
+:::
+::::
+
+Vamos importar a planilha de dados univariados `tucuna.xlsx`. Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
 
 ```{r, results='hold'}
 library(openxlsx)
-univ <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/univ.xlsx",
+univ <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx",
                     rowNames = F, colNames = T,
                     sheet = "tucuna")
 head(univ,10)

@@ -4,25 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 8 R Modulo 3.1 - Estatísticas descritivas e Normalidade | Fundamentos de Ecologia Numérica</title>
+<title> 8 R Modulo 3.1 - Estatísticas descritivas e normalidade | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content=" 8 R Modulo 3.1 - Estatísticas descritivas e Normalidade | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 8 R Modulo 3.1 - Estatísticas descritivas e normalidade | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 8 R Modulo 3.1 - Estatísticas descritivas e Normalidade | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 8 R Modulo 3.1 - Estatísticas descritivas e normalidade | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -49,7 +50,7 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -75,22 +76,23 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
 <li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
-<li><a class="active" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
-<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="active" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
 <li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
 <li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></li>
 <li class="book-part">ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -101,7 +103,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="univ" class="section level1" number="8">
 <h1>
-<span class="header-section-number"> 8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade<a class="anchor" aria-label="anchor" href="#univ"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade<a class="anchor" aria-label="anchor" href="#univ"><i class="fas fa-link"></i></a>
 </h1>
 <div id="resumo-5" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-5"><i class="fas fa-link"></i></a>
@@ -120,7 +122,7 @@
 <p>Considere os dados sobre o comprimento dos brotos de <em>Banksia ericifolia</em> de charnecas<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;A etimologia do gênero &lt;em&gt;Astyanax&lt;/em&gt; vem da mitologia Grega. Heitor personagem da “Ilíada”, tinha um filho chamado Astíanax.&lt;/p&gt;"><sup>13</sup></a> na Baía de Jervis, Austrália <span class="citation">(<a href="#ref-RN146" role="doc-biblioref">BRADSTOCK; TOZER; KEITH, 1997</a>)</span> (Figura <a href="univ.html#fig:rmd3banks">8.1</a>). Existem 500 medições, um conjunto de dados formidável. Por inspeção, o comprimento mínimo do broto é 10,0 e o máximo é 44,9 cm. Esses valores definem o intervalo da amostra. Agora precisamos subdividir o intervalo em intervalos ou classes, cada um com o mesmo tamanho. Geralmente, é aconselhável arredondar o valor mínimo para baixo e o valor máximo para valores apropriados ao decidir as classes de intervalos. Nesse caso, parece sensato dividir a faixa de 10 a 45 cm em sete intervalos a cada 5 cm de largura. Se contarmos o número de brotos que se encontram em cada um dos sete intervalos, temos a base para a tabulação da frequência. A coluna de frequência foi obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual foi obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas foram obtidas somando progressivamente as frequências correspondentes.</p>
 <div class="figure">
 <span style="display:block;" id="fig:rmd3banks"></span>
-<img src="imagens/banksia.png" alt="Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália." width="306"><p class="caption">
+<img src="imagens/banksia.png" alt="Comprimentos (cm) de 500 brotos do arbusto *Banksia ericifolia* de charnecas na Baía de Jervis, Austrália." width="450px"><p class="caption">
 Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</em> de charnecas na Baía de Jervis, Austrália.
 </p>
 </div>
@@ -129,18 +131,18 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 <h2>
 <span class="header-section-number">8.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"fdth"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code><a href="https://ycphs.github.io/openxlsx/index.html">library(openxlsx)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -148,8 +150,17 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 <h2>
 <span class="header-section-number">8.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-2"><i class="fas fa-link"></i></a>
 </h2>
-<p>Note que o sómbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="infobox2 stopred">
+<div class="center">
+<p><strong><span style="color:white">ATENÇÃO</span></strong></p>
+</div>
+<p>Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção <a href="bases.html#arqs">Arquivos disponíveis</a> do Capítulo <a href="bases.html#bases">Bases de dados</a>.</p>
+<div class="center">
+<p>Ou, baixe aqui o arquivo <a href="https://docs.google.com/spreadsheets/d/1iSJeR726dCc-ia3G5jzSBg__mSUsb-91/edit?usp=sharing&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">brotos.xlsx</a></p>
+</div>
+</div>
+<p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">brotos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/brotos.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">F</span>, colNames <span class="op">=</span> <span class="cn">F</span>,</span>
@@ -179,7 +190,7 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 ## 9  26.9 22.5 25.5 33.0 19.4
 ## 10 34.2 33.6 42.5 19.0 25.8</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(brotos)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">brotos</span></span>
@@ -187,7 +198,7 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">)</span></span></code></pre></div>
 <p>Precisaremos converter para um vetor.</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">brotos_v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">brotos_v</span></span></code></pre></div>
 <pre><code>##   [1] 28.4 29.1 25.7 26.2 25.8 30.2 26.2 35.8 33.4 29.0 25.1 36.8 29.9 38.3 27.1
@@ -225,7 +236,7 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 ## [481] 28.3 40.2 30.9 22.0 34.1 26.2 19.6 33.6 26.3 25.1 29.3 31.9 43.0 31.9 33.9
 ## [496] 20.0 39.6 34.3 28.8 34.2</code></pre>
 <p>E agora visualizando nossos dados.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(brotos_v)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span></span>
 <span><span class="va">brotos_v</span></span>
@@ -233,7 +244,7 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span></span></code></pre></div>
 <p>Tendo em mãos o conjunto total de 500 comprimentos medidos de brotos de <em>Banksia</em>, agora <strong>vamos tirar uma subamostra aleatória de uma parte dos 500 valores</strong>. Essa subamostra é tirada usando o comando <code>size=</code> no código subsequente, que estabelece o tamanho da subamostra a ser tirada do total de dados. Esse tamanho é estabelecido no quiz. Inclua esse valor de acordo com o que é pedido no quiz. Por exemplo, se for pedido uma subamostra de 150 comprimentos, então <code>size = 150</code>. Nesse tutorial usaremos todos os 500 comprimentos.</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">666</span><span class="op">)</span></span>
 <span><span class="va">brotos_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">brotos_v</span>, size <span class="op">=</span> <span class="fl">500</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="co">#atualize o valor de 'size=' se necessário</span></span>
 <span><span class="va">brotos_sub</span></span></code></pre></div>
@@ -272,19 +283,13 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 ## [481] 30.5 29.0 26.5 29.2 31.4 20.5 26.8 10.6 27.8 21.9 28.2 23.7 29.9 29.9 36.3
 ## [496] 31.7 38.3 29.2 22.5 41.9</code></pre>
 <p>Para fazermos uma tabela de frequência do comprimento dos brotos carregamos o pacote <code>fdth</code> e pedimos a função <code>range</code> que retorna o valor máximo e mínimo no vetor.</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fdth</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## Attaching package: 'fdth'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     sd, var</code></pre>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#retorna o valor máximo e mínimo</span></span>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fdth</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#retorna o valor máximo e mínimo</span></span>
 <span><span class="co">#?range</span></span></code></pre></div>
 <pre><code>## [1] 10.0 44.9</code></pre>
 <p>Agora é necessário que você substitua os valores de range 10, 44.9 nos valores de início e fim da distribuição de frequência. Os comandos abaixo criam uma tabela de frequência chamada <code>tf</code> com valores máximos e mínimos definidos por <code>range(brotos_v)</code> em intervalor definidos por <code>h=5</code>, e o comando <code>print(tf)</code> exibe a tabela de frequência.</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/fdt.html">fdt</a></span><span class="op">(</span><span class="va">brotos_sub</span>, start<span class="op">=</span><span class="fl">10</span>, end<span class="op">=</span><span class="fl">45</span>, h<span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="co">#tabela de frequência</span></span>
 <span><span class="co">#?fdt #atente para o uso de k, por exemplo tf &lt;- fdt(brotosv, k=5)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span></code></pre></div>
@@ -304,21 +309,20 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 <span class="header-section-number">8.4</span> Gráficos de histograma e boxplot<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-histograma-e-boxplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>No código abaixo se define o layout dos gráficos para serem exibidos lado a lado, e na sequência criamos um gráfico de histograma com base na tabela de frequência <code>tf</code>. O comando <code><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot()</a></code> cria um gráfico de boxplot para os valores em <code>brotos_v</code>. O argumento “horizontal = TRUE” indica que o boxplot deve ser horizontal.</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co">#gráficos lado a lado</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span> <span class="co">#distribuição de frequências</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">brotos_sub</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>        xlab<span class="op">=</span><span class="st">"Class limits"</span><span class="op">)</span> <span class="co">#boxplot</span></span></code></pre></div>
+<span>        xlab<span class="op">=</span><span class="st">"Class limits"</span><span class="op">)</span> <span class="co">#boxplot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co">#gráficos de volta ao normal</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-72-1.png" width="672"></div>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co">#gráficos de volta ao normal</span></span></code></pre></div>
 <p>Se você recebeu a mensagem de erro <span style="color:red">“Error in plot.new() : figure margins too large”</span>, aumente o tamanho da janela do gráfico e execute as últimas três linhas de comando novamente.</p>
 </div>
 <div id="sumário-estatístico-geral" class="section level2" number="8.5">
 <h2>
 <span class="header-section-number">8.5</span> Sumário estatístico geral<a class="anchor" aria-label="anchor" href="#sum%C3%A1rio-estat%C3%ADstico-geral"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span></span>
 <span><span class="co">#?summary</span></span>
 <span><span class="fu">sd</span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
@@ -328,8 +332,8 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 ## [1] 6.373581
 ## [1] 40.62254</code></pre>
 </div>
-<div id="apêndices-5" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-5"><i class="fas fa-link"></i></a>
+<div id="apêndices-4" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-4"><i class="fas fa-link"></i></a>
 </h2>
 </div>
 <div id="sites-consultados-3" class="section level2 unnumbered">
@@ -340,7 +344,7 @@ Figura 8.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</e
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co">## install.packages("openxlsx") #importa arquivos do excel</span></span>
 <span><span class="co">## install.packages("fdth")</span></span>
@@ -406,13 +410,13 @@ TEAM, R. S. <strong>RStudio: Integrated Development Environment for R</strong>. 
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></div>
-<div class="next"><a href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></div>
+<div class="prev"><a href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></div>
+<div class="next"><a href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#univ"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#univ"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-5">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-5">Apresentação</a></li>
 </ul>
@@ -422,7 +426,7 @@ TEAM, R. S. <strong>RStudio: Integrated Development Environment for R</strong>. 
 <li><a class="nav-link" href="#importando-a-planilha-2"><span class="header-section-number">8.3</span> Importando a planilha</a></li>
 <li><a class="nav-link" href="#gr%C3%A1ficos-de-histograma-e-boxplot"><span class="header-section-number">8.4</span> Gráficos de histograma e boxplot</a></li>
 <li><a class="nav-link" href="#sum%C3%A1rio-estat%C3%ADstico-geral"><span class="header-section-number">8.5</span> Sumário estatístico geral</a></li>
-<li><a class="nav-link" href="#ap%C3%AAndices-5">Apêndices</a></li>
+<li><a class="nav-link" href="#ap%C3%AAndices-4">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-consultados-3">Sites consultados</a></li>
 <li><a class="nav-link" href="#script-limpo-2">Script limpo</a></li>
 <li><a class="nav-link" href="#refer%C3%AAncias-6">Referências</a></li>
@@ -442,7 +446,7 @@ TEAM, R. S. <strong>RStudio: Integrated Development Environment for R</strong>. 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 12:56:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

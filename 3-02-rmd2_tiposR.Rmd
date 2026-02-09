@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# R Modulo 2 - Tipos de Dados no R {#tiposR}
+# R Modulo 2 - Tipos de dados no R {#tiposR}
 
 ### Apresentação {-}
 
@@ -33,7 +33,7 @@ No R, uma linguagem de programação amplamente utilizada para análise de dados
 
 Para começar a usar o R e analisar os dados do Projeto PPBio, abra o RStudio, verifique sua interface (Figura \@ref(fig:interface2)) e siga as instruções a seguir.
 
-```{r interface2, echo=FALSE, purl=FALSE, fig.cap="Interface típica do RStudio e nome dos paineis  ou janelas."}
+```{r interface2, echo=FALSE, purl=FALSE, fig.cap="Interface típica do RStudio e nome dos paineis  ou janelas.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/interfaceR.png")
 ```
 
@@ -502,11 +502,11 @@ print(lista1)
 • Data Frames: generalização de matrizes onde diferentes colunas podem armazenar dados de modo diferente.  
 • Funcões: objetos criados pelo usuário e reutilizados para realizar operações específicas.  
 
-```{r nucleos, echo=FALSE, purl=FALSE, fig.height=7,  fig.cap="Resumo visual dos tipos de dados no ambiente de programação R. (De: https://www.tutorialkart.com/r-tutorial/r-data-types)"}
+```{r nucleos, echo=FALSE, purl=FALSE, fig.cap="Resumo visual dos tipos de dados no ambiente de programação R. (De: https://www.tutorialkart.com/r-tutorial/r-data-types)", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/nucleos.png")
 ```
 
-```{r tipos, echo=FALSE, purl=FALSE, fig.height=7, fig.cap="Resumo visual dos tipos de dados no ambiente de programação R. (De: https://lhmet.github.io/adar-ebook/estrutura-dados.html)"}
+```{r tipos, echo=FALSE, purl=FALSE, fig.cap="Resumo visual dos tipos de dados no ambiente de programação R. (De: https://lhmet.github.io/adar-ebook/estrutura-dados.html)", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/tipos.png")
 ```
 
@@ -585,7 +585,7 @@ Detalhe, o texto acima foi gerado pelo próprio ChatGPT (Figura \@ref(fig:22chat
 browseURL("https://chat.openai.com/")
 ```
 
-```{r 22chat, echo=FALSE, fig.height=8, purl=FALSE, fig.cap="Usando o ChatGPT para pedir ajuda sobre o R."}
+```{r 22chat, echo=FALSE, purl=FALSE, fig.cap="Usando o ChatGPT para pedir ajuda sobre o R.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/chatgpt.png")
 ```
 
@@ -602,7 +602,7 @@ Por isso é necessário que o usuário tenha um workflow que permita o reconheci
 • Transformar, visualizar e modelar (fase exploratória)  
 • Comunicar o resultado
 
-```{r 22wf, echo=FALSE, purl=FALSE, fig.cap="Exemplo de workflow para análises no R (modificada de [@RN2941])"}
+```{r 22wf, echo=FALSE, purl=FALSE, fig.cap="Exemplo de workflow para análises no R (modificada de [@RN2941])", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/wf.png")
 ```
 
@@ -651,7 +651,7 @@ Note que o sómbolo `#` em programação R significa que o texto que vem depois 
 
 ```{r, results='hold'}
 library(openxlsx)
-ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx",
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx",
                    rowNames = T,
                    colNames = T,
                    sheet = "Sheet1")
@@ -715,10 +715,10 @@ Estrutura de dados I (Parte 11): https://www.youtube.com/watch?v=aEaSzlDMcuI
 Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
 
 ```{r, eval=FALSE, echo=FALSE, purl=FALSE}
-knitr::purl(input = "02-rmd2_tipos.Rmd", output = "script-rmd2.txt", documentation = 0)
-Script <- readLines("script-rmd2.txt")
+knitr::purl(input = "3-02-rmd2_tiposR.Rmd", output = "script-3-02-rmd2_tiposR.txt", documentation = 0)
+Script <- readLines("script-3-02-rmd2_tiposR.txt")
 Script <- Script[Script != ""]
-writeLines(Script, "script-rmd2.txt")
+writeLines(Script, "script-3-02-rmd2_tiposR.txt")
 cat(Script, sep = "\n")
 ```
 

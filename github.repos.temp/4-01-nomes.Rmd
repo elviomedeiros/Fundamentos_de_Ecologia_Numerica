@@ -1,0 +1,127 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# (PART) PARTE {-}
+
+# Informações gerais 
+
+## Bases de dados para download {#download401}
+
+```{r 401links, echo=FALSE, purl=FALSE}
+arqs <- tibble::tribble(
+  ~"Arquivo (.xlsx)", ~"Planilha", ~"Tipo", ~"Descrição",
+  "ppbio06-peixes", "Sheet1", "Matriz comunitária bruta", "Matriz de dados brutos contendo 26 unidades amostrais (objetos) x 35 espécies (atributos), antes de qualquer modificação. Contagens de indivíduos com alta amplitude de variação.",
+  "ppbio06p-peixes", "Sheet1", "Matriz comunitária particionada", "Matriz de dados particionada contendo 23 unidades amostrais (objetos) x 35 espécies (atributos). Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.",
+  "ppbio06cpue-peixes", "Sheet1", "Matriz comunitária de densidade", "O arquivo ppbio06cpue traz os valores de contagem depois de terem sido ajustados pela Captura Por Unidade de Esforço (CPUE), onde o número de indivíduos de cada espécie em uma determinada UA é dividido pelo esforço de captura daquela UA. Isso significa que os dados foram relativizados pela CPUE. Matriz de dados brutos contendo 23 unidadades amostrais (objetos) x 35 espécies (atributos).",
+  "ppbio06-peixes.ods", "Sheet1", "Matriz comunitária bruta", "Matriz de dados brutos no formato .ODS, contendo 26 unidades amostrais (objetos) x 35 espécies (atributos), antes de qualquer modificação. Contagens de indivíduos com alta amplitude de variação.",
+  "ppbio06p-habitat", "ano1", "Matriz ambiental particionada", "Matriz de dados brutos contendo 23 unidades amostrais (objetos) x 30 variáveis ambientais (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação. Unidades de medição diferentes (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.",
+  "ppbio06p-bentos", "contagem", "Matriz comunitária particionada", "A planilha \"contagem\" traz dados brutos contendo 22 ocasiões de amostragens (objetos) x 35 táxons de macroinvertebrados bentônicos (atributos). Contagens de indivíduos com alta amplitude de variação.",
+  "ppbio06p-bentos", "densidade", "Matriz comunitária de densidade", "Matriz de dados brutos contendo 22 ocasiões de amostragens (objetos) x 35 táxons de macroinvertebrados bentônicos (atributos). A planilha \"densidade\" traz o número de indivíduos de cada espécie em uma determinada UA depois de terem sido relativizados pela área amostrada.",
+  "ppbio06-grupos", "peixesp", "Matriz de grupos", "O arquivo traz na planilha \"peixesp\" os agrupamentos propostos a priori para a comunidade de peixes de acordo com o desenho amostral.",
+  "ppbio06-grupos", "bentosp", "Matriz de grupos", "O arquivo traz na planilha \"bentosp\" os agrupamentos propostos a priori para a fauna de macrobentos de acordo com o desenho amostral."
+)
+dt_url <- c("https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06-peixes.xlsx",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06p-peixes.xlsx",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06cpue-peixes.xlsx",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06-peixes.ods",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06p-habitat.xlsx",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06p-bentos.xlsx",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06p-bentos.xlsx",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06-grupos.xlsx",
+            "https://github.com/elviomedeiros/ecologianumerica/raw/main/ppbio06-grupos.xlsx")
+arqs %>% 
+  mutate(URL = cell_spec(row.names(.), "html", link = dt_url)) %>%
+  kable("html", escape = FALSE, caption = "Matrizes usadas ao longo desse livro, com suas descrições e link URL para download.") %>%
+  kable_styling(bootstrap_options = c("hover", "condensed")) 
+```
+
+## Nomenclatura das matrizes em AMD
+
+No tocante aos tipos de atributos e seu tratamento pré-análises, uma matriz de dados pode ser dos tipos apresentados na tabela abaixo (Tabela \@ref(tab:401tbl-m)).
+
+```{r 401tbl-m, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)",
+  "Matriz comunitaria", "Os atributos são táxons (ex. espécies, gêneros, morfotipos)",
+  "Matriz ambiental", "Os atributos são dados ambientais (ex. pH, condutividade, temperatura)",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)"
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:2, width = c("2cm","5cm"))
+```
+
+## Grupos taxonômicos
+
+Vários grupos taxonômicos foram amostrados, além de variáveis ambientais, análise de conteúdo estomacal de peixes, estrutura de tamanho dos indivíduos e etc. Isso é estabelecido no nome do arquivo .xlsx fornecido, como apresentado na tabela abaixo (Tabela \@ref(tab:401taxon)). O \* se indica o tipo de matriz (Tabela \@ref(tab:401arqs))  
+
+```{r 401taxon, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)",
+  "ppbio*-peixes.xlsx", "Os atributos são táxons de peixes, que podem ter sido medidos em contagem, CPUE, etc.",
+  "ppbio*-habitat.xlsx", "Os atributos são dados ambientais (ex. pH, condutividade, temperatura)",
+  "ppbio*-bentos", "Os atributos são táxons de macrozoobetos (principalmente, insetos aquáticos e moluscos)",
+  "ppbio*-chiron", "Os atributos são táxons da família Chironomidae, na sua fase aquática (larva ou pupa)",
+  "ppbio*-zoopl", "Os atributos são táxons constituintes do zooplâncton (Rotífera, Cladócera e Copépoda)",
+  "ppbio*-conteudo", "Os atributos são ítens alimentares constituintes do conteúdo alimentar de peixes"
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos grupos taxonômicos estudados.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:2, width = c("2cm","5cm"))
+```
+
+## Tipos de matrizes {-}
+
+Matrizes disponíveis para análises, com suas descrições e tipos de dados recomendados (Tabela \@ref(tab:401arqs)).
+
+```{r 401arqs, echo=FALSE, purl=FALSE}
+arqs <- tibble::tribble(
+~"Arquivo (.xlsx)", ~"Tipo de matriz", ~"Descrição", ~"Tipo de dados",
+"ppbio06c", "Matriz comunitária", "O arquivo ppbio06 traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.",
+"ppbio06h", "Matriz ambiental", "O arquivo ppbio06h traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação.", "Unidades de medição diferentes (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.",
+"ppbio06", "Matriz comunitária", "O arquivo ppbio06 traz os dados brutos que serão usados nessa análise. A matriz de dados brutos contendo 26 locais/ocasiões (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.",
+"ppbio06cpue", "Matriz comunitária", "O arquivo ppbio06cpue traz os valores depois de terem sidos ajustados pela Captura Por Unidade de Esforço (CPUE), onde o número de indivíduos de cada espécie em uma determinada UA é dividido pelo esforço de captura daquela UA. Isso significa que os dados foram relativizados pela CPUE. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Densidades de indivíduos (no. de indivíduos por Unidade de Esforço de Captura) com alta amplitude de variação, sugerido uso de matriz relativizada."
+)
+library(knitr)
+library(kableExtra)
+arqsx <- kable(arqs, row.names = FALSE, align="l", booktabs = TRUE, caption = "Exemplos de matrizes disponíveis para análises (PPBio Semiárido), com suas descrições e tipos de dados recomendados.")
+arqsx <- kable_styling(arqsx)
+column_spec(arqsx, 1:4, width = c("2cm","2cm","7cm","5cm"))
+```
+
+## Abreviações {-}
+
+No interesse de sistematizar o código R das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (\@ref(tab:401tbl-m_2)) resume seus tipos e abreviações.
+
+```{r 401tbl-m_2, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)", ~"Abreviação no R",
+  "Matriz comunitaria", "Os atributos são táxons ou OTU's (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)", "m_com",
+  "Matriz ambiental", "Os atributos são dados ambientais e variáveis  físicas e químicas (ex. pH, condutividade, temperatura)", "m_amb",
+  "Matriz de habitat", "Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)", "m_hab",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)", "m_bruta",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas", "m_t",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)", "m_rel, m_relcol, m_rellin",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)", "m_trns, m_log10, m_asrq",
+  "Matriz de distâncias", "Matriz de m x m similaridades ou de distâncias (ex. Euclidiana, Manhattan, Bray-Curtis, etc)", "m_dists, m_euclid, m_bray",
+  "Matriz de trabalho", "Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)", "m_trab",
+  "Matriz particionada", "Foram removidas linhas ou colunas (ex. linhas que são outliers e espécies zeradas)", "m_part",
+  "Base de dados", "Arquivo do Excel planilhado a partir de dados de campo ou de laboratório. Será manejada e particionada no R, para criar a Matriz bruta", "ppbio06.xlsx, zoorebio.xlsx, bentos06.xlsx",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
+```
+

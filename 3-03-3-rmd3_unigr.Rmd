@@ -16,7 +16,7 @@ editor_options:
 
 Considere os dados merísticos (ou médições morfológicas) da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB [@RN3024] (Figura \@ref(fig:rmd32tucu)). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da espécie, um conjunto de dados formidável. 
 
-```{r rmd32tucu, echo=FALSE, purl=FALSE, fig.cap="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB."}
+```{r rmd32tucu, echo=FALSE, purl=FALSE, fig.cap="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB.", out.width = if (knitr::is_html_output()) "450px" else "10cm"}
 knitr::include_graphics("imagens/tucuna.png")
 ```
   
@@ -51,11 +51,24 @@ setwd("C:/Seu/Diretório/De/Trabalho")
 
 ## Importando a planilha
 
-Vamos importar a planilha de dados univariados `univ*.xlsx`. Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+:::: {.infobox2 .stopred data-latex=""}
+
+::: {.center data-latex=""}
+**[ATENÇÃO]{style="color:white"}**
+:::
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção [Arquivos disponíveis](#arqs) do Capítulo [Bases de dados](#bases).
+
+::: {.center data-latex=""}
+Ou, baixe aqui o arquivo [tucuna.xlsx](https://docs.google.com/spreadsheets/d/1CXcIx3vzNmVlaq87Mp_FLcmymLncb8P_/edit?usp=sharing&ouid=101766125969589673518&rtpof=true&sd=true)
+:::
+::::
+
+Vamos importar a planilha de dados univariados `tucuna.xlsx`. Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
 
 ```{r, results='hold'}
 library(openxlsx)
-univ_all <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/univ.xlsx",
+univ_all <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx",
                     rowNames = T, colNames = T,
                     sheet = "tucuna")
 head(univ_all,10)
@@ -308,7 +321,7 @@ mdaplotg(people, type = "h", groupby = groups)
 
 ## Apêndices {-}
 
-## Sites consultados {-}
+## Sites para consulta {-}
 
 https://www.geeksforgeeks.org/break-axis-of-plot-in-r/
 https://stackoverflow.com/questions/72498597/add-a-break-to-a-bar-chart-when-one-value-is-very-large
@@ -318,10 +331,10 @@ https://stackoverflow.com/questions/72498597/add-a-break-to-a-bar-chart-when-one
 Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
 
 ```{r, eval=FALSE, echo=FALSE, purl=FALSE}
-knitr::purl(input = "03-rmd3_univ2.Rmd", output = "script-rmd3-2.txt", documentation = 0)
-Script <- readLines("script-rmd3-2.txt")
+knitr::purl(input = "3-03-3-rmd3_unigr.Rmd", output = "script-3-03-3-rmd3_unigr.txt", documentation = 0)
+Script <- readLines("script-3-03-3-rmd3_unigr.txt")
 Script <- Script[Script != ""]
-writeLines(Script, "script-rmd3-2.txt")
+writeLines(Script, "script-3-03-3-rmd3_unigr.txt")
 cat(Script, sep = "\n")
 ```
 

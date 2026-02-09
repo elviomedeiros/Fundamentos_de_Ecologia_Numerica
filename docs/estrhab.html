@@ -4,25 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
+<title> 13 R Modulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO  Apresentação   13.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content=" 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 13 R Modulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO  Apresentação   13.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 13 R Modulo 4.2 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 13 R Modulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO  Apresentação   13.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -49,7 +50,7 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -75,22 +76,23 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
 <li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
-<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
-<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
 <li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="active" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="active" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
 <li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></li>
 <li class="book-part">ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -101,7 +103,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estrhab" class="section level1" number="13">
 <h1>
-<span class="header-section-number"> 13</span> R Modulo 4.2 - Estrutura do habitat<a class="anchor" aria-label="anchor" href="#estrhab"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 13</span> R Modulo 4.3 - Estrutura do habitat<a class="anchor" aria-label="anchor" href="#estrhab"><i class="fas fa-link"></i></a>
 </h1>
 <div id="resumo-10" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-10"><i class="fas fa-link"></i></a>
@@ -115,7 +117,7 @@
 <h2>
 <span class="header-section-number">13.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-5"><i class="fas fa-link"></i></a>
 </h2>
-<p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz ambiental</strong> (<a href="https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06p-amb.xlsx</a>) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Esses são dados de <strong>variáveis ambientais</strong> distribuidas em diversas unidades amostrais (UA’s ou sítios). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram transformados <span class="citation">(<a href="#ref-RN67" role="doc-biblioref">SOKAL; ROHLF, 1995</a>)</span>. Note que as variáveis foram medidas em diferentes unidades (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.
+<p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz ambiental</strong> (<a href="https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06p-amb.xlsx</a>) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>) <span class="citation">(<a href="#ref-RN2491" role="doc-biblioref">MEDEIROS; SILVA; RAMOS, 2008</a>)</span>. Esses são dados de <strong>variáveis ambientais</strong> distribuidas em diversas unidades amostrais (UA’s ou sítios). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram transformados <span class="citation">(<a href="#ref-RN67" role="doc-biblioref">SOKAL; ROHLF, 1995</a>)</span>. Note que as variáveis foram medidas em diferentes unidades (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.
 Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06-grupos</a>).</p>
 <p><strong>Revise as informações sobre as bases de dados no Capítulo <a href="bases.html#bases">3</a>. As dases de dados para esse Módulo podem ser baixadam na Seção <a href="bases.html#arqs">3.2</a>.</strong></p>
 </div>
@@ -123,7 +125,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <h2>
 <span class="header-section-number">13.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-7"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
@@ -132,11 +134,11 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <span class="header-section-number">13.2.1</span> Instalando os pacotes necessários para esse módulo.<a class="anchor" aria-label="anchor" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><i class="fas fa-link"></i></a>
 </h3>
 <p>Se você ja fez o módulo anterior, não vai precisar instalar nenhum pacote novo. Os pacotes necessários serão carregados ao longo desse módulo.</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"psych"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"corrplot"</span><span class="op">)</span></span></code></pre></div>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -148,7 +150,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 - Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado. Vamos trabalhar com os dados do ano 1.</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
 <span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
@@ -196,7 +198,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## S-R-CT2  0.000000 20.00000  0.00000    0.00000  0.0000000
 ## S-R-CP2  0.000000  0.00000  0.00000   33.33333  1.0000000</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -208,7 +210,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <h2>
 <span class="header-section-number">13.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_amb</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span>
 <span><span class="co">#pat &lt;- "^S"</span></span>
 <span><span class="co">#m_amb &lt;- m_amb[!grepl(pat, rownames(m_amb)), ] #exclui quem começa com pat</span></span></code></pre></div>
@@ -219,21 +221,9 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <h2>
 <span class="header-section-number">13.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## Attaching package: 'psych'</code></pre>
-<pre><code>## The following object is masked from 'package:mdatools':
-## 
-##     pca</code></pre>
-<pre><code>## The following object is masked from 'package:car':
-## 
-##     logit</code></pre>
-<pre><code>## The following objects are masked from 'package:ggplot2':
-## 
-##     %+%, alpha</code></pre>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/pairs.panels.html">pairs.panels</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>,</span>
 <span>             method <span class="op">=</span> <span class="st">"pearson"</span>, <span class="co"># correlation method</span></span>
 <span>             scale <span class="op">=</span> <span class="cn">FALSE</span>, lm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -244,10 +234,8 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <span></span>
 <span><span class="va">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
 <span><span class="va">cor</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## corrplot 0.92 loaded</code></pre>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">cor</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">cor</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span>
 <span><span class="co">#win.print()</span></span>
 <span><span class="co">#corrplot(cor, method = "circle")</span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
@@ -450,7 +438,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <span class="header-section-number">13.6</span> Deletando variáveis colineares<a class="anchor" aria-label="anchor" href="#deletando-vari%C3%A1veis-colineares"><i class="fas fa-link"></i></a>
 </h2>
 <p>Primeiro vamos listar as variáveis com correlação maior que 70% ou r &gt; 0.7.</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get upper triangle (to avoid duplicate pairs)</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
 <span><span class="va">cor_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">r</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -477,7 +465,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## 11       m.elev   m.river   0.8525104
 ## 3    h.overhveg   h.roots   0.7224571</code></pre>
 <p>Agora que temos as variáveis correlacionadas, prosseguimos para deleta-las.</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
 <span><span class="va">del_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"m.distsource"</span>, <span class="st">"m.elev"</span><span class="op">)</span> <span class="co">#exemplo, "g.river_length","g.altitude"</span></span>
 <span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">del_cols</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
@@ -493,7 +481,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <span class="header-section-number">13.7</span> Somando variáveis redundantes<a class="anchor" aria-label="anchor" href="#somando-vari%C3%A1veis-redundantes"><i class="fas fa-link"></i></a>
 </h2>
 <p>Algumas dessa variáveis são redundantes, vamos soma-las.</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.gravel</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.smlgrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.lrggrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.cobbles</span></span>
 <span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
 <span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s.smlgrav"</span>, <span class="st">"s.lrggrav"</span>, <span class="st">"s.cobbles"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
@@ -611,7 +599,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## B-A-MU4  0.0000000  5.000000 30.0000000 10.4444447
 ## B-A-GU4  1.4166667  0.000000 43.3333333  3.7500000</code></pre>
 <p>Salvando a matriz final particionada de dados ambientais.</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">m_amb_part</span>, <span class="st">"m_amb_part.csv"</span>,</span>
 <span>            sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>, <span class="co">#"\t",</span></span>
 <span>            row.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -628,7 +616,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <span class="header-section-number">13.8</span> Tabela de dados ambientais<a class="anchor" aria-label="anchor" href="#tabela-de-dados-ambientais"><i class="fas fa-link"></i></a>
 </h2>
 <p>Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba <code>ambientalp</code>, porque nela constam os agrupamentos <em>a-priori</em> para os dados ambientais.</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">t_grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -646,7 +634,7 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 ## S-R-CP1 Serido      rio CP      1
 ## S-A-TA1 Serido    acude TA      1
 ## S-R-CT2 Serido      rio CT      2</code></pre>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
 <span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -714,12 +702,12 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>, <span class="st">"Min"</span>, <span class="st">"Q1"</span>, <span class="st">"Median"</span>, <span class="st">"Mean"</span>, <span class="st">"Q3"</span>, <span class="st">"Max"</span><span class="op">)</span></span>
 <span><span class="va">summary_table</span></span></code></pre></div>
 </div>
-<div id="apêndices-10" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-10"><i class="fas fa-link"></i></a>
+<div id="apêndices-9" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-9"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="sites-consultados-8" class="section level2 unnumbered">
-<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-8"><i class="fas fa-link"></i></a>
+<div id="sites-consultados-7" class="section level2 unnumbered">
+<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-7"><i class="fas fa-link"></i></a>
 </h2>
 </div>
 <div id="script-limpo-7" class="section level2 unnumbered">
@@ -735,6 +723,9 @@ Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https:/
 </div>
 <h3>Bibliografia Geral</h3>
 <div id="refs" class="references csl-bib-body" entry-spacing="1">
+<div id="ref-RN2491" class="csl-entry">
+MEDEIROS, E. S. F.; SILVA, M. J.; RAMOS, R. T. C. Application of catchment- and local-scale variables for aquatic habitat characterization and assessment in the Brazilian semi-arid region. <strong>Neotropical Biology and Conservation</strong>, [s. l.], v. 3, n. 1, p. 13–20, 2008. Disponível em: &lt;<a href="https://revistas.unisinos.br/index.php/neotropical/article/view/5440">https://revistas.unisinos.br/index.php/neotropical/article/view/5440</a>&gt;
+</div>
 <div id="ref-RN67" class="csl-entry">
 SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Statistics in Biological Research</strong>. 3. ed. New York: W.H. Freeman; Company, 1995. p. 776
 </div>
@@ -746,7 +737,7 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#estrhab"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#estrhab"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-10">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-10">Apresentação</a></li>
 </ul>
@@ -761,8 +752,8 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 <li><a class="nav-link" href="#deletando-vari%C3%A1veis-colineares"><span class="header-section-number">13.6</span> Deletando variáveis colineares</a></li>
 <li><a class="nav-link" href="#somando-vari%C3%A1veis-redundantes"><span class="header-section-number">13.7</span> Somando variáveis redundantes</a></li>
 <li><a class="nav-link" href="#tabela-de-dados-ambientais"><span class="header-section-number">13.8</span> Tabela de dados ambientais</a></li>
-<li><a class="nav-link" href="#ap%C3%AAndices-10">Apêndices</a></li>
-<li><a class="nav-link" href="#sites-consultados-8">Sites consultados</a></li>
+<li><a class="nav-link" href="#ap%C3%AAndices-9">Apêndices</a></li>
+<li><a class="nav-link" href="#sites-consultados-7">Sites consultados</a></li>
 <li><a class="nav-link" href="#script-limpo-7">Script limpo</a></li>
 <li><a class="nav-link" href="#refer%C3%AAncias-11">Referências</a></li>
 </ul>
@@ -781,7 +772,7 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 12:56:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

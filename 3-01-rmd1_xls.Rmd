@@ -16,60 +16,31 @@ A importação de planilhas do Excel para o ambiente de programação R é uma t
 
 A importação de planilhas do Excel para o ambiente de programação R é uma tarefa fundamental para análise de dados e estatísticas. O R é uma linguagem de programação amplamente utilizada por cientistas de dados, pesquisadores e analistas para manipular, visualizar e modelar informações. Através da importação de planilhas do Excel, é possível transformar dados armazenados em formatos familiares em estruturas que podem ser manipuladas e exploradas de maneira eficaz no R. Isso permite a aplicação de diversas técnicas estatísticas e criação de visualizações informativas, contribuindo para a tomada de decisões embasadas em dados. Neste contexto, entender como importar dados do Excel para o R é um passo crucial para realizar análises de alta qualidade e obter insights significativos a partir dos conjuntos de dados disponíveis.
 
-## Instalação do R e RStudio
-
-## R base
-
-1. O primeiro passo é entrar na página do projeto CRAN (Comprehensive R Archive Network) (https://www.r-project.org/).  
-2. Do lado esquerdo da página clique sobre o link CRAN abaixo de Download. 3. Uma nova página com uma série de links irá se abrir. Esses links são chamados de “espelhos” e servem para que você possa escolher o local mais próximo de onde você está para fazer o download do programa. Escolha um espelho no Brasil.  
-4. Na seção Download and Install R, clique sobre o link `Download R for Windows` para baixar a versão para esse sistema... (MacOS??... o que é isso?)  
-5. Clique sobre o link `base`.
-6. Clique sobre o link `Download R 4.x.x for Windows` para fazer o download do arquivo R.exe.
-7. A instalação segue o formato padrão de instalação de programas no Windows, e portanto não são necessários maiores detalhes.  
-
-## RStudio
-
-1. Para baixar o RStudio entre no endereço (https://posit.co/download/rstudio-desktop/)  
-2. Clique no link `Products > RStudio`  
-3. Selecione a versão Desktop.  
-4. Clique em `DOWNLOAD RSTUDIO DESKTOP`  
-5. Será exibida uma página com a recomendação para você baixar o RStudio FREE versão mais recente - Windows  
-6. Clicando nesse link, você irá baixar o arquivo RStudio atual (.exe)
-7. Depois é só clicar e instalar da forma convencional do Windows.  
-
-Após a instalação, você pode abrir o `RStudio` pelo seu respectivo ícone, e o RStudio estará pronto para ser utilizado. O "R base" continuará instalado mas será acessado pelo RStudio. Não o desinstale.
-
-### RStudio na nuvem
-
-Usar o RStudio Cloud (https://login.rstudio.cloud/) é uma opção para quem não quer instalar a versão para PC. O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente.
-
 ## Sobre os dados do PPBio
 
-Usaremos para esse tutorial dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Nesta base de dados estão armazenadas informações sobre diversos grupos taxonômicos dstribuidos em diversas unidades amostrais (UA's ou sítios), como peixes, macroinverbrebrados bentônicos, quironomídeos e zooplâncotn, além de dados do habitat, como variáveis físicas e químicas, morfologia do habitat, composição do substrato, estrutura de habitat marginal, entre outros (Figura \@ref(fig:301ppbio)). Essa é a **matriz bruta de dados**, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados (Tabela \@ref(tab:301arqs)).
+Usaremos para esse tutorial dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Nesta base de dados estão armazenadas informações sobre diversos grupos taxonômicos dstribuidos em diversas unidades amostrais (UA's ou sítios), como peixes, macroinverbrebrados bentônicos, quironomídeos e zooplâncotn, além de dados do habitat, como variáveis físicas e químicas, morfologia do habitat, composição do substrato, estrutura de habitat marginal, entre outros (Figura \@ref(fig:301ppbio)).
 
-```{r 301ppbio, echo=FALSE, purl=FALSE, fig.cap="Parte da planilha de dados brutos do PPBio."}
+Essa é a **matriz bruta de dados**, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.
+
+```{r 301ppbio, echo=FALSE, purl=FALSE, fig.cap="Parte da planilha de dados brutos do PPBio.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/ppbio.png")
 ```
 
-```{r 301arqs, echo=FALSE, purl=FALSE}
-arqs <- tibble::tribble(
-~"Arquivo (.xlsx)", ~"Tipo de matriz", ~"Descrição", ~"Tipo de dados",
-"ppbio06c", "Matriz comunitária", "O arquivo ppbio06 traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.",
-"ppbio06h", "Matriz ambiental", "O arquivo ppbio06h traz os dados brutos que serão usados nas análises. A matriz de dados brutos contendo 26 localidades em estações diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação.", "Unidades de medição diferentes (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada.",
-"ppbio06", "Matriz comunitária", "O arquivo ppbio06 traz os dados brutos que serão usados nessa análise. A matriz de dados brutos contendo 26 locais/ocasiões (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Contagens de indivíduos com alta amplitude de variação, sugerido uso de matriz relativizada.",
-"ppbio06cpue", "Matriz comunitária", "O arquivo ppbio06cpue traz os valores depois de terem sidos ajustados pela Captura Por Unidade de Esforço (CPUE), onde o número de indivíduos de cada espécie em uma determinada UA é dividido pelo esforço de captura daquela UA. Isso significa que os dados foram relativizados pela CPUE. A matriz de dados brutos contendo 26 localidades em estações do ano diferentes (objetos) x 35 espécies (atributos), antes de qualquer modificação.", "Densidades de indivíduos (no. de indivíduos por Unidade de Esforço de Captura) com alta amplitude de variação, sugerido uso de matriz relativizada."
-)
-library(knitr)
-library(kableExtra)
-arqsx <- kable(arqs, row.names = FALSE, align="l", booktabs = TRUE, caption = "Matrizes disponíveis para análises, com suas descrições e tipos de dados recomendados.")
-arqsx <- kable_styling(arqsx)
-column_spec(arqsx, 1:4, width = c("2cm","2cm","7cm","5cm"))
-```
+:::: {.infobox .warning data-latex=""}
 
-A planilha `ppbio` contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \@ref(fig:301rm1)). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária (Tabela \@ref(tab:301arqs)). No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.  
+::: {.center data-latex=""}
+**IMPORTANTE**
+:::
+
+Veja as matrizes de dados disponíveis para análises, suas descrições e tipos de dados, na seção [Arquivos disponíveis](#arqs) do Capítulo [Bases de dados](#bases).
+
+::::
+
+A planilha `ppbio*-peixes.***` contém o delineamento amostral de um dos estudos do Projeto PPBio (Figura \@ref(fig:301rm1)). Nas linhas são apresentadas as abreviações dos nomes das unidades amostrais (UA's) e nas colunas são apresentados os nomes abreviados das espécies - temos portando uma matriz comunitária. No corpo da planilha temos os valores para o tipo de dados amostrado. Quantitativo, semi-quatitativo ou qualitativo.
+
 Qual desses tipos de dados você acha que é apresentado na planilha?
 
-```{r 301rm1, echo=FALSE, purl=FALSE, fig.cap="Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo."}
+```{r 301rm1, echo=FALSE, purl=FALSE, fig.cap="Associação entre a planilha de dados brutos do PPBio e o delineamento amostral do estudo.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/rm1.fig3.png")
 ```
 
@@ -79,19 +50,42 @@ Várias das espécies nessa matriz tem grande importância ecológica, como é o
 
 [^2]: Do Grego, *hoplon*, arma ou armadura, em referência aos dentes caniniformes muito desenvolvidos, e forte estrutura óssea na cabeça. 
 
-```{r 301asbim, echo=FALSE, purl=FALSE, fig.cap="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>"}
-knitr::include_graphics("imagens/Asbim_u4.jpg")
+```{r 301asbim, echo=FALSE, purl=FALSE, fig.cap="*Astyanax bimaculatus*, a espécie mais comum da matriz de dados ppbio. Peru, by Eakins, R. Fonte: <https://www.fishbase.se/summary/Astianax-bimaculatus.html>", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
+knitr::include_graphics("imagens/spp/Asbim_u4.jpg")
 ```
 
-```{r 301hmala, echo=FALSE, purl=FALSE, fig.cap="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>"}
-knitr::include_graphics("imagens/Homal_u6.jpg")
+```{r 301hmala, echo=FALSE, purl=FALSE, fig.cap="*Hoplias malabaricus*, espécie que cresce para se tornar um importante predador. Brazil, by Roselet, F.F.G. Fonte: <https://www.fishbase.se/summary/Hoplias-malabaricus.html>", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
+knitr::include_graphics("imagens/spp/Homal_u6.jpg")
 ```
+
+:::: {.infobox .note data-latex=""}
+
+::: {.center data-latex=""}
+**NOTA**
+:::
+
+Se você ainda não tem o R e o RStudio instalados veja a seção [Instalação do R e RStudio](#instala_r) do Capítulo [Introdução ao R/RStudio](#intro)
+
+::::
 
 ## Importando a planilha de trabalho
 
+:::: {.infobox2 .stopred data-latex=""}
+
+::: {.center data-latex=""}
+**[ATENÇÃO]{style="color:white"}**
+:::
+
+Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção [Arquivos disponíveis](#arqs) do Capítulo [Bases de dados](#bases).
+
+::: {.center data-latex=""}
+Ou, baixe aqui o arquivo [ppbio06c-peixes.xlsx](https://docs.google.com/spreadsheets/d/1Olyew6L3SCFeSXWJC54Ak3MKmgHD3sTK/edit?usp=drive_link&ouid=101766125969589673518&rtpof=true&sd=true)
+:::
+::::
+
 Para começar a usar o R e analisar os dados do Projeto PPBio, abra o RStudio, verifique sua interface (Figura \@ref(fig:301interface)) e siga as instruções a seguir.
 
-```{r 301interface, echo=FALSE, purl=FALSE, fig.cap="Interface típica do RStudio e nome dos paineis  ou janelas."}
+```{r 301interface, echo=FALSE, purl=FALSE, fig.cap="Interface típica do RStudio e nome dos paineis  ou janelas.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/interfaceR.png")
 ```
 
@@ -111,11 +105,6 @@ No contexto da linguagem de programação R, mensagens de erro (errors) e mensag
 É importante prestar atenção a mensagens de erro e avisos, pois eles fornecem insights sobre problemas em seu código ou potenciais fontes de comportamento inesperado. Resolver erros é fundamental para que o código funcione conforme o esperado. Embora os avisos não interrompam a execução, investigá-los pode ajudar a evitar problemas futuros ou melhorar a qualidade do código.
 
 ## Organização básica
-
-::: {#hello .greeting .message style="color: green;"}
-  [ATENÇÃO]{style="color:blue"}
-Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção \@ref(download401)
-:::
 
 No ambiente do RStudio no painel de edição de código execute (`Ctrl+Enter` com o  teclado  ou `Run` no editor de código) os comandos a seguir, para instalar os pacotes necessários para este módulo.
 
@@ -182,7 +171,7 @@ Em resumo, a abordagem baseada em scripts e comandos de teclado oferece mais con
 
 ```{r, results='hide'}
 library(readxl)
-ppbio06 <- read_excel("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx",
+ppbio06 <- read_excel("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx",
                       sheet = "Sheet1",
                       na = "NA")
 str(ppbio06)
@@ -208,7 +197,7 @@ install.packages("openxlsx")
 
 ```{r, results='hide'}
 library(openxlsx)
-ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx",
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx",
                    rowNames = T,
                    colNames = T,
                    sheet = "Sheet1")
@@ -270,25 +259,25 @@ ppbio <- read.xlsx(file.choose(),  #abre o windows explorer
 A planilha a seguir pode ser baixada da seção \@ref(download401)
 
 ```{r, eval=FALSE}
-install.packages("readODS")
+#install.packages("readODS")
 ```
 
-```{r, results='hide'}
+```{r, results='hide', warning=FALSE}
 library(readODS)
-rebio23.ods <- read_ods("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/rebio23-zoopl_5-20.ods",
+ppbio06.ods <- read_ods("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.ods",
                    row_names = TRUE,
                    col_names = TRUE,
-                   sheet = "densidade_hab_indL",
+                   sheet = "Sheet1",
                    as_tibble = FALSE,
                    na = "n/a") # porque existem celulas vazias (n/a)
-rebio23.ods <- na.omit(rebio23.ods)
-str(rebio23.ods)
-class(rebio23.ods)
-rebio23.ods_ma <- as.matrix(rebio23.ods) #lê como uma matriz
-str(rebio23.ods_ma)
-class(rebio23.ods_ma)
-#rebio23.ods
-#rebio23.ods_ma
+ppbio06.ods <- na.omit(ppbio06.ods)
+str(ppbio06.ods)
+class(ppbio06.ods)
+ppbio06.ods_ma <- as.matrix(ppbio06.ods) #lê como uma matriz
+str(ppbio06.ods_ma)
+class(ppbio06.ods_ma)
+#ppbio06.ods
+#ppbio06.ods_ma
 ```
 
 ### Colunas com o mesmo nome
@@ -423,10 +412,10 @@ data_dp_csv <- read.csv("data_dp.csv",
 Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
 
 ```{r, eval=FALSE, echo=FALSE, purl=FALSE}
-knitr::purl(input = "01-rmd1_xls.Rmd", output = "script-rmd1.txt", documentation = 0)
-Script <- readLines("script-rmd1.txt")
+knitr::purl(input = "3-01-rmd1_xls.Rmd", output = "script-3-01-rmd1_xls.txt", documentation = 0)
+Script <- readLines("script-3-01-rmd1_xls.txt")
 Script <- Script[Script != ""]
-writeLines(Script, "script-rmd1.txt")
+writeLines(Script, "script-3-01-rmd1_xls.txt")
 cat(Script, sep = "\n")
 ```
 

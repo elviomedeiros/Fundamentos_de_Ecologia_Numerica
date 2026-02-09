@@ -1,0 +1,809 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 4-3
+
+## Decomposição da diversidade {-} 
+
+### RESUMO {-}
+
+Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies.
+
+### Apresentação {-}
+
+Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas comuns usadas para avaliar a diversidade de espécies. Essas métricas são usadas para avaliar a diversidade e a estrutura de comunidades ecológicas. Elas podem fornecer informações importantes sobre como as diferentes espécies interagem em um ecossistema e como a diversidade de espécies pode ser afetada por mudanças ambientais ou distúrbios [@RN357].
+
+### Sobre os dados
+
+Veja o tópico "Sobre os dados" em [AQUI] 
+
+### Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console 
+```
+
+Instalando os pacotes necessários para esse módulo.
+
+```{r, eval=FALSE}
+```
+
+Depois de instalados, carregue os pacotes a seguir no seu computador.
+
+```{r, eval=FALSE}
+```
+
+Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R ([R CRAN](https://cran.r-project.org/), [@RN2774]) e [RStudio](https://posit.co/download/rstudio-desktop/) [@RN358]). No exemplo acima, o pacote `openxlsx` permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função `install.packages()`.
+
+Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função `library()`. Por exemplo, para carregar o pacote `openxlsx`, você precisa executar a função `library(openxlsx)`. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+### Importando a planilha
+
+Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.  
+	- Ajuste a primeira linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.  
+	- Ajuste o parâmetro `sheet = "Sheet1"` para refletir a aba correta do arquivo .xlsx a ser importado.
+
+```{r, results='hold'}
+#dir <- getwd() #criamos um vetor com o diretório  de trbalho 
+#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(ppbio)
+#View(ppbio)
+ppbio[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+```
+
+Exibindo os dados importados (esses comando são "case-sensitive" `ignore.case(object)`).
+
+```{r, eval=FALSE, results='hold'}
+#View(ppbio)
+print(ppbio[1:8,1:8])
+ppbio[1:10,1:10]
+str(ppbio)
+mode(ppbio)
+class(ppbio)
+```
+
+## REINÍCIO 1
+
+```{r, eval=TRUE}
+m_trab <- ppbio
+```
+Aqui cria-se um novo objeto do R (`m_trab`, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela \@ref(tab:rmd4-arqs)).
+
+#### Abreviações {-}
+
+No interesse de sistematizar o código R das várias matrizes que são comumente usadas em uma AMD, a tabela \@ref(tab:42tbl-m_2) resume seus tipos e abreviações.
+
+## Análise de Espécies Compartilhadas
+
+Instalando os pacotes necessários
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+install.packages("eulerr")
+install.packages("VennDiagram")
+install.packages("ggVennDiagram")
+install.packages("ggvenn")
+install.packages("gplots") 
+```
+
+Carregado a base de dados `teste` para ajudar no entendimento.
+
+```{r, eval=TRUE, results='hide'}
+teste <- read.table(text = "
+	SP1	SP2	SP3	SP4	SP5	SP6	SP7	SP8	SP9	SP10	SP11	SP12	SP13	SP14	SP15	SP16	SP17	SP18	SP19	SP20
+A1	1	0	0	1	0	1	1	1	0	0	1	0	0	1	0	1	1	1	0	0
+A2	1	0	0	1	0	1	1	0	0	0	1	0	0	1	0	1	1	0	0	0
+A3	1	0	0	1	0	1	1	0	0	0	1	0	0	1	0	1	1	0	0	0
+B1	0	1	0	1	1	0	1	0	1	0	0	1	0	1	1	0	1	0	1	0
+B2	0	1	0	1	1	0	1	0	0	0	0	1	0	1	1	0	1	0	0	0
+B3	0	1	0	1	1	0	1	0	0	0	0	1	0	1	1	0	1	0	0	0
+C1	0	0	1	0	1	1	1	0	0	1	0	0	1	0	1	1	1	0	0	1
+C2	0	0	1	0	1	1	1	0	0	0	0	0	1	0	1	1	1	0	0	0
+C3	0	0	1	0	1	1	1	0	0	0	0	0	1	0	1	1	1	0	0	0
+", header = TRUE, row.names = 1)
+teste
+```
+
+## REINÍCIO 2
+
+```{r, eval=TRUE}
+m_trab <- ppbio
+```
+
+### Separando a matriz `ppbio` em suas partes (S e B ou A e R)
+
+Separa-se `S-` e `B-`, e atribui-se, respectivamente, aos grupos G1 e G2 e remove-se as colunas zeradas.
+
+```{r, eval=FALSE}
+G1 <- m_trab[1:12,]
+names(which(colSums(G1) == 0)) #all-zero columns
+G1 <- G1[, colSums(G1 != 0) > 0]
+G2 <- m_trab[13:23,]
+names(which(colSums(G2) == 0)) #all-zero columns
+G2 <- G2[, colSums(G2 != 0) > 0]
+```
+
+#### Mesmo procedimento usando o comando `grepl()` do pacote `dplyr`
+
+Outra forma de separar grupos, mas agpra para `R-` e `A-`, atribuindo-se, respectivamente, aos grupos G3 e G4 e removendo-se as colunas zeradas.
+
+```{r, eval=FALSE}
+library(dplyr)
+G3 <- filter(m_trab, grepl("R-", row.names(m_trab)))
+names(which(colSums(G3) == 0)) #all-zero columns
+G3 <- G3[, colSums(G3 != 0) > 0]
+G4 <- filter(m_trab, grepl("A-", row.names(m_trab)))
+names(which(colSums(G4) == 0)) #all-zero columns
+G4 <- G4[, colSums(G4 != 0) > 0]
+```
+
+```{r 2codes, echo=FALSE}
+tblcodes <- tibble::tribble(
+    ~"Hierarquia", ~"n*=23", ~"",~"",~"",~"",
+    "Área", "", "", "", "", "",
+    "S-", "Ambiente", "Ponto", "Coleta", "Data", "",
+    "B-", "R-", "CT", "1", "01-04-2006", "",
+    "", "A-", "CP", "2", "26-06-2006", "",
+    "", "", "TA", "3", "22-09-2006", "",
+    "", "", "MU", "4", "17-12-2006", "",
+    "", "", "GU", "", "", "",
+    "", "", "PC", "", "", "",
+    "2", "x 2", "x 6", "x 4", "", "np**= 96"
+)
+library(knitr)
+library(kableExtra)
+x <- kable(tblcodes, row.names = FALSE, align = "l", booktabs = TRUE, caption = "Código para o delineamento amostral. *n, total amostrado = 23; **np, n planejado = 96.")
+x <- kable_styling(x)
+column_spec(x, 1:6)
+```
+
+## Táxons compartilhados pelas duas bases de dados
+
+### Bases de dados em arquivos diferentes `B` e `S`
+
+Nos códigos abaixo, a função `intersect()` é usada para se obter os nomes de colunas em comum entre `fixo` e `entorno`, que são guardados em um vetor. Esses vetores são repassados nos outros argumentos subsequentes. O propósito dos argumentos `setdiff()` e `\<- 0` não é preencher células vazias com zeros, mas  adicionar novas colunas em cada data frame com nomes de colunas que estão presentes em um data frame mas não em outro. Se uma coluna está faltando em um data frame, ela será adicionada aquele data frame com o termo `NA` ou `NULL`. Para substituir os valores rotulados de `NA` ou `NULL` usa-se a função `merged[is.na(merged)] <- 0`. Ver Apêndices.
+
+```{r, eval=FALSE, resul='hold'} 
+shared_spp <- intersect(names(G1), names(G2)) #get the common column names
+shared_spp
+G1_only <- setdiff(names(G1), names(G2))
+G1_only
+G2_only <- setdiff(names(G2), names(G1))
+G2_only
+Riqueza <- length(shared_spp) + length(G1_only) + length(G2_only)
+Riqueza
+```
+
+Criando um `data.frame` com todas as espécies compartilhadas e exclusivas.
+
+```{r, eval=FALSE, results='hide'}
+library(tidyverse)
+# Create a data frame with all species
+all_species <- data.frame(
+  type = c(rep("Shared", length(shared_spp)),
+           rep("G1_only", length(G1_only)),
+           rep("G2_only", length(G2_only))),
+  species = c(shared_spp, G1_only, G2_only)
+)
+# Create a table using the `table()` function
+species_table <- table(all_species$type, all_species$species)
+
+# Convert the table to a data frame and format it
+species_table_df <- as.data.frame.matrix(species_table)
+rownames(species_table_df) <- c("G1_only", "G2_only", "Shared")
+species_table_df <- t(species_table_df[, order(colnames(species_table_df))])
+species_table_df <- as.data.frame(species_table_df)
+species_table_df
+# Ordenando pelo nome da coluna
+species_table_df <- rownames_to_column(species_table_df, var = "Espécies")
+species_table_df <- species_table_df[order(species_table_df$G1_only, species_table_df$G2_only, species_table_df$Shared, decreasing = TRUE),]
+library(gt)
+gt(species_table_df)
+```
+
+## REINÍCIO 3
+
+```{r, eval=TRUE}
+m_bruta <- ppbio
+```
+
+Aqui cria-se o vertor da matriz bruta a partir da base de dados depois de feitos os ajustes necessários.
+
+### Criando uma matriz de médias
+
+```{r, eval=TRUE, results='hide'}
+#Inserindo coluna para agrupamentos
+ncol(m_bruta); nrow(m_bruta) #no. de N colunas x M linhas
+m_bruta_g <- cbind(Grupos = rownames(m_bruta), m_bruta)
+
+###Mudando nomes de linhas, ajuste em BB-EN
+#m_bruta_g$Grupos[m_bruta_g$Grupos == "EN11"] <- "BE11"
+#m_bruta_g$Grupos[m_bruta_g$Grupos == "EN14"] <- "BE14"
+#m_bruta_g$Grupos[m_bruta_g$Grupos == "EN15"] <- "BE15"
+###
+
+agrup1 <- substr(m_bruta_g[, 1], 1,1)
+agrup1
+m_bruta_g <- m_bruta_g %>% mutate(Grupos=c(agrup1))
+
+#m_avg_part <- aggregate(m_bruta_g[, 2:3], list(m_bruta_g$Grupos), mean)
+m_avg <- m_bruta_g %>% 
+  group_by(Grupos) %>%
+  summarise(across(.cols = everything(), ~ mean(.x, na.rm = TRUE)))
+#m_avg <- m_bruta_g %>% 
+#  group_by(Grupos) %>%
+#  summarise(across(.cols = everything(), list(mean = mean, sd = sd)))
+#?across
+
+#Primeira coluna para nomes das linhas 
+m_avg <- as.data.frame(m_avg)
+class(m_avg)
+rownames(m_avg) <- m_avg[,1]
+m_avg[,1] <- NULL
+m_avg
+#Salvando a matriz
+write.table(m_avg,
+            "m_avgcsv.csv",
+            append = F,
+            quote = TRUE,
+            sep = ";", dec = ",",
+            row.names = T)
+m_avg1_csv <- read.csv("m_avgcsv.csv",
+                    sep = ";", dec = ",",
+                    header = T,
+                    row.names = 1,
+                    na.strings = NA)
+```
+
+### Análise de Espécies Compartilhadas: Em arquivos diferentes
+
+```{r, eval=FALSE}
+#Espécies compartilhadas
+shared_spp1 <- intersect(names(G1), names(G2)) #get the common column names
+shared_spp1
+G1_only <- setdiff(names(G1), names(G2))
+G1_only
+G2_only <- setdiff(names(G2), names(G1))
+G2_only
+Riqueza <- length(shared_spp1) + length(G1_only) + length(G2_only)
+Riqueza
+```
+
+```{r, eval=FALSE}
+shared_spp2 <- intersect(names(G3), names(G4))
+shared_spp2
+G3_only <- setdiff(names(G3), names(G4))
+G3_only
+G4_only <- setdiff(names(G4), names(G3))
+G4_only
+Riqueza <- length(shared_spp2) + length(G3_only) + length(G4_only)
+Riqueza
+```
+
+### Bases de dados no mesmo arquivo `ppbio`
+
+Pode-se usar a matriz `teste.xlsx` para testar e verificar os resultados dos comandos em comparação com as matrizes reais. O comando `fix()` permite editar uma matriz. A matriz de teste tem `r nrow(teste)` linhas e `r ncol(teste)` colunas, com os nomes `r rownames(teste)` nas linhas e `r colnames(teste)` como os nomes das colunas. Códigos baseados nas letras A, B e C, portanto, se referem a matriz de teste. 
+
+A seguir separamos a matriz em suas partes.
+
+```{r, eval=FALSE}
+data <- (teste)
+data
+library(dplyr)
+A <- filter(data, grepl("A", row.names(data)))
+names(which(colSums(A) == 0)) #all-zero columns
+A <- A[, colSums(A != 0) > 0]
+B <- filter(data, grepl("B", row.names(data)))
+names(which(colSums(B) == 0)) #all-zero columns
+B <- B[, colSums(B != 0) > 0]
+C <- filter(data, grepl("C", row.names(data)))
+names(which(colSums(C) == 0)) #all-zero columns
+C <- C[, colSums(C != 0) > 0]
+```
+
+## REINÍCIO 4
+
+```{r, eval=TRUE}
+data <- (m_bruta)
+```
+
+## Encontrando espécies exclusivas
+
+### Escolhendo as **LINHAS OU GRUPOS** para comparar
+
+```{r rows, eval=FALSE}
+# Get the row indices where "A" occurs
+rownames(data)
+rows <- grep("S-", rownames(data))
+#rows <- grep("B-", rownames(data))
+#rows <- c(1:36)
+rows
+```
+
+#### Espécies exclusivas que ocorrem em **1 LINHA E OUTRA, OU EM 1 GRUPO E OUTRO** `(#EM TESTE)`
+
+Aqui procuramos espécies que ocorrem em todas as linhas do grupo definido pelo vetor `rows` no chunk anterior `rows`   
+
+```{r, eval=FALSE}
+# Initialize an empty vector to store species exclusive to 'A' rows
+species_only_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species occurs only in 'A' rows
+  if (all(data[rows, col] != 0) && !any(data[-rows, col] != 0)) {
+    species_only_in <- c(species_only_in, col)
+  }
+}
+# Print species that only occur in 'A' rows
+print(species_only_in)
+data
+```
+
+### Espécies exclusivas para **1 LINHA OU 1 GRUPO** - Baseado na soma dos grupos `(#FUNCIONA)`
+
+```{r, eval=FALSE}
+# Get the row indices where 'A' occurs
+rows
+# Calculate the sum of occurrences of each species in 'A' rows
+sum_of <- colSums(data[rows, ])
+sum_of
+# Initialize an empty vector to store species exclusive to 'A' rows
+species_only_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species occurs only in 'A' rows
+  if (sum(data[rows, col]) == sum_of[col] && !any(data[-rows, col] != 0)) {
+    species_only_in <- c(species_only_in, col)
+  }
+}
+# Print species that only occur in 'A' rows
+print(species_only_in)
+S_only
+data
+rows
+```
+
+## Espécies exclusivas para **2 LINHAS OU 2 GRUPOs** - Baseado na soma dos grupos `(#FUNCIONA)`
+
+```{r, eval=FALSE}
+# Get the row indices where 'A' occurs
+rows <- grep("S-", rownames(data))
+rows2 <- grep("B-", rownames(data))
+#rows <- as.vector(rbind(c(rows, rows2)))
+rows
+```
+
+```{r, eval=FALSE}
+# Calculate the sum of occurrences of each species in 'A' rows
+sum_of <- colSums(data[rows, ])
+sum_of
+# Initialize an empty vector to store species exclusive to 'A' rows
+species_only_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species occurs only in 'A' rows
+  if (sum(data[rows, col]) == sum_of[col] && !any(data[-rows, col] != 0)) {
+    species_only_in <- c(species_only_in, col)
+  }
+}
+# Print species that only occur in 'A' rows
+print(species_only_in)
+S_only
+data
+rows
+identical(S_only, species_only_in)
+intersect(S_only, species_only_in) #shared column names
+setdiff(S_only, species_only_in) #only in 1st vector
+length(intersect(S_only, species_only_in)) #how many
+```
+
+## Encontrando espécies compartilhadas ENTRE DOIS (OU MAIS) GRUPOS
+
+Encontra espécies que são compartilhadas (ocorrem em **TODAS AS LINHAS**) dentro do grupo analisado. Mas, não significa que elas estejam apenas nestas linhas. A função `any()` indica que  **QUALQUER** linha em comum entre duas colunas faz com que elas tenha esses colunas compartilhadas. Já a função `all()` indica que, para duas colunas terem linhas compartilhadas os grupos das colunas tem que compartilhar **TODAS** as suas linhas. Uma análise sobre esse `loop`. 
+Adicionamos `&& any(data[rows_G3, col] != 0)` para um terceiro grupo e assim sucessivamente.
+
+```{r, eval=FALSE}  
+# Get the rows corresponding to A and B (and C)
+rows_G1 <- grep("S-", rownames(data))
+rows_G2 <- grep("B-", rownames(data))
+rows_G3 <- grep("R-", rownames(data))
+rows_G4 <- grep("A-", rownames(data))
+#rows <- as.vector(cbind(c(rows_G1, rows_G2, rows_G3, rows_G4)))
+# Initialize an empty vector to store species that A and B have in common
+species_in <- character(0)
+# Iterate over each column
+for (col in colnames(data)) {
+  # Check if the species has at least one non-zero value in both A and B rows
+  if (any(data[rows_G1, col] != 0) && any(data[rows_G2, col] != 0)) {
+    species_in <- c(species_in, col)
+  }
+}
+# Print species that A and B have in common
+print(species_in)
+shared_spp
+data
+```
+
+Uma análise feita pelo ChatGPT sobre o `loop` "for...{...if{...}}" acima e os outros anteriores é apresentada [aqui](https://chat.openai.com/share/c58ca553-05f0-41f3-b000-be4d2b71d283) 
+
+## Diagrama de Venn
+
+Primeiro é necessário criar uma matriz binária para os valores das colunas nas linhas. Isso é feito a seguir.
+
+```{r, results='hold'}
+library("gt")
+m_venn <- as.data.frame(t(m_avg))
+m_venn
+gt(round(m_venn, 2), rownames_to_stub = TRUE)
+m_venn[m_venn !=0] <- 1 #matriz binária 
+```
+
+### Usando o pacote `eulerr`
+
+```{r, results='hold'}
+library("eulerr")
+#set.seed() #this seed changes the orientation of the sets        
+plot(euler(m_venn), counts = TRUE, fontface = 1)
+```
+
+## Usando o pacote [`VennDiagram`](https://rstudio-pubs-static.s3.amazonaws.com/13301_6641d73cfac741a59c0a851feb99e98b.html)
+
+```{r, results='hold'}
+# Load required libraries
+library(VennDiagram)
+library(ggvenn)
+G1 <- nrow(subset(m_venn, S==1))
+G2 <- nrow(subset(m_venn, B==1))
+#G3 <- nrow(subset(m_venn, R==1))
+#G4 <- nrow(subset(m_venn, A==1))
+G1_G2 <- nrow(subset(m_venn, G1==1 & G2==1))
+#G3_G4 <- nrow(subset(m_venn, G3==1 & G4==1))
+
+grid.newpage()
+draw.single.venn(area = G1, category = "G1")
+
+grid.newpage()
+draw.single.venn(G1, category = "G1",
+                 lty = "blank",
+                 fill = "cornflower blue", 
+                 alpha = 0.5)
+##lty - outline of cirlces, ## fill - colour, ## alpha - colour transparency
+
+grid.newpage()
+draw.pairwise.venn(G1, G2, G1_G2,
+                   category = c("G1","G2"))
+grid.newpage()
+draw.pairwise.venn(G1, G2, G1_G2,
+                   category = c("G1","G2"),
+                   lty = rep("blank",2),
+                   fill = c("light blue", "pink"),
+                   alpha = rep(0.5,2),
+                   cat.pos = c(0,0),
+                   cat.dist = rep(0.025,2))
+## cat.pos - position of category titles, represented by degree from the
+## middle of the circle
+## cat.dist - distance of the category titles from the edge of the circle
+
+grid.newpage()
+draw.pairwise.venn(G1, G2, G1_G2,
+                   category = c("G1", "G2"),
+                   lty = rep("blank",2),
+                   fill = c("light blue", "pink"),
+                   alpha = rep(0.5, 2),
+                   cat.pos = c(0,0),
+                   cat.dist = rep(0.025, 2),
+                   scaled = FALSE)
+## scaled - TRUE for scaled or FALSE for unscaled cirlces
+
+grid.newpage() #<--
+draw.pairwise.venn(area1 = G1, area2 = G2, cross.area = 0,
+                   category = c("G1","G2"),
+                   lty = rep("blank",2),
+                   fill = c("light blue", "green"),
+                   alpha = rep(0.5, 2),
+                   cat.pos = c(0, 180),
+                   euler.d = TRUE, sep.dist = 0.03, 
+                   rotation.degree = 45)
+## euler.d - TRUE for movable circles; FALSE for unmovable circles. Must be
+## TRUE to have space between non-overlapping circles.
+## sep.dist - distance between circles
+## rotation.degree - degrees the diagram is rotated
+
+#grid.newpage()
+#draw.triple.venn(area1 = BB, area2 = CA, area3 = EN,
+#                 n12 = BB_CA, n23 = CA_EN, n13 = BB_EN, 
+#                 n123 = BB_CA_EN,
+#                 category = c("Rio Barro Branco", #"Rio Caiana", "Entorno da REBio"),
+#                 lty = "blank", 
+#                 fill = c("skyblue", "pink1", #"mediumorchid"),
+#                 scaled = TRUE)
+#grid.newpage()
+#draw.quad.venn(area1 = BB, area2 = CA, area3 = EN, #area4 = RE,
+#               n12 = BB_CA, n23 = CA_EN, n13 = BB_EN,
+#               n14 = BB_RE, n24 = CA_RE, n34 = EN_RE,
+#               n123 = BB_CA_EN, n1234 = BB_CA_EN_RE,
+#               n124 = BB_CA_RE, n134 = BB_EN_RE,
+#               n234 = CA_EN_RE,
+#               category = c("BB", "CA", "EN", "RE"),
+#               lty = "blank",
+#               fill = c("skyblue", "pink1", #"mediumorchid", "orange"),
+#               scaled = TRUE)
+```
+
+## Diagrama de Venn - BASEADO EM PALAVRAS
+
+Cálculo do overlap [AQUI](https://stackoverflow.com/questions/70160554/how-to-get-list-of-unique-items-for-each-partition-in-venn-diagram) ou [AQUI](https://forum.posit.co/t/items-in-intersection-of-a-venn-diagram/62947)
+
+```{r, results='hold'}
+lista <- m_venn
+lista
+
+G1 <- rownames(lista)[which(lista$S !=0)]
+G2 <- rownames(lista)[which(lista$B !=0)]
+G3 <- rownames(lista)[which(lista$R !=0)]
+G4 <- rownames(lista)[which(lista$A !=0)]
+over = list(G1, G2)
+over
+
+venn.diagram(#salva o diagrama em um arquivo
+  x = list(G1, G2),
+  category.names = c("G1","G2"),
+  filename = 'fig-venn_diagramm2.png',
+  height = 3000, width = 3000, resolution = 500, 
+  disable.logging = T, scaled = T,
+  output = F,
+  lty = "blank",
+  fill = c("skyblue", "pink1"))
+
+overlap <- calculate.overlap(over)
+overlap
+VennDiagram::get.venn.partitions(over)
+```
+
+Mais opções [Aqui](https://www.datanovia.com/en/blog/beautiful-ggplot-venn-diagram-with-r/) e [Aqui](https://www.datanovia.com/en/blog/venn-diagram-with-r-or-rstudio-a-million-ways/)
+
+```{r, results='hold', eval=FALSE}
+library("ggVennDiagram")
+x <- list(
+  G1 = rownames(lista)[which(lista$S !=0)],
+  G2 = rownames(lista)[which(lista$B !=0)],
+  G3 = rownames(lista)[which(lista$R !=0)],
+  G4 = rownames(lista)[which(lista$A !=0)])
+
+ggvenn(
+  x, 
+  fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF", "#CD534CFF"),
+  stroke_size = 0.5, set_name_size = 4
+  )
+
+# Default plot
+ggVennDiagram(
+  x, label_alpha = 0,
+  category.names = c("G1","G2","G3","G4")
+  ) +
+  ggplot2::scale_fill_gradient(low="yellow",high = "green")
+
+grid.newpage()
+ggVennDiagram(x[1:2], label_alpha = 0)
+
+library("ggvenn")
+grid.newpage()
+ggvenn(x)
+
+library("gplots")
+grid.newpage()
+v.table <- venn(x)
+v.table <- as.data.frame(v.table)
+print(v.table)
+print(t(m_avg))
+```
+
+```{r, eval=FALSE}
+# Estrutura da comunidade
+system(paste("open", shQuote("D:/Elvio/OneDrive/MSS/_Zoo-Rebio/R_ZooRebio/strcom.qmd")))
+```
+
+
+## PARTIÇÃO DA DIVERSIDADE
+
+O output da função `adipart` no pacote `vegan` do R fornece uma análise detalhada da diversidade alfa, beta e gama baseada no índice de riqueza para o seu conjunto de dados `fauna.zoo` em diferentes escalas espaciais definidas por `escala.total`. Aqui está uma explicação detalhada do output e sua interpretação:
+
+### Output da Função adipart
+
+# Extrair valores do objeto part.geral
+statistic <- part.geral$statistic
+SES <- part.geral$oecosimu$z
+mean <- part.geral$oecosimu$means
+lower_2.5 <- apply(part.geral$oecosimu$simulated, 1, quantile, probs = 0.025)
+median_50 <- apply(part.geral$oecosimu$simulated, 1, quantile, probs = 0.50)
+upper_97.5 <- apply(part.geral$oecosimu$simulated, 1, quantile, probs = 0.975)
+Pr_sim <- part.geral$oecosimu$pval
+
+# Definir função para adicionar significância
+get_significance <- function(p) {
+  if (p <= 0.001) {
+    return("***")
+  } else if (p <= 0.01) {
+    return("**")
+  } else if (p <= 0.05) {
+    return("*")
+  } else if (p <= 0.1) {
+    return(".")
+  } else {
+    return(" ")
+  }
+}
+significance <- sapply(Pr_sim, get_significance)
+
+# Criar dataframe com todas as informações
+diversity_data <- data.frame(
+  Component = names(statistic),
+  Observed = round(statistic, 2),
+  SES = round(SES, 2),
+  Mean = round(mean, 2),
+  Lower_2.5 = round(lower_2.5, 2),
+  Median_50 = round(median_50, 2),
+  Upper_97.5 = round(upper_97.5, 2),
+  Pr_sim = Pr_sim,
+  Sign = significance
+)
+
+# Exibir a tabela
+print(diversity_data)
+str(part.geral)
+gt(diversity_data)
+
+
+#### Chamada
+A chamada da função especifica os parâmetros utilizados:
+- **y**: `fauna.zoo` (seu conjunto de dados)
+- **x**: `escala.total` (as escalas espaciais)
+- **index**: "richness" (medida de diversidade)
+- **weights**: "unif" (pesos uniformes)
+- **nsimul**: 999 (número de simulações para o modelo nulo)
+
+#### Modelo Nulo
+O método usado para as simulações do modelo nulo é `r2dtable` com 999 simulações. Este método simula tabelas aleatórias com as mesmas somas de linhas e colunas que a tabela observada.
+
+#### Estatísticas e Teste de Hipótese
+O output fornece os valores observados das estatísticas, os tamanhos dos efeitos padronizados (SES), médias, percentis (2.5%, 50%, 97.5%) e valores de p (Pr(sim.)) para cada componente de diversidade.
+
+### Análise das Estatísticas
+
+1. **alpha.1, alpha.2, alpha.3**: Estes são os valores de diversidade alfa em diferentes níveis hierárquicos.
+   - A diversidade alfa mede a riqueza média de espécies dentro de cada unidade de amostragem.
+   - Os valores observados são significativamente menores do que os valores simulados, conforme indicado pelos valores de p muito baixos (0.001).
+
+2. **gamma**: Esta é a diversidade gama, representando a riqueza total de espécies em todas as unidades de amostragem.
+   - O valor observado é igual ao valor simulado, indicando que não há desvio significativo do modelo nulo (valor de p = 1.000).
+
+3. **beta.1, beta.2, beta.3**: Estes são os valores de diversidade beta em diferentes níveis hierárquicos.
+   - A diversidade beta mede a diferenciação na composição de espécies entre as unidades de amostragem.
+   - O valor beta.1 observado é significativamente menor, enquanto os valores beta.2 e beta.3 são significativamente maiores do que os valores simulados (todos os valores de p = 0.001).
+
+#### Códigos de Significância
+- ‘***’ indica um valor de p < 0.001, mostrando resultados altamente significativos.
+
+### Interpretação
+- **Diversidade Alfa**: Os valores de diversidade alfa observados significativamente menores sugerem que a riqueza de espécies dentro das unidades individuais é menor do que o esperado ao acaso.
+- **Diversidade Gama**: A riqueza total de espécies (diversidade gama) não difere do valor esperado, o que implica que a riqueza total é como esperado.
+- **Diversidade Beta**: Os resultados mistos para diversidade beta (beta.1 menor e beta.2, beta.3 maiores) indicam variabilidade na composição de espécies entre as unidades de amostragem em diferentes níveis hierárquicos. Isso pode sugerir diferentes processos ecológicos ou estruturas comunitárias nessas escalas.
+
+No geral, esses resultados fornecem insights sobre a partição da diversidade dentro do seu conjunto de dados, destacando áreas onde os padrões observados diferem daqueles esperados sob um modelo nulo.
+
+O modelo nulo `r2dtable` é uma técnica utilizada em ecologia e biologia da conservação para gerar tabelas de contingência aleatórias que mantêm as margens (somas de linhas e colunas) iguais às da tabela original. Isso é útil para testes de hipótese e análise de diversidade porque permite comparar os dados observados com o que seria esperado por acaso, mantendo as restrições estruturais dos dados originais.
+
+### Detalhes do `r2dtable`
+
+- **Função**: `r2dtable` faz parte do pacote base do R e é usado para gerar tabelas de contingência aleatórias.
+- **Entrada**: A função `r2dtable(n, r, c)` toma três argumentos:
+  - `n`: número de tabelas aleatórias a serem geradas.
+  - `r`: vetor com as somas das linhas da tabela original.
+  - `c`: vetor com as somas das colunas da tabela original.
+- **Saída**: Produz uma lista de tabelas de contingência aleatórias que têm as mesmas somas de linhas e colunas que a tabela original.
+
+### Como Funciona
+
+O algoritmo por trás do `r2dtable` usa uma permutação aleatória das células da tabela original, mas ajusta as células de forma que as somas das linhas e colunas permaneçam constantes. Isso cria uma distribuição nula contra a qual os dados observados podem ser comparados.
+
+### Uso no Contexto do vegan e adipart
+
+Quando aplicado no contexto de diversidade com a função `adipart` do pacote `vegan`:
+
+1. **Geração de Tabelas Aleatórias**: `r2dtable` gera tabelas de contingência aleatórias baseadas nas margens (somas das linhas e colunas) da tabela original `fauna.zoo`.
+2. **Simulações**: A função `adipart` utiliza essas tabelas para criar uma distribuição nula de riqueza de espécies (ou qualquer outro índice de diversidade especificado).
+3. **Comparação com Dados Observados**: Os valores observados de alfa, beta e gama diversidade são comparados com a distribuição nula para determinar se os padrões observados são significativamente diferentes do que seria esperado por acaso.
+
+### Interpretação
+
+- **Valores Observados vs. Valores Simulados**: Comparando os valores observados com os valores simulados, pode-se determinar se a diversidade observada é maior ou menor do que o esperado por acaso.
+- **Significância Estatística**: Valores de p são calculados para testar a significância das diferenças entre os valores observados e a distribuição nula.
+
+### Exemplos de Uso
+
+Aqui está um exemplo básico de como o `r2dtable` pode ser usado diretamente no R:
+
+```R
+# Suponha uma tabela original com margens definidas
+r <- c(20, 30, 25)  # somas das linhas
+c <- c(25, 25, 25)  # somas das colunas
+
+# Gerar 999 tabelas aleatórias
+simulated_tables <- r2dtable(999, r, c)
+
+# Visualizar a primeira tabela simulada
+print(simulated_tables[[1]])
+```
+
+No contexto do `vegan` e `adipart`, você normalmente não chamaria `r2dtable` diretamente, pois a função `adipart` faz isso internamente para gerar as distribuições nulas necessárias para a análise de diversidade.
+
+Essa técnica permite realizar uma análise robusta da diversidade, considerando a estrutura dos dados e fornecendo uma base para testes de hipóteses sobre os padrões de diversidade observados.
+
+
+Claro! Vamos interpretar os resultados em português:
+
+A saída que você compartilhou parece ser de uma análise de simulação hierárquica realizada com a função `hiersimu`, que provavelmente faz parte de um pacote para estatísticas ecológicas ou biodiversidade no R. Aqui está uma breve interpretação dos componentes principais:
+
+- **statistic**: O valor observado da estatística de diversidade para cada nível hierárquico (por exemplo, habitat, ponto, rio, etc.).
+- **SES (Tamanho do Efeito Padronizado)**: Indica como a estatística observada se compara ao modelo nulo. Um SES negativo significa que a diversidade observada é menor do que a esperada por acaso, enquanto um SES positivo significa que é maior.
+- **mean, 2.5%, 50%, 97.5%**: Esses valores representam a média e o intervalo de confiança de 95% (IC) para a estatística sob o modelo nulo (ou seja, valores simulados).
+- **Pr(sim.)**: O valor-p que indica a probabilidade de que a estatística observada seja menor ou maior do que os valores simulados sob a hipótese nula. Um valor-p baixo (por exemplo, <0.01) sugere que a estatística observada é significativamente diferente do modelo nulo.
+
+Aqui está a interpretação dos resultados:
+
+1. **rebio.habitat**:
+   - Estatística observada: 0.90817
+   - SES: -35.933 (sugerindo uma diversidade muito menor comparada ao modelo nulo)
+   - Valor-p: 0.01, indicando que o valor observado é significativamente menor do que o esperado por acaso.
+
+2. **rebio.ponto**:
+   - Estatística observada: 0.99444
+   - SES: -39.547
+   - Valor-p: 0.01, indicando uma diversidade significativamente menor.
+
+3. **rebio.rio**:
+   - Estatística observada: 1.61250
+   - SES: -23.345
+   - Valor-p: 0.01, indicando uma diversidade significativamente menor.
+
+4. **rebio**:
+   - Estatística observada: 1.80002
+   - SES: 0.000 (indicando que a diversidade observada está exatamente no nível esperado pelo modelo nulo)
+   - Valor-p: 1.00, significando que não há diferença significativa em relação ao modelo nulo.
+
+Resumindo, todos os níveis hierárquicos, exceto "rebio", mostram desvios significativos na diversidade em relação ao que é esperado por acaso, com uma diversidade observada significativamente menor. "rebio" está exatamente no nível esperado, sem desvio significativo.
+
+
+## Apêndices {.unnumbered}
+
+### Sites consultados {.unnumbered}
+[Primeira coluna para nomes das linhas](www.link.com) 
+
+### Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "02-shared.Rmd", output = "script-rmd2-4-2.txt", documentation = 0)
+Script <- readLines("script-rmd2-4-2.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd2-4-2.txt")
+cat(Script, sep = "\n")
+```
+
+## Referências {-}

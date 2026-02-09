@@ -7,7 +7,7 @@
 <title> 14 R Modulo 5 - Relativizações e transformações | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Transformações e relativizações de dados são técnicas essenciais na análise de dados em Ecologia Numérica, permitindo comparar diferentes variáveis que estão em escalas diferentes ou que...">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
@@ -22,7 +22,8 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -49,7 +50,7 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -75,22 +76,23 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
 <li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
-<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
-<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
 <li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
 <li><a class="active" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></li>
 <li class="book-part">ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -117,18 +119,18 @@
 <h2>
 <span class="header-section-number">14.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-8"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"moments"</span><span class="op">)</span> <span class="co">#calcula assimetria e curtose dos dados</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span> <span class="co">#estatisticas para ecologia de comunidades</span></span></code></pre></div>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
 <p>Definindo o diretório de trabalho e installando os pacotes necessários:</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 <div id="importando-a-planilha-7" class="section level3" number="14.1.1">
@@ -138,11 +140,11 @@
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 - Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado.</p>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
 <span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
-<span><span class="va">m_bruta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx"</span>,</span>
+<span><span class="va">m_bruta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
@@ -191,7 +193,7 @@
 ## S-R-CP1        0       19        0        0        0
 ## S-A-TA1        0       23        1       13        0</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(m_bruta)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">m_bruta</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -199,7 +201,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span></code></pre></div>
 <p>Podemos exibir a planilha depois de ter sido importada para o ambiente R/RStudio usando as funções <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code>, <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> ou <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>. Note que essas funções são case-sensitive. A função <code>ignore.case()</code> é uma função do pacote <code>stringr</code> que modifica um padrão para que ele não considere o caso das letras nas correspondências. Por exemplo, se você quiser encontrar todas as ocorrências da letra “a” em um vetor de caracteres, independente de ser “A” ou “a”, você pode usar essa função.</p>
-<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(m_bruta)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span></code></pre></div>
@@ -356,7 +358,7 @@ ppbio06.xlsx, zoorebio.xlsx, bentos06.xlsx
 <span class="header-section-number">14.2</span> Tamanho da matriz<a class="anchor" aria-label="anchor" href="#tamanho-da-matriz"><i class="fas fa-link"></i></a>
 </h2>
 <p>Podemos agora calcular o número e a proporção de zeros na matriz usando as funções <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> e <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> (Você pode pesquisar o que faz a função <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> usando o comando <code><a href="https://rdrr.io/r/base/length.html">?length</a></code>).</p>
-<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#menor e maior valores</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de colunas</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de N colunas</span></span>
@@ -377,7 +379,7 @@ ppbio06.xlsx, zoorebio.xlsx, bentos06.xlsx
 ## [1] 194
 ## [1] 78.68132</code></pre>
 <p>Tabela que resume as informações geradas (<a href="reltrns.html#tab:tbl5-tam">14.2</a>).</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tamanho</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  Comando <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"range"</span>, <span class="st">"lenght"</span>, <span class="st">"m cols"</span>, <span class="st">"n linhas"</span>, <span class="st">"Tamanho"</span>, <span class="st">"Tamanho"</span>,</span>
 <span>             <span class="st">"Zeros"</span>, <span class="st">"Nao zeros"</span>, <span class="st">"% Zeros"</span><span class="op">)</span>,</span>
@@ -488,7 +490,7 @@ Nao zeros
 <h2>
 <span class="header-section-number">14.3</span> Reset point 1<a class="anchor" aria-label="anchor" href="#reset-point-1-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">m_bruta</span></span></code></pre></div>
 <p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela Tabela @ref(tab:5tblm_2)).</p>
 </div>
@@ -497,10 +499,10 @@ Nao zeros
 <span class="header-section-number">14.4</span> Cálculo da matriz de distâncias<a class="anchor" aria-label="anchor" href="#c%C3%A1lculo-da-matriz-de-dist%C3%A2ncias"><i class="fas fa-link"></i></a>
 </h2>
 <p>Agora vamos calcular a matriz de distâncias euclidiana (<span class="citation">LEGENDRE; LEGENDRE (<a href="#ref-RN1278" role="doc-biblioref">1998</a>)</span>, <span class="citation">BORCARD; GILLET; LEGENDRE (<a href="#ref-RN1336" role="doc-biblioref">2018</a>)</span>) entre as UA´s usando a função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> (pesquise o que faz essa função usando o comando <code><a href="https://rdrr.io/r/stats/dist.html">?dist</a></code>).</p>
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trab</span>, method <span class="op">=</span> <span class="st">"euclidian"</span>, diag <span class="op">=</span> <span class="cn">TRUE</span>, upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Pronto, calculamos a matriz de distâncias (euclidiana). Agora podemos visualizar a matriz.</p>
-<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#m_dists</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span></span>
@@ -540,7 +542,7 @@ Nao zeros
 ## S-R-CT3 478.9008   0.0000 449.24826
 ## S-R-CP3 182.8606 449.2483   0.00000</code></pre>
 <p>Uma matriz do tipo <code>dist</code> no R é um objeto que armazena as distâncias entre as linhas de uma matriz ou um data frame. Ela é criada pela função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code>, que calcula as distâncias usando diferentes medidas, como “euclidean”, “manhattan”, “canberra”, “binary” ou “minkowski” <span class="citation">(<a href="#ref-RN419" role="doc-biblioref">HORTON; KLEINMAN, 2015</a>)</span>.</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span></span>
@@ -557,7 +559,7 @@ Nao zeros
 ## [1] 172.9708
 ## [1] 285.9043</code></pre>
 <p>A função <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> calcula a média de todos os valores da matriz de distâncias, ou seja, a média multivariada, que é o centróide. Nesse caso o <strong>centroide assume o valor de 285.9</strong>. Usamos agora a fórmula <code>m*(m-1)/2</code>, onde <code>m</code> é o no. de objetos sendo comparados, para calcular quantas distâcias temos na nossa matriz.</p>
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">m</span></span>
@@ -569,7 +571,7 @@ Nao zeros
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   16.28  142.70  242.82  285.90  423.64  707.33</code></pre>
 <p>Temos então que m é 26 objetos (ou linhas), e portanto, a matriz de distâncias tem 325 valores. Fazemos agora um breve sumário do que foi calculado até agora com base na matriz de distâncias.</p>
-<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Sumario1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span>,</span>
 <span>                  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span>,</span>
 <span>                  <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span>,</span>
@@ -581,7 +583,7 @@ Nao zeros
 <pre><code>##           Minimo   Maximo Desv.Padr    Media m(m-1)/2
 ## Valores 16.27882 707.3267  172.9708 285.9043      325</code></pre>
 <p>A matriz <code>m_dists</code> está como uma classe <code>dist</code>, mas podemos transformá-la em uma classe <code>matrix</code> usando a função <code><a href="https://rdrr.io/r/base/matrix.html">as.matrix()</a></code>.</p>
-<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dist</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#View(dist)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dist</span><span class="op">)</span></span>
@@ -612,7 +614,7 @@ Nao zeros
 <h3>
 <span class="header-section-number">14.5.1</span> Calculando alguns parâmetros básicos<a class="anchor" aria-label="anchor" href="#calculando-alguns-par%C3%A2metros-b%C3%A1sicos"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span> <span class="co"># intervalo dos valores da matriz</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span> <span class="co"># média dos valores da matriz</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span> <span class="co"># desvio padrão dos valores da matriz</span></span></code></pre></div>
@@ -630,7 +632,7 @@ Lembre que no R e RStudio, a vírgula é usada como separador de decimal e o pon
 <h3>
 <span class="header-section-number">14.5.2</span> Calculando a assimetria e a curtose<a class="anchor" aria-label="anchor" href="#calculando-a-assimetria-e-a-curtose"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="va">sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span><span class="op">)</span> <span class="co">#calcula a assimetria da matriz</span></span>
 <span><span class="va">ku</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span><span class="op">)</span> <span class="co">#calcula a curtose da matriz</span></span>
@@ -666,7 +668,7 @@ Lembre que no R e RStudio, a vírgula é usada como separador de decimal e o pon
 <p>Para fazer os gráficos, usamos as funções <code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code> e <code><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot.default()</a></code> do R. Também usamos a função <code><a href="https://rdrr.io/r/graphics/curve.html">curve()</a></code> para sobrepor uma curva de normalidade ao histograma, e a função par para ajustar os parâmetros gráficos.</p>
 <p>Nas linhas <code>xlim = (), # limites dos eixos</code> do código abaixo, os limites dos eixos do gráfico a ser criado foram definidos entre 0 e 707.3266572. No seu caso, você deve ajustar os valores de <code>xlim</code> para que eles sejam os limites dos valores da sua matriz, definidos pela linha <code>range(dist)</code> <em>(primeira linha do código abaixo)</em>.</p>
 <p>Em resumo, o código abaixo plota um histograma e um boxplot da distribuição de dados armazenada na matriz de distâncias. Também é adicionada uma curva normal teórica ao histograma utilizando a média e o desvio padrão dos dados (Figura <a href="reltrns.html#fig:5dists">14.1</a>. As funções <code>floor(min(m_dists))</code> e <code>ceiling(max(m_dists))</code> definem os limites dos graficos pelo valores mínimo e máximo do objeto.</p>
-<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_dists</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># esse comando faz os gráficos aparecerem um acima do outro</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">m_dists</span>,</span>
@@ -691,7 +693,7 @@ Figura 14.1: Distribuições de frequências da matriz de distâncias
 [Atenção:] Se você recebeu a mensagem de erro <span style="color:red">“Error in plot.new() : figure margins too large”</span>, aumente o tamanho da janela do gráfico e execute o bloco de comandos novamente.</p>
 </div>
 <p>O comando abaixo apaga os gráficos.</p>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="relativizando-e-transformando-a-base-de-dados" class="section level2" number="14.7">
@@ -699,7 +701,7 @@ Figura 14.1: Distribuições de frequências da matriz de distâncias
 <span class="header-section-number">14.7</span> Relativizando e transformando a base de dados<a class="anchor" aria-label="anchor" href="#relativizando-e-transformando-a-base-de-dados"><i class="fas fa-link"></i></a>
 </h2>
 <p>Na sequencia de códigos a seguir o R realiza relativizações e transformações em dados biológicos (<span class="citation">SOKAL; ROHLF (<a href="#ref-RN67" role="doc-biblioref">1995</a>)</span>). Vamos ver passo a passo o que cada seção do código faz. Os códigos para as demais principais relativizações estão <a href="reltrns.html#relativiza%C3%A7%C3%B5es">AQUI</a></p>
-<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span></code></pre></div>
 <p>Essa linha carrega o pacote <code>vegan</code> no ambiente R, permitindo o uso de suas funções. O pacote <code>vegan</code> é um pacote do R para análise de ecologia numérica e comunidades biológicas. Ele fornece uma ampla variedade de funções para análise de dados ecológicos, como análise de diversidade, ordenação de espécies, análise de similaridade, entre outras.</p>
 <p>A função <code><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand()</a></code> é usada para relativizar os dados armazenados na matriz de trabalho (<code>m_trab</code>). O parâmetro <code>method</code> especifica o método de relativização, neste caso <em>“total”</em> (relativização pelo total de cada coluna). Outros métodos disponíveis são <em>max, normalize, range e rankm</em> (@ref(tab:(5tbl-rel)). O parâmetro <code>MARGIN</code> especifica em qual dimensão os cálculos devem ser feitos <em>(1 para linhas, 2 para colunas)</em>. Neste caso, <code>MARGIN=2</code> (colunas). A variável <code>m_relcol</code> armazena o resultado da relativização. Sokal e Rohlf (<span class="citation">SOKAL; ROHLF (<a href="#ref-RN286" role="doc-biblioref">1987</a>)</span>) tratam dos diversos tipos de relativizações e transformações em dados ecológicos.</p>
@@ -707,7 +709,7 @@ Figura 14.1: Distribuições de frequências da matriz de distâncias
 <h3>
 <span class="header-section-number">14.7.1</span> Relativização pelo total<a class="anchor" aria-label="anchor" href="#relativiza%C3%A7%C3%A3o-pelo-total"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_relcol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
 <span>                         method<span class="op">=</span><span class="st">"total"</span>,</span>
 <span>                         MARGIN <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -875,7 +877,7 @@ Figura 14.1: Distribuições de frequências da matriz de distâncias
 ## B-R-PC4 0.0000000 0.01923077
 ## B-A-MU4 0.0000000 0.00000000
 ## B-A-GU4 0.0000000 0.00000000</code></pre>
-<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#colSums(m_relcol)</span></span>
 <span><span class="co">#range(m_relcol)</span></span></code></pre></div>
 </div>
@@ -884,7 +886,7 @@ Figura 14.1: Distribuições de frequências da matriz de distâncias
 <span class="header-section-number">14.7.2</span> Transformação pelo arcoseno da raiz quadrada<a class="anchor" aria-label="anchor" href="#transforma%C3%A7%C3%A3o-pelo-arcoseno-da-raiz-quadrada"><i class="fas fa-link"></i></a>
 </h3>
 <p>A seguir é realizada a transformação pelo arcoseno da raiz quadrada, apropriada para ados em proporção como os ados previamente relativisados. Para cada transformação, a função é aplicada aos dados de interesse e o resultado é armazenado em uma nova variável. A função <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> é usada para visualizar o resultado de cada transformação na forma de uma tabela. Os códigos para as demais principais transformações estão <a href="reltrns.html#transforma%C3%A7%C3%B5es">AQUI</a></p>
-<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_relcol_asrq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#View(m_relcol_asrq)</span></span>
 <span><span class="va">m_relcol_asrqpi</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">/</span><span class="va">pi</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -898,13 +900,13 @@ Figura 14.1: Distribuições de frequências da matriz de distâncias
 <span class="header-section-number">14.8</span> Reset point 2<a class="anchor" aria-label="anchor" href="#reset-point-2-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui estabelecemos a matriz transformada depois de ter sido relativisada como <code>m_trns</code>.</p>
-<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="va">m_relcol_asrqpi</span></span>
 <span><span class="co">#m_dists &lt;- dist(m_trns, method = "euclidian", diag = TRUE, upper = FALSE)</span></span></code></pre></div>
 <p>Agora é com você…Refaça toda a análise com as relativizações e transformações adequadas para a matriz de dados fornecida.</p>
 </div>
-<div id="apêndices-11" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-11"><i class="fas fa-link"></i></a>
+<div id="apêndices-10" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-10"><i class="fas fa-link"></i></a>
 </h2>
 <div id="relativizações" class="section level3 unnumbered">
 <h3>Relativizações<a class="anchor" aria-label="anchor" href="#relativiza%C3%A7%C3%B5es"><i class="fas fa-link"></i></a>
@@ -912,7 +914,7 @@ Figura 14.1: Distribuições de frequências da matriz de distâncias
 <div id="total-das-colunas" class="section level4 unnumbered">
 <h4>Total das colunas<a class="anchor" aria-label="anchor" href="#total-das-colunas"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_relcol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">m_bruta</span>,</span>
 <span>                         method<span class="op">=</span><span class="st">"total"</span>,</span>
 <span>                         MARGIN <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -991,7 +993,7 @@ Quando a escala absoluta dos valores não é importante, mas a ordem dos valores
 <h4>Log10<a class="anchor" aria-label="anchor" href="#log10"><i class="fas fa-link"></i></a>
 </h4>
 <p>Não aceita zeros, porque o log de zero é indeterminado. Por isso devemos substituir os valores com erro (infinito negativo) por zero, usando a função <code><a href="https://rdrr.io/r/base/replace.html">replace()</a></code>.</p>
-<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_lg10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="co">#View(m_lg10)</span></span>
 <span><span class="va">m_lg10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/replace.html">replace</a></span><span class="op">(</span><span class="va">m_lg10</span>, <span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.infinite</a></span><span class="op">(</span><span class="va">m_lg10</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></span>
@@ -1001,7 +1003,7 @@ Quando a escala absoluta dos valores não é importante, mas a ordem dos valores
 <h4>Log(x+1)<a class="anchor" aria-label="anchor" href="#logx1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Desaconselhavel para valores que variam entre 0-1.</p>
-<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_lgx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#View(m_lgx1)</span></span></code></pre></div>
 </div>
@@ -1009,7 +1011,7 @@ Quando a escala absoluta dos valores não é importante, mas a ordem dos valores
 <h4>Exponenciais<a class="anchor" aria-label="anchor" href="#exponenciais"><i class="fas fa-link"></i></a>
 </h4>
 <p>“Power transformations”, onde o valor de <code>p</code> estabelece a compressão dos dados.</p>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_bruta_P1</span> <span class="op">&lt;-</span> <span class="va">m_bruta</span><span class="op">^</span><span class="fl">1</span> <span class="co">#p=1</span></span>
 <span><span class="co">#View(m_bruta_P1)</span></span>
 <span><span class="va">m_bruta_P05</span> <span class="op">&lt;-</span> <span class="va">m_bruta</span><span class="op">^</span><span class="fl">0.5</span> <span class="co">#p=0,5</span></span>
@@ -1020,14 +1022,14 @@ Quando a escala absoluta dos valores não é importante, mas a ordem dos valores
 <div id="presençaausência" class="section level4 unnumbered">
 <h4>Presença/Ausência<a class="anchor" aria-label="anchor" href="#presen%C3%A7aaus%C3%AAncia"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_pa</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">m_bruta</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">*</span><span class="fl">1L</span></span>
 <span><span class="co">#View(m_pa)</span></span></code></pre></div>
 </div>
 <div id="raiz-quadrada" class="section level4 unnumbered">
 <h4>Raiz quadrada<a class="anchor" aria-label="anchor" href="#raiz-quadrada"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_rq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="co">#View(m_rq)</span></span></code></pre></div>
 </div>
@@ -1035,7 +1037,7 @@ Quando a escala absoluta dos valores não é importante, mas a ordem dos valores
 <h4>Arcoseno da raiz quadrada<a class="anchor" aria-label="anchor" href="#arcoseno-da-raiz-quadrada"><i class="fas fa-link"></i></a>
 </h4>
 <p>Os valores de entrada tem que variar entre 0 e 1. Ideal para matrizes relativizadas. Duas formulações estão disponíveis, com e sem a multiplicação por <code>2/pi</code>. A segunda opção costuma ter melhor efeito na normalização dos dados.</p>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_asrq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#View(m_asrq)</span></span>
 <span><span class="va">m_asrqpi</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">/</span><span class="va">pi</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -1047,7 +1049,7 @@ Quando a escala absoluta dos valores não é importante, mas a ordem dos valores
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## dev.off() #apaga os graficos, se houver algum</span></span>
 <span><span class="co">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co">## cat("\014") #limpa o console</span></span>
@@ -1217,7 +1219,7 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></div>
+<div class="prev"><a href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></div>
 <div class="next"><a href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -1249,7 +1251,7 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 </li>
 <li><a class="nav-link" href="#reset-point-2-1"><span class="header-section-number">14.8</span> Reset point 2</a></li>
 <li>
-<a class="nav-link" href="#ap%C3%AAndices-11">Apêndices</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#ap%C3%AAndices-10">Apêndices</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#relativiza%C3%A7%C3%B5es">Relativizações</a></li>
 <li><a class="nav-link" href="#transforma%C3%A7%C3%B5es">Transformações</a></li>
 </ul>
@@ -1272,7 +1274,7 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 12:56:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

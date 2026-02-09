@@ -7,7 +7,7 @@
 <title> 10 R Modulo 3.3 - Gráficos univariados | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO  Apresentação   10.1 Sobre os dados Considere os dados merísticos (ou médições morfológicas) da espécie de peixe Cichla ocellaris (tucunaré amarelo) do reservatório da barragem de Gramame,...">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
@@ -22,7 +22,8 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -49,7 +50,7 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -75,22 +76,23 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
 <li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
-<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
-<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
 <li><a class="active" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
 <li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></li>
 <li class="book-part">ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -118,7 +120,7 @@
 <p>Considere os dados merísticos (ou médições morfológicas) da espécie de peixe <em>Cichla ocellaris</em> (tucunaré amarelo) do reservatório da barragem de Gramame, PB <span class="citation">(<a href="#ref-RN3024" role="doc-biblioref">MEDEIROS; ROSA, 1994</a>)</span> (Figura <a href="unigr.html#fig:rmd32tucu">10.1</a>). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da espécie, um conjunto de dados formidável.</p>
 <div class="figure">
 <span style="display:block;" id="fig:rmd32tucu"></span>
-<img src="imagens/tucuna.png" alt="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB." width="260"><p class="caption">
+<img src="imagens/tucuna.png" alt="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB." width="450px"><p class="caption">
 Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (tucunaré amarelo) do reservatório da barragem de Gramame, PB.
 </p>
 </div>
@@ -127,19 +129,19 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <h2>
 <span class="header-section-number">10.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mdatools"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code><a href="https://ycphs.github.io/openxlsx/index.html">library(openxlsx)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -147,10 +149,19 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <h2>
 <span class="header-section-number">10.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-4"><i class="fas fa-link"></i></a>
 </h2>
-<p>Vamos importar a planilha de dados univariados <code>univ*.xlsx</code>. Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="infobox2 stopred">
+<div class="center">
+<p><strong><span style="color:white">ATENÇÃO</span></strong></p>
+</div>
+<p>Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção <a href="bases.html#arqs">Arquivos disponíveis</a> do Capítulo <a href="bases.html#bases">Bases de dados</a>.</p>
+<div class="center">
+<p>Ou, baixe aqui o arquivo <a href="https://docs.google.com/spreadsheets/d/1CXcIx3vzNmVlaq87Mp_FLcmymLncb8P_/edit?usp=sharing&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">tucuna.xlsx</a></p>
+</div>
+</div>
+<p>Vamos importar a planilha de dados univariados <code>tucuna.xlsx</code>. Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
-<span><span class="va">univ_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/univ.xlsx"</span>,</span>
+<span><span class="va">univ_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                    sheet <span class="op">=</span> <span class="st">"tucuna"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">univ_all</span>,<span class="fl">10</span><span class="op">)</span></span>
@@ -200,7 +211,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 ## TU009  24.6 200.5  20.5     25.7 195.9
 ## TU010  19.4  86.7  16.0     18.3  84.5</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(univ)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">univ_all</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">univ_all</span></span>
@@ -212,7 +223,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <h2>
 <span class="header-section-number">10.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="va">univ_all</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="va">univ_all</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="co">#univ_all &lt;- univ_all</span></span>
@@ -223,7 +234,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span class="header-section-number">10.5</span> Gráficos de dispersão<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-dispers%C3%A3o"><i class="fas fa-link"></i></a>
 </h2>
 <p>(<a href="https://mda.tools/docs/datasets--simple-plots.html" class="uri">https://mda.tools/docs/datasets--simple-plots.html</a>)</p>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mda.tools">mdatools</a></span><span class="op">)</span></span>
 <span><span class="co">#removendo linhas ou coluns por nome</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">univ</span>, <span class="st">"name"</span><span class="op">)</span> <span class="op">=</span> <span class="st">"Tucunaré"</span></span>
@@ -317,7 +328,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <h2>
 <span class="header-section-number">10.6</span> Gráficos de linha<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-linha"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mda.tools">mdatools</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning: package 'mdatools' was built under R version 4.3.3</code></pre>
 <pre><code>## 
@@ -325,7 +336,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <pre><code>## The following object is masked from 'package:car':
 ## 
 ##     ellipse</code></pre>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">var</span> <span class="op">&lt;-</span> <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="st">"yaxis.name"</span><span class="op">)</span> <span class="op">=</span> <span class="st">"CT_cm"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="st">"xaxis.name"</span><span class="op">)</span> <span class="op">=</span> <span class="st">"Indivíduo"</span></span>
@@ -334,14 +345,14 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplot.html">mdaplot</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplot.html">mdaplot</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"darkgray"</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-105-1.png" width="672"></div>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#mdaplot(univ$CT_cm, type = "l", cgroup = g)</span></span></code></pre></div>
 </div>
 <div id="gráficos-de-barra" class="section level2" number="10.7">
 <h2>
 <span class="header-section-number">10.7</span> Gráficos de barra<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-barra"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a simple two rows matrix with values</span></span>
 <span><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
 <span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">50</span>, <span class="fl">60</span>, <span class="fl">90</span><span class="op">)</span>,</span>
@@ -363,7 +374,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplot.html">mdaplot</a></span><span class="op">(</span><span class="va">d</span>, type <span class="op">=</span> <span class="st">"h"</span>, xticks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span>, xticklabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>   show.labels <span class="op">=</span> <span class="cn">TRUE</span>, labels <span class="op">=</span> <span class="st">"values"</span>, xlas <span class="op">=</span> <span class="fl">2</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">"Variance, %"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-106-1.png" width="672"></div>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
 <span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">60</span>, <span class="fl">70</span>, <span class="fl">75</span><span class="op">)</span>,</span>
 <span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">3</span><span class="op">)</span></span>
@@ -381,7 +392,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplot.html">mdaplot</a></span><span class="op">(</span><span class="va">d</span>, type <span class="op">=</span> <span class="st">"e"</span>, xticks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>   xticklabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, xlas <span class="op">=</span> <span class="fl">2</span>, xlab <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-106-2.png" width="672"></div>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplot.html">mdaplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mda.subset.html">mda.subset</a></span><span class="op">(</span><span class="va">d</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"h"</span>, col <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span></span>
@@ -395,7 +406,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <h2>
 <span class="header-section-number">10.8</span> Gráficos de grupos<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-grupos"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># let's create a simple dataset with 3 rows</span></span>
 <span><span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
 <span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.40</span>, <span class="fl">0.69</span>, <span class="fl">0.88</span>, <span class="fl">0.95</span><span class="op">)</span>,</span>
@@ -417,21 +428,21 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"b"</span>, lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>         xticks <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, xticklabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-107-1.png" width="672"></div>
-<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"l"</span>, legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"b"</span>, legend.position <span class="op">=</span> <span class="st">"bottomleft"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"h"</span>, legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"b"</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-107-2.png" width="672"></div>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"l"</span>, show.labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"b"</span>, show.labels <span class="op">=</span> <span class="cn">TRUE</span>, labels <span class="op">=</span> <span class="st">"indices"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"h"</span>, show.labels <span class="op">=</span> <span class="cn">TRUE</span>, labels <span class="op">=</span> <span class="st">"values"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"b"</span>, show.labels <span class="op">=</span> <span class="cn">TRUE</span>, labels <span class="op">=</span> <span class="st">"values"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-107-3.png" width="672"></div>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load data and exclude column with income</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">people</span><span class="op">)</span></span>
 <span><span class="va">people</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mda.exclcols.html">mda.exclcols</a></span><span class="op">(</span><span class="va">people</span>, <span class="st">"Income"</span><span class="op">)</span></span>
@@ -451,7 +462,7 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">d</span>, type <span class="op">=</span> <span class="st">"h"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">d</span>, type <span class="op">=</span> <span class="st">"b"</span>, lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-107-4.png" width="672"></div>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sex</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">people</span><span class="op">[</span>, <span class="st">"Sex"</span><span class="op">]</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"M"</span>, <span class="st">"F"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">reg</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">people</span><span class="op">[</span>, <span class="st">"Region"</span><span class="op">]</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="st">"M"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">groups</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">reg</span><span class="op">)</span></span>
@@ -463,12 +474,12 @@ Figura 10.1: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span><span class="fu"><a href="https://rdrr.io/pkg/mdatools/man/mdaplotg.html">mdaplotg</a></span><span class="op">(</span><span class="va">people</span>, type <span class="op">=</span> <span class="st">"h"</span>, groupby <span class="op">=</span> <span class="va">groups</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-107-5.png" width="672"></div>
 </div>
-<div id="apêndices-7" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-7"><i class="fas fa-link"></i></a>
+<div id="apêndices-6" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-6"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="sites-consultados-5" class="section level2 unnumbered">
-<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-5"><i class="fas fa-link"></i></a>
+<div id="sites-para-consulta" class="section level2 unnumbered">
+<h2>Sites para consulta<a class="anchor" aria-label="anchor" href="#sites-para-consulta"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://www.geeksforgeeks.org/break-axis-of-plot-in-r/" class="uri">https://www.geeksforgeeks.org/break-axis-of-plot-in-r/</a>
 <a href="https://stackoverflow.com/questions/72498597/add-a-break-to-a-bar-chart-when-one-value-is-very-large" class="uri">https://stackoverflow.com/questions/72498597/add-a-break-to-a-bar-chart-when-one-value-is-very-large</a></p>
@@ -497,8 +508,8 @@ TEAM, R. S. <strong>RStudio: Integrated Development Environment for R</strong>. 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></div>
-<div class="next"><a href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></div>
+<div class="prev"><a href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></div>
+<div class="next"><a href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -516,8 +527,8 @@ TEAM, R. S. <strong>RStudio: Integrated Development Environment for R</strong>. 
 <li><a class="nav-link" href="#gr%C3%A1ficos-de-linha"><span class="header-section-number">10.6</span> Gráficos de linha</a></li>
 <li><a class="nav-link" href="#gr%C3%A1ficos-de-barra"><span class="header-section-number">10.7</span> Gráficos de barra</a></li>
 <li><a class="nav-link" href="#gr%C3%A1ficos-de-grupos"><span class="header-section-number">10.8</span> Gráficos de grupos</a></li>
-<li><a class="nav-link" href="#ap%C3%AAndices-7">Apêndices</a></li>
-<li><a class="nav-link" href="#sites-consultados-5">Sites consultados</a></li>
+<li><a class="nav-link" href="#ap%C3%AAndices-6">Apêndices</a></li>
+<li><a class="nav-link" href="#sites-para-consulta">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-4">Script limpo</a></li>
 <li><a class="nav-link" href="#refer%C3%AAncias-8">Referências</a></li>
 </ul>
@@ -536,7 +547,7 @@ TEAM, R. S. <strong>RStudio: Integrated Development Environment for R</strong>. 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 12:56:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

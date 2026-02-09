@@ -19,7 +19,7 @@ Os softwares disponíveis para análise multivariada são diversos. A maioria do
 
 Legendre e Legendre [-@RN1278] alertam o ecologista numérico sobre as armadilhas do uso de computadores - que **a computabilidade não garante (i) que os dados satisfaçam o método e (ii) que os resultados sejam interpretados corretamente em termos ecológicos.** A isso, infelizmente, deve ser adicionada a advertência adicional de que os computadores não negam a necessidade de verificar a exatidão dos cálculos.
 
-A conclusão desta disciplina ajudará a evitar essas armadilhas, fornecendo a você as habilidades para aplicar essas técnicas com sucesso para o avanço da ciência e do gerenciamento de nossos recursos naturais. Espero que com a conclusão dessa disciplina o aluno possa evitar essas armadilhas e possua as habilidades para aplicar essas técnicas com sucesso para avançar na sua área de atuação. 
+A conclusão desta disciplina ajudará a evitar essas armadilhas, fornecendo a você as habilidades para aplicar essas técnicas com sucesso para o avanço da ciência e do gerenciamento de nossos recursos naturais. Espero que com a conclusão dessa disciplina o aluno possa evitar essas armadilhas e possua as habilidades para aplicar essas técnicas com sucesso para avançar na sua área de atuação.
 
 ## Plano de estudo 
 
@@ -81,7 +81,7 @@ Os softwares disponíveis para análise multivariada são diversificados. A maio
 
 O RStudio é um ambiente integrado de desenvolvimento (IDE) para a linguagem de programação R, projetado para ajudar os usuários a trabalhar com dados de forma mais eficiente e produtiva (Figura \@ref(fig:rm1fig1)). Ele oferece uma ampla variedade de recursos e ferramentas para análise de dados, incluindo edição de código, visualização de gráficos, depuração, gerenciamento de projetos e colaboração. O RStudio é gratuito e de código aberto, disponível para Windows, Mac e Linux, e é usado por uma comunidade crescente de cientistas de dados, pesquisadores, analistas e desenvolvedores em todo o mundo. Ele oferece suporte para várias bibliotecas e pacotes do R, incluindo o `tidyverse`, que é uma coleção popular de pacotes para manipulação de dados e visualização. Com o RStudio, os usuários podem facilmente importar, manipular e visualizar dados, executar análises estatísticas e criar visualizações gráficas interativas. Além disso, o RStudio oferece a possibilidade de publicar relatórios e apresentações dinâmicas em diversos formatos, como HTML, PDF e Word, facilitando a comunicação e colaboração entre os usuários.
 
-```{r rm1fig1, echo=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R."}
+```{r rm1fig1, echo=FALSE, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/rm1.fig1.png")
 ```
 
@@ -94,6 +94,33 @@ O RStudio oferece diversas vantagens em relação ao uso do R base. Algumas dess
 5. Integração com outras ferramentas: o RStudio integra-se com diversas ferramentas populares de análise de dados, como o Git e o LaTeX, permitindo uma maior eficiência e produtividade no processo de análise e geração de relatórios. 
 
 Essas são apenas algumas das vantagens que o RStudio oferece em relação ao R. É importante notar que, embora o RStudio seja uma ferramenta poderosa para análise de dados, ele não substitui a necessidade de conhecimento em R e estatística para obter resultados precisos e significativos. 
+
+## Instalação do R e RStudio {#instala_r}
+
+### R base
+
+1. O primeiro passo é entrar na página do projeto CRAN (Comprehensive R Archive Network) (https://www.r-project.org/).  
+2. Do lado esquerdo da página clique sobre o link CRAN abaixo de Download. 3. Uma nova página com uma série de links irá se abrir. Esses links são chamados de “espelhos” e servem para que você possa escolher o local mais próximo de onde você está para fazer o download do programa. Escolha um espelho no Brasil.  
+4. Na seção Download and Install R, clique sobre o link `Download R for Windows` para baixar a versão para esse sistema... (MacOS??... o que é isso?)  
+5. Clique sobre o link `base`.
+6. Clique sobre o link `Download R 4.x.x for Windows` para fazer o download do arquivo R.exe.
+7. A instalação segue o formato padrão de instalação de programas no Windows, e portanto não são necessários maiores detalhes.  
+
+### RStudio
+
+1. Para baixar o RStudio entre no endereço (https://posit.co/download/rstudio-desktop/)  
+2. Clique no link `Products > RStudio`  
+3. Selecione a versão Desktop.  
+4. Clique em `DOWNLOAD RSTUDIO DESKTOP`  
+5. Será exibida uma página com a recomendação para você baixar o RStudio FREE versão mais recente - Windows  
+6. Clicando nesse link, você irá baixar o arquivo RStudio atual (.exe)
+7. Depois é só clicar e instalar da forma convencional do Windows.  
+
+Após a instalação, você pode abrir o `RStudio` pelo seu respectivo ícone, e o RStudio estará pronto para ser utilizado. O "R base" continuará instalado mas será acessado pelo RStudio. Não o desinstale.
+
+### RStudio na nuvem
+
+Usar o RStudio Cloud (https://login.rstudio.cloud/) é uma opção para quem não quer instalar a versão para PC. O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente.
 
 ## O essencial 
 
@@ -111,8 +138,8 @@ Linguagens de programação estatística de código aberto tem sido amplamente u
 
 A interface de usuário do RStudio é composta por várias janelas e painéis que permitem a interação com o R de forma organizada e intuitiva. A janela principal é dividida em quatro painéis (Figura \@ref(fig:R-eng)):
 
-```{r R-eng, echo=FALSE, out.width = if (knitr::is_html_output()) "450" else "0.8\\textwidth", fig.asp = 1, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/"}
-knitr::include_graphics("imagens/interfaceR-eng.png")
+```{r R-eng, echo=FALSE, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos).", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
+knitr::include_graphics("imagens/interfaceR.png")
 ```
 
 **Editor de código**: é onde o usuário pode criar, editar e salvar scripts R. O editor fornece recursos como destaque de sintaxe, indentação automática, autocompletar e outras ferramentas úteis para a programação. 
@@ -151,7 +178,7 @@ Você pode usar qualquer editor de texto, processador de texto ou planilha para 
 
 A seguir é apresentada a estrutura básica de uma matriz comunitária e como importar um arquivo XLS/XLSX para o RStudio usando a programação R (Figura \@ref(fig:ppbio2)). Como tudo no R, existem várias formas para se ler os arquivos Excel. Usaremos primeiro pacote readxl (que já vem instalado com o R base) (veja https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/)
 
-```{r ppbio2, echo=FALSE, out.width = if (knitr::is_html_output()) "600" else "0.8\\textwidth", fig.asp = 1, fig.cap="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada"}
+```{r ppbio2, echo=FALSE, fig.cap="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada", out.width = if (knitr::is_html_output()) "600px" else "13cm", fig.asp=1}
 knitr::include_graphics("imagens/rm1.fig3.png")
 ```
 

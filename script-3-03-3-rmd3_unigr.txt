@@ -1,0 +1,204 @@
+## dev.off() #apaga os graficos, se houver algum
+## rm(list=ls(all=TRUE)) #limpa a memória
+## cat("\014") #limpa o console
+## install.packages("mdatools")
+library(openxlsx)
+## getwd()
+## setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+univ_all <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx",
+                    rowNames = T, colNames = T,
+                    sheet = "tucuna")
+head(univ_all,10)
+head(univ_all[, 1:5], 10)
+## #View(univ)
+## print(univ_all[1:5,1:5])
+## univ_all
+## str(univ_all)
+## mode(univ_all)
+## class(univ_all)
+univ <- univ_all
+univ <- univ_all[, 1:3]
+#univ_all <- univ_all
+#var <- ""
+## library(mdatools)
+## #removendo linhas ou coluns por nome
+## attr(univ, "name") = "Tucunaré"
+## attr(univ, "xaxis.name") = "Eixo X"
+## attr(univ, "yaxis.name") = "Eixo Y"
+## par(mfrow = c(1,2))
+## # show plot for the whole dataset (columns 1 and 2 will be taken)
+## mdaplot(univ, type = "p")
+## # subset the dataset and keep only columns 6 and 7 and then make a plot
+## mdaplot(mda.subset(univ, select = c(1,2)), type = "p")
+## 
+## par(mfrow = c(2,2))
+## # show Height vs Weight and color points by the Beer consumption
+## mdaplot(univ, type = "p", cgroup = univ_all[, var])
+## # do the same but do not show colorbar
+## mdaplot(univ, type = "p", cgroup = univ_all[, var],
+##         show.colorbar = FALSE)
+## # do the same but use grayscale color map
+## mdaplot(univ, type = "p", cgroup = univ_all[, var], colmap = "gray")
+## # do the same but using colormap with gradients between red, yellow and green colors
+## mdaplot(univ, type = "p", cgroup = univ_all[, var],
+##         colmap = c("red", "yellow", "green"))
+## # make a factor using values of variable Sex and define labels for the factor levels
+## g <- factor(univ_all[, "sexo"],
+##            levels = c("MACHO", "FEMEA", "imaturo"))
+## g
+## par(mfrow = c(1, 2))
+## mdaplot(univ, type = "p", cgroup = g)
+## mdaplot(univ, type = "p", cgroup = g, colmap = "gray")
+## 
+## par(mfrow = c(1, 2))
+## # default way - color grouping is used for borders and "bg" for background
+## mdaplot(univ, type = "p", cgroup = univ_all[, var], pch = 21, bg = "white")
+## # inverse - color grouping is used for background and "bg" for border
+## mdaplot(univ, type = "p", cgroup = univ_all[, var], pch = 21, bg = "white", pch.colinv = TRUE)
+## 
+## par(mfrow = c(2, 2))
+## # by default row names will be used as labels
+## mdaplot(univ, type = "p", show.labels = TRUE)
+## # here we tell to use indices as labels instead
+## mdaplot(univ, type = "p", show.labels = TRUE, labels = "indices")
+## # here we use names again but change color and size of the labels
+## mdaplot(univ, type = "p", show.labels = TRUE, labels = "names", lab.col = "red", lab.cex = 0.5)
+## # finally we provide a vector with manual values to be used as the labels
+## mdaplot(univ, type = "p", show.labels = TRUE, labels = paste0("T", seq_len(nrow(univ))))
+## 
+## par(mfrow = c(2, 2))
+## # manual values and tick labels for the x-axis
+## mdaplot(univ, xticks = c(10,30,40), xticklabels = c("Small", "Medium", "Large"))
+## # same but with rotation of the tick labels
+## mdaplot(univ, xticks = c(10,30,40), xticklabels = c("Small", "Medium", "Large"), xlas = 2)
+## # manual values and tick labels for the y-axis
+## mdaplot(univ, yticks = c(200,600,900), yticklabels = c("Light", "Medium", "Heavy"))
+## # same but with rotation of the tick labels
+## mdaplot(univ, yticks = c(200,600,900), yticklabels = c("Light", "Medium", "Heavy"), ylas = 2)
+## 
+## par(mfrow = c(1, 2))
+## # change margin for bottom part
+## par(mar = c(6, 4, 4, 2) + 0.1)
+## mdaplot(univ, xticks = c(10,30,40),
+##         xticklabels = c("Small", "Medium", "Large"),
+##         xlas = 2, xlab = "")
+## mtext("Comprimento", side = 1, line = 5)
+## # change margin for left part
+## par(mar = c(5, 6, 4, 1) + 0.1)
+## mdaplot(univ, yticks = c(200,600,900), yticklabels = c("Light", "Medium", "Heavy"),
+##         ylas = 2, ylab = "")
+## mtext("Peso", side = 2, line = 5)
+## 
+## par(mfrow = c(1,2))
+## mdaplot(univ, show.grid = FALSE, show.lines = c(20,200))
+## mdaplot(univ, show.lines = c(40, NA))
+## # define a factor using values of variable Sex and simple labels
+## g
+## par(mfrow = c(1, 2))
+## # make a scatter plot grouping points by the factor and then show convex hull for each group
+## p <- mdaplot(univ, cgroup = g)
+## plotConvexHull(p)
+## # make a scatter plot grouping points by the factor and then show 90% confidence intervals
+## p <- mdaplot(univ, cgroup = g)
+## plotConfidenceEllipse(p, conf.level = 0.90)
+## 
+## # média agrupada por fator
+## media <- tapply(univ$CT_cm, g, mean)
+## media
+## anova <- aov(CT_cm ~ g, data = univ_all)
+## summary(anova)
+## plot(anova,1)
+library(mdatools)
+var <- univ$CT_cm
+attr(univ$CT_cm, "yaxis.name") = "CT_cm"
+attr(univ$CT_cm, "xaxis.name") = "Indivíduo"
+par(mfrow = c(2, 1))
+mdaplot(univ$CT_cm, type = "l")
+mdaplot(univ$CT_cm, type = "l", col = "darkgray", lty = 2)
+#mdaplot(univ$CT_cm, type = "l", cgroup = g)
+# make a simple two rows matrix with values
+d = rbind(
+   c(20, 50, 60, 90),
+   c(14, 45, 59, 88)
+)
+# add some names and attributes
+colnames(d) = paste0("PC", 1:4)
+rownames(d) = c("Cal", "CV")
+attr(d, "xaxis.name") = "Components"
+attr(d, "name") = "Explained variance"
+par(mfrow = c(1, 2))
+# make a default bar plot
+mdaplot(d, type = "h")
+# make a bar plot with manual xtick labels, color and labels for data values
+mdaplot(d, type = "h", xticks = seq_len(ncol(d)), xticklabels = colnames(d), col = "red",
+   show.labels = TRUE, labels = "values", xlas = 2, xlab = "", ylab = "Variance, %")
+d = rbind(
+   c(20, 60, 70, 75),
+   c(2, 5, 4, 3)
+)
+# add names and attributes
+rownames(d) = c("Mean", "Std")
+colnames(d) = paste0("PC", 1:4)
+attr(d, 'name') = "Statistics"
+# show the plots
+par(mfrow = c(1, 2))
+mdaplot(d, type = "e")
+mdaplot(d, type = "e", xticks = seq_len(ncol(d)),
+   xticklabels = colnames(d), col = "red", xlas = 2, xlab = "")
+par(mfrow = c(1, 2))
+mdaplot(mda.subset(d, 1), type = "h", col = "lightgray")
+mdaplot(d, type = "e", show.axes = FALSE, pch = NA)
+mdaplot(mda.subset(d, 1), type = "b")
+mdaplot(d, type = "e", show.axes = FALSE)
+# let's create a simple dataset with 3 rows
+p = rbind(
+   c(0.40, 0.69, 0.88, 0.95),
+   c(0.34, 0.64, 0.81, 0.92),
+   c(0.30, 0.61, 0.80, 0.88)
+)
+# add some names and attributes
+rownames(p) = c("Cal", "CV", "Test")
+colnames(p) = paste0("PC", 1:4)
+attr(p, "name") = "Cumulative variance"
+attr(p, "xaxis.name") = "Components"
+# and make group plots of different types
+par(mfrow = c(2, 2))
+mdaplotg(p, type = "l")
+mdaplotg(p, type = "b")
+mdaplotg(p, type = "h", xticks = 1:4)
+mdaplotg(p, type = "b", lty = c(1, 2, 1), col = c("red", "green", "blue"), pch = 1,
+         xticks = 1:4, xticklabels = colnames(p))
+par(mfrow = c(2, 2))
+mdaplotg(p, type = "l", legend.position = "top")
+mdaplotg(p, type = "b", legend.position = "bottomleft")
+mdaplotg(p, type = "h", legend.position = "bottom")
+mdaplotg(p, type = "b", show.legend = FALSE)
+par(mfrow = c(2, 2))
+mdaplotg(p, type = "l", show.labels = TRUE)
+mdaplotg(p, type = "b", show.labels = TRUE, labels = "indices")
+mdaplotg(p, type = "h", show.labels = TRUE, labels = "values")
+mdaplotg(p, type = "b", show.labels = TRUE, labels = "values")
+# load data and exclude column with income
+data(people)
+people = mda.exclcols(people, "Income")
+# use values of sex variable to split data into two subsets
+sex = people[, "Sex"]
+m = mda.subset(people, subset = sex == -1)
+f = mda.subset(people, subset = sex ==  1)
+# combine the two subsets into a named list
+d = list(male = m, female = f)
+# make plots for the list
+par(mfrow = c(2, 2))
+mdaplotg(d, type = "p")
+mdaplotg(d, type = "b")
+mdaplotg(d, type = "h")
+mdaplotg(d, type = "b", lty = c(1, 2), col = c("red", "blue"), pch = 1)
+sex = factor(people[, "Sex"], labels = c("M", "F"))
+reg = factor(people[, "Region"], labels = c("S", "M"))
+groups = data.frame(sex, reg)
+par(mfrow = c(2, 2))
+mdaplotg(people, type = "p", groupby = groups)
+mdaplotg(people, type = "l", groupby = groups)
+mdaplotg(people, type = "b", groupby = groups)
+mdaplotg(people, type = "h", groupby = groups)

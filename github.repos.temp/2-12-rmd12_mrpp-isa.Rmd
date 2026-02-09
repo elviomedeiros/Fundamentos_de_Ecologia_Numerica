@@ -1,0 +1,577 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 12
+
+### Procedimento de Permutações Múltiplas (MRPP) e Análise de Espécies Indicadoras (ISA) {-}
+
+### Apresentação {-}
+
+A Análise de Espécies Indicadoras (ISA) foi originalmente desenvolvida por @RN2094 como uma técnica para identificar espécies que estão fortemente associadas a um grupo específico. Uma motivação para o desenvolvimento dessa técnica foi fornecer uma ferramenta para determinar quantos grupos focar em uma análise de agrupamento.
+
+Antes do desenvolvimento do ISA, a principal técnica estatística para identificar espécies associadas a grupos era a Análise de Espécies Indicadoras de Duas Vias ou **T**wo-**W**ay **IN**dicator **SP**ecies **AN**alysis(TWINSPAN) [@RN2939, @RN1552]. O TWINSPAN é uma abordagem divisiva - parte do pressuposto de que tudo está em um grupo e depois procura maneiras de dividir esse grupo. No entanto, vários aspectos do TWINSPAN limitam muito sua utilidade:
+
+- Não pode ser usado para grupos predefinidos.
+- Apresenta desempenho ruim com mais de um gradiente.
+- Envolve detalhes analíticos complexos.
+- Baseia-se na Análise de Correspondência (CA) e, portanto, em distâncias qui-quadrado.
+- Requer "pseudoespécies" para converter dados de abundância quantitativa em dados de presença/ausência qualitativos (colocando abundâncias em classes e considerando cada classe equivalente a uma pseudoespécie).
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console
+```
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("indicspecies")
+install.packages("gt")
+```
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+Definindo o diretório de trabalho e installando os pacotes necessários:
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+### Sobre os dados do PPBio
+
+A planilha `ppbio` contém os dados de abundância de espécies em diferentes unidades amostrais (UA's). A base teórica dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+### A planilha PPBio Grupos
+
+Para esse módulo também usaremos a planilha `ppbio06-grupos`. Esta é uma **tabela de agrupamentos** guardada no arquivo `ppbio06-grupos.xlsx`, que traz os agrupamentos das UA's definidos *a priori* no delineamento amostral do PPBio (veja a figura \@ref(fig:29mapa2). Essa tabela contem as ~26 localidades (UAs) em períodos diferentes (linhas) x ~5 tipos de grupos aos quais cada UA foi atribuida (colunas) (dados publicados por @RN2491)(veja o quadro da figura \@ref(fig:29codes)). As bases teóricas dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+```{r 29mapa2, echo=FALSE, purl=FALSE, fig.cap="Mapa com a distribuição das Unidades Amostrais entre as duas áreas prioritárias para a conservação da Caatinga (sensu PROBIO) estudadas: Buíque/Vale do rio Ipojuca (em vermelho) e Seridó/Borborema (em azul)."}
+knitr::include_graphics("imagens/bases/com-mapa2.png")
+```
+
+```{r 29codes, echo=FALSE, purl=FALSE, fig.cap="Quadro com a descrição do desenho amostral do primeiro ano do PPBio Semiárido (2006) e codificação dos agrupamentos *a priori*."}
+knitr::include_graphics("imagens/bases/com-codes.png")
+```
+
+### Importando as planilhas
+
+Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.  
+	- Ajuste a primeira linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.  
+	- Ajuste o parâmetro `sheet = ""` para refletir a aba correta do arquivo .xlsx a ser importado.
+
+::: {#hello .greeting .message style="color: green;"}
+  [ATENÇÃO]{style="color:red"}
+Para a matriz de peixes, escolha a aba "peixesp" da tabela de agrupamentos ´ppbio06-grupos.xlsx´; para a matriz de bentos, escolha a aba "bentos" da tabela de agrupamentos, e assim por diante.
+:::
+
+Alternativamente você pode ir na barra de tarefas e escolhes as opções:\
+SESSION -\> SET WORKING DIRECTORY -\> CHOOSE DIRECTORY
+
+```{r, results='hold'}
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "Sheet1")
+t_grps <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "peixesp")
+ppbio[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+t_grps
+```
+
+## REINÍCIO 1
+
+::: {#hello .greeting .message style="color: green;"}
+[ATENÇÃO]{style="color:red"} Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.
+:::
+
+```{r}
+m_bruta <- (ppbio)   # <1>
+```
+
+1.  Aqui usaremos as matrizes relativizadas/transformadas/particionadas, etc
+
+Podemos exibir a planilha depois de ter sido importada para o ambiente R/RStudio usando as funções `View()`, `print()` ou `head()`. Note que essas funções são case-sensitive. A função `ignore.case()` é uma função do pacote stringr que modifica um padrão para que ele não considere o  caso das letras nas correspondências. Por exemplo, se você quiser encontrar todas as ocorrências da letra "a" em um vetor de caracteres, independente de ser "A" ou "a", você pode usar essa função.
+
+```{r, results='hide'}
+#View(m_bruta)
+print(m_bruta)
+head(m_bruta)
+```
+
+A função `head()` no RStudio é uma forma de ver as primeiras (n=6) linhas de um objeto, como um vetor, uma matriz, um data frame ou uma lista. Ela é útil para ter uma ideia do conteúdo e da estrutura do objeto.
+
+Também podemos explorar as características da planilha usando as funções `str()`, `mode()`, `class()` e `length()`. O número de observações ou tamanho do vetor depende do tipo de dados, se eles são uma `matrix` ou um `data.frame`.
+
+```{r, results='hold'}
+str(m_bruta)
+mode(m_bruta)
+class(m_bruta)
+#?str
+```
+
+O símbolo `?` é usado para acessar a documentação de uma função ou um pacote no R. Como mostrado acima você pode saber mais sobre a função `str()`, usando o comando `?str`. Isso vai abrir uma página no menu de ajuda com a descrição, os argumentos, os valores de retorno e os exemplos da função `str()`. Você também pode usar o símbolo `?` para obter informações sobre um pacote inteiro. Por exemplo, se você quiser saber mais sobre o pacote `openxlsx`, você pode digitar `?openxlsx`. Isso vai abrir uma página com a visão geral, a instalação, os recursos e as referências do pacote solicitado.
+
+Podemos agora calcular o número e a proporção de zeros na matriz usando as funções `sum()` e `length()` (Você pode pesquisar o que faz a função `length()` usando o comando `?length`).
+
+### Tamanho da matriz
+
+```{r, results='hold'}
+range(m_bruta) #menor e maior valores
+length(m_bruta) #no. de colunas
+ncol(m_bruta) #no. de N colunas
+nrow(m_bruta) #no. de M linhas
+sum(lengths(m_bruta)) #soma os nos. de colunas
+length(as.matrix(m_bruta)) #tamanho da matriz m x n
+sum(m_bruta == 0) # número de observações igual a zero
+sum(m_bruta > 0) # número de observações maiores que zero
+zeros <- (sum(m_bruta == 0)/length(as.matrix(m_bruta)))*100 # proporção de zeros na matriz
+zeros
+```
+
+A matriz de dados apresenta um total de `r length(as.matrix(m_bruta))` valores que variam entre `r range(m_bruta)` (menor e maior valores). A matriz m x n tem `r nrow(m_bruta)` linhas e `r ncol(m_bruta)` colunas. Existem `r sum(m_bruta == 0)` observações iguais a zero e `r sum(m_bruta > 0)` observações maiores que zero, representando um percentual de `r round(zeros,1)`% dos valores sendo zeros.
+
+Essas informações podem ser resumidas na Tabela \@ref(tab:8tam) que será gerada abaixo.
+
+```{r, results='hold'}
+tamanho <- data.frame(
+  Função = c("range", "lenght", "m cols", "n linhas", "Tamanho", "Tamanho",
+             "Zeros", "Nao zeros", "% Zeros"),
+  Resultado = c(paste(range(m_bruta), collapse = " - "), length(m_bruta), ncol(m_bruta),
+                nrow(m_bruta), sum(lengths(m_bruta)), length(as.matrix(m_bruta)), sum(m_bruta == 0),
+                sum(m_bruta > 0), round(zeros, 1))
+)
+tamanho
+```
+
+```{r 8tam, echo=FALSE}
+knitr::kable(tamanho, format = "markdown", caption = "Resumo das informações sobre o tamanho da matriz")
+```
+
+Ou seja, temos uma matriz de tamanho `m x n` igual a `r nrow(m_bruta)` objetos por `r ncol(m_bruta)` atributos, onde `r round(zeros, 2)`% dos valores da matriz são iguais a zero!
+
+## Classificação
+
+Criando uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, criada a partir da matriz de dados relativizada pelo total das colunas e transformada pelo arco seno da raiz quadrada.
+
+```{r, results='hold', fig.show='hold'}
+library(vegan)
+m_trns <- asin(sqrt(decostand(m_bruta,
+                               method="total", MARGIN = 2)))
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster <- hclust(vegdist, method = "average")
+plot(cluster, main = "Cluster Dendrogram - Bray-Curtis")
+#rect.hclust(cluster, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+as.matrix(vegdist)[1:6, 1:6]
+```
+
+## Histórico das fusões
+
+Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de "-") ou grupo de objetos (indicado pela ausência do sinal de "-") que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a `m-1` última fusão entre os dois últimos grupos. Nesse caso, `r nrow(as.matrix(vegdist))-1`.
+
+```{r, results='hold'}
+merge <- as.data.frame(cluster$merge)
+merge[nrow(merge)+1,] = c("0","0")
+height <- as.data.frame(round(cluster$height, 2))
+height[nrow(height)+1,] = c("1.0")
+fusoes <- data.frame(Cluster = merge, Height = height)
+colnames(fusoes) <- c("Cluster1", "Cluster2", "Height")
+UA <- rownames_to_column(as.data.frame(m_trns[, 0]))
+colnames(UA) <- c("No. e UA")
+fusoes <- cbind(UA, fusoes)
+fusoes$Histórico <- 1:nrow(fusoes)
+fusoes
+```
+
+No código acima, `h = 0.8` fornece os grupos formados na altura `h` do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, "h") representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo `height`, isso significa que a distancia entre esses objetos é 0.8.
+
+## MRPP
+
+**M**ulti-**R**esponse **P**ermutation **P**rocedure
+
+## REINÍCIO 2
+
+::: {#hello .greeting .message style="color: green;"}
+[ATENÇÃO]{style="color:red"} Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.
+:::
+
+```{r}
+m_trab <- (m_bruta)   # <1>
+```
+1.  Aqui usaremos as matrizes relativizadas/transformadas/particionadas, etc
+
+[Lab6](https://sites.ualberta.ca/~ahamann/teaching/renr690/labs/Lab6.pdf)
+
+```{r, results='hold'}
+library(vegan)
+t_grps
+grp <- t_grps$area
+set.seed(666)
+mrpp <- with(t_grps, mrpp(m_trab, grp, distance="bray"))
+mrpp
+#teste de hipótese
+str(mrpp)
+p_value <- mrpp$Pvalue
+print(sprintf("p-value: %.10f", p_value))
+# Conditional statement to check the p-value and print the appropriate message
+if (p_value < 0.05) {
+  print(sprintf("Existe diferença significativa porquê o valor de p é %.10f, sendo menor que o nível de significância de 0.05.", p_value))
+} else {
+  print(sprintf("Não existe diferença significativa porquê o valor de p é %.10f, sendo maior ou igual ao nível de significância de 0.05.", p_value))
+}
+```
+
+### Interpretação da MRPP
+
+Os resultados da análise MRPP fornecem várias informações importantes sobre a dissimilaridade entre grupos e a significância dessa dissimilaridade:
+
+Foi usada a medida de distância de *`r mrpp$distance`*. 
+
+Sobre as médias e contagens das classes: Esta seção fornece as médias de dissimilaridade (delta) e as contagens (n) para cada grupo. Neste caso, os grupos e suas contagens foram *`r mrpp$n`*, e a média de dissimilaridade foi de *`r mrpp$classdelta`* para seu respectivo grupo. A contagem indica o número de amostras em cada grupo.
+
+Concordância Dentro do Grupo Corrigida para o Acaso (A) ou "Chance Corrected Within-Group Agreement": Esta métrica, que varia de 0 a 1, mede a concordância dentro dos grupos após considerar o acaso. Um valor próximo de 1 indica alta concordância dentro dos grupos, enquanto um valor próximo de 0 indica baixa concordância além do que seria esperado apenas pelo acaso.
+
+De acordo com MCCUNE um valor esperado seria de XXX para o caso de XXX. Para essa análise o valor de A observado foi de *`r mrpp$A`* 
+
+Significância do Delta: A significância do índice de dissimilaridade observado (delta) é avaliada usando um teste de permutação ("Bootstrapping"). Neste caso, o valor **p** associado ao índice de dissimilaridade observado foi de *`r mrpp$Pvalue`*, sugerindo que a dissimilaridade observada não é estatisticamente significativa no nível de significância convencional de 0.05.
+
+Permutação: O método de permutação usado para avaliar a significância é indicado como *`r mrpp$control$within$type`*, o que significa que o número de permutações não foi restrito a um valor específico, mas sim foi permitido variar com base nos recursos computacionais disponíveis.
+
+Número de Permutações: O número de permutações realizadas na análise foi de *`r mrpp$permutations`*.
+
+### Interpretação dos resultados do `output` ou `Call` do R
+
+O MRPP é uma técnica estatística usada para testar se há uma diferença significativa entre dois ou mais grupos com base em uma matriz de dissimilaridade (ou distância). No seu caso, você está comparando dois grupos, `r mrpp$n`, usando o índice de dissimilaridade de `r mrpp$distance`.
+
+Resultados
+Matriz de Dissimilaridade e Grupos:
+
+Dissimilarity index: `r mrpp$distance`: Você usou o índice de Bray-Curtis para medir a dissimilaridade entre os elementos dos grupos.
+Groups (grp): Você tem dois grupos chamados `r mrpp$n`.
+
+Médias e Contagens dos Grupos:
+
+Class means and counts: Isso mostra a média de dissimilaridade dentro de cada grupo e a contagem de amostras em cada grupo.
+Buique: Média de dissimilaridade interna de 0.8246 com 11 amostras.
+Serido: Média de dissimilaridade interna de 0.796 com 12 amostras.
+
+Concordância Dentro do Grupo Corrigida para o Acaso (A):
+
+Chance corrected within-group agreement A: Este valor mede o grau de similaridade dentro dos grupos, corrigido pelo acaso. O valor de `r mrpp$A` indica que há uma pequena similaridade interna dentro dos grupos. Um valor de A próximo de 1 indicaria alta similaridade interna, enquanto um valor próximo de 0 indicaria que a similaridade interna é apenas o que seria esperado pelo acaso.
+
+Delta Observado e Esperado:
+
+Observed delta: A média de dissimilaridade observada (0.8097) entre os elementos dos grupos.
+Expected delta: A média de dissimilaridade esperada (0.8488) entre os elementos dos grupos se não houvesse nenhuma estrutura nos dados, ou seja, se os grupos fossem formados ao acaso.
+
+Significância Estatística (P-valor):
+
+Significance of delta: O p-valor de `r mrpp$Pvalue` indica que há uma diferença significativa entre os grupos "Buique" e "Serido". Um p-valor menor que 0.05 geralmente sugere que a diferença observada é estatisticamente significativa e não é devida ao acaso.
+Permutações:
+
+Permutation: free: Permutações foram usadas para calcular a significância.
+Number of permutations: `r mrpp$permutations`: Foram realizadas `r mrpp$permutations` permutações para avaliar a significância do resultado.
+
+Resumo
+Os resultados do MRPP indicam que há uma diferença estatisticamente significativa entre os grupos "Buique" e "Serido" com base nas suas dissimilaridades internas medidas pelo índice de Bray-Curtis. A similaridade dentro dos grupos é um pouco maior do que seria esperado ao acaso, mas ainda é relativamente baixa.
+
+### Gráfico da MRPP
+
+```{r 29mrpp, results='hold', fig.show='hold', fig.cap="Ordenação dos dados mostrando o agrupamento escolhido (`r print(grp)` da tabela de grupos e teste (sigma) de diferenças entre os grupos."}
+set.seed(666)
+def.par <- par(no.readonly = TRUE)
+layout(matrix(1:2,nr=1))
+plot(ord <- metaMDS(m_trab, distance="bray"), type="text", display="sites")
+with(t_grps, ordihull(ord, grp))
+with(mrpp, {
+  fig.dist <- hist(boot.deltas, xlim=range(c(delta,boot.deltas)), 
+                 main="Test of Differences Among Groups")
+  abline(v=delta); 
+  text(delta, 2*mean(fig.dist$counts), adj = -0.5,
+     expression(bold(delta)), cex=1.5 )  }
+)
+par(def.par)
+```
+
+Ver (https://stackoverflow.com/questions/68784131/creating-a-3-dimensional-nmds-plot-using-ordiplot3d-but-struggling-to-have-row-l)
+
+Na figura \@ref(fig:29mrpp) observa-se (a esquerda) a distribuição da UA's no espaço da Ordenação e o agrupamento de acordo com `r print(grp)`. A direita observa-se a distribuição de frequência de delta. O delta esperado foi de `r mrpp$E.delta`, enquanto que o delta observado foi de `r mrpp$delta` sifnificativamente menor, com um valor de *p* de `r mrpp$Pvalue` (A=`r mrpp$A`).
+
+No geral, esses resultados indicam que há diferença estatisticamente significativa entre os grupos avaliados para essa comparação específica com base nas relativizações e transformações utilizadas e na medida de distância escolhida, pois a dissimilaridade observada não é significativamente diferente do que seria esperado apenas pelo acaso.
+
+### Interpretação do Gráfico
+
+O gráfico está dividido em duas partes:
+
+Gráfico NMDS (Non-metric Multidimensional Scaling) à esquerda:
+
+O NMDS é uma técnica de ordenação que representa dados de alta dimensão em um espaço de menor dimensão (neste caso, duas dimensões).
+Os pontos representam amostras dos dois grupos, "Buique" (B) e "Serido" (S).
+As siglas no gráfico (como "S-R-CP2" ou "B-A-MU1") são identificadores das amostras.
+As distâncias entre os pontos refletem as dissimilaridades entre as amostras. Pontos mais próximos são mais semelhantes, enquanto pontos mais distantes são mais diferentes.
+As linhas conectando os pontos representam o agrupamento dos pontos por grupo.
+
+Histograma de Permutações à direita:
+
+Este histograma mostra a distribuição dos valores delta (δ) gerados por permutações aleatórias das amostras.
+
+O eixo x representa os valores de delta (δ).
+
+O eixo y mostra a frequência com que cada valor de delta apareceu nas permutações.
+
+A barra vertical indica o valor observado de delta (0.8097) e está localizada à esquerda da distribuição de permutações, sugerindo que o valor observado é menor que a maioria dos valores permutados.
+
+Isso suporta a conclusão de que as diferenças observadas entre os grupos "Buique" e "Serido" são estatisticamente significativas e não são devidas ao acaso.
+
+Resumo da Interpretação
+Gráfico NMDS: Mostra a separação e a relação entre as amostras dos dois grupos. Amostras do mesmo grupo estão mais próximas umas das outras, indicando similaridade interna.
+Histograma: Mostra que a dissimilaridade observada entre os grupos (valor delta observado) é menor do que a maioria dos valores gerados por permutações, reforçando a significância estatística das diferenças observadas entre os grupos.
+Portanto, a combinação desses gráficos indica que os grupos "Buique" e "Serido" têm uma diferença significativa em termos de dissimilaridade, confirmando os resultados estatísticos apresentados anteriormente.
+
+### Avaliando as distâncias médias `meandist`
+
+```{r, results='hold', fig.show='hold'}
+set.seed(666)
+md <- with(t_grps, meandist(vegdist(m_trab), grp))
+md
+summary(md)
+par(mfrow=c(1,2))
+plot(md)
+plot(md, kind="histogram")
+par(mfrow=c(1,1))
+```
+
+Podemos partir para uma Análise de Espécies Indicadoras (ISA) se as diferenças entre grupos são significativas.
+
+## ISA
+
+**I**ndicator **S**pecies **A**nalisys
+
+Ver [indicspecies](https://cran.r-project.org/web/packages/indicspecies/vignettes/IndicatorSpeciesAnalysis.html)
+
+### Organizando os grupos
+
+```{r, results='hold'}
+library(indicspecies)
+# Grupos a priori
+groups <- grp
+groups
+#OU
+rep <- c(rep("Serido", 12), rep("Buique", 11))
+rep
+#OU
+levs <- factor(c(rep(1,12), rep(2,11)), labels = c("Serido","Buique"))
+levs
+#OU Grupos a posteriori
+km <- kmeans(m_trab, centers=3)
+groupskm <- km$cluster
+groupskm
+```
+
+Usaremos a oppção `grupos`
+
+### Valores indicativos (IV)
+
+```{r, results='hold'}
+set.seed(666)
+indval <- multipatt(m_trab, groups,
+                    control = how(nperm=999)) 
+indval
+# Ordena pelo menor valor de P
+indval$sign[order(indval$sign$p.value), ]
+library("gt")
+gt(indval$sign[order(indval$sign$p.value), ], rownames_to_stub=TRUE)
+```
+
+### Multi-level Pattern Analysis
+
+```{r, results='hold'}
+set.seed(666)
+summary(indval)
+summary(indval, indvalcomp=TRUE)
+summary(indval, alpha=1)
+pa <- ifelse(m_trab>0,1,0)
+phi <- multipatt(pa, groups, func = "r", 
+                 control = how(nperm=999))
+phi
+phi <- multipatt(pa, groups, func = "r.g", 
+                 control = how(nperm=999)) 
+summary(phi)
+round(head(phi$str),3)
+round(head(indval$str),3)
+```
+
+Outras funções podem ser usadas para estimar e testar a associação entre espécies e grupos de Unidades Amostrais, mas estas funções estão além do interesse desse livro. Mais importante, é que quarto Índices de Associações (IA) são  possíveis no pacote `indicspecies` (`func=`)(CITA):
+
+- `IndVal`: o Valor Indicativo (IV), originalmente proposto por (CITA),  
+- `IndVal.g`: uma extenção do IV (CITA), que é usada como padrão (`default`) pela função `multipatt` (CITA),  
+- `r` e,  
+- `r.g.`
+
+O Índice de Associação escolhido na Análise de Espécies Indicadoras deve ser reportado na metodologia quando o trabalho é publicado. Para ver mais detalhes e exemplos desses IA's `?indicspecies` e `?multipatt`.
+
+Até o momento temos usado o IA padrão, `IndVal.g`.
+
+
+**If the association index used in multipatt() is func = "IndVal" or func = "IndVal.g", one can also inspect the indicator value components when displaying the results. Indeed, the indicator value index is the product of two components, called ‘A’ and ‘B’ (Dufrêne and Legendre 1997; De Cáceres and Legendre 2009):
+
+Component ‘A’ is sample estimate of the probability that the surveyed site belongs to the target site group given the fact that the species has been found. This conditional probability is called the specificity or positive predictive value of the species as indicator of the site group.
+Component ‘B’ is sample estimate of the probability of finding the species in sites belonging to the site group. This second conditional probability is called the fidelity or sensitivity of the species as indicator of the target site group.**
+
+**This gives us additional information about why species can be used as indicators. For example, ‘Ludads’ is a good indicator of Group 1 because it occurs in sites belonging to this group only (i.e., A = 1.0000), although not all sites belonging to Group 1 include the species (i.e., B = 0.8235). In contrast, ‘Pancam’ can be used to indicate Group 3 because it appears in all sites belonging to this group (i.e., B = 1.0000) and it is largely (but not completely) restricted to it (i.e., A = 0.8278).**
+
+https://cran.r-project.org/web/packages/indicspecies/vignettes/IndicatorSpeciesAnalysis.html
+
+## ANOSIM e SIMPER
+
+SIMPER ("**SIM**ilarity **PER**rcentages)
+
+```{r, results='hold', fig.show='hold'}
+set.seed(666)
+dist <- vegdist(m_trab)
+ano <- with(t_grps, anosim(dist, grp))
+ano
+summary(ano)
+plot(ano)
+
+sim_total <- with(t_grps, simper(m_trab, permutations = 999))
+sim_total
+sim <- with(t_grps, simper(m_trab, grp, permutations = 999))
+sim
+summary(sim, ordered = TRUE)
+```
+
+## PerMANOVA usando Matrizes de Distâncias `adonis2`
+
+**Per**mutational **M**ultivariate **AN**alysis **0**f **VA**riance using Distance Matrices
+
+https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/permanova/
+https://rpubs.com/hafezahmad/948799
+
+```{r, results='hold', fig.show='hold'}
+set.seed(666)
+adonis2(m_trab ~ area, data = t_grps, method = "bray")
+## default test by terms
+adonis2(m_trab ~ area*ambiente, data = t_grps)
+## overall tests
+adonis2(m_trab ~ area*ambiente, data = t_grps, by = NULL)
+```
+
+Anderson (2001, Fig. 4) warns that the method may confound location and dispersion effects: significant differences may be caused by different within-group variation (dispersion) instead of different mean values of the groups (see Warton et al. 2012 for a general analysis). However, it seems that adonis2 is less sensitive to dispersion effects than some of its alternatives (anosim, mrpp). Function betadisper is a sister function to adonis2 to study the differences in dispersion within the same geometric framework.
+
+### Usando função `betadisper` 
+
+```{r, results='hold', fig.show='hold'}
+set.seed(666)
+## Bray-Curtis distances between samples
+dis <- vegdist(m_trab)
+
+## Calculate multivariate dispersions
+mod <- betadisper(dis, groups)
+mod
+
+## Perform test
+anova(mod)
+
+## Permutation test for F
+permutest(mod, pairwise = TRUE, permutations = 99)
+
+## Tukey's Honest Significant Differences
+mod.HSD <- TukeyHSD(mod)
+plot(mod.HSD)
+
+## Plot the groups and distances to centroids on the
+## first two PCoA axes
+plot(mod)
+
+## with data ellipses instead of hulls
+plot(mod, ellipse = TRUE, hull = FALSE) # 1 sd data ellipse
+plot(mod, ellipse = TRUE, hull = FALSE, conf = 0.90) # 90% data ellipse
+
+# plot with manual colour specification
+my_cols <- c("#1b9e77", "#7570b3")
+plot(mod, col = my_cols, pch = c(16,17), cex = 1.1)
+
+## can also specify which axes to plot, ordering respected
+plot(mod, axes = c(3,1), seg.col = "forestgreen", seg.lty = "dashed")
+
+## Draw a boxplot of the distances to centroid for each group
+boxplot(mod)
+
+## `scores` and `eigenvals` also work
+scrs <- scores(mod)
+str(scrs)
+head(scores(mod, 1:4, display = "sites"))
+# group centroids/medians 
+scores(mod, 1:4, display = "centroids")
+# eigenvalues from the underlying principal coordinates analysis
+eigenvals(mod) 
+
+## try out bias correction; compare with mod3
+mod3B <- betadisper(dis, groups, type = "median", bias.adjust=TRUE)
+anova(mod3B)
+permutest(mod3B, permutations = 99)
+
+## should always work for a single group
+group <- factor(rep("Serido", NROW(m_trab)))
+tmp <- betadisper(dis, group, type = "median")
+tmp <- betadisper(dis, group, type = "centroid")
+
+## simulate missing values in 'd' and 'group'
+## using spatial medians
+groups[c(2,20)] <- NA
+dis[c(2, 20)] <- NA
+mod2 <- betadisper(dis, groups) ## messages
+mod2
+permutest(mod2, permutations = 99)
+anova(mod2)
+plot(mod2)
+boxplot(mod2)
+plot(TukeyHSD(mod2))
+
+## Using group centroids
+mod3 <- betadisper(dis, groups, type = "centroid")
+mod3
+permutest(mod3, permutations = 99)
+anova(mod3)
+plot(mod3)
+boxplot(mod3)
+plot(TukeyHSD(mod3))
+```
+
+## Apêndices {.unnumbered}
+
+### Sites consultados {-}
+
+[rpubs](https://rpubs.com/hafezahmad/948799)
+[Permdist](https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/permdisp/)
+[Video](https://www.youtube.com/watch?v=1QGI6u0BVnQ)
+[Video](https://www.youtube.com/watch?v=1ETBgbXl-BM)
+[Pairwise Permanova](https://gist.github.com/mcgoodman/58c9d1257fd1625954a4ffa1c3301939)
+
+## Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "2-12-rmd12_mrpp-isa.Rmd", output = "script-rmd12.txt", documentation = 0)
+Script <- readLines("script-rmd12.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd12.txt")
+cat(Script, sep = "\n")
+```
+
+
+## Referências {-}

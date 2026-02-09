@@ -7,7 +7,7 @@
 <title> 2 Introdução ao R/RStudio | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Bem-vindo à disciplina de Ecologia Numérica. A base desta disciplina está no uso de técnicas multivariadas de classificação e ordenação, como são usadas em ecologia e gestão de recursos....">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
@@ -22,7 +22,8 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -49,7 +50,7 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -75,22 +76,23 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
 <li><a class="active" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
 <li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
-<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
-<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
 <li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
 <li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></li>
 <li class="book-part">ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -172,7 +174,7 @@ nessa disciplina, áreas de rápido desenvolvimento de análise temporal e espac
 <p>O RStudio é um ambiente integrado de desenvolvimento (IDE) para a linguagem de programação R, projetado para ajudar os usuários a trabalhar com dados de forma mais eficiente e produtiva (Figura <a href="intro.html#fig:rm1fig1">2.1</a>). Ele oferece uma ampla variedade de recursos e ferramentas para análise de dados, incluindo edição de código, visualização de gráficos, depuração, gerenciamento de projetos e colaboração. O RStudio é gratuito e de código aberto, disponível para Windows, Mac e Linux, e é usado por uma comunidade crescente de cientistas de dados, pesquisadores, analistas e desenvolvedores em todo o mundo. Ele oferece suporte para várias bibliotecas e pacotes do R, incluindo o <code>tidyverse</code>, que é uma coleção popular de pacotes para manipulação de dados e visualização. Com o RStudio, os usuários podem facilmente importar, manipular e visualizar dados, executar análises estatísticas e criar visualizações gráficas interativas. Além disso, o RStudio oferece a possibilidade de publicar relatórios e apresentações dinâmicas em diversos formatos, como HTML, PDF e Word, facilitando a comunicação e colaboração entre os usuários.</p>
 <div class="figure">
 <span style="display:block;" id="fig:rm1fig1"></span>
-<img src="imagens/rm1.fig1.png" alt="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R." width="450"><p class="caption">
+<img src="imagens/rm1.fig1.png" alt="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R." width="450px"><p class="caption">
 Figura 2.1: Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R.
 </p>
 </div>
@@ -186,32 +188,79 @@ Figura 2.1: Interface do usuário do ambiente integrado de desenvolvimento (IDE)
 </ol>
 <p>Essas são apenas algumas das vantagens que o RStudio oferece em relação ao R. É importante notar que, embora o RStudio seja uma ferramenta poderosa para análise de dados, ele não substitui a necessidade de conhecimento em R e estatística para obter resultados precisos e significativos.</p>
 </div>
-<div id="o-essencial" class="section level2" number="2.5">
+<div id="instala_r" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.5</span> O essencial<a class="anchor" aria-label="anchor" href="#o-essencial"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Instalação do R e RStudio<a class="anchor" aria-label="anchor" href="#instala_r"><i class="fas fa-link"></i></a>
 </h2>
-<div id="licença-de-software" class="section level3" number="2.5.1">
+<div id="r-base" class="section level3" number="2.5.1">
 <h3>
-<span class="header-section-number">2.5.1</span> Licença de software<a class="anchor" aria-label="anchor" href="#licen%C3%A7a-de-software"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5.1</span> R base<a class="anchor" aria-label="anchor" href="#r-base"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>O primeiro passo é entrar na página do projeto CRAN (Comprehensive R Archive Network) (<a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a>).<br>
+</li>
+<li>Do lado esquerdo da página clique sobre o link CRAN abaixo de Download. 3. Uma nova página com uma série de links irá se abrir. Esses links são chamados de “espelhos” e servem para que você possa escolher o local mais próximo de onde você está para fazer o download do programa. Escolha um espelho no Brasil.<br>
+</li>
+<li>Na seção Download and Install R, clique sobre o link <code>Download R for Windows</code> para baixar a versão para esse sistema… (MacOS??… o que é isso?)<br>
+</li>
+<li>Clique sobre o link <code>base</code>.</li>
+<li>Clique sobre o link <code>Download R 4.x.x for Windows</code> para fazer o download do arquivo R.exe.</li>
+<li>A instalação segue o formato padrão de instalação de programas no Windows, e portanto não são necessários maiores detalhes.</li>
+</ol>
+</div>
+<div id="rstudio" class="section level3" number="2.5.2">
+<h3>
+<span class="header-section-number">2.5.2</span> RStudio<a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Para baixar o RStudio entre no endereço (<a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>)<br>
+</li>
+<li>Clique no link <code>Products &gt; RStudio</code><br>
+</li>
+<li>Selecione a versão Desktop.<br>
+</li>
+<li>Clique em <code>DOWNLOAD RSTUDIO DESKTOP</code><br>
+</li>
+<li>Será exibida uma página com a recomendação para você baixar o RStudio FREE versão mais recente - Windows<br>
+</li>
+<li>Clicando nesse link, você irá baixar o arquivo RStudio atual (.exe)</li>
+<li>Depois é só clicar e instalar da forma convencional do Windows.</li>
+</ol>
+<p>Após a instalação, você pode abrir o <code>RStudio</code> pelo seu respectivo ícone, e o RStudio estará pronto para ser utilizado. O “R base” continuará instalado mas será acessado pelo RStudio. Não o desinstale.</p>
+</div>
+<div id="rstudio-na-nuvem" class="section level3" number="2.5.3">
+<h3>
+<span class="header-section-number">2.5.3</span> RStudio na nuvem<a class="anchor" aria-label="anchor" href="#rstudio-na-nuvem"><i class="fas fa-link"></i></a>
+</h3>
+<p>Usar o RStudio Cloud (<a href="https://login.rstudio.cloud/" class="uri">https://login.rstudio.cloud/</a>) é uma opção para quem não quer instalar a versão para PC. O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente.</p>
+</div>
+</div>
+<div id="o-essencial" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> O essencial<a class="anchor" aria-label="anchor" href="#o-essencial"><i class="fas fa-link"></i></a>
+</h2>
+<div id="licença-de-software" class="section level3" number="2.6.1">
+<h3>
+<span class="header-section-number">2.6.1</span> Licença de software<a class="anchor" aria-label="anchor" href="#licen%C3%A7a-de-software"><i class="fas fa-link"></i></a>
 </h3>
 <p>A licença de uso do RStudio depende da versão do software que está sendo utilizada. O RStudio oferece duas versões principais: a versão gratuita e a versão paga, conhecida como RStudio Pro. A versão gratuita do RStudio é licenciada sob a licença AGPLv3, o que significa que é um software de código aberto e livremente distribuível. Isso permite que os usuários baixem, modifiquem e distribuam o código-fonte do RStudio gratuitamente. No entanto, o uso comercial do RStudio sob a licença AGPLv3 pode ter algumas limitações, como a obrigatoriedade de disponibilizar o código-fonte modificado para os usuários. Já a versão paga do RStudio, o RStudio Pro, requer uma licença comercial para uso em ambientes empresariais ou acadêmicos. A licença comercial do RStudio Pro oferece recursos adicionais, como suporte técnico e atualizações regulares do software. Além disso, a licença comercial permite que os usuários utilizem o RStudio Pro em um ambiente sem a obrigação de divulgar o código-fonte modificado. É importante lembrar que as licenças de uso do RStudio podem mudar com o tempo, portanto, é recomendado que os usuários verifiquem as informações de licenciamento diretamente no site do RStudio antes de utilizar o software.</p>
 </div>
-<div id="interface-do-usuário" class="section level3" number="2.5.2">
+<div id="interface-do-usuário" class="section level3" number="2.6.2">
 <h3>
-<span class="header-section-number">2.5.2</span> Interface do usuário<a class="anchor" aria-label="anchor" href="#interface-do-usu%C3%A1rio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.2</span> Interface do usuário<a class="anchor" aria-label="anchor" href="#interface-do-usu%C3%A1rio"><i class="fas fa-link"></i></a>
 </h3>
 <p>Uma interface de programa estatístico é uma ferramenta que permite que os usuários interajam com uma linguagem de programação de maneira mais amigável e visual. Essas interfaces geralmente apresentam uma interface gráfica do usuário (GUI) que oferece um ambiente integrado para a análise de dados. Os usuários podem importar dados, criar visualizações, executar análises estatísticas e gerar relatórios. As interfaces de programa estatístico podem variar desde aplicativos de desktop autônomos até plug-ins para aplicativos de planilha, e muitos são desenvolvidos para atender a necessidades específicas de usuários em áreas como finanças, pesquisa médica, ciências sociais e outras. Essas interfaces tornam a análise de dados mais acessível a uma gama mais ampla de usuários, independentemente de sua experiência em programação ou estatística.</p>
 <p>Linguagens de programação estatística de código aberto tem sido amplamente usadas em análises de dados e pesquisa em todo o mundo. Suas interfaces ou GUIs, embora poderosas, podem ser um pouco intimidadoras para novos usuários, uma vez que é necessário habilidades de programação básicas.</p>
 </div>
-<div id="interface-do-usuário-do-rstudio" class="section level3" number="2.5.3">
+<div id="interface-do-usuário-do-rstudio" class="section level3" number="2.6.3">
 <h3>
-<span class="header-section-number">2.5.3</span> Interface do usuário do RStudio<a class="anchor" aria-label="anchor" href="#interface-do-usu%C3%A1rio-do-rstudio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.3</span> Interface do usuário do RStudio<a class="anchor" aria-label="anchor" href="#interface-do-usu%C3%A1rio-do-rstudio"><i class="fas fa-link"></i></a>
 </h3>
 <p>A interface de usuário do RStudio é composta por várias janelas e painéis que permitem a interação com o R de forma organizada e intuitiva. A janela principal é dividida em quatro painéis (Figura <a href="intro.html#fig:R-eng">2.2</a>):</p>
 <div class="figure">
 <span style="display:block;" id="fig:R-eng"></span>
-<img src="imagens/interfaceR-eng.png" alt="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( &lt;- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/" width="450"><p class="caption">
-Figura 2.2: Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( &lt;- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) <a href="https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/" class="uri">https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/</a>
+<img src="imagens/interfaceR.png" alt="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( &lt;- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos)." width="450px"><p class="caption">
+Figura 2.2: Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( &lt;- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos).
 </p>
 </div>
 <p><strong>Editor de código</strong>: é onde o usuário pode criar, editar e salvar scripts R. O editor fornece recursos como destaque de sintaxe, indentação automática, autocompletar e outras ferramentas úteis para a programação.</p>
@@ -220,15 +269,15 @@ Figura 2.2: Interface do usuário do ambiente integrado de desenvolvimento (IDE)
 <p><strong>Ambiente/Histórico/Git/Conexões</strong>: este painel também pode ser dividido em quatro subpainéis. O painel de ambiente exibe informações sobre variáveis e funções criadas no R. O painel de histórico mostra os comandos recentes digitados no console. O painel de Git permite que o usuário integre o RStudio com um repositório Git para controle de versão. O painel de conexões permite a conexão com bancos de dados e outros recursos externos.</p>
 <p>A interface de usuário do RStudio também inclui uma barra de ferramentas na parte superior da janela, que fornece acesso rápido a comandos e recursos comuns. Além disso, há uma barra de menus padrão que permite o acesso a todas as opções e recursos do RStudio. No geral, a interface de usuário do RStudio é altamente personalizável e pode ser configurada para atender às necessidades específicas do usuário.</p>
 </div>
-<div id="projetos" class="section level3" number="2.5.4">
+<div id="projetos" class="section level3" number="2.6.4">
 <h3>
-<span class="header-section-number">2.5.4</span> Projetos<a class="anchor" aria-label="anchor" href="#projetos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.4</span> Projetos<a class="anchor" aria-label="anchor" href="#projetos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Um ‘Projeto’ no RStudio é um conjunto de dados e arquivos de resultados associados entre si, junto com as opções e configurações no momento em que o Projeto foi salvo pela última vez. Quando você abre um projeto, esses arquivos são abertos e suas opções e configurações são restauradas da última vez. Você só pode ter um projeto aberto por vez, mas pode alternar facilmente entre eles abrindo um projeto salvo. Um projeto pode ter mais de um arquivo de dados associado. Se você tiver um projeto aberto e abrir ou criar qualquer arquivo nele, o projeto será considerado modificado. Ao sair do RStudio ou abrir um novo projeto, será perguntado se deseja salvar o projeto modificado. Para melhor gerenciamento de dados, você pode manter seus arquivos de projeto em seus próprios diretórios, separados do software RStudio. Ele lembra o nome do caminho completo para cada projeto. Os detalhes de como o RStudio gerencia diretórios e definições de gerenciamento de arquivos são fornecidos no sistema de Ajuda. Você pode redefinir o diretório padrão (working directory) para que o RStudio navegue até o diretório que você escolheu e abra os arquivos ou projetos que você encontrará no diretório escolhido.</p>
 </div>
-<div id="nomes-de-arquivos" class="section level3" number="2.5.5">
+<div id="nomes-de-arquivos" class="section level3" number="2.6.5">
 <h3>
-<span class="header-section-number">2.5.5</span> Nomes de arquivos<a class="anchor" aria-label="anchor" href="#nomes-de-arquivos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.5</span> Nomes de arquivos<a class="anchor" aria-label="anchor" href="#nomes-de-arquivos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Alguns dos tipos de extensão de arquivos que podem ser criados ou manipulados no RStudio incluem:</p>
 <p>● Arquivos de script: São arquivos de texto contendo código R, com extensões de arquivo como .R, .Rmd, .Rnw, .Rhistory, entre outros.<br>
@@ -239,68 +288,68 @@ Figura 2.2: Interface do usuário do ambiente integrado de desenvolvimento (IDE)
 <p>Esses são apenas alguns dos tipos de arquivos que podem ser usados ou gerados no RStudio. O RStudio também oferece suporte a muitos outros tipos de arquivos, como arquivos de ajuda, arquivos de instalação de pacotes, entre outros.</p>
 </div>
 </div>
-<div id="preparação-dos-arquivos" class="section level2" number="2.6">
+<div id="preparação-dos-arquivos" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">2.6</span> Preparação dos arquivos<a class="anchor" aria-label="anchor" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> Preparação dos arquivos<a class="anchor" aria-label="anchor" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><i class="fas fa-link"></i></a>
 </h2>
 <p>Arquivos de dados multivariádos são geralmente maiores e mais complexos do que outros, portanto, é necessário cuidado extra. Eles podem ser preparados de duas maneiras principais. A primeira forma é como a matriz completa de valores (.xlsx), onde cada linha mostra os valores de cada coluna. Isso é bom quando há poucos zeros. É assim que uma planilha funciona. A outra maneira, preferida pelos ecologistas para seus dados de espécies, é registrar apenas os valores diferentes de zero para cada espécie. Cada linha, representando uma unidade de amostragem, é então lida como uma lista de verificação ou registro quadrat. Este formato compacto (.csv ou tab delimited) é muito mais eficiente quando o tamanho da matriz de dados é muito grande. O RStudio considera as linhas no arquivo de dados como as unidades de amostragem e as colunas como as variáveis. Dependendo de quantos existem, pode ser mais conveniente inserir seus dados ao contrário e, em seguida, transpô-los para o RStudio. Veremos como fazer isso mais tarde.</p>
-<div id="formatos-de-arquivo-de-dados" class="section level3" number="2.6.1">
+<div id="formatos-de-arquivo-de-dados" class="section level3" number="2.7.1">
 <h3>
-<span class="header-section-number">2.6.1</span> Formatos de arquivo de dados<a class="anchor" aria-label="anchor" href="#formatos-de-arquivo-de-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.1</span> Formatos de arquivo de dados<a class="anchor" aria-label="anchor" href="#formatos-de-arquivo-de-dados"><i class="fas fa-link"></i></a>
 </h3>
 <p>Você pode usar qualquer editor de texto, processador de texto ou planilha para construir sua planilha de dados, embora seja recomendado o uso do Excel. No entanto, a entrada de dados no RStudio deve ser feita dentro do ambiente R por linha de comando. Os dados podem ser preparados no formato de planilha (spreadsheet), mas você deve seguir o formato cuidadosamente para saber onde e como colocar as informações nas células da planilha.</p>
 <p>A seguir é apresentada a estrutura básica de uma matriz comunitária e como importar um arquivo XLS/XLSX para o RStudio usando a programação R (Figura <a href="intro.html#fig:ppbio2">2.3</a>). Como tudo no R, existem várias formas para se ler os arquivos Excel. Usaremos primeiro pacote readxl (que já vem instalado com o R base) (veja <a href="https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/" class="uri">https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/</a>)</p>
 <div class="figure">
 <span style="display:block;" id="fig:ppbio2"></span>
-<img src="imagens/rm1.fig3.png" alt="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada" width="600"><p class="caption">
+<img src="imagens/rm1.fig3.png" alt="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada" width="600px"><p class="caption">
 Figura 2.3: Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada
 </p>
 </div>
 </div>
-<div id="o-arquivo-de-espécies" class="section level3" number="2.6.2">
+<div id="o-arquivo-de-espécies" class="section level3" number="2.7.2">
 <h3>
-<span class="header-section-number">2.6.2</span> O arquivo de espécies<a class="anchor" aria-label="anchor" href="#o-arquivo-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.2</span> O arquivo de espécies<a class="anchor" aria-label="anchor" href="#o-arquivo-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ao usar o formato de dados compacto, você viu que as variáveis (colunas) são numeradas, não nomeadas. Portanto, para aplicar um nome a eles, você precisa criar um arquivo de texto separado que contenha os códigos e nomes. Isso é mais útil quando as variáveis são espécies, uma vez que você pode ter um único arquivo de espécie que se aplica a todos os seus arquivos de dados e aos projetos.</p>
 <p>O arquivo de espécies também inclui o nome completo da espécie, que é usado em alguns arquivos de resultados. Esta facilidade é obviamente muito útil para registro de campo quando você pode identificar a maioria das espécies. Leve a lista de espécies com você e apenas escreva o número do código em sua folha de dados. Observe também os seguintes guias de formato e regras para o arquivo de espécies.</p>
 <p>● Nomes de código curtos são recomendados para reduzir a superimposição de nomes em quaisquer resultados gráficos.<br>
 ● Os registros podem estar em qualquer ordem neste arquivo. (No entanto, você achará útil manter as espécies em ordem alfabética porque a maior parte dos outputs é ordenada pela sequência de espécies em seu arquivo de espécies.).</p>
 </div>
-<div id="formato-de-valores-separados-por-vírgula-.csv" class="section level3" number="2.6.3">
+<div id="formato-de-valores-separados-por-vírgula-.csv" class="section level3" number="2.7.3">
 <h3>
-<span class="header-section-number">2.6.3</span> Formato de valores separados por vírgula (.csv)<a class="anchor" aria-label="anchor" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.3</span> Formato de valores separados por vírgula (.csv)<a class="anchor" aria-label="anchor" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><i class="fas fa-link"></i></a>
 </h3>
 <p>Um arquivo ASCII de valores separados por vírgula (formato *.csv) também pode ser usado para importar / exportar dados do RStudio. Este formato de arquivo requer uma formatação muito cuidadosa.</p>
 </div>
-<div id="editando-a-matriz-de-dados" class="section level3" number="2.6.4">
+<div id="editando-a-matriz-de-dados" class="section level3" number="2.7.4">
 <h3>
-<span class="header-section-number">2.6.4</span> Editando a matriz de dados<a class="anchor" aria-label="anchor" href="#editando-a-matriz-de-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.4</span> Editando a matriz de dados<a class="anchor" aria-label="anchor" href="#editando-a-matriz-de-dados"><i class="fas fa-link"></i></a>
 </h3>
 <p>O RStudio fornece uma pletora de formas para edição de matrizes. Isso é mais útil para pequenas correções. Essas edições são salvas no formato de planilha para que você possa alternar entre a edição do arquivo e o software de planilha. Use a planilha para uma edição mais extensa de suas matrizes. Você pode fazer operações do tipo matriz facilmente na janela principal. A exclusão de linhas ou colunas, transformações e transposição e multiplicação de matrizes estão disponíveis com linhas de comando.</p>
 </div>
-<div id="arquivos-de-resultados" class="section level3" number="2.6.5">
+<div id="arquivos-de-resultados" class="section level3" number="2.7.5">
 <h3>
-<span class="header-section-number">2.6.5</span> Arquivos de resultados<a class="anchor" aria-label="anchor" href="#arquivos-de-resultados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.5</span> Arquivos de resultados<a class="anchor" aria-label="anchor" href="#arquivos-de-resultados"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para manter um registro completo de suas análises, é melhor anexar arquivos de resultados sucessivos a um arquivo de scripts nomeado. Faça isso salvando o arquivo de resultado e, então, após cada operação sucessiva, selecione Salvar script. Você também deve adquirir o hábito de inserir um título descritivo significativo (usando <span style="color:green">#</span>) para cada análise. Isso fornece documentação adicional de sua análise e aparece no script. As tabelas no arquivo de resultado são construídas com espaços, não tabulações. Portanto, o alinhamento das colunas no RStudio e nos processadores de texto só é obtido selecionando uma fonte de pitch-fixo, como Courier. Sendo arquivos de texto simples, você também pode pesquisar ou editar arquivos de resultados e scripts usando o R ou qualquer editor de texto.</p>
 <p>Você pode exportar seus arquivos de resultado para sua planilha.</p>
 </div>
-<div id="gráficos" class="section level3" number="2.6.6">
+<div id="gráficos" class="section level3" number="2.7.6">
 <h3>
-<span class="header-section-number">2.6.6</span> Gráficos<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.6</span> Gráficos<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Você pode salvar imagens gráficas do RStudio como metarquivos do Windows (.wmf) ou metarquivos aprimorados (*.emf), usando linhas de comando ou a interface gráfica. Um gráfico salvo dessa forma é uma imagem vetorial que pode ser aberta em um pacote gráfico ou colada em processadores de texto e redimensionada ou editada sem perda de detalhes. No entanto, certifique-se de não alterar a proporção de aspecto ao redimensionar. Se o formato *.emf não for lido corretamente por seu outro software, tente salvar o gráfico no formato .wmf.</p>
 </div>
 </div>
-<div id="conclusão" class="section level2" number="2.7">
+<div id="conclusão" class="section level2" number="2.8">
 <h2>
-<span class="header-section-number">2.7</span> Conclusão<a class="anchor" aria-label="anchor" href="#conclus%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8</span> Conclusão<a class="anchor" aria-label="anchor" href="#conclus%C3%A3o"><i class="fas fa-link"></i></a>
 </h2>
 <p>Foram apresentadas as três primeiras etapas da sequência abaixo, incluindo a preparação da importantíssima matriz de dados e como importá-la e exportá-la. Resumir os dados e decidir sobre o tratamento dos valores ausentes é um primeiro passo para a familiarização com conjuntos de dados multivariados.</p>
 </div>
-<div id="sequência-típica-na-preparação-e-análise-de-dados" class="section level2" number="2.8">
+<div id="sequência-típica-na-preparação-e-análise-de-dados" class="section level2" number="2.9">
 <h2>
-<span class="header-section-number">2.8</span> Sequência típica na preparação e análise de dados<a class="anchor" aria-label="anchor" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.9</span> Sequência típica na preparação e análise de dados<a class="anchor" aria-label="anchor" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><i class="fas fa-link"></i></a>
 </h2>
 <p>Para realizar uma análise multivariada, precisamos seguir uma sequência de etapas analíticas, como a seguir:</p>
 <ol style="list-style-type: decimal">
@@ -321,9 +370,9 @@ Cada análise pode exigir o carregamento de várias matrizes principais e secund
 </ol>
 <p>Salve e imprima os resultados</p>
 </div>
-<div id="material-de-apoio" class="section level2" number="2.9">
+<div id="material-de-apoio" class="section level2" number="2.10">
 <h2>
-<span class="header-section-number">2.9</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.10</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio"><i class="fas fa-link"></i></a>
 </h2>
 <p>Recursos na Web Apostilas
 RStudio Desktop - Posit
@@ -372,7 +421,7 @@ VALENTIN, J. L. <strong>Ecologia Numérica. Uma Introdução à Análise Multiva
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html"><span class="header-section-number">1</span> Apresentação</a></div>
-<div class="next"><a href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></div>
+<div class="next"><a href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -386,27 +435,34 @@ VALENTIN, J. L. <strong>Ecologia Numérica. Uma Introdução à Análise Multiva
 </li>
 <li><a class="nav-link" href="#o-que-%C3%A9-o-r-studio"><span class="header-section-number">2.4</span> O que é o R Studio?</a></li>
 <li>
-<a class="nav-link" href="#o-essencial"><span class="header-section-number">2.5</span> O essencial</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#licen%C3%A7a-de-software"><span class="header-section-number">2.5.1</span> Licença de software</a></li>
-<li><a class="nav-link" href="#interface-do-usu%C3%A1rio"><span class="header-section-number">2.5.2</span> Interface do usuário</a></li>
-<li><a class="nav-link" href="#interface-do-usu%C3%A1rio-do-rstudio"><span class="header-section-number">2.5.3</span> Interface do usuário do RStudio</a></li>
-<li><a class="nav-link" href="#projetos"><span class="header-section-number">2.5.4</span> Projetos</a></li>
-<li><a class="nav-link" href="#nomes-de-arquivos"><span class="header-section-number">2.5.5</span> Nomes de arquivos</a></li>
+<a class="nav-link" href="#instala_r"><span class="header-section-number">2.5</span> Instalação do R e RStudio</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#r-base"><span class="header-section-number">2.5.1</span> R base</a></li>
+<li><a class="nav-link" href="#rstudio"><span class="header-section-number">2.5.2</span> RStudio</a></li>
+<li><a class="nav-link" href="#rstudio-na-nuvem"><span class="header-section-number">2.5.3</span> RStudio na nuvem</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><span class="header-section-number">2.6</span> Preparação dos arquivos</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#formatos-de-arquivo-de-dados"><span class="header-section-number">2.6.1</span> Formatos de arquivo de dados</a></li>
-<li><a class="nav-link" href="#o-arquivo-de-esp%C3%A9cies"><span class="header-section-number">2.6.2</span> O arquivo de espécies</a></li>
-<li><a class="nav-link" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><span class="header-section-number">2.6.3</span> Formato de valores separados por vírgula (.csv)</a></li>
-<li><a class="nav-link" href="#editando-a-matriz-de-dados"><span class="header-section-number">2.6.4</span> Editando a matriz de dados</a></li>
-<li><a class="nav-link" href="#arquivos-de-resultados"><span class="header-section-number">2.6.5</span> Arquivos de resultados</a></li>
-<li><a class="nav-link" href="#gr%C3%A1ficos"><span class="header-section-number">2.6.6</span> Gráficos</a></li>
+<a class="nav-link" href="#o-essencial"><span class="header-section-number">2.6</span> O essencial</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#licen%C3%A7a-de-software"><span class="header-section-number">2.6.1</span> Licença de software</a></li>
+<li><a class="nav-link" href="#interface-do-usu%C3%A1rio"><span class="header-section-number">2.6.2</span> Interface do usuário</a></li>
+<li><a class="nav-link" href="#interface-do-usu%C3%A1rio-do-rstudio"><span class="header-section-number">2.6.3</span> Interface do usuário do RStudio</a></li>
+<li><a class="nav-link" href="#projetos"><span class="header-section-number">2.6.4</span> Projetos</a></li>
+<li><a class="nav-link" href="#nomes-de-arquivos"><span class="header-section-number">2.6.5</span> Nomes de arquivos</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#conclus%C3%A3o"><span class="header-section-number">2.7</span> Conclusão</a></li>
-<li><a class="nav-link" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><span class="header-section-number">2.8</span> Sequência típica na preparação e análise de dados</a></li>
-<li><a class="nav-link" href="#material-de-apoio"><span class="header-section-number">2.9</span> Material de apoio</a></li>
+<li>
+<a class="nav-link" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><span class="header-section-number">2.7</span> Preparação dos arquivos</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#formatos-de-arquivo-de-dados"><span class="header-section-number">2.7.1</span> Formatos de arquivo de dados</a></li>
+<li><a class="nav-link" href="#o-arquivo-de-esp%C3%A9cies"><span class="header-section-number">2.7.2</span> O arquivo de espécies</a></li>
+<li><a class="nav-link" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><span class="header-section-number">2.7.3</span> Formato de valores separados por vírgula (.csv)</a></li>
+<li><a class="nav-link" href="#editando-a-matriz-de-dados"><span class="header-section-number">2.7.4</span> Editando a matriz de dados</a></li>
+<li><a class="nav-link" href="#arquivos-de-resultados"><span class="header-section-number">2.7.5</span> Arquivos de resultados</a></li>
+<li><a class="nav-link" href="#gr%C3%A1ficos"><span class="header-section-number">2.7.6</span> Gráficos</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#conclus%C3%A3o"><span class="header-section-number">2.8</span> Conclusão</a></li>
+<li><a class="nav-link" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><span class="header-section-number">2.9</span> Sequência típica na preparação e análise de dados</a></li>
+<li><a class="nav-link" href="#material-de-apoio"><span class="header-section-number">2.10</span> Material de apoio</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-consultados">Sites consultados</a></li>
 <li><a class="nav-link" href="#leitura-suplementar">Leitura suplementar</a></li>
@@ -427,7 +483,7 @@ VALENTIN, J. L. <strong>Ecologia Numérica. Uma Introdução à Análise Multiva
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 12:56:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

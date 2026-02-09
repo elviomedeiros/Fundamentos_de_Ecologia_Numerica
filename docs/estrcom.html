@@ -4,25 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 11 R Modulo 4.1 - Estrutura da Comunidade | Fundamentos de Ecologia Numérica</title>
+<title> 11 R Modulo 4.1 - Estrutura da comunidade | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíbal">
+<meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content=" 11 R Modulo 4.1 - Estrutura da Comunidade | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 11 R Modulo 4.1 - Estrutura da comunidade | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 11 R Modulo 4.1 - Estrutura da Comunidade | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 11 R Modulo 4.1 - Estrutura da comunidade | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -49,7 +50,7 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -75,22 +76,23 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de Dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de Dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de Dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
 <li class="book-part">ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de Dados no R</a></li>
-<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e Normalidade</a></li>
-<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes Estatísticos</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
 <li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
-<li><a class="active" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a></li>
+<li><a class="active" href="estrcom.html"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.2 - Estrutura do habitat</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
 <li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="r-modulo-10-1.html"><span class="header-section-number">16</span> R Modulo 10-1</a></li>
 <li class="book-part">ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">17</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -101,7 +103,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estrcom" class="section level1" number="11">
 <h1>
-<span class="header-section-number"> 11</span> R Modulo 4.1 - Estrutura da Comunidade<a class="anchor" aria-label="anchor" href="#estrcom"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 11</span> R Modulo 4.1 - Estrutura da comunidade<a class="anchor" aria-label="anchor" href="#estrcom"><i class="fas fa-link"></i></a>
 </h1>
 <div id="resumo-8" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-8"><i class="fas fa-link"></i></a>
@@ -125,12 +127,12 @@
 <h2>
 <span class="header-section-number">11.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-5"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"moments"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></span>
@@ -143,12 +145,12 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gt"</span><span class="op">)</span></span></code></pre></div>
 <p>Depois de instalados, carregue os pacotes a seguir no seu computador.</p>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org">Rcpp</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a>, <span class="citation">(<a href="#ref-RN2774" role="doc-biblioref">TEAM, 2017</a>)</span>) e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-RN358" role="doc-biblioref">TEAM, 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code><a href="https://ycphs.github.io/openxlsx/index.html">library(openxlsx)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -159,10 +161,10 @@
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 - Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado.</p>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
 <span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
-<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-peixes.xlsx"</span>,</span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
@@ -211,7 +213,7 @@
 ## S-R-CP1        0       19        0        0        0
 ## S-A-TA1        0       23        1       13        0</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -223,7 +225,7 @@
 <h2>
 <span class="header-section-number">11.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span>
 <span><span class="co">#pat &lt;- "^S"</span></span>
 <span><span class="co">#m_trab &lt;- m_trab[!grepl(pat, rownames(m_trab)), ] #exclui quem começa com pat</span></span></code></pre></div>
@@ -235,7 +237,7 @@
 <span class="header-section-number">11.5</span> Transpor a matriz para trabalhar com as espécies<a class="anchor" aria-label="anchor" href="#transpor-a-matriz-para-trabalhar-com-as-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vamos transpor a matriz para trabalharmos com as espécies. A função <code>t</code> transpõe a matriz. Só deve ser usada uma vez, pois se repetida com <code>Ctrl+Enter</code> continua “girando” a matriz. As espécies como colunas representam uma matriz comunitária e as espécies como linhas representam uma matriz (comunitária) transposta.</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="co">#View(m_trab)</span></span>
@@ -416,7 +418,7 @@
 <span class="header-section-number">11.5.1</span> Informações básicas da matriz<a class="anchor" aria-label="anchor" href="#informa%C3%A7%C3%B5es-b%C3%A1sicas-da-matriz"><i class="fas fa-link"></i></a>
 </h3>
 <p>Agora podemos pedir ao R as informações básicas da matriz de trabalho (<code>m_trab</code>), como o número de observações ou tamanho do vetor (depende do tipo da matriz), número de observações igual a zero, número de observaçõoes maiores que zero e proporção de zeros na matriz.</p>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#menor e maior valores</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#no. de colunas</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#no. de N colunas</span></span>
@@ -560,7 +562,7 @@
 <span class="header-section-number">11.6.1</span> Variabilidade<a class="anchor" aria-label="anchor" href="#variabilidade"><i class="fas fa-link"></i></a>
 </h3>
 <p>Primeiro a variabilidade estatística</p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#?apply</span></span>
 <span><span class="va">Sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="co">#ou</span></span>
@@ -675,7 +677,7 @@
 <span class="header-section-number">11.6.2</span> Riqueza<a class="anchor" aria-label="anchor" href="#riqueza"><i class="fas fa-link"></i></a>
 </h3>
 <p>Atente para o fato de que a riqueza será a frequêcia de ocorrência na matrix transposta. Converte-se primeiro para matriz binária.</p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_pa</span> <span class="op">&lt;-</span> <span class="va">m_trab</span></span>
 <span><span class="va">m_pa</span><span class="op">[</span><span class="va">m_pa</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">m_pa</span><span class="op">)</span></span>
@@ -795,7 +797,7 @@ H' = -\sum_{i=1}^{S} \left( \frac{n_i}{N} \times \ln\frac{n_i}{N} \right)
 <span class="math inline">\(S\)</span> é o número total de espécies na comunidade.</li>
 </ul>
 <p>Esta fórmula mede a incerteza (ou entropia) na identificação de uma espécie selecionada aleatoriamente da comunidade. Quanto maior o valor de <span class="math inline">\(H'\)</span>, maior a diversidade da comunidade.</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html">diversity</a></span><span class="op">(</span><span class="va">m_trab</span>, index <span class="op">=</span> <span class="st">"shannon"</span><span class="op">)</span></span>
 <span><span class="va">H</span></span></code></pre></div>
 <pre><code>##  ap-davis  as-bimac  as-fasci  ch-bimac  ci-ocela  ci-orien  co-macro  co-heter 
@@ -834,7 +836,7 @@ D = 1 - \sum_{i=1}^{S} \left( \frac{n_i (n_i - 1)}{N (N - 1)} \right)
 <li>Ao escolhermos <code>simpson</code> o R retorna <span class="math inline">\(1 - D\)</span>, e</li>
 <li>ao escolhermos <code>invsimpson</code> o R retorna <span class="math inline">\(1/D\)</span> .</li>
 </ul>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html">diversity</a></span><span class="op">(</span><span class="va">m_trab</span>, <span class="st">"simpson"</span><span class="op">)</span></span>
 <span><span class="va">D</span></span>
 <span><span class="va">D</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">#substitui NA ou NaN por 0</span></span>
@@ -878,7 +880,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="math inline">\(\ln(S)\)</span> é o logarítmo natural do número total de espécies na comunidade.</li>
 </ul>
 <p>Esta fórmula fornece um valor entre 0 e 1, onde 0 indica uma distribuição completamente desigual onde uma comunidade apresenta uma única espécie dominante e 1 indica uma distribuição completamente equitativa onde todas as espécies têm a mesma abundância.</p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">E</span> <span class="op">&lt;-</span> <span class="va">H</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html">specnumber</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">E</span></span>
 <span><span class="va">E</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">E</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">#substitui NA ou NaN por 0</span></span>
@@ -910,7 +912,7 @@ J' = \frac{H'}{\ln(S)}
 <p>A assimetria mede a falta de simetria em uma distribuição de frequência. Uma distribuição é simétrica se as duas metades à esquerda e à direita da média são cópias espelhadas uma da outra. Se a distribuição não é simétrica, então é assimétrica. A assimetria pode ser positiva, negativa ou nula (simétrica). Uma assimetria positiva indica que a cauda da distribuição se estende mais para a direita em relação à média, enquanto uma assimetria negativa indica que a cauda da distribuição se estende mais para a esquerda em relação à média.</p>
 <p>A curtose descreve o pico ou a “pontiagudez” de uma distribuição. Uma distribuição com alta curtose tem uma alta concentração de valores ao redor da média e caudas mais pesadas (ou seja, valores extremos são mais prováveis). Uma distribuição com baixa curtose é mais achatada e dispersa, com caudas mais leves. A curtose pode ser positiva (distribuição leptocúrtica, com alta concentração em torno da média e caudas pesadas), negativa (distribuição platicúrtica, com dispersão alta e caudas mais leves) ou nula (mesocúrtica, similar à distribuição normal).</p>
 <p>Essas medidas são úteis para compreender as propriedades e características de diferentes conjuntos de dados e distribuições de frequência. Elas ajudam a compreender a forma e o comportamento dos dados em uma amostra ou população <span class="citation">(<a href="#ref-RN158" role="doc-biblioref">ZAR, 1999</a>)</span>.</p>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="va">Assimetria</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">m_trab</span>,<span class="fl">1</span>,<span class="va">skewness</span><span class="op">)</span></span>
 <span><span class="va">Assimetria</span></span>
@@ -947,7 +949,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="header-section-number">11.7.3.2.1</span> Descritores da estrutura da comunidade: Espécies<a class="anchor" aria-label="anchor" href="#descritores-da-estrutura-da-comunidade-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h5>
 <p>Sum, soma; RA, abundância relativa (%), mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou <span class="citation">(<a href="#ref-RN465" role="doc-biblioref">PIELOU, 1975</a>)</span>; H, índice de diversidade de Shannon <span class="citation">(<a href="#ref-RN136" role="doc-biblioref">LUDWIG; REYNOLDS, 1988</a>)</span>; D, índice de diversidade de Simpson <span class="citation">(<a href="#ref-RN1073" role="doc-biblioref">HURLBERT, 1971</a>)</span>.</p>
-<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Descritores1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Sum</span>, <span class="va">RA</span>, <span class="va">Mean</span>, <span class="va">DP</span>, <span class="va">Max</span>, <span class="va">Min</span>, <span class="va">MinZ</span>, <span class="va">FO</span>, <span class="va">S</span>, <span class="va">E</span>, <span class="va">H</span>, <span class="va">D</span><span class="op">)</span></span>
 <span><span class="va">Descritores1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Descritores1</span><span class="op">)</span></span>
 <span><span class="va">Descritores1</span></span>
@@ -1214,7 +1216,7 @@ J' = \frac{H'}{\ln(S)}
 ## SomaTotalD  30.09 14.31
 ## MediaTotalD  0.86  0.41
 ## DPTotalD     0.78  0.34</code></pre>
-<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Fazendo uma tabela</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">DescritoresFinal</span></span>
@@ -2261,7 +2263,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="header-section-number">11.7.3.2.2</span> Descritores da normalidade<a class="anchor" aria-label="anchor" href="#descritores-da-normalidade"><i class="fas fa-link"></i></a>
 </h5>
 <p>Agora tabelamos os descritores de normalidade</p>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Assimetria</span>, <span class="va">Curtose</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Normalidade1</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span></span>
@@ -2404,7 +2406,7 @@ J' = \frac{H'}{\ln(S)}
 ## MediaTotalN       3.78   17.05
 ## DPTotalN          1.04    6.94</code></pre>
 <p>A função <code>fix(nome da matriz)</code> dá acesso ao grid da matriz criada para manipulação dos dados numéricos.</p>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Fazendo uma tabela</span></span>
 <span><span class="va">nf</span> <span class="op">&lt;-</span> <span class="va">NormalidadeFinal</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">nf</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">nf</span><span class="op">)</span> <span class="co">#no. de N colunas x M linhas</span></span>
@@ -3068,12 +3070,12 @@ J' = \frac{H'}{\ln(S)}
 </ul>
 <p>Em muitas operações, o <code>NA</code> é tratado como um valor especial que propagará em outras operações. Isso significa que se uma operação é realizada com um ou mais valores <code>NA</code>, o resultado geralmente será <code>NA</code>. Por outro lado, <code>NaN</code> é um valor específico que indica um resultado matematicamente indefinido ou inválido.</p>
 <p>Por exemplo, ao realizar operações em um vetor que contém <code>NA</code>, o resultado será <code>NA</code> para qualquer operação que envolva um valor <code>NA</code>:</p>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Resultado será NA porque há um valor NA no vetor</span></span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Por outro lado, <code>NaN</code> resulta de operações matemáticas inválidas:</p>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">0</span><span class="op">/</span><span class="fl">0</span> <span class="co"># Resultado será NaN, pois a divisão por zero é indefinida</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co"># Resultado será NaN, pois não há raiz quadrada real de um número negativo</span></span></code></pre></div>
 <pre><code>## Warning in sqrt(-1): NaNs produzidos</code></pre>
@@ -3084,7 +3086,7 @@ J' = \frac{H'}{\ln(S)}
 <h5>
 <span class="header-section-number">11.7.3.3.1</span> Salvando as tabelas criadas em .txt direto no diretório de trabalho<a class="anchor" aria-label="anchor" href="#salvando-as-tabelas-criadas-em-.txt-direto-no-diret%C3%B3rio-de-trabalho"><i class="fas fa-link"></i></a>
 </h5>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Spp"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>                       <span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>            <span class="st">"DescritoresSPP.txt"</span>,</span>
@@ -3097,7 +3099,7 @@ J' = \frac{H'}{\ln(S)}
 <span>            sep<span class="op">=</span><span class="st">"\t"</span><span class="op">)</span></span></code></pre></div>
 <p>Agora é necessário voltar à matriz comunitária (<strong>antes de ter sido transposta</strong>), antes de continuarmos a análise, porque as análises anteriores também precisam ser refeitas com a matriz não transposta. A seguir confere-se se está sendo usada a matriz comunitária com as espécies nas colunas.</p>
 <p>Para ver o código dos descritores da estrutura da comunidade para as Unidades Amostrais (UA’s), matriz não transposta, veja <a href="estrcom.html#descruas">Descritores da estrutura da comunidade: UA’s</a> nos apêndices.</p>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span></span></code></pre></div>
 <pre><code>##           S-A-ZA1 S-R-CC1 S-R-CT1 S-R-CP1 S-A-TA1 S-R-CT2 S-R-CP2 S-A-TA2
 ## ap-davis        0       0       0       0       0       0       0       0
@@ -3243,7 +3245,7 @@ J' = \frac{H'}{\ln(S)}
 ## sy-marmo        0       0
 ## te-chalc        0       0
 ## tr-signa        0       0</code></pre>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
 <div id="hello" class="greeting message" style="color: green;">
 <p>Note que em uma matriz comunitária (onde os atributos são as espécies), a matriz transposta vai conter as unidades amostrais como colunas e espécies como linhas. Não tendo a mesma interpretação de matriz transposta em matemática.</p>
@@ -3262,7 +3264,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="header-section-number">11.8.1</span> Série de Hill e pefil da diversidade<a class="anchor" aria-label="anchor" href="#s%C3%A9rie-de-hill-e-pefil-da-diversidade"><i class="fas fa-link"></i></a>
 </h3>
 <p>Pode-se utilizar uma série de Hill ao invés dos índices específicos de diversidade. Assim, quanto maior o valor de <code>q</code> (definido em <code>scales</code>), maior será o peso para a equabilidade. Quanto mais próximo de zero, maior o peso para riqueza. Quando <code>q = 0</code>, o valor de Hill é igual a riqueza de espécies.</p>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Hill</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/renyi.html">renyi</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
 <span>              scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,</span>
 <span>              hill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -3295,7 +3297,7 @@ J' = \frac{H'}{\ln(S)}
 ## B-A-MU4  5 3.672499 3.348321 3.103452 2.925311 2.799120
 ## B-A-GU4  4 2.514025 2.206452 2.107190 2.053368 2.015850</code></pre>
 <p>Podemos mapear isso em um gráfico de perfil de diversidade</p>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -3317,7 +3319,7 @@ J' = \frac{H'}{\ln(S)}
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grafico1</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="va">grafico1</span>, dpi <span class="op">=</span> <span class="fl">300</span>, filename <span class="op">=</span> <span class="st">"fig-hill.png"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Saving 7 x 5 in image</code></pre>
@@ -3334,11 +3336,11 @@ Figura 11.1: Mapeamento dos pontos de coleta em um gráfico de perfil de diversi
 <span class="header-section-number">11.9</span> Distribuição de abundância<a class="anchor" aria-label="anchor" href="#distribui%C3%A7%C3%A3o-de-abund%C3%A2ncia"><i class="fas fa-link"></i></a>
 </h2>
 <p>Uma maneira de observar a diversidade de espécies é usando um gráfico de distribuição de abundâncias de uma comunidade, como mostrado a seguir. Note que aqui utiliza-se as abundâncias totais das espécies (Figura <a href="estrcom.html#fig:241abun">11.2</a>), mas é possível fazer por linha, basta substituir o objeto <code>abund</code> pela abundância de uma linha. Como na linha marcada com o <code>#</code>.</p>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span></code></pre></div>
 <p>Na primeira linha do código abaixo, retira-se o <code>#</code> do início da linha para rodar a distribuição de abundância apenas para o local (linha) 1 <code>comunidade[1,]</code>. Pode-se mudar o número para o local de interesse.</p>
 <p>O código a seguir produzirá o gráfico para o local escolhido.</p>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#abund &lt;- m_trab[1, ] #escolhe a primeira linha para a distribuição de abundância</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span>, </span>
 <span>                 abun <span class="op">=</span> <span class="va">abund</span><span class="op">)</span> </span>
@@ -3370,7 +3372,7 @@ Figura 11.2: Distribuição da densidade de indivíduos.
 </h2>
 <p>O código abaixo indica como usar o pacote <a href="https://youtu.be/4yUXG28QPLM">iNEXT</a> para extrapolar e interpolar curvas de rarefação visando comparar a riqueza de diferentes locais (linhas, por isso se trabalha com a matriz transposta). A curva de raferação vai ser construida para as UA’s demarcadas em <code>rarefa &lt;- t(m_trab[c("S-R-CT2","S-R-CP2","S-A-TA2","B-A-MU2"),])</code></p>
 <p>Pode-se, alternativamente, construrir a curva de raferação para as 8 linhas (UA’s) com maior somatório dos valores das espécies (linhas marcadas com o símbolo <span style="color:green"><code>#</code></span>).</p>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab_r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">m_trab</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">ceiling</span><span class="op">)</span><span class="op">)</span> <span class="co">#arredonda a matriz original para números inteiros</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab_r</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab_r</span><span class="op">)</span><span class="op">)</span></span>
@@ -3398,7 +3400,7 @@ Figura 11.2: Distribuição da densidade de indivíduos.
 <p>A curva de rarefação vai ser construida para os sítios: “S-R-CT2”,“S-R-CP2”,“S-A-TA2”,“B-A-MU2”</p>
 </div>
 <p>No código abaixo o valor de <code>q</code> pode ser mudado para <code>q=1</code> para comparar a diversidade de Shannon e para <code>q=2</code> para Simpson (Figura (<a href="estrcom.html#fig:241rare">11.3</a>). A função <code>endpoint=</code> define o tamanho da amostra para o qual se deseja extrapolar a curva de rarefação. Se <code>endpoint=NULL</code>, a extrapolação será feita para o dobro do valor amostrado.</p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://chao.stat.nthu.edu.tw/wordpress/software_download/">iNEXT</a></span><span class="op">)</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/iNEXT/man/iNEXT.html">iNEXT</a></span><span class="op">(</span><span class="va">rarefa</span>, q <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>             datatype <span class="op">=</span> <span class="st">"abundance"</span>,</span>
@@ -3484,7 +3486,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h2>
 <span class="header-section-number">11.11</span> Curva de acumulação de espécies<a class="anchor" aria-label="anchor" href="#curva-de-acumula%C3%A7%C3%A3o-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acumula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/specaccum.html">specaccum</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
 <span>                     method <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span>
 <span><span class="va">acumula</span></span></code></pre></div>
@@ -3513,7 +3515,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <span class="header-section-number">11.11.1</span> Plot locais<a class="anchor" aria-label="anchor" href="#plot-locais"><i class="fas fa-link"></i></a>
 </h3>
 <p>Plotamos uma curva de acumulação de espécies simples.</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">acumula</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" width="672"></div>
 <p>Uma curva de acumulação de espécies é uma ferramenta gráfica usada para entender como a riqueza de espécies em uma comunidade aumenta à medida que mais amostras são coletadas ou observações são feitas. Ela é especialmente útil em estudos de biodiversidade e ecologia. Aqui está uma explicação sobre como interpretar uma curva de acumulação de espécies:</p>
@@ -3566,7 +3568,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 </ol>
 <p>Em resumo, a curva de acumulação de espécies é uma ferramenta valiosa para entender como a riqueza de espécies aumenta com o esforço amostral em uma comunidade. A interpretação depende da inclinação da curva, da presença de uma assíntota e do contexto do estudo. Ela ajuda a responder à pergunta: “Quantas espécies diferentes podemos esperar encontrar em uma comunidade com base nas amostras que coletamos até agora?”</p>
 <p>Agora podemos plotar uma curva de acumulação de espécies melhorada.</p>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"UAs"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">sites</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"Riqueza"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"lower"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span> <span class="op">-</span> <span class="va">acumula</span><span class="op">$</span><span class="va">sd</span><span class="op">)</span>,</span>
@@ -3589,7 +3591,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h2>
 <span class="header-section-number">11.12</span> Plot indivíduos<a class="anchor" aria-label="anchor" href="#plot-indiv%C3%ADduos"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Individuos"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">individuals</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"Riqueza"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"lower"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span> <span class="op">-</span> <span class="va">acumula</span><span class="op">$</span><span class="va">sd</span><span class="op">)</span>,</span>
@@ -3605,14 +3607,14 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <span><span class="va">gInd</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-138-1.png" width="672"></div>
 </div>
-<div id="apêndices-8" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-8"><i class="fas fa-link"></i></a>
+<div id="apêndices-7" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-7"><i class="fas fa-link"></i></a>
 </h2>
 <div id="criando-uma-tabela-de-espécies" class="section level3 unnumbered">
 <h3>Criando uma tabela de espécies<a class="anchor" aria-label="anchor" href="#criando-uma-tabela-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h3>
 <p>Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba <code>peixes</code>, porque nela constam os agrupamentos <em>a-priori</em> para os dados de peixes.</p>
-<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">t_grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -3630,7 +3632,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 ## S-R-CC1 Serido      rio CC      1
 ## S-R-CT1 Serido      rio CT      1
 ## S-R-CP1 Serido      rio CP      1</code></pre>
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
 <span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">m_trab</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -4101,7 +4103,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h3>Descritores da estrutura da comunidade: UA’s<a class="anchor" aria-label="anchor" href="#descruas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou <span class="citation">(<a href="#ref-RN465" role="doc-biblioref">PIELOU, 1975</a>)</span>; H, índice de diversidade de Shannon <span class="citation">(<a href="#ref-RN136" role="doc-biblioref">LUDWIG; REYNOLDS, 1988</a>)</span>; D, índice de diversidade de Simpson <span class="citation">(<a href="#ref-RN1073" role="doc-biblioref">HURLBERT, 1971</a>)</span>.</p>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Matriz transposta</span></span>
 <span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#transpõe a matriz de volta para comunitaria</span></span>
 <span><span class="va">Sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
@@ -4152,7 +4154,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <div id="descritores-da-normalidade-1" class="section level3 unnumbered">
 <h3>Descritores da normalidade<a class="anchor" aria-label="anchor" href="#descritores-da-normalidade-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Assimetria</span>, <span class="va">Curtose</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Normalidade1</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">Normalidade1</span><span class="op">)</span> <span class="co">#remove NA e NaN</span></span>
@@ -4180,7 +4182,7 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <div id="salvando-as-tabelas-criadas-em-txt-direto-no-diretório-de-trabalho" class="section level3 unnumbered">
 <h3>Salvando as tabelas criadas em txt direto no diretório de trabalho<a class="anchor" aria-label="anchor" href="#salvando-as-tabelas-criadas-em-txt-direto-no-diret%C3%B3rio-de-trabalho"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Spp"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>                       <span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>            <span class="st">"DescritoresUA.csv"</span>,</span>
@@ -4193,15 +4195,15 @@ Figura 11.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <span>            sep<span class="op">=</span><span class="st">"\t"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="sites-consultados-6" class="section level2 unnumbered">
-<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-6"><i class="fas fa-link"></i></a>
+<div id="sites-consultados-5" class="section level2 unnumbered">
+<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-5"><i class="fas fa-link"></i></a>
 </h2>
 </div>
 <div id="script-limpo-5" class="section level2 unnumbered">
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## dev.off() #apaga os graficos, se houver algum</span></span>
 <span><span class="co">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co">## cat("\014") #limpa o console</span></span>
@@ -4587,7 +4589,7 @@ ZAR, J. H. <strong>Biostatistical Analysis</strong>. 4th. ed. Upper Saddle River
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#estrcom"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da Comunidade</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#estrcom"><span class="header-section-number">11</span> R Modulo 4.1 - Estrutura da comunidade</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-8">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-8">Apresentação</a></li>
 </ul>
@@ -4624,14 +4626,14 @@ ZAR, J. H. <strong>Biostatistical Analysis</strong>. 4th. ed. Upper Saddle River
 </li>
 <li><a class="nav-link" href="#plot-indiv%C3%ADduos"><span class="header-section-number">11.12</span> Plot indivíduos</a></li>
 <li>
-<a class="nav-link" href="#ap%C3%AAndices-8">Apêndices</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#ap%C3%AAndices-7">Apêndices</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#criando-uma-tabela-de-esp%C3%A9cies">Criando uma tabela de espécies</a></li>
 <li><a class="nav-link" href="#descruas">Descritores da estrutura da comunidade: UA’s</a></li>
 <li><a class="nav-link" href="#descritores-da-normalidade-1">Descritores da normalidade</a></li>
 <li><a class="nav-link" href="#salvando-as-tabelas-criadas-em-txt-direto-no-diret%C3%B3rio-de-trabalho">Salvando as tabelas criadas em txt direto no diretório de trabalho</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#sites-consultados-6">Sites consultados</a></li>
+<li><a class="nav-link" href="#sites-consultados-5">Sites consultados</a></li>
 <li><a class="nav-link" href="#script-limpo-5">Script limpo</a></li>
 <li><a class="nav-link" href="#refer%C3%AAncias-9">Referências</a></li>
 </ul>
@@ -4650,7 +4652,7 @@ ZAR, J. H. <strong>Biostatistical Analysis</strong>. 4th. ed. Upper Saddle River
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíbal, Campus V, João Pessoa, PB. It was last built on Last updated: 16/01/2026 14:16:28.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 12:56:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

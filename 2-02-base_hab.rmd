@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Base de Dados II - Habitat {#basehab}
+# Base de dados II - Habitat {#basehab}
 
 ### Estrutura do Habitat: Variáveis ambientais no semiárido {-}
 
@@ -51,7 +51,7 @@ Este trabalho mede a diversidade e disponibilidade do habitat físico em sistema
 
 Este estudo foi realizado na região semiárida brasileira, em bacias hidrográficas que fluem através de uma floresta aberta arbustiva seca decidual (a "Caatinga"). A amplitude térmica é baixa na área de estudo, com médias variando de aproximadamente 25 a 30 °C, e a precipitação média anual varia entre 600 e 1100 mm. As altitudes variam entre 100 e 1000 m (Figura \@ref(fig:202mapa) e Figura \@ref(fig:202hab1)).
 
-```{r 202mapa, echo=FALSE, purl=FALSE, fig.cap="Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão."}
+```{r 202mapa, echo=FALSE, purl=FALSE, fig.cap="Área de estudo mostrando os estados do Rio Grande do Norte (RN), Paraíba (PB), Pernambuco (PE) e Alagoas (AL), principais sistemas fluviais e pontos de amostragem na região semiárida do Brasil. TA, açude Recanto; CP, riacho Cipó; CT, riacho Catureré; PC, riacho Poço da Cruz; MU, açude Mulungu e GU, açude Gurjão.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/com-mapa.png")
 ```
 
@@ -59,7 +59,7 @@ knitr::include_graphics("imagens/bases/com-mapa.png")
 
 Os locais consistiam em trechos de **riachos (-R)** com fluxo de água superficial (durante a estação chuvosa) ou poças temporárias isoladas (durante a estação seca) e **reservatórios ou açudes (-A)** artificiais criados a partir do represamento de riachos. A amostragem foi realizada durante o ano de 2006 em **quatro ocasiões** durante as estações chuvosa (**abril, 1** e **junho, 2**) e seca (**setembro, 3** e **dezembro, 4**) (Figura \@ref(fig:202mapa) e Figura \@ref(fig:202habcodes)).
 
-```{r 202hab1, echo=FALSE, fig.width=8, purl=FALSE, fig.cap="Características gerais dos locais de estudo. Os critérios a priori para agrupar a estrutura do habitat no DCA são indicados com um (*)."}
+```{r 202hab1, echo=FALSE, purl=FALSE, fig.cap="Características gerais dos locais de estudo. Os critérios a priori para agrupar a estrutura do habitat no DCA são indicados com um (*).", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab1.png")
 ```
 
@@ -67,7 +67,7 @@ knitr::include_graphics("imagens/bases/hab1.png")
 
 A planilha `ppbio` contém os dados das variáveis ambientais em diferentes unidades amostrais (UA's) (Figura \@ref(fig:202habitat)) (Veja [Programa de Pesquisa em Biodiversidade -- PPBio](https://ppbio.inpa.gov.br/Sobre)). Essa é a **matriz bruta de dados**, porque os valores ainda não foram ajustados (não foram relativizados ou transformados). Outros tipos de arquivos existem para os dados do PPBio (\@ref(arqs)), que fazem parte de um estudo mais amplo sobre ecologia de rios do semiárido. 
 
-```{r 202habitat, echo=FALSE, purl=FALSE, fig.cap="Parte da planilha de dados brutos do PPBio para o habitat."}
+```{r 202habitat, echo=FALSE, purl=FALSE, fig.cap="Parte da planilha de dados brutos do PPBio para o habitat.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/habitat.png")
 ```
 
@@ -75,11 +75,11 @@ knitr::include_graphics("imagens/bases/habitat.png")
 
 Os arquivos da base de dados do projeto são fornecidos em formato Excel (.xlsx). Por exemplo, o arquivo `ppbio06*-habitat.xlsx`, traz os dados brutos que serão usados nas análises. A matriz de dados brutos contem mais de 20 localidades (n=linhas ou objetos) em estações do ano diferentes, e cerca de 30 variáveis ambientais (m=colunas ou atributos), antes de qualquer modificação. Portando é uma matriz bruta. Os valores incluem diversis tipos de variáveis medidas em unidades diferentes (%, °C, mg/L, etc), e apresentam uma alta amplitude de variação, portanto, a aplicação de uma transformação é recomendado (Figura \@ref(fig:202habitat)). Nos nomes dos objetos e dos atributos são codificados de acordo com a tabela mostrada na Figura \@ref(fig:202habcodes).
 
-```{r 202habcodes, echo=FALSE, purl=FALSE, fig.cap="Codificação para as variáveis ambentais descritoras da estrutura do habitat (atributos) e os sítios e períodos de amostragem (objetos)."}
+```{r 202habcodes, echo=FALSE, purl=FALSE, fig.cap="Codificação para as variáveis ambentais descritoras da estrutura do habitat (atributos) e os sítios e períodos de amostragem (objetos).", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab-codes.png")
 ```
 
-```{r 202habstr, echo=FALSE, purl=FALSE, fig.cap="Imagem representativa da codificação das variáveis, para a medição da estrutura do habitat (atributos)."}
+```{r 202habstr, echo=FALSE, purl=FALSE, fig.cap="Imagem representativa da codificação das variáveis, para a medição da estrutura do habitat (atributos).", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab-str.png")
 ```
 
@@ -99,32 +99,32 @@ A variação na composição do habitat entre os locais e as ocasiões de amostr
 
 A estrutura do habitat para todos os locais de estudo consistiu geralmente em plantas C4 crescendo nas margens do litoral (nomeadamente gramíneas), macrófitas aquáticas, incluindo plantas flutuantes (geralmente *Salvinia* sp., *Pistia* sp. e *Azolla* sp.), plantas emergentes (*Nymphaea* spp.) e plantas submersas (*Ceratophyllum* sp. e *Egeria* sp.) e algas (aderidas ao substrato e filamentosas) (Figura \@ref(fig:202hab2)). Vegetação ciliar pendendo, restos lenhosos, serapilheira e massas de raízes também estiveram presentes nos locais estudados.
 
-```{r 202hab2, echo=FALSE, fig.width=8 , purl=FALSE, fig.cap="Percentagens (± desvio padrão) dos elementos do habitat de ambos os elementos marginais e composição do substrato que ocupam o perímetro molhado marginal dos locais de estudo e parâmetros médios de qualidade da água."}
+```{r 202hab2, echo=FALSE, purl=FALSE, fig.cap="Percentagens (± desvio padrão) dos elementos do habitat de ambos os elementos marginais e composição do substrato que ocupam o perímetro molhado marginal dos locais de estudo e parâmetros médios de qualidade da água.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab2.png")
 ```
 
 A composição do substrato foi composta principalmente de lama e areia, com menor contribuição de seixos, pedras e cascalho (Figura \@ref(fig:202hab2)). A diversidade de estruturas de habitat foi geralmente maior nos locais dos rios, na área do Seridó e durante a estação chuvosa, apesar de uma maior riqueza de elementos de habitat nos locais dos reservatórios (Figura \@ref(fig:202hab3)). A composição do substrato também foi mais diversa e rica nos locais do rio e na área do Seridó, enquanto o substrato foi mais rico e diversificado durante a estação seca (Figura \@ref(fig:202hab3)). A análise de correspondência sem tendência (Figura \@ref(fig:202hab4)) mostrou que as diferenças na estrutura do habitat foram significativas apenas entre os locais de riachos e reservatórios (MRPP, A = 0,06, p = 0,03) e estações (MRPP, A = 0,06, p = 0,03). 
 
-```{r 202hab3, echo=FALSE, fig.width=10, purl=FALSE, fig.cap="Diversidade e riqueza de elementos do habitat em locais de estudo em todos os tipos de habitat, área de estudo e estações do ano."}
+```{r 202hab3, echo=FALSE, purl=FALSE, fig.cap="Diversidade e riqueza de elementos do habitat em locais de estudo em todos os tipos de habitat, área de estudo e estações do ano.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab3.png")
 ```
 
 Diferenças na estrutura do habitat entre as duas áreas de estudo não foram significativas (MRPP, A = 0,01, p = 0,26). A análise do valor indicador mostrou que os elementos importantes que separam esses grupos foram macrófitas para reservatórios (IV = 53,2, p = 0,01) e areia e pedras para locais fluviais (IV = 61,8, p = 0,02 e IV = 82,6, p = 0,002, respectivamente). Importantes características de habitat que separam as estações foram vegetação submersa (IV = 48,4, 0,01) e vegetação pendente (IV = 48,9, p = 0,02) para a estação chuvosa. Nenhum elemento do substrato foi significativamente importante na separação dos locais de acordo com as estações do ano (Figura \@ref(fig:202hab4)). 
 
-```{r 202hab4, echo=FALSE, fig.width=10, purl=FALSE, fig.cap="Resultados da DCA para a composição do habitat nos locais de estudo. A caixa de inserção mostra elementos de habitat correlacionados (r2>0,2) com locais/ocasiões de amostragem no espaço de ordenação (indicados por vetores). A direção e o comprimento dos vetores indicam a força da correlação. Consulte a Tabela 2 para obter os nomes completos dos elementos do habitat. Os locais (S1-S6) são codificados de acordo com a Tabela 1 e a ocasião da amostragem. Abreviaturas: APR, abril; JUN, junho; SET, setembro; DEZ, dezembro."}
+```{r 202hab4, echo=FALSE, purl=FALSE, fig.cap="Resultados da DCA para a composição do habitat nos locais de estudo. A caixa de inserção mostra elementos de habitat correlacionados (r2>0,2) com locais/ocasiões de amostragem no espaço de ordenação (indicados por vetores). A direção e o comprimento dos vetores indicam a força da correlação. Consulte a Tabela 2 para obter os nomes completos dos elementos do habitat. Os locais (S1-S6) são codificados de acordo com a Tabela 1 e a ocasião da amostragem. Abreviaturas: APR, abril; JUN, junho; SET, setembro; DEZ, dezembro.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab4.png")
 ```
 
 A análise de correspondência canônica mostrou que as variáveis de alcance e escala de captação não estavam fortemente correlacionadas, exceto para a distância do local à nascente do rio e comprimento do córrego da localização do local (correlação de Pearson = 0,965), elevação e comprimento do rio principal (Correlação de Pearson = 0,853) e elevação e largura do local (correlação de Pearson = 0,906). A variância total dos dados (“inércia”) foi de 1,19. A variância total explicada pela CCA foi de 46,2%, sendo a maior parte dessa variação explicada pelo primeiro eixo (18,4%) (Figura \@ref(fig:202hab5). No entanto, os eixos 2 e 3 não podem ser desconsiderados, pois também explicaram parte substancial da variação do conjunto de dados. Os resultados da análise mostram uma relação significativa entre os dados de estrutura do habitat e as variáveis de alcance e escala de captação, com o autovalor do primeiro eixo muito alto para ser esperado por acaso (Figura \@ref(fig:202hab5), valores de p para autovalor e correlação para o primeiro eixo = 0,01). O primeiro eixo foi fortemente correlacionado com variáveis morfológicas da escala de captação, nomeadamente comprimento do rio principal, elevação e a distância altamente correlacionada do local à nascente do rio e comprimento do córrego da localização do local. O primeiro eixo também foi correlacionado com a inclinação da margem, uma variável morfológica da escala de alcance. Eixos 2 e 3 foram correlacionados com variáveis de escala de alcance de morfologia (largura do local, eixo 2) e qualidade da água (velocidade da água e oxigênio dissolvido, eixo 3) (Figura \@ref(fig:202hab5)). 
 
 
-```{r 202hab5, echo=FALSE, fig.width=10, purl=FALSE, fig.cap="Estatísticas de sumário dos eixos da Análise de Correspondência Canônica para a estrutura do habitat e variáveis de escala de captação e alcance. Correlações para variáveis de escala de captação e alcance com os eixos de ordenação após Análise de Correspondência Canônica."}
+```{r 202hab5, echo=FALSE, purl=FALSE, fig.cap="Estatísticas de sumário dos eixos da Análise de Correspondência Canônica para a estrutura do habitat e variáveis de escala de captação e alcance. Correlações para variáveis de escala de captação e alcance com os eixos de ordenação após Análise de Correspondência Canônica.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab5.png")
 ```
 
 A Figura \@ref(fig:202hab6) indica que o eixo 1 representa um gradiente de sítios com estrutura de habitat influenciada por variáveis de escala de captação e o eixo 2 representa sítios influenciados por variáveis de escala de alcance.
 
-```{r 202hab6, echo=FALSE, fig.width=10, purl=FALSE, fig.cap="Biplot de locais de ordenação (Δ) (com base na estrutura do habitat) na bacia e alcance- variáveis de escala espaço, conforme definido pelo CCA. Os vetores representam o comprimento do rio (RIVER), distância do local da fonte (DISTSOUR), elevação, inclinação da margem (SLOPE) e largura do local (WIDTH). (+) indica a posição dos elementos do habitat no espaço de ordenação."}
+```{r 202hab6, echo=FALSE, purl=FALSE, fig.cap="Biplot de locais de ordenação (Δ) (com base na estrutura do habitat) na bacia e alcance- variáveis de escala espaço, conforme definido pelo CCA. Os vetores representam o comprimento do rio (RIVER), distância do local da fonte (DISTSOUR), elevação, inclinação da margem (SLOPE) e largura do local (WIDTH). (+) indica a posição dos elementos do habitat no espaço de ordenação.", out.width = if (knitr::is_html_output()) "450px" else "10cm", fig.asp=1}
 knitr::include_graphics("imagens/bases/hab6.png")
 ```
 
@@ -137,7 +137,5 @@ Apesar das diferenças na diversidade e riqueza de elementos de habitat entre Se
 No contexto do presente estudo, a Análise de Correspondência Canônica identificou vários níveis de variáveis de captação e alcance de riachos correlacionados com a estrutura do habitat. Ao nível da bacia, as variáveis que representam a ordem do riacho, como comprimento do rio, comprimento do córrego da localização do local e distância do local da fonte, foram importantes determinantes da estrutura do habitat. Na escala de alcance do córrego, a estrutura do habitat foi relacionada com a inclinação da margem e a largura do local, enquanto a profundidade não foi um determinante importante da estrutura do habitat. Como todas as variáveis de habitat foram medidas nas margens, não se deve esperar que a profundidade geral do local seja um elemento importante que afete a estrutura do habitat (a profundidade média foi de 34,4 ± 19,4 cm). Entretanto, a inclinação e a largura podem afetar o habitat físico através de sua influência no grau de conectividade entre o habitat aquático e terrestre. É importante lembrar que a declividade foi medida nas margens, compreendendo a porção terrestre das margens. Os parâmetros de qualidade da água em escala local também foram considerados importantes descritores da estrutura do habitat, principalmente aqueles associados ao conteúdo de oxigênio dissolvido na água (nomeadamente, oxigênio dissolvido e velocidade da água). Embora a temperatura e a transparência também possam estar relacionadas ao oxigênio dissolvido, a primeira foi relativamente constante em todos os locais de estudo (a temperatura média da água foi de 29,5 ± 2,9 °C) e a última (estimada a partir das profundidades de Secchi) foi muito alta em todas as áreas de estudo. como com médias por local variando de 16 a 90 cm. O modelo de habitat foi sugerido como uma estrutura onde fatores bióticos influenciam a biota (Southwood, 1977). Em ecossistemas de riachos, a inundação e a variabilidade do fluxo têm sido sugeridas como os principais eixos no modelo de habitat (Minshall, 1988; Poff e Ward, 1989). Embora os resultados apresentados neste estudo indiquem que as variações sazonais associadas ao regime de inundação e fluxo são elementos importantes que afetam a estrutura do habitat, há indícios de que o modelo de habitat pode ser multidimensional. Nos sistemas semiáridos do Brasil, a estrutura do habitat está sendo impulsionada por muitos componentes em diferentes níveis, onde o papel das características de captação e morfologia local e variáveis de água aumentariam em predominância em suas respectivas escalas. Isto realça a importância da ligação entre a estrutura do habitat e a diversidade biótica a nível local e regional.
 
 O presente estudo mostra que a estrutura do habitat em sistemas semiáridos no nordeste do Brasil é composta por uma gama de elementos que variam de acordo com o tipo de habitat e estação do ano, enquanto a heterogeneidade do habitat foi mais forte nas escalas local e de captação do que entre áreas de captação. Portanto, vários níveis da hierarquia de captação são importantes para a estrutura do habitat, desde variáveis de escala de captação, como tamanho e elevação do rio, até características locais, como largura, inclinação e oxigênio dissolvido na água. Tais feições devem ser avaliadas e utilizadas como uma estrutura básica para caracterização e avaliação de habitats aquáticos no semiárido brasileiro. Os resultados apresentados têm implicações para a conservação e manejo dos sistemas semiáridos brasileiros. Dado que o habitat é a estrutura básica para a colonização de organismos aquáticos, os mecanismos potenciais que mantêm a diversidade biótica estão em todos os níveis da bacia hidrográfica. É fundamental, portanto, identificar as partes dos ecossistemas ribeirinhos que são vitais para a manutenção de sua saúde.
-
-## Apêndices {.unnumbered}
 
 ## Referências {-}

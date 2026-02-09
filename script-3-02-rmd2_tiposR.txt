@@ -1,0 +1,159 @@
+"Início do R Módulo"
+600+66
+x <- 10
+x
+for (i in 1:5) {x+1->x}
+x
+1:5
+a <- 5 + 3
+a
+print(a)
+class(a)
+var1 <- 3
+var2 <- as.integer(3)
+class(var1)
+class(var2)
+b <- "Ola mundo"
+c <- TRUE
+class(b)
+class(c)
+log(x=20, base=10)
+log(20)
+x <- c(1.4, 6.5, 3, 4, 71.2)
+var1 <- 3
+is.vector(var1)
+var1 <- c(3,6, 7.8, 332)
+print(var1)
+var2 <- c("Ola","tudo","bem")
+print(var2)
+var3 <- c(TRUE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE)
+print(var3)
+mat1 <- matrix(c(1,5,10,30,15,8),
+ nrow=3,
+ ncol=2,
+ byrow=TRUE)
+print(mat1)
+vec1 <- c(1, 5)
+vec2 <- c(10, 30)
+vec3 <- c(15, 8) 
+mat2 <- rbind(vec1, vec2, vec3)
+print(mat2)
+class(mat2)
+a <- sample(c(0,1,5),10,replace=TRUE)
+b <- sample(c(0,10,20),10,replace=TRUE)
+c <- sample(c(0,5,10),10,replace=TRUE)
+df1 <- data.frame(a,b,c)
+df1
+mat1[2][1]
+df1 <- data.frame(c(1,2,3),c("baixo","medio","alto"),c(TRUE, TRUE, FALSE))
+print(df1)
+df2 <- data.frame(Sp1=c(1,5,2,5,3), Sp2=c(21,8,10,7,18)) 
+row.names(df2) <- LETTERS[1:5]
+df2
+plot(df2, type='n'); text(df2, row.names(df2))
+data <- read.table(text = "
+Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7
+A 0 0 0 0 0 0 6
+B 0 0 0 2 0 0 10
+C 93 2 0 177 0 260 2
+D 0 4 0 8 0 0 83
+E 0 0 0 0 1 0 0
+F 0 0 1 0 0 1 0
+G 0 2 0 2 0 0 0
+", header = TRUE, row.names = 1)
+data
+print(mtcars)
+mtcars[1,2]
+mtcars["Mazda RX4","gear"]
+mtcars[1:5,1]
+mtcars[,2]
+mtcars[3,]
+rownames(mtcars)
+mtcars$gear
+t(mtcars)
+nrow(mtcars)
+ncol(mtcars)
+mtcars[mtcars<=3]
+mtcars[mtcars==0] 
+mtcars[mtcars!=0]
+length(as.matrix(mtcars))
+dim(mtcars)
+length(mtcars[mtcars==0])
+str(mtcars)
+summary(mtcars)
+meses <- c("Jan","Jan","Feb","Mar","Apr","Apr","May","Jan","Jan","May","May","Jun")
+meses
+meses <- factor(meses)
+print(meses)
+table(meses)
+meses <- c("Jan", "Jan", "Jan", "Feb", "Feb", "Feb", "Feb", "Mar", "Mar", "Mar", "Apr", "Apr", "Apr", "May", "May", "May", "Jun", "Jun", "Jun")
+meses
+factor(meses)
+print(meses)
+table(meses)
+riq <- c(3, 5, 7, 6, 8, 9, 0, 4, 6, 9, 2, 6, 3, 9, 6, 0, 1, 6, 7)
+dados <- data.frame(Mes = meses, Riqueza = riq)
+riq
+dados
+factor(meses)
+plot(factor(meses),riq)
+by(riq, meses, mean)
+df <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  A = c(7, 8, 9), #nome duplicado
+  C = c(0, 0, 1),
+  D = c(1, 1, 0),
+  E = c(1, 0, 0),
+  F = c(11, 12, 13),
+  G = c(1, 2, 0),
+  E = c(2, 1, 1), #nome duplicado
+  check.names = FALSE
+)
+df
+# Achando colunas com nomes duplicados
+dup_cols <- names(df)[duplicated(names(df))]
+# Somando colunas com o mesmo nome
+for (col_name in unique(dup_cols)) {
+  # Get indices of columns with the same name
+  col_indices <- which(names(df) == col_name)
+  # Sum columns with the same name
+  df[[col_name]] <- rowSums(df[, col_indices, drop = FALSE])
+}
+# Remove as colunas duplicadas originais e mantem as novas colunas que são a soma ("except for the first occurrence")
+df <- df[, !duplicated(names(df))]
+# Mostra a nova tabela com colunas repetidas somadas
+print(df)
+a <- c(3,6,9)
+b <- c("a","b","c","d")
+c <- c(TRUE, FALSE, TRUE, TRUE)
+lista1 <- list(a,b,c)
+print(lista1)
+## help(mean)
+## ?mean
+## help.search("linear regression")
+## example(mean)
+## # Abrir o link para o site do ChatGPT
+## browseURL("https://chat.openai.com/")
+## rm(list=ls(all=TRUE)) #limpa a memória
+## install.packages("openxlsx") #importa arquivos do excel
+library(openxlsx)
+## getwd()
+## setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "Sheet1")
+ppbio[1:10, 1:10] #primeiras 10 linhas e 10 colunas da matriz
+#View(ppbio)
+print(ppbio[1:10, 1:10])
+#ppbio
+str(ppbio)
+#?str
+mode(ppbio)
+#?mode
+class(ppbio)
+#?class
+ppbio_ma <- as.matrix(ppbio) #lê ppbio como uma matriz
+str(ppbio_ma)

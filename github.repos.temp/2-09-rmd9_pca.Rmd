@@ -1,0 +1,514 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 9
+
+### Análise de Componentes Principais - PCA {-}
+
+### RESUMO {-}
+
+Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma representação compacta dos dados, preservando as principais tendências e padrões presentes nos mesmos
+
+### Apresentação {-}
+
+A Análise de Componentes Principais (PCA) é uma técnica estatística que é frequentemente usada para reduzir a dimensionalidade e extrair informações relevantes de conjuntos de dados complexos. Ela é amplamente utilizada em várias áreas, como ciência de dados, aprendizado de máquina e reconhecimento de padrões.
+
+O objetivo da PCA é encontrar um novo conjunto de variáveis, chamadas de **componentes principais**, que são combinações lineares das variáveis originais. Essas combinações lineares são eixos ortogonais escolhidos de forma a maximizar a variância dos dados ao longo dos componentes principais sucessivos. Isso significa que os primeiros componentes principais capturam a maior parte da variabilidade dos dados, enquanto os componentes posteriores capturam cada vez menos.
+
+Ao aplicar a PCA, a dimensionalidade do conjunto de dados pode ser reduzida, o que é útil quando há muitas variáveis e se deseja simplificar a análise. Além disso, a PCA também pode ser usada para visualizar os dados em um espaço de menor dimensão, permitindo a identificação de padrões, tendências e relacionamentos entre as observações. Um benefício adicional da PCA é a possibilidade de remover ruídos e redundâncias dos dados. Ao eliminar os componentes principais com menor variância, pode-se reduzir o impacto de pequenos erros de medição ou características menos relevantes do conjunto de dados.
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) ##LIMPA A MEMORIA
+cat("\014") #limpa o console 
+```
+
+## Pacotes do módulo
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+install.packages("openxlsx")
+install.packages("vegan")
+install.packages("gplots")
+install.packages("psych")
+install.packages("ggplot2")
+```
+
+```{r}
+library(tidyverse)
+```
+
+Os códigos acima, são usados para instalar os pacotes necessários para este módulo. O  comando `library()` será usado para carregarmos esses pacote a medida que eles forem sendo necessários.
+
+Para definir o diretório de trabalho usa-se os códigos abaixo. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+Alternativamente você pode ir na barra de tarefas e escolhes as opções:\
+SESSION -\> SET WORKING DIRECTORY -\> CHOOSE DIRECTORY
+
+Usar o [RStudio Cloud](https://login.rstudio.cloud/) é uma opção para quem não quer instalar a versão para PC. [^1]
+
+[^1]: O RStudio Cloud é uma plataforma online que fornece um ambiente de desenvolvimento integrado para o R, permitindo que os usuários executem análises, desenvolvam código e colaborem com outras pessoas, sem a necessidade de instalar o R e o RStudio em seus próprios computadores. É uma solução conveniente e acessível, especialmente para iniciantes ou usuários que desejam compartilhar projetos e colaborar de forma eficiente.
+
+## Sobre os dados do PPBio
+
+A planilha `ppbio` contém os dados de abundância de espécies em diferentes unidades amostrais (UA's). A base teórica dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+### A planilha PPBio Habitat
+
+Para esse módulo também usaremos a planilha `ppbioh`. Esta é uma **matriz de dados ambiental**, guardados na nO arquivo `ppbio06h.xlsx`, que traz os dados brutos de 26 localidades (UAs) em períodos diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação. As unidades de medição incluem cm, m, °C, mg/L, %, entre outros (dados publicados por [@RN2491]. Esses dados tem uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada. As bases teóricas dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+## Importando a planilha de trabalho
+
+Note que o sómbolo `#` em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.
+
+```{r, results='hide'}
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "Sheet1")
+ppbio_a <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-habitat.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "ano1")
+str(ppbio)
+ppbio_ma <- as.matrix(ppbio) #lê ppbio como uma matriz
+str(ppbio_ma)
+#ppbio
+#ppbio_ma
+```
+
+### Outra forma de achar e importar uma planilha
+
+```{r, eval=FALSE}
+getwd()
+ppbio <- read.xlsx(file.choose(),
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+```
+
+## Particionando as variáveis de interesse
+
+Use o script abaixo apenas se for necessário escolher quais variáveis entrar na análise e particionar a matriz para as variáveis geomorfológicas da matriz ambiental `m.variáveis`.
+
+```{r, eval=FALSE}
+#Lista as colunas
+colnames(ppbio_a)
+#Escolher quais colunas usar por nome
+colnames(ppbio_a)[rev(order(colSums(ppbio_a)))] #ordena por maior soma
+#Usar a função subset()
+m_part <- subset(ppbio_a[, c("a.veloc", "a.temp", "a.do", "a.transp")]) #escolhe colunas por nome
+m_part <- subset(ppbio_a[c("", "", "", ""),]) #escolhe linhas por nome
+m_part <- subset(ppbio_a[, 18:26]) #escolhe as colunas de 18 a 26
+m_part <- subset(ppbio_a, select = -c(a.veloc, a.temp, a.do, a.transp) #exclui colunas por nome
+#m_part
+#Escolhe as colunas que começam com a inicial "vari"
+library(tidyverse)
+vari <- "m."
+m_part <- rename_with(select(ppbio_a, starts_with(vari)), ~ gsub("_", ".", .))
+```
+
+## REINÍCIO 1
+
+::: {#hello .greeting .message style="color: green;"}
+Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.
+:::
+
+```{r}
+m_trab <- (ppbio)   # <1>
+#m_trab <- (m_part)   # <1>
+```
+
+1.  Substitua a nova matriz aqui. Caso seja necessário.
+
+No interesse de sistematizar o uso das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (Tabela \@ref(tab:29m_) resume seus tipos e abreviações.
+
+```{r 29m_, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Nome", ~"Atributos (colunas)", ~"Abreviação no R",
+  "Matriz comunitaria", "Os atributos são táxons ou OTU's (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)", "m_com",
+  "Matriz ambiental", "Os atributos são dados ambientais e variáveis  físicas e químicas (ex. pH, condutividade, temperatura)", "m_amb",
+  "Matriz de habitat", "Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)", "m_hab",
+  "Matriz bruta", "Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)", "m_brt",
+  "Matriz transposta", "Os atributos foram transpostos para as linhas", "m_t",
+  "Matriz relativizada", "Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)", "m_rel",
+  "Matriz transformada", "Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)", "m_trns",
+  "Matriz de trabalho", "Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)", "m_trab",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c", "c"), booktabs = TRUE, caption = "Nomenclatura das matrizes em AMD em relação aos atributos das colunas.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:3, width = c("2cm","5cm","2cm"))
+```
+
+## Classificação
+
+Para conhecermos os dados, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir da matriz de dados `ppbioh` relativizada pelo total das colunas e transformada pelo arco seno da raiz quadrada.
+
+### Dendrograma e Heatmap
+
+Ao criar a matriz transformada `m_trns` verifique o tipo de relativização/transformação, ela deve ser específica para cada tipo de matriz, comunitária e ambiental. 
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+#Dendrograma
+library(vegan)
+#relativização/transformação da matriz comunitária
+m_trns <- asin(sqrt(decostand
+                    (m_trab, method="total", MARGIN = 2)))
+#transformação da matriz ambiental
+#m_trns <- sqrt(m_trab)
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster_uas <- hclust(vegdist, method = "average")
+plot (cluster_uas, main = "Cluster Dendrogram - Bray-Curtis",
+      hang = 0.1) #testar com -.01
+rect.hclust(cluster_uas, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+as.matrix(vegdist)[1:6, 1:6]
+
+#Heatmap
+library("gplots")
+heatdist <- as.matrix(vegdist)
+col <- rev(heat.colors(999)) #rev() reverte as cores do heatmap
+heatmap.2(x=(as.matrix(vegdist)), #objetos x objetos
+          Rowv = as.dendrogram(cluster_uas),
+          Colv = as.dendrogram(cluster_uas),
+          key = T, tracecol = NA, revC = T,
+          col = heat.colors,  #dissimilaridade = 1 - similaridade
+          density.info = "none",
+          xlab = "UA´s", ylab = "UA´s",
+          mar = c(6, 6) + 0.2)
+cluster_spp <- hclust((vegdist(t(m_trns), method = "bray",
+                            diag = TRUE,
+                            upper = FALSE)), method = "average")
+plot (cluster_spp, main = "Dendrograma dos atributos")
+heatmap.2(t(as.matrix(m_trns)), #objetos x atributos
+          Colv = as.dendrogram(cluster_uas),
+          Rowv = as.dendrogram(cluster_spp),
+          key = T, tracecol = NA, revC = T,
+          col = col,
+          density.info = "none",
+          xlab = "Unidades amostrais", ylab = "Espécies",
+          mar = c(6, 6) + 0.1)  # adjust margin size
+```
+
+### Histórico das fusões
+
+Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de "-") ou grupo de objetos (indicado pela ausência do sinall de "-") que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a `m-1` última fusão entre os dois últimos grupos. Nesse caso, `r nrow(as.matrix(vegdist))-1`.
+
+```{r, results='hold'}
+library(gt)
+merge <- as.data.frame(cluster_uas$merge)
+merge[nrow(merge)+1,] = c("0","0")
+height <- as.data.frame(round(cluster_uas$height, 2))
+height[nrow(height)+1,] = c("1.0")
+fusoes <- data.frame(Cluster_uas = merge, Height = height)
+colnames(fusoes) <- c("Cluster1", "Cluster2", "Height")
+UA <- rownames_to_column(as.data.frame(m_trns[, 0]))
+colnames(UA) <- c("UAs")
+No.UA <- 1:nrow(fusoes)
+fusoes <- cbind(No.UA, UA, fusoes)
+fusoes$Histórico <- 1:nrow(fusoes)
+#fusoes
+gt(fusoes)
+```
+
+No código acima, `h = 0.8` fornece os grupos formados na altura `h` do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, "h") representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo `height`, isso significa que a distancia entre esses objetos é 0.8.
+
+## Análise de Componentes Principais
+
+```{r, results='hold', fig.show='hold'}
+pca <- prcomp(m_trab)
+pca
+plot(pca, type = "l")
+summary(pca)
+```
+
+Uma PCA sempre retorna `n` componentes principais (PCs), onde n é o número de objetos da `n x m` matrix de dados.
+
+### Subsetting as variáveis para a PCA
+
+Para escolher quais variáveis entrar na PCA podemos:
+
+```{r, eval=FALSE}
+#Remover a primeira coluna
+pca_part1 <- prcomp(m_trns[,-1])
+
+#Usar apenas as 5 primeiras colunas
+colnames(m_trns) #lista as colunas
+pca_part2 <- prcomp(m_trns[,1:5]) 
+
+#Escolher quais colunas usar por nome
+colnames(m_trns)[rev(order(colSums(m_trns)))] #ordena por maior soma
+pca_part3 <- prcomp(~as-bimac + ge-brasi, data = m_trns) #usa apenas as colunas listadas
+#"-" deve ser substituido, o R não o reconhece como  texto
+
+#Usar a função subset()
+pca_part4 <- subset(m_trns[,1:5])
+prcomp(pca_part4, scale = TRUE)
+```
+
+Continuando ...
+
+### Explorando correlações multivariadas
+
+```{r, results='hold'}
+#attach(m_trns)
+plot(m_trns$"as-bimac", m_trns$"ge-brasi")
+#plot(m_trns$"m.elev", m_trns$"m.river")
+
+plot(scale(m_trns$"as-bimac"), scale(m_trns$"ge-brasi"))
+#plot(scale(m_trns$"m.elev"), scale(m_trns$"m.river"))
+
+plot((m_trns$"as-bimac" - mean(m_trns$"as-bimac")) / sd(m_trns$"as-bimac"))
+#plot((m_trns$"m.elev" - mean(m_trns$"m.elev")) / sd(m_trns$"m.elev"))
+
+library(psych)
+pairs.panels(m_trns[,1:6], 
+             method = "pearson", # correlation method
+             scale = FALSE, lm = FALSE,
+             hist.col = "#00AFBB", pch = 19,
+             density = TRUE,  # show density plots
+             ellipses = TRUE, # show correlation ellipses
+             alpha = 0.5
+             )
+#Ordem pela soma das colunas
+# Passo 1
+col_sums <- colSums(m_trns)
+# Passo 2
+ordered_indices <- order(col_sums, decreasing = TRUE)
+# Passo 3
+ordered <- m_trns[, ordered_indices]
+ordered
+```
+
+Note que, no R, escalar os dados (argumento `scale=TRUE`) já significa centrar (argumento `center=TRUE`) e escalar, uma vez que no ambiente de programação do R base, ao  escalar os dados são primeiro centrados (argumento `center=TRUE` como o padrão) (mas veja também a Tabela \@ref(tab:29term)).
+
+Nos argumentos da função `prcomp()`:
+
+1. `center`, um valor lógico (TRUE, FALSE) indicando se as variáveis devem ser deslocadas para serem centradas em zero. O valor é passado para a função "scale".
+
+2. `scale`, um valor lógico (TRUE, FALSE) indicando se as variáveis devem ser escaladas para terem variância unitária antes da análise, é recomendável fazer a escala. Ao escalar os dados também são automáticamente centrados. 
+
+::: {#hello .greeting .message style="color: green;"}
+[Nota importante sobre terminologia]{style="color:red"}
+Na literatura de estatística multivariada (e univariada), as palavras transformação, padronização, relativização e ponderação infelizmente não são usadas de forma consistente. Nesta disciplina usamos da seguinte forma:
+:::
+
+Transformar (ou ponderar)
+
+:   para a aplicação de uma única função a todos os valores em uma matriz de dados independentemente de linhas e/ou colunas. Este é o significado normal no contexto 
+univariado, e também é aplicável para dados multivariados.
+
+Relativizar (ou padronizar)
+
+:  para a aplicação de uma função a todos os valores na matriz de dados, onde a função envolve alguma propriedade estatística de cada linha e/ou coluna. No contexto univariado, a padronização geralmente significa converter para z-scores, mas no contexto multivariado, esse conceito precisa ser ampliado, por isso a conversão para z-scores também pode ser chamada de "scaling" ou centralização.
+
+Normalizar,
+
+:  para dividir pela norma, ou reescalar os valores para variar entre 0 e 1.
+
+Portanto, nessa disciplina, usamos esses termos conforme definido acima, para fins de consistência (Tabela \@ref(tab:29term)). Mas ver também as terminologias definidas para as funções e argumentos do R, no menu de ajuda do programa.
+
+```{r, 29term, echo=FALSE, purl=FALSE}
+m_ <- tibble::tribble(
+  ~"Termo", ~"Descrição",
+  "Transformar (ou ponderar)", "Aplicação de uma única função matemática a todos os valores. Ex. Log, Raiz, etc.",
+  "Relativizar", "≅ Normalizar", 
+  "Padronizar (✓)", "Reescalar os dados para apresentarem uma média = 0 e um desvio padrão = 1, subtraindo a média de cada valor e dividindo pelo desvio padrão",
+  "Normalizar (✓)", "Dividir pela norma. Reescalar os valores para variar entre 0 e 1",
+  "Centrar", "≅ Padronizar",
+  "Reescalar", "Adicionar ou subtrair uma constante, e então multiplicar ou dividir por uma constante. Significa mudar a unidade de medida. Ex. Celsius para Fahrenheit",
+  "Escalar (X)",  "≅ Relativizar. Dividir cada variável por um fator. Variáveis diferentes têm fatores de escalar diferentes",
+  "(✓) termo consistente na literatura; (X) termo pode ter mais de um significado diferente; (≅) equivalente a", "",
+  )
+library(knitr)
+library(kableExtra)
+m_x <- kable(m_, row.names = FALSE, align = c("l", "c"), booktabs = TRUE, caption = "Resumo sobre terminologia usada conforme definido para fins de consistência.")
+m_x <- kable_styling(m_x)
+column_spec(m_x, 1:2, width = c("2cm","5cm"))
+```
+
+### Centrando e re-escalando a matriz de dados
+
+```{r, results='hold', fig.height=9, fig.width=8, fig.show='hold'}
+pca_ce <- prcomp(m_trns, center = TRUE, scale = F)
+#pca_ce
+pca_cs <- prcomp(m_trns, center = TRUE, scale = TRUE)
+#pca_cs
+pca_sc <- prcomp(m_trns, scale = TRUE)
+#pca_sc
+
+par(mfrow = c(3,1))
+plot(pca_ce, type = "l")
+plot(pca_cs, type = "l")
+plot(pca_sc, type = "l")
+par(mfrow = c(1,1))
+
+pca_sc #fornece os desvios padrões, Rotação dos eixos e Eigenvetores
+str(pca_sc)
+summary(pca_sc)
+plot(pca_sc, type = "l", main = "Scree Plot (scaled data - m_trns)") #scree plot
+```
+
+No `scree plot` o eixo x representa os componentes principais (n x k) = (`r ncol(ppbio)`) x (`r nrow(ppbio)`). O eixo y representa a variância de cada componente principal, expressa como o desvio padrão ao elevado ao quadrado (DP^2^), que também é o `eigenvalor` daquele eixo. Por exemplo, o desvio padrão do primeiro componente foi de `r pca_sc$sdev[1]`, que elevado ao quadrado resulta em `r (pca_sc$sdev[1])^2`, como apresentado no gráfico. Para o segundo PC, temos PC2 `r pca_sc$sdev[2]` ^2^ = `r (pca_sc$sdev[2])^2`.
+
+#### Sobre o `scree plot`
+
+O scree plot [^2] é um gráfico que exibe a magnitude das autovalores resultantes de uma análise de componentes principais (PCA) ou de uma análise de fator. Os autovalores representam a quantidade de variação explicada por cada componente principal ou fator.
+
+[^2]: A palavra "scree" tem origem na língua inglesa e é uma abreviação de "screening", que significa triagem ou seleção. Nesse contexto, o termo "scree plot" é uma representação gráfica utilizada para auxiliar na triagem ou seleção dos componentes principais ou fatores mais relevantes em uma análise multivariada.
+
+No scree plot, os autovalores são plotados no eixo vertical em ordem decrescente, enquanto os números dos componentes principais ou fatores correspondentes são plotados no eixo horizontal. O gráfico geralmente é exibido como um gráfico de linha ou de barras.
+
+O objetivo do scree plot é ajudar a identificar o número de componentes principais ou fatores significativos a serem retidos. Normalmente, procura-se um ponto de "cotovelo" no gráfico, onde a inclinação da curva dos autovalores diminui significativamente. Esse ponto indica que os componentes principais ou fatores além dele contribuem menos para a variação total dos dados.
+
+#### Descendo os nomes das UAs
+
+```{r, results='hold'}
+add.col <- rownames_to_column(m_trns, var = "UAs")
+#add.col
+agrup <- substr(add.col[, 1], 5,6) #descendo os nomes
+#agrup
+m_pca_agrup <- add.col %>% mutate(Agrupamentos=c(agrup),.before=UAs)
+m_pca_agrup[1:5, 1:5]
+```
+
+## Fazendo a PCA
+
+```{r, results='hold', fig.height=9, fig.width=8, fig.show='hold'}
+pca_sc <- prcomp(m_trns, scale = TRUE)
+pca_sc #fornece os desvios padrões, Rotação dos eixos e Eigenvetores
+str(pca_sc)
+summary(pca_sc)
+plot(pca_sc, type = "l", main = "Scree Plot (scaled data - m_trns)") #scree plot
+biplot(pca_sc, choices=1:2, scale = 1,
+       main="Biplot da PCA. PPBio Comunidade",
+       xlab = "PC1 UAs",
+       ylab = "PC2 UAs",
+       cex = 0.8) #PCA plot
+# Calculando o percentual de variação explicado
+var_exp <- round((pca_sc$sdev^2/sum(pca_sc$sdev^2))*100, 2)
+var_exp
+```
+
+## Interpretando o `biplot` gerado no código anterior
+
+O biplot é uma forma gráfica de representar os resultados de uma Análise de Componentes Principais. Ele exibe tanto os dados originais (eixos z e w) quanto as projeções dos dados no espaço de componentes principais (eixos y e z).
+
+O biplot consiste em dois tipos principais de informações:
+
+Vetores de variáveis (eixos z e w):
+
+:   Esses vetores representam as direções das variáveis originais no espaço dos componentes principais. Eles mostram como as variáveis originais contribuem para a formação dos componentes principais (PC1 = x e PC2 = y). O comprimento do vetor indica a magnitude da contribuição, enquanto a direção indica a relação entre as variáveis. Se os vetores estiverem próximos ou apontarem na mesma direção, as variáveis estão correlacionadas positivamente. Se estiverem em direções opostas, as variáveis estão correlacionadas negativamente.
+
+Pontos de dados (eixos x e y):
+
+:   Esses pontos representam as observações ou amostras no espaço dos componentes principais (PC1 = x e PC2 = y). Eles mostram como as amostras são posicionadas em relação aos componentes principais. A distância entre os pontos de dados indica a dissimilaridade entre as amostras. Além disso, a orientação das amostras em relação aos vetores de variáveis pode revelar padrões ou grupos nos dados.
+
+Com base nesses elementos, a interpretação do biplot envolve:
+
+1. Identificar quais variáveis têm uma contribuição significativa para cada componente principal com base nos comprimentos e direções dos vetores de variáveis.
+Observar a posição das amostras em relação aos vetores de variáveis para entender a relação entre as variáveis e as amostras.
+
+2. Identificar padrões, grupos ou similaridades entre as amostras com base na proximidade ou orientação relativa entre os pontos de dados e os vetores de variáveis.
+
+Lembre-se de que a interpretação do biplot deve ser feita considerando o contexto específico dos dados e os objetivos da análise. É uma ferramenta **visual** poderosa para explorar e entender a estrutura dos dados em um espaço de dimensões reduzidas fornecido pela PCA.
+
+## Extraindo PC escores
+
+```{r, results='hold'}
+str(pca_sc)
+pca_sc$x
+pca_scores <- cbind(Agrupamento = m_pca_agrup[,1], m_trns, pca_sc$x[,1:2])
+head(pca_scores)
+
+pc1_uas <- round(pca_sc$x[,1],2)
+#pc1_uas
+pc2_uas <- round(pca_sc$x[,2],2)
+#pc2_uas
+pc_uas <- data.frame(PC1 = pc1_uas, PC2 = pc2_uas)
+sorted_pc_uas <- pc_uas[order(-pc_uas$PC1), ]
+sorted_pc_uas <- rownames_to_column(sorted_pc_uas, var = "UAs")
+sorted_pc_uas
+
+pc1_spp <- round(pca_sc$rotation[,1],2)
+#pc1_spp
+pc2_spp <- round(pca_sc$rotation[,2],2)
+#pc2_spp
+pc_spp <- data.frame(PC1 = pc1_spp, PC2 = pc2_spp)
+sorted_pc_spp <- pc_spp[order(-pc_spp$PC1), ]
+sorted_pc_spp <- rownames_to_column(sorted_pc_spp, var = "Spp")
+sorted_pc_spp
+
+#nrow(sorted_pc_uas)-nrow(sorted_pc_spp)
+#sorted_pc_uas[nrow(sorted_pc_uas) + 12,] <- c("<NA>", "<NA>", "<NA>")
+#cbind(sorted_pc_uas, sorted_pc_spp)
+```
+
+## Gráfico melhorado com `ggplot`
+
+Ou talves seja melhor melhorar usando os pacotes `FactoMineR` e `factoextra` com o código disponível nos Apêndices ([PCA usando o pacote FactoMineR][PCA usando o pacote FactoMineR]).
+
+```{r, results='hold', fig.show='hold'}
+library(ggplot2)
+ggplot(pca_scores, aes(PC1, PC2, col = Agrupamento, fill = Agrupamento)) +
+  stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
+  geom_point(shape = 21, col = "black")
+
+cor(m_trns, pca_scores[, c("PC1", "PC2")])
+```
+
+Fizemos uma PCA. Pergunta... É recomendavel uma análise métrica para dados de comunidade? 
+
+
+## Apêndices {.unnumbered}
+
+### PCA usando o pacote FactoMineR {-}
+
+http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/
+
+```{r, eval=FALSE}
+#| eval: false
+library(FactoMineR)
+library(factoextra)
+pca_fm <- PCA(m_trns, graph = FALSE)
+eigenval <- get_eigenvalue(pca_fm)
+eigenval
+fviz_eig(pca_fm, addlabels = TRUE)
+var <- get_pca_var(pca_fm)
+ind <- get_pca_ind(pca_fm)
+fviz_pca_var(pca_fm, col.var = "red", repel = TRUE)
+fviz_pca_ind(pca_fm, col.ind = "blue", repel = TRUE)
+grupo <- as.factor(m_pca_agrup[,1])
+fviz_pca_biplot(pca_fm, habillage = grupo, title="PCA no FactoMineR", repel = TRUE, addEllipses = FALSE,
+                geom.ind = c("point","text"),
+                pointshape = 21,
+                pointsize = 2,
+                fill.ind = m_pca_agrup$Agrupamentos)+
+  theme_bw()+
+  labs(title = "Biplot PCA no FactoMineR", #substitui o title
+       fill = "Grupos") #substitui o habillage
+var$cos2
+library(corrplot)
+corrplot(pca_fm$var$cos2, is.corr = T)
+corrplot(pca_fm$var$contrib, is.corr = F)
+fviz_contrib(pca_fm, choice = "var", axes = 1, top = 10, title = "10 mais para a PC1")
+fviz_contrib(pca_fm, choice = "var", axes = 2, top = 10, title = "10 mais para a PC2")
+pca_sign <- dimdesc(pca_fm, axes = c(1,2,3), proba = 0.05)
+pca_sign
+```

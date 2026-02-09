@@ -1,0 +1,381 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 10-2
+
+### Análise de Ordenação - NMDS {-} 
+
+### RESUMO {-}
+
+O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.
+
+### Apresentação {-}
+
+O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística utilizada para representar dados com muitas dimensões em um espaço dimensional menor, de forma que a estrutura dos dados originais seja preservada o máximo possível.
+
+Ao contrário do MDS métrico, que preserva as distâncias entre os pontos, o MDS não-métrico preserva apenas as relações de ordem ou similaridade entre os pontos, sem assumir uma relação linear com as distâncias reais. Em outras palavras, ele se concentra em preservar as relações de proximidade entre os pontos, mas não necessariamente suas distâncias exatas.
+
+A técnica funciona construindo uma matriz de similaridade a partir dos dados originais e, em seguida, posicionando os pontos em um espaço de menor dimensão de forma que as distâncias ou similaridades relativas sejam mantidas o mais fiel possível à matriz original.
+
+O MDS não-métrico é útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.
+
+## Algoritmo da NMDS
+
+O algoritmo de uma NMDS (Non-Metric Multidimensional Scaling) funciona de maneira a posicionar os pontos de dados em um espaço de menor dimensão de forma que as relações de ordem ou similaridade entre os pontos sejam preservadas o máximo possível.
+
+Aqui está uma visão geral de como o algoritmo de NMDS opera:
+
+1. **Matriz de Similaridade**: O algoritmo começa com uma matriz de similaridade ou dissimilaridade que captura as relações entre os pontos de dados. Essa matriz pode ser baseada em diferentes medidas, como correlações, coeficientes de similaridade, distâncias euclidianas, entre outras.
+
+2. **Inicialização**: Inicialmente, os pontos são atribuídos a posições aleatórias ou em uma configuração inicial no espaço de menor dimensão.
+
+3. **Ajuste Iterativo**: O algoritmo itera para melhorar as posições dos pontos no espaço de menor dimensão. Durante cada iteração, os pontos são movidos em direção a uma configuração que melhor preserve as relações de similaridade ou dissimilaridade conforme definido pela matriz de similaridade.
+
+4. **Critério de Convergência**: O processo iterativo continua até que um critério de convergência seja alcançado. Isso pode ser baseado na estabilidade das posições dos pontos ou na convergência de uma função de custo que quantifica a discrepância entre as relações de similaridade na configuração original e na configuração reduzida.
+
+5. **Saída**: Uma vez que o algoritmo convergiu, as posições finais dos pontos no espaço de menor dimensão são utilizadas como representações dos dados para visualização ou análise.
+
+::: {#hello .greeting .message style="color: green;"}
+É importante notar que, embora o NMDS preserve as relações de ordem ou similaridade entre os pontos, não há garantia de que as distâncias absolutas entre os pontos no espaço de menor dimensão correspondam às distâncias reais entre os pontos nos dados originais. O objetivo principal é preservar a estrutura relativa dos dados em um espaço de menor dimensão, facilitando a interpretação e visualização dos padrões nos dados.
+:::
+
+## Organização básica
+
+Apagamos os gráficos, se houver algum, limpamos a memória e o console.
+
+```{r, eval=FALSE}
+dev.off()
+rm(list=ls(all=TRUE))
+cat("\014")
+#apaga os graficos, se houver algum, limpa a memória e o console
+```
+
+## Pacotes do módulo
+
+Instalando os pacotes necessários para esse módulo. Nos computadores do Laboratório de Ecologia não instale esses pacotes, eles já estão instalados.
+
+```{r, eval=FALSE}
+install.packages("openxlsx")
+install.packages("rgl")
+```
+
+```{r, results='hide'}
+#dir <- getwd() #criamos um vetor com o diretório  de trbalho 
+#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T, colNames = T,
+                   sheet = "Sheet1")
+str(ppbio)
+#View(ppbio)
+ppbio[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+t_grps <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "peixesp")
+```
+
+## REINÍCIO 1
+
+::: {#hello .greeting .message style="color: green;"}
+Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.
+:::
+
+```{r}
+m_trab <- (ppbio)   # <1>
+```
+1.  Substitua a nova matriz aqui. Caso seja necessário.
+
+## Classificação 1: Matriz comunitária
+
+Para conhecermos os dados, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir das matrizes de dados de interesse `ppbio**` com suas devidas relativizações e transformações.
+
+### Dendrograma e Heatmap 1
+
+```{r, results='hold', fig.show='hold', fig.height=9, fig.width=8}
+#Dendrograma
+library(vegan)
+m_trns <- asin(sqrt(decostand(m_trab,
+                               method="total", MARGIN = 2)))
+#m_trns <- sqrt(m_trab)
+vegdist <- vegdist(m_trns, method = "bray",
+                   diag = TRUE,
+                   upper = FALSE)
+cluster_uas <- hclust(vegdist, method = "average")
+plot (cluster_uas, main = "Cluster Dendrogram - Bray-Curtis da Matriz Comunitária",
+      hang = 0.1) #testar com -.01
+#rect.hclust(cluster_uas, k = 3, h = NULL) 
+#h = 0.8 fornece os grupos formados na altura h
+as.matrix(vegdist)[1:6, 1:6]
+
+#Heatmap
+library("gplots")
+heatdist <- as.matrix(vegdist)
+col <- rev(heat.colors(999)) #rev() reverte as cores do heatmap
+heatmap.2(x=(as.matrix(vegdist)), #objetos x objetos
+          Rowv = as.dendrogram(cluster_uas),
+          Colv = as.dendrogram(cluster_uas),
+          key = T, tracecol = NA, revC = T,
+          col = heat.colors,  #dissimilaridade = 1 - similaridade
+          density.info = "none",
+          xlab = "UA´s", ylab = "UA´s",
+          mar = c(6, 6) + 0.2)
+cluster_spp <- hclust((vegdist(t(m_trns), method = "bray",
+                            diag = TRUE,
+                            upper = FALSE)), method = "average")
+plot (cluster_spp, main = "Dendrograma dos atributos")
+heatmap.2(t(as.matrix(m_trns)), #objetos x atributos
+          Colv = as.dendrogram(cluster_uas),
+          Rowv = as.dendrogram(cluster_spp),
+          key = T, tracecol = NA, revC = T,
+          col = col,
+          density.info = "none",
+          xlab = "Unidades amostrais", ylab = "Espécies",
+          mar = c(6, 6) + 0.1)  # adjust margin size
+```
+
+### Histórico das fusões 1
+
+Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de "-") ou grupo de objetos (indicado pela ausência do sinall de "-") que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a `m-1` última fusão entre os dois últimos grupos. Nesse caso, `r nrow(as.matrix(vegdist))-1`.
+
+```{r, results='hold'}
+library(tidyverse)
+library(gt)
+merge <- as.data.frame(cluster_uas$merge)
+merge[nrow(merge)+1,] = c("0","0")
+height <- as.data.frame(round(cluster_uas$height, 2))
+height[nrow(height)+1,] = c("1.0")
+fusoes <- data.frame(Cluster_uas = merge, Height = height)
+colnames(fusoes) <- c("Cluster1", "Cluster2", "Height")
+UA <- rownames_to_column(as.data.frame(m_trns[, 0]))
+colnames(UA) <- c("UAs")
+No.UA <- 1:nrow(fusoes)
+fusoes <- cbind(No.UA, UA, fusoes)
+fusoes$Histórico <- 1:nrow(fusoes)
+#fusoes
+gt(fusoes)
+```
+
+## Ordenação
+
+O Escalonamento Multidimensional Não-Métrico (NMS  ou NMDS) é uma ferramenta comumente usada para examinar a composição da comunidade. Vamos estabelecer algumas bases conceituais. Considere um único eixo de abundância representando uma única espécie [Fonte](https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/):
+
+O objetivo do NMDS é representar a posição original das comunidades em um espaço multidimensional da forma mais precisa possível, usando um número reduzido de dimensões que podem ser facilmente plotadas e visualizadas.
+
+Por ser uma ordenação **não-métrica** o NMDS não utiliza as abundâncias absolutas das espécies nas comunidades, mas sim a ordem do  seu "rank" estatístico (ou sua "ordenação). O uso de "ranks" ou ordenações omite alguns dos problemas associados ao uso de distâncias absolutas (por exemplo, sensibilidade à transformação) e, como resultado, é uma técnica muito mais flexível, que aceita uma variedade de tipos de dados.
+
+O procedimento NMDS segue um algorítimo iterativo que ocorre em várias etapas:
+
+(1) Definir as posições originais das comunidades em espaço multidimensional
+(2) Especificar o número m de dimensões reduzidas (tipicamente 2)
+(3) Construir uma configuração inicial das amostras em 2 dimensões
+(4) Regressar distâncias nesta configuração inicial contra as distâncias observadas (medidas)
+(5) Determinar o stress (discordância entre a configuração 2-D e os valores previstos da regressão).
+Se a configuração 2-D preservar perfeitamente os ranks originais de classificação, então um gráfico de um vs. o outro deve ser monotonicamente crescente (gráfico de Shepard). A extensão com que os pontos na configuração 2-D diferem dessa linha monotonicamente crescente determina o grau de stress
+(6) Se o stress for alto, reposicione os pontos em m dimensões na direção do stress decrescente e repita até que o stress esteja abaixo de um certo limite.
+
+Geralmente, stress < 0.05 fornece uma excelente representação em dimensões reduzidas, < 0.1 é ótimo, < 0.2 é bom, e stress > 0.3 fornece uma representação ruim.
+
+NOTA: A configuração final pode diferir dependendo da configuração inicial (que normalmente é aleatória) e do número de iterações do algorítmo, então é aconselhável executar o NMDS várias vezes e comparar a interpretação das soluções de menor stress.
+
+Para começar, o NMDS requer uma matriz de distâncias (ou uma matriz de dissimilaridades). Distâncias Euclidianas brutas não são ideais para este propósito: elas são sensíveis às abundâncias totais, então podem tratar locais com um número semelhante de espécies como mais semelhantes, mesmo que as identidades das espécies sejam diferentes. Elas também são sensíveis às ausências de espécies, então podem tratar locais com o mesmo número de espécies ausentes como mais semelhantes.
+
+Consequentemente, os ecologistas usam o cálculo de dissimilaridade de Bray-Curtis, que possui muitas propriedades ideais:
+
+- É invariante a mudanças em unidades
+- Não é afetado por adições/remoções de espécies que não estão presentes em duas comunidades
+- Não é afetado pela adição de uma nova comunidade
+- Pode reconhecer diferenças nas abundâncias totais quando as abundâncias relativas são iguais.
+
+Para executar a NMDS, usa-se a função  `metaMDS` do pacote `vegan`.
+
+```{r}
+library(vegan)
+```
+
+Para executar a NMDS, usa-se a função  `metaMDS` do pacote `vegan`. `metaMDS` requer uma matriz de comunidade-por-espécies (CPE, "community-by-species"). De momento, cria-se essa matrizcom dados amostradoes aleatóriamente de um cojunto arbitrário de valores.
+
+A função `metaMDS` vai calcular as distâncias, executar o algorítimo iterativo, determna o stress ou fitting entre os  conjuntos de dados e etc. Precisa-se apenas definir a matriz de comunidade-por-espécies. Nesse caso:
+
+```{r}
+nmds <- metaMDS(m_trns, #matriz CPE, definida anteriormente
+                k=2) #no. de redução de dimensões
+nmds
+```
+
+Nesse exemplo, `metaMDS` aplicou automaticamente uma transformação da raiz quadrada e calculou as distâncias de Bray-Curtis para a matriz de comunidade-por-local.
+
+Deve-se observar cada iteração do NMDS até que uma solução seja alcançada (ou seja, o stress foi minimizado após algum número de reconfigurações dos pontos em 2 dimensões). Pode-se aumentar o número padrão de iterações usando o argumento `trymax = `. Isso pode ajudar a aliviar problemas de não convergência. Se o stress for alto, pode-se aumentar o número de dimensões para `k = 3`.
+
+```{r}
+set.seed(321)
+nmds <- metaMDS(m_trns, distance = "bray", k = 3, trymax = 100)
+
+#distance = "manhattan", "euclidean", "canberra", "clark", "bray", "kulczynski", "jaccard", "gower", #"altGower", "morisita", "horn", "mountford", "raup", "binomial", "chao", "cao", "mahalanobis", "chisq", #"chord", "hellinger", "aitchison", or "robust.aitchison".
+```
+
+Pode-se agora examinar o objeto NMDS.
+
+```{r}
+nmds
+scores(nmds)
+```
+
+Nesse exemplo, aplicamos uma transformação do acro seno da raiz quadrada e calculamos as distâncias de Bray-Curtis para a matriz de comunidade-por-local.
+
+É necessário examinar o **Gráfico de Shepard** (Figura \@ref(fig:2102stress)), que mostra a dispersão em torno da regressão entre as distâncias entre pontos da configuração final (distâncias entre cada par de comunidades) *versus* as dissimilaridades originais.
+
+```{r 2102stress, results='hold', fig.show='hold', fig.cap="Stress da análise de ordenação da matriz CBE, baseada na dissimilaridade de Bray-Curtis."}
+stressplot(nmds)
+gof <- goodness(nmds)
+gof
+```
+
+Uma dispersão grande ao redor da linha sugere que as dissimilaridades originais não são bem preservadas no número reduzido de dimensões.
+
+### Gráficos de ordenação
+
+Agora podemos plotar a NMDS
+
+```{r ord2102, results='hold', fig.show='hold', fig.cap="Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis."}
+plot(nmds, display = "sites", type = "n")
+points(nmds, display = "sites", cex = 2*gof/mean(gof))
+```
+
+A ordenação mostra tanto as comunidades ("locais", círculos abertos) quanto as espécies (cruzes vermelhas).
+
+Aqui, pode-se usar as funções `ordiplot` e `orditorp` para adicionar texto ao gráfico no lugar dos pontos.
+
+```{r}
+plot(nmds)
+
+ordiplot(nmds, choices = c(1,2), type = "n")
+orditorp(nmds, display = "species", col="red", air=0.01)
+orditorp(nmds, display = "sites", cex=1.25, air=0.01)
+```
+
+A função `choices = c(1,2)` escolhe quais eixos da ordenação serão mostrados.
+
+Existem algumas funções adicionais que podem ser de interesse. Pode-se desenhar polígonos convexos conectando os vértices dos pontos feitos por certos grupos de comunidades no gráfico.
+
+Para isso, cria-se um vetor de valores de tratamento.
+
+```{r}
+plot(nmds)
+
+grupos <- t_grps$area
+grupos
+colors <- ifelse(grupos == "Serido", "green", 
+           ifelse(grupos == "Buique", "blue", "black"))
+#           ifelse(grupos == "Rio", "red", "black")))
+colors
+ordiplot(nmds, type = "n")
+ordihull(nmds, groups = grupos, draw = "polygon", col= "grey90", label = TRUE)
+orditorp(nmds, display = "species", col = "red", air = 0.01)
+orditorp(nmds, display = "sites", col = colors, air = 0.01, cex = 1.25)
+```
+
+Essa é uma maneira intuitiva de entender como as comunidades e espécies se agrupam com base nos tratamentos possveis. Nesse caso, grupos com cores diferentes. Também é possível plotar elipses e "gráficos de aranha" usando as funções `ordiellipse` e `orderspider`, que enfatizam o centróide das comunidades em cada agrupamento.
+
+```{r, fig.show='hold', fig.height=10, fig.width=9}
+par(mfrow=c(2,2))
+ordiplot(nmds, type = "n")
+orditorp(nmds, display = "species", col = "red", air = 0.01)
+orditorp(nmds, display = "sites", col = colors, air = 0.01, cex = 1.25)
+ordihull(nmds, groups = grupos, draw = "polygon", col = "grey90", label = TRUE)
+
+ordiplot(nmds, type = "n")
+orditorp(nmds, display = "species", col = "red", air = 0.01)
+orditorp(nmds, display = "sites", col = colors, air = 0.01, cex = 1.25)
+ordiellipse(nmds, groups = grupos, display = "sites", draw = "polygon", col = "grey90", label = T)
+ordibar(nmds, grupos, display = "sites")
+
+ordiplot(nmds, type = "n")
+orditorp(nmds, display = "species", col = "red", air = 0.01)
+orditorp(nmds, display = "sites", col = colors, air = 0.01, cex = 1.25)
+ordispider(nmds, grupos, display="sites")
+
+ordiplot(nmds, type = "n")
+orditorp(nmds, display = "species", col = "red", air = 0.01)
+orditorp(nmds, display = "sites", col = colors, air = 0.01, cex = 1.25)
+ordicluster(nmds, cluster_uas, prune = 0, display = "sites")
+par(mfrow=c(1,1))
+```
+
+Outra alternativa é plotar uma "árvore de abrangência mínima" (da função `hclust`), que agrupa as comunidades com base em suas dissimilaridades originais e projeta o dendrograma no gráfico 2D.
+
+```{r}
+plot(nmds)
+
+ordiplot(nmds, type = "n")
+orditorp(nmds, display = "species", col = "red", air = 0.01)
+orditorp(nmds, display = "sites", col = colors, air = 0.01, cex = 1.25)
+ordicluster(nmds, hclust(vegdist(m_trns, "bray")))
+#?ordicluster
+```
+
+Observe que o agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.
+
+Pode-se ainda plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos agrupamentos. Lembrar que deve-se ter criado um vetor de valores de cor com a mesma extensão do vetor de valores de agrupamento.
+
+```{r}
+plot(nmds)
+
+ordiplot(nmds, type = "n")
+#Plot convex hulls with colors baesd on treatment
+for(i in unique(grupos)) {
+  ordihull(nmds$point[grep(i,grupos),],draw="polygon",groups=grupos[grupos==i],col=colors[grep(i,grupos)],label=F) } 
+orditorp(nmds, display = "species", col= "red", air = 0.01)
+orditorp(nmds, display = "sites", col = colors, air = 0.01, cex = 1.25)
+```
+
+Esse agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.
+
+Pode-se plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos tratamentos. Primeiro, cria-se um vetor de valores de cor com a mesma extensão do vetor de valores de tratamento.
+
+Se o tratamento for uma variável contínua, deve-se considerar linhas de mapeamento de contorno sobrepostas no gráfico. Para este exemplo, considera-se que os tratamentos foram aplicados ao longo de um gradiente de elevação. Podemos definir elevações aleatórias para o mesmo exemplo.
+
+```{r}
+m <- nrow(m_trns)
+surf <- seq(1, m)
+surf <- c(cluster_uas$height, 1)
+knots <- nrow(m_trns)
+```
+
+Agora usa-se a função `ordisurf` para plotar as linhas de contorno. A quantidade de linhas de contorno é definida pelo comando `knots = `. Se `knots = 0` ou `knots = 1` a função `ordisurf` ajustará uma tendencia linear a superfície, e se `knots = 2` a função ajustará uma tendência quadrática, ao inves de linhas retas. E por fim, exibe-se as espécies no gráfico.
+ 
+```{r}
+plot(nmds)
+ordisurf(nmds, surf, main = "", col = "forestgreen", knots = knots)
+orditorp(nmds, display = "sites", col = "grey30", air = 0.1, cex = 1)
+orditorp(nmds, display = "species", col = "grey30", air = 0.1, cex = 1)
+```
+
+## Apêndices {.unnumbered}
+
+### Videos consultados {.unnumbered}
+
+https://youtu.be/OMrtxobDhrM
+https://youtu.be/zjxE2KwNO0M
+https://youtu.be/Kl49qI3XJKY
+https://youtu.be/paO9-PLXwD0
+https://youtu.be/QljEeBei-JA
+https://youtu.be/4tQJI-g9wao
+https://youtu.be/M-Ing955VEI
+
+### Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "11-rmd11_nmds.Rmd", output = "script-rmd11.txt", documentation = 0)
+Script <- readLines("script-rmd11.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd11.txt")
+cat(Script, sep = "\n")
+```
+
+## Referências {-}
