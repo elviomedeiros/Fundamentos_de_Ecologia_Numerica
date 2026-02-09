@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 18 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica</title>
+<title> 19 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os...">
 <meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content=" 18 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 19 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 18 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 19 R Modulo 10.2 - Análise de Ordenação - NMDS | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -92,8 +92,9 @@
 <li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
 <li class="book-part">IV. ANÁLISES MULTIVARIADAS</li>
 <li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
-<li><a class="" href="nmds.html"><span class="header-section-number">17</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></li>
-<li><a class="active" href="nmds2.html"><span class="header-section-number">18</span> R Modulo 10.2 - Análise de Ordenação - NMDS</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">17</span> R Modulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="nmds.html"><span class="header-section-number">18</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></li>
+<li><a class="active" href="nmds2.html"><span class="header-section-number">19</span> R Modulo 10.2 - Análise de Ordenação - NMDS</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -102,26 +103,26 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nmds2" class="section level1" number="18">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nmds2" class="section level1" number="19">
 <h1>
-<span class="header-section-number"> 18</span> R Modulo 10.2 - Análise de Ordenação - NMDS<a class="anchor" aria-label="anchor" href="#nmds2"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 19</span> R Modulo 10.2 - Análise de Ordenação - NMDS<a class="anchor" aria-label="anchor" href="#nmds2"><i class="fas fa-link"></i></a>
 </h1>
-<div id="resumo-14" class="section level3 unnumbered">
-<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-14"><i class="fas fa-link"></i></a>
+<div id="resumo-15" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-15"><i class="fas fa-link"></i></a>
 </h3>
 <p>O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.</p>
 </div>
-<div id="apresentação-15" class="section level3 unnumbered">
-<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-15"><i class="fas fa-link"></i></a>
+<div id="apresentação-16" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-16"><i class="fas fa-link"></i></a>
 </h3>
 <p>O Escalonamento Multidimensional Não-Métrico, também conhecido como NMDS ou MDS não-métrico (Multidimensional Scaling), é uma técnica estatística utilizada para representar dados com muitas dimensões em um espaço dimensional menor, de forma que a estrutura dos dados originais seja preservada o máximo possível.</p>
 <p>Ao contrário do MDS métrico, que preserva as distâncias entre os pontos, o MDS não-métrico preserva apenas as relações de ordem ou similaridade entre os pontos, sem assumir uma relação linear com as distâncias reais. Em outras palavras, ele se concentra em preservar as relações de proximidade entre os pontos, mas não necessariamente suas distâncias exatas.</p>
 <p>A técnica funciona construindo uma matriz de similaridade a partir dos dados originais e, em seguida, posicionando os pontos em um espaço de menor dimensão de forma que as distâncias ou similaridades relativas sejam mantidas o mais fiel possível à matriz original.</p>
 <p>O MDS não-métrico é útil em situações onde as relações entre os pontos são importantes, mas as distâncias exatas entre eles podem não ser facilmente quantificáveis ou interpretáveis. Além da Ecologia, o NMDS é frequentemente usado em áreas como análise de dados, psicometria, ciência social, visualização de dados e aprendizado de máquina.</p>
 </div>
-<div id="algoritmo-da-nmds-1" class="section level2" number="18.1">
+<div id="algoritmo-da-nmds-1" class="section level2" number="19.1">
 <h2>
-<span class="header-section-number">18.1</span> Algoritmo da NMDS<a class="anchor" aria-label="anchor" href="#algoritmo-da-nmds-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.1</span> Algoritmo da NMDS<a class="anchor" aria-label="anchor" href="#algoritmo-da-nmds-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>O algoritmo de uma NMDS (Non-Metric Multidimensional Scaling) funciona de maneira a posicionar os pontos de dados em um espaço de menor dimensão de forma que as relações de ordem ou similaridade entre os pontos sejam preservadas o máximo possível.</p>
 <p>Aqui está uma visão geral de como o algoritmo de NMDS opera:</p>
@@ -136,26 +137,26 @@
 <p>É importante notar que, embora o NMDS preserve as relações de ordem ou similaridade entre os pontos, não há garantia de que as distâncias absolutas entre os pontos no espaço de menor dimensão correspondam às distâncias reais entre os pontos nos dados originais. O objetivo principal é preservar a estrutura relativa dos dados em um espaço de menor dimensão, facilitando a interpretação e visualização dos padrões nos dados.</p>
 </div>
 </div>
-<div id="organização-básica-12" class="section level2" number="18.2">
+<div id="organização-básica-13" class="section level2" number="19.2">
 <h2>
-<span class="header-section-number">18.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-12"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-13"><i class="fas fa-link"></i></a>
 </h2>
 <p>Apagamos os gráficos, se houver algum, limpamos a memória e o console.</p>
-<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span></span>
 <span><span class="co">#apaga os graficos, se houver algum, limpa a memória e o console</span></span></code></pre></div>
 </div>
-<div id="pacotes-do-módulo-1" class="section level2" number="18.3">
+<div id="pacotes-do-módulo-1" class="section level2" number="19.3">
 <h2>
-<span class="header-section-number">18.3</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Instalando os pacotes necessários para esse módulo. Nos computadores do Laboratório de Ecologia não instale esses pacotes, eles já estão instalados.</p>
-<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rgl"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
 <span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
@@ -170,29 +171,29 @@
 <span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                   sheet <span class="op">=</span> <span class="st">"peixesp"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="reinício-1-1" class="section level2" number="18.4">
+<div id="reinício-1-1" class="section level2" number="19.4">
 <h2>
-<span class="header-section-number">18.4</span> REINÍCIO 1<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-1-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.4</span> REINÍCIO 1<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-1-1"><i class="fas fa-link"></i></a>
 </h2>
 <div id="hello" class="greeting message" style="color: green;">
 <p>Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.</p>
 </div>
-<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Substitua a nova matriz aqui. Caso seja necessário.</li>
 </ol>
 </div>
-<div id="classificação-1-matriz-comunitária-1" class="section level2" number="18.5">
+<div id="classificação-1-matriz-comunitária-1" class="section level2" number="19.5">
 <h2>
-<span class="header-section-number">18.5</span> Classificação 1: Matriz comunitária<a class="anchor" aria-label="anchor" href="#classifica%C3%A7%C3%A3o-1-matriz-comunit%C3%A1ria-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.5</span> Classificação 1: Matriz comunitária<a class="anchor" aria-label="anchor" href="#classifica%C3%A7%C3%A3o-1-matriz-comunit%C3%A1ria-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Para conhecermos os dados, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir das matrizes de dados de interesse <code>ppbio**</code> com suas devidas relativizações e transformações.</p>
-<div id="dendrograma-e-heatmap-1-1" class="section level3" number="18.5.1">
+<div id="dendrograma-e-heatmap-1-1" class="section level3" number="19.5.1">
 <h3>
-<span class="header-section-number">18.5.1</span> Dendrograma e Heatmap 1<a class="anchor" aria-label="anchor" href="#dendrograma-e-heatmap-1-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.5.1</span> Dendrograma e Heatmap 1<a class="anchor" aria-label="anchor" href="#dendrograma-e-heatmap-1-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Dendrograma</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span>
 <span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
@@ -239,14 +240,14 @@
 ## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068
 ## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271
 ## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-1.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-2.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-3.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-279-4.png" width="768"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-300-1.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-300-2.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-300-3.png" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-300-4.png" width="768"></p>
 </div>
-<div id="histórico-das-fusões-1-1" class="section level3" number="18.5.2">
+<div id="histórico-das-fusões-1-2" class="section level3" number="19.5.2">
 <h3>
-<span class="header-section-number">18.5.2</span> Histórico das fusões 1<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es-1-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.5.2</span> Histórico das fusões 1<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es-1-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de “-”) ou grupo de objetos (indicado pela ausência do sinall de “-”) que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a <code>m-1</code> última fusão entre os dois últimos grupos. Nesse caso, 22.</p>
-<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
@@ -901,9 +902,9 @@
 </div>
 </div>
 </div>
-<div id="ordenação-1" class="section level2" number="18.6">
+<div id="ordenação-1" class="section level2" number="19.6">
 <h2>
-<span class="header-section-number">18.6</span> Ordenação<a class="anchor" aria-label="anchor" href="#ordena%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.6</span> Ordenação<a class="anchor" aria-label="anchor" href="#ordena%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>O Escalonamento Multidimensional Não-Métrico (NMS ou NMDS) é uma ferramenta comumente usada para examinar a composição da comunidade. Vamos estabelecer algumas bases conceituais. Considere um único eixo de abundância representando uma única espécie <a href="https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/">Fonte</a>:</p>
 <p>O objetivo do NMDS é representar a posição original das comunidades em um espaço multidimensional da forma mais precisa possível, usando um número reduzido de dimensões que podem ser facilmente plotadas e visualizadas.</p>
@@ -929,11 +930,11 @@ Se a configuração 2-D preservar perfeitamente os ranks originais de classifica
 <li>Pode reconhecer diferenças nas abundâncias totais quando as abundâncias relativas são iguais.</li>
 </ul>
 <p>Para executar a NMDS, usa-se a função <code>metaMDS</code> do pacote <code>vegan</code>.</p>
-<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span></code></pre></div>
 <p>Para executar a NMDS, usa-se a função <code>metaMDS</code> do pacote <code>vegan</code>. <code>metaMDS</code> requer uma matriz de comunidade-por-espécies (CPE, “community-by-species”). De momento, cria-se essa matrizcom dados amostradoes aleatóriamente de um cojunto arbitrário de valores.</p>
 <p>A função <code>metaMDS</code> vai calcular as distâncias, executar o algorítimo iterativo, determna o stress ou fitting entre os conjuntos de dados e etc. Precisa-se apenas definir a matriz de comunidade-por-espécies. Nesse caso:</p>
-<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nmds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span><span class="va">m_trns</span>, <span class="co">#matriz CPE, definida anteriormente</span></span>
 <span>                k<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co">#no. de redução de dimensões</span></span></code></pre></div>
 <pre><code>## Run 0 stress 0.1601399 
@@ -995,7 +996,7 @@ Se a configuração 2-D preservar perfeitamente os ranks originais de classifica
 ## ... Similar to previous best
 ## Run 20 stress 0.2078279 
 ## *** Best solution repeated 2 times</code></pre>
-<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nmds</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1015,7 +1016,7 @@ Se a configuração 2-D preservar perfeitamente os ranks originais de classifica
 ## Species: expanded scores based on 'm_trns'</code></pre>
 <p>Nesse exemplo, <code>metaMDS</code> aplicou automaticamente uma transformação da raiz quadrada e calculou as distâncias de Bray-Curtis para a matriz de comunidade-por-local.</p>
 <p>Deve-se observar cada iteração do NMDS até que uma solução seja alcançada (ou seja, o stress foi minimizado após algum número de reconfigurações dos pontos em 2 dimensões). Pode-se aumentar o número padrão de iterações usando o argumento <code>trymax =</code>. Isso pode ajudar a aliviar problemas de não convergência. Se o stress for alto, pode-se aumentar o número de dimensões para <code>k = 3</code>.</p>
-<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">321</span><span class="op">)</span></span>
 <span><span class="va">nmds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span><span class="va">m_trns</span>, distance <span class="op">=</span> <span class="st">"bray"</span>, k <span class="op">=</span> <span class="fl">3</span>, trymax <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Run 0 stress 0.1105304 
@@ -1060,10 +1061,10 @@ Se a configuração 2-D preservar perfeitamente os ranks originais de classifica
 ## ... Procrustes: rmse 0.02206039  max resid 0.07161019 
 ## Run 20 stress 0.1105304 
 ## *** Best solution repeated 6 times</code></pre>
-<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#distance = "manhattan", "euclidean", "canberra", "clark", "bray", "kulczynski", "jaccard", "gower", #"altGower", "morisita", "horn", "mountford", "raup", "binomial", "chao", "cao", "mahalanobis", "chisq", #"chord", "hellinger", "aitchison", or "robust.aitchison".</span></span></code></pre></div>
 <p>Pode-se agora examinar o objeto NMDS.</p>
-<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nmds</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1081,7 +1082,7 @@ Se a configuração 2-D preservar perfeitamente os ranks originais de classifica
 ## The best solution was from try 5 (random start)
 ## Scaling: centring, PC rotation, halfchange scaling 
 ## Species: expanded scores based on 'm_trns'</code></pre>
-<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html">scores</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $sites
 ##               NMDS1       NMDS2       NMDS3
@@ -1147,8 +1148,8 @@ Se a configuração 2-D preservar perfeitamente os ranks originais de classifica
 ## te-chalc   0.06189483 -1.29537417 -1.16447425
 ## tr-signa  -0.38328723 -0.92884690  0.02246739</code></pre>
 <p>Nesse exemplo, aplicamos uma transformação do acro seno da raiz quadrada e calculamos as distâncias de Bray-Curtis para a matriz de comunidade-por-local.</p>
-<p>É necessário examinar o <strong>Gráfico de Shepard</strong> (Figura <a href="nmds2.html#fig:2102stress">18.1</a>), que mostra a dispersão em torno da regressão entre as distâncias entre pontos da configuração final (distâncias entre cada par de comunidades) <em>versus</em> as dissimilaridades originais.</p>
-<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<p>É necessário examinar o <strong>Gráfico de Shepard</strong> (Figura <a href="nmds2.html#fig:2102stress">19.1</a>), que mostra a dispersão em torno da regressão entre as distâncias entre pontos da configuração final (distâncias entre cada par de comunidades) <em>versus</em> as dissimilaridades originais.</p>
+<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/goodness.metaMDS.html">stressplot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span>
 <span><span class="va">gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/goodness.cca.html">goodness</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span>
 <span><span class="va">gof</span></span></code></pre></div>
@@ -1159,47 +1160,47 @@ Se a configuração 2-D preservar perfeitamente os ranks originais de classifica
 <div class="figure">
 <span style="display:block;" id="fig:2102stress"></span>
 <img src="fundamentos_de_ecologia_numerica_files/figure-html/2102stress-1.png" alt="Stress da análise de ordenação da matriz CBE, baseada na dissimilaridade de Bray-Curtis." width="672"><p class="caption">
-Figura 18.1: Stress da análise de ordenação da matriz CBE, baseada na dissimilaridade de Bray-Curtis.
+Figura 19.1: Stress da análise de ordenação da matriz CBE, baseada na dissimilaridade de Bray-Curtis.
 </p>
 </div>
 <p>Uma dispersão grande ao redor da linha sugere que as dissimilaridades originais não são bem preservadas no número reduzido de dimensões.</p>
-<div id="gráficos-de-ordenação" class="section level3" number="18.6.1">
+<div id="gráficos-de-ordenação" class="section level3" number="19.6.1">
 <h3>
-<span class="header-section-number">18.6.1</span> Gráficos de ordenação<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-ordena%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.6.1</span> Gráficos de ordenação<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-de-ordena%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h3>
 <p>Agora podemos plotar a NMDS</p>
-<div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, cex <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="va">gof</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gof</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ord2102"></span>
 <img src="fundamentos_de_ecologia_numerica_files/figure-html/ord2102-1.png" alt="Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis." width="672"><p class="caption">
-Figura 18.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
+Figura 19.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
 </p>
 </div>
 <p>A ordenação mostra tanto as comunidades (“locais”, círculos abertos) quanto as espécies (cruzes vermelhas).</p>
 <p>Aqui, pode-se usar as funções <code>ordiplot</code> e <code>orditorp</code> para adicionar texto ao gráfico no lugar dos pontos.</p>
-<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb607"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-285-1.png" width="672"></div>
-<div class="sourceCode" id="cb571"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-306-1.png" width="672"></div>
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col<span class="op">=</span><span class="st">"red"</span>, air<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, cex<span class="op">=</span><span class="fl">1.25</span>, air<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-285-2.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-306-2.png" width="672"></div>
 <p>A função <code>choices = c(1,2)</code> escolhe quais eixos da ordenação serão mostrados.</p>
 <p>Existem algumas funções adicionais que podem ser de interesse. Pode-se desenhar polígonos convexos conectando os vértices dos pontos feitos por certos grupos de comunidades no gráfico.</p>
 <p>Para isso, cria-se um vetor de valores de tratamento.</p>
-<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb609"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-286-1.png" width="672"></div>
-<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-307-1.png" width="672"></div>
+<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grupos</span> <span class="op">&lt;-</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">area</span></span>
 <span><span class="va">grupos</span></span></code></pre></div>
 <pre><code>##  [1] "Serido" "Serido" "Serido" "Serido" "Serido" "Serido" "Serido" "Serido"
 ##  [9] "Serido" "Serido" "Serido" "Serido" "Buique" "Buique" "Buique" "Buique"
 ## [17] "Buique" "Buique" "Buique" "Buique" "Buique" "Buique" "Buique"</code></pre>
-<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">grupos</span> <span class="op">==</span> <span class="st">"Serido"</span>, <span class="st">"green"</span>, </span>
 <span>           <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">grupos</span> <span class="op">==</span> <span class="st">"Buique"</span>, <span class="st">"blue"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#           ifelse(grupos == "Rio", "red", "black")))</span></span>
@@ -1207,14 +1208,14 @@ Figura 18.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
 <pre><code>##  [1] "green" "green" "green" "green" "green" "green" "green" "green" "green"
 ## [10] "green" "green" "green" "blue"  "blue"  "blue"  "blue"  "blue"  "blue" 
 ## [19] "blue"  "blue"  "blue"  "blue"  "blue"</code></pre>
-<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordihull</a></span><span class="op">(</span><span class="va">nmds</span>, groups <span class="op">=</span> <span class="va">grupos</span>, draw <span class="op">=</span> <span class="st">"polygon"</span>, col<span class="op">=</span> <span class="st">"grey90"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-286-2.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-307-2.png" width="672"></div>
 <p>Essa é uma maneira intuitiva de entender como as comunidades e espécies se agrupam com base nos tratamentos possveis. Nesse caso, grupos com cores diferentes. Também é possível plotar elipses e “gráficos de aranha” usando as funções <code>ordiellipse</code> e <code>orderspider</code>, que enfatizam o centróide das comunidades em cada agrupamento.</p>
-<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
@@ -1237,45 +1238,45 @@ Figura 18.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordicluster</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="va">cluster_uas</span>, prune <span class="op">=</span> <span class="fl">0</span>, display <span class="op">=</span> <span class="st">"sites"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-287-1.png" width="864"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-308-1.png" width="864"></div>
 <p>Outra alternativa é plotar uma “árvore de abrangência mínima” (da função <code>hclust</code>), que agrupa as comunidades com base em suas dissimilaridades originais e projeta o dendrograma no gráfico 2D.</p>
-<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-288-1.png" width="672"></div>
-<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-309-1.png" width="672"></div>
+<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordicluster</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, <span class="st">"bray"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-288-2.png" width="672"></div>
-<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-309-2.png" width="672"></div>
+<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#?ordicluster</span></span></code></pre></div>
 <p>Observe que o agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.</p>
 <p>Pode-se ainda plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos agrupamentos. Lembrar que deve-se ter criado um vetor de valores de cor com a mesma extensão do vetor de valores de agrupamento.</p>
-<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-289-1.png" width="672"></div>
-<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-310-1.png" width="672"></div>
+<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">nmds</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="co">#Plot convex hulls with colors baesd on treatment</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">grupos</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordihull</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">$</span><span class="va">point</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="va">i</span>,<span class="va">grupos</span><span class="op">)</span>,<span class="op">]</span>,draw<span class="op">=</span><span class="st">"polygon"</span>,groups<span class="op">=</span><span class="va">grupos</span><span class="op">[</span><span class="va">grupos</span><span class="op">==</span><span class="va">i</span><span class="op">]</span>,col<span class="op">=</span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="va">i</span>,<span class="va">grupos</span><span class="op">)</span><span class="op">]</span>,label<span class="op">=</span><span class="cn">F</span><span class="op">)</span> <span class="op">}</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col<span class="op">=</span> <span class="st">"red"</span>, air <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="va">colors</span>, air <span class="op">=</span> <span class="fl">0.01</span>, cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-289-2.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-310-2.png" width="672"></div>
 <p>Esse agrupamento é baseado em distâncias de Bray-Curtis. Este é um método sugerido para verificar a precisão do gráfico 2D.</p>
 <p>Pode-se plotar os polígonos convexos, elipses, gráficos de aranha, etc., coloridos com base nos tratamentos. Primeiro, cria-se um vetor de valores de cor com a mesma extensão do vetor de valores de tratamento.</p>
 <p>Se o tratamento for uma variável contínua, deve-se considerar linhas de mapeamento de contorno sobrepostas no gráfico. Para este exemplo, considera-se que os tratamentos foram aplicados ao longo de um gradiente de elevação. Podemos definir elevações aleatórias para o mesmo exemplo.</p>
-<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
 <span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">m</span><span class="op">)</span></span>
 <span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">height</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">knots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span></code></pre></div>
 <p>Agora usa-se a função <code>ordisurf</code> para plotar as linhas de contorno. A quantidade de linhas de contorno é definida pelo comando <code>knots =</code>. Se <code>knots = 0</code> ou <code>knots = 1</code> a função <code>ordisurf</code> ajustará uma tendencia linear a superfície, e se <code>knots = 2</code> a função ajustará uma tendência quadrática, ao inves de linhas retas. E por fim, exibe-se as espécies no gráfico.</p>
-<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nmds</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-291-1.png" width="672"></div>
-<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-312-1.png" width="672"></div>
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordisurf.html">ordisurf</a></span><span class="op">(</span><span class="va">nmds</span>, <span class="va">surf</span>, main <span class="op">=</span> <span class="st">""</span>, col <span class="op">=</span> <span class="st">"forestgreen"</span>, knots <span class="op">=</span> <span class="va">knots</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Family: gaussian 
@@ -1288,14 +1289,14 @@ Figura 18.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
 ## 5.63  total = 6.63 
 ## 
 ## REML score: -2.960328</code></pre>
-<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"sites"</span>, col <span class="op">=</span> <span class="st">"grey30"</span>, air <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/orditorp.html">orditorp</a></span><span class="op">(</span><span class="va">nmds</span>, display <span class="op">=</span> <span class="st">"species"</span>, col <span class="op">=</span> <span class="st">"grey30"</span>, air <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-291-2.png" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-312-2.png" width="672"></div>
 </div>
 </div>
-<div id="apêndices-14" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-14"><i class="fas fa-link"></i></a>
+<div id="apêndices-15" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-15"><i class="fas fa-link"></i></a>
 </h2>
 <div id="videos-consultados" class="section level3 unnumbered">
 <h3>Videos consultados<a class="anchor" aria-label="anchor" href="#videos-consultados"><i class="fas fa-link"></i></a>
@@ -1314,44 +1315,44 @@ Figura 18.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
 </div>
 </div>
-<div id="referências-16" class="section level2 unnumbered">
-<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-16"><i class="fas fa-link"></i></a>
+<div id="referências-17" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-17"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="nmds.html"><span class="header-section-number">17</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></div>
+<div class="prev"><a href="nmds.html"><span class="header-section-number">18</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></div>
 <div class="next"><a href="bibliografia-geral.html">Bibliografia Geral</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#nmds2"><span class="header-section-number">18</span> R Modulo 10.2 - Análise de Ordenação - NMDS</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#resumo-14">RESUMO</a></li>
-<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-15">Apresentação</a></li>
+<a class="nav-link" href="#nmds2"><span class="header-section-number">19</span> R Modulo 10.2 - Análise de Ordenação - NMDS</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-15">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-16">Apresentação</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#algoritmo-da-nmds-1"><span class="header-section-number">18.1</span> Algoritmo da NMDS</a></li>
-<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-12"><span class="header-section-number">18.2</span> Organização básica</a></li>
-<li><a class="nav-link" href="#pacotes-do-m%C3%B3dulo-1"><span class="header-section-number">18.3</span> Pacotes do módulo</a></li>
-<li><a class="nav-link" href="#rein%C3%ADcio-1-1"><span class="header-section-number">18.4</span> REINÍCIO 1</a></li>
+<li><a class="nav-link" href="#algoritmo-da-nmds-1"><span class="header-section-number">19.1</span> Algoritmo da NMDS</a></li>
+<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-13"><span class="header-section-number">19.2</span> Organização básica</a></li>
+<li><a class="nav-link" href="#pacotes-do-m%C3%B3dulo-1"><span class="header-section-number">19.3</span> Pacotes do módulo</a></li>
+<li><a class="nav-link" href="#rein%C3%ADcio-1-1"><span class="header-section-number">19.4</span> REINÍCIO 1</a></li>
 <li>
-<a class="nav-link" href="#classifica%C3%A7%C3%A3o-1-matriz-comunit%C3%A1ria-1"><span class="header-section-number">18.5</span> Classificação 1: Matriz comunitária</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#dendrograma-e-heatmap-1-1"><span class="header-section-number">18.5.1</span> Dendrograma e Heatmap 1</a></li>
-<li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es-1-1"><span class="header-section-number">18.5.2</span> Histórico das fusões 1</a></li>
+<a class="nav-link" href="#classifica%C3%A7%C3%A3o-1-matriz-comunit%C3%A1ria-1"><span class="header-section-number">19.5</span> Classificação 1: Matriz comunitária</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dendrograma-e-heatmap-1-1"><span class="header-section-number">19.5.1</span> Dendrograma e Heatmap 1</a></li>
+<li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es-1-2"><span class="header-section-number">19.5.2</span> Histórico das fusões 1</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#ordena%C3%A7%C3%A3o-1"><span class="header-section-number">18.6</span> Ordenação</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1ficos-de-ordena%C3%A7%C3%A3o"><span class="header-section-number">18.6.1</span> Gráficos de ordenação</a></li></ul>
+<a class="nav-link" href="#ordena%C3%A7%C3%A3o-1"><span class="header-section-number">19.6</span> Ordenação</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1ficos-de-ordena%C3%A7%C3%A3o"><span class="header-section-number">19.6.1</span> Gráficos de ordenação</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#ap%C3%AAndices-14">Apêndices</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#ap%C3%AAndices-15">Apêndices</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#videos-consultados">Videos consultados</a></li>
 <li><a class="nav-link" href="#script-limpo-11">Script limpo</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#refer%C3%AAncias-16">Referências</a></li>
+<li><a class="nav-link" href="#refer%C3%AAncias-17">Referências</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1368,7 +1369,7 @@ Figura 18.2: Gráfico de ordenação, baseada na dissimilaridade de Bray-Curtis.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 18:22:43.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 18:38:06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

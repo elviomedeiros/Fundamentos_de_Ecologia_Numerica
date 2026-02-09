@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 17 R Modulo 8 - Análise de Classificação Não-hierárquica - K-Means | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíba">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="RESUMO O método K-means é um algoritmo de aprendizado de máquina não supervisionado utilizado para agrupar dados em clusters. Ele é um dos métodos mais populares e amplamente utilizados para...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content=" 17 R Modulo 8 - Análise de Classificação Não-hierárquica - K-Means | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="RESUMO O método K-means é um algoritmo de aprendizado de máquina não supervisionado utilizado para agrupar dados em clusters. Ele é um dos métodos mais populares e amplamente utilizados para...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 17 R Modulo 8 - Análise de Classificação Não-hierárquica - K-Means | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO O método K-means é um algoritmo de aprendizado de máquina não supervisionado utilizado para agrupar dados em clusters. Ele é um dos métodos mais populares e amplamente utilizados para...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.1.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.1.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.1.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.1.3/utils.src.js"></script><script src="libs/rglwidgetClass-1.1.3/buffer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shaders.src.js"></script><script src="libs/rglwidgetClass-1.1.3/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.1.3/textures.src.js"></script><script src="libs/rglwidgetClass-1.1.3/projection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/mouse.src.js"></script><script src="libs/rglwidgetClass-1.1.3/init.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pieces.src.js"></script><script src="libs/rglwidgetClass-1.1.3/draw.src.js"></script><script src="libs/rglwidgetClass-1.1.3/controls.src.js"></script><script src="libs/rglwidgetClass-1.1.3/selection.src.js"></script><script src="libs/rglwidgetClass-1.1.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.1.3/pretty.src.js"></script><script src="libs/rglwidgetClass-1.1.3/axes.src.js"></script><script src="libs/rglwidgetClass-1.1.3/animation.src.js"></script><script src="libs/CanvasMatrix4-1.1.3/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">II. BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">3</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">4</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">5</span> Base de dados II - Habitat</a></li>
+<li class="book-part">III. ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="" href="xls.html"><span class="header-section-number">6</span> R Modulo 1 - Importando planilhas de dados</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">7</span> R Modulo 2 - Tipos de dados no R</a></li>
+<li><a class="" href="univ.html"><span class="header-section-number">8</span> R Modulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="univ2.html"><span class="header-section-number">9</span> R Modulo 3.2 - Testes estatísticos</a></li>
+<li><a class="" href="unigr.html"><span class="header-section-number">10</span> R Modulo 3.3 - Gráficos univariados</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">11</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">12</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">13</span> R Modulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">14</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">15</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li class="book-part">IV. ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="active" href="kmeans.html"><span class="header-section-number">17</span> R Modulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="nmds.html"><span class="header-section-number">18</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></li>
+<li><a class="" href="nmds2.html"><span class="header-section-number">19</span> R Modulo 10.2 - Análise de Ordenação - NMDS</a></li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="kmeans" class="section level1" number="17">
+<h1>
+<span class="header-section-number"> 17</span> R Modulo 8 - Análise de Classificação Não-hierárquica - K-Means<a class="anchor" aria-label="anchor" href="#kmeans"><i class="fas fa-link"></i></a>
+</h1>
+<div id="resumo-13" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-13"><i class="fas fa-link"></i></a>
+</h3>
+<p>O método K-means é um algoritmo de aprendizado de máquina não supervisionado utilizado para agrupar dados em clusters. Ele é um dos métodos mais populares e amplamente utilizados para tarefas de clustering. O objetivo do algoritmo K-means é particionar um conjunto de dados em K clusters, onde K é um valor pré-definido pelo usuário. Cada cluster é representado por seu centróide, que é o ponto médio dos dados pertencentes a esse cluster. O algoritmo busca minimizar a variância intra-cluster, ou seja, a soma dos quadrados das distâncias entre os pontos de um cluster e o centróide desse cluster.</p>
+</div>
+<div id="apresentação-14" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-14"><i class="fas fa-link"></i></a>
+</h3>
+<p>O método K-means é um algoritmo de aprendizado de máquina não supervisionado utilizado para agrupar dados em clusters. Ele é um dos métodos mais populares e amplamente utilizados para tarefas de clustering.</p>
+<p>O objetivo do algoritmo K-means é particionar um conjunto de dados em K clusters, onde K é um valor pré-definido pelo usuário. Cada cluster é representado por seu centróide, que é o ponto médio dos dados pertencentes a esse cluster. O algoritmo busca minimizar a variância intra-cluster, ou seja, a soma dos quadrados das distâncias entre os pontos de um cluster e o centróide desse cluster.</p>
+<p>O processo de clustering pelo K-means envolve os seguintes passos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Inicialização: Seleção aleatória de K centróides iniciais ou usando outros métodos de inicialização.</p></li>
+<li><p>Atribuição: Cada ponto de dados é atribuído ao cluster cujo centróide está mais próximo.</p></li>
+<li><p>Atualização: Recalcula-se o centróide de cada cluster com base nos pontos de dados atribuídos a ele.</p></li>
+<li><p>Repetição: Os passos 2 e 3 são repetidos até que os centróides dos clusters se estabilizem ou um critério de parada seja atingido.</p></li>
+</ol>
+<p>O algoritmo K-means é iterativo e pode convergir para uma solução ótima local. Portanto, é comum executar o algoritmo várias vezes com diferentes inicializações aleatórias para melhorar a qualidade do clustering. A escolha do número de clusters (K) é um parâmetro importante e pode afetar os resultados.</p>
+<p>O K-means é amplamente aplicado em diversas áreas, como análise de dados, mineração de dados, reconhecimento de padrões e segmentação de imagens. Ele é eficiente e escalável, tornando-o uma opção popular para clustering de grandes conjuntos de dados. No entanto, é importante ressaltar que o K-means assume que os clusters são esféricos e de tamanho similar, o que nem sempre é o caso em todos os conjuntos de dados.</p>
+</div>
+<div id="organização-básica-11" class="section level2" number="17.1">
+<h2>
+<span class="header-section-number">17.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-11"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">##LIMPA A MEMORIA</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
+<p>Instalando os pacotes necessários para esse módulo</p>
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+<p>Os códigos acima, são usados para instalar os pacotes necessários para este módulo. Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, no código acima, carregamos o pacote <code>tidyverse</code>, usando a função <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>.</p>
+<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
+<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
+<p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:<br>
+SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
+<div id="sobre-os-dados-do-ppbio-5" class="section level3" number="17.1.1">
+<h3>
+<span class="header-section-number">17.1.1</span> Sobre os dados do PPBio<a class="anchor" aria-label="anchor" href="#sobre-os-dados-do-ppbio-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>A planilha <code>ppbio</code> contém os dados de abundância de espécies em diferentes unidades amostrais (UA’s). A base teórica dos dados do PPBio para o presente estudo pode ser vista em <a href="www.quarto.com">Base Teórica</a>. Leia antes de prosseguir.</p>
+</div>
+<div id="importando-a-planilha-de-trabalho-2" class="section level3" number="17.1.2">
+<h3>
+<span class="header-section-number">17.1.2</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="va">ppbio_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span> <span class="co">#lê ppbio como uma matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio_ma</span><span class="op">)</span></span>
+<span><span class="co">#ppbio</span></span>
+<span><span class="co">#ppbio_ma</span></span></code></pre></div>
+</div>
+</div>
+<div id="reset-point-1-2" class="section level2" number="17.2">
+<h2>
+<span class="header-section-number">17.2</span> Reset point 1<a class="anchor" aria-label="anchor" href="#reset-point-1-2"><i class="fas fa-link"></i></a>
+</h2>
+<div id="hello" class="greeting message" style="color: green;">
+<p><span style="color:red">ATENÇÃO</span>
+Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.</p>
+</div>
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_bruta</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Substitua a nova matriz aqui. Caso seja necessário.</li>
+</ol>
+<p>No interesse de sistematizar o uso das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (@ref(tab:8tbl-m_) resume seus tipos e abreviações.</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:8tbl-m_)Nomenclatura das matrizes em AMD em relação aos atributos das colunas.
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Nome
+</th>
+<th style="text-align:center;">
+Atributos (colunas)
+</th>
+<th style="text-align:center;">
+Abreviação no R
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz comunitaria
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são táxons ou OTU’s (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_com
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz ambiental
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são dados ambientais e variáveis físicas e químicas (ex. pH, condutividade, temperatura)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_amb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz de habitat
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_hab
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz bruta
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_brt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz transposta
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos foram transpostos para as linhas
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_t
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz relativizada
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_rel
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz transformada
+</td>
+<td style="text-align:center;width: 2cm; ">
+Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_trns
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz de trabalho
+</td>
+<td style="text-align:center;width: 2cm; ">
+Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_trab
+</td>
+</tr>
+</tbody>
+</table></div>
+<div id="outra-forma-de-achar-e-importar-uma-planilha-2" class="section level3" number="17.2.1">
+<h3>
+<span class="header-section-number">17.2.1</span> Outra forma de achar e importar uma planilha<a class="anchor" aria-label="anchor" href="#outra-forma-de-achar-e-importar-uma-planilha-2"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.choose.html">file.choose</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="classificação" class="section level2" number="17.3">
+<h2>
+<span class="header-section-number">17.3</span> Classificação<a class="anchor" aria-label="anchor" href="#classifica%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h2>
+<p>Criando uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, criada a partir da matriz de dados relativizada pelo total das colunas e transformada pelo arco seno da raiz quadrada.</p>
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span>
+<span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">m_bruta</span>,</span>
+<span>                               method<span class="op">=</span><span class="st">"total"</span>, MARGIN <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">vegdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                   diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">cluster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">vegdist</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">cluster</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Bray-Curtis"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster</span>, k <span class="op">=</span> <span class="fl">3</span>, h <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span>
+<span><span class="co">#h = 0.8 fornece os grupos formados na altura h</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##           S-R-CT1   S-R-CP1   S-A-TA1   S-R-CT2   S-R-CP2   S-A-TA2
+## S-R-CT1 0.0000000 0.8743721 0.9338269 0.6274997 0.8106894 0.9420728
+## S-R-CP1 0.8743721 0.0000000 0.6833816 0.7759468 0.7726098 0.7342613
+## S-A-TA1 0.9338269 0.6833816 0.0000000 0.8789631 0.9178304 0.5700984
+## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068
+## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271
+## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-252-1.png" width="672"></div>
+</div>
+<div id="histórico-das-fusões-1" class="section level2" number="17.4">
+<h2>
+<span class="header-section-number">17.4</span> Histórico das fusões<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de “-”) ou grupo de objetos (indicado pela ausência do sinal de “-”) que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a <code>m-1</code> última fusão entre os dois últimos grupos. Nesse caso, 22.</p>
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
+<span><span class="va">merge</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">merge</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>,<span class="st">"0"</span><span class="op">)</span></span>
+<span><span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cluster</span><span class="op">$</span><span class="va">height</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">height</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1.0"</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Cluster <span class="op">=</span> <span class="va">merge</span>, Height <span class="op">=</span> <span class="va">height</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cluster1"</span>, <span class="st">"Cluster2"</span>, <span class="st">"Height"</span><span class="op">)</span></span>
+<span><span class="va">UA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>, <span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">UA</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"No. e UA"</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">UA</span>, <span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span><span class="op">$</span><span class="va">Histórico</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span></span></code></pre></div>
+<pre><code>##    No. e UA Cluster1 Cluster2 Height Histórico
+## 1   S-R-CT1      -20      -23   0.14         1
+## 2   S-R-CP1       -8      -11   0.26         2
+## 3   S-A-TA1      -17        1   0.28         3
+## 4   S-R-CT2      -19      -22   0.37         4
+## 5   S-R-CP2       -6      -12   0.41         5
+## 6   S-A-TA2       -4      -10   0.46         6
+## 7   S-R-CT3      -16        4   0.48         7
+## 8   S-R-CP3       -5        2   0.53         8
+## 9   S-A-TA3      -13        7   0.56         9
+## 10  S-R-CT4       -9        5   0.57        10
+## 11  S-R-CP4       -7        6   0.59        11
+## 12  S-A-TA4      -14        3   0.61        12
+## 13  B-A-MU1       -2       -3   0.68        13
+## 14  B-A-GU1       -1       11   0.68        14
+## 15  B-R-PC2      -15      -18   0.69        15
+## 16  B-A-MU2      -21       14   0.75        16
+## 17  B-A-GU2       10       13   0.76        17
+## 18  B-R-PC3        9       12   0.79        18
+## 19  B-A-MU3        8       16    0.8        19
+## 20  B-A-GU3       17       19   0.85        20
+## 21  B-R-PC4       15       20   0.89        21
+## 22  B-A-MU4       18       21   0.91        22
+## 23  B-A-GU4        0        0    1.0        23</code></pre>
+<p>No código acima, <code>h = 0.8</code> fornece os grupos formados na altura <code>h</code> do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, “h”) representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo <code>height</code>, isso significa que a distancia entre esses objetos é 0.8.</p>
+</div>
+<div id="algoritmo-k-means---versão-simplificada" class="section level2" number="17.5">
+<h2>
+<span class="header-section-number">17.5</span> Algoritmo K-Means - Versão simplificada<a class="anchor" aria-label="anchor" href="#algoritmo-k-means---vers%C3%A3o-simplificada"><i class="fas fa-link"></i></a>
+</h2>
+<p>Este <a href="https://youtu.be/6qleqPsrBqI">vídeo do YouTube</a> é um bom exemplo de como fazer uma Classificação K-Means.</p>
+<div id="organização-básica-primeiro" class="section level3" number="17.5.1">
+<h3>
+<span class="header-section-number">17.5.1</span> Organização básica primeiro<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-primeiro"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos</span></span></code></pre></div>
+</div>
+<div id="instalar-pacotes-necessários" class="section level3" number="17.5.2">
+<h3>
+<span class="header-section-number">17.5.2</span> Instalar pacotes necessários<a class="anchor" aria-label="anchor" href="#instalar-pacotes-necess%C3%A1rios"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"factoextra"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"FactoMineR"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"cluster"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gridExtra"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="importando-matriz" class="section level3" number="17.5.3">
+<h3>
+<span class="header-section-number">17.5.3</span> Importando matriz<a class="anchor" aria-label="anchor" href="#importando-matriz"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">ppbioh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-amb.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"ano1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ppbioh</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "h.macroph"    "h.grass"      "h.subveg"     "h.overhveg"   "h.litter"    
+##  [6] "h.filalgae"   "h.attalgae"   "h.roots"      "h.lrgdeb"     "h.smldeb"    
+## [11] "s.mud"        "s.sand"       "s.smlgrav"    "s.lrggrav"    "s.cobbles"   
+## [16] "s.rocks"      "s.bedrock"    "m.elev"       "m.river"      "m.stream"    
+## [21] "m.distsource" "m.distmouth"  "m.maxslope"   "m.maxdepth"   "m.habdepth"  
+## [26] "m.width"      "a.veloc"      "a.temp"       "a.do"         "a.transp"</code></pre>
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ppbioh_part</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">ppbioh</span>,</span>
+<span>                      select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s.mud"</span>,<span class="st">"s.sand"</span>,<span class="st">"s.smlgrav"</span>,<span class="st">"s.lrggrav"</span>,<span class="st">"s.cobbles"</span>,<span class="st">"s.rocks"</span>,<span class="st">"s.bedrock"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">ppbioh_part</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## character(0)</code></pre>
+</div>
+</div>
+<div id="reset-point-2-2" class="section level2" number="17.6">
+<h2>
+<span class="header-section-number">17.6</span> Reset point 2<a class="anchor" aria-label="anchor" href="#reset-point-2-2"><i class="fas fa-link"></i></a>
+</h2>
+<div id="hello" class="greeting message" style="color: green;">
+<p><span style="color:red">ATENÇÃO</span>
+Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.</p>
+</div>
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbioh_part</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span>
+<span><span class="co">#m_bruta &lt;- (ppbioh)</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Substitua a nova matriz aqui. Caso seja necessário.</li>
+</ol>
+<div id="algumas-análises-exploatórias" class="section level3" number="17.6.1">
+<h3>
+<span class="header-section-number">17.6.1</span> Algumas análises exploatórias<a class="anchor" aria-label="anchor" href="#algumas-an%C3%A1lises-exploat%C3%B3rias"><i class="fas fa-link"></i></a>
+</h3>
+<p>Dados brutos</p>
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  0 98</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-258-1.png" width="672"></div>
+<div id="relativização-e-transformação" class="section level4" number="17.6.1.1">
+<h4>
+<span class="header-section-number">17.6.1.1</span> Relativização e transformação<a class="anchor" aria-label="anchor" href="#relativiza%C3%A7%C3%A3o-e-transforma%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h4>
+<p>Dados transformados pela função expressa em <code>m_trns</code>.</p>
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.000000 9.899495</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-259-1.png" width="672"></div>
+</div>
+<div id="gráficos-comparativos" class="section level4" number="17.6.1.2">
+<h4>
+<span class="header-section-number">17.6.1.2</span> Gráficos comparativos<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-comparativos"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span>, log <span class="op">=</span> <span class="st">""</span>, las <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>        ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        main <span class="op">=</span> <span class="st">"Dados brutos"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span>, log <span class="op">=</span> <span class="st">""</span>, las <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>        ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        main <span class="op">=</span> <span class="st">"Dados relativizados e transformados"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-260-1.png" width="672"></div>
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="determinando-o-número-ideal-de-clusteres" class="section level2" number="17.7">
+<h2>
+<span class="header-section-number">17.7</span> Determinando o número ideal de clusteres<a class="anchor" aria-label="anchor" href="#determinando-o-n%C3%BAmero-ideal-de-clusteres"><i class="fas fa-link"></i></a>
+</h2>
+<div id="reescalar-os-dados-primeiro-usando-a-função-scale" class="section level3" number="17.7.1">
+<h3>
+<span class="header-section-number">17.7.1</span> Reescalar os dados primeiro usando a função <code>scale()</code><a class="anchor" aria-label="anchor" href="#reescalar-os-dados-primeiro-usando-a-fun%C3%A7%C3%A3o-scale"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.sthda.com/english/rpkgs/factoextra">factoextra</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Attaching package: 'gridExtra'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     combine</code></pre>
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_trns_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Definindo uma função que envolve o algoritmo k-means</span></span>
+<span><span class="va">kmeans_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">k</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">data</span>, centers <span class="op">=</span> <span class="va">k</span>, nstart <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">methods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"silhouette"</span>, <span class="st">"wss"</span>, <span class="st">"gap_stat"</span><span class="op">)</span></span>
+<span><span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">method</span> <span class="kw">in</span> <span class="va">methods</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">plot_title</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"No. de clusters método "</span>, <span class="va">method</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_nbclust.html">fviz_nbclust</a></span><span class="op">(</span><span class="va">m_trns_s</span>, FUNcluster <span class="op">=</span> <span class="va">kmeans_fun</span>, method <span class="op">=</span> <span class="va">method</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="va">plot_title</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">plots</span><span class="op">[[</span><span class="va">method</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">plot</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>No código acima, as funções <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>, reescala a matriz, <code>fviz_</code> cria um gráfico que sugere o número ideal de clusteres para serem usados, e o argumento <code>method=</code> indica o método usado para propor o número de clusteres, que podem ser “silhouette”, “wss” e “gap_stat” (Veja <a href="kmeans.html#m%C3%A9todos-de-determina%C3%A7%C3%A3o-de-clusters-em-k-means">Métodos de determinação de clusters em <code>k-means</code></a> nos Apêndices).</p>
+<p>Aqui criamos uma figura com os resultados dos gráficos para cada método de proposição para o número de clusteres (Figura <a href="kmeans.html#fig:28prop">17.1</a>).</p>
+<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span>grobs <span class="op">=</span> <span class="va">plots</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:28prop"></span>
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/28prop-1.png" alt="Gráficos para cada método de proposição para o número de clusteres." width="672"><p class="caption">
+Figura 17.1: Gráficos para cada método de proposição para o número de clusteres.
+</p>
+</div>
+<p>Com os dados reescalados, agora fazemos uma primeira tentativa. A função <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> estabelece um número inicial de partida de onde serã feitas as permutações aleatórias. Nesse caso, foi usado <code>centers=n</code> centros para calcular os agrupamentos K-Means.</p>
+<div class="sourceCode" id="cb531"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.sthda.com/english/rpkgs/factoextra">factoextra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span></span>
+<span><span class="va">m_trns_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">666</span><span class="op">)</span></span>
+<span><span class="va">kmeans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">m_trns_s</span>, centers <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">kmeans</span> <span class="co">#resultados descritivos da análise</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_cluster.html">fviz_cluster</a></span><span class="op">(</span><span class="va">kmeans</span>, data <span class="op">=</span> <span class="va">m_trns_s</span>, outlier.color <span class="op">=</span> <span class="st">"black"</span>, outlier.shape <span class="op">=</span> <span class="fl">19</span>,</span>
+<span>             ellipse.type <span class="op">=</span> <span class="st">"convex"</span><span class="op">)</span> <span class="co">#ou "confidence"</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-263-1.png" width="672"></div>
+<pre><code>## K-means clustering with 3 clusters of sizes 3, 9, 11
+## 
+## Cluster means:
+##        s.mud     s.sand  s.smlgrav  s.lrggrav   s.cobbles     s.rocks
+## 1 -0.4981467  0.2643189 -0.8616320 -0.5098978  1.83999539  1.48863931
+## 2  0.9046630 -1.0028428 -0.4021210 -0.3097617 -0.58268890 -0.08988163
+## 3 -0.6043206  0.7484208  0.5639986  0.3925044 -0.02507146 -0.33245303
+##    s.bedrock
+## 1 -0.2937783
+## 2  0.4569884
+## 3 -0.2937783
+## 
+## Clustering vector:
+## S-R-CT1 S-R-CP1 S-A-TA1 S-R-CT2 S-R-CP2 S-A-TA2 S-R-CT3 S-R-CP3 S-A-TA3 S-R-CT4 
+##       2       3       2       1       3       3       1       3       3       2 
+## S-R-CP4 S-A-TA4 B-A-MU1 B-A-GU1 B-R-PC2 B-A-MU2 B-A-GU2 B-R-PC3 B-A-MU3 B-A-GU3 
+##       1       3       3       2       3       3       2       3       2       2 
+## B-R-PC4 B-A-MU4 B-A-GU4 
+##       3       2       2 
+## 
+## Within cluster sum of squares by cluster:
+## [1] 12.17309 35.54207 43.97147
+##  (between_SS / total_SS =  40.5 %)
+## 
+## Available components:
+## 
+## [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+## [6] "betweenss"    "size"         "iter"         "ifault"</code></pre>
+<div id="usando-os-agrupamentos-do-kmeanscluster" class="section level4" number="17.7.1.1">
+<h4>
+<span class="header-section-number">17.7.1.1</span> Usando os agrupamentos do <code>kmeans$cluster</code><a class="anchor" aria-label="anchor" href="#usando-os-agrupamentos-do-kmeanscluster"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kmeans</span></span>
+<span><span class="va">kmeans</span><span class="op">$</span><span class="va">cluster</span></span>
+<span><span class="va">grupos</span> <span class="op">&lt;-</span> <span class="va">kmeans</span><span class="op">$</span><span class="va">cluster</span></span>
+<span><span class="va">grupos</span></span>
+<span><span class="va">grupos2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">grupos</span>, <span class="va">m_trab</span><span class="op">)</span></span>
+<span><span class="va">grupos2</span></span></code></pre></div>
+<pre><code>## K-means clustering with 3 clusters of sizes 3, 9, 11
+## 
+## Cluster means:
+##        s.mud     s.sand  s.smlgrav  s.lrggrav   s.cobbles     s.rocks
+## 1 -0.4981467  0.2643189 -0.8616320 -0.5098978  1.83999539  1.48863931
+## 2  0.9046630 -1.0028428 -0.4021210 -0.3097617 -0.58268890 -0.08988163
+## 3 -0.6043206  0.7484208  0.5639986  0.3925044 -0.02507146 -0.33245303
+##    s.bedrock
+## 1 -0.2937783
+## 2  0.4569884
+## 3 -0.2937783
+## 
+## Clustering vector:
+## S-R-CT1 S-R-CP1 S-A-TA1 S-R-CT2 S-R-CP2 S-A-TA2 S-R-CT3 S-R-CP3 S-A-TA3 S-R-CT4 
+##       2       3       2       1       3       3       1       3       3       2 
+## S-R-CP4 S-A-TA4 B-A-MU1 B-A-GU1 B-R-PC2 B-A-MU2 B-A-GU2 B-R-PC3 B-A-MU3 B-A-GU3 
+##       1       3       3       2       3       3       2       3       2       2 
+## B-R-PC4 B-A-MU4 B-A-GU4 
+##       3       2       2 
+## 
+## Within cluster sum of squares by cluster:
+## [1] 12.17309 35.54207 43.97147
+##  (between_SS / total_SS =  40.5 %)
+## 
+## Available components:
+## 
+## [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+## [6] "betweenss"    "size"         "iter"         "ifault"      
+## S-R-CT1 S-R-CP1 S-A-TA1 S-R-CT2 S-R-CP2 S-A-TA2 S-R-CT3 S-R-CP3 S-A-TA3 S-R-CT4 
+##       2       3       2       1       3       3       1       3       3       2 
+## S-R-CP4 S-A-TA4 B-A-MU1 B-A-GU1 B-R-PC2 B-A-MU2 B-A-GU2 B-R-PC3 B-A-MU3 B-A-GU3 
+##       1       3       3       2       3       3       2       3       2       2 
+## B-R-PC4 B-A-MU4 B-A-GU4 
+##       3       2       2 
+## S-R-CT1 S-R-CP1 S-A-TA1 S-R-CT2 S-R-CP2 S-A-TA2 S-R-CT3 S-R-CP3 S-A-TA3 S-R-CT4 
+##       2       3       2       1       3       3       1       3       3       2 
+## S-R-CP4 S-A-TA4 B-A-MU1 B-A-GU1 B-R-PC2 B-A-MU2 B-A-GU2 B-R-PC3 B-A-MU3 B-A-GU3 
+##       1       3       3       2       3       3       2       3       2       2 
+## B-R-PC4 B-A-MU4 B-A-GU4 
+##       3       2       2 
+##         grupos      s.mud    s.sand s.smlgrav   s.lrggrav  s.cobbles   s.rocks
+## S-R-CT1      2 65.0000000 30.000000  0.000000  0.00000000  1.6666666  0.000000
+## S-R-CP1      3 16.6666660 70.000000  5.000000  5.00000000  3.3333333  0.000000
+## S-A-TA1      2 81.6666641  8.333333  1.666667  0.00000000  0.0000000  0.000000
+## S-R-CT2      1 40.0000000 40.000000  0.000000  0.00000000 20.0000000  0.000000
+## S-R-CP2      3  0.6666667 87.666664  3.333333  3.33333325  5.0000000  0.000000
+## S-A-TA2      3  5.0000000 95.000000  0.000000  0.00000000  0.0000000  0.000000
+## S-R-CT3      1 65.5555573 23.111111  0.000000  0.00000000  3.0000000  8.333333
+## S-R-CP3      3 48.7500000 22.500000 10.000000 10.00000000  8.7500000  0.000000
+## S-A-TA3      3 46.6666679 40.000000  6.666667  6.66666651  0.0000000  0.000000
+## S-R-CT4      2 95.0000000  1.833333  0.000000  0.00000000  0.3333333  2.833333
+## S-R-CP4      1  5.0000000 60.000000  0.000000  0.00000000 25.0000000 10.000000
+## S-A-TA4      3 59.1428566 38.714287  2.142857  0.00000000  0.0000000  0.000000
+## B-A-MU1      3 33.3333321 65.000000  0.000000  0.00000000  1.6666666  0.000000
+## B-A-GU1      2 96.6666641  3.333333  0.000000  0.00000000  0.0000000  0.000000
+## B-R-PC2      3 39.0000000 56.000000  3.000000  0.00000000  1.0000000  1.000000
+## B-A-MU2      3 20.6000004 77.000000  0.000000  0.00000000  2.4000001  0.000000
+## B-A-GU2      2 98.0000000  2.000000  0.000000  0.00000000  0.0000000  0.000000
+## B-R-PC3      3 33.6666679 63.000000  3.333333  0.00000000  0.0000000  0.000000
+## B-A-MU3      2 65.0000000 35.000000  0.000000  0.00000000  0.0000000  0.000000
+## B-A-GU3      2 87.7777786  6.666667  3.333333  2.22222233  0.0000000  0.000000
+## B-R-PC4      3 48.8750000 47.875000  1.875000  0.00000000  0.1250000  1.250000
+## B-A-MU4      2 91.7777786  3.222222  0.000000  0.00000000  0.0000000  5.000000
+## B-A-GU4      2 95.1666641  3.416667  1.333333  0.08333334  0.0000000  0.000000
+##         s.bedrock
+## S-R-CT1  3.333333
+## S-R-CP1  0.000000
+## S-A-TA1  8.333333
+## S-R-CT2  0.000000
+## S-R-CP2  0.000000
+## S-A-TA2  0.000000
+## S-R-CT3  0.000000
+## S-R-CP3  0.000000
+## S-A-TA3  0.000000
+## S-R-CT4  0.000000
+## S-R-CP4  0.000000
+## S-A-TA4  0.000000
+## B-A-MU1  0.000000
+## B-A-GU1  0.000000
+## B-R-PC2  0.000000
+## B-A-MU2  0.000000
+## B-A-GU2  0.000000
+## B-R-PC3  0.000000
+## B-A-MU3  0.000000
+## B-A-GU3  0.000000
+## B-R-PC4  0.000000
+## B-A-MU4  0.000000
+## B-A-GU4  0.000000</code></pre>
+<div id="descendo-os-nomes-das-uas" class="section level5" number="17.7.1.1.1">
+<h5>
+<span class="header-section-number">17.7.1.1.1</span> Descendo os nomes das UA’s<a class="anchor" aria-label="anchor" href="#descendo-os-nomes-das-uas"><i class="fas fa-link"></i></a>
+</h5>
+<p>Agora vamos criar duas tabelas cruzadas entre as unidades amostrais e seu pertencimento a um dos agrupamentos criados pela análises de K-Means. Essas tabelas mostram a contagem de ocorrências de cada UA para cada cluster.</p>
+<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">unid.as</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">m_trab</span>, var <span class="op">=</span> <span class="st">"UAs"</span><span class="op">)</span></span>
+<span><span class="va">agrup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">unid.as</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">uas2</span> <span class="op">&lt;-</span> <span class="va">unid.as</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>spp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">agrup</span><span class="op">)</span>,.before<span class="op">=</span><span class="va">UAs</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">unid.as</span><span class="op">$</span><span class="va">UAs</span>, <span class="va">kmeans</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">uas2</span><span class="op">$</span><span class="va">spp</span>, <span class="va">kmeans</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##          
+##           1 2 3
+##   B-A-GU1 0 1 0
+##   B-A-GU2 0 1 0
+##   B-A-GU3 0 1 0
+##   B-A-GU4 0 1 0
+##   B-A-MU1 0 0 1
+##   B-A-MU2 0 0 1
+##   B-A-MU3 0 1 0
+##   B-A-MU4 0 1 0
+##   B-R-PC2 0 0 1
+##   B-R-PC3 0 0 1
+##   B-R-PC4 0 0 1
+##   S-A-TA1 0 1 0
+##   S-A-TA2 0 0 1
+##   S-A-TA3 0 0 1
+##   S-A-TA4 0 0 1
+##   S-R-CP1 0 0 1
+##   S-R-CP2 0 0 1
+##   S-R-CP3 0 0 1
+##   S-R-CP4 1 0 0
+##   S-R-CT1 0 1 0
+##   S-R-CT2 1 0 0
+##   S-R-CT3 1 0 0
+##   S-R-CT4 0 1 0
+##     
+##      1 2 3
+##   CP 1 0 3
+##   CT 2 2 0
+##   GU 0 4 0
+##   MU 0 2 2
+##   PC 0 0 3
+##   TA 0 1 3</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="apêndices-13" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-13"><i class="fas fa-link"></i></a>
+</h2>
+<div id="restos-de-códigos" class="section level3 unnumbered">
+<h3>Restos de códigos<a class="anchor" aria-label="anchor" href="#restos-de-c%C3%B3digos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Código simples para a função fviz/no. de clusteres ppbioh_rqs &lt;- scale(ppbioh_rq) #reescala a matriz ?scale fviz_nbclust(ppbioh_rqs, kmeans, #sugere o no. ideal de clusteres method = “silhouette”) #outros métodos são “wss” e “gap_stat”</p>
+</div>
+<div id="métodos-de-determinação-de-clusters-em-k-means" class="section level3 unnumbered">
+<h3>Métodos de determinação de clusters em <code>k-means</code><a class="anchor" aria-label="anchor" href="#m%C3%A9todos-de-determina%C3%A7%C3%A3o-de-clusters-em-k-means"><i class="fas fa-link"></i></a>
+</h3>
+<p>Os métodos “silhouette”, “wss” e “gap_stat” são usados para determinar o número ideal de clusters em uma análise de cluster utilizando o algoritmo K-means.</p>
+<p>Método “silhouette”:</p>
+<ul>
+<li>O método “silhouette” avalia a qualidade dos clusters formados pelo K-means. Ele calcula a medida de silhouette para diferentes números de clusters e identifica o número de clusters com a maior média de silhouette, indicando uma melhor separação e compactação dos clusters.
+Método “wss” (Within-Cluster Sum of Squares):</li>
+</ul>
+<p>O método “wss”:</p>
+<ul>
+<li>O método “wss” calcula a soma dos quadrados das distâncias dos pontos em cada cluster em relação ao centróide desse cluster. Ele avalia a variabilidade dentro de cada cluster. O objetivo é encontrar o número de clusters que minimiza o valor do WSS, indicando uma melhor compactação dos pontos dentro dos clusters.
+Método “gap_stat” (Gap statistic):</li>
+</ul>
+<p>O método “gap_stat”:</p>
+<ul>
+<li>O método “gap_stat” compara a variação da dispersão dos dados dentro dos clusters em relação àquela esperada em um conjunto de dados aleatórios (dados de referência sem estrutura de cluster). Ele calcula a diferença entre a métrica de dispersão intra-cluster dos dados reais e dos dados de referência para diferentes números de clusters. O número de clusters com o maior valor de lacuna estatística indica um melhor ajuste dos dados reais em relação aos dados aleatórios, sugerindo a presença de estrutura de cluster.</li>
+</ul>
+<p>Esses métodos ajudam a determinar o número ideal de clusters de forma objetiva, utilizando diferentes critérios de avaliação. Cada método tem suas próprias vantagens e pode ser mais adequado dependendo do conjunto de dados e do objetivo da análise.</p>
+</div>
+</div>
+<div id="referências-15" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-15"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="upgma.html"><span class="header-section-number">16</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></div>
+<div class="next"><a href="nmds.html"><span class="header-section-number">18</span> R Módulo 10.1 - Análise de Ordenação - NMDS</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#kmeans"><span class="header-section-number">17</span> R Modulo 8 - Análise de Classificação Não-hierárquica - K-Means</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-13">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-14">Apresentação</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-11"><span class="header-section-number">17.1</span> Organização básica</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sobre-os-dados-do-ppbio-5"><span class="header-section-number">17.1.1</span> Sobre os dados do PPBio</a></li>
+<li><a class="nav-link" href="#importando-a-planilha-de-trabalho-2"><span class="header-section-number">17.1.2</span> Importando a planilha de trabalho</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#reset-point-1-2"><span class="header-section-number">17.2</span> Reset point 1</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#outra-forma-de-achar-e-importar-uma-planilha-2"><span class="header-section-number">17.2.1</span> Outra forma de achar e importar uma planilha</a></li></ul>
+</li>
+<li><a class="nav-link" href="#classifica%C3%A7%C3%A3o"><span class="header-section-number">17.3</span> Classificação</a></li>
+<li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es-1"><span class="header-section-number">17.4</span> Histórico das fusões</a></li>
+<li>
+<a class="nav-link" href="#algoritmo-k-means---vers%C3%A3o-simplificada"><span class="header-section-number">17.5</span> Algoritmo K-Means - Versão simplificada</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-primeiro"><span class="header-section-number">17.5.1</span> Organização básica primeiro</a></li>
+<li><a class="nav-link" href="#instalar-pacotes-necess%C3%A1rios"><span class="header-section-number">17.5.2</span> Instalar pacotes necessários</a></li>
+<li><a class="nav-link" href="#importando-matriz"><span class="header-section-number">17.5.3</span> Importando matriz</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#reset-point-2-2"><span class="header-section-number">17.6</span> Reset point 2</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#algumas-an%C3%A1lises-exploat%C3%B3rias"><span class="header-section-number">17.6.1</span> Algumas análises exploatórias</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#determinando-o-n%C3%BAmero-ideal-de-clusteres"><span class="header-section-number">17.7</span> Determinando o número ideal de clusteres</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#reescalar-os-dados-primeiro-usando-a-fun%C3%A7%C3%A3o-scale"><span class="header-section-number">17.7.1</span> Reescalar os dados primeiro usando a função scale()</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#ap%C3%AAndices-13">Apêndices</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#restos-de-c%C3%B3digos">Restos de códigos</a></li>
+<li><a class="nav-link" href="#m%C3%A9todos-de-determina%C3%A7%C3%A3o-de-clusters-em-k-means">Métodos de determinação de clusters em k-means</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#refer%C3%AAncias-15">Referências</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 09/02/2026 18:38:06.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
