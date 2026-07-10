@@ -540,27 +540,27 @@ Figura 10.1: Interface típica do RStudio e nome dos paineis ou janelas.
 ## [19,]
 ## [20,]
 ##       [,1] [,2] [,3]
-##  [1,]    1   20    0
-##  [2,]    0    0    0
-##  [3,]    1   10    0
-##  [4,]    0    0   30
-##  [5,]    0    0    0
-##  [6,]    5   10   40
-##  [7,]    1    0   30
-##  [8,]    1   10    0
-##  [9,]    1   20   30
-## [10,]    0   20   40
+##  [1,]    0   20    0
+##  [2,]    0   20   40
+##  [3,]    0    0   30
+##  [4,]    0   10   30
+##  [5,]    0    0   40
+##  [6,]    5    0   40
+##  [7,]    5    0   30
+##  [8,]    5   10   30
+##  [9,]    1   20    0
+## [10,]    1   10   30
 ##       [,1] [,2] [,3]
-##  [1,]    1   20    0
-##  [2,]    0    0    0
-##  [3,]    1   10    0
-##  [4,]    0    0   30
-##  [5,]    0    0    0
-##  [6,]    5   10   40
-##  [7,]    1    0   30
-##  [8,]    1   10    0
-##  [9,]    1   20   30
-## [10,]    0   20   40</code></pre>
+##  [1,]    0   20    0
+##  [2,]    0   20   40
+##  [3,]    0    0   30
+##  [4,]    0   10   30
+##  [5,]    0    0   40
+##  [6,]    5    0   40
+##  [7,]    5    0   30
+##  [8,]    5   10   30
+##  [9,]    1   20    0
+## [10,]    1   10   30</code></pre>
 <p>Na primeira forma, definimos os elementos da matriz, o número de linhas e colunas através dos <code>argumentos</code> <code>nrow</code> e <code>ncol</code>, e se os elementos serão preenchidos ao longo das linhas (<code>byrow = TRUE</code>) ou ao longo das colunas (<code>byrow = FALSE</code>).</p>
 <p>Na segunda forma, criamos dois vetores e então os juntamos através da função <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code>. Repare que na segunda matriz, o R nomeou automaticamente as linhas da matriz com os nomes dos vetores, ao invés de definir seus números.</p>
 <p>No terceiro caso, a função <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> realiza uma amostragem aleatória de elementos. No caso de <code>a</code>, são sorteados 10 valores do conjunto {0, 1, 5}, permitindo repetições (<code>replace = TRUE</code>). O resultado é armazenado no vetor <code>a</code>. Com a função <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code>, porque não funcionou como esperado? Peça ajuda com <code><a href="https://rdrr.io/r/base/matrix.html">?matrix</a></code></p>
@@ -573,22 +573,22 @@ Figura 10.1: Interface típica do RStudio e nome dos paineis ou janelas.
 <span><span class="va">mat2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>    <span class="co"># linhas 1 a 2, colunas 2 a 3</span></span></code></pre></div>
 <pre><code>## [1] 10
 ##       [,1] [,2]
-##  [1,]    1    0
-##  [2,]    0    0
-##  [3,]    1    0
+##  [1,]    0    0
+##  [2,]    0   40
+##  [3,]    0   30
 ##  [4,]    0   30
-##  [5,]    0    0
+##  [5,]    0   40
 ##  [6,]    5   40
-##  [7,]    1   30
-##  [8,]    1    0
-##  [9,]    1   30
-## [10,]    0   40
+##  [7,]    5   30
+##  [8,]    5   30
+##  [9,]    1    0
+## [10,]    1   30
 ##      [,1] [,2] [,3]
-## [1,]    1   20    0
-## [2,]    1   10    0
+## [1,]    0   20    0
+## [2,]    0    0   30
 ##      [,1] [,2]
 ## [1,]   20    0
-## [2,]    0    0</code></pre>
+## [2,]   20   40</code></pre>
 <p>Note que as linhas e colunas não tem nomes específicos atribuídos a elas.</p>
 </div>
 <div id="data-frames" class="section level3" number="10.5.3">
@@ -1471,7 +1471,7 @@ WICKHAM, H. <strong>ggplot2: Elegant Graphics for Data Analysis</strong>. [s.l.]
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 10:59:42.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 11:20:17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
