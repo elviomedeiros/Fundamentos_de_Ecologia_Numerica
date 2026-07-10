@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content=" 13 R Módulo 3.2 - Testes estatísticos | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -148,19 +148,19 @@ Figura 13.2: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <h2>
 <span class="header-section-number">13.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"fdth"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggpubr"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"multcomp"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -169,7 +169,7 @@ Figura 13.2: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span class="header-section-number">13.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vamos importar a planilha de dados univariados <code>tucuna.xlsx</code>. Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -221,7 +221,7 @@ Figura 13.2: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 ## TU009  24.6 200.5  20.5     25.7 195.9
 ## TU010  19.4  86.7  16.0     18.3  84.5</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(univ)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">univ</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">univ</span></span>
@@ -229,7 +229,7 @@ Figura 13.2: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span></code></pre></div>
 <p>Vamos escolher uma coluna como a variável de interesse para trabalhar com ela. No código abaixo, essa coluna é descrita pelo seu nome apresentado depois do <code>$</code>. Antes do <code>$</code> especificamos e qual data frame está a variável. Depois disso, a convertemos para um vertor.</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
 <span><span class="va">var</span> <span class="op">&lt;-</span> <span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span></span>
 <span><span class="va">var_v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span></span>
@@ -246,7 +246,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 </p>
 </div>
 <p>E agora visualizando nossos dados.</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(var)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">var_v</span><span class="op">)</span></span>
 <span><span class="va">var_v</span></span>
@@ -260,7 +260,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <p>A coluna de frequência será obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual será obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas serão obtidas somando progressivamente as frequências correspondentes.</p>
 <p>Tendo em mãos o conjunto total de 434 valores merísticos da variável de interesse agora <strong>podemos tirar uma subamostra aleatória de uma parte dos 434 valores</strong>. Essa subamostra é tirada usando o comando <code>size=</code> no código subsequente, que estabelece o tamanho da subamostra a ser tirada do total de dados. Por exemplo, para uma subamostra de 150 comprimentos, então <code>size = 150</code>. Nesse tutorial usaremos todos os 434 comprimentos. Podemos ainda escolher uma das colunas da base de dados, nesse caso vamos usar a coluna</p>
 <p>Subsitua em <code>n &lt;-</code> o valor de <code>size=</code> desejado. Aqui <code>n &lt;-</code> será todo o conjunto de dados <code>length(var_v)</code>.</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">var_v</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">666</span><span class="op">)</span></span>
 <span><span class="va">var_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">var_v</span>, size <span class="op">=</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="co">#atualize o valor de 'size=' se necessário</span></span>
@@ -272,7 +272,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h2>
 <span class="header-section-number">13.4</span> REINÍCIO<a class="anchor" aria-label="anchor" href="#id_4032reinicio"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">var_sub</span> <span class="op">&lt;-</span> <span class="va">var_trns</span></span></code></pre></div>
 </div>
 <div id="averiguando-normalidade-1" class="section level2" number="13.5">
@@ -284,12 +284,12 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <span class="header-section-number">13.5.1</span> Tabela de frequências e gráfico <em>stem-and-leaf</em><a class="anchor" aria-label="anchor" href="#tabela-de-frequ%C3%AAncias-e-gr%C3%A1fico-stem-and-leaf-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para fazermos uma tabela de frequência dos valores merísticos carregamos o pacote <code>fdth</code> e pedimos a função <code>range</code> que retorna o valor máximo e mínimo no vetor.</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jcfaria/fdth">fdth</a></span><span class="op">)</span></span>
 <span><span class="va">range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#retorna o valor máximo e mínimo</span></span>
 <span><span class="co">#?range</span></span></code></pre></div>
 <p>Agora é necessário que você substitua os valores de range 3.5, 36.1 nos valores de início e fim da distribuição de frequência. Os comandos abaixo criam uma tabela de frequência chamada <code>tf</code> com valores máximos e mínimos definidos por <code>range(var_sub)</code> em intervalos definidos por <code>h</code>, e o comando <code>print(tf)</code> exibe a tabela de frequência.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Regra de Sturges</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">3.3</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span> <span class="co">#ver as funções floor() e round()</span></span>
@@ -326,7 +326,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h3>
 <span class="header-section-number">13.5.2</span> Gráfico <em>stem-and-leaf</em><a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-stem-and-leaf"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/stem.html">stem</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -385,7 +385,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h3>
 <span class="header-section-number">13.5.3</span> Assimetria e curtose<a class="anchor" aria-label="anchor" href="#assimetria-e-curtose-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span></code></pre></div>
@@ -397,7 +397,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h2>
 <span class="header-section-number">13.6</span> Histograma e boxplot<a class="anchor" aria-label="anchor" href="#histograma-e-boxplot"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co">#gráficos lado a lado</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span> <span class="co">#distribuição de frequências</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">var_sub</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -408,7 +408,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <p><span style="color:red">IMPORTANTE</span> Se você recebeu a mensagem de erro <span style="color:red">“Error in plot.new() : figure margins too large”</span>, aumente o tamanho da janela do gráfico e execute as últimas três linhas de comando novamente.</p>
 </div>
 <p>Calculando os outliers.</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Quartis</span></span>
 <span><span class="va">Q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">var_sub</span>, <span class="fl">0.25</span><span class="op">)</span></span>
 <span><span class="va">Q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">var_sub</span>, <span class="fl">0.75</span><span class="op">)</span></span>
@@ -457,10 +457,10 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 ## 
 ## $out
 ##  [1] 34.9 31.0 35.0 32.0 32.1 35.0 32.0 35.0 31.2 32.9 36.1 32.0 33.0 31.0 36.0</code></pre>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">var_sub</span>, probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-103-1.png" alt="" width="672"></div>
@@ -469,11 +469,11 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h2>
 <span class="header-section-number">13.7</span> Sumário estatístico geral<a class="anchor" aria-label="anchor" href="#sum%C3%A1rio-estat%C3%ADstico-geral-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="co">#?summary</span></span>
-<span><span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
-<span><span class="fu">var</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/var.html">var</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co">#moda</span></span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    3.50    6.00   10.10   12.32   15.70   36.10 
@@ -489,7 +489,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h3>
 <span class="header-section-number">13.8.1</span> Q-Q plots<a class="anchor" aria-label="anchor" href="#q-q-plots"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">limites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">var_sub</span>,</span>
@@ -505,7 +505,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <span>     xlim <span class="op">=</span> <span class="va">limites</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Histogram"</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -518,7 +518,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h3>
 <span class="header-section-number">13.8.2</span> Testes de Shapiro-Wilk e Kolmogorov-Smirnov<a class="anchor" aria-label="anchor" href="#testes-de-shapiro-wilk-e-kolmogorov-smirnov"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="va">shap</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">shap</span><span class="op">$</span><span class="va">p.value</span>, scientific <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -528,11 +528,11 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">var_sub</span>, <span class="st">"pnorm"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in ks.test.default(var_sub, "pnorm"): não devem existir empates no
 ## teste de Kolmogorov-Smirnov de apenas uma amostra</code></pre>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">var_sub</span>,</span>
 <span>        <span class="st">"pnorm"</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>,</span>
-<span>        <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in ks.test.default(var_sub, "pnorm", mean(var_sub), sd(var_sub)): não
 ## devem existir empates no teste de Kolmogorov-Smirnov de apenas uma amostra</code></pre>
 <pre><code>## 
@@ -555,7 +555,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 ## data:  var_sub
 ## D = 0.15016, p-value = 6.326e-09
 ## alternative hypothesis: two-sided</code></pre>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("nortest")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nortest</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span></code></pre></div>
@@ -577,7 +577,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 </div>
 <p>Veja a seção <a href="norm.html#transfuni">Transformação de variáveis e outros tipos de conjuntos de dados</a> do Capítulo <a href="norm.html#norm">Introdução ao R/RStudio</a></p>
 </div>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">var_sub</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">var_trns</span> <span class="op">&lt;-</span> <span class="va">var_sub</span></span></code></pre></div>
@@ -608,7 +608,12 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <p>Para verificar esse pressuposto, utilizamos o <strong>teste de Levene</strong> para igualdade de variâncias <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>; <a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>.</p>
 <p>Se o teste de Levene for significativo (p &lt; 0,05), rejeita-se a hipótese nula de igualdade das variâncias e aceita-se a hipótese alternativa de que as variâncias são diferentes entre os grupos. Nesse caso, devem ser utilizados os resultados que não assumem igualdade de variâncias. Se o teste de Levene não for significativo (p &gt; 0,05), não há evidências para rejeitar a hipótese nula, indicando que as variâncias dos grupos podem ser consideradas homogêneas. Nesse caso, podem ser utilizados os resultados que assumem igualdade de variâncias.</p>
 <p>Essa distinção torna-se mais clara ao interpretar a saída do teste t para amostras independentes, que normalmente apresenta resultados tanto para a situação em que as variâncias são consideradas iguais quanto para aquela em que são consideradas diferentes.</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<p>Hipótese nula (H₀): as variâncias populacionais são iguais entre os grupos, há homogeneidade de variâncias.</p>
+<p>Hipótese alternativa (H₁): pelo menos uma das variâncias populacionais difere das demais, há heterogeneidade de variâncias.</p>
+<p>Interpretação:</p>
+<p>p≥0,05: não se rejeita H₀</p>
+<p>p&lt;0,05: rejeita-se H₀</p>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Levene</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span><span class="op">)</span> <span class="co">#evita o Warning de "group coerced to factor"</span></span>
@@ -693,9 +698,9 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <span class="header-section-number">13.11</span> Testes t (<em>t-tests</em>)<a class="anchor" aria-label="anchor" href="#ttests"><i class="fas fa-link"></i></a>
 </h2>
 <p>Os <strong>testes t</strong> são utilizados para determinar se um valor, ou conjuntos de valores, são da mesma população amostral, e podem ser classificados em três tipos principais <span class="citation">(<a href="#ref-levin1987">LEVIN; COSTA, 1987</a>)</span>:</p>
-<p>Teste t para uma amostra (<em>one-sample t-test</em>)</p>
-<p>Teste t para grupos independentes (<em>independent groups t-test</em>) - Bicaudal (<em>Two-sided</em>) - Unicaudal (<em>Single-sided</em>)</p>
-<p>Teste t para amostras pareadas, ou para medidas repetidas (<em>repeated measures t-test</em>)</p>
+<p>Teste t para uma amostra (<em>One-sample t-test</em>)</p>
+<p>Teste t para grupos independentes (<em>Independent groups t-test</em>) - Bicaudal (<em>Two-sided</em>) - Unicaudal (<em>Single-sided</em>)</p>
+<p>Teste t para amostras pareadas, ou para medidas repetidas (<em>Repeated measures t-test</em>)</p>
 <div id="pressupostos" class="section level4" number="13.11.0.1">
 <h4>
 <span class="header-section-number">13.11.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos"><i class="fas fa-link"></i></a>
@@ -723,11 +728,13 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 </div>
 <div id="teste-t-para-uma-amostra-one-sample-t-test" class="section level3" number="13.11.1">
 <h3>
-<span class="header-section-number">13.11.1</span> Teste t para uma amostra (<em>one-sample t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-para-uma-amostra-one-sample-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.11.1</span> Teste t para uma amostra (<em>One-sample t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-para-uma-amostra-one-sample-t-test"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<p>H₀: a média populacional da variável é igual ao valor de referência</p>
+<p>H₁: a média populacional da variável é diferente do valor de referência</p>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">var_sub</span> <span class="op">&lt;-</span> <span class="va">var_v</span></span></code></pre></div>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Machos</span></span>
 <span><span class="va">machos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">var_sub</span>, <span class="va">univ</span><span class="op">$</span><span class="va">sexo</span> <span class="op">==</span> <span class="st">"MACHO"</span><span class="op">)</span></span>
 <span><span class="va">machos</span></span>
@@ -791,9 +798,9 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 </div>
 <div id="teste-t-para-grupos-independentes-independent-groups-t-test" class="section level3" number="13.11.2">
 <h3>
-<span class="header-section-number">13.11.2</span> Teste t para grupos independentes (<em>independent groups t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-para-grupos-independentes-independent-groups-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.11.2</span> Teste t para grupos independentes (<em>Independent groups t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-para-grupos-independentes-independent-groups-t-test"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">machos_CP_cm</span>, <span class="va">femeas_CP_cm</span>,</span>
 <span>      alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two.sided"</span><span class="op">)</span>, <span class="co">#"two.sided", "less", "greater"</span></span>
 <span>      mu <span class="op">=</span> <span class="fl">0</span>, paired <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -813,11 +820,12 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <p>O QUE REPORTAR: Foi observada diferença significativa no comprimento padrão entre machos e fêmeas de <em>Cichla ocellaris</em> (teste t de Welch: t = 3,47; gl = 210,82; p &lt; 0,001). Os machos apresentaram maior comprimento médio (18,70 cm) em comparação às fêmeas (15,28 cm).</p>
 <p>Quanto a sua direção, o teste t para grupos independentes, pode ser bicaudal (o que usamos anteriormente) e unicaudal. No primeiro caso, a área de rejeição é dividida entre as duas extremidades (caudas) da distribuição. É usado quando você quer saber se existe uma diferença, mas não tem certeza se o resultado será maior ou menor. No <strong>teste t unicaudal</strong>, toda a área de rejeição fica em apenas uma das extremidades. É usado quando a sua hipótese prevê uma direção específica (ex: testar se um novo remédio é melhor, mas não se ele é pior).</p>
 <p>Quanto a sua direção, o teste t para grupos independentes, pode ser bicaudal (o que usamos anteriormente) e unicaudal. O <strong>teste t bicaudal</strong> é utilizado quando se deseja verificar se existe qualquer diferença entre duas médias, sem especificar previamente a direção dessa diferença.</p>
-<p>H₀: as médias são iguais H₁: as médias são diferentes</p>
+<p>H₀: as médias populacionais de dois grupos são iguais.</p>
+<p>H₁: as médias populacionais de dois grupos são diferentes.</p>
 <p>No exemplo com tucunaré, perguntamos: “O comprimento padrão médio difere entre machos e fêmeas?”. Aqui não se assume previamente qual sexo possui maior comprimento.</p>
 <p>Já o <strong>teste t unicaudal</strong> é utilizado quando existe uma <strong>hipótese direcional</strong>, ou seja, quando se espera previamente que uma média seja maior ou menor que a outra.</p>
 <p>No exemplo do tucunaré, perguntamos: “Os machos possuem comprimento padrão médio maior que as fêmeas?”. No R, isso é implementado com o argumento<code>alternative = c("greater")</code>.</p>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">machos_CP_cm</span>, <span class="va">femeas_CP_cm</span>,</span>
 <span>      alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"greater"</span><span class="op">)</span>, <span class="co">#"two.sided", "less", "greater"</span></span>
 <span>      mu <span class="op">=</span> <span class="fl">0</span>, paired <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -839,11 +847,13 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 </div>
 <div id="teste-t-pareado-ou-para-medidas-repetidas-repeated-measures-t-test" class="section level3" number="13.11.3">
 <h3>
-<span class="header-section-number">13.11.3</span> Teste t pareado ou para medidas repetidas (<em>repeated measures t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-pareado-ou-para-medidas-repetidas-repeated-measures-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.11.3</span> Teste t pareado ou para medidas repetidas (<em>Repeated measures t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-pareado-ou-para-medidas-repetidas-repeated-measures-t-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>A principal característica do teste t pareado é que cada observação do primeiro grupo possui uma observação correspondente no segundo grupo. Ou seja, os dados vêm dos mesmos indivíduos ou de unidades experimentais que formam pares naturais (desenho amostral do tipo antes e depois).</p>
 <p>O teste não compara diretamente as médias dos grupos. Na verdade, ele calcula a diferença dentro de cada par e testa se a média dessas diferenças é igual a zero.</p>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<p>H₀: Hipótese nula: a média das diferenças entre as duas medidas pareadas é igual a zero.</p>
+<p>H₁: Hipótese alternativa: a média das diferenças entre as duas medidas pareadas é diferente de zero.</p>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filtrar apenas fêmeas</span></span>
 <span><span class="va">femeas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">univ</span>, <span class="va">sexo</span> <span class="op">==</span> <span class="st">"FEMEA"</span><span class="op">)</span></span>
 <span><span class="co"># Manter apenas IMATURO e MADURO</span></span>
@@ -878,45 +888,90 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 </h2>
 <div id="anova-one-way-teste-entre-grupos-com-comparações-pos-hoc" class="section level3" number="13.12.1">
 <h3>
-<span class="header-section-number">13.12.1</span> ANOVA One-Way, teste entre grupos com comparações <em>pos-hoc</em><a class="anchor" aria-label="anchor" href="#anova-one-way-teste-entre-grupos-com-compara%C3%A7%C3%B5es-pos-hoc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12.1</span> ANOVA One-Way, teste entre grupos com comparações <em>pos hoc</em><a class="anchor" aria-label="anchor" href="#anova-one-way-teste-entre-grupos-com-compara%C3%A7%C3%B5es-pos-hoc"><i class="fas fa-link"></i></a>
 </h3>
-<p>No caso anterior foi testada a hipótese nula de que duas médias populacionais eram iguais. Quando se deseja comparar as médias de mais de dois grupos ou níveis de uma variável independente, utiliza-se uma análise de variância de uma via (<em>one-way analysis of variance — ANOVA</em>).</p>
+<p>No caso anterior foi testada a hipótese nula de que duas médias populacionais eram iguais. Quando se deseja comparar as médias de mais de dois grupos ou níveis de uma variável independente, utiliza-se uma análise de variância de uma via (<em>One-way Analysis of Variance - ANOVA</em>).</p>
 <p>No centro da ANOVA está o conceito de variância. O procedimento básico consiste em obter duas estimativas diferentes da variância populacional a partir dos dados e, em seguida, calcular uma estatística baseada na razão entre essas duas estimativas.</p>
 <p>Uma dessas estimativas (<strong>variância entre grupos</strong>) mede o efeito da variável independente combinado com a variância do erro. A outra estimativa (<strong>variância dentro dos grupos</strong>) mede apenas a variância do erro.</p>
-<p>A razão <code>F</code> é a razão entre a variância entre grupos e a variância dentro dos grupos.</p>
+<p>A razão <code>F</code> é a razão entre a variância entre grupos e a variância dentro dos grupos. Um valor significativo de <code>F</code> indica que provavelmente nem todas as médias populacionais são iguais.</p>
 <p><span class="math display">\[
 F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 \]</span></p>
-<p>Um valor significativo de <code>F</code> indica que provavelmente nem todas as médias populacionais são iguais.</p>
-<p>Como a hipótese nula é rejeitada quando qualquer par de médias é desigual, é necessário identificar onde estão as diferenças significativas. Isso requer uma <strong>análise pos-hoc</strong>.</p>
-<p>A análise pos-hoc ocorre quando se procura nos dados qualquer significância estatística. Ou seja, deseja-se realizar um conjunto completo de comparações.</p>
-<p>Esse tipo de teste envolve riscos de erros do tipo I[^erroi]. Diferentemente das comparações planejadas, os testes pós-hoc são elaborados para proteger contra erros do tipo I, considerando que todas as comparações possíveis serão realizadas. Esses testes são mais rigorosos do que as comparações planejadas e, portanto, é mais difícil obter significância estatística.</p>
-<p>Há vários testes pos-hoc disponíveis. Quanto mais opções de comparação um teste oferece, mais rigoroso ele é na determinação da significância.</p>
-<p>O teste de Scheffé, por exemplo, permite realizar todas as comparações possíveis, mas é bastante rigoroso na rejeição da hipótese nula. Em contraste, o <strong>teste HSD de Tukey (<em>Honestly Significant Difference</em>)</strong> é mais flexível, mas há restrições quanto aos tipos de comparações que podem ser realizados. No nosso caso, usaremos o teste pós-hoc HSD de Tukey <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p>
-<div id="pressupostos-1" class="section level4" number="13.12.1.1">
+</div>
+<div id="cálculo-da-variância-entre-grupos" class="section level3" number="13.12.2">
+<h3>
+<span class="header-section-number">13.12.2</span> Cálculo da variância entre grupos<a class="anchor" aria-label="anchor" href="#c%C3%A1lculo-da-vari%C3%A2ncia-entre-grupos"><i class="fas fa-link"></i></a>
+</h3>
+<p>A variância entre grupos é obtida a partir da Soma dos Quadrados Entre os Grupos (SQE), que mede o quanto as médias dos grupos se afastam da média geral:</p>
+<p><span class="math display">\[
+SQE = \sum_{i=1}^{k} n_i(\bar{x}_i - \bar{x})^2
+\]</span></p>
+<p>onded:</p>
+<ol start="11" style="list-style-type: lower-alpha">
+<li>é o número de grupos;<br>
+(n_i) é o número de observações no grupo (i);<br>
+({x}_i) é a média do grupo (i);<br>
+({x}) é a média geral.</li>
+</ol>
+<p>A variância entre grupos, também chamada de Quadrado Médio Entre os Grupos (QME), é calculada por:</p>
+<p><span class="math display">\[
+QME = \frac{SQE}{k - 1}
+\]</span></p>
+</div>
+<div id="cálculo-da-variância-dentro-dos-grupos" class="section level3" number="13.12.3">
+<h3>
+<span class="header-section-number">13.12.3</span> Cálculo da variância dentro dos grupos<a class="anchor" aria-label="anchor" href="#c%C3%A1lculo-da-vari%C3%A2ncia-dentro-dos-grupos"><i class="fas fa-link"></i></a>
+</h3>
+<p>A variância dentro dos grupos é obtida pela Soma dos Quadrados Dentro dos Grupos (SQD), que representa a variabilidade das observações em torno da média de seu próprio grupo:</p>
+<p><span class="math display">\[
+SQD = \sum_{i=1}^{k} \sum_{j=1}^{n_i} (x_{ij} - \bar{x}_i)^2
+\]</span></p>
+<p>A variância dentro dos grupos, também chamada de Quadrado Médio do Erro (QMD ou QMR), é dada por:</p>
+<p><span class="math display">\[
+QMD = \frac{SQD}{N - k}
+\]</span></p>
+<p>onde:</p>
+<ol start="14" style="list-style-type: upper-alpha">
+<li>é o número total de observações;</li>
+</ol>
+<ol start="11" style="list-style-type: lower-alpha">
+<li>é o número de grupos.</li>
+</ol>
+<p>Finalmente, a estatística de teste da ANOVA é calculada como:</p>
+<p><span class="math display">\[
+F = \frac{QME}{QMD}
+\]</span></p>
+<p>Quando a hipótese nula ((H_0)) é verdadeira, espera-se que as estimativas de variância entre e dentro dos grupos sejam semelhantes, produzindo um valor de (F) próximo de 1. Valores elevados de (F) indicam que a variabilidade entre os grupos é significativamente maior do que a variabilidade dentro dos grupos, fornecendo evidências para rejeitar a hipótese nula. Assim, conclui-se que pelo menos uma média populacional difere das demais, sendo necessários testes <em>pos hoc</em> para identificar quais grupos apresentam diferenças significativas.</p>
+<p>Como a hipótese nula é rejeitada quando qualquer par de médias é desigual, é necessário identificar onde estão as diferenças significativas. Isso requer uma <strong>análise <em>post hoc</em></strong>.</p>
+<p>A análise <em>pos hoc</em> ocorre quando se procura nos dados qualquer significância estatística. Ou seja, deseja-se realizar um conjunto completo de comparações.</p>
+<p>Esse tipo de teste envolve riscos de erros do tipo I[^erroi]. Diferentemente das comparações planejadas, os testes <em>pos hoc</em> são elaborados para proteger contra erros do tipo I, considerando que todas as comparações possíveis serão realizadas. Esses testes são mais rigorosos do que as comparações planejadas e, portanto, é mais difícil obter significância estatística.</p>
+<p>Há vários testes <em>pos hoc</em> disponíveis. Quanto mais opções de comparação um teste oferece, mais rigoroso ele é na determinação da significância.</p>
+<p>O teste de Scheffé, por exemplo, permite realizar todas as comparações possíveis, mas é bastante rigoroso na rejeição da hipótese nula. Em contraste, o <strong>teste HSD de Tukey (<em>Honestly Significant Difference</em>)</strong> é mais flexível, mas há restrições quanto aos tipos de comparações que podem ser realizados. No nosso caso, usaremos o teste <em>pos hoc</em> HSD de Tukey <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p>
+<div id="pressupostos-1" class="section level4" number="13.12.3.1">
 <h4>
-<span class="header-section-number">13.12.1.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12.3.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Antes de realizar a ANOVA, é necessário garantir que os pressupostos necessários sejam atendidos. Os pressupostos da ANOVA são os mesmos do teste t. Os dois pressupostos principais são:</p>
-<p>Normalidade populacional: As populações das quais as amostras foram retiradas devem apresentar distribuição normal. Isso deve ser verificado para cada grupo usando estatísticas de normalidade, como assimetria (skewness) e teste de Shapiro-Wilk. Homogeneidade de variâncias: Os escores de cada grupo devem apresentar variâncias homogêneas. Assim como no teste t, o teste de Levene determinará se as variâncias são iguais ou diferentes.</p>
+<p>Normalidade populacional: As populações das quais as amostras foram retiradas devem apresentar distribuição normal. Isso deve ser verificado para cada grupo usando estatísticas de normalidade, como assimetria (<em>skewness</em>) e teste de Shapiro-Wilk.</p>
+<p>Homogeneidade de variâncias: Os escores de cada grupo devem apresentar variâncias homogêneas. Assim como no teste t, o teste de Levene determinará se as variâncias são iguais ou diferentes.</p>
 </div>
-<div id="exemplos-1" class="section level4" number="13.12.1.2">
+<div id="exemplos-1" class="section level4" number="13.12.3.2">
 <h4>
-<span class="header-section-number">13.12.1.2</span> Exemplos<a class="anchor" aria-label="anchor" href="#exemplos-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12.3.2</span> Exemplos<a class="anchor" aria-label="anchor" href="#exemplos-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Como no exemplo anterior, podemos testar três tipos de perguntas:</p>
 <ol style="list-style-type: decimal">
 <li><p>Testar os pressupostos subjacentes da ANOVA.</p></li>
 <li><p>Determinar se existem diferenças significativas no comprimento dos peixes entre as três classificações para a variavel <code>sexo</code>.</p></li>
-<li><p>Identificar a origem dessas diferenças (caso elas existam) utilizando análise pós-hoc.</p></li>
+<li><p>Identificar a origem dessas diferenças (caso elas existam) utilizando análise <em>pos hoc</em>.</p></li>
 </ol>
 </div>
 </div>
-<div id="gráficos-exploratórios" class="section level3" number="13.12.2">
+<div id="gráficos-exploratórios" class="section level3" number="13.12.4">
 <h3>
-<span class="header-section-number">13.12.2</span> Gráficos exploratórios<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-explorat%C3%B3rios"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12.4</span> Gráficos exploratórios<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-explorat%C3%B3rios"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span><span class="op">)</span></span>
 <span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">ordered</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span>,</span>
 <span>                         levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MACHO"</span>, <span class="st">"FEMEA"</span>, <span class="st">"imaturo"</span><span class="op">)</span><span class="op">)</span></span>
@@ -937,7 +992,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggline.html">ggline</a></span><span class="op">(</span><span class="va">univ</span>, x <span class="op">=</span> <span class="st">"sexo"</span>, y <span class="op">=</span> <span class="st">"CP_cm"</span>,</span>
 <span>       add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mean_se"</span>, <span class="st">"jitter"</span><span class="op">)</span>,</span>
 <span>       order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MACHO"</span>, <span class="st">"FEMEA"</span>, <span class="st">"imaturo"</span><span class="op">)</span>,</span>
-<span>       ylab <span class="op">=</span> <span class="st">"Weight"</span>, xlab <span class="op">=</span> <span class="st">"Treatment"</span><span class="op">)</span></span>
+<span>       ylab <span class="op">=</span> <span class="st">"CP (cm)"</span>, xlab <span class="op">=</span> <span class="st">"Sexo"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">sexo</span>, data <span class="op">=</span> <span class="va">univ</span>,</span>
 <span>        xlab <span class="op">=</span> <span class="st">"Sexo"</span>, ylab <span class="op">=</span> <span class="st">"CP_cm"</span>,</span>
 <span>        frame <span class="op">=</span> <span class="cn">FALSE</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span><span class="op">)</span></span>
@@ -954,11 +1009,13 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 ## 3 imaturo   221  7.57  4.44</code></pre>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-115-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-115-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-115-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-115-4.png" alt="" width="672"></p>
 </div>
-<div id="análise-de-variância-anova" class="section level3" number="13.12.3">
+<div id="análise-de-variância-anova" class="section level3" number="13.12.5">
 <h3>
-<span class="header-section-number">13.12.3</span> Análise de variância (ANOVA)<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-vari%C3%A2ncia-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12.5</span> Análise de variância (ANOVA)<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-vari%C3%A2ncia-anova"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<p>H₀: Hipótese nula: todas as médias populacionais dos grupos são iguais.</p>
+<p>H₁: Hipótese alternativa: pelo menos uma das médias populacionais difere das demais.</p>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">sexo</span>, data <span class="op">=</span> <span class="va">univ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">anova</span><span class="op">)</span></span>
 <span><span class="co">#Interpretação: Um valor de p MENOR que o nível de significância de 0.05 significa que,</span></span>
@@ -969,13 +1026,13 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>O QUE REPORTAR: Foi observada diferença significativa no comprimento padrão entre os grupos de sexo avaliados (ANOVA one-way: F₂,₄₃₁ = 145,5; p &lt; 0,001).</p>
-<p>Mas a ANOVA não informa quais dos grupos diferem entre si. Para isso você precisa fazer um teste <em>pos-hoc</em>.</p>
+<p>Mas a ANOVA não informa quais dos grupos diferem entre si. Para isso você precisa fazer um teste <em>pos hoc</em>.</p>
 </div>
-<div id="comparações-múltiplas-pos-hoc" class="section level3" number="13.12.4">
+<div id="comparações-múltiplas-pos-hoc" class="section level3" number="13.12.6">
 <h3>
-<span class="header-section-number">13.12.4</span> Comparações múltiplas <em>pos-hoc</em><a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%B5es-m%C3%BAltiplas-pos-hoc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12.6</span> Comparações múltiplas <em>pos hoc</em><a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%B5es-m%C3%BAltiplas-pos-hoc"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://multcomp.R-forge.R-project.org">multcomp</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">glht</a></span><span class="op">(</span><span class="va">anova</span>, linfct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">mcp</a></span><span class="op">(</span>sexo <span class="op">=</span> <span class="st">"Tukey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -1021,14 +1078,13 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 ## imaturo &lt; 2e-16 &lt; 2e-16
 ## 
 ## P value adjustment method: BH</code></pre>
-<p>O QUE REPORTAR:</p>
-<p>O comprimento padrão diferiu significativamente entre os grupos avaliados (ANOVA one-way: F₂,₄₃₁ = 145,5; p &lt; 0,001). O teste pós-hoc de Tukey indicou que os machos apresentaram comprimento padrão significativamente maior que as fêmeas (diferença média = 3,42 cm; p &lt; 0,001) e indivíduos imaturos (diferença média = 11,13 cm; p &lt; 0,001). Além disso, as fêmeas apresentaram comprimento significativamente maior que os indivíduos imaturos (diferença média = 7,70 cm; p &lt; 0,001).</p>
+<p>O QUE REPORTAR: O comprimento padrão diferiu significativamente entre os grupos avaliados (ANOVA one-way: F₂,₄₃₁ = 145,5; p &lt; 0,001). O teste <em>pos hoc</em> de Tukey indicou que os machos apresentaram comprimento padrão significativamente maior que as fêmeas (diferença média = 3,42 cm; p &lt; 0,001) e indivíduos imaturos (diferença média = 11,13 cm; p &lt; 0,001). Além disso, as fêmeas apresentaram comprimento significativamente maior que os indivíduos imaturos (diferença média = 7,70 cm; p &lt; 0,001).</p>
 </div>
-<div id="avaliações-a-posteriori" class="section level3" number="13.12.5">
+<div id="avaliações-a-posteriori" class="section level3" number="13.12.7">
 <h3>
-<span class="header-section-number">13.12.5</span> Avaliações <em>a posteriori</em><a class="anchor" aria-label="anchor" href="#avalia%C3%A7%C3%B5es-a-posteriori"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12.7</span> Avaliações <em>a posteriori</em><a class="anchor" aria-label="anchor" href="#avalia%C3%A7%C3%B5es-a-posteriori"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Homogeneidade de variâncias </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">anova</span>, <span class="fl">1</span><span class="op">)</span> <span class="co">#valores numerados são outliers</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
@@ -1091,7 +1147,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span class="header-section-number">13.13.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-2"><i class="fas fa-link"></i></a>
 </h4>
 <p>Antes de realizar a ANOVA de duas vias, é necessário garantir que os pressupostos necessários sejam atendidos. Os pressupostos da ANOVA de duas vias são os mesmos da ANOVA de uma via:</p>
-<p>Normalidade populacional: As populações das quais as amostras foram retiradas devem apresentar distribuição normal. Isso deve ser verificado para cada grupo usando estatísticas de normalidade, como assimetria (skewness) e teste de Shapiro-Wilk.</p>
+<p>Normalidade populacional: As populações das quais as amostras foram retiradas devem apresentar distribuição normal. Isso deve ser verificado para cada grupo usando estatísticas de normalidade, como assimetria (<em>skewness</em>) e teste de Shapiro-Wilk.</p>
 <p>Homogeneidade de variâncias: Os escores em cada grupo devem apresentar variâncias homogêneas.</p>
 <p>A principal preocupação está relacionada às violações do segundo pressuposto, porque tais violações podem significar que os dados foram avaliados em um nível de significância maior do que o inicialmente assumido. Em vez de serem significativos em um nível alfa de 0,05, os resultados podem, na realidade, ser significativos apenas em um nível alfa de 0,10.</p>
 <p>Isso ocorre porque violações do pressuposto de homogeneidade distorcem o formato da distribuição <code>F</code>, de modo que o valor crítico de <code>F</code> deixa de corresponder a um ponto de corte de 5%.</p>
@@ -1103,7 +1159,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <p>No caso dos dados de dinâmica populacional do tucunaré, além do fator <code>sexo</code> (que tem três níveis: MACHO, FÊMEA, imaturo), podemos querer considerar o efeito de um segundo fator no comprimento dos indivíduos. Podemos usar o fator <code>periodo</code> (dois níveis: chuvoso, seco).</p>
 <p>Assim, a primeira variável independente é o sexo, com três níveis, e a segunda variável independente é o período do ano, com dois níveis. A variável dependente pode ser o comprimento padrão (CP_cm) ou comprimento total (CT_cm).</p>
 <p>Atente que agora temos um delineamento fatorial 3 × 2, com seis combinações possíveis.</p>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span>,</span>
 <span>                  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MACHO"</span>, <span class="st">"FEMEA"</span>, <span class="st">"imaturo"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">univ</span><span class="op">$</span><span class="va">periodo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">periodo</span>,</span>
@@ -1146,7 +1202,12 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <li><p>A influência do sexo sobre o comprimento depende do período do ano?</p></li>
 </ol>
 <p>Ou seja, deseja-se avaliar a possível interação entre sexo e período sobre a estrutura de tamanho populacional de <em>Cichla ocellaris</em>.</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+</div>
+<div id="gráficos-exploratórios-1" class="section level3" number="13.13.1">
+<h3>
+<span class="header-section-number">13.13.1</span> Gráficos exploratórios<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-explorat%C3%B3rios-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://rpkgs.datanovia.com/ggpubr/">"ggpubr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op">(</span><span class="va">univ</span>, x <span class="op">=</span> <span class="st">"sexo"</span>, y <span class="op">=</span> <span class="st">"CP_cm"</span>, color <span class="op">=</span> <span class="st">"periodo"</span>,</span>
 <span>          palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span><span class="op">)</span></span>
@@ -1156,7 +1217,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span>       palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Bin width defaults to 1/30 of the range of the data. Pick better value with
 ## `binwidth`.</code></pre>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">*</span> <span class="va">sexo</span>, data<span class="op">=</span><span class="va">univ</span>, frame <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"CP_cm"</span><span class="op">)</span></span>
 <span></span>
@@ -1167,12 +1228,28 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span>                 xlab <span class="op">=</span> <span class="st">"Sexo"</span>, ylab<span class="op">=</span><span class="st">"CP_cm"</span>,</span>
 <span>                 pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">19</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-120-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-120-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-120-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-120-4.png" alt="" width="672"></p>
+<p>De forma geral, para uma ANOVA de dois fatores (<em>two-way</em> ANOVA) são testadas três hipóteses, correspondentes aos dois efeitos principais e à interação entre os fatores.</p>
+<div id="efeito-principal-do-fator-a" class="section level4" number="13.13.1.1">
+<h4>
+<span class="header-section-number">13.13.1.1</span> Efeito principal do fator A<a class="anchor" aria-label="anchor" href="#efeito-principal-do-fator-a"><i class="fas fa-link"></i></a>
+</h4>
+<p>Hipótese nula (H₀): as médias populacionais são iguais entre os níveis do fator A, ou seja, o fator A não exerce efeito sobre a variável resposta.</p>
+<p>Hipótese alternativa (H₁): pelo menos uma média difere entre os níveis do fator A.</p>
 </div>
-<div id="gráficos-exploratórios-1" class="section level3" number="13.13.1">
-<h3>
-<span class="header-section-number">13.13.1</span> Gráficos exploratórios<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos-explorat%C3%B3rios-1"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div id="efeito-principal-do-fator-b" class="section level4" number="13.13.1.2">
+<h4>
+<span class="header-section-number">13.13.1.2</span> Efeito principal do fator B<a class="anchor" aria-label="anchor" href="#efeito-principal-do-fator-b"><i class="fas fa-link"></i></a>
+</h4>
+<p>Hipótese nula (H₀): as médias populacionais são iguais entre os níveis do fator B, ou seja, o fator B não exerce efeito sobre a variável resposta.</p>
+<p>Hipótese alternativa (H₁): pelo menos uma média difere entre os níveis do fator B.</p>
+</div>
+<div id="interação-entre-os-fatores" class="section level4" number="13.13.1.3">
+<h4>
+<span class="header-section-number">13.13.1.3</span> Interação entre os fatores<a class="anchor" aria-label="anchor" href="#intera%C3%A7%C3%A3o-entre-os-fatores"><i class="fas fa-link"></i></a>
+</h4>
+<p>Hipótese nula (H₀): não existe interação entre os fatores A e B; o efeito de um fator é o mesmo em todos os níveis do outro fator.</p>
+<p>Hipótese alternativa (H₁): existe interação entre os fatores A e B; o efeito de um fator depende do nível do outro fator.</p>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">+</span> <span class="va">sexo</span>, data <span class="op">=</span> <span class="va">univ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">anova2</span><span class="op">)</span></span>
 <span><span class="co">#O modelo ajustado acima não representa um modelo aditivo.</span></span>
@@ -1194,9 +1271,8 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 ## ℹ Summaries were computed grouped by periodo and sexo.
 ## ℹ Output is grouped by periodo.
 ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
-## ℹ Use `summarise(.by = c(periodo, sexo))` for per-operation grouping (`?dplyr::dplyr_by`)
-##   instead.</code></pre>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+## ℹ Use `summarise(.by = c(periodo, sexo))` for per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Comparações múltiplas pares: Tukey</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova3</span>, which <span class="op">=</span> <span class="st">"sexo"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova3</span>, which <span class="op">=</span> <span class="st">"periodo"</span><span class="op">)</span></span>
@@ -1312,18 +1388,16 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 ## imaturo &lt; 2e-16 &lt; 2e-16
 ## 
 ## P value adjustment method: BH</code></pre>
-<p>O QUE REPORTAR (<code>anova2</code>):</p>
-<p>A ANOVA de duas vias revelou efeito significativo do período do ano sobre o comprimento padrão dos indivíduos (F₁,₄₃₀ = 6,29; p = 0,013), bem como efeito significativo do sexo (F₂,₄₃₀ = 144,80; p &lt; 0,001).</p>
+<p>O QUE REPORTAR (<code>anova2</code>): A ANOVA de duas vias revelou efeito significativo do período do ano sobre o comprimento padrão dos indivíduos (F₁,₄₃₀ = 6,29; p = 0,013), bem como efeito significativo do sexo (F₂,₄₃₀ = 144,80; p &lt; 0,001).</p>
 <p>No caso da <code>anova2</code>, o modelo NÃO testou <strong>interação</strong> (<code>periodo + sexo</code>). Portanto, você NÃO pode afirmar se o efeito do sexo depende do período. Para testar a interação usamos <code>periodo * sexo</code>, na anova2.</p>
-<div class="greeting message" style="color: green;">
-<p><span style="color:blue">O QUE REPORTAR (<code>anova3</code>):</span> A ANOVA de duas vias revelou efeito significativo do período do ano (F₁,₄₂₈ = 6,29; p = 0,013) e do sexo (F₂,₄₂₈ = 144,71; p &lt; 0,001), separadamente, sobre o comprimento padrão de <em>Cichla ocellaris</em>. Entretanto, não foi observada interação significativa entre período e sexo (F₂,₄₂₈ = 0,87; p = 0,418).</p>
+<p>O QUE REPORTAR (<code>anova3</code>): A ANOVA de duas vias revelou efeito significativo do período do ano (F₁,₄₂₈ = 6,29; p = 0,013) e do sexo (F₂,₄₂₈ = 144,71; p &lt; 0,001), separadamente, sobre o comprimento padrão de <em>Cichla ocellaris</em>. Entretanto, não foi observada interação significativa entre período e sexo (F₂,₄₂₈ = 0,87; p = 0,418).</p>
 </div>
 </div>
 <div id="avaliações-a-posteriori-1" class="section level3" number="13.13.2">
 <h3>
 <span class="header-section-number">13.13.2</span> Avaliações <em>a posteriori</em><a class="anchor" aria-label="anchor" href="#avalia%C3%A7%C3%B5es-a-posteriori-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Homogeneidade de variâncias</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">anova3</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
@@ -1435,7 +1509,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <li>Wilcoxon pareado</li>
 <li>Mann-Whitney (Wilcoxon rank-sum)</li>
 </ol>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Wilcoxon para uma amostra</span></span>
 <span><span class="va">wilcox_machos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
 <span>  <span class="va">machos</span>,</span>
@@ -1491,7 +1565,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <li>Kruskal-Wallis</li>
 <li>Scheirer-Ray-Hare test</li>
 </ol>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span><span class="op">)</span></span>
 <span><span class="va">univ</span><span class="op">$</span><span class="va">periodo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">periodo</span><span class="op">)</span></span>
 <span></span>
@@ -1503,7 +1577,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span><span class="co">#Pós-hoc para Kruskal-Wallis</span></span>
 <span><span class="co">#install.packages("FSA")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fishr-core-team.github.io/FSA/">FSA</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://fishr-core-team.github.io/FSA/reference/dunnTest.html">dunnTest</a></span><span class="op">(</span></span>
+<span><span class="fu">dunnTest</span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"bonferroni"</span></span>
@@ -1511,20 +1585,20 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span></span>
 <span><span class="co">#install.packages("rcompanion")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://CRAN.R-project.org/package=rcompanion">rcompanion</a></span><span class="op">)</span></span>
-<span><span class="va">anova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rcompanion/man/scheirerRayHare.html">scheirerRayHare</a></span><span class="op">(</span></span>
+<span><span class="va">anova2</span> <span class="op">&lt;-</span> <span class="fu">scheirerRayHare</span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">+</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">anova2</span></span>
 <span></span>
-<span><span class="va">anova3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rcompanion/man/scheirerRayHare.html">scheirerRayHare</a></span><span class="op">(</span></span>
+<span><span class="va">anova3</span> <span class="op">&lt;-</span> <span class="fu">scheirerRayHare</span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">*</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">anova3</span></span>
 <span></span>
 <span><span class="co">#Se sexo for significativo:</span></span>
-<span><span class="fu"><a href="https://fishr-core-team.github.io/FSA/reference/dunnTest.html">dunnTest</a></span><span class="op">(</span></span>
+<span><span class="fu">dunnTest</span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"bonferroni"</span></span>
@@ -1561,7 +1635,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># dev.off() #apaga os graficos, se houver algum</span></span>
 <span><span class="co"># rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co"># cat("\014") #limpa o console</span></span>
@@ -1650,13 +1724,13 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">outliers</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">var_sub</span>, probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="co">#?summary</span></span>
-<span><span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
-<span><span class="fu">var</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/var.html">var</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co">#moda</span></span>
 <span><span class="va">limites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -1673,7 +1747,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span>     xlim <span class="op">=</span> <span class="va">limites</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Histogram"</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -1689,7 +1763,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">var_sub</span>,</span>
 <span>        <span class="st">"pnorm"</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>,</span>
-<span>        <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#install.packages("nortest")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nortest</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
@@ -1757,7 +1831,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">univ</span>, <span class="va">sexo</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>  sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># Conjunto de gráficos</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://rpkgs.datanovia.com/ggpubr/">"ggpubr"</a></span><span class="op">)</span></span>
@@ -1837,7 +1911,7 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">univ</span>, <span class="va">periodo</span>, <span class="va">sexo</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>  sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># Comparações múltiplas pares: Tukey</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova3</span>, which <span class="op">=</span> <span class="st">"sexo"</span><span class="op">)</span></span>
@@ -2006,18 +2080,20 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 </li>
 <li>
 <a class="nav-link" href="#ttests"><span class="header-section-number">13.11</span> Testes t (t-tests)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#teste-t-para-uma-amostra-one-sample-t-test"><span class="header-section-number">13.11.1</span> Teste t para uma amostra (one-sample t-test)</a></li>
-<li><a class="nav-link" href="#teste-t-para-grupos-independentes-independent-groups-t-test"><span class="header-section-number">13.11.2</span> Teste t para grupos independentes (independent groups t-test)</a></li>
-<li><a class="nav-link" href="#teste-t-pareado-ou-para-medidas-repetidas-repeated-measures-t-test"><span class="header-section-number">13.11.3</span> Teste t pareado ou para medidas repetidas (repeated measures t-test)</a></li>
+<li><a class="nav-link" href="#teste-t-para-uma-amostra-one-sample-t-test"><span class="header-section-number">13.11.1</span> Teste t para uma amostra (One-sample t-test)</a></li>
+<li><a class="nav-link" href="#teste-t-para-grupos-independentes-independent-groups-t-test"><span class="header-section-number">13.11.2</span> Teste t para grupos independentes (Independent groups t-test)</a></li>
+<li><a class="nav-link" href="#teste-t-pareado-ou-para-medidas-repetidas-repeated-measures-t-test"><span class="header-section-number">13.11.3</span> Teste t pareado ou para medidas repetidas (Repeated measures t-test)</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#anova"><span class="header-section-number">13.12</span> Teste entre três médias (ANOVA)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#anova-one-way-teste-entre-grupos-com-compara%C3%A7%C3%B5es-pos-hoc"><span class="header-section-number">13.12.1</span> ANOVA One-Way, teste entre grupos com comparações pos-hoc</a></li>
-<li><a class="nav-link" href="#gr%C3%A1ficos-explorat%C3%B3rios"><span class="header-section-number">13.12.2</span> Gráficos exploratórios</a></li>
-<li><a class="nav-link" href="#an%C3%A1lise-de-vari%C3%A2ncia-anova"><span class="header-section-number">13.12.3</span> Análise de variância (ANOVA)</a></li>
-<li><a class="nav-link" href="#compara%C3%A7%C3%B5es-m%C3%BAltiplas-pos-hoc"><span class="header-section-number">13.12.4</span> Comparações múltiplas pos-hoc</a></li>
-<li><a class="nav-link" href="#avalia%C3%A7%C3%B5es-a-posteriori"><span class="header-section-number">13.12.5</span> Avaliações a posteriori</a></li>
+<li><a class="nav-link" href="#anova-one-way-teste-entre-grupos-com-compara%C3%A7%C3%B5es-pos-hoc"><span class="header-section-number">13.12.1</span> ANOVA One-Way, teste entre grupos com comparações pos hoc</a></li>
+<li><a class="nav-link" href="#c%C3%A1lculo-da-vari%C3%A2ncia-entre-grupos"><span class="header-section-number">13.12.2</span> Cálculo da variância entre grupos</a></li>
+<li><a class="nav-link" href="#c%C3%A1lculo-da-vari%C3%A2ncia-dentro-dos-grupos"><span class="header-section-number">13.12.3</span> Cálculo da variância dentro dos grupos</a></li>
+<li><a class="nav-link" href="#gr%C3%A1ficos-explorat%C3%B3rios"><span class="header-section-number">13.12.4</span> Gráficos exploratórios</a></li>
+<li><a class="nav-link" href="#an%C3%A1lise-de-vari%C3%A2ncia-anova"><span class="header-section-number">13.12.5</span> Análise de variância (ANOVA)</a></li>
+<li><a class="nav-link" href="#compara%C3%A7%C3%B5es-m%C3%BAltiplas-pos-hoc"><span class="header-section-number">13.12.6</span> Comparações múltiplas pos hoc</a></li>
+<li><a class="nav-link" href="#avalia%C3%A7%C3%B5es-a-posteriori"><span class="header-section-number">13.12.7</span> Avaliações a posteriori</a></li>
 </ul>
 </li>
 <li>
@@ -2056,7 +2132,7 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/06/2026 07:13:08.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 10:32:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO LEGENDRE; LEGENDRE (1998) alertam o ecologista numérico sobre as armadilhas do uso de computadores - que a computabilidade não garante (i) que os dados satisfaçam o método e (ii) que os...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content=" 3 Introdução ao R/RStudio | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO LEGENDRE; LEGENDRE (1998) alertam o ecologista numérico sobre as armadilhas do uso de computadores - que a computabilidade não garante (i) que os dados satisfaçam o método e (ii) que os...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO LEGENDRE; LEGENDRE (1998) alertam o ecologista numérico sobre as armadilhas do uso de computadores - que a computabilidade não garante (i) que os dados satisfaçam o método e (ii) que os...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -248,30 +248,15 @@ Figura 3.2: Interface do usuário do ambiente integrado de desenvolvimento (IDE)
 <li><p><strong>Consistência:</strong> O uso de scripts promove a adoção de práticas consistentes em toda a análise, reduzindo a chance de erros causados por abordagens diferentes em momentos distintos.</p></li>
 </ol>
 <p>Em resumo, a abordagem baseada em scripts e comandos de teclado oferece mais controle, flexibilidade, eficiência e reprodutibilidade, tornando-a a escolha preferida para profissionais que buscam análises de dados precisas, consistentes e de alta qualidade no ambiente R.</p>
-</div>
-<div id="o-que-é-um-script-e-qual-sua-diferença-para-um-código" class="section level2" number="3.7">
-<h2>
-<span class="header-section-number">3.7</span> O que é um <code>script</code> e qual sua diferença para um <code>código</code>?<a class="anchor" aria-label="anchor" href="#o-que-%C3%A9-um-script-e-qual-sua-diferen%C3%A7a-para-um-c%C3%B3digo"><i class="fas fa-link"></i></a>
-</h2>
-<p>Em programação R, tanto “código” quanto “script” se referem a sequências de instruções escritas na linguagem de programação R (veja também <a href="tiposR.html#snippet-e-chunk">Snippet e chunk</a>). No entanto, há uma diferença sutil em como esses termos são geralmente usados:</p>
-<ol style="list-style-type: decimal">
-<li>Código:</li>
-</ol>
-<p>Em R, “código” geralmente se refere a linhas individuais ou blocos de instruções de programação R que realizam tarefas ou operações específicas. O código pode ser escrito de forma interativa em um console R ou dentro de um arquivo de script. O código pode consistir em declarações simples, como atribuir valores a variáveis, realizar cálculos, definir funções ou chamar funções de pacotes.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Script:</li>
-</ol>
-<p>Um “script” em R refere-se a um arquivo contendo uma série de instruções de código R. Scripts R são essencialmente arquivos de texto contendo uma sequência de comandos e declarações R que podem ser executados em conjunto. Os scripts R permitem que os usuários organizem seu código em unidades reutilizáveis e estruturadas. Os scripts R geralmente têm a extensão de arquivo “.R”.</p>
-<p>Em resumo, enquanto “código” se refere a instruções individuais de programação R, “script” se refere a um arquivo contendo uma coleção de código R, geralmente usado para executar tarefas ou análises maiores de forma estruturada e organizada.</p>
-<div id="projetos" class="section level3" number="3.7.1">
+<div id="projetos" class="section level3" number="3.6.1">
 <h3>
-<span class="header-section-number">3.7.1</span> Projetos<a class="anchor" aria-label="anchor" href="#projetos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6.1</span> Projetos<a class="anchor" aria-label="anchor" href="#projetos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Um ‘Projeto’ no RStudio é um conjunto de dados e arquivos de resultados associados entre si, junto com as opções e configurações no momento em que o Projeto foi salvo pela última vez. Quando você abre um projeto, esses arquivos são abertos e suas opções e configurações são restauradas da última vez. Você só pode ter um projeto aberto por vez, mas pode alternar facilmente entre eles abrindo um projeto salvo. Um projeto pode ter mais de um arquivo de dados associado. Se você tiver um projeto aberto e abrir ou criar qualquer arquivo nele, o projeto será considerado modificado. Ao sair do RStudio ou abrir um novo projeto, será perguntado se deseja salvar o projeto modificado. Para melhor gerenciamento de dados, você pode manter seus arquivos de projeto em seus próprios diretórios, separados do software RStudio. Ele lembra o nome do caminho completo para cada projeto. Os detalhes de como o RStudio gerencia diretórios e definições de gerenciamento de arquivos são fornecidos no sistema de Ajuda. Você pode redefinir o diretório padrão (working directory) para que o RStudio navegue até o diretório que você escolheu e abra os arquivos ou projetos que você encontrará no diretório escolhido.</p>
 </div>
-<div id="nomes-de-arquivos" class="section level3" number="3.7.2">
+<div id="nomes-de-arquivos" class="section level3" number="3.6.2">
 <h3>
-<span class="header-section-number">3.7.2</span> Nomes de arquivos<a class="anchor" aria-label="anchor" href="#nomes-de-arquivos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6.2</span> Nomes de arquivos<a class="anchor" aria-label="anchor" href="#nomes-de-arquivos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Alguns dos tipos de extensão de arquivos que podem ser criados ou manipulados no RStudio incluem:</p>
 <p>● Arquivos de script: São arquivos de texto contendo código R, com extensões de arquivo como .R, .Rmd, .Rnw, .Rhistory, entre outros.<br>
@@ -282,23 +267,23 @@ Figura 3.2: Interface do usuário do ambiente integrado de desenvolvimento (IDE)
 <p>Esses são apenas alguns dos tipos de arquivos que podem ser usados ou gerados no RStudio. O RStudio também oferece suporte a muitos outros tipos de arquivos, como arquivos de ajuda, arquivos de instalação de pacotes, entre outros.</p>
 </div>
 </div>
-<div id="preparação-dos-arquivos" class="section level2" number="3.8">
+<div id="preparação-dos-arquivos" class="section level2" number="3.7">
 <h2>
-<span class="header-section-number">3.8</span> Preparação dos arquivos<a class="anchor" aria-label="anchor" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Preparação dos arquivos<a class="anchor" aria-label="anchor" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><i class="fas fa-link"></i></a>
 </h2>
 <p>Arquivos de dados multivariádos são geralmente maiores e mais complexos do que outros, portanto, é necessário cuidado extra. Eles podem ser preparados de duas maneiras principais. A primeira forma é como a matriz completa de valores (.xlsx), onde cada linha mostra os valores de cada coluna. Isso é bom quando há poucos zeros. É assim que uma planilha funciona. A outra maneira, preferida pelos ecologistas para seus dados de espécies, é registrar apenas os valores diferentes de zero para cada espécie. Cada linha, representando uma unidade de amostragem, é então lida como uma lista de verificação ou registro quadrat. Este formato compacto (.csv ou tab delimited) é muito mais eficiente quando o tamanho da matriz de dados é muito grande. O RStudio considera as linhas no arquivo de dados como as unidades de amostragem e as colunas como as variáveis. Dependendo de quantos existem, pode ser mais conveniente inserir seus dados ao contrário e, em seguida, transpô-los para o RStudio. Veremos como fazer isso mais tarde.</p>
-<div id="extensoes" class="section level3" number="3.8.1">
+<div id="extensoes" class="section level3" number="3.7.1">
 <h3>
-<span class="header-section-number">3.8.1</span> Visualizar extenções de arquivos<a class="anchor" aria-label="anchor" href="#extensoes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.1</span> Visualizar extenções de arquivos<a class="anchor" aria-label="anchor" href="#extensoes"><i class="fas fa-link"></i></a>
 </h3>
 <p>Se você não está vendo as extensões (tipos de arquivos) no seu computador, siga os passos a seguir (no Windows 11) ou faça os ajustes para sua versão de Sistema Operacional.</p>
 <p>No Windows Explorer (Explorador de Arquivos), clique no menu <code>Visualizar</code> no topo (se não estiver visivel, clique nos três pontinhos <code>...</code>), escolha a opção <code>Mostrar</code> e selecione <code>Extensões de nomes de arquivos</code>.</p>
 <p>Como alternativa, no Explorador de Arquivos, clique no menu de três pontos <code>(...) &gt; Opções &gt; guia Modo de Exibição</code>, depois desmarque <code>Ocultar extensões para tipos de arquivo conhecidos</code>.</p>
 <div class="inline-figure"><img src="imagens/extensoes.png" id="fig-extensoes" width="600"></div>
 </div>
-<div id="formatos-de-arquivo-de-dados" class="section level3" number="3.8.2">
+<div id="formatos-de-arquivo-de-dados" class="section level3" number="3.7.2">
 <h3>
-<span class="header-section-number">3.8.2</span> Formatos de arquivo de dados<a class="anchor" aria-label="anchor" href="#formatos-de-arquivo-de-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.2</span> Formatos de arquivo de dados<a class="anchor" aria-label="anchor" href="#formatos-de-arquivo-de-dados"><i class="fas fa-link"></i></a>
 </h3>
 <p>Você pode usar qualquer editor de texto, processador de texto ou planilha para construir sua planilha de dados, embora seja recomendado o uso do Excel. No entanto, a entrada de dados no RStudio deve ser feita dentro do ambiente R por linha de comando. Os dados podem ser preparados no formato de planilha (spreadsheet), mas você deve seguir o formato cuidadosamente para saber onde e como colocar as informações nas células da planilha.</p>
 <p>A seguir é apresentada a estrutura básica de uma matriz comunitária e como importar um arquivo XLS/XLSX para o RStudio usando a programação R (Figura <a href="rrstu.html#fig:ppbio001">3.3</a>). Como tudo no R, existem várias formas para se ler os arquivos Excel. Usaremos primeiro pacote readxl (que já vem instalado com o R base) (veja <a href="https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/" class="uri">https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/</a>)</p>
@@ -309,50 +294,50 @@ Figura 3.3: Usaremos uma matriz multivariada (sítios x espécies, matriz comuni
 </p>
 </div>
 </div>
-<div id="o-arquivo-de-espécies" class="section level3" number="3.8.3">
+<div id="o-arquivo-de-espécies" class="section level3" number="3.7.3">
 <h3>
-<span class="header-section-number">3.8.3</span> O arquivo de espécies<a class="anchor" aria-label="anchor" href="#o-arquivo-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.3</span> O arquivo de espécies<a class="anchor" aria-label="anchor" href="#o-arquivo-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ao usar o formato de dados compacto, você viu que as variáveis (colunas) são numeradas, não nomeadas. Portanto, para aplicar um nome a eles, você precisa criar um arquivo de texto separado que contenha os códigos e nomes. Isso é mais útil quando as variáveis são espécies, uma vez que você pode ter um único arquivo de espécie que se aplica a todos os seus arquivos de dados e aos projetos.</p>
 <p>O arquivo de espécies também inclui o nome completo da espécie, que é usado em alguns arquivos de resultados. Esta facilidade é obviamente muito útil para registro de campo quando você pode identificar a maioria das espécies. Leve a lista de espécies com você e apenas escreva o número do código em sua folha de dados. Observe também os seguintes guias de formato e regras para o arquivo de espécies.</p>
 <p>● Nomes de código curtos são recomendados para reduzir a superimposição de nomes em quaisquer resultados gráficos.<br>
 ● Os registros podem estar em qualquer ordem neste arquivo. (No entanto, você achará útil manter as espécies em ordem alfabética porque a maior parte dos outputs é ordenada pela sequência de espécies em seu arquivo de espécies.).</p>
 </div>
-<div id="formato-de-valores-separados-por-vírgula-.csv" class="section level3" number="3.8.4">
+<div id="formato-de-valores-separados-por-vírgula-.csv" class="section level3" number="3.7.4">
 <h3>
-<span class="header-section-number">3.8.4</span> Formato de valores separados por vírgula (.csv)<a class="anchor" aria-label="anchor" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.4</span> Formato de valores separados por vírgula (.csv)<a class="anchor" aria-label="anchor" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><i class="fas fa-link"></i></a>
 </h3>
 <p>Um arquivo ASCII de valores separados por vírgula (formato *.csv) também pode ser usado para importar / exportar dados do RStudio. Este formato de arquivo requer uma formatação muito cuidadosa.</p>
 </div>
-<div id="editando-a-matriz-de-dados" class="section level3" number="3.8.5">
+<div id="editando-a-matriz-de-dados" class="section level3" number="3.7.5">
 <h3>
-<span class="header-section-number">3.8.5</span> Editando a matriz de dados<a class="anchor" aria-label="anchor" href="#editando-a-matriz-de-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.5</span> Editando a matriz de dados<a class="anchor" aria-label="anchor" href="#editando-a-matriz-de-dados"><i class="fas fa-link"></i></a>
 </h3>
 <p>O RStudio fornece uma pletora de formas para edição de matrizes. Isso é mais útil para pequenas correções. Essas edições são salvas no formato de planilha para que você possa alternar entre a edição do arquivo e o software de planilha. Use a planilha para uma edição mais extensa de suas matrizes. Você pode fazer operações do tipo matriz facilmente na janela principal. A exclusão de linhas ou colunas, transformações e transposição e multiplicação de matrizes estão disponíveis com linhas de comando.</p>
 </div>
-<div id="arquivos-de-resultados" class="section level3" number="3.8.6">
+<div id="arquivos-de-resultados" class="section level3" number="3.7.6">
 <h3>
-<span class="header-section-number">3.8.6</span> Arquivos de resultados<a class="anchor" aria-label="anchor" href="#arquivos-de-resultados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.6</span> Arquivos de resultados<a class="anchor" aria-label="anchor" href="#arquivos-de-resultados"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para manter um registro completo de suas análises, é melhor anexar arquivos de resultados sucessivos a um arquivo de scripts nomeado. Faça isso salvando o arquivo de resultado e, então, após cada operação sucessiva, selecione Salvar script. Você também deve adquirir o hábito de inserir um título descritivo significativo (usando <span style="color:green">#</span>) para cada análise. Isso fornece documentação adicional de sua análise e aparece no script. As tabelas no arquivo de resultado são construídas com espaços, não tabulações. Portanto, o alinhamento das colunas no RStudio e nos processadores de texto só é obtido selecionando uma fonte de pitch-fixo, como Courier. Sendo arquivos de texto simples, você também pode pesquisar ou editar arquivos de resultados e scripts usando o R ou qualquer editor de texto.</p>
 <p>Você pode exportar seus arquivos de resultado para sua planilha.</p>
 </div>
-<div id="gráficos" class="section level3" number="3.8.7">
+<div id="gráficos" class="section level3" number="3.7.7">
 <h3>
-<span class="header-section-number">3.8.7</span> Gráficos<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.7</span> Gráficos<a class="anchor" aria-label="anchor" href="#gr%C3%A1ficos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Você pode salvar imagens gráficas do RStudio como metarquivos do Windows (.wmf) ou metarquivos aprimorados (*.emf), usando linhas de comando ou a interface gráfica. Um gráfico salvo dessa forma é uma imagem vetorial que pode ser aberta em um pacote gráfico ou colada em processadores de texto e redimensionada ou editada sem perda de detalhes. No entanto, certifique-se de não alterar a proporção de aspecto ao redimensionar. Se o formato *.emf não for lido corretamente por seu outro software, tente salvar o gráfico no formato .wmf.</p>
 </div>
 </div>
-<div id="conclusão" class="section level2" number="3.9">
+<div id="conclusão" class="section level2" number="3.8">
 <h2>
-<span class="header-section-number">3.9</span> Conclusão<a class="anchor" aria-label="anchor" href="#conclus%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.8</span> Conclusão<a class="anchor" aria-label="anchor" href="#conclus%C3%A3o"><i class="fas fa-link"></i></a>
 </h2>
 <p>Foram apresentadas as três primeiras etapas da sequência abaixo, incluindo a preparação da importantíssima matriz de dados e como importá-la e exportá-la. Resumir os dados e decidir sobre o tratamento dos valores ausentes é um primeiro passo para a familiarização com conjuntos de dados multivariados.</p>
 </div>
-<div id="sequência-típica-na-preparação-e-análise-de-dados" class="section level2" number="3.10">
+<div id="sequência-típica-na-preparação-e-análise-de-dados" class="section level2" number="3.9">
 <h2>
-<span class="header-section-number">3.10</span> Sequência típica na preparação e análise de dados<a class="anchor" aria-label="anchor" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.9</span> Sequência típica na preparação e análise de dados<a class="anchor" aria-label="anchor" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><i class="fas fa-link"></i></a>
 </h2>
 <p>Para realizar uma análise multivariada, precisamos seguir uma sequência de etapas analíticas, como a seguir:</p>
 <ol style="list-style-type: decimal">
@@ -372,14 +357,14 @@ Cada análise pode exigir o carregamento de várias matrizes principais e secund
 </ol>
 <p>Salve e imprima os resultados</p>
 </div>
-<div id="material-de-apoio-1" class="section level2" number="3.11">
+<div id="material-de-apoio-1" class="section level2" number="3.10">
 <h2>
-<span class="header-section-number">3.11</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.10</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-1"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="teste-seus-conhecimentos" class="section level2" number="3.12">
+<div id="teste-seus-conhecimentos" class="section level2" number="3.11">
 <h2>
-<span class="header-section-number">3.12</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.11</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos"><i class="fas fa-link"></i></a>
 </h2>
 <div class="infobox note">
 <div class="center">
@@ -391,61 +376,6 @@ Cada análise pode exigir o carregamento de várias matrizes principais e secund
 <div id="apêndices-1" class="section level2 unnumbered">
 <h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-1"><i class="fas fa-link"></i></a>
 </h2>
-<div id="comandos" class="section level3 unnumbered">
-<h3>Terminologia de comandos no R<a class="anchor" aria-label="anchor" href="#comandos"><i class="fas fa-link"></i></a>
-</h3>
-<p>Vários termos se misturam no R, sobre o que são comandos. Aqui seguiremos a seguinte terminologia <span class="citation">(<a href="#ref-venables2026">VENABLES; SMITH; R CORE TEAM, 2026</a>)</span>:</p>
-<p><strong>Comando</strong>: É qualquer instrução que você dá para o R executar.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span></code></pre></div>
-<p>Aqui o comando é “atribuir 5 ao objeto <code>x</code>”.</p>
-<p><strong>Função</strong>: É um bloco de código que executa uma tarefa específica. No R, funções têm parênteses.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>A função <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> calcula a soma.</p>
-<p><strong>Parâmetro</strong>: É o nome de uma entrada que a função aceita.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">size</span>, <span class="va">replace</span><span class="op">)</span></span>
-<span><span class="co">#?sample</span></span></code></pre></div>
-<p>Aqui <code>x</code>, <code>size</code> e <code>replace</code> são parâmetros da função <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>.</p>
-<p><strong>Argumento</strong>: É o valor que você passa para um parâmetro.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><code>c(0,1,5)</code> é o argumento para o parâmetro <code>x</code>. 10 é o argumento para <code>size</code> e <code>TRUE</code> é o argumento para <code>replace</code>.</p>
-<div class="inline-table"><table class="table table-sm">
-<thead><tr class="header">
-<th>Termo</th>
-<th>O que é</th>
-<th>Exemplo</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Comando</td>
-<td>Instrução para o R</td>
-<td><code>x &lt;- 5</code></td>
-</tr>
-<tr class="even">
-<td>Função</td>
-<td>Código que executa tarefa</td>
-<td><code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code></td>
-</tr>
-<tr class="odd">
-<td>Parâmetro</td>
-<td>Nome da entrada da função</td>
-<td>
-<code>size</code> em <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>
-</td>
-</tr>
-<tr class="even">
-<td>Argumento</td>
-<td>Valor passado ao parâmetro</td>
-<td>
-<code>10</code> em <code>size = 10</code>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
 </div>
 <div id="sites-consultados-1" class="section level2 unnumbered">
 <h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-1"><i class="fas fa-link"></i></a>
@@ -485,9 +415,6 @@ SILVA, F. R.; GONÇALVES-SOUZA, T.; PATERNO, G. B.; PROVETE, D. B.; VANCINE, M. 
 <div id="ref-valentin2000" class="csl-entry">
 VALENTIN, J. L. <strong>Ecologia Numérica. Uma Introdução à Análise Multivariada de Dados Ecológicos</strong>. 1. ed. Rio de Janeiro: Interciência, 2000. Type: Book.
 </div>
-<div id="ref-venables2026" class="csl-entry">
-VENABLES, W. N.; SMITH, D. M.; R CORE TEAM. <strong>An Introduction to R. Notes on R: A Programming Environment for Data Analysis and Graphics Version 4.6.0</strong>. [s.l: s.n.]. Disponível em: &lt;<a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html">https://cran.r-project.org/doc/manuals/r-release/R-intro.html</a>&gt;.
-</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="ferram.html"><span class="header-section-number">2</span> Ferramentas</a></div>
@@ -515,31 +442,28 @@ VENABLES, W. N.; SMITH, D. M.; R CORE TEAM. <strong>An Introduction to R. Notes 
 </ul>
 </li>
 <li><a class="nav-link" href="#mensagens-de-erro-e-avisos-no-r"><span class="header-section-number">3.5</span> Mensagens de erro e avisos no R</a></li>
-<li><a class="nav-link" href="#nomouse"><span class="header-section-number">3.6</span> Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a></li>
 <li>
-<a class="nav-link" href="#o-que-%C3%A9-um-script-e-qual-sua-diferen%C3%A7a-para-um-c%C3%B3digo"><span class="header-section-number">3.7</span> O que é um script e qual sua diferença para um código?</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#projetos"><span class="header-section-number">3.7.1</span> Projetos</a></li>
-<li><a class="nav-link" href="#nomes-de-arquivos"><span class="header-section-number">3.7.2</span> Nomes de arquivos</a></li>
+<a class="nav-link" href="#nomouse"><span class="header-section-number">3.6</span> Prefira sempre códigos e scripts do que mouse e menus de janelas no R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#projetos"><span class="header-section-number">3.6.1</span> Projetos</a></li>
+<li><a class="nav-link" href="#nomes-de-arquivos"><span class="header-section-number">3.6.2</span> Nomes de arquivos</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><span class="header-section-number">3.8</span> Preparação dos arquivos</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#extensoes"><span class="header-section-number">3.8.1</span> Visualizar extenções de arquivos</a></li>
-<li><a class="nav-link" href="#formatos-de-arquivo-de-dados"><span class="header-section-number">3.8.2</span> Formatos de arquivo de dados</a></li>
-<li><a class="nav-link" href="#o-arquivo-de-esp%C3%A9cies"><span class="header-section-number">3.8.3</span> O arquivo de espécies</a></li>
-<li><a class="nav-link" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><span class="header-section-number">3.8.4</span> Formato de valores separados por vírgula (.csv)</a></li>
-<li><a class="nav-link" href="#editando-a-matriz-de-dados"><span class="header-section-number">3.8.5</span> Editando a matriz de dados</a></li>
-<li><a class="nav-link" href="#arquivos-de-resultados"><span class="header-section-number">3.8.6</span> Arquivos de resultados</a></li>
-<li><a class="nav-link" href="#gr%C3%A1ficos"><span class="header-section-number">3.8.7</span> Gráficos</a></li>
+<a class="nav-link" href="#prepara%C3%A7%C3%A3o-dos-arquivos"><span class="header-section-number">3.7</span> Preparação dos arquivos</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#extensoes"><span class="header-section-number">3.7.1</span> Visualizar extenções de arquivos</a></li>
+<li><a class="nav-link" href="#formatos-de-arquivo-de-dados"><span class="header-section-number">3.7.2</span> Formatos de arquivo de dados</a></li>
+<li><a class="nav-link" href="#o-arquivo-de-esp%C3%A9cies"><span class="header-section-number">3.7.3</span> O arquivo de espécies</a></li>
+<li><a class="nav-link" href="#formato-de-valores-separados-por-v%C3%ADrgula-.csv"><span class="header-section-number">3.7.4</span> Formato de valores separados por vírgula (.csv)</a></li>
+<li><a class="nav-link" href="#editando-a-matriz-de-dados"><span class="header-section-number">3.7.5</span> Editando a matriz de dados</a></li>
+<li><a class="nav-link" href="#arquivos-de-resultados"><span class="header-section-number">3.7.6</span> Arquivos de resultados</a></li>
+<li><a class="nav-link" href="#gr%C3%A1ficos"><span class="header-section-number">3.7.7</span> Gráficos</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#conclus%C3%A3o"><span class="header-section-number">3.9</span> Conclusão</a></li>
-<li><a class="nav-link" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><span class="header-section-number">3.10</span> Sequência típica na preparação e análise de dados</a></li>
-<li><a class="nav-link" href="#material-de-apoio-1"><span class="header-section-number">3.11</span> Material de apoio</a></li>
-<li><a class="nav-link" href="#teste-seus-conhecimentos"><span class="header-section-number">3.12</span> TESTE SEUS CONHECIMENTOS</a></li>
-<li>
-<a class="nav-link" href="#ap%C3%AAndices-1">Apêndices</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#comandos">Terminologia de comandos no R</a></li></ul>
-</li>
+<li><a class="nav-link" href="#conclus%C3%A3o"><span class="header-section-number">3.8</span> Conclusão</a></li>
+<li><a class="nav-link" href="#sequ%C3%AAncia-t%C3%ADpica-na-prepara%C3%A7%C3%A3o-e-an%C3%A1lise-de-dados"><span class="header-section-number">3.9</span> Sequência típica na preparação e análise de dados</a></li>
+<li><a class="nav-link" href="#material-de-apoio-1"><span class="header-section-number">3.10</span> Material de apoio</a></li>
+<li><a class="nav-link" href="#teste-seus-conhecimentos"><span class="header-section-number">3.11</span> TESTE SEUS CONHECIMENTOS</a></li>
+<li><a class="nav-link" href="#ap%C3%AAndices-1">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-consultados-1">Sites consultados</a></li>
 <li><a class="nav-link" href="#leitura-suplementar-1">Leitura suplementar</a></li>
 <li><a class="nav-link" href="#refer%C3%AAncias-1">Referências</a></li>
@@ -559,7 +483,7 @@ VENABLES, W. N.; SMITH, D. M.; R CORE TEAM. <strong>An Introduction to R. Notes 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/06/2026 07:13:08.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 10:32:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

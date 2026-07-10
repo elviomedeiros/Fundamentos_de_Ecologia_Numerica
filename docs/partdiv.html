@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content=" 17 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -151,12 +151,12 @@ seção <a href="bases.html#arqs">Arquivos disponíveis</a>.</strong></p>
 <h3>
 <span class="header-section-number">17.1.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"moments"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></span>
@@ -170,7 +170,7 @@ seção <a href="bases.html#arqs">Arquivos disponíveis</a>.</strong></p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gt"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggVennDiagram"</span><span class="op">)</span></span></code></pre></div>
 <p>Depois de instalados, carregue os pacotes a seguir no seu computador.</p>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org">Rcpp</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes
 necessários para este módulo. Esses códigos são comandos para instalar
@@ -194,7 +194,7 @@ arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a
 caminho especificado entre aspas. No seu caso, você deve ajustar o
 caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a
 barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -209,7 +209,7 @@ pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do
 arquivo .xlsx a ser importado.</p>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
 <span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
@@ -262,7 +262,7 @@ arquivo .xlsx a ser importado.</p>
 ## S-R-CP2        0        5        1        0       40</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive”
 <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -275,7 +275,7 @@ arquivo .xlsx a ser importado.</p>
 <h2>
 <span class="header-section-number">17.2</span> REINÍCIO 1<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
 <p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho,
 para esse momento) que substitui a matriz de dados original, por uma
@@ -295,7 +295,7 @@ tipos e abreviações.</p>
 <span class="header-section-number">17.3</span> Análise de Espécies Compartilhadas<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas"><i class="fas fa-link"></i></a>
 </h2>
 <p>Instalando os pacotes necessários</p>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"eulerr"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"VennDiagram"</span><span class="op">)</span></span>
@@ -303,7 +303,7 @@ tipos e abreviações.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggvenn"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gplots"</span><span class="op">)</span> </span></code></pre></div>
 <p>Carregado a base de dados <code>teste</code> para ajudar no entendimento.</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">teste</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">    SP1 SP2 SP3 SP4 SP5 SP6 SP7 SP8 SP9 SP10    SP11    SP12    SP13    SP14    SP15    SP16    SP17    SP18    SP19    SP20</span></span>
 <span><span class="st">A1  1   0   0   1   0   1   1   1   0   0   1   0   0   1   0   1   1   1   0   0</span></span>
@@ -322,7 +322,7 @@ tipos e abreviações.</p>
 <h2>
 <span class="header-section-number">17.4</span> REINÍCIO 2<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
 <div id="separando-a-matriz-ppbio-em-suas-partes-s-e-b-ou-a-e-r" class="section level3" number="17.4.1">
 <h3>
@@ -330,7 +330,7 @@ tipos e abreviações.</p>
 </h3>
 <p>Separa-se <code>S-</code> e <code>B-</code>, e atribui-se, respectivamente, aos grupos G1 e G2
 e remove-se as colunas zeradas.</p>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">G1</span> <span class="op">&lt;-</span> <span class="va">m_trab</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,<span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co">#all-zero columns</span></span>
 <span><span class="va">G1</span> <span class="op">&lt;-</span> <span class="va">G1</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G1</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
@@ -344,7 +344,7 @@ e remove-se as colunas zeradas.</p>
 <p>Outra forma de separar grupos, mas agpra para <code>R-</code> e <code>A-</code>,
 atribuindo-se, respectivamente, aos grupos G3 e G4 e removendo-se as
 colunas zeradas.</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">G3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">m_trab</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"R-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G3</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co">#all-zero columns</span></span>
@@ -550,7 +550,7 @@ não em outro. Se uma coluna está faltando em um data frame, ela será
 adicionada aquele data frame com o termo <code>NA</code> ou <code>NULL</code>. Para substituir
 os valores rotulados de <code>NA</code> ou <code>NULL</code> usa-se a função
 <code>merged[is.na(merged)] &lt;- 0</code>. Ver Apêndices.</p>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shared_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G2</span><span class="op">)</span><span class="op">)</span> <span class="co">#get the common column names</span></span>
 <span><span class="va">shared_spp</span></span>
 <span><span class="va">G1_only</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G2</span><span class="op">)</span><span class="op">)</span></span>
@@ -561,7 +561,7 @@ os valores rotulados de <code>NA</code> ou <code>NULL</code> usa-se a função
 <span><span class="va">Riqueza</span></span></code></pre></div>
 <p>Criando um <code>data.frame</code> com todas as espécies compartilhadas e
 exclusivas.</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="co"># Create a data frame with all species</span></span>
 <span><span class="va">all_species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
@@ -590,7 +590,7 @@ exclusivas.</p>
 <h2>
 <span class="header-section-number">17.6</span> REINÍCIO 3<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_bruta</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
 <p>Aqui cria-se o vertor da matriz bruta a partir da base de dados depois
 de feitos os ajustes necessários.</p>
@@ -598,7 +598,7 @@ de feitos os ajustes necessários.</p>
 <h3>
 <span class="header-section-number">17.6.1</span> Criando uma matriz de médias<a class="anchor" aria-label="anchor" href="#criando-uma-matriz-de-m%C3%A9dias-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Inserindo coluna para agrupamentos</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de N colunas x M linhas</span></span>
 <span><span class="va">m_bruta_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Grupos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>, <span class="va">m_bruta</span><span class="op">)</span></span>
@@ -645,7 +645,7 @@ de feitos os ajustes necessários.</p>
 <h3>
 <span class="header-section-number">17.6.2</span> Análise de Espécies Compartilhadas: Em arquivos diferentes<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas-em-arquivos-diferentes"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Espécies compartilhadas</span></span>
 <span><span class="va">shared_spp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G2</span><span class="op">)</span><span class="op">)</span> <span class="co">#get the common column names</span></span>
 <span><span class="va">shared_spp1</span></span>
@@ -655,7 +655,7 @@ de feitos os ajustes necessários.</p>
 <span><span class="va">G2_only</span></span>
 <span><span class="va">Riqueza</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">shared_spp1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">G1_only</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">G2_only</span><span class="op">)</span></span>
 <span><span class="va">Riqueza</span></span></code></pre></div>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shared_spp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">shared_spp2</span></span>
 <span><span class="va">G3_only</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G4</span><span class="op">)</span><span class="op">)</span></span>
@@ -676,7 +676,7 @@ e 20 colunas, com os nomes A1, A2, A3, B1, B2, B3, C1, C2, C3 nas linhas e
 SP1, SP2, SP3, SP4, SP5, SP6, SP7, SP8, SP9, SP10, SP11, SP12, SP13, SP14, SP15, SP16, SP17, SP18, SP19, SP20 como os nomes das colunas. Códigos baseados nas
 letras A, B e C, portanto, se referem a matriz de teste.</p>
 <p>A seguir separamos a matriz em suas partes.</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">teste</span><span class="op">)</span></span>
 <span><span class="va">data</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -695,7 +695,7 @@ letras A, B e C, portanto, se referem a matriz de teste.</p>
 <h2>
 <span class="header-section-number">17.7</span> REINÍCIO 4<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="encontrando-espécies-exclusivas" class="section level2" number="17.8">
@@ -706,7 +706,7 @@ letras A, B e C, portanto, se referem a matriz de teste.</p>
 <h3>
 <span class="header-section-number">17.8.1</span> Escolhendo as <strong>LINHAS OU GRUPOS</strong> para comparar<a class="anchor" aria-label="anchor" href="#escolhendo-as-linhas-ou-grupos-para-comparar"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the row indices where "A" occurs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"S-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
@@ -719,7 +719,7 @@ letras A, B e C, portanto, se referem a matriz de teste.</p>
 </h4>
 <p>Aqui procuramos espécies que ocorrem em todas as linhas do grupo
 definido pelo vetor <code>rows</code> no chunk anterior <code>rows</code></p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize an empty vector to store species exclusive to 'A' rows</span></span>
 <span><span class="va">species_only_in</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co"># Iterate over each column</span></span>
@@ -738,7 +738,7 @@ definido pelo vetor <code>rows</code> no chunk anterior <code>rows</code></p>
 <h3>
 <span class="header-section-number">17.8.2</span> Espécies exclusivas para <strong>1 LINHA OU 1 GRUPO</strong> - Baseado na soma dos grupos <code>(#FUNCIONA)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-para-1-linha-ou-1-grupo---baseado-na-soma-dos-grupos-funciona"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the row indices where 'A' occurs</span></span>
 <span><span class="va">rows</span></span>
 <span><span class="co"># Calculate the sum of occurrences of each species in 'A' rows</span></span>
@@ -764,13 +764,13 @@ definido pelo vetor <code>rows</code> no chunk anterior <code>rows</code></p>
 <h2>
 <span class="header-section-number">17.9</span> Espécies exclusivas para <strong>2 LINHAS OU 2 GRUPOs</strong> - Baseado na soma dos grupos <code>(#FUNCIONA)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-para-2-linhas-ou-2-grupos---baseado-na-soma-dos-grupos-funciona"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the row indices where 'A' occurs</span></span>
 <span><span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"S-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rows2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"B-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#rows &lt;- as.vector(rbind(c(rows, rows2)))</span></span>
 <span><span class="va">rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate the sum of occurrences of each species in 'A' rows</span></span>
 <span><span class="va">sum_of</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="va">rows</span>, <span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">sum_of</span></span>
@@ -806,7 +806,7 @@ linhas compartilhadas os grupos das colunas tem que compartilhar
 <strong>TODAS</strong> as suas linhas. Uma análise sobre esse <code>loop</code>. Adicionamos
 <code>&amp;&amp; any(data[rows_G3, col] != 0)</code> para um terceiro grupo e assim
 sucessivamente.</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the rows corresponding to A and B (and C)</span></span>
 <span><span class="va">rows_G1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"S-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rows_G2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"B-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
@@ -836,7 +836,7 @@ e os outros anteriores é apresentada
 </h2>
 <p>Primeiro é necessário criar uma matriz binária para os valores das
 colunas nas linhas. Isso é feito a seguir.</p>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://gt.rstudio.com">"gt"</a></span><span class="op">)</span></span>
 <span><span class="va">m_venn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_avg</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">m_venn</span></span>
@@ -878,23 +878,23 @@ colunas nas linhas. Isso é feito a seguir.</p>
 ## sy-marmo   0.00000000   0.08333333
 ## te-chalc  12.18181818   0.00000000
 ## tr-signa   2.45454545  15.08333333</code></pre>
-<div id="rsubzscgqs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rsubzscgqs table {
+<div id="amekjfcwck" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#amekjfcwck table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rsubzscgqs thead, #rsubzscgqs tbody, #rsubzscgqs tfoot, #rsubzscgqs tr, #rsubzscgqs td, #rsubzscgqs th {
+#amekjfcwck thead, #amekjfcwck tbody, #amekjfcwck tfoot, #amekjfcwck tr, #amekjfcwck td, #amekjfcwck th {
   border-style: none;
 }
 
-#rsubzscgqs p {
+#amekjfcwck p {
   margin: 0;
   padding: 0;
 }
 
-#rsubzscgqs .gt_table {
+#amekjfcwck .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -920,12 +920,12 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-left-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_caption {
+#amekjfcwck .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rsubzscgqs .gt_title {
+#amekjfcwck .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -937,7 +937,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-width: 0;
 }
 
-#rsubzscgqs .gt_subtitle {
+#amekjfcwck .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -949,7 +949,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-top-width: 0;
 }
 
-#rsubzscgqs .gt_heading {
+#amekjfcwck .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -961,13 +961,13 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_bottom_border {
+#amekjfcwck .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_col_headings {
+#amekjfcwck .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -982,7 +982,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_col_heading {
+#amekjfcwck .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1002,7 +1002,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   overflow-x: hidden;
 }
 
-#rsubzscgqs .gt_column_spanner_outer {
+#amekjfcwck .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1014,15 +1014,15 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 4px;
 }
 
-#rsubzscgqs .gt_column_spanner_outer:first-child {
+#amekjfcwck .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rsubzscgqs .gt_column_spanner_outer:last-child {
+#amekjfcwck .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rsubzscgqs .gt_column_spanner {
+#amekjfcwck .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1034,11 +1034,11 @@ colunas nas linhas. Isso é feito a seguir.</p>
   width: 100%;
 }
 
-#rsubzscgqs .gt_spanner_row {
+#amekjfcwck .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rsubzscgqs .gt_group_heading {
+#amekjfcwck .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1064,7 +1064,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   text-align: left;
 }
 
-#rsubzscgqs .gt_empty_group_heading {
+#amekjfcwck .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1079,15 +1079,15 @@ colunas nas linhas. Isso é feito a seguir.</p>
   vertical-align: middle;
 }
 
-#rsubzscgqs .gt_from_md > :first-child {
+#amekjfcwck .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rsubzscgqs .gt_from_md > :last-child {
+#amekjfcwck .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rsubzscgqs .gt_row {
+#amekjfcwck .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1106,7 +1106,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   overflow-x: hidden;
 }
 
-#rsubzscgqs .gt_stub {
+#amekjfcwck .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1119,7 +1119,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#rsubzscgqs .gt_stub_row_group {
+#amekjfcwck .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1133,15 +1133,15 @@ colunas nas linhas. Isso é feito a seguir.</p>
   vertical-align: top;
 }
 
-#rsubzscgqs .gt_row_group_first td {
+#amekjfcwck .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rsubzscgqs .gt_row_group_first th {
+#amekjfcwck .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rsubzscgqs .gt_summary_row {
+#amekjfcwck .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1151,16 +1151,16 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#rsubzscgqs .gt_first_summary_row {
+#amekjfcwck .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_first_summary_row.thick {
+#amekjfcwck .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rsubzscgqs .gt_last_summary_row {
+#amekjfcwck .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1170,7 +1170,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_grand_summary_row {
+#amekjfcwck .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1180,7 +1180,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#rsubzscgqs .gt_first_grand_summary_row {
+#amekjfcwck .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1190,7 +1190,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-top-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_last_grand_summary_row_top {
+#amekjfcwck .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1200,11 +1200,11 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_striped {
+#amekjfcwck .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rsubzscgqs .gt_table_body {
+#amekjfcwck .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1213,7 +1213,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_footnotes {
+#amekjfcwck .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1227,7 +1227,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_footnote {
+#amekjfcwck .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1236,7 +1236,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#rsubzscgqs .gt_sourcenotes {
+#amekjfcwck .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1250,7 +1250,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#rsubzscgqs .gt_sourcenote {
+#amekjfcwck .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1258,72 +1258,72 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#rsubzscgqs .gt_left {
+#amekjfcwck .gt_left {
   text-align: left;
 }
 
-#rsubzscgqs .gt_center {
+#amekjfcwck .gt_center {
   text-align: center;
 }
 
-#rsubzscgqs .gt_right {
+#amekjfcwck .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rsubzscgqs .gt_font_normal {
+#amekjfcwck .gt_font_normal {
   font-weight: normal;
 }
 
-#rsubzscgqs .gt_font_bold {
+#amekjfcwck .gt_font_bold {
   font-weight: bold;
 }
 
-#rsubzscgqs .gt_font_italic {
+#amekjfcwck .gt_font_italic {
   font-style: italic;
 }
 
-#rsubzscgqs .gt_super {
+#amekjfcwck .gt_super {
   font-size: 65%;
 }
 
-#rsubzscgqs .gt_footnote_marks {
+#amekjfcwck .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rsubzscgqs .gt_asterisk {
+#amekjfcwck .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rsubzscgqs .gt_indent_1 {
+#amekjfcwck .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rsubzscgqs .gt_indent_2 {
+#amekjfcwck .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rsubzscgqs .gt_indent_3 {
+#amekjfcwck .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rsubzscgqs .gt_indent_4 {
+#amekjfcwck .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rsubzscgqs .gt_indent_5 {
+#amekjfcwck .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rsubzscgqs .katex-display {
+#amekjfcwck .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rsubzscgqs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#amekjfcwck div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1516,9 +1516,8 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <h3>
 <span class="header-section-number">17.11.1</span> Usando o pacote <code>eulerr</code><a class="anchor" aria-label="anchor" href="#usando-o-pacote-eulerr"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jolars/eulerr">"eulerr"</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning: pacote 'eulerr' foi compilado no R versão 4.5.3</code></pre>
 <pre><code>## Registered S3 method overwritten by 'eulerr':
 ##   method    from  
 ##   plot.venn gplots</code></pre>
@@ -1527,7 +1526,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <pre><code>## O seguinte objeto é mascarado por 'package:gplots':
 ## 
 ##     venn</code></pre>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#set.seed() #this seed changes the orientation of the sets        </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://jolars.github.io/eulerr/reference/euler.html">euler</a></span><span class="op">(</span><span class="va">m_venn</span><span class="op">)</span>, counts <span class="op">=</span> <span class="cn">TRUE</span>, fontface <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-211-1.png" alt="" width="672"></div>
@@ -1537,13 +1536,11 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <h2>
 <span class="header-section-number">17.12</span> Usando o pacote <a href="https://rstudio-pubs-static.s3.amazonaws.com/13301_6641d73cfac741a59c0a851feb99e98b.html"><code>VennDiagram</code></a><a class="anchor" aria-label="anchor" href="#usando-o-pacote-venndiagram"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load required libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/uclahs-cds/package-VennDiagram">VennDiagram</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning: pacote 'VennDiagram' foi compilado no R versão 4.5.3</code></pre>
 <pre><code>## Carregando pacotes exigidos: grid</code></pre>
 <pre><code>## Carregando pacotes exigidos: futile.logger</code></pre>
-<pre><code>## Warning: pacote 'futile.logger' foi compilado no R versão 4.5.3</code></pre>
 <pre><code>## 
 ## Anexando pacote: 'VennDiagram'</code></pre>
 <pre><code>## O seguinte objeto é mascarado por 'package:car':
@@ -1552,11 +1549,9 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <pre><code>## O seguinte objeto é mascarado por 'package:ggpubr':
 ## 
 ##     rotate</code></pre>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yanlinlin82.github.io/ggvenn/">ggvenn</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning: pacote 'ggvenn' foi compilado no R versão 4.5.3</code></pre>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">G1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_venn</span>, <span class="va">S</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yanlinlin82.github.io/ggvenn/">ggvenn</a></span><span class="op">)</span></span>
+<span><span class="va">G1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_venn</span>, <span class="va">S</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">G2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_venn</span>, <span class="va">B</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#G3 &lt;- nrow(subset(m_venn, R==1))</span></span>
 <span><span class="co">#G4 &lt;- nrow(subset(m_venn, A==1))</span></span>
@@ -1566,21 +1561,21 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.single.venn.html">draw.single.venn</a></span><span class="op">(</span>area <span class="op">=</span> <span class="va">G1</span>, category <span class="op">=</span> <span class="st">"G1"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-2.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.single.venn.html">draw.single.venn</a></span><span class="op">(</span><span class="va">G1</span>, category <span class="op">=</span> <span class="st">"G1"</span>,</span>
 <span>                 lty <span class="op">=</span> <span class="st">"blank"</span>,</span>
 <span>                 fill <span class="op">=</span> <span class="st">"cornflower blue"</span>, </span>
 <span>                 alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-4.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##lty - outline of cirlces, ## fill - colour, ## alpha - colour transparency</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.pairwise.venn.html">draw.pairwise.venn</a></span><span class="op">(</span><span class="va">G1</span>, <span class="va">G2</span>, <span class="va">G1_G2</span>,</span>
 <span>                   category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G1"</span>,<span class="st">"G2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-5.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-6.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.pairwise.venn.html">draw.pairwise.venn</a></span><span class="op">(</span><span class="va">G1</span>, <span class="va">G2</span>, <span class="va">G1_G2</span>,</span>
 <span>                   category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G1"</span>,<span class="st">"G2"</span><span class="op">)</span>,</span>
@@ -1590,7 +1585,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span>                   cat.pos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
 <span>                   cat.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.025</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-7.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-8.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## cat.pos - position of category titles, represented by degree from the</span></span>
 <span><span class="co">## middle of the circle</span></span>
 <span><span class="co">## cat.dist - distance of the category titles from the edge of the circle</span></span>
@@ -1605,7 +1600,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span>                   cat.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>                   scaled <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-9.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-10.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## scaled - TRUE for scaled or FALSE for unscaled cirlces</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#&lt;--</span></span>
@@ -1618,7 +1613,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span>                   euler.d <span class="op">=</span> <span class="cn">TRUE</span>, sep.dist <span class="op">=</span> <span class="fl">0.03</span>, </span>
 <span>                   rotation.degree <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-11.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-212-12.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## euler.d - TRUE for movable circles; FALSE for unmovable circles. Must be</span></span>
 <span><span class="co">## TRUE to have space between non-overlapping circles.</span></span>
 <span><span class="co">## sep.dist - distance between circles</span></span>
@@ -1652,7 +1647,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <a href="https://stackoverflow.com/questions/70160554/how-to-get-list-of-unique-items-for-each-partition-in-venn-diagram">AQUI</a>
 ou
 <a href="https://forum.posit.co/t/items-in-intersection-of-a-venn-diagram/62947">AQUI</a></p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lista</span> <span class="op">&lt;-</span> <span class="va">m_venn</span></span>
 <span><span class="va">lista</span></span>
 <span></span>
@@ -1672,40 +1667,40 @@ ou
 <span>  output <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>  lty <span class="op">=</span> <span class="st">"blank"</span>,</span>
 <span>  fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"skyblue"</span>, <span class="st">"pink1"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## INFO [2026-06-13 07:13:43] $x
-## INFO [2026-06-13 07:13:43] list(G1, G2)
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $category.names
-## INFO [2026-06-13 07:13:43] c("G1", "G2")
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $filename
-## INFO [2026-06-13 07:13:43] [1] "fig-venn_diagramm2.png"
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $height
-## INFO [2026-06-13 07:13:43] [1] 3000
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $width
-## INFO [2026-06-13 07:13:43] [1] 3000
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $resolution
-## INFO [2026-06-13 07:13:43] [1] 500
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $disable.logging
-## INFO [2026-06-13 07:13:43] T
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $scaled
-## INFO [2026-06-13 07:13:43] T
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $output
-## INFO [2026-06-13 07:13:43] F
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $lty
-## INFO [2026-06-13 07:13:43] [1] "blank"
-## INFO [2026-06-13 07:13:43] 
-## INFO [2026-06-13 07:13:43] $fill
-## INFO [2026-06-13 07:13:43] c("skyblue", "pink1")
-## INFO [2026-06-13 07:13:43]</code></pre>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<pre><code>## INFO [2026-07-10 10:32:59] $x
+## INFO [2026-07-10 10:32:59] list(G1, G2)
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $category.names
+## INFO [2026-07-10 10:32:59] c("G1", "G2")
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $filename
+## INFO [2026-07-10 10:32:59] [1] "fig-venn_diagramm2.png"
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $height
+## INFO [2026-07-10 10:32:59] [1] 3000
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $width
+## INFO [2026-07-10 10:32:59] [1] 3000
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $resolution
+## INFO [2026-07-10 10:32:59] [1] 500
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $disable.logging
+## INFO [2026-07-10 10:32:59] T
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $scaled
+## INFO [2026-07-10 10:32:59] T
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $output
+## INFO [2026-07-10 10:32:59] F
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $lty
+## INFO [2026-07-10 10:32:59] [1] "blank"
+## INFO [2026-07-10 10:32:59] 
+## INFO [2026-07-10 10:32:59] $fill
+## INFO [2026-07-10 10:32:59] c("skyblue", "pink1")
+## INFO [2026-07-10 10:32:59]</code></pre>
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">overlap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/calculate.overlap.html">calculate.overlap</a></span><span class="op">(</span><span class="va">over</span><span class="op">)</span></span>
 <span><span class="va">overlap</span></span>
 <span><span class="fu">VennDiagram</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/get.venn.partitions.html">get.venn.partitions</a></span><span class="op">(</span><span class="va">over</span><span class="op">)</span></span></code></pre></div>
@@ -1794,7 +1789,7 @@ ou
 <a href="https://www.datanovia.com/en/blog/beautiful-ggplot-venn-diagram-with-r/">Aqui</a>
 e
 <a href="https://www.datanovia.com/en/blog/venn-diagram-with-r-or-rstudio-a-million-ways/">Aqui</a></p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gaospecial/ggVennDiagram">"ggVennDiagram"</a></span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  G1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">lista</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">lista</span><span class="op">$</span><span class="va">S</span> <span class="op">!=</span><span class="fl">0</span><span class="op">)</span><span class="op">]</span>,</span>
@@ -1809,14 +1804,14 @@ e
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Default plot</span></span>
-<span><span class="fu"><a href="https://gaospecial.github.io/ggVennDiagram/reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span></span>
+<span><span class="fu">ggVennDiagram</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>, label_alpha <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  category.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G1"</span>,<span class="st">"G2"</span>,<span class="st">"G3"</span>,<span class="st">"G4"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"yellow"</span>,high <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://gaospecial.github.io/ggVennDiagram/reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, label_alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="fu">ggVennDiagram</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, label_alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://yanlinlin82.github.io/ggvenn/">"ggvenn"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -1828,7 +1823,7 @@ e
 <span><span class="va">v.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">v.table</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">v.table</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_avg</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Estrutura da comunidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"open"</span>, <span class="fu"><a href="https://rdrr.io/r/base/shQuote.html">shQuote</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/MSS/_Zoo-Rebio/R_ZooRebio/strcom.qmd"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -2061,7 +2056,7 @@ a distribuição nula.</li>
 </h3>
 <p>Aqui está um exemplo básico de como o <code>r2dtable</code> pode ser usado
 diretamente no R:</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Suponha uma tabela original com margens definidas</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">25</span><span class="op">)</span>  <span class="co"># somas das linhas</span></span>
 <span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span>, <span class="fl">25</span><span class="op">)</span>  <span class="co"># somas das colunas</span></span>
@@ -2275,7 +2270,7 @@ R STUDIO TEAM. <strong>RStudio: Integrated Development Environment for R</strong
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/06/2026 07:13:08.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 10:32:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

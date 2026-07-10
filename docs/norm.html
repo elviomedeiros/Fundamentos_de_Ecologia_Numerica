@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content=" 12 R Módulo 3.1 - Estatísticas descritivas e normalidade | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -142,18 +142,18 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 <h2>
 <span class="header-section-number">12.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"fdth"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> <span class="citation">(<a href="#ref-rdevelopmentcoreteam2017">R DEVELOPMENT CORE TEAM, 2017</a>)</span> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-rstudioteam2022">R STUDIO TEAM, 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code><a href="https://ycphs.github.io/openxlsx/index.html">library(openxlsx)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -162,7 +162,7 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 <span class="header-section-number">12.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">brotos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/brotos.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">F</span>, colNames <span class="op">=</span> <span class="cn">F</span>,</span>
@@ -192,7 +192,7 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 ## 9  26.9 22.5 25.5 33.0 19.4
 ## 10 34.2 33.6 42.5 19.0 25.8</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(brotos)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">brotos</span></span>
@@ -200,7 +200,7 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">)</span></span></code></pre></div>
 <p><code>Brotos.xlsx</code> está como um dataframe. Precisaremos converter para um vetor. Para isso, transformamos o dataframe em matriz numérica (<code><a href="https://rdrr.io/r/base/matrix.html">as.matrix()</a></code>), e na sequência usamos <code><a href="https://rdrr.io/r/base/vector.html">as.vector()</a></code> para achatar a matriz em uma única dimensão.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">brotos_v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">brotos</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">brotos_v</span></span></code></pre></div>
 <pre><code>##   [1] 28.4 25.1 29.9 25.8 35.0 36.4 29.1 33.2 26.9 34.2 32.0 31.7 23.6 31.1 29.1
@@ -238,7 +238,7 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 ## [481] 26.7 28.4 29.1 19.2 31.5 16.5 34.4 37.5 24.6 22.1 20.2 31.4 33.9 33.5 25.8
 ## [496] 16.5 16.5 18.8 25.1 34.2</code></pre>
 <p>E agora visualizando nossos dados.</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(brotos_v)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span></span>
 <span><span class="va">brotos_v</span></span>
@@ -249,7 +249,7 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">brotos_v</span><span class="op">)</span></span></code></pre></div>
 <p>Tendo em mãos o conjunto total de 500 comprimentos medidos de brotos de <em>Banksia</em>, agora <strong>vamos tirar uma subamostra aleatória de uma parte dos 500 valores</strong>. Essa subamostra é tirada usando o comando <code>size=</code> no código subsequente, que estabelece o tamanho da subamostra a ser tirada do total de dados. Por exemplo, para uma subamostra de 150 comprimentos, então <code>size = 150</code>. Nesse tutorial usaremos todos os 500 comprimentos.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">666</span><span class="op">)</span></span>
 <span><span class="va">brotos_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">brotos_v</span>, size <span class="op">=</span> <span class="fl">500</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="co">#atualize o valor de 'size=' se necessário</span></span>
 <span><span class="va">brotos_sub</span></span></code></pre></div>
@@ -314,7 +314,7 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 <span class="header-section-number">12.5</span> Tabela de frequências e gráfico <em>stem-and-leaf</em><a class="anchor" aria-label="anchor" href="#tabela-de-frequ%C3%AAncias-e-gr%C3%A1fico-stem-and-leaf"><i class="fas fa-link"></i></a>
 </h2>
 <p>Mas o primeiro passo é construir uma tabela de frequências. Para fazermos uma tabela de frequência do comprimento dos brotos carregamos o pacote <code>fdth</code> e pedimos a função <code>range</code> que retorna o valor máximo e mínimo no vetor.</p>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jcfaria/fdth">fdth</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#retorna o valor máximo e mínimo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
@@ -322,7 +322,7 @@ Figura 12.1: Comprimentos (cm) de 500 brotos do arbusto <em>Banksia ericifolia</
 <pre><code>## [1] 10.0 44.9
 ## [1] 500</code></pre>
 <p>Agora é necessário que você substitua os valores de range 10, 44.9 nos valores de início e fim da distribuição de frequência. Os comandos abaixo criam uma tabela de frequência chamada <code>tf</code> com valores máximos e mínimos definidos por <code>range(brotos_v)</code> em intervalor definidos por <code>h=5</code>, e o comando <code>print(tf)</code> exibe a tabela de frequência.</p>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/fdt.html">fdt</a></span><span class="op">(</span><span class="va">brotos_sub</span>, start<span class="op">=</span><span class="fl">10</span>, end<span class="op">=</span><span class="fl">45</span>, h<span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="co">#tabela de frequência</span></span>
 <span><span class="co">#?fdt #atente para o uso de k, por exemplo tf &lt;- fdt(brotos_sub, k=7)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span></code></pre></div>
@@ -350,7 +350,7 @@ h = \frac{\max(x)-\min(x)}{k}
 <p><span class="math display">\[
 k = 1 + 3.3\log_{10}(n)
 \]</span> onde, k = número de classes e n = tamanho da amostra</p>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Regra de Sturges</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">3.3</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span> <span class="co">#ver as funções floor() e round()</span></span>
@@ -359,25 +359,25 @@ k = 1 + 3.3\log_{10}(n)
 <span><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/fdt.html">fdt</a></span><span class="op">(</span><span class="va">brotos_sub</span>, start<span class="op">=</span><span class="fl">10</span>, end<span class="op">=</span><span class="fl">45</span>, h<span class="op">=</span><span class="va">h</span><span class="op">)</span> <span class="co">#tabela de frequência manual</span></span>
 <span><span class="co">#?fdt #atente para o uso de k, por exemplo tf &lt;- fdt(brotos_sub, k=k)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  Class limits  f   rf rf(%)  cf cf(%)
-##       [10,13)  2 0.00   0.4   2   0.4
-##       [13,16)  7 0.01   1.4   9   1.8
-##       [16,19) 14 0.03   2.8  23   4.6
-##       [19,22) 48 0.10   9.6  71  14.2
-##       [22,25) 63 0.13  12.6 134  26.8
-##       [25,28) 82 0.16  16.4 216  43.2
-##       [28,31) 98 0.20  19.6 314  62.8
-##       [31,34) 78 0.16  15.6 392  78.4
-##       [34,37) 52 0.10  10.4 444  88.8
-##       [37,40) 32 0.06   6.4 476  95.2
-##       [40,43) 15 0.03   3.0 491  98.2</code></pre>
+<pre><code>##  Class limits  f   rf rf(%)  cf  cf(%)
+##       [10,13)  2 0.00  0.41   2   0.41
+##       [13,16)  7 0.01  1.43   9   1.83
+##       [16,19) 14 0.03  2.85  23   4.68
+##       [19,22) 48 0.10  9.78  71  14.46
+##       [22,25) 63 0.13 12.83 134  27.29
+##       [25,28) 82 0.17 16.70 216  43.99
+##       [28,31) 98 0.20 19.96 314  63.95
+##       [31,34) 78 0.16 15.89 392  79.84
+##       [34,37) 52 0.11 10.59 444  90.43
+##       [37,40) 32 0.07  6.52 476  96.95
+##       [40,43) 15 0.03  3.05 491 100.00</code></pre>
 </div>
 <div id="sobre-o-gráfico-stem-and-leaf" class="section level3" number="12.5.2">
 <h3>
 <span class="header-section-number">12.5.2</span> Sobre o gráfico <em>stem-and-leaf</em><a class="anchor" aria-label="anchor" href="#sobre-o-gr%C3%A1fico-stem-and-leaf"><i class="fas fa-link"></i></a>
 </h3>
 <p>Podemos agora entender melhor o que é o gráfico Stem-and-leaf.</p>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/stem.html">stem</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -453,7 +453,7 @@ k = 1 + 3.3\log_{10}(n)
 <p>A assimetria mede a falta de simetria em uma distribuição de frequência. Uma distribuição é simétrica se as duas metades à esquerda e à direita da média são cópias espelhadas uma da outra. Se a distribuição não é simétrica, então é assimétrica. A assimetria pode ser positiva, negativa ou nula (simétrica). Uma assimetria positiva indica que a cauda da distribuição se estende mais para a direita em relação à média (média &gt; mediana &gt; moda), enquanto uma assimetria negativa indica que a cauda da distribuição se estende mais para a esquerda em relação à média (média &lt; mediana &lt; moda) <span class="citation">(<a href="#ref-levin1977">LEVIN, 1977</a>)</span>.</p>
 <p>A curtose descreve o pico ou a “pontiagudez” de uma distribuição. Uma distribuição com alta curtose tem uma alta concentração de valores ao redor da média e caudas mais pesadas (ou seja, valores extremos são mais prováveis). Uma distribuição com baixa curtose é mais achatada e dispersa, com caudas mais leves. A curtose pode ser positiva (distribuição leptocúrtica, com alta concentração em torno da média e caudas pesadas), negativa (distribuição platicúrtica, com dispersão alta e caudas mais leves) ou nula (mesocúrtica, similar à distribuição normal) <span class="citation">(<a href="#ref-levin1977">LEVIN, 1977</a>)</span>.</p>
 <p>Essas medidas são úteis para compreender as propriedades e características de diferentes conjuntos de dados e distribuições de frequência. Elas ajudam a compreender a forma e o comportamento dos dados em uma amostra ou população <span class="citation">(<a href="#ref-zar2010">ZAR, 2010</a>)</span>.</p>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span></code></pre></div>
@@ -465,7 +465,7 @@ k = 1 + 3.3\log_{10}(n)
 <span class="header-section-number">12.7</span> Gráficos de histograma e boxplot<a class="anchor" aria-label="anchor" href="#iqr"><i class="fas fa-link"></i></a>
 </h2>
 <p>No código abaixo se define o layout dos gráficos para serem exibidos lado a lado, e na sequência criamos um gráfico de histograma com base na tabela de frequência <code>tf</code>. O comando <code><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot()</a></code> cria um gráfico de boxplot para os valores em <code>brotos_v</code>. O argumento “horizontal = TRUE” indica que o boxplot deve ser horizontal.</p>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co">#gráficos lado a lado</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span> <span class="co">#distribuição de frequências</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">brotos_sub</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -497,7 +497,7 @@ IQR = Q_3 - Q_1
 \text{Limite superior} = Q_3 + 1.5 \times IQR
 \]</span></p>
 <p>Valores fora desses limites são considerados possíveis outliers. Façamos o cálculo no R.</p>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Quartis</span></span>
 <span><span class="va">Q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">brotos_sub</span>, <span class="fl">0.25</span><span class="op">)</span></span>
 <span><span class="va">Q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">brotos_sub</span>, <span class="fl">0.75</span><span class="op">)</span></span>
@@ -534,10 +534,10 @@ IQR = Q_3 - Q_1
 <span class="header-section-number">12.7.1</span> Histograma de densidade<a class="anchor" aria-label="anchor" href="#histograma-de-densidade"><i class="fas fa-link"></i></a>
 </h3>
 <p>Outra forma de ver a distribuição de frequência é através do histograma de densidade de probabilidade e curva normal teórica sobreposta.</p>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">brotos_sub</span>, probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-78-1.png" alt="" width="672"></div>
@@ -566,14 +566,14 @@ IQR = Q_3 - Q_1
 \]</span></p>
 <p>É importante lembrar que em histogramas de densidade, as alturas precisam ser ajustadas para garantir que a área total sob o histograma deve ser igual a 1.</p>
 <p>Podemos usar a função <code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code> para criar um histograma manualmente mostrando as frequências absolutas. Se o objetivo for visualizar frequências absolutas diretamente, basta estabelecer o argumento <code>probability = FALSE</code>. Nesse caso, o eixo y representará contagens/frequências. Podemos ainda definir os intervalos das classes manualmente na função <code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code></p>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span></span>
 <span>  <span class="va">brotos_sub</span>,</span>
 <span>  probability <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">45</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-79-1.png" alt="" width="672"></div>
@@ -585,7 +585,7 @@ IQR = Q_3 - Q_1
 <span class="header-section-number">12.8</span> Gráfico de probabilidade normal (<em>Normal probability plot</em> ou <em>Normal Q-Q plot</em>)<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-probabilidade-normal-normal-probability-plot-ou-normal-q-q-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Em um gráfico Q-Q normal, pontos próximos da reta indicam que os dados seguem aproximadamente uma distribuição normal. Quando os pontos apresentam curvaturas acentuadas, isso sugere assimetria ou desvios importantes da normalidade. Já pontos muito afastados da reta podem indicar a presença de valores discrepantes (<em>outliers</em>).</p>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">brotos_sub</span>,</span>
 <span>       main <span class="op">=</span> <span class="st">"Normal Q-Q Plot dos Brotos"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">brotos_sub</span>,</span>
@@ -613,11 +613,11 @@ Z \sim N(0,1)
 <h2>
 <span class="header-section-number">12.9</span> Sumário estatístico geral<a class="anchor" aria-label="anchor" href="#sum%C3%A1rio-estat%C3%ADstico-geral"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
 <span><span class="co">#?summary</span></span>
-<span><span class="fu">sd</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
-<span><span class="fu">var</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/var.html">var</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co">#moda</span></span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   10.00   24.70   29.10   28.97   33.23   44.90 
@@ -630,9 +630,9 @@ Z \sim N(0,1)
 <span class="header-section-number">12.10</span> Estatística de Shapiro-Wilk<a class="anchor" aria-label="anchor" href="#estat%C3%ADstica-de-shapiro-wilk"><i class="fas fa-link"></i></a>
 </h2>
 <p>Os testes de Shapiro-Wilk e Kolmogorov-Smirnov são ambos usados para avaliar normalidade, mas funcionam de maneiras diferentes e têm objetivos diferentes <span class="citation">(<a href="#ref-moore2017">MOORE; MCCABE; CRAIG, 2017</a>)</span>. O Shapiro-Wilk é mais utilizado para amostras pequenas e médias (preferível em relação ao Kolmogorov-Smirnov). Testa as hipóteses:</p>
-<p>H<sub>0</sub>: os dados seguem distribuição normal<br>
-H<sub>1</sub>: os dados não seguem distribuição normal</p>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<p>H<sub>0</sub>(Hipótese nula): os dados seguem distribuição normal<br>
+H<sub>1</sub>(Hipótese alternativa): os dados não seguem distribuição normal</p>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
 <span><span class="co">#format(p, scientific = FALSE)</span></span></code></pre></div>
 <pre><code>## 
@@ -651,16 +651,16 @@ H<sub>1</sub>: os dados não seguem distribuição normal</p>
 <p>O Kolmogorov-Smirnov é um teste mais geral, desenvolvido para responder a pergunta: “A distribuição observada difere da distribuição teórica?”. Portanto, mede se a distribuição observada difere da distribuição teórica, comparando a distribuição acumulada empírica dos dados com uma distribuição teórica. Por isso, ele pode ser usado para vários tipos de distribuição (normal, exponencial, uniforme, Poisson, etc). A estatística do teste é o <code>D</code>, e ele mede a maior distância entre as duas curvas acumuladas, sendo menos poderoso para normalidade e mais sensível ao centro da distribuição.</p>
 <p>No caso do Kolmogorov-Smirnov, para testar normalidade, precisamos fornecer a média e o desvio padrão da amostra. Quando elas são estimados da própria amostra, o teste deixa de ser o Kolmogorov-Smirnov “puro” (mas veja a seguir). Por isso, <strong>para normalidade, o Shapiro-Wilk costuma ser preferido</strong>. O Kolmogorov-Smirnov pressupõe, ainda, que não existem empates (<code>ties</code>) nos dados, ou seja, valores repetidos. Nesses casos, o valor-p pode ficar menos confiável. Quando há muitos empates, a distribuição empírica fica “escalonada”, o que viola a hipótese teórica do teste.</p>
 <p>Outro problema do Kolmogorov-Smirnov, para teste de normalidade é que ele precisa da média e do desvio padrão da normal teórica. Se a média e desvio padrão são estimados da amostra, isso enfraquece o teste. Uma possibilidade é a versão adaptada do Kolmogorov-Smirnov de Lilliefors no R. Ele é uma adaptação do Kolmogorov-Smirnov para normalidade com média e desvio padrão estimados da amostra.</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#ks.test(brotos_sub, "pnorm") #assume media 0 e desvio padrão 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">brotos_sub</span>, <span class="co">#média e desvio padrão estimados da amostra</span></span>
 <span>        <span class="st">"pnorm"</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span>,</span>
-<span>        <span class="fu">sd</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in ks.test.default(brotos_sub, "pnorm", mean(brotos_sub),
 ## sd(brotos_sub)): não devem existir empates no teste de Kolmogorov-Smirnov de
 ## apenas uma amostra</code></pre>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#format(p, scientific = FALSE)</span></span></code></pre></div>
 <pre><code>## 
 ##  Asymptotic one-sample Kolmogorov-Smirnov test
@@ -671,7 +671,7 @@ H<sub>1</sub>: os dados não seguem distribuição normal</p>
 <p>O teste Kolmogorov-Smirnov clássico foi desenvolvido para distribuições contínuas sem empates. No código acima foi estimada média e desvio usando a própria amostra.</p>
 <p>Como o Kolmogorov-Smirnov clássico assume parâmetros conhecidos previamente, isso torna o teste “otimista”.</p>
 <p>O teste ideal nesse caso é o <code>Lilliefors</code></p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("nortest")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nortest</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
@@ -783,7 +783,7 @@ y' = \frac{2}{\pi}\arcsin(\sqrt{y})
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co"># install.packages("openxlsx") #importa arquivos do excel</span></span>
 <span><span class="co"># install.packages("fdth")</span></span>
@@ -831,7 +831,7 @@ y' = \frac{2}{\pi}\arcsin(\sqrt{y})
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co">#gráficos de volta ao normal</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">brotos_sub</span>, probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">brotos_sub</span>,</span>
@@ -841,13 +841,13 @@ y' = \frac{2}{\pi}\arcsin(\sqrt{y})
 <span>       lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
 <span><span class="co">#?summary</span></span>
-<span><span class="fu">sd</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
-<span><span class="fu">var</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/var.html">var</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">brotos_sub</span>,</span>
 <span>        <span class="st">"pnorm"</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span>,</span>
-<span>        <span class="fu">sd</span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#install.packages("nortest")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nortest</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">brotos_sub</span><span class="op">)</span></span></code></pre></div>
@@ -953,7 +953,7 @@ ZAR, J. H. <strong>Biostatistical Analysis</strong>. 5. ed. Upper Saddle River, 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/06/2026 07:13:08.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 10:32:20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
