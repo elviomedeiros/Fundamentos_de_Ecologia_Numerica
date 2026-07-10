@@ -164,7 +164,7 @@
 <h2>
 <span class="header-section-number">15.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
@@ -172,7 +172,7 @@
 <h3>
 <span class="header-section-number">15.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">densidade</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/MSS/_Bentos-2006/Bentos2006/zoobentos2006_com.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -553,7 +553,7 @@
 ##               3              13              66            4018             130 
 ##     Planorbidae        Physidae      Sphaeridae       Thiaridae        Veliidae 
 ##             717              30               1           14152               3</code></pre>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span></span>
@@ -916,7 +916,7 @@
 <h3>
 <span class="header-section-number">15.1.2</span> Criando tabelas com os dados<a class="anchor" aria-label="anchor" href="#criando-tabelas-com-os-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Tabela de habitat</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
@@ -982,7 +982,7 @@
 <span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/loadWorkbook.html">loadWorkbook</a></span><span class="op">(</span><span class="st">"tabela de habitat.xlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"Sheet 1"</span>, x <span class="op">=</span> <span class="va">m_wide</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"tabela de habitat.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Escolher sumário de uma variavel</span></span>
 <span><span class="va">m</span></span>
 <span><span class="va">var</span> <span class="op">&lt;-</span> <span class="st">"h.roots"</span></span>
@@ -1011,7 +1011,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>, <span class="st">"Min"</span>, <span class="st">"Q1"</span>, <span class="st">"Median"</span>, <span class="st">"Mean"</span>, <span class="st">"Q3"</span>, <span class="st">"Max"</span><span class="op">)</span></span>
 <span><span class="va">summary_table</span></span></code></pre></div>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
@@ -1076,7 +1076,7 @@
 <span><span class="va">hab_gttable</span></span>
 <span><span class="fu"><a href="https://gt.rstudio.com/reference/gtsave.html">gtsave</a></span><span class="op">(</span><span class="va">hab_gttable</span>, <span class="st">"gt-hab_gttable_xlsx.html"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">hab_gttable</span>, <span class="st">"gt-hab_gttable_xlsx.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#BENTOS2006 - RAREFAÇÃO E ANOVAS----</span></span>
 <span><span class="co">#####....----</span></span>
 <span></span>
@@ -1188,7 +1188,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">rareplot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="va">rareplot</span>, dpi <span class="op">=</span> <span class="fl">300</span>, filename <span class="op">=</span> <span class="st">"fig-rarerich.png"</span>, bg <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#BENTOS2006 - REGRESSÕES----</span></span>
 <span><span class="co">#####....----</span></span>
 <span></span>
@@ -1285,7 +1285,7 @@
 <span><span class="co">#library(car)</span></span>
 <span><span class="co">#crPlots(step.model)</span></span>
 <span><span class="co">#par(mfrow = c(1,1))</span></span></code></pre></div>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#REMOVENDO ESPÉCIES RARAS----</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span><span class="op">(</span><span class="st">"https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/data-adjustments/"</span><span class="op">)</span></span>
@@ -1386,7 +1386,7 @@ COAKES, S. J.; STEED, L. G. <strong>SPSS: Analysis Without Anguish: version 10.0
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 18:20:14.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 19:34:14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
