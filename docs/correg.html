@@ -137,17 +137,17 @@
 <h2>
 <span class="header-section-number">14.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> <span class="co">#sem notação científica, oposto de scipen = 0</span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -156,7 +156,7 @@
 <span class="header-section-number">14.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vamos importar a planilha de dados univariados <code>tucuna.xlsx</code>. Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -208,7 +208,7 @@
 ## TU009  24.6 200.5  20.5     25.7 195.9
 ## TU010  19.4  86.7  16.0     18.3  84.5</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(univ)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">univ</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">univ</span></span>
@@ -274,7 +274,7 @@
 <p>Hipótese nula (H₀): não existe correlação linear entre as duas variáveis na população.<br>
 Hipótese alternativa (H₁): existe correlação linear entre as duas variáveis na população.</p>
 <p>Nesse caso, utiliza-se:</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
@@ -365,9 +365,9 @@ y: comprimento total (CT_cm)</p>
 <ol style="list-style-type: decimal">
 <li>Comprimento padrão e comprimento total ainda se correlacionam independentemente do peso?</li>
 </ol>
-<p>Hipótese nula (H₀): não existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.<br>
-Hipótese alternativa (H₁): existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<p>Hipótese nula (<span class="math inline">\(H_0\)</span>): não existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.<br>
+Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.</p>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span></span>
 <span>  <span class="va">univ</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CP_cm"</span>, <span class="st">"CT_cm"</span>, <span class="st">"PT_g"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>  use <span class="op">=</span> <span class="st">"complete.obs"</span></span>
@@ -388,7 +388,7 @@ Hipótese alternativa (H₁): existe correlação linear entre as duas variávei
 <p>Interpretação:</p>
 <p>O resultado da <strong>correlação parcial</strong> (<code><a href="https://rdrr.io/pkg/ppcor/man/pcor.test.html">pcor.test()</a></code>) de Pearson, isto é, a correlação entre CP_cm e CT_cm após controlar o efeito de uma terceira variável (PT_g), demonstra um <strong>coeficiente de correlação parcial</strong> <span class="math inline">\(r_p\)</span> de 0.9946 (<em>estimate</em>), mesmo após remover o efeito do peso (PT_g). A <strong>estaística t</strong> (<em>statistic</em>) de 198.92 utilizada para testar a significância da correlação parcial e o <strong>número de observações</strong> (n) também são apresentados. O <strong>número de variáveis controladas</strong> (neste caso, apenas PT_g), é demonstrado em
 gp = 1. O <strong>valor de p</strong> (&lt;0,001) é extremamente pequeno. Finalmemte, o <strong>método utilizado</strong> (correlação parcial de Pearson) é apresentado.</p>
-<p>Tivemos uma correlação parcial extremamente forte e positiva (r=0.955) entre CP_cm e CT_cm, mesmo após remover o efeito do PT_g (peso total) (p &lt; 0,001). Isso indica que a associação entre comprimento padrão e comprimento total permanece muito forte independentemente do peso corporal.</p>
+<p>Tivemos uma correlação parcial extremamente forte e positiva (r = 0.955) entre CP_cm e CT_cm, mesmo após remover o efeito do PT_g (peso total) (p &lt; 0,001). Isso indica que a associação entre comprimento padrão e comprimento total permanece muito forte independentemente do peso corporal.</p>
 <p>O QUE REPORTAR: Análise de correlação parcial revelou associação positiva extremamente forte entre comprimento padrão e comprimento total, mesmo após o controle do peso corporal (r = 0,955; p &lt; 0,001).</p>
 </div>
 <div id="regressão-simples" class="section level2" number="14.7">
@@ -427,7 +427,7 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <li>Realização da ANOVA do modelo da regressão</li>
 <li>Aplicação de correção robusta</li>
 </ol>
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,</span>
@@ -497,7 +497,8 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <p>No caso do nosso exemplo, o modelo de regressão linear simples pode ser representado por:</p>
 <p><span class="math display">\[
 CT_{cm} = \beta_0 + \beta_1 CP_{cm} + \varepsilon
-\]</span> onde:</p>
+\]</span></p>
+<p>onde:</p>
 <ul>
 <li>
 <span class="math inline">\(CT_{cm}\)</span> = comprimento total (variável resposta ou dependente);</li>
@@ -525,15 +526,15 @@ onde:</p>
 </li>
 <li>1,206 é o coeficiente angular (<span class="math inline">\(\beta_1\)</span>)</li>
 </ul>
-<p>O <strong>intercept</strong> (<span class="math inline">\(\beta_0 = 1.147\)</span>) representa o valor esperado de <span class="math inline">\(CT_{cm}\)</span> quando <span class="math inline">\(CP_{cm}=0\)</span> (geralmente sem interpretação biológica, mas importante em Modelos Lineares Generaliados). O <strong>coeficiente angular</strong> (<span class="math inline">\(\beta_1 = 1,206\)</span>) indica que, em média, para cada aumento de 1 cm em <span class="math inline">\(CP_{cm}\)</span>, espera-se aumento aproximado de 1,206 cm em <span class="math inline">\(CT_{cm}\)</span>. O **erro padrão do coeficiente angular*, que mede a precisão da estimativa de <span class="math inline">\(beta_1\)</span>, foi de 0,00258.</p>
+<p>O <strong>intercept</strong> (<span class="math inline">\(\beta_0 = 1.147\)</span>) representa o valor esperado de CT_cm quando CP_cm=0 (geralmente sem interpretação biológica, mas importante em Modelos Lineares Generaliados). O <strong>coeficiente angular</strong> (<span class="math inline">\(\beta_1\)</span> = 1,206) indica que, em média, para cada aumento de 1 cm em CP_cm, espera-se aumento aproximado de 1,206 cm em CT_cm. O **erro padrão do coeficiente angular*, que mede a precisão da estimativa de <span class="math inline">\(beta_1\)</span>, foi de 0,00258.</p>
 <p>Os resultados também mostram que O coeficiente de CP_cm é altamente significativo (t=467.22, p&lt;0.001), indicando que o comprimento padrão é um forte preditor do comprimento total. Embora o modelo apresente um erro médio de aproximadamente 0,42 cm na predição do comprimento total, como mostrado no <strong>erro padrão residual</strong> de 0.4216. Os <strong>coeficientes de determinação</strong> (múltiplos e ajustados) de 0.998, indicam que o cerca de 99,8% da variação no comprimento total.</p>
 <p>Finalmente, <strong>o teste F</strong> de 2.183e+05 e seu <strong>valor de p</strong> &lt; 0.001, testam a hipótese de que o modelo não explica a variável resposta:</p>
 <p><span class="math inline">\(H_0\)</span>: Hipótese nula: <span class="math inline">\(\beta_1 = 0\)</span>, ou seja, a variável explicativa não exerce efeito sobre a variável resposta (o modelo não possui poder preditivo).</p>
 <p><span class="math inline">\(H_1\)</span>: Hipótese alternativa: <span class="math inline">\(\beta_1 \neq 0\)</span>, ou seja, a variável explicativa exerce efeito sobre a variável resposta (o modelo possui poder preditivo).</p>
 <p>Como p&lt;0.001, rejeita-se <span class="math inline">\(H_0\)</span> e aceota-se <span class="math inline">\(H_1\)</span>, o modelo de regressão é estatisticamente significativo e tem poder preditivo para o comprimento total.</p>
-<p>O QUE REPORTAR: A regressão linear simples revelou que o comprimento padrão foi um preditor significativo do comprimento total (<span class="math inline">\(\beta = 1.207 \pm 0.003\)</span>, <span class="math inline">\(t(432) = 467.22\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). O modelo apresentou excelente ajuste aos dados (<span class="math inline">\(R^2 = 0.998\)</span>; <span class="math inline">\(F(1,432) = 218300\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>), explicando aproximadamente 99,8% da variação no comprimento total. A equação ajustada foi <span class="math inline">\(CT_{cm} = 0.148 + 1.207 \times CP_{cm}\)</span>.</p>
+<p>O QUE REPORTAR: A regressão linear simples revelou que o comprimento padrão foi um preditor significativo do comprimento total (<span class="math inline">\(\beta\)</span> = 1.207 <span class="math inline">\(\pm\)</span> 0.003, t<span class="math inline">\(_{(432)}\)</span> = 467.22, p &lt; 0.001). O modelo apresentou excelente ajuste aos dados (r<span class="math inline">\(^2\)</span> = 0.998; F<span class="math inline">\(_{(1,432)}\)</span> = 218300, p &lt; 0.001), explicando aproximadamente 99,8% da variação no comprimento total. A equação ajustada foi <span class="math inline">\(CT_{cm} = 0.148 + 1.207 \times CP_{cm}\)</span>.</p>
 <p>Na sequência avaliamos homogeneidade de variâncias. Para o caso de heterogeneidade de variâncias devemos usar a <strong>correção robusta de White (HC3)</strong>. Antes disso realizamos uma ANOVA da regressão, para testar se o comprimento padrão explica uma parcela significativa da variação no comprimento total. A diferença entre <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> e <code><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova()</a></code> só aparece em modelos com dois ou mais preditores. <code>Anova(modelo, white.adjust = TRUE)</code> calcula o mesmo teste, mas utilizando a correção robusta de White (HC3) para os erros padrão. Essa correção é recomendada quando há heterocedasticidade (variância não constante dos resíduos).</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -569,7 +570,7 @@ onde:</p>
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
 <p>Em um novo exemplo, podemos analisar comprimento total e peso corporal em peixes. Em estudos de relação peso-comprimento normalmente considera-se comprimento como variável independente e peso como variável dependente.</p>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
@@ -623,7 +624,7 @@ onde:</p>
     geom_tipo()
 ?ggplot</code></pre>
 <p>Esse modelo modular torna possível compor gráficos simples ou complexos com clareza.</p>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
 <span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">univ</span>,</span>
@@ -729,7 +730,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 11:31:39.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 12:00:45.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

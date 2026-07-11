@@ -128,7 +128,7 @@
 <h2>
 <span class="header-section-number">18.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-7"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
@@ -137,11 +137,11 @@
 <span class="header-section-number">18.2.1</span> Instalando os pacotes necessários para esse módulo.<a class="anchor" aria-label="anchor" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><i class="fas fa-link"></i></a>
 </h3>
 <p>Se você ja fez o módulo anterior, não vai precisar instalar nenhum pacote novo. Os pacotes necessários serão carregados ao longo desse módulo.</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"psych"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"corrplot"</span><span class="op">)</span></span></code></pre></div>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -153,7 +153,7 @@
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 - Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado. Vamos trabalhar com os dados do ano 1.</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
 <span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
@@ -201,7 +201,7 @@
 ## S-R-CT2  0.000000 20.00000  0.00000    0.00000  0.0000000
 ## S-R-CP2  0.000000  0.00000  0.00000   33.33333  1.0000000</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -213,7 +213,7 @@
 <h2>
 <span class="header-section-number">18.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_amb</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span>
 <span><span class="co">#pat &lt;- "^S"</span></span>
 <span><span class="co">#m_amb &lt;- m_amb[!grepl(pat, rownames(m_amb)), ] #exclui quem começa com pat</span></span></code></pre></div>
@@ -224,7 +224,7 @@
 <h2>
 <span class="header-section-number">18.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/pairs.panels.html">pairs.panels</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>,</span>
@@ -441,7 +441,7 @@
 <span class="header-section-number">18.6</span> Deletando variáveis colineares<a class="anchor" aria-label="anchor" href="#deletando-vari%C3%A1veis-colineares"><i class="fas fa-link"></i></a>
 </h2>
 <p>Primeiro vamos listar as variáveis com correlação maior que 70% ou r &gt; 0.7.</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get upper triangle (to avoid duplicate pairs)</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
 <span><span class="va">cor_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">r</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -468,7 +468,7 @@
 ## 11       m.elev   m.river   0.8525104
 ## 3    h.overhveg   h.roots   0.7224571</code></pre>
 <p>Agora que temos as variáveis correlacionadas, prosseguimos para deleta-las.</p>
-<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
 <span><span class="va">del_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"m.distsource"</span>, <span class="st">"m.elev"</span><span class="op">)</span> <span class="co">#exemplo, "g.river_length","g.altitude"</span></span>
 <span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">del_cols</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
@@ -484,7 +484,7 @@
 <span class="header-section-number">18.7</span> Somando variáveis redundantes<a class="anchor" aria-label="anchor" href="#somando-vari%C3%A1veis-redundantes"><i class="fas fa-link"></i></a>
 </h2>
 <p>Algumas dessa variáveis são redundantes, vamos soma-las.</p>
-<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.gravel</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.smlgrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.lrggrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.cobbles</span></span>
 <span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
 <span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s.smlgrav"</span>, <span class="st">"s.lrggrav"</span>, <span class="st">"s.cobbles"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
@@ -602,7 +602,7 @@
 ## B-A-MU4  0.0000000  5.000000 30.0000000 10.4444447
 ## B-A-GU4  1.4166667  0.000000 43.3333333  3.7500000</code></pre>
 <p>Salvando a matriz final particionada de dados ambientais.</p>
-<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">m_amb_part</span>, <span class="st">"m_amb_part.csv"</span>,</span>
 <span>            sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>, <span class="co">#"\t",</span></span>
 <span>            row.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -619,7 +619,7 @@
 <span class="header-section-number">18.8</span> Tabela de dados ambientais<a class="anchor" aria-label="anchor" href="#tabela-de-dados-ambientais"><i class="fas fa-link"></i></a>
 </h2>
 <p>Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba <code>ambientalp</code>, porque nela constam os agrupamentos <em>a-priori</em> para os dados ambientais.</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">t_grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -637,7 +637,7 @@
 ## S-R-CP1 Serido      rio CP      1
 ## S-A-TA1 Serido    acude TA      1
 ## S-R-CT2 Serido      rio CT      2</code></pre>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
 <span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -778,7 +778,7 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 11:31:39.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 12:00:45.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
