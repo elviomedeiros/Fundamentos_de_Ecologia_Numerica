@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 17 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica</title>
+<title> 18 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content=" 17 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 18 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 17 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 18 R Modulo 4.2 - Decomposição da diversidade | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO Na ecologia de comunidades, a diversidade de espécies é uma medida importante para entender a complexidade e a estrutura de uma comunidade de organismos. Vamos explorar algumas das métricas...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -89,13 +89,14 @@
 <li><a class="" href="xls.html"><span class="header-section-number">11</span> R Módulo 2 - Importando planilhas de dados</a></li>
 <li><a class="" href="norm.html"><span class="header-section-number">12</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
 <li><a class="" href="testes.html"><span class="header-section-number">13</span> R Módulo 3.2 - Testes estatísticos</a></li>
-<li><a class="" href="correg.html"><span class="header-section-number">14</span> R Módulo 3.2 - Correlação e Regressão</a></li>
-<li><a class="" href="regmul.html"><span class="header-section-number">15</span> R Módulo 4.2 - Regressão múltipla</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
-<li><a class="active" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="correg.html"><span class="header-section-number">14</span> Correlação e Regressão</a></li>
+<li><a class="" href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></li>
+<li><a class="" href="mlgs.html"><span class="header-section-number">16</span> Modelos Lineares Generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
+<li><a class="active" href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
@@ -105,20 +106,20 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="partdiv" class="section level1" number="17">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="partdiv" class="section level1" number="18">
 <h1>
-<span class="header-section-number"> 17</span> R Modulo 4.2 - Decomposição da diversidade<a class="anchor" aria-label="anchor" href="#partdiv"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 18</span> R Modulo 4.2 - Decomposição da diversidade<a class="anchor" aria-label="anchor" href="#partdiv"><i class="fas fa-link"></i></a>
 </h1>
-<div id="resumo-11" class="section level3 unnumbered">
-<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-11"><i class="fas fa-link"></i></a>
+<div id="resumo-12" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-12"><i class="fas fa-link"></i></a>
 </h3>
 <p>Na ecologia de comunidades, a diversidade de espécies é uma medida
 importante para entender a complexidade e a estrutura de uma comunidade
 de organismos. Vamos explorar algumas das métricas comuns usadas para
 avaliar a diversidade de espécies.</p>
 </div>
-<div id="apresentação-11" class="section level3 unnumbered">
-<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-11"><i class="fas fa-link"></i></a>
+<div id="apresentação-12" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-12"><i class="fas fa-link"></i></a>
 </h3>
 <p>Na ecologia de comunidades, a diversidade de espécies é uma medida
 importante para entender a complexidade e a estrutura de uma comunidade
@@ -129,9 +130,9 @@ podem fornecer informações importantes sobre como as diferentes espécies
 interagem em um ecossistema e como a diversidade de espécies pode ser
 afetada por mudanças ambientais ou distúrbios <span class="citation">(<a href="#ref-magurran1988">MAGURRAN, 1988</a>)</span>.</p>
 </div>
-<div id="sobre-os-dados-4" class="section level2" number="17.1">
+<div id="sobre-os-dados-5" class="section level2" number="18.1">
 <h2>
-<span class="header-section-number">17.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz
 comunitária</strong>
@@ -149,16 +150,16 @@ foram relativizados ou transformados.</p>
 Dados</a>. A matriz de dados para esse Módulo pode ser baixada na
 seção <a href="bases.html#arqs">Arquivos disponíveis</a>.</strong></p>
 <p><strong>Revise o módulo anterior <a href="estrcom.html#estrcom">Estrutura da Comunidade</a></strong></p>
-<div id="organização-básica-6" class="section level3" number="17.1.1">
+<div id="organização-básica-8" class="section level3" number="18.1.1">
 <h3>
-<span class="header-section-number">17.1.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-8"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"moments"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></span>
@@ -172,7 +173,7 @@ seção <a href="bases.html#arqs">Arquivos disponíveis</a>.</strong></p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gt"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggVennDiagram"</span><span class="op">)</span></span></code></pre></div>
 <p>Depois de instalados, carregue os pacotes a seguir no seu computador.</p>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org">Rcpp</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes
 necessários para este módulo. Esses códigos são comandos para instalar
@@ -196,13 +197,13 @@ arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a
 caminho especificado entre aspas. No seu caso, você deve ajustar o
 caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a
 barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="importando-a-planilha-5" class="section level3" number="17.1.2">
+<div id="importando-a-planilha-5" class="section level3" number="18.1.2">
 <h3>
-<span class="header-section-number">17.1.2</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1.2</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-5"><i class="fas fa-link"></i></a>
 </h3>
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa
 que o texto que vem depois dele é um comentário e não será executado
@@ -211,7 +212,7 @@ pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do
 arquivo .xlsx a ser importado.</p>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
 <span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
@@ -264,7 +265,7 @@ arquivo .xlsx a ser importado.</p>
 ## S-R-CP2        0        5        1        0       40</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive”
 <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -273,11 +274,11 @@ arquivo .xlsx a ser importado.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="reinício-1" class="section level2" number="17.2">
+<div id="reinício-1" class="section level2" number="18.2">
 <h2>
-<span class="header-section-number">17.2</span> REINÍCIO 1<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.2</span> REINÍCIO 1<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
 <p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho,
 para esse momento) que substitui a matriz de dados original, por uma
@@ -292,12 +293,12 @@ comumente usadas em uma AMD, a tabela @ref(tab:42tbl-m_2) resume seus
 tipos e abreviações.</p>
 </div>
 </div>
-<div id="análise-de-espécies-compartilhadas" class="section level2" number="17.3">
+<div id="análise-de-espécies-compartilhadas" class="section level2" number="18.3">
 <h2>
-<span class="header-section-number">17.3</span> Análise de Espécies Compartilhadas<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.3</span> Análise de Espécies Compartilhadas<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas"><i class="fas fa-link"></i></a>
 </h2>
 <p>Instalando os pacotes necessários</p>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"eulerr"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"VennDiagram"</span><span class="op">)</span></span>
@@ -305,7 +306,7 @@ tipos e abreviações.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggvenn"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gplots"</span><span class="op">)</span> </span></code></pre></div>
 <p>Carregado a base de dados <code>teste</code> para ajudar no entendimento.</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">teste</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">    SP1 SP2 SP3 SP4 SP5 SP6 SP7 SP8 SP9 SP10    SP11    SP12    SP13    SP14    SP15    SP16    SP17    SP18    SP19    SP20</span></span>
 <span><span class="st">A1  1   0   0   1   0   1   1   1   0   0   1   0   0   1   0   1   1   1   0   0</span></span>
@@ -320,33 +321,33 @@ tipos e abreviações.</p>
 <span><span class="st">"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">teste</span></span></code></pre></div>
 </div>
-<div id="reinício-2" class="section level2" number="17.4">
+<div id="reinício-2" class="section level2" number="18.4">
 <h2>
-<span class="header-section-number">17.4</span> REINÍCIO 2<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4</span> REINÍCIO 2<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
-<div id="separando-a-matriz-ppbio-em-suas-partes-s-e-b-ou-a-e-r" class="section level3" number="17.4.1">
+<div id="separando-a-matriz-ppbio-em-suas-partes-s-e-b-ou-a-e-r" class="section level3" number="18.4.1">
 <h3>
-<span class="header-section-number">17.4.1</span> Separando a matriz <code>ppbio</code> em suas partes (S e B ou A e R)<a class="anchor" aria-label="anchor" href="#separando-a-matriz-ppbio-em-suas-partes-s-e-b-ou-a-e-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.1</span> Separando a matriz <code>ppbio</code> em suas partes (S e B ou A e R)<a class="anchor" aria-label="anchor" href="#separando-a-matriz-ppbio-em-suas-partes-s-e-b-ou-a-e-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>Separa-se <code>S-</code> e <code>B-</code>, e atribui-se, respectivamente, aos grupos G1 e G2
 e remove-se as colunas zeradas.</p>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">G1</span> <span class="op">&lt;-</span> <span class="va">m_trab</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,<span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co">#all-zero columns</span></span>
 <span><span class="va">G1</span> <span class="op">&lt;-</span> <span class="va">G1</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G1</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
 <span><span class="va">G2</span> <span class="op">&lt;-</span> <span class="va">m_trab</span><span class="op">[</span><span class="fl">13</span><span class="op">:</span><span class="fl">23</span>,<span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G2</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co">#all-zero columns</span></span>
 <span><span class="va">G2</span> <span class="op">&lt;-</span> <span class="va">G2</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G2</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div>
-<div id="mesmo-procedimento-usando-o-comando-grepl-do-pacote-dplyr" class="section level4" number="17.4.1.1">
+<div id="mesmo-procedimento-usando-o-comando-grepl-do-pacote-dplyr" class="section level4" number="18.4.1.1">
 <h4>
-<span class="header-section-number">17.4.1.1</span> Mesmo procedimento usando o comando <code>grepl()</code> do pacote <code>dplyr</code><a class="anchor" aria-label="anchor" href="#mesmo-procedimento-usando-o-comando-grepl-do-pacote-dplyr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.1.1</span> Mesmo procedimento usando o comando <code>grepl()</code> do pacote <code>dplyr</code><a class="anchor" aria-label="anchor" href="#mesmo-procedimento-usando-o-comando-grepl-do-pacote-dplyr"><i class="fas fa-link"></i></a>
 </h4>
 <p>Outra forma de separar grupos, mas agpra para <code>R-</code> e <code>A-</code>,
 atribuindo-se, respectivamente, aos grupos G3 e G4 e removendo-se as
 colunas zeradas.</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">G3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">m_trab</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"R-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G3</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co">#all-zero columns</span></span>
@@ -356,7 +357,7 @@ colunas zeradas.</p>
 <span><span class="va">G4</span> <span class="op">&lt;-</span> <span class="va">G4</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">G4</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:2codes">Tabela 17.1: </span><span id="tab:2codes">Tabela 17.2: </span>Código para o delineamento amostral. *n, total amostrado = 23; **np, n planejado = 96.
+<span id="tab:2codes">Tabela 18.1: </span><span id="tab:2codes">Tabela 18.2: </span>Código para o delineamento amostral. *n, total amostrado = 23; **np, n planejado = 96.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -534,13 +535,13 @@ np**= 96
 </div>
 </div>
 </div>
-<div id="táxons-compartilhados-pelas-duas-bases-de-dados" class="section level2" number="17.5">
+<div id="táxons-compartilhados-pelas-duas-bases-de-dados" class="section level2" number="18.5">
 <h2>
-<span class="header-section-number">17.5</span> Táxons compartilhados pelas duas bases de dados<a class="anchor" aria-label="anchor" href="#t%C3%A1xons-compartilhados-pelas-duas-bases-de-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.5</span> Táxons compartilhados pelas duas bases de dados<a class="anchor" aria-label="anchor" href="#t%C3%A1xons-compartilhados-pelas-duas-bases-de-dados"><i class="fas fa-link"></i></a>
 </h2>
-<div id="bases-de-dados-em-arquivos-diferentes-b-e-s" class="section level3" number="17.5.1">
+<div id="bases-de-dados-em-arquivos-diferentes-b-e-s" class="section level3" number="18.5.1">
 <h3>
-<span class="header-section-number">17.5.1</span> Bases de dados em arquivos diferentes <code>B</code> e <code>S</code><a class="anchor" aria-label="anchor" href="#bases-de-dados-em-arquivos-diferentes-b-e-s"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.5.1</span> Bases de dados em arquivos diferentes <code>B</code> e <code>S</code><a class="anchor" aria-label="anchor" href="#bases-de-dados-em-arquivos-diferentes-b-e-s"><i class="fas fa-link"></i></a>
 </h3>
 <p>Nos códigos abaixo, a função <code><a href="https://generics.r-lib.org/reference/setops.html">intersect()</a></code> é usada para se obter os
 nomes de colunas em comum entre <code>fixo</code> e <code>entorno</code>, que são guardados em
@@ -552,7 +553,7 @@ não em outro. Se uma coluna está faltando em um data frame, ela será
 adicionada aquele data frame com o termo <code>NA</code> ou <code>NULL</code>. Para substituir
 os valores rotulados de <code>NA</code> ou <code>NULL</code> usa-se a função
 <code>merged[is.na(merged)] &lt;- 0</code>. Ver Apêndices.</p>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shared_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G2</span><span class="op">)</span><span class="op">)</span> <span class="co">#get the common column names</span></span>
 <span><span class="va">shared_spp</span></span>
 <span><span class="va">G1_only</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G2</span><span class="op">)</span><span class="op">)</span></span>
@@ -563,7 +564,7 @@ os valores rotulados de <code>NA</code> ou <code>NULL</code> usa-se a função
 <span><span class="va">Riqueza</span></span></code></pre></div>
 <p>Criando um <code>data.frame</code> com todas as espécies compartilhadas e
 exclusivas.</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="co"># Create a data frame with all species</span></span>
 <span><span class="va">all_species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
@@ -588,19 +589,19 @@ exclusivas.</p>
 <span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="va">species_table_df</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="reinício-3" class="section level2" number="17.6">
+<div id="reinício-3" class="section level2" number="18.6">
 <h2>
-<span class="header-section-number">17.6</span> REINÍCIO 3<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.6</span> REINÍCIO 3<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_bruta</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
 <p>Aqui cria-se o vertor da matriz bruta a partir da base de dados depois
 de feitos os ajustes necessários.</p>
-<div id="criando-uma-matriz-de-médias-1" class="section level3" number="17.6.1">
+<div id="criando-uma-matriz-de-médias-1" class="section level3" number="18.6.1">
 <h3>
-<span class="header-section-number">17.6.1</span> Criando uma matriz de médias<a class="anchor" aria-label="anchor" href="#criando-uma-matriz-de-m%C3%A9dias-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.6.1</span> Criando uma matriz de médias<a class="anchor" aria-label="anchor" href="#criando-uma-matriz-de-m%C3%A9dias-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Inserindo coluna para agrupamentos</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de N colunas x M linhas</span></span>
 <span><span class="va">m_bruta_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Grupos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>, <span class="va">m_bruta</span><span class="op">)</span></span>
@@ -643,11 +644,11 @@ de feitos os ajustes necessários.</p>
 <span>                    row.names <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                    na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="análise-de-espécies-compartilhadas-em-arquivos-diferentes" class="section level3" number="17.6.2">
+<div id="análise-de-espécies-compartilhadas-em-arquivos-diferentes" class="section level3" number="18.6.2">
 <h3>
-<span class="header-section-number">17.6.2</span> Análise de Espécies Compartilhadas: Em arquivos diferentes<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas-em-arquivos-diferentes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.6.2</span> Análise de Espécies Compartilhadas: Em arquivos diferentes<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas-em-arquivos-diferentes"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Espécies compartilhadas</span></span>
 <span><span class="va">shared_spp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G2</span><span class="op">)</span><span class="op">)</span> <span class="co">#get the common column names</span></span>
 <span><span class="va">shared_spp1</span></span>
@@ -657,7 +658,7 @@ de feitos os ajustes necessários.</p>
 <span><span class="va">G2_only</span></span>
 <span><span class="va">Riqueza</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">shared_spp1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">G1_only</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">G2_only</span><span class="op">)</span></span>
 <span><span class="va">Riqueza</span></span></code></pre></div>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shared_spp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">shared_spp2</span></span>
 <span><span class="va">G3_only</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">G4</span><span class="op">)</span><span class="op">)</span></span>
@@ -667,9 +668,9 @@ de feitos os ajustes necessários.</p>
 <span><span class="va">Riqueza</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">shared_spp2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">G3_only</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">G4_only</span><span class="op">)</span></span>
 <span><span class="va">Riqueza</span></span></code></pre></div>
 </div>
-<div id="bases-de-dados-no-mesmo-arquivo-ppbio" class="section level3" number="17.6.3">
+<div id="bases-de-dados-no-mesmo-arquivo-ppbio" class="section level3" number="18.6.3">
 <h3>
-<span class="header-section-number">17.6.3</span> Bases de dados no mesmo arquivo <code>ppbio</code><a class="anchor" aria-label="anchor" href="#bases-de-dados-no-mesmo-arquivo-ppbio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.6.3</span> Bases de dados no mesmo arquivo <code>ppbio</code><a class="anchor" aria-label="anchor" href="#bases-de-dados-no-mesmo-arquivo-ppbio"><i class="fas fa-link"></i></a>
 </h3>
 <p>Pode-se usar a matriz <code>teste.xlsx</code> para testar e verificar os resultados
 dos comandos em comparação com as matrizes reais. O comando <code><a href="https://rdrr.io/r/utils/fix.html">fix()</a></code>
@@ -678,7 +679,7 @@ e 20 colunas, com os nomes A1, A2, A3, B1, B2, B3, C1, C2, C3 nas linhas e
 SP1, SP2, SP3, SP4, SP5, SP6, SP7, SP8, SP9, SP10, SP11, SP12, SP13, SP14, SP15, SP16, SP17, SP18, SP19, SP20 como os nomes das colunas. Códigos baseados nas
 letras A, B e C, portanto, se referem a matriz de teste.</p>
 <p>A seguir separamos a matriz em suas partes.</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">teste</span><span class="op">)</span></span>
 <span><span class="va">data</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -693,35 +694,35 @@ letras A, B e C, portanto, se referem a matriz de teste.</p>
 <span><span class="va">C</span> <span class="op">&lt;-</span> <span class="va">C</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">C</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div>
 </div>
 </div>
-<div id="reinício-4" class="section level2" number="17.7">
+<div id="reinício-4" class="section level2" number="18.7">
 <h2>
-<span class="header-section-number">17.7</span> REINÍCIO 4<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.7</span> REINÍCIO 4<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="encontrando-espécies-exclusivas" class="section level2" number="17.8">
+<div id="encontrando-espécies-exclusivas" class="section level2" number="18.8">
 <h2>
-<span class="header-section-number">17.8</span> Encontrando espécies exclusivas<a class="anchor" aria-label="anchor" href="#encontrando-esp%C3%A9cies-exclusivas"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8</span> Encontrando espécies exclusivas<a class="anchor" aria-label="anchor" href="#encontrando-esp%C3%A9cies-exclusivas"><i class="fas fa-link"></i></a>
 </h2>
-<div id="escolhendo-as-linhas-ou-grupos-para-comparar" class="section level3" number="17.8.1">
+<div id="escolhendo-as-linhas-ou-grupos-para-comparar" class="section level3" number="18.8.1">
 <h3>
-<span class="header-section-number">17.8.1</span> Escolhendo as <strong>LINHAS OU GRUPOS</strong> para comparar<a class="anchor" aria-label="anchor" href="#escolhendo-as-linhas-ou-grupos-para-comparar"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.1</span> Escolhendo as <strong>LINHAS OU GRUPOS</strong> para comparar<a class="anchor" aria-label="anchor" href="#escolhendo-as-linhas-ou-grupos-para-comparar"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the row indices where "A" occurs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"S-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#rows &lt;- grep("B-", rownames(data))</span></span>
 <span><span class="co">#rows &lt;- c(1:36)</span></span>
 <span><span class="va">rows</span></span></code></pre></div>
-<div id="espécies-exclusivas-que-ocorrem-em-1-linha-e-outra-ou-em-1-grupo-e-outro-em-teste" class="section level4" number="17.8.1.1">
+<div id="espécies-exclusivas-que-ocorrem-em-1-linha-e-outra-ou-em-1-grupo-e-outro-em-teste" class="section level4" number="18.8.1.1">
 <h4>
-<span class="header-section-number">17.8.1.1</span> Espécies exclusivas que ocorrem em <strong>1 LINHA E OUTRA, OU EM 1 GRUPO E OUTRO</strong> <code>(#EM TESTE)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-que-ocorrem-em-1-linha-e-outra-ou-em-1-grupo-e-outro-em-teste"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.1.1</span> Espécies exclusivas que ocorrem em <strong>1 LINHA E OUTRA, OU EM 1 GRUPO E OUTRO</strong> <code>(#EM TESTE)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-que-ocorrem-em-1-linha-e-outra-ou-em-1-grupo-e-outro-em-teste"><i class="fas fa-link"></i></a>
 </h4>
 <p>Aqui procuramos espécies que ocorrem em todas as linhas do grupo
 definido pelo vetor <code>rows</code> no chunk anterior <code>rows</code></p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize an empty vector to store species exclusive to 'A' rows</span></span>
 <span><span class="va">species_only_in</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co"># Iterate over each column</span></span>
@@ -736,11 +737,11 @@ definido pelo vetor <code>rows</code> no chunk anterior <code>rows</code></p>
 <span><span class="va">data</span></span></code></pre></div>
 </div>
 </div>
-<div id="espécies-exclusivas-para-1-linha-ou-1-grupo---baseado-na-soma-dos-grupos-funciona" class="section level3" number="17.8.2">
+<div id="espécies-exclusivas-para-1-linha-ou-1-grupo---baseado-na-soma-dos-grupos-funciona" class="section level3" number="18.8.2">
 <h3>
-<span class="header-section-number">17.8.2</span> Espécies exclusivas para <strong>1 LINHA OU 1 GRUPO</strong> - Baseado na soma dos grupos <code>(#FUNCIONA)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-para-1-linha-ou-1-grupo---baseado-na-soma-dos-grupos-funciona"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.2</span> Espécies exclusivas para <strong>1 LINHA OU 1 GRUPO</strong> - Baseado na soma dos grupos <code>(#FUNCIONA)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-para-1-linha-ou-1-grupo---baseado-na-soma-dos-grupos-funciona"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the row indices where 'A' occurs</span></span>
 <span><span class="va">rows</span></span>
 <span><span class="co"># Calculate the sum of occurrences of each species in 'A' rows</span></span>
@@ -762,17 +763,17 @@ definido pelo vetor <code>rows</code> no chunk anterior <code>rows</code></p>
 <span><span class="va">rows</span></span></code></pre></div>
 </div>
 </div>
-<div id="espécies-exclusivas-para-2-linhas-ou-2-grupos---baseado-na-soma-dos-grupos-funciona" class="section level2" number="17.9">
+<div id="espécies-exclusivas-para-2-linhas-ou-2-grupos---baseado-na-soma-dos-grupos-funciona" class="section level2" number="18.9">
 <h2>
-<span class="header-section-number">17.9</span> Espécies exclusivas para <strong>2 LINHAS OU 2 GRUPOs</strong> - Baseado na soma dos grupos <code>(#FUNCIONA)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-para-2-linhas-ou-2-grupos---baseado-na-soma-dos-grupos-funciona"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.9</span> Espécies exclusivas para <strong>2 LINHAS OU 2 GRUPOs</strong> - Baseado na soma dos grupos <code>(#FUNCIONA)</code><a class="anchor" aria-label="anchor" href="#esp%C3%A9cies-exclusivas-para-2-linhas-ou-2-grupos---baseado-na-soma-dos-grupos-funciona"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the row indices where 'A' occurs</span></span>
 <span><span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"S-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rows2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"B-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#rows &lt;- as.vector(rbind(c(rows, rows2)))</span></span>
 <span><span class="va">rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate the sum of occurrences of each species in 'A' rows</span></span>
 <span><span class="va">sum_of</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="va">rows</span>, <span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">sum_of</span></span>
@@ -795,9 +796,9 @@ definido pelo vetor <code>rows</code> no chunk anterior <code>rows</code></p>
 <span><span class="co">#setdiff(S_only, species_only_in) #only in 1st vector</span></span>
 <span><span class="co">#length(intersect(S_only, species_only_in)) #how many</span></span></code></pre></div>
 </div>
-<div id="encontrando-espécies-compartilhadas-entre-dois-ou-mais-grupos" class="section level2" number="17.10">
+<div id="encontrando-espécies-compartilhadas-entre-dois-ou-mais-grupos" class="section level2" number="18.10">
 <h2>
-<span class="header-section-number">17.10</span> Encontrando espécies compartilhadas ENTRE DOIS (OU MAIS) GRUPOS<a class="anchor" aria-label="anchor" href="#encontrando-esp%C3%A9cies-compartilhadas-entre-dois-ou-mais-grupos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.10</span> Encontrando espécies compartilhadas ENTRE DOIS (OU MAIS) GRUPOS<a class="anchor" aria-label="anchor" href="#encontrando-esp%C3%A9cies-compartilhadas-entre-dois-ou-mais-grupos"><i class="fas fa-link"></i></a>
 </h2>
 <p>Encontra espécies que são compartilhadas (ocorrem em <strong>TODAS AS
 LINHAS</strong>) dentro do grupo analisado. Mas, não significa que elas estejam
@@ -808,7 +809,7 @@ linhas compartilhadas os grupos das colunas tem que compartilhar
 <strong>TODAS</strong> as suas linhas. Uma análise sobre esse <code>loop</code>. Adicionamos
 <code>&amp;&amp; any(data[rows_G3, col] != 0)</code> para um terceiro grupo e assim
 sucessivamente.</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the rows corresponding to A and B (and C)</span></span>
 <span><span class="va">rows_G1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"S-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rows_G2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"B-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
@@ -832,13 +833,13 @@ sucessivamente.</p>
 e os outros anteriores é apresentada
 <a href="https://chat.openai.com/share/c58ca553-05f0-41f3-b000-be4d2b71d283">aqui</a></p>
 </div>
-<div id="diagrama-de-venn" class="section level2" number="17.11">
+<div id="diagrama-de-venn" class="section level2" number="18.11">
 <h2>
-<span class="header-section-number">17.11</span> Diagrama de Venn<a class="anchor" aria-label="anchor" href="#diagrama-de-venn"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.11</span> Diagrama de Venn<a class="anchor" aria-label="anchor" href="#diagrama-de-venn"><i class="fas fa-link"></i></a>
 </h2>
 <p>Primeiro é necessário criar uma matriz binária para os valores das
 colunas nas linhas. Isso é feito a seguir.</p>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://gt.rstudio.com">"gt"</a></span><span class="op">)</span></span>
 <span><span class="va">m_venn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_avg</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">m_venn</span></span>
@@ -880,23 +881,23 @@ colunas nas linhas. Isso é feito a seguir.</p>
 ## sy-marmo   0.00000000   0.08333333
 ## te-chalc  12.18181818   0.00000000
 ## tr-signa   2.45454545  15.08333333</code></pre>
-<div id="tewroeucyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tewroeucyv table {
+<div id="vfqfxkfjkj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vfqfxkfjkj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tewroeucyv thead, #tewroeucyv tbody, #tewroeucyv tfoot, #tewroeucyv tr, #tewroeucyv td, #tewroeucyv th {
+#vfqfxkfjkj thead, #vfqfxkfjkj tbody, #vfqfxkfjkj tfoot, #vfqfxkfjkj tr, #vfqfxkfjkj td, #vfqfxkfjkj th {
   border-style: none;
 }
 
-#tewroeucyv p {
+#vfqfxkfjkj p {
   margin: 0;
   padding: 0;
 }
 
-#tewroeucyv .gt_table {
+#vfqfxkfjkj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -922,12 +923,12 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-left-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_caption {
+#vfqfxkfjkj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tewroeucyv .gt_title {
+#vfqfxkfjkj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -939,7 +940,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-width: 0;
 }
 
-#tewroeucyv .gt_subtitle {
+#vfqfxkfjkj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -951,7 +952,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-top-width: 0;
 }
 
-#tewroeucyv .gt_heading {
+#vfqfxkfjkj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -963,13 +964,13 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_bottom_border {
+#vfqfxkfjkj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_col_headings {
+#vfqfxkfjkj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -984,7 +985,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_col_heading {
+#vfqfxkfjkj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1004,7 +1005,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   overflow-x: hidden;
 }
 
-#tewroeucyv .gt_column_spanner_outer {
+#vfqfxkfjkj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1016,15 +1017,15 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 4px;
 }
 
-#tewroeucyv .gt_column_spanner_outer:first-child {
+#vfqfxkfjkj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tewroeucyv .gt_column_spanner_outer:last-child {
+#vfqfxkfjkj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tewroeucyv .gt_column_spanner {
+#vfqfxkfjkj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1036,11 +1037,11 @@ colunas nas linhas. Isso é feito a seguir.</p>
   width: 100%;
 }
 
-#tewroeucyv .gt_spanner_row {
+#vfqfxkfjkj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tewroeucyv .gt_group_heading {
+#vfqfxkfjkj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1066,7 +1067,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   text-align: left;
 }
 
-#tewroeucyv .gt_empty_group_heading {
+#vfqfxkfjkj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1081,15 +1082,15 @@ colunas nas linhas. Isso é feito a seguir.</p>
   vertical-align: middle;
 }
 
-#tewroeucyv .gt_from_md > :first-child {
+#vfqfxkfjkj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tewroeucyv .gt_from_md > :last-child {
+#vfqfxkfjkj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tewroeucyv .gt_row {
+#vfqfxkfjkj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1108,7 +1109,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   overflow-x: hidden;
 }
 
-#tewroeucyv .gt_stub {
+#vfqfxkfjkj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1121,7 +1122,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#tewroeucyv .gt_stub_row_group {
+#vfqfxkfjkj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1135,15 +1136,15 @@ colunas nas linhas. Isso é feito a seguir.</p>
   vertical-align: top;
 }
 
-#tewroeucyv .gt_row_group_first td {
+#vfqfxkfjkj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tewroeucyv .gt_row_group_first th {
+#vfqfxkfjkj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tewroeucyv .gt_summary_row {
+#vfqfxkfjkj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1153,16 +1154,16 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#tewroeucyv .gt_first_summary_row {
+#vfqfxkfjkj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_first_summary_row.thick {
+#vfqfxkfjkj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tewroeucyv .gt_last_summary_row {
+#vfqfxkfjkj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1172,7 +1173,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_grand_summary_row {
+#vfqfxkfjkj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1182,7 +1183,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#tewroeucyv .gt_first_grand_summary_row {
+#vfqfxkfjkj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1192,7 +1193,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-top-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_last_grand_summary_row_top {
+#vfqfxkfjkj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1202,11 +1203,11 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_striped {
+#vfqfxkfjkj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tewroeucyv .gt_table_body {
+#vfqfxkfjkj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1215,7 +1216,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_footnotes {
+#vfqfxkfjkj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1229,7 +1230,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_footnote {
+#vfqfxkfjkj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1238,7 +1239,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#tewroeucyv .gt_sourcenotes {
+#vfqfxkfjkj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1252,7 +1253,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
   border-right-color: #D3D3D3;
 }
 
-#tewroeucyv .gt_sourcenote {
+#vfqfxkfjkj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1260,72 +1261,72 @@ colunas nas linhas. Isso é feito a seguir.</p>
   padding-right: 5px;
 }
 
-#tewroeucyv .gt_left {
+#vfqfxkfjkj .gt_left {
   text-align: left;
 }
 
-#tewroeucyv .gt_center {
+#vfqfxkfjkj .gt_center {
   text-align: center;
 }
 
-#tewroeucyv .gt_right {
+#vfqfxkfjkj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tewroeucyv .gt_font_normal {
+#vfqfxkfjkj .gt_font_normal {
   font-weight: normal;
 }
 
-#tewroeucyv .gt_font_bold {
+#vfqfxkfjkj .gt_font_bold {
   font-weight: bold;
 }
 
-#tewroeucyv .gt_font_italic {
+#vfqfxkfjkj .gt_font_italic {
   font-style: italic;
 }
 
-#tewroeucyv .gt_super {
+#vfqfxkfjkj .gt_super {
   font-size: 65%;
 }
 
-#tewroeucyv .gt_footnote_marks {
+#vfqfxkfjkj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tewroeucyv .gt_asterisk {
+#vfqfxkfjkj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tewroeucyv .gt_indent_1 {
+#vfqfxkfjkj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tewroeucyv .gt_indent_2 {
+#vfqfxkfjkj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tewroeucyv .gt_indent_3 {
+#vfqfxkfjkj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tewroeucyv .gt_indent_4 {
+#vfqfxkfjkj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tewroeucyv .gt_indent_5 {
+#vfqfxkfjkj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tewroeucyv .katex-display {
+#vfqfxkfjkj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tewroeucyv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vfqfxkfjkj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1514,11 +1515,11 @@ colunas nas linhas. Isso é feito a seguir.</p>
 </tbody>
 </table></div>
 </div>
-<div id="usando-o-pacote-eulerr" class="section level3" number="17.11.1">
+<div id="usando-o-pacote-eulerr" class="section level3" number="18.11.1">
 <h3>
-<span class="header-section-number">17.11.1</span> Usando o pacote <code>eulerr</code><a class="anchor" aria-label="anchor" href="#usando-o-pacote-eulerr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.11.1</span> Usando o pacote <code>eulerr</code><a class="anchor" aria-label="anchor" href="#usando-o-pacote-eulerr"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jolars/eulerr">"eulerr"</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Registered S3 method overwritten by 'eulerr':
 ##   method    from  
@@ -1528,17 +1529,17 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <pre><code>## O seguinte objeto é mascarado por 'package:gplots':
 ## 
 ##     venn</code></pre>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#set.seed() #this seed changes the orientation of the sets        </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://jolars.github.io/eulerr/reference/euler.html">euler</a></span><span class="op">(</span><span class="va">m_venn</span><span class="op">)</span>, counts <span class="op">=</span> <span class="cn">TRUE</span>, fontface <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-213-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-218-1.png" alt="" width="672"></div>
 </div>
 </div>
-<div id="usando-o-pacote-venndiagram" class="section level2" number="17.12">
+<div id="usando-o-pacote-venndiagram" class="section level2" number="18.12">
 <h2>
-<span class="header-section-number">17.12</span> Usando o pacote <a href="https://rstudio-pubs-static.s3.amazonaws.com/13301_6641d73cfac741a59c0a851feb99e98b.html"><code>VennDiagram</code></a><a class="anchor" aria-label="anchor" href="#usando-o-pacote-venndiagram"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.12</span> Usando o pacote <a href="https://rstudio-pubs-static.s3.amazonaws.com/13301_6641d73cfac741a59c0a851feb99e98b.html"><code>VennDiagram</code></a><a class="anchor" aria-label="anchor" href="#usando-o-pacote-venndiagram"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load required libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/uclahs-cds/package-VennDiagram">VennDiagram</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Carregando pacotes exigidos: grid</code></pre>
@@ -1551,7 +1552,7 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <pre><code>## O seguinte objeto é mascarado por 'package:ggpubr':
 ## 
 ##     rotate</code></pre>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yanlinlin82.github.io/ggvenn/">ggvenn</a></span><span class="op">)</span></span>
 <span><span class="va">G1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_venn</span>, <span class="va">S</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">G2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_venn</span>, <span class="va">B</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -1562,22 +1563,22 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.single.venn.html">draw.single.venn</a></span><span class="op">(</span>area <span class="op">=</span> <span class="va">G1</span>, category <span class="op">=</span> <span class="st">"G1"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-2.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-2.png" alt="" width="672"></p>
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.single.venn.html">draw.single.venn</a></span><span class="op">(</span><span class="va">G1</span>, category <span class="op">=</span> <span class="st">"G1"</span>,</span>
 <span>                 lty <span class="op">=</span> <span class="st">"blank"</span>,</span>
 <span>                 fill <span class="op">=</span> <span class="st">"cornflower blue"</span>, </span>
 <span>                 alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-4.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-4.png" alt="" width="672"></p>
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##lty - outline of cirlces, ## fill - colour, ## alpha - colour transparency</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.pairwise.venn.html">draw.pairwise.venn</a></span><span class="op">(</span><span class="va">G1</span>, <span class="va">G2</span>, <span class="va">G1_G2</span>,</span>
 <span>                   category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G1"</span>,<span class="st">"G2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-5.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-6.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-5.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-6.png" alt="" width="672"></p>
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.pairwise.venn.html">draw.pairwise.venn</a></span><span class="op">(</span><span class="va">G1</span>, <span class="va">G2</span>, <span class="va">G1_G2</span>,</span>
 <span>                   category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G1"</span>,<span class="st">"G2"</span><span class="op">)</span>,</span>
@@ -1586,8 +1587,8 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span>                   alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">2</span><span class="op">)</span>,</span>
 <span>                   cat.pos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
 <span>                   cat.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.025</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-7.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-8.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-7.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-8.png" alt="" width="672"></p>
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## cat.pos - position of category titles, represented by degree from the</span></span>
 <span><span class="co">## middle of the circle</span></span>
 <span><span class="co">## cat.dist - distance of the category titles from the edge of the circle</span></span>
@@ -1601,8 +1602,8 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span>                   cat.pos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
 <span>                   cat.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>                   scaled <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-9.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-10.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-9.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-10.png" alt="" width="672"></p>
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## scaled - TRUE for scaled or FALSE for unscaled cirlces</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#&lt;--</span></span>
@@ -1614,8 +1615,8 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span>                   cat.pos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">180</span><span class="op">)</span>,</span>
 <span>                   euler.d <span class="op">=</span> <span class="cn">TRUE</span>, sep.dist <span class="op">=</span> <span class="fl">0.03</span>, </span>
 <span>                   rotation.degree <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-11.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-214-12.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-11.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-219-12.png" alt="" width="672"></p>
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## euler.d - TRUE for movable circles; FALSE for unmovable circles. Must be</span></span>
 <span><span class="co">## TRUE to have space between non-overlapping circles.</span></span>
 <span><span class="co">## sep.dist - distance between circles</span></span>
@@ -1641,15 +1642,15 @@ colunas nas linhas. Isso é feito a seguir.</p>
 <span><span class="co">#               fill = c("skyblue", "pink1", #"mediumorchid", "orange"),</span></span>
 <span><span class="co">#               scaled = TRUE)</span></span></code></pre></div>
 </div>
-<div id="diagrama-de-venn---baseado-em-palavras" class="section level2" number="17.13">
+<div id="diagrama-de-venn---baseado-em-palavras" class="section level2" number="18.13">
 <h2>
-<span class="header-section-number">17.13</span> Diagrama de Venn - BASEADO EM PALAVRAS<a class="anchor" aria-label="anchor" href="#diagrama-de-venn---baseado-em-palavras"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.13</span> Diagrama de Venn - BASEADO EM PALAVRAS<a class="anchor" aria-label="anchor" href="#diagrama-de-venn---baseado-em-palavras"><i class="fas fa-link"></i></a>
 </h2>
 <p>Cálculo do overlap
 <a href="https://stackoverflow.com/questions/70160554/how-to-get-list-of-unique-items-for-each-partition-in-venn-diagram">AQUI</a>
 ou
 <a href="https://forum.posit.co/t/items-in-intersection-of-a-venn-diagram/62947">AQUI</a></p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lista</span> <span class="op">&lt;-</span> <span class="va">m_venn</span></span>
 <span><span class="va">lista</span></span>
 <span></span>
@@ -1669,40 +1670,40 @@ ou
 <span>  output <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>  lty <span class="op">=</span> <span class="st">"blank"</span>,</span>
 <span>  fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"skyblue"</span>, <span class="st">"pink1"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## INFO [2026-07-11 12:01:24] $x
-## INFO [2026-07-11 12:01:24] list(G1, G2)
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $category.names
-## INFO [2026-07-11 12:01:24] c("G1", "G2")
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $filename
-## INFO [2026-07-11 12:01:24] [1] "fig-venn_diagramm2.png"
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $height
-## INFO [2026-07-11 12:01:24] [1] 3000
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $width
-## INFO [2026-07-11 12:01:24] [1] 3000
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $resolution
-## INFO [2026-07-11 12:01:24] [1] 500
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $disable.logging
-## INFO [2026-07-11 12:01:24] T
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $scaled
-## INFO [2026-07-11 12:01:24] T
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $output
-## INFO [2026-07-11 12:01:24] F
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $lty
-## INFO [2026-07-11 12:01:24] [1] "blank"
-## INFO [2026-07-11 12:01:24] 
-## INFO [2026-07-11 12:01:24] $fill
-## INFO [2026-07-11 12:01:24] c("skyblue", "pink1")
-## INFO [2026-07-11 12:01:24]</code></pre>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<pre><code>## INFO [2026-07-11 16:50:04] $x
+## INFO [2026-07-11 16:50:04] list(G1, G2)
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $category.names
+## INFO [2026-07-11 16:50:04] c("G1", "G2")
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $filename
+## INFO [2026-07-11 16:50:04] [1] "fig-venn_diagramm2.png"
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $height
+## INFO [2026-07-11 16:50:04] [1] 3000
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $width
+## INFO [2026-07-11 16:50:04] [1] 3000
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $resolution
+## INFO [2026-07-11 16:50:04] [1] 500
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $disable.logging
+## INFO [2026-07-11 16:50:04] T
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $scaled
+## INFO [2026-07-11 16:50:04] T
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $output
+## INFO [2026-07-11 16:50:04] F
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $lty
+## INFO [2026-07-11 16:50:04] [1] "blank"
+## INFO [2026-07-11 16:50:04] 
+## INFO [2026-07-11 16:50:04] $fill
+## INFO [2026-07-11 16:50:04] c("skyblue", "pink1")
+## INFO [2026-07-11 16:50:04]</code></pre>
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">overlap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/calculate.overlap.html">calculate.overlap</a></span><span class="op">(</span><span class="va">over</span><span class="op">)</span></span>
 <span><span class="va">overlap</span></span>
 <span><span class="fu">VennDiagram</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/get.venn.partitions.html">get.venn.partitions</a></span><span class="op">(</span><span class="va">over</span><span class="op">)</span></span></code></pre></div>
@@ -1791,7 +1792,7 @@ ou
 <a href="https://www.datanovia.com/en/blog/beautiful-ggplot-venn-diagram-with-r/">Aqui</a>
 e
 <a href="https://www.datanovia.com/en/blog/venn-diagram-with-r-or-rstudio-a-million-ways/">Aqui</a></p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gaospecial/ggVennDiagram">"ggVennDiagram"</a></span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  G1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">lista</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">lista</span><span class="op">$</span><span class="va">S</span> <span class="op">!=</span><span class="fl">0</span><span class="op">)</span><span class="op">]</span>,</span>
@@ -1825,28 +1826,28 @@ e
 <span><span class="va">v.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">v.table</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">v.table</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_avg</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Estrutura da comunidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"open"</span>, <span class="fu"><a href="https://rdrr.io/r/base/shQuote.html">shQuote</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/MSS/_Zoo-Rebio/R_ZooRebio/strcom.qmd"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="partição-da-diversidade" class="section level2" number="17.14">
+<div id="partição-da-diversidade" class="section level2" number="18.14">
 <h2>
-<span class="header-section-number">17.14</span> PARTIÇÃO DA DIVERSIDADE<a class="anchor" aria-label="anchor" href="#parti%C3%A7%C3%A3o-da-diversidade"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.14</span> PARTIÇÃO DA DIVERSIDADE<a class="anchor" aria-label="anchor" href="#parti%C3%A7%C3%A3o-da-diversidade"><i class="fas fa-link"></i></a>
 </h2>
 <p>O output da função <code>adipart</code> no pacote <code>vegan</code> do R fornece uma análise
 detalhada da diversidade alfa, beta e gama baseada no índice de riqueza
 para o seu conjunto de dados <code>fauna.zoo</code> em diferentes escalas espaciais
 definidas por <code>escala.total</code>. Aqui está uma explicação detalhada do
 output e sua interpretação:</p>
-<div id="output-da-função-adipart" class="section level3" number="17.14.1">
+<div id="output-da-função-adipart" class="section level3" number="18.14.1">
 <h3>
-<span class="header-section-number">17.14.1</span> Output da Função adipart<a class="anchor" aria-label="anchor" href="#output-da-fun%C3%A7%C3%A3o-adipart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.14.1</span> Output da Função adipart<a class="anchor" aria-label="anchor" href="#output-da-fun%C3%A7%C3%A3o-adipart"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 </div>
-<div id="extrair-valores-do-objeto-part---geral" class="section level2" number="17.15">
+<div id="extrair-valores-do-objeto-part---geral" class="section level2" number="18.15">
 <h2>
-<span class="header-section-number">17.15</span> Extrair valores do objeto part - geral<a class="anchor" aria-label="anchor" href="#extrair-valores-do-objeto-part---geral"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.15</span> Extrair valores do objeto part - geral<a class="anchor" aria-label="anchor" href="#extrair-valores-do-objeto-part---geral"><i class="fas fa-link"></i></a>
 </h2>
 <p>statistic &lt;- part.geral<span class="math inline">\(statistic
 SES &lt;- part.geral\)</span>oecosimu<span class="math inline">\(z
@@ -1856,18 +1857,18 @@ median_50 &lt;- apply(part.geral\)</span>oecosimu<span class="math inline">\(sim
 upper_97.5 &lt;- apply(part.geral\)</span>oecosimu<span class="math inline">\(simulated, 1, quantile, probs = 0.975)
 Pr_sim &lt;- part.geral\)</span>oecosimu$pval</p>
 </div>
-<div id="definir-função-para-adicionar-significância" class="section level2" number="17.16">
+<div id="definir-função-para-adicionar-significância" class="section level2" number="18.16">
 <h2>
-<span class="header-section-number">17.16</span> Definir função para adicionar significância<a class="anchor" aria-label="anchor" href="#definir-fun%C3%A7%C3%A3o-para-adicionar-signific%C3%A2ncia"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.16</span> Definir função para adicionar significância<a class="anchor" aria-label="anchor" href="#definir-fun%C3%A7%C3%A3o-para-adicionar-signific%C3%A2ncia"><i class="fas fa-link"></i></a>
 </h2>
 <p>get_significance &lt;- function(p) { if (p &lt;= 0.001) { return(“<em><strong>”) }
 else if (p &lt;= 0.01) { return(”</strong>”) } else if (p &lt;= 0.05) { return(”</em>”)
 } else if (p &lt;= 0.1) { return(“.”) } else { return(” “) } }
 significance &lt;- sapply(Pr_sim, get_significance)</p>
 </div>
-<div id="criar-dataframe-com-todas-as-informações" class="section level2" number="17.17">
+<div id="criar-dataframe-com-todas-as-informações" class="section level2" number="18.17">
 <h2>
-<span class="header-section-number">17.17</span> Criar dataframe com todas as informações<a class="anchor" aria-label="anchor" href="#criar-dataframe-com-todas-as-informa%C3%A7%C3%B5es"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.17</span> Criar dataframe com todas as informações<a class="anchor" aria-label="anchor" href="#criar-dataframe-com-todas-as-informa%C3%A7%C3%B5es"><i class="fas fa-link"></i></a>
 </h2>
 <p>diversity_data &lt;- data.frame( Component = names(statistic), Observed =
 round(statistic, 2), SES = round(SES, 2), Mean = round(mean, 2),
@@ -1875,14 +1876,14 @@ Lower_2.5 = round(lower_2.5, 2), Median_50 = round(median_50, 2),
 Upper_97.5 = round(upper_97.5, 2), Pr_sim = Pr_sim, Sign = significance
 )</p>
 </div>
-<div id="exibir-a-tabela" class="section level2" number="17.18">
+<div id="exibir-a-tabela" class="section level2" number="18.18">
 <h2>
-<span class="header-section-number">17.18</span> Exibir a tabela<a class="anchor" aria-label="anchor" href="#exibir-a-tabela"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18</span> Exibir a tabela<a class="anchor" aria-label="anchor" href="#exibir-a-tabela"><i class="fas fa-link"></i></a>
 </h2>
 <p>print(diversity_data) str(part.geral) gt(diversity_data)</p>
-<div id="chamada" class="section level4" number="17.18.0.1">
+<div id="chamada" class="section level4" number="18.18.0.1">
 <h4>
-<span class="header-section-number">17.18.0.1</span> Chamada<a class="anchor" aria-label="anchor" href="#chamada"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.0.1</span> Chamada<a class="anchor" aria-label="anchor" href="#chamada"><i class="fas fa-link"></i></a>
 </h4>
 <p>A chamada da função especifica os parâmetros utilizados: - <strong>y</strong>:
 <code>fauna.zoo</code> (seu conjunto de dados) - <strong>x</strong>: <code>escala.total</code> (as escalas
@@ -1890,25 +1891,25 @@ espaciais) - <strong>index</strong>: “richness” (medida de diversidade) -
 <strong>weights</strong>: “unif” (pesos uniformes) - <strong>nsimul</strong>: 999 (número de
 simulações para o modelo nulo)</p>
 </div>
-<div id="modelo-nulo" class="section level4" number="17.18.0.2">
+<div id="modelo-nulo" class="section level4" number="18.18.0.2">
 <h4>
-<span class="header-section-number">17.18.0.2</span> Modelo Nulo<a class="anchor" aria-label="anchor" href="#modelo-nulo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.0.2</span> Modelo Nulo<a class="anchor" aria-label="anchor" href="#modelo-nulo"><i class="fas fa-link"></i></a>
 </h4>
 <p>O método usado para as simulações do modelo nulo é <code>r2dtable</code> com 999
 simulações. Este método simula tabelas aleatórias com as mesmas somas de
 linhas e colunas que a tabela observada.</p>
 </div>
-<div id="estatísticas-e-teste-de-hipótese" class="section level4" number="17.18.0.3">
+<div id="estatísticas-e-teste-de-hipótese" class="section level4" number="18.18.0.3">
 <h4>
-<span class="header-section-number">17.18.0.3</span> Estatísticas e Teste de Hipótese<a class="anchor" aria-label="anchor" href="#estat%C3%ADsticas-e-teste-de-hip%C3%B3tese"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.0.3</span> Estatísticas e Teste de Hipótese<a class="anchor" aria-label="anchor" href="#estat%C3%ADsticas-e-teste-de-hip%C3%B3tese"><i class="fas fa-link"></i></a>
 </h4>
 <p>O output fornece os valores observados das estatísticas, os tamanhos dos
 efeitos padronizados (SES), médias, percentis (2.5%, 50%, 97.5%) e
 valores de p (Pr(sim.)) para cada componente de diversidade.</p>
 </div>
-<div id="análise-das-estatísticas" class="section level3" number="17.18.1">
+<div id="análise-das-estatísticas" class="section level3" number="18.18.1">
 <h3>
-<span class="header-section-number">17.18.1</span> Análise das Estatísticas<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-das-estat%C3%ADsticas"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.1</span> Análise das Estatísticas<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-das-estat%C3%ADsticas"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>
@@ -1942,9 +1943,9 @@ valores simulados (todos os valores de p = 0.001).</li>
 </ul>
 </li>
 </ol>
-<div id="códigos-de-significância" class="section level4" number="17.18.1.1">
+<div id="códigos-de-significância" class="section level4" number="18.18.1.1">
 <h4>
-<span class="header-section-number">17.18.1.1</span> Códigos de Significância<a class="anchor" aria-label="anchor" href="#c%C3%B3digos-de-signific%C3%A2ncia"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.1.1</span> Códigos de Significância<a class="anchor" aria-label="anchor" href="#c%C3%B3digos-de-signific%C3%A2ncia"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
 <li>‘***’ indica um valor de p &lt; 0.001, mostrando resultados
@@ -1952,9 +1953,9 @@ altamente significativos.</li>
 </ul>
 </div>
 </div>
-<div id="interpretação" class="section level3" number="17.18.2">
+<div id="interpretação" class="section level3" number="18.18.2">
 <h3>
-<span class="header-section-number">17.18.2</span> Interpretação<a class="anchor" aria-label="anchor" href="#interpreta%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.2</span> Interpretação<a class="anchor" aria-label="anchor" href="#interpreta%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
@@ -1982,9 +1983,9 @@ Isso é útil para testes de hipótese e análise de diversidade porque
 permite comparar os dados observados com o que seria esperado por acaso,
 mantendo as restrições estruturais dos dados originais.</p>
 </div>
-<div id="detalhes-do-r2dtable" class="section level3" number="17.18.3">
+<div id="detalhes-do-r2dtable" class="section level3" number="18.18.3">
 <h3>
-<span class="header-section-number">17.18.3</span> Detalhes do <code>r2dtable</code><a class="anchor" aria-label="anchor" href="#detalhes-do-r2dtable"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.3</span> Detalhes do <code>r2dtable</code><a class="anchor" aria-label="anchor" href="#detalhes-do-r2dtable"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
@@ -2006,18 +2007,18 @@ gerar tabelas de contingência aleatórias.</li>
 que têm as mesmas somas de linhas e colunas que a tabela original.</li>
 </ul>
 </div>
-<div id="como-funciona" class="section level3" number="17.18.4">
+<div id="como-funciona" class="section level3" number="18.18.4">
 <h3>
-<span class="header-section-number">17.18.4</span> Como Funciona<a class="anchor" aria-label="anchor" href="#como-funciona"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.4</span> Como Funciona<a class="anchor" aria-label="anchor" href="#como-funciona"><i class="fas fa-link"></i></a>
 </h3>
 <p>O algoritmo por trás do <code>r2dtable</code> usa uma permutação aleatória das
 células da tabela original, mas ajusta as células de forma que as somas
 das linhas e colunas permaneçam constantes. Isso cria uma distribuição
 nula contra a qual os dados observados podem ser comparados.</p>
 </div>
-<div id="uso-no-contexto-do-vegan-e-adipart" class="section level3" number="17.18.5">
+<div id="uso-no-contexto-do-vegan-e-adipart" class="section level3" number="18.18.5">
 <h3>
-<span class="header-section-number">17.18.5</span> Uso no Contexto do vegan e adipart<a class="anchor" aria-label="anchor" href="#uso-no-contexto-do-vegan-e-adipart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.5</span> Uso no Contexto do vegan e adipart<a class="anchor" aria-label="anchor" href="#uso-no-contexto-do-vegan-e-adipart"><i class="fas fa-link"></i></a>
 </h3>
 <p>Quando aplicado no contexto de diversidade com a função <code>adipart</code> do
 pacote <code>vegan</code>:</p>
@@ -2037,9 +2038,9 @@ determinar se os padrões observados são significativamente
 diferentes do que seria esperado por acaso.</li>
 </ol>
 </div>
-<div id="interpretação-1" class="section level3" number="17.18.6">
+<div id="interpretação-1" class="section level3" number="18.18.6">
 <h3>
-<span class="header-section-number">17.18.6</span> Interpretação<a class="anchor" aria-label="anchor" href="#interpreta%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.6</span> Interpretação<a class="anchor" aria-label="anchor" href="#interpreta%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
@@ -2052,13 +2053,13 @@ testar a significância das diferenças entre os valores observados e
 a distribuição nula.</li>
 </ul>
 </div>
-<div id="exemplos-de-uso" class="section level3" number="17.18.7">
+<div id="exemplos-de-uso" class="section level3" number="18.18.7">
 <h3>
-<span class="header-section-number">17.18.7</span> Exemplos de Uso<a class="anchor" aria-label="anchor" href="#exemplos-de-uso"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.18.7</span> Exemplos de Uso<a class="anchor" aria-label="anchor" href="#exemplos-de-uso"><i class="fas fa-link"></i></a>
 </h3>
 <p>Aqui está um exemplo básico de como o <code>r2dtable</code> pode ser usado
 diretamente no R:</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Suponha uma tabela original com margens definidas</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">25</span><span class="op">)</span>  <span class="co"># somas das linhas</span></span>
 <span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span>, <span class="fl">25</span><span class="op">)</span>  <span class="co"># somas das colunas</span></span>
@@ -2147,16 +2148,16 @@ com uma diversidade observada significativamente menor. “rebio” está
 exatamente no nível esperado, sem desvio significativo.</p>
 </div>
 </div>
-<div id="apêndices-10" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-10"><i class="fas fa-link"></i></a>
+<div id="apêndices-11" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-11"><i class="fas fa-link"></i></a>
 </h2>
 <div id="sites-consultados-6" class="section level3 unnumbered">
 <h3>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-6"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="www.link.com">Primeira coluna para nomes das linhas</a></p>
 </div>
-<div id="script-limpo-7" class="section level3 unnumbered">
-<h3>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-7"><i class="fas fa-link"></i></a>
+<div id="script-limpo-8" class="section level3 unnumbered">
+<h3>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-8"><i class="fas fa-link"></i></a>
 </h3>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários.
 Você pode copiar e colar no R para executa-lo. Lembre de remover os
@@ -2164,8 +2165,8 @@ Você pode copiar e colar no R para executa-lo. Lembre de remover os
 executar essas linhas.</p>
 </div>
 </div>
-<div id="referências-13" class="section level2 unnumbered">
-<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-13"><i class="fas fa-link"></i></a>
+<div id="referências-14" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-14"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
@@ -2183,76 +2184,76 @@ R STUDIO TEAM. <strong>RStudio: Integrated Development Environment for R</strong
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></div>
-<div class="next"><a href="estrhab.html"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a></div>
+<div class="prev"><a href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></div>
+<div class="next"><a href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#partdiv"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#resumo-11">RESUMO</a></li>
-<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-11">Apresentação</a></li>
+<a class="nav-link" href="#partdiv"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-12">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-12">Apresentação</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#sobre-os-dados-4"><span class="header-section-number">17.1</span> Sobre os dados</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><span class="header-section-number">17.1.1</span> Organização básica</a></li>
-<li><a class="nav-link" href="#importando-a-planilha-5"><span class="header-section-number">17.1.2</span> Importando a planilha</a></li>
+<a class="nav-link" href="#sobre-os-dados-5"><span class="header-section-number">18.1</span> Sobre os dados</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-8"><span class="header-section-number">18.1.1</span> Organização básica</a></li>
+<li><a class="nav-link" href="#importando-a-planilha-5"><span class="header-section-number">18.1.2</span> Importando a planilha</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#rein%C3%ADcio-1"><span class="header-section-number">17.2</span> REINÍCIO 1</a></li>
-<li><a class="nav-link" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas"><span class="header-section-number">17.3</span> Análise de Espécies Compartilhadas</a></li>
+<li><a class="nav-link" href="#rein%C3%ADcio-1"><span class="header-section-number">18.2</span> REINÍCIO 1</a></li>
+<li><a class="nav-link" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas"><span class="header-section-number">18.3</span> Análise de Espécies Compartilhadas</a></li>
 <li>
-<a class="nav-link" href="#rein%C3%ADcio-2"><span class="header-section-number">17.4</span> REINÍCIO 2</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#separando-a-matriz-ppbio-em-suas-partes-s-e-b-ou-a-e-r"><span class="header-section-number">17.4.1</span> Separando a matriz ppbio em suas partes (S e B ou A e R)</a></li></ul>
+<a class="nav-link" href="#rein%C3%ADcio-2"><span class="header-section-number">18.4</span> REINÍCIO 2</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#separando-a-matriz-ppbio-em-suas-partes-s-e-b-ou-a-e-r"><span class="header-section-number">18.4.1</span> Separando a matriz ppbio em suas partes (S e B ou A e R)</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#t%C3%A1xons-compartilhados-pelas-duas-bases-de-dados"><span class="header-section-number">17.5</span> Táxons compartilhados pelas duas bases de dados</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#bases-de-dados-em-arquivos-diferentes-b-e-s"><span class="header-section-number">17.5.1</span> Bases de dados em arquivos diferentes B e S</a></li></ul>
+<a class="nav-link" href="#t%C3%A1xons-compartilhados-pelas-duas-bases-de-dados"><span class="header-section-number">18.5</span> Táxons compartilhados pelas duas bases de dados</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#bases-de-dados-em-arquivos-diferentes-b-e-s"><span class="header-section-number">18.5.1</span> Bases de dados em arquivos diferentes B e S</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#rein%C3%ADcio-3"><span class="header-section-number">17.6</span> REINÍCIO 3</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#criando-uma-matriz-de-m%C3%A9dias-1"><span class="header-section-number">17.6.1</span> Criando uma matriz de médias</a></li>
-<li><a class="nav-link" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas-em-arquivos-diferentes"><span class="header-section-number">17.6.2</span> Análise de Espécies Compartilhadas: Em arquivos diferentes</a></li>
-<li><a class="nav-link" href="#bases-de-dados-no-mesmo-arquivo-ppbio"><span class="header-section-number">17.6.3</span> Bases de dados no mesmo arquivo ppbio</a></li>
+<a class="nav-link" href="#rein%C3%ADcio-3"><span class="header-section-number">18.6</span> REINÍCIO 3</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#criando-uma-matriz-de-m%C3%A9dias-1"><span class="header-section-number">18.6.1</span> Criando uma matriz de médias</a></li>
+<li><a class="nav-link" href="#an%C3%A1lise-de-esp%C3%A9cies-compartilhadas-em-arquivos-diferentes"><span class="header-section-number">18.6.2</span> Análise de Espécies Compartilhadas: Em arquivos diferentes</a></li>
+<li><a class="nav-link" href="#bases-de-dados-no-mesmo-arquivo-ppbio"><span class="header-section-number">18.6.3</span> Bases de dados no mesmo arquivo ppbio</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#rein%C3%ADcio-4"><span class="header-section-number">17.7</span> REINÍCIO 4</a></li>
+<li><a class="nav-link" href="#rein%C3%ADcio-4"><span class="header-section-number">18.7</span> REINÍCIO 4</a></li>
 <li>
-<a class="nav-link" href="#encontrando-esp%C3%A9cies-exclusivas"><span class="header-section-number">17.8</span> Encontrando espécies exclusivas</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#escolhendo-as-linhas-ou-grupos-para-comparar"><span class="header-section-number">17.8.1</span> Escolhendo as LINHAS OU GRUPOS para comparar</a></li>
-<li><a class="nav-link" href="#esp%C3%A9cies-exclusivas-para-1-linha-ou-1-grupo---baseado-na-soma-dos-grupos-funciona"><span class="header-section-number">17.8.2</span> Espécies exclusivas para 1 LINHA OU 1 GRUPO - Baseado na soma dos grupos (#FUNCIONA)</a></li>
+<a class="nav-link" href="#encontrando-esp%C3%A9cies-exclusivas"><span class="header-section-number">18.8</span> Encontrando espécies exclusivas</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#escolhendo-as-linhas-ou-grupos-para-comparar"><span class="header-section-number">18.8.1</span> Escolhendo as LINHAS OU GRUPOS para comparar</a></li>
+<li><a class="nav-link" href="#esp%C3%A9cies-exclusivas-para-1-linha-ou-1-grupo---baseado-na-soma-dos-grupos-funciona"><span class="header-section-number">18.8.2</span> Espécies exclusivas para 1 LINHA OU 1 GRUPO - Baseado na soma dos grupos (#FUNCIONA)</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#esp%C3%A9cies-exclusivas-para-2-linhas-ou-2-grupos---baseado-na-soma-dos-grupos-funciona"><span class="header-section-number">17.9</span> Espécies exclusivas para 2 LINHAS OU 2 GRUPOs - Baseado na soma dos grupos (#FUNCIONA)</a></li>
-<li><a class="nav-link" href="#encontrando-esp%C3%A9cies-compartilhadas-entre-dois-ou-mais-grupos"><span class="header-section-number">17.10</span> Encontrando espécies compartilhadas ENTRE DOIS (OU MAIS) GRUPOS</a></li>
+<li><a class="nav-link" href="#esp%C3%A9cies-exclusivas-para-2-linhas-ou-2-grupos---baseado-na-soma-dos-grupos-funciona"><span class="header-section-number">18.9</span> Espécies exclusivas para 2 LINHAS OU 2 GRUPOs - Baseado na soma dos grupos (#FUNCIONA)</a></li>
+<li><a class="nav-link" href="#encontrando-esp%C3%A9cies-compartilhadas-entre-dois-ou-mais-grupos"><span class="header-section-number">18.10</span> Encontrando espécies compartilhadas ENTRE DOIS (OU MAIS) GRUPOS</a></li>
 <li>
-<a class="nav-link" href="#diagrama-de-venn"><span class="header-section-number">17.11</span> Diagrama de Venn</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#usando-o-pacote-eulerr"><span class="header-section-number">17.11.1</span> Usando o pacote eulerr</a></li></ul>
+<a class="nav-link" href="#diagrama-de-venn"><span class="header-section-number">18.11</span> Diagrama de Venn</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#usando-o-pacote-eulerr"><span class="header-section-number">18.11.1</span> Usando o pacote eulerr</a></li></ul>
 </li>
-<li><a class="nav-link" href="#usando-o-pacote-venndiagram"><span class="header-section-number">17.12</span> Usando o pacote VennDiagram</a></li>
-<li><a class="nav-link" href="#diagrama-de-venn---baseado-em-palavras"><span class="header-section-number">17.13</span> Diagrama de Venn - BASEADO EM PALAVRAS</a></li>
+<li><a class="nav-link" href="#usando-o-pacote-venndiagram"><span class="header-section-number">18.12</span> Usando o pacote VennDiagram</a></li>
+<li><a class="nav-link" href="#diagrama-de-venn---baseado-em-palavras"><span class="header-section-number">18.13</span> Diagrama de Venn - BASEADO EM PALAVRAS</a></li>
 <li>
-<a class="nav-link" href="#parti%C3%A7%C3%A3o-da-diversidade"><span class="header-section-number">17.14</span> PARTIÇÃO DA DIVERSIDADE</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#output-da-fun%C3%A7%C3%A3o-adipart"><span class="header-section-number">17.14.1</span> Output da Função adipart</a></li></ul>
+<a class="nav-link" href="#parti%C3%A7%C3%A3o-da-diversidade"><span class="header-section-number">18.14</span> PARTIÇÃO DA DIVERSIDADE</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#output-da-fun%C3%A7%C3%A3o-adipart"><span class="header-section-number">18.14.1</span> Output da Função adipart</a></li></ul>
 </li>
-<li><a class="nav-link" href="#extrair-valores-do-objeto-part---geral"><span class="header-section-number">17.15</span> Extrair valores do objeto part - geral</a></li>
-<li><a class="nav-link" href="#definir-fun%C3%A7%C3%A3o-para-adicionar-signific%C3%A2ncia"><span class="header-section-number">17.16</span> Definir função para adicionar significância</a></li>
-<li><a class="nav-link" href="#criar-dataframe-com-todas-as-informa%C3%A7%C3%B5es"><span class="header-section-number">17.17</span> Criar dataframe com todas as informações</a></li>
+<li><a class="nav-link" href="#extrair-valores-do-objeto-part---geral"><span class="header-section-number">18.15</span> Extrair valores do objeto part - geral</a></li>
+<li><a class="nav-link" href="#definir-fun%C3%A7%C3%A3o-para-adicionar-signific%C3%A2ncia"><span class="header-section-number">18.16</span> Definir função para adicionar significância</a></li>
+<li><a class="nav-link" href="#criar-dataframe-com-todas-as-informa%C3%A7%C3%B5es"><span class="header-section-number">18.17</span> Criar dataframe com todas as informações</a></li>
 <li>
-<a class="nav-link" href="#exibir-a-tabela"><span class="header-section-number">17.18</span> Exibir a tabela</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#an%C3%A1lise-das-estat%C3%ADsticas"><span class="header-section-number">17.18.1</span> Análise das Estatísticas</a></li>
-<li><a class="nav-link" href="#interpreta%C3%A7%C3%A3o"><span class="header-section-number">17.18.2</span> Interpretação</a></li>
-<li><a class="nav-link" href="#detalhes-do-r2dtable"><span class="header-section-number">17.18.3</span> Detalhes do r2dtable</a></li>
-<li><a class="nav-link" href="#como-funciona"><span class="header-section-number">17.18.4</span> Como Funciona</a></li>
-<li><a class="nav-link" href="#uso-no-contexto-do-vegan-e-adipart"><span class="header-section-number">17.18.5</span> Uso no Contexto do vegan e adipart</a></li>
-<li><a class="nav-link" href="#interpreta%C3%A7%C3%A3o-1"><span class="header-section-number">17.18.6</span> Interpretação</a></li>
-<li><a class="nav-link" href="#exemplos-de-uso"><span class="header-section-number">17.18.7</span> Exemplos de Uso</a></li>
+<a class="nav-link" href="#exibir-a-tabela"><span class="header-section-number">18.18</span> Exibir a tabela</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#an%C3%A1lise-das-estat%C3%ADsticas"><span class="header-section-number">18.18.1</span> Análise das Estatísticas</a></li>
+<li><a class="nav-link" href="#interpreta%C3%A7%C3%A3o"><span class="header-section-number">18.18.2</span> Interpretação</a></li>
+<li><a class="nav-link" href="#detalhes-do-r2dtable"><span class="header-section-number">18.18.3</span> Detalhes do r2dtable</a></li>
+<li><a class="nav-link" href="#como-funciona"><span class="header-section-number">18.18.4</span> Como Funciona</a></li>
+<li><a class="nav-link" href="#uso-no-contexto-do-vegan-e-adipart"><span class="header-section-number">18.18.5</span> Uso no Contexto do vegan e adipart</a></li>
+<li><a class="nav-link" href="#interpreta%C3%A7%C3%A3o-1"><span class="header-section-number">18.18.6</span> Interpretação</a></li>
+<li><a class="nav-link" href="#exemplos-de-uso"><span class="header-section-number">18.18.7</span> Exemplos de Uso</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#ap%C3%AAndices-10">Apêndices</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#ap%C3%AAndices-11">Apêndices</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#sites-consultados-6">Sites consultados</a></li>
-<li><a class="nav-link" href="#script-limpo-7">Script limpo</a></li>
+<li><a class="nav-link" href="#script-limpo-8">Script limpo</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#refer%C3%AAncias-13">Referências</a></li>
+<li><a class="nav-link" href="#refer%C3%AAncias-14">Referências</a></li>
 </ul>
 
       <div class="book-extra">
@@ -2269,7 +2270,7 @@ R STUDIO TEAM. <strong>RStudio: Integrated Development Environment for R</strong
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 12:00:45.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 16:49:19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,19 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 6 Teoria 3 - Relativizações e transformações de dados | Fundamentos de Ecologia Numérica</title>
+<title> 16 Modelos Lineares Generalizados (GLMs) | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
-<meta name="description" content="Relativizações e transformações de dados  Apresentação  Referências">
+<meta name="description" content='RESUMO  Apresentação  16.0.0.1 Pressupostos   16.0.0.2 Exemplo   16.1 Organização básica dev.off() #apaga os graficos, se houver algum rm(list=ls(all=TRUE)) #limpa a memória cat("\014") #limpa o...'>
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content=" 6 Teoria 3 - Relativizações e transformações de dados | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 16 Modelos Lineares Generalizados (GLMs) | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Relativizações e transformações de dados  Apresentação  Referências">
+<meta property="og:description" content='RESUMO  Apresentação  16.0.0.1 Pressupostos   16.0.0.2 Exemplo   16.1 Organização básica dev.off() #apaga os graficos, se houver algum rm(list=ls(all=TRUE)) #limpa a memória cat("\014") #limpa o...'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 6 Teoria 3 - Relativizações e transformações de dados | Fundamentos de Ecologia Numérica">
-<meta name="twitter:description" content="Relativizações e transformações de dados  Apresentação  Referências">
+<meta name="twitter:title" content=" 16 Modelos Lineares Generalizados (GLMs) | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content='RESUMO  Apresentação  16.0.0.1 Pressupostos   16.0.0.2 Exemplo   16.1 Organização básica dev.off() #apaga os graficos, se houver algum rm(list=ls(all=TRUE)) #limpa a memória cat("\014") #limpa o...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -79,7 +79,7 @@
 <li class="book-part">II. TEORIA</li>
 <li><a class="" href="amd.html"><span class="header-section-number">4</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
 <li><a class="" href="tiposE.html"><span class="header-section-number">5</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
-<li><a class="active" href="reltrnsT.html"><span class="header-section-number">6</span> Teoria 3 - Relativizações e transformações de dados</a></li>
+<li><a class="" href="reltrnsT.html"><span class="header-section-number">6</span> Teoria 3 - Relativizações e transformações de dados</a></li>
 <li class="book-part">III. BASES DE DADOS</li>
 <li><a class="" href="bases.html"><span class="header-section-number">7</span> Bases de dados. Dados do PPBio Semiárido</a></li>
 <li><a class="" href="basepeixes.html"><span class="header-section-number">8</span> Base de dados I - Peixes</a></li>
@@ -91,7 +91,7 @@
 <li><a class="" href="testes.html"><span class="header-section-number">13</span> R Módulo 3.2 - Testes estatísticos</a></li>
 <li><a class="" href="correg.html"><span class="header-section-number">14</span> Correlação e Regressão</a></li>
 <li><a class="" href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></li>
-<li><a class="" href="mlgs.html"><span class="header-section-number">16</span> Modelos Lineares Generalizados (GLMs)</a></li>
+<li><a class="active" href="mlgs.html"><span class="header-section-number">16</span> Modelos Lineares Generalizados (GLMs)</a></li>
 <li><a class="" href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
 <li><a class="" href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
 <li><a class="" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
@@ -106,40 +106,83 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="reltrnsT" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mlgs" class="section level1" number="16">
 <h1>
-<span class="header-section-number"> 6</span> Teoria 3 - Relativizações e transformações de dados<a class="anchor" aria-label="anchor" href="#reltrnsT"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 16</span> Modelos Lineares Generalizados (GLMs)<a class="anchor" aria-label="anchor" href="#mlgs"><i class="fas fa-link"></i></a>
 </h1>
-<div id="relativizações-e-transformações-de-dados" class="section level3 unnumbered">
-<h3>Relativizações e transformações de dados<a class="anchor" aria-label="anchor" href="#relativiza%C3%A7%C3%B5es-e-transforma%C3%A7%C3%B5es-de-dados"><i class="fas fa-link"></i></a>
+<div id="resumo-10" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-10"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="apresentação-1" class="section level3 unnumbered">
-<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
+<div id="apresentação-10" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-10"><i class="fas fa-link"></i></a>
+</h3>
+<div id="pressupostos-6" class="section level4" number="16.0.0.1">
+<h4>
+<span class="header-section-number">16.0.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-6"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+<div id="exemplo-3" class="section level4" number="16.0.0.2">
+<h4>
+<span class="header-section-number">16.0.0.2</span> Exemplo<a class="anchor" aria-label="anchor" href="#exemplo-3"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+</div>
+<div id="organização-básica-6" class="section level2" number="16.1">
+<h2>
+<span class="header-section-number">16.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
+<div id="organizando-os-dados-1" class="section level3" number="16.1.1">
+<h3>
+<span class="header-section-number">16.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="referências-2" class="section level2 unnumbered">
-<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-2"><i class="fas fa-link"></i></a>
+</div>
+<div id="apêndices-9" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-9"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="sites-para-consulta-3" class="section level2 unnumbered">
+<h2>Sites para consulta<a class="anchor" aria-label="anchor" href="#sites-para-consulta-3"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a>
+<a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a>
+<a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a></p>
+</div>
+<div id="script-limpo-6" class="section level2 unnumbered">
+<h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
+</div>
+<div id="referências-12" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-12"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
 </div>
-
-
-
   <div class="chapter-nav">
-<div class="prev"><a href="tiposE.html"><span class="header-section-number">5</span> Teoria 2 - Tipos de dados usados em AMD</a></div>
-<div class="next"><a href="bases.html"><span class="header-section-number">7</span> Bases de dados. Dados do PPBio Semiárido</a></div>
+<div class="prev"><a href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></div>
+<div class="next"><a href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#reltrnsT"><span class="header-section-number">6</span> Teoria 3 - Relativizações e transformações de dados</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#relativiza%C3%A7%C3%B5es-e-transforma%C3%A7%C3%B5es-de-dados">Relativizações e transformações de dados</a></li>
-<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-1">Apresentação</a></li>
+<a class="nav-link" href="#mlgs"><span class="header-section-number">16</span> Modelos Lineares Generalizados (GLMs)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-10">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-10">Apresentação</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#refer%C3%AAncias-2">Referências</a></li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><span class="header-section-number">16.1</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">16.1.1</span> Organizando os dados</a></li></ul>
+</li>
+<li><a class="nav-link" href="#ap%C3%AAndices-9">Apêndices</a></li>
+<li><a class="nav-link" href="#sites-para-consulta-3">Sites para consulta</a></li>
+<li><a class="nav-link" href="#script-limpo-6">Script limpo</a></li>
+<li><a class="nav-link" href="#refer%C3%AAncias-12">Referências</a></li>
 </ul>
 
       <div class="book-extra">

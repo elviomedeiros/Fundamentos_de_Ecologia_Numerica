@@ -89,13 +89,14 @@
 <li><a class="active" href="xls.html"><span class="header-section-number">11</span> R Módulo 2 - Importando planilhas de dados</a></li>
 <li><a class="" href="norm.html"><span class="header-section-number">12</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
 <li><a class="" href="testes.html"><span class="header-section-number">13</span> R Módulo 3.2 - Testes estatísticos</a></li>
-<li><a class="" href="correg.html"><span class="header-section-number">14</span> R Módulo 3.2 - Correlação e Regressão</a></li>
-<li><a class="" href="regmul.html"><span class="header-section-number">15</span> R Módulo 4.2 - Regressão múltipla</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
-<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="correg.html"><span class="header-section-number">14</span> Correlação e Regressão</a></li>
+<li><a class="" href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></li>
+<li><a class="" href="mlgs.html"><span class="header-section-number">16</span> Modelos Lineares Generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
@@ -172,10 +173,10 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <span class="header-section-number">11.3</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica"><i class="fas fa-link"></i></a>
 </h2>
 <p>No ambiente do RStudio no painel de edição de código execute (<code>Ctrl+Enter</code> com o teclado ou <code>Run</code> no editor de código) os comandos a seguir, para instalar os pacotes necessários para este módulo.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"readxl"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
 <p>E em seguida,</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a>) <span class="citation">(<a href="#ref-rdevelopmentcoreteam2017">R DEVELOPMENT CORE TEAM, 2017</a>)</span>, e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-rstudioteam2022">R STUDIO TEAM, 2022</a>)</span>. No exemplo acima, o pacote <code>readxl</code> permite ler e escrever arquivos Excel no R.</p>
 <p>Para instalar um pacote no R, você precisa usar a função <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p>
@@ -219,7 +220,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <p>Lembre que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.</p>
 <p>Ajuste a segunda linha do código abaixo para refletir <span style="color:red">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
 <p>Definindo o diretório de trabalho e installando os pacotes necessários:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:\SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
@@ -241,7 +242,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <h2>
 <span class="header-section-number">11.4</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
 <span><span class="va">ppbio06</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx"</span>,</span>
 <span>                      sheet <span class="op">=</span> <span class="st">"Sheet1"</span>,</span>
@@ -250,15 +251,15 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span></code></pre></div>
 <p>Com essas linhas de código a primeira coluna da matriz importada apresenta texto. Não queremos assim porque vamos fazer cálculos matemáticos na matriz.</p>
 <p>Resolvemos o problema com mais algumas linhas de código.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ppbio06</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ppbio06</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="co">#tem  que ser um df</span></span>
 <span><span class="va">ppbio06</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
 <p>Ou podemos instalar esse pacote de importação de arquivos .xlsx para o R.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -272,12 +273,12 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <span><span class="co">#ppbio</span></span>
 <span><span class="co">#ppbio_ma</span></span></code></pre></div>
 <p>Compare as diferenças. Agora podemos exportar os dados como uma matriz de dados em formato de <code>valores separados por vírgula (.csv)</code>.</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">ppbio</span>, <span class="st">"ppbiocsv.txt"</span>, append <span class="op">=</span> <span class="cn">F</span>, quote <span class="op">=</span> <span class="cn">T</span>, <span class="st">";"</span>, row.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/shell.exec.html">shell.exec</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span> <span class="co">#abre o diretorio de trabalho no Windows Explorer</span></span></code></pre></div>
 <p>Podemos abrir o arquivo .csv criado <code>ppbiocsv.txt</code> usando os códigos abaixo.</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ppbiocsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"ppbiocsv.txt"</span>,</span>
 <span>                     sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">","</span>, <span class="co">#definimos o dígito separador</span></span>
 <span>                     header <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -288,7 +289,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <p>Lembre de prestar atenção no dígito separador de decimais ” , ” ou ” . ” . Além disso, só estaamos usando <code>ppbio**.***</code> porque o diretório de trabalho ja fo definido no início. Se não deveríamos estar usando <code>C:/Seu/Diretório/De/Trabalho/ppbio**.***</code></p>
 <p>Alguns comandos para exibir a planilha são “case-sensitive” <code>(ignore.case(object))</code></p>
 <p>Atente para os resultados dos comandos a seguir.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio06</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#ppbio</span></span>
@@ -372,7 +373,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <span class="header-section-number">11.4.1</span> Outra forma de achar e importar uma planilha<a class="anchor" aria-label="anchor" href="#outra-forma-de-achar-e-importar-uma-planilha"><i class="fas fa-link"></i></a>
 </h3>
 <p>Essa forma é desaconselhavel porque é demorada e sujeita a erros. Além de precisar ser refeita sempre que se quiser abrir uma nova planilha ou reabrir a última planilha importada.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.choose.html">file.choose</a></span><span class="op">(</span><span class="op">)</span>,  <span class="co">#abre o explorador de arquivos do Windows</span></span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -384,9 +385,9 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <span class="header-section-number">11.5</span> Importando <code>.ods</code> do LibreOffice Calc<a class="anchor" aria-label="anchor" href="#importando-.ods-do-libreoffice-calc"><i class="fas fa-link"></i></a>
 </h2>
 <p>A planilha a seguir pode ser baixada da seção <a href="@arqs">Arquivos disponíveis</a>.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("readODS")</span></span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/readODS/">readODS</a></span><span class="op">)</span></span>
 <span><span class="va">ppbio06.ods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/readODS/reference/read_ods.html">read_ods</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.ods"</span>,</span>
 <span>                   row_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -413,7 +414,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 </h3>
 <p>Em algumas situações é necessário encontrar colunas com o mesmo nome em um conjunto de dados e soma-las ou fazer sua média. Isso pode ocorrer quando se está trabalhando com dados de várias fontes e é necessário combinar esses diferentes conjuntos de dados.</p>
 <p>Considere por exemplo um cenário onde se está trabalhando em um projeto de análise de dados ecológicos e você recebeu conjuntos de dados de diferentes locais de amostragens enviados por diferentes pesquisadores, e cada pesquiador enviou seu conjunto de dados que contém informações sobre as mesmas espécies (ou variáveis ambientais). Devido a diferentes sistemas de registro ou a falta de comunicação entre os pesquisadores, pode haver repetição nos nomes das colunas.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Dados de mamíferos roedores</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  Rato <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
@@ -477,7 +478,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 ## 3   12         6       1     0      1    13       0</code></pre>
 <p>Por exemplo, no estudo sobre mamíferos roedores acima, quando se combina o conjunto geral de dados para realizar uma análise abrangente, depara-se com colunas duplicadas, onde a matriz com o conjunto total de dados contém espécies repetidas.</p>
 <p>Nesse caso, encontrar e resolver colunas com o mesmo nome é crucial para garantir a integridade dos dados e realizar uma análise precisa. Você deve consolidar essas colunas duplicadas, somando-as ou fazendo sua média.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Achando colunas com nomes duplicados</span></span>
 <span><span class="va">dup_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co"># Somando colunas com o mesmo nome</span></span>
@@ -496,7 +497,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 ## 2   10         5       0     1      1    12       2
 ## 3   12         6       1     0      1    13       0</code></pre>
 <p>Uma situação diferente ocorre quando tem-se colunas com o mesmo nome.</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span>  B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,</span>
@@ -540,7 +541,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 ## L2 11 5 0 1 1 12 2
 ## L3 13 6 1 0 1 13 0</code></pre>
 <p>Por exemplo, nesse dataframe temos colunas duplicadas. Nesse caso, encontrar e resolver colunas com o mesmo nome é crucial para garantir a integridade dos dados e realizar uma análise precisa. Você deve consolidar essas colunas duplicadas, somando-as ou fazendo sua média.</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>,</span>
 <span>  B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>,</span>
@@ -563,7 +564,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span> <span class="op">==</span> <span class="st">"L1"</span>, <span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p>Mesma coisa, mas usando um <code>loop</code></p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Achando colunas com nomes duplicados</span></span>
 <span><span class="va">dup_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co"># Somando colunas com o mesmo nome</span></span>
@@ -586,7 +587,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <h3>
 <span class="header-section-number">11.6.2</span> Removendo linhas ou colunas por nome<a class="anchor" aria-label="anchor" href="#removendo-linhas-ou-colunas-por-nome"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
 <span><span class="co">#Colunas</span></span>
 <span><span class="va">m_part</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">ppbio</span>, select <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">`ap-davis`</span>, <span class="va">`as-bimac`</span><span class="op">)</span><span class="op">)</span> <span class="co">#escolhendo uma coluna pelo nome</span></span>
@@ -603,7 +604,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <span class="header-section-number">11.6.3</span> Criando uma matriz de médias<a class="anchor" aria-label="anchor" href="#criando-uma-matriz-de-m%C3%A9dias"><i class="fas fa-link"></i></a>
 </h3>
 <p>Por razões diferentes o precedimento anterior pode vir a ser necessário de ser aplicado às linhas. Por exemplo, quando se quer somar ou fazer a média de amostras diferentes do mesmo ambiente de coleta. Veja a matriz abaixo.</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7 Sp8</span></span>
 <span><span class="st">A1 0 0 0 0 0 0 6 1</span></span>
@@ -623,7 +624,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 ## C1   0   0   0   0   1   0   0   1
 ## C2   0   0   1   0   0   1   0   1
 ## C3   0   2   0   2   0   0   0   1</code></pre>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
 <span><span class="co">#Inserindo coluna para agrupamentos</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co">#no. de N colunas x M linhas</span></span>
@@ -690,7 +691,7 @@ Figura 11.2: Associação entre a planilha de dados brutos do PPBio e o delineam
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("readxl") #importa arquivos do excel</span></span>
 <span><span class="co"># library(readxl)</span></span>
 <span><span class="co"># getwd()</span></span>
@@ -1004,7 +1005,7 @@ R STUDIO TEAM. <strong>RStudio: Integrated Development Environment for R</strong
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 12:00:45.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 16:49:19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
