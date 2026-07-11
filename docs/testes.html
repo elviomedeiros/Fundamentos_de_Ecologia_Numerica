@@ -732,8 +732,8 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h3>
 <span class="header-section-number">13.11.1</span> Teste t para uma amostra (<em>One-sample t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-para-uma-amostra-one-sample-t-test"><i class="fas fa-link"></i></a>
 </h3>
-<p>H₀: a média populacional da variável é igual ao valor de referência</p>
-<p>H₁: a média populacional da variável é diferente do valor de referência</p>
+<p>H₀: a média populacional da variável é igual ao valor de referência.<br>
+H₁: a média populacional da variável é diferente do valor de referência.</p>
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">var_sub</span> <span class="op">&lt;-</span> <span class="va">var_v</span></span></code></pre></div>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
@@ -909,7 +909,19 @@ F = \frac{\text{Variância entre grupos}}{\text{Variância dentro dos grupos}}
 SQE = \sum_{i=1}^{k} n_i(\bar{x}_i - \bar{x})^2
 \]</span></p>
 <p>onde:</p>
-<p><span class="math inline">\(k\)</span> é o número de grupos;<br><span class="math inline">\(n_i\)</span> é o número de observações no grupo <span class="math inline">\(i\)</span>;<br><span class="math inline">\(\bar{x}_i\)</span> é a média do grupo <span class="math inline">\(i\)</span>;<br><span class="math inline">\(\bar{x}\)</span> é a média geral.</p>
+<ul>
+<li>
+<span class="math inline">\(k\)</span> é o número de grupos;<br>
+</li>
+<li>
+<span class="math inline">\(n_i\)</span> é o número de observações no grupo <span class="math inline">\(i\)</span>;<br>
+</li>
+<li>
+<span class="math inline">\(\bar{x}_i\)</span> é a média do grupo <span class="math inline">\(i\)</span>;<br>
+</li>
+<li>
+<span class="math inline">\(\bar{x}\)</span> é a média geral.</li>
+</ul>
 <p>A variância entre grupos, também chamada de Quadrado Médio Entre os Grupos (QME), é calculada por:</p>
 <p><span class="math display">\[
 QME = \frac{SQE}{k - 1}
@@ -928,7 +940,13 @@ SQD = \sum_{i=1}^{k} \sum_{j=1}^{n_i} (x_{ij} - \bar{x}_i)^2
 QMD = \frac{SQD}{N - k}
 \]</span></p>
 <p>onde:</p>
-<p><span class="math inline">\(N\)</span> é o número total de observações;<br><span class="math inline">\(k\)</span> é o número de grupos.</p>
+<ul>
+<li>
+<span class="math inline">\(N\)</span> é o número total de observações;<br>
+</li>
+<li>
+<span class="math inline">\(k\)</span> é o número de grupos.</li>
+</ul>
 <p>Finalmente, a estatística de teste da ANOVA é calculada como:</p>
 <p><span class="math display">\[
 F = \frac{QME}{QMD}
@@ -2125,7 +2143,7 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 19:34:14.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 11:31:39.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

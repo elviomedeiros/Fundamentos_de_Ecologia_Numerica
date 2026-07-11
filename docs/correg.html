@@ -140,7 +140,8 @@
 <div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> <span class="co">#sem notação científica, oposto de scipen = 0</span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
 <div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
@@ -222,23 +223,33 @@
 <p>O <strong>coeficiente de correlação produto-momento de Pearson</strong> descreve a relação entre duas variáveis numéricas contínuas. A análise de correlação também pode ser aplicada entre variáveis categóricas binárias (coeficiente Phi) ou entre uma variável numérica contínua e uma variável categórica binária (correlação ponto-bisserial) <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>, porém essas abordagens não constituem o foco do presente texto.</p>
 <p>Quando os pressupostos da correlação não podem ser adequadamente atendidos, utiliza-se uma alternativa não-paramétrica, a <em>correlação de postos de Spearman</em>.</p>
 <p>Neste capítulo serão abordadas:</p>
-<p>Correlação simples bivariada (coeficiente de correlação produto-momento de Pearson) Correlação de Spearman (bivariada não-paramétrica) Correlação parcial</p>
+<ul>
+<li>Correlação simples bivariada (coeficiente de correlação produto-momento de Pearson)<br>
+</li>
+<li>Correlação de Spearman (bivariada não-paramétrica)<br>
+</li>
+<li>Correlação parcial</li>
+</ul>
 <p>A correlação bivariada simples, refere-se à correlação entre duas variáveis contínuas e é a medida mais comum de relação linear.</p>
 <p>Esse coeficiente possui valores possíveis variando de:</p>
 <p>-1 a +1,</p>
 <p>onde o valor indica a força da relação, enquanto o sinal indica a direção da relação.</p>
-<p>A correlação parcial fornece uma medida única de associação linear entre duas variáveis, ajustando os efeitos de uma ou mais variáveis adicionais.</p>
+<p>A correlação parcial fornece uma medida única de associação linear entre duas variáveis, ajustando para os efeitos de uma ou mais variáveis adicionais.</p>
 <div id="pressupostos-4" class="section level4" number="14.4.0.1">
 <h4>
 <span class="header-section-number">14.4.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-4"><i class="fas fa-link"></i></a>
 </h4>
 <p>A análise de correlação possui vários pressupostos:</p>
 <ol style="list-style-type: decimal">
-<li><p>Pares relacionados: Os dados devem ser coletados em pares relacionados. Ou seja, se houver um escore na variável X, deve haver também um escore correspondente na variável Y para o mesmo participante.</p></li>
-<li><p>Escala de medida: Os dados devem possuir natureza intervalar ou de razão.</p></li>
-<li><p>Normalidade: Os escores de cada variável devem apresentar distribuição normal.</p></li>
-<li><p>Linearidade: A relação entre as duas variáveis deve ser linear.</p></li>
-<li><p>Homoscedasticidade: A variabilidade dos escores de uma variável deve ser aproximadamente a mesma em todos os valores da outra variável. Ou seja, refere-se à forma como os escores se distribuem uniformemente em torno da linha de regressão.</p></li>
+<li>Pares relacionados: Os dados devem ser coletados em pares relacionados. Ou seja, se houver um escore na variável x, deve haver também um escore correspondente na variável y para o mesmo participante.<br>
+</li>
+<li>Escala de medida: Os dados devem possuir natureza intervalar ou de razão.<br>
+</li>
+<li>Normalidade: Os escores de cada variável devem apresentar distribuição normal.<br>
+</li>
+<li>Linearidade: A relação entre as duas variáveis deve ser linear.<br>
+</li>
+<li>Homoscedasticidade: A variabilidade dos escores de uma variável deve ser aproximadamente a mesma em todos os valores da outra variável. Ou seja, refere-se à forma como os escores se distribuem uniformemente em torno da linha de regressão.</li>
 </ol>
 <p>Os pressupostos 1 e 2 dependem do delineamento da pesquisa.</p>
 <p>O pressuposto 3 pode ser avaliado utilizando os procedimentos descritos nos capítulos anteriores.</p>
@@ -260,26 +271,27 @@
 <ol style="list-style-type: decimal">
 <li>Existe correlação significativa entre o comprimento padrão e o comprimento total dos indivíduos?</li>
 </ol>
+<p>Hipótese nula (H₀): não existe correlação linear entre as duas variáveis na população.<br>
+Hipótese alternativa (H₁): existe correlação linear entre as duas variáveis na população.</p>
 <p>Nesse caso, utiliza-se:</p>
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Teste de Pearson</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Teste de Pearson</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span>, method<span class="op">=</span><span class="st">"pearson"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>,</span>
-<span>         method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span>
+<span>         method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="co">#"pearson", "kendall", "spearman"</span></span>
 <span></span>
 <span><span class="co"># Teste de Spearman</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>,</span>
 <span>         method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##            univ.CT_cm univ.CP_cm univ.PT_g
-## univ.CT_cm  1.0000000  0.9990120 0.9057485
-## univ.CP_cm  0.9990120  1.0000000 0.9039503
-## univ.PT_g   0.9057485  0.9039503 1.0000000
+<pre><code>##            univ.CP_cm univ.CT_cm univ.PT_g
+## univ.CP_cm  1.0000000  0.9990120 0.9039503
+## univ.CT_cm  0.9990120  1.0000000 0.9057485
+## univ.PT_g   0.9039503  0.9057485 1.0000000
 ## 
 ##  Pearson's product-moment correlation
 ## 
@@ -292,9 +304,9 @@
 ##      cor 
 ## 0.999012 
 ## 
-##            univ.CT_cm univ.CP_cm
-## univ.CT_cm  1.0000000  0.9976789
-## univ.CP_cm  0.9976789  1.0000000
+##            univ.CP_cm univ.CT_cm
+## univ.CP_cm  1.0000000  0.9976789
+## univ.CT_cm  0.9976789  1.0000000
 ## 
 ##  Spearman's rank correlation rho
 ## 
@@ -304,7 +316,18 @@
 ## sample estimates:
 ##       rho 
 ## 0.9976789</code></pre>
-<p>Na correlação de Spearman, os dados são transformados em <em>ranks</em> (postos).</p>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672"></div>
+<p>Interpretação:</p>
+<p>Os resultados da <strong>correlação de Pearson</strong> (<code>cor.test(x, y, method = "pearson")</code>) revelam a <strong>estatística do teste</strong>, t = 467.22 (para 432 <strong>graus de liberdade</strong>), indicando forte evidência contra a hipótese nula, e o <strong>valor de p</strong>, &lt;0.001, indicando que a correlação é estatisticamente significativa. Também é mostrado o <strong>coeficiente de correlação</strong> (r) de 0.999 e o intervalo de confiança (95%) de 0.9988≤ρ≤0.9992.</p>
+<p>Em uma correlação simples (bivariada), não existe uma distinção estatística obrigatória entre variável explicativa (independente) e variável resposta (dependente). A correlação mede apenas a força e a direção da associação entre duas variáveis (sem assumir causalidade), e o coeficiente de correlação é o mesmo independentemente da ordem das variáveis.</p>
+<p>Entretanto, quando se faz um gráfico de dispersão, por convenção:</p>
+<p>Eixo x (horizontal): variável explicativa (independente), quando houver uma hipótese causal;<br>
+Eixo y (vertical): variável resposta (dependente).</p>
+<p>Por exemplo, nos dados de tucunaré, como nosso objetivo é verificar se o comprimento padrão (CP) explica o comprimento total (CT), temos que:</p>
+<p>x: comprimento padrão (CP_cm)
+y: comprimento total (CT_cm)</p>
+<p>Se pretendemos ajustar uma <strong>regressão linear</strong>, a variável explicativa deve ser colocada no eixo x e a variável resposta no eixo y, pois a reta de regressão depende dessa escolha (veremos isso a seguir.</p>
+<p>Na <strong>correlação de Spearman</strong>, os dados são transformados em <em>ranks</em> (postos).</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th>valor</th>
@@ -331,18 +354,20 @@
 </table></div>
 <p>Quando existem valores repetidos, no exemplo acima, 12 e 12, ocorrem empates (<em>ties</em>). O teste exato de Spearman assume ranks únicos, sem valores repetidos. Como nossos dados possuem medidas repetidas (muito comum em biometria), o R usa uma aproximação assintótica (removendo os empates), em vez do cálculo exato. Isso não invalida o teste, em caso de amostras grandes, mas significa uma limitação do teste de correlação não-paramétrico.</p>
 <p>O QUE REPORTAR (Pearson): Foi observada correlação linear positiva extremamente forte entre o comprimento padrão (CP_cm) e o comprimento total (CT_cm) dos indivíduos analisados (correlação de Pearson: r = 0,957; p &lt; 0,001; n = 433).</p>
-<p>O QUE REPORTAR (spearman): Foi observada correlação positiva significativa entre CT_cm e CP_cm (Spearman: ρ = 0,998; p &lt; 0,001).</p>
+<p>O QUE REPORTAR (spearman): Foi observada correlação positiva significativa entre comprimento padrão (CP_cm) e o comprimento total (CT_cm) (Spearman: ρ = 0,998; p &lt; 0,001).</p>
 </div>
 <div id="correlação-parcial" class="section level2" number="14.6">
 <h2>
 <span class="header-section-number">14.6</span> Correlação parcial<a class="anchor" aria-label="anchor" href="#correla%C3%A7%C3%A3o-parcial"><i class="fas fa-link"></i></a>
 </h2>
 <p>Além disso, pode-se avaliar se essa relação permanece significativa quando o efeito de uma variável adicional, como o peso corporal (<code>PT_g</code>) ou o período do ano (<code>periodo</code>), é controlada na análise. Nesse caso, a correlação parcial remove a parte da correlação explicada pelo peso. Ou seja, a correlação parcial faz a mesma coisa da bivariada, mas controla o efeito de uma terceira variável.</p>
-<p>Sabe-se que peixes mais pesados tendem a aumentar ambo os comprimentos. Podemos, portanto, correlacionar CP_cm e CT_cm, e controlar pelo peso, para responder a seguinte questão:</p>
+<p>Espera-se que peixes mais pesados tendem a aumentar em ambos os comprimentos (CP e CT). Podemos, portanto, correlacionar CP_cm e CT_cm, e controlar pelo peso, para responder a seguinte questão:</p>
 <ol style="list-style-type: decimal">
-<li>CP e CT ainda se correlacionam independentemente do peso?</li>
+<li>Comprimento padrão e comprimento total ainda se correlacionam independentemente do peso?</li>
 </ol>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<p>Hipótese nula (H₀): não existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.<br>
+Hipótese alternativa (H₁): existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.</p>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span></span>
 <span>  <span class="va">univ</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CP_cm"</span>, <span class="st">"CT_cm"</span>, <span class="st">"PT_g"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>  use <span class="op">=</span> <span class="st">"complete.obs"</span></span>
@@ -360,7 +385,10 @@
 ## PT_g  0.9039503 0.9057485 1.0000000
 ##    estimate p.value statistic   n gp  Method
 ## 1 0.9945978       0  198.9168 434  1 pearson</code></pre>
-<p>Tivemos uma correlação parcial extremamente forte e positiva (r=0.955) entre CP_cm e CT_cm, mesmo após remover o efeito do PT_g (peso total) (p &lt; 0,001). Isso india que a associação entre comprimento padrão e comprimento total permanece muito forte independentemente do peso corporal.</p>
+<p>Interpretação:</p>
+<p>O resultado da <strong>correlação parcial</strong> (<code><a href="https://rdrr.io/pkg/ppcor/man/pcor.test.html">pcor.test()</a></code>) de Pearson, isto é, a correlação entre CP_cm e CT_cm após controlar o efeito de uma terceira variável (PT_g), demonstra um <strong>coeficiente de correlação parcial</strong> <span class="math inline">\(r_p\)</span> de 0.9946 (<em>estimate</em>), mesmo após remover o efeito do peso (PT_g). A <strong>estaística t</strong> (<em>statistic</em>) de 198.92 utilizada para testar a significância da correlação parcial e o <strong>número de observações</strong> (n) também são apresentados. O <strong>número de variáveis controladas</strong> (neste caso, apenas PT_g), é demonstrado em
+gp = 1. O <strong>valor de p</strong> (&lt;0,001) é extremamente pequeno. Finalmemte, o <strong>método utilizado</strong> (correlação parcial de Pearson) é apresentado.</p>
+<p>Tivemos uma correlação parcial extremamente forte e positiva (r=0.955) entre CP_cm e CT_cm, mesmo após remover o efeito do PT_g (peso total) (p &lt; 0,001). Isso indica que a associação entre comprimento padrão e comprimento total permanece muito forte independentemente do peso corporal.</p>
 <p>O QUE REPORTAR: Análise de correlação parcial revelou associação positiva extremamente forte entre comprimento padrão e comprimento total, mesmo após o controle do peso corporal (r = 0,955; p &lt; 0,001).</p>
 </div>
 <div id="regressão-simples" class="section level2" number="14.7">
@@ -368,18 +396,21 @@
 <span class="header-section-number">14.7</span> Regressão simples<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-simples"><i class="fas fa-link"></i></a>
 </h2>
 <p>Nesse texto, optei por tratar correlação e regressão linear como diferentes aspectos de uma mesma análise (seguindo a visão de <span class="citation">MCDONALD (<a href="#ref-mcdonald2014">2014</a>)</span>), apesar de que também podemos considerar correlação e regressão linear como um único teste estatístico <span class="citation">(<a href="#ref-cleophas2016">CLEOPHAS; ZWINDERMAN, 2016</a>; <a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p>
-<p>A principal diferença entre correlação e regressão é que, na correlação, ambas as variáveis medidas são amostradas aleatoriamente a partir de uma população, enquanto na regressão os valores da variável independente (X) costumam ser escolhidos ou controlados pelo pesquisador <span class="citation">(<a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>.</p>
+<p>A principal diferença entre correlação e regressão é que, na correlação, ambas as variáveis medidas são amostradas aleatoriamente a partir de uma população, enquanto na regressão os valores da variável independente (x) costumam ser escolhidos ou controlados pelo pesquisador <span class="citation">(<a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>.</p>
 <p>No nosso exemplo, o pesquisador interessado na biometria de <em>Cichla ocellaris</em> deseja compreender a relação entre o comprimento padrão e o comprimento total dos indivíduos. Em estudos pesqueiros, muitas vezes apenas parte do exemplar é obtida, seja devido ao processamento do pescado, danos durante a captura ou coleta incompleta em campo <span class="citation">(<a href="#ref-royce1942">ROYCE, 1942</a>)</span>. Nesses casos, torna-se útil estimar o comprimento total do peixe a partir do comprimento padrão.</p>
-<p>Já fizemos a avaliação da correlação entre as variáveis de interesse. Agora faremos uma análise de regressão linear entre essas variáveis. O modelo ajustado da regressão permite prever o comprimento total a partir do comprimento padrão.</p>
+<p>Já fizemos a avaliação da correlação entre as variáveis de interesse. Agora faremos uma análise de regressão linear entre essas variáveis, para que possamos, usando o modelo ajustado da regressão, prever o comprimento total a partir do comprimento padrão.</p>
 <div id="variáveis-independentes-e-dependentes" class="section level4" number="14.7.0.1">
 <h4>
 <span class="header-section-number">14.7.0.1</span> Variáveis independentes e dependentes<a class="anchor" aria-label="anchor" href="#vari%C3%A1veis-independentes-e-dependentes"><i class="fas fa-link"></i></a>
 </h4>
-<p>Quando se testa uma relação de causa e efeito, a variável que supostamente causa a relação é chamada de variável <strong>independente</strong>, e geralmente é representada no eixo X. Já a variável que representa o efeito é denominada <strong>variável dependente</strong>, e é representada no eixo Y. Em alguns experimentos, o pesquisador define os valores da variável independente. Por exemplo, se o interesse for avaliar o efeito da temperatura sobre a taxa de vocalização de anuros, os animais podem ser mantidos em câmaras com temperaturas controladas de 10°C, 15°C, 20°C, e assim por diante <span class="citation">(<a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>.</p>
-<p>Uma outra possibilidade é quando, ambas as variáveis apresentam variação natural, mas a relação causal ocorre apenas em uma direção. Por exemplo, ao medir temperatura do ar e taxa de vocalização de sapos em diferentes noites, ambas variam naturalmente. Entretanto, caso exista relação causal, espera-se que a temperatura afete a vocalização, e não o contrário, já que a vocalização dos sapos não altera a temperatura do ambiente <span class="citation">(<a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>.</p>
-<p>Em estudos biométricos como o em <em>Cichla ocellaris</em>, podemos investigar a relação entre comprimento padrão (CP_cm) e comprimento total (CT_cm). Nesse caso, podemos considerar comprimento padrão como variável independente, pois desejamos prever comprimento total a partir do comprimento padrão.</p>
-<p>Por exemplo, ao analisar comprimento total e peso corporal em peixes, pode não haver interesse em afirmar que uma variável “causa” a outra, mas apenas em verificar se indivíduos maiores tendem a apresentar maior massa corporal. Nesses casos, a distinção entre variável independente e dependente torna-se menos importante, principalmente em análises de correlação, uma vês que o coeficiente de determinação (R<sup>2</sup>) não se alteram apenas por trocar qual variável está no eixo X ou Y.</p>
-<p>Em estudos de relação peso-comprimento normalmente considera-se comprimento como variável independente e peso como variável dependente.</p>
+<p>Quando se testa uma relação de causa e efeito, a variável que supostamente causa a relação é chamada de variável <strong>independente</strong>, e geralmente é representada no eixo x. Já a variável que representa o efeito é denominada <strong>variável dependente</strong>, e é representada no eixo y.</p>
+<p>Em alguns experimentos, o pesquisador <strong>define os valores da variável independente</strong>. Por exemplo, se o interesse for avaliar o efeito da temperatura sobre a taxa de vocalização de anuros, os animais podem ser mantidos em câmaras com temperaturas controladas de 10°C, 15°C, 20°C <span class="citation">(<a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>, e essa seria a variável independente. Uma outra possibilidade é quando, <strong>ambas as variáveis apresentam variação natural</strong>, mas a relação causal ocorre apenas em uma direção. Por exemplo, ao medir temperatura do ar e taxa de vocalização de sapos em diferentes noites, ambas variam naturalmente. Entretanto, caso exista relação causal, espera-se que a temperatura (<strong>independente</strong>) afete a vocalização (<strong>dependente</strong>), e não o contrário, já que a vocalização dos sapos não altera a temperatura do ambiente <span class="citation">(<a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>.</p>
+<p>Um último caso ocorre quando desejamos prever uma variável (<strong>dependente</strong>) a partir de uma segunda variável (<strong>independente</strong>). Em estudos biométricos como o em <em>Cichla ocellaris</em>, podemos investigar a relação entre comprimento padrão (CP_cm) e comprimento total (CT_cm). Nesse caso, podemos considerar comprimento padrão como variável independente, pois desejamos prever comprimento total a partir do comprimento padrão.</p>
+<p>No R, isso é implementando usando a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
+<pre><code>lm(y ~ x, data = dados)</code></pre>
+<p>onde:</p>
+<p>o que está à esquerda de <code>~</code> é a variável dependente (resposta, y);
+o que está à direita de <code>~</code> é a variável independente (explicativa, preditora, x).</p>
 </div>
 <div id="exemplo-1" class="section level4" number="14.7.0.2">
 <h4>
@@ -397,43 +428,32 @@
 <li>Aplicação de correção robusta</li>
 </ol>
 <div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span><span class="op">)</span>,</span>
+<span>     ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#abline(modelo, col = "red", lwd = 2)</span></span>
 <span></span>
 <span><span class="co"># Teste de Pearson</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span>, method<span class="op">=</span><span class="st">"pearson"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>,</span>
 <span>         method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span>
 <span><span class="co"># Teste de Spearman</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>,</span>
 <span>         method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">CT_cm</span>, data<span class="op">=</span><span class="va">univ</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span> </span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">modelo</span>, white.adjust<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Coefficient covariances computed by hccm()</code></pre>
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="va">univ</span><span class="op">[</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span><span class="op">!=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span><span class="op">)</span>,<span class="op">]</span></span>
-<span><span class="co">#univ</span></span></code></pre></div>
-<pre><code>##            univ.CT_cm univ.CP_cm univ.PT_g
-## univ.CT_cm  1.0000000  0.9990120 0.9057485
-## univ.CP_cm  0.9990120  1.0000000 0.9039503
-## univ.PT_g   0.9057485  0.9039503 1.0000000
+<span><span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">CT_cm</span> <span class="op">~</span> <span class="va">CP_cm</span>, data<span class="op">=</span><span class="va">univ</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            univ.CP_cm univ.CT_cm univ.PT_g
+## univ.CP_cm  1.0000000  0.9990120 0.9039503
+## univ.CT_cm  0.9990120  1.0000000 0.9057485
+## univ.PT_g   0.9039503  0.9057485 1.0000000
 ## 
 ##  Pearson's product-moment correlation
 ## 
-## data:  univ$CT_cm and univ$CP_cm
+## data:  univ$CP_cm and univ$CT_cm
 ## t = 467.22, df = 432, p-value &lt; 2.2e-16
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
@@ -442,19 +462,9 @@
 ##      cor 
 ## 0.999012 
 ## 
-##            univ.CT_cm univ.CP_cm
-## univ.CT_cm  1.0000000  0.9976789
-## univ.CP_cm  0.9976789  1.0000000
-## 
-##  Spearman's rank correlation rho
-## 
-## data:  univ$CP_cm and univ$CT_cm
-## S = 31624, p-value &lt; 2.2e-16
-## alternative hypothesis: true rho is not equal to 0
-## sample estimates:
-##       rho 
-## 0.9976789 
-## 
+##            univ.CP_cm univ.CT_cm
+## univ.CP_cm  1.0000000  0.9976789
+## univ.CT_cm  0.9976789  1.0000000
 ## 
 ##  Spearman's rank correlation rho
 ## 
@@ -467,48 +477,23 @@
 ## 
 ## 
 ## Call:
-## lm(formula = CP_cm ~ CT_cm, data = univ)
+## lm(formula = CT_cm ~ CP_cm, data = univ)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -2.46995 -0.10511  0.00786  0.10786  2.01153 
+##     Min      1Q  Median      3Q     Max 
+## -2.3777 -0.1281 -0.0147  0.1260  3.0354 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -0.09800    0.03141  -3.119  0.00193 ** 
-## CT_cm        0.82716    0.00177 467.221  &lt; 2e-16 ***
+## (Intercept) 0.147883   0.037700   3.923 0.000102 ***
+## CP_cm       1.206566   0.002582 467.221  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.3491 on 432 degrees of freedom
+## Residual standard error: 0.4216 on 432 degrees of freedom
 ## Multiple R-squared:  0.998,  Adjusted R-squared:  0.998 
-## F-statistic: 2.183e+05 on 1 and 432 DF,  p-value: &lt; 2.2e-16
-## 
-## Analysis of Variance Table
-## 
-## Response: CP_cm
-##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
-## CT_cm       1 26600.7 26600.7  218295 &lt; 2.2e-16 ***
-## Residuals 432    52.6     0.1                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## Anova Table (Type II tests)
-## 
-## Response: CP_cm
-##            Sum Sq  Df F value    Pr(&gt;F)    
-## CT_cm     26600.7   1  218295 &lt; 2.2e-16 ***
-## Residuals    52.6 432                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## Analysis of Deviance Table (Type II tests)
-## 
-## Response: CP_cm
-##            Df     F    Pr(&gt;F)    
-## CT_cm       1 73564 &lt; 2.2e-16 ***
-## Residuals 432                    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-135-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-135-2.png" alt="" width="672"></p>
+## F-statistic: 2.183e+05 on 1 and 432 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-135-1.png" alt="" width="672"></div>
 <p>No caso do nosso exemplo, o modelo de regressão linear simples pode ser representado por:</p>
 <p><span class="math display">\[
 CT_{cm} = \beta_0 + \beta_1 CP_{cm} + \varepsilon
@@ -527,15 +512,69 @@ CT_{cm} = \beta_0 + \beta_1 CP_{cm} + \varepsilon
 </ul>
 <p>Esse modelo busca prever o comprimento total dos indivíduos a partir do comprimento padrão.</p>
 <p>No R, o modelo é ajustado utilizando a função:</p>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">CT_cm</span> <span class="op">~</span> <span class="va">CP_cm</span>, data <span class="op">=</span> <span class="va">univ</span><span class="op">)</span></span></code></pre></div>
-<p>A fórmula utilizada dentro da função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> indica que <code>CT_cm</code> é a variável resposta e <code>CP_cm</code> é a variável explicativa.</p>
-<p>O modelo ajustado seria:</p>
-<p><span class="math display">\[
-CT_{cm} = 1.25 + 1.12 \times CP_{cm}
-\]</span></p>
+<pre><code>modelo &lt;- lm(CT_cm ~ CP_cm, data = univ)</code></pre>
 <p>Interpretação:</p>
-<p>O intercept (<span class="math inline">\(\beta_0 = 1.25\)</span>) representa o valor esperado de <span class="math inline">\(CT_{cm}\)</span> quando <span class="math inline">\(CP_{cm}=0\)</span>. O coeficiente angular (<span class="math inline">\(\beta_1 = 1.12\)</span>) indica que, para cada aumento de 1 cm em <span class="math inline">\(CP_{cm}\)</span>, espera-se aumento médio de 1,12 cm em <span class="math inline">\(CT_{cm}\)</span>. O <code>summary(modelo)</code> também fornece valor de <span class="math inline">\(R^2\)</span>, indicando a proporção da variação explicada pelo modelo, o teste <code>F</code> da regressão e os valores de <code>p</code> para avaliar a significância estatística dos coeficientes.</p>
+<p>A função <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> fornece todas as informações necessárias para interpretar os resultados da regressão linear.</p>
+<p>A fórmula utilizada dentro da função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> indica que <code>CT_cm</code> é a variável resposta (dependente) e <code>CP_cm</code> é a variável explicativa (independente). A <strong>equação do modelo ajustado</strong> seria:</p>
+<p><span class="math display">\[
+CT_{cm} = 0.147 + 1.206 \times CP_{cm}
+\]</span>
+onde:</p>
+<ul>
+<li>0,147 é o intercepto (<span class="math inline">\(\beta_0\)</span>)<br>
+</li>
+<li>1,206 é o coeficiente angular (<span class="math inline">\(\beta_1\)</span>)</li>
+</ul>
+<p>O <strong>intercept</strong> (<span class="math inline">\(\beta_0 = 1.147\)</span>) representa o valor esperado de <span class="math inline">\(CT_{cm}\)</span> quando <span class="math inline">\(CP_{cm}=0\)</span> (geralmente sem interpretação biológica, mas importante em Modelos Lineares Generaliados). O <strong>coeficiente angular</strong> (<span class="math inline">\(\beta_1 = 1,206\)</span>) indica que, em média, para cada aumento de 1 cm em <span class="math inline">\(CP_{cm}\)</span>, espera-se aumento aproximado de 1,206 cm em <span class="math inline">\(CT_{cm}\)</span>. O **erro padrão do coeficiente angular*, que mede a precisão da estimativa de <span class="math inline">\(beta_1\)</span>, foi de 0,00258.</p>
+<p>Os resultados também mostram que O coeficiente de CP_cm é altamente significativo (t=467.22, p&lt;0.001), indicando que o comprimento padrão é um forte preditor do comprimento total. Embora o modelo apresente um erro médio de aproximadamente 0,42 cm na predição do comprimento total, como mostrado no <strong>erro padrão residual</strong> de 0.4216. Os <strong>coeficientes de determinação</strong> (múltiplos e ajustados) de 0.998, indicam que o cerca de 99,8% da variação no comprimento total.</p>
+<p>Finalmente, <strong>o teste F</strong> de 2.183e+05 e seu <strong>valor de p</strong> &lt; 0.001, testam a hipótese de que o modelo não explica a variável resposta:</p>
+<p><span class="math inline">\(H_0\)</span>: Hipótese nula: <span class="math inline">\(\beta_1 = 0\)</span>, ou seja, a variável explicativa não exerce efeito sobre a variável resposta (o modelo não possui poder preditivo).</p>
+<p><span class="math inline">\(H_1\)</span>: Hipótese alternativa: <span class="math inline">\(\beta_1 \neq 0\)</span>, ou seja, a variável explicativa exerce efeito sobre a variável resposta (o modelo possui poder preditivo).</p>
+<p>Como p&lt;0.001, rejeita-se <span class="math inline">\(H_0\)</span> e aceota-se <span class="math inline">\(H_1\)</span>, o modelo de regressão é estatisticamente significativo e tem poder preditivo para o comprimento total.</p>
+<p>O QUE REPORTAR: A regressão linear simples revelou que o comprimento padrão foi um preditor significativo do comprimento total (<span class="math inline">\(\beta = 1.207 \pm 0.003\)</span>, <span class="math inline">\(t(432) = 467.22\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). O modelo apresentou excelente ajuste aos dados (<span class="math inline">\(R^2 = 0.998\)</span>; <span class="math inline">\(F(1,432) = 218300\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>), explicando aproximadamente 99,8% da variação no comprimento total. A equação ajustada foi <span class="math inline">\(CT_{cm} = 0.148 + 1.207 \times CP_{cm}\)</span>.</p>
+<p>Na sequência avaliamos homogeneidade de variâncias. Para o caso de heterogeneidade de variâncias devemos usar a <strong>correção robusta de White (HC3)</strong>. Antes disso realizamos uma ANOVA da regressão, para testar se o comprimento padrão explica uma parcela significativa da variação no comprimento total. A diferença entre <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> e <code><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova()</a></code> só aparece em modelos com dois ou mais preditores. <code>Anova(modelo, white.adjust = TRUE)</code> calcula o mesmo teste, mas utilizando a correção robusta de White (HC3) para os erros padrão. Essa correção é recomendada quando há heterocedasticidade (variância não constante dos resíduos).</p>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">modelo</span>, white.adjust<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Coefficient covariances computed by hccm()</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CT_cm
+##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## CP_cm       1  38802   38802  218295 &lt; 2.2e-16 ***
+## Residuals 432     77       0                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Anova Table (Type II tests)
+## 
+## Response: CT_cm
+##           Sum Sq  Df F value    Pr(&gt;F)    
+## CP_cm      38802   1  218295 &lt; 2.2e-16 ***
+## Residuals     77 432                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Analysis of Deviance Table (Type II tests)
+## 
+## Response: CT_cm
+##            Df     F    Pr(&gt;F)    
+## CP_cm       1 75315 &lt; 2.2e-16 ***
+## Residuals 432                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
+<p>Em um novo exemplo, podemos analisar comprimento total e peso corporal em peixes. Em estudos de relação peso-comprimento normalmente considera-se comprimento como variável independente e peso como variável dependente.</p>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
+<span><span class="co">#df</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#abline(modelo, col = "red", lwd = 2)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-137-1.png" alt="" width="672"></div>
 </div>
 </div>
 <div id="gráfico-de-dispersão-scatterplot" class="section level2" number="14.8">
@@ -584,7 +623,7 @@ CT_{cm} = 1.25 + 1.12 \times CP_{cm}
     geom_tipo()
 ?ggplot</code></pre>
 <p>Esse modelo modular torna possível compor gráficos simples ou complexos com clareza.</p>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
 <span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">univ</span>,</span>
@@ -604,9 +643,9 @@ CT_{cm} = 1.25 + 1.12 \times CP_{cm}
 ## [19] "mes"      "periodo"  "estação"  "sexo"    
 ## 
 ## FEMEA MACHO 
-##    21    38 
+##    21    39 
 ## [1] "MACHO" "FEMEA"</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672"></div>
 <p>O gráfico acima ilustra uma regressão linear simples entre <code>CP_cm</code> e <code>Pgon_g</code>, com ajuste separado por <code>sexo</code>. As diferenças entre as retas e a dispersão dos pontos sugerem que o peso gonadal não depende apenas do comprimento corporal, mas também de outras características do indivíduo. Por isso, podemos testar como uma análise seguinte a <strong>regressão múltipla</strong>, incorporando simultaneamente <code>CP_cm</code>, <code>sexo</code> e outras possíveis covariáveis relevantes para estimar efeitos parciais e testar interações.</p>
 <p>Assim, embora a regressão simples seja útil para descrever a associação bivariada, ela não controla simultaneamente múltiplas fontes de variação.</p>
 </div>
@@ -690,7 +729,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/07/2026 19:34:14.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 11:31:39.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
