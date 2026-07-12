@@ -118,6 +118,7 @@
 <div id="apresentação-9" class="section level3 unnumbered">
 <h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-9"><i class="fas fa-link"></i></a>
 </h3>
+<p>A regressão múltipla é uma extensão da correlação bivariada e tem como objetivo <strong>predizer uma variável dependente a partir de duas ou mais variáveis independentes</strong>. Esse método é amplamente utilizado quando as variáveis preditoras apresentam associação entre si e também com a variável resposta. As variáveis independentes podem ser contínuas ou categóricas, embora variáveis categóricas devam ser previamente convertidas em variáveis <em>dummy</em> para serem incluídas no modelo. Em contraste, a variável dependente deve ser medida em uma escala contínua. Se a variável dependente não for contínua, então a análise discriminante é apropriada <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p>
 <p>Existem diferentes abordagens para regressão múltipla, destacando-se a regressão simultânea (ou padrão), a regressão hierárquica e a regressão <em>stepwise</em> (“passo-a-passo”). Na regressão simultânea, todas as variáveis independentes entram no modelo ao mesmo tempo, permitindo avaliar a contribuição conjunta dos preditores sobre a variável resposta. Na regressão hierárquica, a ordem de entrada das variáveis é definida previamente com base em conhecimento teórico ou hipóteses biológicas. Já na regressão <em>stepwise</em>, a inclusão ou remoção das variáveis ocorre automaticamente a partir de critérios estatísticos, buscando selecionar os melhores preditores do modelo. A regressão <em>stepwise</em> pode ainda ser, <em>forward</em>, <em>backward</em> ou <em>mixed</em>, dependendo da ordem na qual as variáveis são incorporadas. Veremos mais sobre isso a serguir.</p>
 <p>A aplicação da regressão múltipla exige o atendimento de alguns pressupostos estatísticos. Entre os principais estão:</p>
 <ol style="list-style-type: decimal">
@@ -126,8 +127,6 @@
 <li>Ausência de <strong>multicolinearidade</strong> entre as variáveis independentes</li>
 <li>Adequação dos resíduos do modelo quanto à normalidade, linearidade, homocedasticidade e independência.</li>
 </ol>
-<p>No contexto da biometria de <em>Cichla ocellaris</em>, a regressão múltipla pode ser utilizada para investigar quais variáveis morfométricas melhor predizem o peso corporal dos indivíduos. Nesse caso, o peso total (<code>PT_g</code>) pode ser utilizado como variável dependente, enquanto variáveis como comprimento total (<code>CT_cm</code>), comprimento padrão (<code>CP_cm</code>) e circunferência intestinal (<code>Cint_cm</code>) podem atuar como variáveis independentes. Assim, o modelo busca explicar a variação do peso corporal a partir de múltiplos atributos biométricos dos indivíduos analisados.</p>
-<p>A regressão múltipla é uma extensão da correlação bivariada e tem como objetivo <strong>predizer uma variável dependente a partir de duas ou mais variáveis independentes</strong>. Esse método é amplamente utilizado quando as variáveis preditoras apresentam associação entre si e também com a variável resposta. As variáveis independentes podem ser contínuas ou categóricas, embora variáveis categóricas devam ser previamente convertidas em variáveis <em>dummy</em> para serem incluídas no modelo. Em contraste, a variável dependente deve ser medida em uma escala contínua. Se a variável dependente não for contínua, então a análise discriminante é apropriada <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p>
 <p>O resultado da regressão é uma equação que representa a melhor previsão de uma variável dependente a partir de várias variáveis independentes. Para isso, existem três principais modelos de regressão. Regressão padrão ou simultânea, regressão hierárquica e regressão <em>stepwise</em> (“passo-a-passo”). Esses modelos diferem em dois aspectos: primeiro, no tratamento da variabilidade sobreposta devido à correlação das variáveis independentes e, segundo, em termos da ordem de entrada das variáveis independentes na equação. No <strong>modelo padrão ou simultâneo</strong>, todas as variáveis independentes entram na equação de regressão ao mesmo tempo porque se deseja examinar a relação entre todo o conjunto de preditores e a variável dependente. Na <strong>regressão múltipla hierárquica</strong>, determina-se a ordem de entrada das variáveis independentes com base no conhecimento teórico. Na <strong>regressão <em>stepwise</em> </strong>, o número de variáveis independentes inseridas e a ordem de entrada são determinados por critérios estatísticos gerados pelo procedimento <em>stepwise</em>.</p>
 <p>O método de entrada na regressão <em>stpewise</em> pode ser <em>forward</em>, <em>backward</em> ou uma combinação de ambos (<em>mixed</em>). A seleção <em>forward</em> envolve a entrada dos preditores um de cada vez. A ordem de entrada e se o preditor será eventualmente aceito são decididas com base em se o teste <code>F</code> excede um determinado valor crítico e se um nível alfa crítico é atingido. A seleção <em>backward</em> começa com todas as variáveis na equação e gradualmente elimina-se os preditores de baixo desempenho com base em se o valor <code>F</code> parcial é menor que um valor crítico. O critério padrão também deve ser atendido. A seleção <em>mixed</em> (<em>stepwise</em>) é uma combinação dos procedimentos <em>forward</em> e <em>backward</em>. Ela permite a remoção posterior de variáveis que foram previamente inseridas. A escolha da técnica depende amplamente dos objetivos do pesquisador.</p>
 <div id="pressupostos-5" class="section level4" number="15.0.0.1">
@@ -137,27 +136,22 @@
 <p>Uma série de pressupostos sustenta o uso da regressão:</p>
 <ol style="list-style-type: decimal">
 <li><p>Razão entre casos e variáveis independentes: O número de casos necessários depende do tipo de modelo de regressão a ser utilizado. Para regressão padrão ou hierárquica, idealmente deve-se ter vinte vezes mais casos do que preditores, enquanto ainda mais casos são necessários para regressão <em>stepwise</em>. O requisito mínimo é ter pelo menos cinco vezes mais casos do que variáveis independentes <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p></li>
-<li><p>Outliers: Casos extremos têm impacto considerável na solução de regressão e devem ser excluídos ou modificados para reduzir sua influência. Outliers univariados podem ser detectados durante a triagem de dados, conforme descrito na seção <a href="norm.html#iqr">Gráficos de histograma e boxplot</a>. Outliers multivariados podem ser detectados usando métodos estatísticos, como a distância de Mahalanobis, e métodos gráficos, como gráficos de dispersão dos resíduos (isso é abordado na <a href="#outcentr"><code>PARTE V</code></a> deste livro). A decisão de remover outliers do conjunto de dados deve ser tomada com cuidado, porque sua exclusão frequentemente resulta na geração de outros casos discrepantes.</p></li>
-<li><p>Multicolinearidade e singularidade: <em>Multicolinearidade</em> refere-se a altas correlações entre as variáveis independentes, enquanto <em>singularidade</em> ocorre quando existem correlações perfeitas entre variáveis independentes. Esses problemas afetam a forma como se interpretam quaisquer relações entre os preditores (VIs) e a variável dependente, e podem ser detectados examinando-se a matriz de correlação, as correlações múltiplas ao quadrado e as tolerâncias. A maioria dos programas computacionais possui valores padrão para multicolinearidade. É importante não admitir-mos variáveis que representem esse tipo de problema.</p></li>
+<li><p><strong>Outliers</strong>: Casos extremos têm impacto considerável na solução de regressão e devem ser excluídos ou modificados para reduzir sua influência. Outliers univariados podem ser detectados durante a triagem de dados, conforme descrito na seção <a href="norm.html#iqr">Gráficos de histograma e boxplot</a>. Outliers multivariados podem ser detectados usando métodos estatísticos, como a distância de Mahalanobis, e métodos gráficos, como gráficos de dispersão dos resíduos (isso é abordado na <a href="#outcentr"><code>PARTE V</code></a> deste livro). A decisão de remover outliers do conjunto de dados deve ser tomada com cuidado, porque sua exclusão frequentemente resulta na geração de outros casos discrepantes.</p></li>
+<li><p><strong>Multicolinearidade e singularidade</strong>: <em>Multicolinearidade</em> refere-se a altas correlações entre as variáveis independentes, enquanto <em>singularidade</em> ocorre quando existem correlações perfeitas entre variáveis independentes. Esses problemas afetam a forma como se interpretam quaisquer relações entre os preditores (VIs) e a variável dependente, e podem ser detectados examinando-se a matriz de correlação, as correlações múltiplas ao quadrado e as tolerâncias. A maioria dos programas computacionais possui valores padrão para multicolinearidade. É importante não admitir-mos variáveis que representem esse tipo de problema.</p></li>
 <li><p>Normalidade, linearidade, homocedasticidade e independência dos resíduos: Um exame dos gráficos de dispersão dos resíduos permite testar os pressupostos acima. Assume-se que as diferenças entre os escores observados e previstos da variável dependente sejam normalmente distribuídas. Além disso, assume-se que os resíduos tenham uma relação linear com os escores previstos da variável dependente e que a variância dos resíduos seja a mesma para todos os escores previstos. Desvios leves da linearidade não são graves. Desvios moderados a extremos podem levar a uma séria subestimação de uma relação.</p></li>
 </ol>
 <p>O pressuposto 1 relaciona-se ao delineamento da pesquisa. Os pressupostos 2, 3 e 4 são avaliados por meio da análise de regressão.</p>
+<p>No contexto da biometria de <em>Cichla ocellaris</em>, a regressão múltipla pode ser utilizada para investigar quais variáveis morfométricas melhor predizem o peso corporal dos indivíduos. Nesse caso, o peso total (<code>PT_g</code>) pode ser utilizado como variável dependente, enquanto variáveis como comprimento total (<code>CT_cm</code>), comprimento padrão (<code>CP_cm</code>) podem atuar como variáveis independentes. Assim, o modelo busca explicar a variação do peso corporal a partir de múltiplos atributos biométricos dos indivíduos analisados.</p>
 <p>Com esse tipo de análise, é possível responder questões como:</p>
 <ol style="list-style-type: decimal">
 <li><p>Qual a contribuição conjunta das variáveis biométricas para a predição do peso corporal?</p></li>
 <li><p>Qual variável apresenta maior poder preditivo?</p></li>
 <li><p>Se determinadas hipóteses biológicas previamente propostas são sustentadas pelos dados observados.</p></li>
 </ol>
-<p>Um gerente de marketing de uma grande rede de supermercados queria determinar o efeito do espaço de prateleira e do preço sobre as vendas de alimentos para animais de estimação. Uma amostra aleatória de quinze lojas de mesmo tamanho foi selecionada, e foram registrados as vendas, o espaço de prateleira em metros quadrados e o preço por quilograma. Para demonstrar a aplicação dos três modelos de regressão, você utilizará o mesmo conjunto de dados para responder a três perguntas:</p>
-<ol style="list-style-type: decimal">
-<li>Qual contribuição tanto o espaço de prateleira quanto o preço oferecem para a previsão das vendas de alimentos para animais de estimação?</li>
-<li>Qual é o melhor preditor das vendas de alimentos para animais de estimação?</li>
-<li>Pesquisas anteriores sugeriram que o espaço de prateleira é o principal preditor das vendas de alimentos para animais de estimação. Essa hipótese está correta?</li>
-</ol>
 </div>
-<div id="exemplo-2" class="section level4" number="15.0.0.2">
+<div id="exemplo-1-1" class="section level4" number="15.0.0.2">
 <h4>
-<span class="header-section-number">15.0.0.2</span> Exemplo<a class="anchor" aria-label="anchor" href="#exemplo-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.0.2</span> Exemplo 1<a class="anchor" aria-label="anchor" href="#exemplo-1-1"><i class="fas fa-link"></i></a>
 </h4>
 </div>
 </div>
@@ -165,7 +159,7 @@
 <h2>
 <span class="header-section-number">15.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
@@ -173,7 +167,7 @@
 <h3>
 <span class="header-section-number">15.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -228,7 +222,7 @@
 <h4>
 <span class="header-section-number">15.1.1.1</span> Correlograma e redução de variáveis desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-redu%C3%A7%C3%A3o-de-vari%C3%A1veis-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Correlograma e redução de variáveis desnecessárias</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
@@ -240,20 +234,16 @@
 <span>             hist.col <span class="op">=</span> <span class="st">"#00AFBB"</span>, pch <span class="op">=</span> <span class="fl">19</span>,</span>
 <span>             density <span class="op">=</span> <span class="cn">TRUE</span>,  <span class="co"># show density plots</span></span>
 <span>             ellipses <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># show correlation ellipses</span></span>
-<span>             alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-142-1.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#dev.off()</span></span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co">#dev.off()</span></span>
 <span></span>
 <span><span class="va">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">cor</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
 <span><span class="co">#png("fig-nome.png")</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">cor</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-142-2.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#dev.off()</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">cor</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span>
+<span><span class="co">#dev.off()</span></span>
 <span></span>
 <span><span class="co">## Impressão em papel</span></span>
 <span><span class="co">#win.print()</span></span>
@@ -270,6 +260,20 @@
 ## Ctubo_cm  0.9091518  0.8093258  0.9071124  1.0000000  0.8062440 -0.4330032
 ## PC_g      0.9039903  0.9999423  0.9021382  0.8062440  1.0000000 -0.3321762
 ## p_PT     -0.5189589 -0.3320403 -0.5159241 -0.4330032 -0.3321762  1.0000000</code></pre>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-142-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-142-2.png" alt="" width="672"></p>
+</div>
+<div id="exemplo-2" class="section level4" number="15.1.1.2">
+<h4>
+<span class="header-section-number">15.1.1.2</span> Exemplo 2<a class="anchor" aria-label="anchor" href="#exemplo-2"><i class="fas fa-link"></i></a>
+</h4>
+<p>Um gerente de marketing de uma grande rede de supermercados queria determinar o efeito do espaço de prateleira e do preço sobre as vendas de alimentos para animais de estimação. Uma amostra aleatória de quinze lojas de mesmo tamanho foi selecionada, e foram registrados as vendas, o espaço de prateleira em metros quadrados e o preço por quilograma. Para demonstrar a aplicação dos três modelos de regressão, você utilizará o mesmo conjunto de dados para responder a três perguntas:</p>
+<ol style="list-style-type: decimal">
+<li>Qual contribuição tanto o espaço de prateleira quanto o preço oferecem para a previsão das vendas de alimentos para animais de estimação?<br>
+</li>
+<li>Qual é o melhor preditor das vendas de alimentos para animais de estimação?<br>
+</li>
+<li>Pesquisas anteriores sugeriram que o espaço de prateleira é o principal preditor das vendas de alimentos para animais de estimação. Essa hipótese está correta?</li>
+</ol>
 </div>
 </div>
 </div>
@@ -283,17 +287,17 @@
 </div>
 <p>Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção <a href="bases.html#arqs">Arquivos disponíveis</a> do Capítulo <a href="bases.html#bases">Bases de dados</a>.</p>
 <div class="center">
-<p>Ou, baixe aqui o arquivo <a href="https://docs.google.com/spreadsheets/d/16WE7J4BJdRGyG7kKobhKU943rMO1YZXY/edit?usp=sharing&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06p-bentos.xlsx</a></p>
+<p>Ou, baixe aqui o arquivo <a href="https://docs.google.com/spreadsheets/d/1ovRZcxd9gJNf6DXUQeYvhWK5UlCdcEwz/edit?usp=sharing&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06com-bentos.xlsx</a></p>
 </div>
 </div>
-<p>Também usaremos uma tabela de agrupamentos.</p>
+<p>Também usaremos uma matriz ambiental com seus respectivos agrupamentos.</p>
 <div class="infobox2 stopred">
 <div class="center">
 <p><span style="color:white"><strong>ATENÇÃO</strong></span></p>
 </div>
 <p>Os links para baixar as planilhas necessárias para repetir esse tutorial podem ser encontrados na seção <a href="bases.html#arqs">Arquivos disponíveis</a> do Capítulo <a href="bases.html#bases">Bases de dados</a>.</p>
 <div class="center">
-<p>Ou, baixe aqui o arquivo <a href="https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=sharing&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06-grupos.xlsx</a></p>
+<p>Ou, baixe aqui o arquivo <a href="https://docs.google.com/spreadsheets/d/1gZ5zF-Kxd04NeS_lKSPza7o3ZUCXi0oI/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06amb-bentos.xlsx</a></p>
 </div>
 </div>
 </div>
@@ -301,11 +305,11 @@
 <h2>
 <span class="header-section-number">15.3</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-5"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">densidade</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-bentos.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -691,7 +695,7 @@
 ##               3              13              66            4018             130 
 ##     Planorbidae        Physidae      Sphaeridae       Thiaridae        Veliidae 
 ##             717              30               1           14152               3</code></pre>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span></span>
@@ -1072,7 +1076,7 @@
 <h3>
 <span class="header-section-number">15.3.1</span> Criando tabelas com os dados<a class="anchor" aria-label="anchor" href="#criando-tabelas-com-os-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Tabela de habitat</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
@@ -1138,7 +1142,7 @@
 <span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/loadWorkbook.html">loadWorkbook</a></span><span class="op">(</span><span class="st">"tabela de habitat.xlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"Sheet 1"</span>, x <span class="op">=</span> <span class="va">m_wide</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"tabela de habitat.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Escolher sumário de uma variavel</span></span>
 <span><span class="va">m</span></span>
 <span><span class="va">var</span> <span class="op">&lt;-</span> <span class="st">"h.roots"</span></span>
@@ -1167,7 +1171,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>, <span class="st">"Min"</span>, <span class="st">"Q1"</span>, <span class="st">"Median"</span>, <span class="st">"Mean"</span>, <span class="st">"Q3"</span>, <span class="st">"Max"</span><span class="op">)</span></span>
 <span><span class="va">summary_table</span></span></code></pre></div>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
@@ -1232,7 +1236,7 @@
 <span><span class="va">hab_gttable</span></span>
 <span><span class="fu"><a href="https://gt.rstudio.com/reference/gtsave.html">gtsave</a></span><span class="op">(</span><span class="va">hab_gttable</span>, <span class="st">"gt-hab_gttable_xlsx.html"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">hab_gttable</span>, <span class="st">"gt-hab_gttable_xlsx.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#BENTOS2006 - RAREFAÇÃO E ANOVAS----</span></span>
 <span><span class="co">#####....----</span></span>
 <span></span>
@@ -1344,7 +1348,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">rareplot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="va">rareplot</span>, dpi <span class="op">=</span> <span class="fl">300</span>, filename <span class="op">=</span> <span class="st">"fig-rarerich.png"</span>, bg <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#BENTOS2006 - REGRESSÕES----</span></span>
 <span><span class="co">#####....----</span></span>
 <span></span>
@@ -1441,7 +1445,7 @@
 <span><span class="co">#library(car)</span></span>
 <span><span class="co">#crPlots(step.model)</span></span>
 <span><span class="co">#par(mfrow = c(1,1))</span></span></code></pre></div>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#REMOVENDO ESPÉCIES RARAS----</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span><span class="op">(</span><span class="st">"https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/data-adjustments/"</span><span class="op">)</span></span>
@@ -1545,7 +1549,7 @@ COAKES, S. J.; STEED, L. G. <strong>SPSS: Analysis Without Anguish: version 10.0
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 16:49:19.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 12/07/2026 11:14:01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

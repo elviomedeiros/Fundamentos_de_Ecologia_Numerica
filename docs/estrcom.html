@@ -132,12 +132,12 @@
 <h2>
 <span class="header-section-number">17.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-7"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"moments"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></span>
@@ -150,12 +150,12 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gt"</span><span class="op">)</span></span></code></pre></div>
 <p>Depois de instalados, carregue os pacotes a seguir no seu computador.</p>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org">Rcpp</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar e carregar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a>, <span class="citation">(<a href="#ref-rdevelopmentcoreteam2017">R DEVELOPMENT CORE TEAM, 2017</a>)</span>) e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <span class="citation">(<a href="#ref-rstudioteam2022">R STUDIO TEAM, 2022</a>)</span>). No exemplo acima, o pacote <code>openxlsx</code> permite ler e escrever arquivos Excel no R. Para instalar um pacote no R, você precisa usar a função <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <p>Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, para carregar o pacote <code>openxlsx</code>, você precisa executar a função <code><a href="https://ycphs.github.io/openxlsx/index.html">library(openxlsx)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado.</p>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -166,7 +166,7 @@
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 - Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado.</p>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -217,7 +217,7 @@
 ## S-R-CP1        0       19        0        0        0
 ## S-A-TA1        0       23        1       13        0</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -229,7 +229,7 @@
 <h2>
 <span class="header-section-number">17.4</span> REINÍCIO<a class="anchor" aria-label="anchor" href="#id_401reinicio"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span>
 <span><span class="co">#pat &lt;- "^S"</span></span>
 <span><span class="co">#m_trab &lt;- m_trab[!grepl(pat, rownames(m_trab)), ] #exclui quem começa com pat</span></span></code></pre></div>
@@ -241,7 +241,7 @@
 <span class="header-section-number">17.5</span> Transpor a matriz para trabalhar com as espécies<a class="anchor" aria-label="anchor" href="#transpor-a-matriz-para-trabalhar-com-as-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vamos transpor a matriz para trabalharmos com as espécies. A função <code>t</code> transpõe a matriz. Só deve ser usada uma vez, pois se repetida com <code>Ctrl+Enter</code> continua “girando” a matriz. As espécies como colunas representam uma matriz comunitária e as espécies como linhas representam uma matriz (comunitária) transposta.</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="co">#View(m_trab)</span></span>
@@ -422,7 +422,7 @@
 <span class="header-section-number">17.5.1</span> Informações básicas da matriz<a class="anchor" aria-label="anchor" href="#informa%C3%A7%C3%B5es-b%C3%A1sicas-da-matriz"><i class="fas fa-link"></i></a>
 </h3>
 <p>Agora podemos pedir ao R as informações básicas da matriz de trabalho (<code>m_trab</code>), como o número de observações ou tamanho do vetor (depende do tipo da matriz), número de observações igual a zero, número de observaçõoes maiores que zero e proporção de zeros na matriz.</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#menor e maior valores</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#no. de colunas</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#no. de N colunas</span></span>
@@ -566,7 +566,7 @@
 <span class="header-section-number">17.6.1</span> Variabilidade<a class="anchor" aria-label="anchor" href="#variabilidade"><i class="fas fa-link"></i></a>
 </h3>
 <p>Primeiro a variabilidade estatística</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#?apply</span></span>
 <span><span class="va">Sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="co">#ou</span></span>
@@ -681,7 +681,7 @@
 <span class="header-section-number">17.6.2</span> Riqueza<a class="anchor" aria-label="anchor" href="#riqueza"><i class="fas fa-link"></i></a>
 </h3>
 <p>Atente para o fato de que a riqueza será a frequêcia de ocorrência na matrix transposta. Converte-se primeiro para matriz binária.</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_pa</span> <span class="op">&lt;-</span> <span class="va">m_trab</span></span>
 <span><span class="va">m_pa</span><span class="op">[</span><span class="va">m_pa</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">m_pa</span><span class="op">)</span></span>
@@ -800,7 +800,7 @@ H' = -\sum_{i=1}^{S} \left( \frac{n_i}{N} \times \ln\frac{n_i}{N} \right)
 <span class="math inline">\(S\)</span> é o número total de espécies na comunidade.</li>
 </ul>
 <p>Esta fórmula mede a incerteza (ou entropia) na identificação de uma espécie selecionada aleatoriamente da comunidade. Quanto maior o valor de <span class="math inline">\(H'\)</span>, maior a diversidade da comunidade.</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html">diversity</a></span><span class="op">(</span><span class="va">m_trab</span>, index <span class="op">=</span> <span class="st">"shannon"</span><span class="op">)</span></span>
 <span><span class="va">H</span></span></code></pre></div>
 <pre><code>##  ap-davis  as-bimac  as-fasci  ch-bimac  ci-ocela  ci-orien  co-macro  co-heter 
@@ -839,7 +839,7 @@ D = 1 - \sum_{i=1}^{S} \left( \frac{n_i (n_i - 1)}{N (N - 1)} \right)
 <li>Ao escolhermos <code>simpson</code> o R retorna <span class="math inline">\(1 - D\)</span>, e</li>
 <li>ao escolhermos <code>invsimpson</code> o R retorna <span class="math inline">\(1/D\)</span> .</li>
 </ul>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html">diversity</a></span><span class="op">(</span><span class="va">m_trab</span>, <span class="st">"simpson"</span><span class="op">)</span></span>
 <span><span class="va">D</span></span>
 <span><span class="va">D</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">#substitui NA ou NaN por 0</span></span>
@@ -883,7 +883,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="math inline">\(\ln(S)\)</span> é o logarítmo natural do número total de espécies na comunidade.</li>
 </ul>
 <p>Esta fórmula fornece um valor entre 0 e 1, onde 0 indica uma distribuição completamente desigual onde uma comunidade apresenta uma única espécie dominante e 1 indica uma distribuição completamente equitativa onde todas as espécies têm a mesma abundância.</p>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">E</span> <span class="op">&lt;-</span> <span class="va">H</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html">specnumber</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">E</span></span>
 <span><span class="va">E</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">E</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">#substitui NA ou NaN por 0</span></span>
@@ -915,7 +915,7 @@ J' = \frac{H'}{\ln(S)}
 <p>A assimetria mede a falta de simetria em uma distribuição de frequência. Uma distribuição é simétrica se as duas metades à esquerda e à direita da média são cópias espelhadas uma da outra. Se a distribuição não é simétrica, então é assimétrica. A assimetria pode ser positiva, negativa ou nula (simétrica). Uma assimetria positiva indica que a cauda da distribuição se estende mais para a direita em relação à média, enquanto uma assimetria negativa indica que a cauda da distribuição se estende mais para a esquerda em relação à média.</p>
 <p>A curtose descreve o pico ou a “pontiagudez” de uma distribuição. Uma distribuição com alta curtose tem uma alta concentração de valores ao redor da média e caudas mais pesadas (ou seja, valores extremos são mais prováveis). Uma distribuição com baixa curtose é mais achatada e dispersa, com caudas mais leves. A curtose pode ser positiva (distribuição leptocúrtica, com alta concentração em torno da média e caudas pesadas), negativa (distribuição platicúrtica, com dispersão alta e caudas mais leves) ou nula (mesocúrtica, similar à distribuição normal).</p>
 <p>Essas medidas são úteis para compreender as propriedades e características de diferentes conjuntos de dados e distribuições de frequência. Elas ajudam a compreender a forma e o comportamento dos dados em uma amostra ou população <span class="citation">(<a href="#ref-zar2010">ZAR, 2010</a>)</span>.</p>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="va">Assimetria</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">m_trab</span>,<span class="fl">1</span>,<span class="va">skewness</span><span class="op">)</span></span>
 <span><span class="va">Assimetria</span></span>
@@ -952,7 +952,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="header-section-number">17.7.3.2.1</span> Descritores da estrutura da comunidade: Espécies<a class="anchor" aria-label="anchor" href="#descritores-da-estrutura-da-comunidade-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h5>
 <p>Sum, soma; RA, abundância relativa (%), mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); RR, riqueza rarefacionada; E, índice de equitabilidade de Pielou <span class="citation">(<a href="#ref-pielou1975">PIELOU, 1975</a>)</span>; H, índice de diversidade de Shannon <span class="citation">(<a href="#ref-ludwig1988">LUDWIG; REYNOLDS, 1988</a>)</span>; D, índice de diversidade de Simpson <span class="citation">(<a href="#ref-hurlbert1971">HURLBERT, 1971</a>)</span>.</p>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RR</span> <span class="op">&lt;-</span> <span class="va">S</span></span>
 <span><span class="va">Descritores1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Sum</span>, <span class="va">RA</span>, <span class="va">Mean</span>, <span class="va">DP</span>, <span class="va">Max</span>, <span class="va">Min</span>, <span class="va">MinZ</span>, <span class="va">FO</span>, <span class="va">S</span>, <span class="va">RR</span>, <span class="va">E</span>, <span class="va">H</span>, <span class="va">D</span><span class="op">)</span></span>
 <span><span class="va">Descritores1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Descritores1</span><span class="op">)</span></span>
@@ -1263,7 +1263,7 @@ J' = \frac{H'}{\ln(S)}
 ## SomaTotalD  194.00 16.69 30.09 14.31
 ## MediaTotalD   5.54  0.48  0.86  0.41
 ## DPTotalD      5.56  0.38  0.78  0.34</code></pre>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Fazendo uma tabela</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">DescritoresFinal</span></span>
@@ -1272,23 +1272,23 @@ J' = \frac{H'}{\ln(S)}
 <span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="va">df</span>, rowname_col <span class="op">=</span> <span class="st">"Spp"</span>, caption <span class="op">=</span> <span class="st">"Descritores da diversidade por espécie (colunas). Sum, soma; RA, abundância relativa (%); mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; MinZ, menor valor não zero; FO, frequência de ocorrência (%); S, riqueza (ou no. de ocorrências, da matriz transposta); E, índice de equitabilidade de Pielou; H, índice de diversidade de Shannon; D, índice de diversidade de Simpson."</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 13
 ## [1] 38</code></pre>
-<div id="wrrbwdqrlu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wrrbwdqrlu table {
+<div id="ynlkxlrpqw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ynlkxlrpqw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wrrbwdqrlu thead, #wrrbwdqrlu tbody, #wrrbwdqrlu tfoot, #wrrbwdqrlu tr, #wrrbwdqrlu td, #wrrbwdqrlu th {
+#ynlkxlrpqw thead, #ynlkxlrpqw tbody, #ynlkxlrpqw tfoot, #ynlkxlrpqw tr, #ynlkxlrpqw td, #ynlkxlrpqw th {
   border-style: none;
 }
 
-#wrrbwdqrlu p {
+#ynlkxlrpqw p {
   margin: 0;
   padding: 0;
 }
 
-#wrrbwdqrlu .gt_table {
+#ynlkxlrpqw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1314,12 +1314,12 @@ J' = \frac{H'}{\ln(S)}
   border-left-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_caption {
+#ynlkxlrpqw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wrrbwdqrlu .gt_title {
+#ynlkxlrpqw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1331,7 +1331,7 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-width: 0;
 }
 
-#wrrbwdqrlu .gt_subtitle {
+#ynlkxlrpqw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1343,7 +1343,7 @@ J' = \frac{H'}{\ln(S)}
   border-top-width: 0;
 }
 
-#wrrbwdqrlu .gt_heading {
+#ynlkxlrpqw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1355,13 +1355,13 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_bottom_border {
+#ynlkxlrpqw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_col_headings {
+#ynlkxlrpqw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1376,7 +1376,7 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_col_heading {
+#ynlkxlrpqw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1396,7 +1396,7 @@ J' = \frac{H'}{\ln(S)}
   overflow-x: hidden;
 }
 
-#wrrbwdqrlu .gt_column_spanner_outer {
+#ynlkxlrpqw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1408,15 +1408,15 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 4px;
 }
 
-#wrrbwdqrlu .gt_column_spanner_outer:first-child {
+#ynlkxlrpqw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wrrbwdqrlu .gt_column_spanner_outer:last-child {
+#ynlkxlrpqw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wrrbwdqrlu .gt_column_spanner {
+#ynlkxlrpqw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1428,11 +1428,11 @@ J' = \frac{H'}{\ln(S)}
   width: 100%;
 }
 
-#wrrbwdqrlu .gt_spanner_row {
+#ynlkxlrpqw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wrrbwdqrlu .gt_group_heading {
+#ynlkxlrpqw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1458,7 +1458,7 @@ J' = \frac{H'}{\ln(S)}
   text-align: left;
 }
 
-#wrrbwdqrlu .gt_empty_group_heading {
+#ynlkxlrpqw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1473,15 +1473,15 @@ J' = \frac{H'}{\ln(S)}
   vertical-align: middle;
 }
 
-#wrrbwdqrlu .gt_from_md > :first-child {
+#ynlkxlrpqw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wrrbwdqrlu .gt_from_md > :last-child {
+#ynlkxlrpqw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wrrbwdqrlu .gt_row {
+#ynlkxlrpqw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1500,7 +1500,7 @@ J' = \frac{H'}{\ln(S)}
   overflow-x: hidden;
 }
 
-#wrrbwdqrlu .gt_stub {
+#ynlkxlrpqw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1513,7 +1513,7 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#wrrbwdqrlu .gt_stub_row_group {
+#ynlkxlrpqw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1527,15 +1527,15 @@ J' = \frac{H'}{\ln(S)}
   vertical-align: top;
 }
 
-#wrrbwdqrlu .gt_row_group_first td {
+#ynlkxlrpqw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wrrbwdqrlu .gt_row_group_first th {
+#ynlkxlrpqw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wrrbwdqrlu .gt_summary_row {
+#ynlkxlrpqw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1545,16 +1545,16 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#wrrbwdqrlu .gt_first_summary_row {
+#ynlkxlrpqw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_first_summary_row.thick {
+#ynlkxlrpqw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wrrbwdqrlu .gt_last_summary_row {
+#ynlkxlrpqw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1564,7 +1564,7 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_grand_summary_row {
+#ynlkxlrpqw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1574,7 +1574,7 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#wrrbwdqrlu .gt_first_grand_summary_row {
+#ynlkxlrpqw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1584,7 +1584,7 @@ J' = \frac{H'}{\ln(S)}
   border-top-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_last_grand_summary_row_top {
+#ynlkxlrpqw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1594,11 +1594,11 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_striped {
+#ynlkxlrpqw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wrrbwdqrlu .gt_table_body {
+#ynlkxlrpqw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1607,7 +1607,7 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_footnotes {
+#ynlkxlrpqw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1621,7 +1621,7 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_footnote {
+#ynlkxlrpqw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1630,7 +1630,7 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#wrrbwdqrlu .gt_sourcenotes {
+#ynlkxlrpqw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1644,7 +1644,7 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#wrrbwdqrlu .gt_sourcenote {
+#ynlkxlrpqw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1652,72 +1652,72 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#wrrbwdqrlu .gt_left {
+#ynlkxlrpqw .gt_left {
   text-align: left;
 }
 
-#wrrbwdqrlu .gt_center {
+#ynlkxlrpqw .gt_center {
   text-align: center;
 }
 
-#wrrbwdqrlu .gt_right {
+#ynlkxlrpqw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wrrbwdqrlu .gt_font_normal {
+#ynlkxlrpqw .gt_font_normal {
   font-weight: normal;
 }
 
-#wrrbwdqrlu .gt_font_bold {
+#ynlkxlrpqw .gt_font_bold {
   font-weight: bold;
 }
 
-#wrrbwdqrlu .gt_font_italic {
+#ynlkxlrpqw .gt_font_italic {
   font-style: italic;
 }
 
-#wrrbwdqrlu .gt_super {
+#ynlkxlrpqw .gt_super {
   font-size: 65%;
 }
 
-#wrrbwdqrlu .gt_footnote_marks {
+#ynlkxlrpqw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wrrbwdqrlu .gt_asterisk {
+#ynlkxlrpqw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wrrbwdqrlu .gt_indent_1 {
+#ynlkxlrpqw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wrrbwdqrlu .gt_indent_2 {
+#ynlkxlrpqw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wrrbwdqrlu .gt_indent_3 {
+#ynlkxlrpqw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wrrbwdqrlu .gt_indent_4 {
+#ynlkxlrpqw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wrrbwdqrlu .gt_indent_5 {
+#ynlkxlrpqw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wrrbwdqrlu .katex-display {
+#ynlkxlrpqw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wrrbwdqrlu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ynlkxlrpqw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2358,7 +2358,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="header-section-number">17.7.3.2.2</span> Descritores da normalidade<a class="anchor" aria-label="anchor" href="#descritores-da-normalidade"><i class="fas fa-link"></i></a>
 </h5>
 <p>Agora tabelamos os descritores de normalidade</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Assimetria</span>, <span class="va">Curtose</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Normalidade1</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span></span>
@@ -2501,7 +2501,7 @@ J' = \frac{H'}{\ln(S)}
 ## MediaTotalN       3.78   17.05
 ## DPTotalN          1.04    6.94</code></pre>
 <p>A função <code>fix(nome da matriz)</code> dá acesso ao grid da matriz criada para manipulação dos dados numéricos.</p>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Fazendo uma tabela</span></span>
 <span><span class="va">nf</span> <span class="op">&lt;-</span> <span class="va">NormalidadeFinal</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">nf</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">nf</span><span class="op">)</span> <span class="co">#no. de N colunas x M linhas</span></span>
@@ -2509,23 +2509,23 @@ J' = \frac{H'}{\ln(S)}
 <span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="va">nf</span>, rowname_col <span class="op">=</span> <span class="st">"Spp"</span>, caption <span class="op">=</span> <span class="st">"Descritores da normalidade por espécie (coluna)"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2
 ## [1] 38</code></pre>
-<div id="kgwvtqguqm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kgwvtqguqm table {
+<div id="rpckupqzdt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rpckupqzdt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kgwvtqguqm thead, #kgwvtqguqm tbody, #kgwvtqguqm tfoot, #kgwvtqguqm tr, #kgwvtqguqm td, #kgwvtqguqm th {
+#rpckupqzdt thead, #rpckupqzdt tbody, #rpckupqzdt tfoot, #rpckupqzdt tr, #rpckupqzdt td, #rpckupqzdt th {
   border-style: none;
 }
 
-#kgwvtqguqm p {
+#rpckupqzdt p {
   margin: 0;
   padding: 0;
 }
 
-#kgwvtqguqm .gt_table {
+#rpckupqzdt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2551,12 +2551,12 @@ J' = \frac{H'}{\ln(S)}
   border-left-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_caption {
+#rpckupqzdt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kgwvtqguqm .gt_title {
+#rpckupqzdt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2568,7 +2568,7 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-width: 0;
 }
 
-#kgwvtqguqm .gt_subtitle {
+#rpckupqzdt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2580,7 +2580,7 @@ J' = \frac{H'}{\ln(S)}
   border-top-width: 0;
 }
 
-#kgwvtqguqm .gt_heading {
+#rpckupqzdt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2592,13 +2592,13 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_bottom_border {
+#rpckupqzdt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_col_headings {
+#rpckupqzdt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2613,7 +2613,7 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_col_heading {
+#rpckupqzdt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2633,7 +2633,7 @@ J' = \frac{H'}{\ln(S)}
   overflow-x: hidden;
 }
 
-#kgwvtqguqm .gt_column_spanner_outer {
+#rpckupqzdt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2645,15 +2645,15 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 4px;
 }
 
-#kgwvtqguqm .gt_column_spanner_outer:first-child {
+#rpckupqzdt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kgwvtqguqm .gt_column_spanner_outer:last-child {
+#rpckupqzdt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kgwvtqguqm .gt_column_spanner {
+#rpckupqzdt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2665,11 +2665,11 @@ J' = \frac{H'}{\ln(S)}
   width: 100%;
 }
 
-#kgwvtqguqm .gt_spanner_row {
+#rpckupqzdt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kgwvtqguqm .gt_group_heading {
+#rpckupqzdt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2695,7 +2695,7 @@ J' = \frac{H'}{\ln(S)}
   text-align: left;
 }
 
-#kgwvtqguqm .gt_empty_group_heading {
+#rpckupqzdt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2710,15 +2710,15 @@ J' = \frac{H'}{\ln(S)}
   vertical-align: middle;
 }
 
-#kgwvtqguqm .gt_from_md > :first-child {
+#rpckupqzdt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kgwvtqguqm .gt_from_md > :last-child {
+#rpckupqzdt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kgwvtqguqm .gt_row {
+#rpckupqzdt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2737,7 +2737,7 @@ J' = \frac{H'}{\ln(S)}
   overflow-x: hidden;
 }
 
-#kgwvtqguqm .gt_stub {
+#rpckupqzdt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2750,7 +2750,7 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#kgwvtqguqm .gt_stub_row_group {
+#rpckupqzdt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2764,15 +2764,15 @@ J' = \frac{H'}{\ln(S)}
   vertical-align: top;
 }
 
-#kgwvtqguqm .gt_row_group_first td {
+#rpckupqzdt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kgwvtqguqm .gt_row_group_first th {
+#rpckupqzdt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kgwvtqguqm .gt_summary_row {
+#rpckupqzdt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2782,16 +2782,16 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#kgwvtqguqm .gt_first_summary_row {
+#rpckupqzdt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_first_summary_row.thick {
+#rpckupqzdt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kgwvtqguqm .gt_last_summary_row {
+#rpckupqzdt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2801,7 +2801,7 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_grand_summary_row {
+#rpckupqzdt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2811,7 +2811,7 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#kgwvtqguqm .gt_first_grand_summary_row {
+#rpckupqzdt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2821,7 +2821,7 @@ J' = \frac{H'}{\ln(S)}
   border-top-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_last_grand_summary_row_top {
+#rpckupqzdt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2831,11 +2831,11 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_striped {
+#rpckupqzdt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kgwvtqguqm .gt_table_body {
+#rpckupqzdt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2844,7 +2844,7 @@ J' = \frac{H'}{\ln(S)}
   border-bottom-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_footnotes {
+#rpckupqzdt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2858,7 +2858,7 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_footnote {
+#rpckupqzdt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2867,7 +2867,7 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#kgwvtqguqm .gt_sourcenotes {
+#rpckupqzdt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2881,7 +2881,7 @@ J' = \frac{H'}{\ln(S)}
   border-right-color: #D3D3D3;
 }
 
-#kgwvtqguqm .gt_sourcenote {
+#rpckupqzdt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2889,72 +2889,72 @@ J' = \frac{H'}{\ln(S)}
   padding-right: 5px;
 }
 
-#kgwvtqguqm .gt_left {
+#rpckupqzdt .gt_left {
   text-align: left;
 }
 
-#kgwvtqguqm .gt_center {
+#rpckupqzdt .gt_center {
   text-align: center;
 }
 
-#kgwvtqguqm .gt_right {
+#rpckupqzdt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kgwvtqguqm .gt_font_normal {
+#rpckupqzdt .gt_font_normal {
   font-weight: normal;
 }
 
-#kgwvtqguqm .gt_font_bold {
+#rpckupqzdt .gt_font_bold {
   font-weight: bold;
 }
 
-#kgwvtqguqm .gt_font_italic {
+#rpckupqzdt .gt_font_italic {
   font-style: italic;
 }
 
-#kgwvtqguqm .gt_super {
+#rpckupqzdt .gt_super {
   font-size: 65%;
 }
 
-#kgwvtqguqm .gt_footnote_marks {
+#rpckupqzdt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kgwvtqguqm .gt_asterisk {
+#rpckupqzdt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kgwvtqguqm .gt_indent_1 {
+#rpckupqzdt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kgwvtqguqm .gt_indent_2 {
+#rpckupqzdt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kgwvtqguqm .gt_indent_3 {
+#rpckupqzdt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kgwvtqguqm .gt_indent_4 {
+#rpckupqzdt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kgwvtqguqm .gt_indent_5 {
+#rpckupqzdt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kgwvtqguqm .katex-display {
+#rpckupqzdt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kgwvtqguqm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rpckupqzdt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3174,12 +3174,12 @@ J' = \frac{H'}{\ln(S)}
 </ul>
 <p>Em muitas operações, o <code>NA</code> é tratado como um valor especial que propagará em outras operações. Isso significa que se uma operação é realizada com um ou mais valores <code>NA</code>, o resultado geralmente será <code>NA</code>. Por outro lado, <code>NaN</code> é um valor específico que indica um resultado matematicamente indefinido ou inválido.</p>
 <p>Por exemplo, ao realizar operações em um vetor que contém <code>NA</code>, o resultado será <code>NA</code> para qualquer operação que envolva um valor <code>NA</code>:</p>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Resultado será NA porque há um valor NA no vetor</span></span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Por outro lado, <code>NaN</code> resulta de operações matemáticas inválidas:</p>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">0</span><span class="op">/</span><span class="fl">0</span> <span class="co"># Resultado será NaN, pois a divisão por zero é indefinida</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co"># Resultado será NaN, pois não há raiz quadrada real de um número negativo</span></span></code></pre></div>
 <pre><code>## Warning in sqrt(-1): NaNs produzidos</code></pre>
@@ -3190,7 +3190,7 @@ J' = \frac{H'}{\ln(S)}
 <h5>
 <span class="header-section-number">17.7.3.3.1</span> Salvando as tabelas criadas em .txt direto no diretório de trabalho<a class="anchor" aria-label="anchor" href="#salvando-as-tabelas-criadas-em-.txt-direto-no-diret%C3%B3rio-de-trabalho"><i class="fas fa-link"></i></a>
 </h5>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Spp"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>                       <span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>            <span class="st">"DescritoresSPP.txt"</span>,</span>
@@ -3203,7 +3203,7 @@ J' = \frac{H'}{\ln(S)}
 <span>            sep<span class="op">=</span><span class="st">"\t"</span><span class="op">)</span></span></code></pre></div>
 <p>Agora é necessário voltar à matriz comunitária (<strong>antes de ter sido transposta</strong>), antes de continuarmos a análise, porque as análises anteriores também precisam ser refeitas com a matriz não transposta. A seguir confere-se se está sendo usada a matriz comunitária com as espécies nas colunas.</p>
 <p>Para ver o código dos descritores da estrutura da comunidade para as Unidades Amostrais (UA’s), matriz não transposta, veja <a href="estrcom.html#descruas">Descritores da estrutura da comunidade: UA’s</a> nos apêndices.</p>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span></span></code></pre></div>
 <pre><code>##           S-A-ZA1 S-R-CC1 S-R-CT1 S-R-CP1 S-A-TA1 S-R-CT2 S-R-CP2 S-A-TA2
 ## ap-davis        0       0       0       0       0       0       0       0
@@ -3349,7 +3349,7 @@ J' = \frac{H'}{\ln(S)}
 ## sy-marmo        0       0
 ## te-chalc        0       0
 ## tr-signa        0       0</code></pre>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span></code></pre></div>
 <div id="hello" class="greeting message" style="color: green;">
 <p>Note que em uma matriz comunitária (onde os atributos são as espécies), a matriz transposta vai conter as unidades amostrais como colunas e espécies como linhas. Não tendo a mesma interpretação de matriz transposta em matemática.</p>
@@ -3368,7 +3368,7 @@ J' = \frac{H'}{\ln(S)}
 <span class="header-section-number">17.8.1</span> Série de Hill e pefil da diversidade<a class="anchor" aria-label="anchor" href="#s%C3%A9rie-de-hill-e-pefil-da-diversidade"><i class="fas fa-link"></i></a>
 </h3>
 <p>Pode-se utilizar uma série de Hill ao invés dos índices específicos de diversidade. Assim, quanto maior o valor de <code>q</code> (definido em <code>scales</code>), maior será o peso para a equabilidade. Quanto mais próximo de zero, maior o peso para riqueza. Quando <code>q = 0</code>, o valor de Hill é igual a riqueza de espécies.</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Hill</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/renyi.html">renyi</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
 <span>              scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,</span>
 <span>              hill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -3401,7 +3401,7 @@ J' = \frac{H'}{\ln(S)}
 ## B-A-MU4  5 3.672499 3.348321 3.103452 2.925311 2.799120
 ## B-A-GU4  4 2.514025 2.206452 2.107190 2.053368 2.015850</code></pre>
 <p>Podemos mapear isso em um gráfico de perfil de diversidade</p>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -3422,7 +3422,7 @@ J' = \frac{H'}{\ln(S)}
 ## ℹ Please use `linewidth` instead.
 ## This warning is displayed once per session.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grafico1</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="va">grafico1</span>, dpi <span class="op">=</span> <span class="fl">300</span>, filename <span class="op">=</span> <span class="st">"fig-hill.png"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Saving 7 x 5 in image</code></pre>
@@ -3439,11 +3439,11 @@ Figura 17.1: Mapeamento dos pontos de coleta em um gráfico de perfil de diversi
 <span class="header-section-number">17.9</span> Distribuição de abundância<a class="anchor" aria-label="anchor" href="#distribui%C3%A7%C3%A3o-de-abund%C3%A2ncia"><i class="fas fa-link"></i></a>
 </h2>
 <p>Uma maneira de observar a diversidade de espécies é usando um gráfico de distribuição de abundâncias de uma comunidade, como mostrado a seguir. Note que aqui utiliza-se as abundâncias totais das espécies (Figura <a href="estrcom.html#fig:241abun">17.2</a>), mas é possível fazer por linha, basta substituir o objeto <code>abund</code> pela abundância de uma linha. Como na linha marcada com o <code>#</code>.</p>
-<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span></code></pre></div>
 <p>Na primeira linha do código abaixo, retira-se o <code>#</code> do início da linha para rodar a distribuição de abundância apenas para o local (linha) 1 <code>comunidade[1,]</code>. Pode-se mudar o número para o local de interesse.</p>
 <p>O código a seguir produzirá o gráfico para o local escolhido.</p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#abund &lt;- m_trab[1, ] #escolhe a primeira linha para a distribuição de abundância</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span>, </span>
 <span>                 abun <span class="op">=</span> <span class="va">abund</span><span class="op">)</span> </span>
@@ -3475,7 +3475,7 @@ Figura 17.2: Distribuição da densidade de indivíduos.
 </h2>
 <p>O código abaixo indica como usar o pacote <a href="https://youtu.be/4yUXG28QPLM">iNEXT</a> <span class="citation">(<a href="#ref-chao2014">CHAO et al., 2014</a>; <a href="#ref-hsieh2025">HSIEH; MA; CHAO, 2025</a>)</span>para extrapolar e interpolar curvas de rarefação visando comparar a riqueza de diferentes locais (linhas, por isso se trabalha com a matriz transposta). A curva de raferação vai ser construida para as UA’s demarcadas em <code>rarefa &lt;- t(m_trab[c("S-R-CT2","S-R-CP2","S-A-TA2","B-A-MU2"),])</code></p>
 <p>Pode-se, alternativamente, construrir a curva de raferação para as 8 linhas (UA’s) com maior somatório dos valores das espécies (linhas marcadas com o símbolo <span style="color:green"><code>#</code></span>).</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab_r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">m_trab</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">ceiling</span><span class="op">)</span><span class="op">)</span> <span class="co">#arredonda a matriz original para números inteiros</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab_r</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab_r</span><span class="op">)</span><span class="op">)</span></span>
@@ -3503,7 +3503,7 @@ Figura 17.2: Distribuição da densidade de indivíduos.
 <p>A curva de rarefação vai ser construida para os sítios: “S-R-CT2”,“S-R-CP2”,“S-A-TA2”,“B-A-MU2”</p>
 </div>
 <p>No código abaixo o valor de <code>q</code> pode ser mudado para <code>q=1</code> para comparar a diversidade de Shannon e para <code>q=2</code> para Simpson (Figura (<a href="estrcom.html#fig:241rare">17.3</a>). A função <code>endpoint=</code> define o tamanho da amostra para o qual se deseja extrapolar a curva de rarefação. Se <code>endpoint=NULL</code>, a extrapolação será feita para o dobro do valor amostrado.</p>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sites.google.com/view/chao-lab-website/software/inext">iNEXT</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iNEXT</span>, bibtex<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## function (x, q = 0, datatype = "abundance", size = NULL, endpoint = NULL, 
@@ -3662,9 +3662,9 @@ Figura 17.2: Distribuição da densidade de indivíduos.
 ##     class(z) &lt;- c("iNEXT")
 ##     return(z)
 ## }
-## &lt;bytecode: 0x0000018a8b57e818&gt;
+## &lt;bytecode: 0x000002608c6c0430&gt;
 ## &lt;environment: namespace:iNEXT&gt;</code></pre>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/iNEXT/man/iNEXT.html">iNEXT</a></span><span class="op">(</span><span class="va">rarefa</span>, q <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>             datatype <span class="op">=</span> <span class="st">"abundance"</span>,</span>
 <span>             size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -3749,7 +3749,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h2>
 <span class="header-section-number">17.11</span> Curva de acumulação de espécies<a class="anchor" aria-label="anchor" href="#curva-de-acumula%C3%A7%C3%A3o-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acumula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/specaccum.html">specaccum</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
 <span>                     method <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span>
 <span><span class="va">acumula</span></span></code></pre></div>
@@ -3757,28 +3757,28 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 ## Accumulation method: random, with 100 permutations
 ## Call: specaccum(comm = m_trab, method = "random") 
 ## 
-##                                                                              
-## Sites    1.00000  2.0000  3.0000  4.00000  5.00000  6.00000  7.00000  8.00000
-## Richness 7.96000 12.0800 15.3600 17.82000 19.91000 21.42000 22.26000 23.58000
-## sd       4.88643  5.0406  5.1923  4.43444  4.44289  3.76636  3.87069  3.72591
 ##                                                                               
-## Sites     9.00000 10.00000 11.0000 12.00000 13.00000 14.00000 15.00000 16.0000
-## Richness 24.63000 25.33000 26.2600 26.95000 27.61000 28.27000 28.85000 29.5900
-## sd        3.21818  3.33955  3.0637  3.05959  2.97089  2.97415  2.71314  2.4745
-##                                                                        
-## Sites    17.00000 18.00000 19.00000 20.00000 21.00000 22.00000 23.00000
-## Richness 30.15000 30.74000 31.37000 31.97000 32.47000 33.05000 33.52000
-## sd        2.35863  2.21391  2.09692  1.93038  1.95637  1.79435  1.48038
-##                              
-## Sites    24.00000 25.00000 26
-## Richness 34.00000 34.42000 35
-## sd        1.37804  0.99676  0</code></pre>
+## Sites    1.00000  2.00000  3.00000  4.00000  5.00000  6.0000  7.00000  8.00000
+## Richness 6.46000 11.22000 14.76000 16.87000 18.60000 20.8100 21.98000 23.12000
+## sd       4.00611  4.52731  4.76969  4.63987  4.68826  3.8787  3.67074  3.59933
+##                                                                                
+## Sites     9.00000 10.00000 11.0000 12.00000 13.00000 14.00000 15.00000 16.00000
+## Richness 24.34000 25.23000 26.0700 27.01000 27.73000 28.32000 29.05000 29.58000
+## sd        3.54828  3.25314  3.0592  3.09609  3.11353  2.94351  2.80827  2.63688
+##                                                                              
+## Sites    17.0000 18.00000 19.0000 20.00000 21.0000 22.00000 23.00000 24.00000
+## Richness 30.3800 30.98000 31.4000 31.91000 32.5300 33.13000 33.59000 34.19000
+## sd        2.3859  2.31368  2.2563  2.14662  1.8934  1.70948  1.46401  1.16076
+##                     
+## Sites    25.00000 26
+## Richness 34.67000 35
+## sd        0.77921  0</code></pre>
 <div id="plot-locais" class="section level3" number="17.11.1">
 <h3>
 <span class="header-section-number">17.11.1</span> Plot locais<a class="anchor" aria-label="anchor" href="#plot-locais"><i class="fas fa-link"></i></a>
 </h3>
 <p>Plotamos uma curva de acumulação de espécies simples.</p>
-<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">acumula</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-181-1.png" alt="" width="672"></div>
 <p>Uma curva de acumulação de espécies é uma ferramenta gráfica usada para entender como a riqueza de espécies em uma comunidade aumenta à medida que mais amostras são coletadas ou observações são feitas. Ela é especialmente útil em estudos de biodiversidade e ecologia. Aqui está uma explicação sobre como interpretar uma curva de acumulação de espécies:</p>
@@ -3831,7 +3831,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 </ol>
 <p>Em resumo, a curva de acumulação de espécies é uma ferramenta valiosa para entender como a riqueza de espécies aumenta com o esforço amostral em uma comunidade. A interpretação depende da inclinação da curva, da presença de uma assíntota e do contexto do estudo. Ela ajuda a responder à pergunta: “Quantas espécies diferentes podemos esperar encontrar em uma comunidade com base nas amostras que coletamos até agora?”</p>
 <p>Agora podemos plotar uma curva de acumulação de espécies melhorada.</p>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"UAs"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">sites</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"Riqueza"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"lower"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span> <span class="op">-</span> <span class="va">acumula</span><span class="op">$</span><span class="va">sd</span><span class="op">)</span>,</span>
@@ -3854,7 +3854,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h2>
 <span class="header-section-number">17.12</span> Plot indivíduos<a class="anchor" aria-label="anchor" href="#plot-indiv%C3%ADduos"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Individuos"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">individuals</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"Riqueza"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span><span class="op">)</span>,</span>
 <span>                        <span class="st">"lower"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">acumula</span><span class="op">$</span><span class="va">richness</span> <span class="op">-</span> <span class="va">acumula</span><span class="op">$</span><span class="va">sd</span><span class="op">)</span>,</span>
@@ -3874,7 +3874,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h2>
 <span class="header-section-number">17.13</span> Riqueza rarefacionada<a class="anchor" aria-label="anchor" href="#riqueza-rarefacionada"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Rarefação baseada na matriz de contagem</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">m_trab</span></span>
@@ -3889,14 +3889,14 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">Srare</span>, xlab <span class="op">=</span> <span class="st">"Observed No. of Species"</span>, ylab <span class="op">=</span> <span class="st">"Rarefied No. of Species"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-184-1.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#png("fig-rarecurve.png")</span></span>
 <span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/rarefy.html">rarecurve</a></span><span class="op">(</span><span class="va">data</span>, step <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>          sample <span class="op">=</span> <span class="va">raremax</span>, <span class="co">#linhas de rarefação</span></span>
 <span>          col <span class="op">=</span> <span class="st">"blue"</span>, cex <span class="op">=</span> <span class="fl">0.6</span>,</span>
 <span>          xlab <span class="op">=</span> <span class="st">"Sample size"</span>, ylab <span class="op">=</span> <span class="st">"Taxa"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co">#c(0,5000)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-184-2.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#dev.off()</span></span></code></pre></div>
 <pre><code>## S-A-ZA1 S-R-CC1 S-R-CT1 S-R-CP1 S-A-TA1 S-R-CT2 S-R-CP2 S-A-TA2 S-R-CT3 S-R-CP3 
 ##       2       3      18       5       5      17      10       4      18       6 
@@ -3923,7 +3923,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h3>Criando uma tabela de espécies<a class="anchor" aria-label="anchor" href="#criando-uma-tabela-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h3>
 <p>Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba <code>peixes</code>, porque nela constam os agrupamentos <em>a-priori</em> para os dados de peixes.</p>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">t_grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -3941,7 +3941,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 ## S-R-CC1 Serido      rio CC      1
 ## S-R-CT1 Serido      rio CT      1
 ## S-R-CP1 Serido      rio CP      1</code></pre>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
 <span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">m_trab</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -4412,7 +4412,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h3>Descritores da estrutura da comunidade: UA’s<a class="anchor" aria-label="anchor" href="#descruas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Sum, soma; mean, média; DP, desvio padrão da média; Max, maior valor; Min, menor valor; S, riqueza (ou frequência de ocorrência na matriz transposta); E, índice de equitabilidade de Pielou <span class="citation">(<a href="#ref-pielou1975">PIELOU, 1975</a>)</span>; H, índice de diversidade de Shannon <span class="citation">(<a href="#ref-ludwig1988">LUDWIG; REYNOLDS, 1988</a>)</span>; D, índice de diversidade de Simpson <span class="citation">(<a href="#ref-hurlbert1971">HURLBERT, 1971</a>)</span>.</p>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Matriz transposta</span></span>
 <span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span> <span class="co">#transpõe a matriz de volta para comunitaria</span></span>
 <span><span class="va">Sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
@@ -4463,7 +4463,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <div id="descritores-da-normalidade-1" class="section level3 unnumbered">
 <h3>Descritores da normalidade<a class="anchor" aria-label="anchor" href="#descritores-da-normalidade-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Assimetria</span>, <span class="va">Curtose</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Normalidade1</span><span class="op">)</span></span>
 <span><span class="va">Normalidade1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">Normalidade1</span><span class="op">)</span> <span class="co">#remove NA e NaN</span></span>
@@ -4491,7 +4491,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <div id="salvando-as-tabelas-criadas-em-txt-direto-no-diretório-de-trabalho" class="section level3 unnumbered">
 <h3>Salvando as tabelas criadas em txt direto no diretório de trabalho<a class="anchor" aria-label="anchor" href="#salvando-as-tabelas-criadas-em-txt-direto-no-diret%C3%B3rio-de-trabalho"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Spp"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>                       <span class="va">DescritoresFinal</span><span class="op">)</span>,</span>
 <span>            <span class="st">"DescritoresUA.csv"</span>,</span>
@@ -4512,7 +4512,7 @@ Figura 17.3: Curva de rafefação para sítios específicos. <code>q=0</code>, r
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## dev.off() #apaga os graficos, se houver algum</span></span>
 <span><span class="co">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co">## cat("\014") #limpa o console</span></span>
@@ -4971,7 +4971,7 @@ ZAR, J. H. <strong>Biostatistical Analysis</strong>. 5. ed. Upper Saddle River, 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 11/07/2026 16:49:19.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 12/07/2026 11:14:01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
