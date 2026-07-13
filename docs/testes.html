@@ -201,17 +201,17 @@ Figura 13.2: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 ## TU008    0.4    17.0      I 0.2475248    0.1     2.5      IMATURO 0.06188119
 ## TU009    2.0    25.3     II 0.9975062    0.1     6.5 EM MATURACAO 0.04987531
 ## TU010    1.4    17.7     II 1.6147636    0.1       6      IMATURO 0.11534025
-##       mes periodo estação    sexo
-## TU001 ago chuvoso inverno   MACHO
-## TU002 ago chuvoso inverno   MACHO
-## TU003 ago chuvoso inverno   MACHO
-## TU004 ago chuvoso inverno   MACHO
-## TU005 ago chuvoso inverno   MACHO
-## TU006 set chuvoso inverno   MACHO
-## TU007 set chuvoso inverno   FEMEA
-## TU008 set chuvoso inverno imaturo
-## TU009 set chuvoso inverno   MACHO
-## TU010 set chuvoso inverno   MACHO
+##       mes periodo estação    sexo   sexo2
+## TU001 ago chuvoso inverno   MACHO   FEMEA
+## TU002 ago chuvoso inverno   MACHO   FEMEA
+## TU003 ago chuvoso inverno   MACHO   FEMEA
+## TU004 ago chuvoso inverno   MACHO   FEMEA
+## TU005 ago chuvoso inverno   MACHO   FEMEA
+## TU006 set chuvoso inverno   MACHO   FEMEA
+## TU007 set chuvoso inverno   FEMEA   MACHO
+## TU008 set chuvoso inverno imaturo imaturo
+## TU009 set chuvoso inverno   MACHO   FEMEA
+## TU010 set chuvoso inverno   MACHO   FEMEA
 ##       CT_cm  PT_g CP_cm Ctubo_cm  PC_g
 ## TU001  32.4 468.8  27.2     39.8 458.9
 ## TU002  33.4 520.0  28.8     14.3 507.4
@@ -240,7 +240,7 @@ Figura 13.2: Dados merísticos da espécie de peixe <em>Cichla ocellaris</em> (t
 <pre><code>##  [1] "CT_cm"    "PT_g"     "CP_cm"    "Ctubo_cm" "PC_g"     "p_PT"    
 ##  [7] "Pest_g"   "Cest_cm"  "gr_est"   "ir_est"   "Pint_g"   "Cint_cm" 
 ## [13] "gr_int"   "ir_int"   "Pgon_g"   "Cgon_cm"  "emg"      "ig"      
-## [19] "mes"      "periodo"  "estação"  "sexo"    
+## [19] "mes"      "periodo"  "estação"  "sexo"     "sexo2"   
 ## [1]  3.5 36.1</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:4032tucucompr"></span>
@@ -585,10 +585,10 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">var_sub</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">var_trns</span> <span class="op">&lt;-</span> <span class="va">var_sub</span></span></code></pre></div>
 <p>Se o lambda ótimo da função <code><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox()</a></code> for:</p>
-<p>λ≈-1, usar transformação inversa (1/y);</p>
-<p>λ≈0, usar log;</p>
-<p>λ≈0.5, usar raiz quadrada;</p>
-<p>λ≈1, não transformar.</p>
+<p>λ≈-1, usar transformação inversa (1/y);<br>
+λ≈0, usar log;<br>
+λ≈0.5, usar raiz quadrada;<br>
+λ≈1, não transformar.</p>
 <div class="infobox2 stopred">
 <div class="center">
 <p><span style="color:white"><strong>REINÍCIO</strong></span></p>
@@ -611,11 +611,11 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <p>Para verificar esse pressuposto, utilizamos o <strong>teste de Levene</strong> para igualdade de variâncias <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>; <a href="#ref-mcdonald2014">MCDONALD, 2014</a>)</span>.</p>
 <p>Se o teste de Levene for significativo (p &lt; 0,05), rejeita-se a hipótese nula de igualdade das variâncias e aceita-se a hipótese alternativa de que as variâncias são diferentes entre os grupos. Nesse caso, devem ser utilizados os resultados que não assumem igualdade de variâncias. Se o teste de Levene não for significativo (p &gt; 0,05), não há evidências para rejeitar a hipótese nula, indicando que as variâncias dos grupos podem ser consideradas homogêneas. Nesse caso, podem ser utilizados os resultados que assumem igualdade de variâncias.</p>
 <p>Essa distinção torna-se mais clara ao interpretar a saída do teste t para amostras independentes, que normalmente apresenta resultados tanto para a situação em que as variâncias são consideradas iguais quanto para aquela em que são consideradas diferentes.</p>
-<p>Hipótese nula (H₀): as variâncias populacionais são iguais entre os grupos, há homogeneidade de variâncias.</p>
-<p>Hipótese alternativa (H₁): pelo menos uma das variâncias populacionais difere das demais, há heterogeneidade de variâncias.</p>
+<p>Hipótese nula (<span class="math inline">\(H_0\)</span>): as variâncias populacionais são iguais entre os grupos, há homogeneidade de variâncias.<br>
+Hipótese alternativa (<span class="math inline">\(H_1\)</span>): pelo menos uma das variâncias populacionais difere das demais, há heterogeneidade de variâncias.</p>
 <p>Interpretação:</p>
-<p>p≥0,05: não se rejeita H₀</p>
-<p>p&lt;0,05: rejeita-se H₀</p>
+<p>p≥0,05: não se rejeita <span class="math inline">\(H_0\)</span><br>
+p&lt;0,05: rejeita-se <span class="math inline">\(H_1\)</span></p>
 <div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Levene</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
@@ -669,7 +669,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 ## [298] FEMEA   imaturo MACHO   FEMEA   FEMEA   MACHO   MACHO   MACHO   MACHO  
 ## [307] FEMEA   FEMEA   MACHO   imaturo FEMEA   imaturo FEMEA   MACHO   FEMEA  
 ## [316] FEMEA   imaturo imaturo imaturo imaturo imaturo imaturo imaturo imaturo
-## [325] imaturo MACHO   MACHO   imaturo MACHO   MACHO   FEMEA   imaturo FEMEA  
+## [325] imaturo MACHO   MACHO   imaturo MACHO   MACHO   FEMEA   FEMEA   imaturo
 ## [334] MACHO   MACHO   FEMEA   MACHO   FEMEA   MACHO   MACHO   MACHO   imaturo
 ## [343] FEMEA   FEMEA   MACHO   MACHO   FEMEA   FEMEA   MACHO   FEMEA   imaturo
 ## [352] MACHO   MACHO   FEMEA   MACHO   FEMEA   MACHO   MACHO   MACHO   MACHO  
@@ -685,7 +685,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 ## Levels: MACHO FEMEA imaturo
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value Pr(&gt;F)
-## group   2  0.2011 0.8179
+## group   2  0.2018 0.8173
 ##       431               
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value   Pr(&gt;F)   
@@ -733,8 +733,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <h3>
 <span class="header-section-number">13.11.1</span> Teste t para uma amostra (<em>One-sample t-test</em>)<a class="anchor" aria-label="anchor" href="#teste-t-para-uma-amostra-one-sample-t-test"><i class="fas fa-link"></i></a>
 </h3>
-<p>H₀: a média populacional da variável é igual ao valor de referência.<br>
-H₁: a média populacional da variável é diferente do valor de referência.</p>
+<p><span class="math inline">\(H_0\)</span>: a média populacional da variável é igual ao valor de referência.<br><span class="math inline">\(H_1\)</span>: a média populacional da variável é diferente do valor de referência.</p>
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">var_sub</span> <span class="op">&lt;-</span> <span class="va">var_v</span></span></code></pre></div>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
@@ -823,8 +822,7 @@ H₁: a média populacional da variável é diferente do valor de referência.</
 <p>O QUE REPORTAR: Foi observada diferença significativa no comprimento padrão entre machos e fêmeas de <em>Cichla ocellaris</em> (teste t de Welch: t = 3,47; gl = 210,82; p &lt; 0,001). Os machos apresentaram maior comprimento médio (18,70 cm) em comparação às fêmeas (15,28 cm).</p>
 <p>Quanto a sua direção, o teste t para grupos independentes, pode ser bicaudal (o que usamos anteriormente) e unicaudal. No primeiro caso, a área de rejeição é dividida entre as duas extremidades (caudas) da distribuição. É usado quando você quer saber se existe uma diferença, mas não tem certeza se o resultado será maior ou menor. No <strong>teste t unicaudal</strong>, toda a área de rejeição fica em apenas uma das extremidades. É usado quando a sua hipótese prevê uma direção específica (ex: testar se um novo remédio é melhor, mas não se ele é pior).</p>
 <p>Quanto a sua direção, o teste t para grupos independentes, pode ser bicaudal (o que usamos anteriormente) e unicaudal. O <strong>teste t bicaudal</strong> é utilizado quando se deseja verificar se existe qualquer diferença entre duas médias, sem especificar previamente a direção dessa diferença.</p>
-<p>H₀: as médias populacionais de dois grupos são iguais.</p>
-<p>H₁: as médias populacionais de dois grupos são diferentes.</p>
+<p><span class="math inline">\(H_0\)</span>: as médias populacionais de dois grupos são iguais.<br><span class="math inline">\(H_1\)</span>: as médias populacionais de dois grupos são diferentes.</p>
 <p>No exemplo com tucunaré, perguntamos: “O comprimento padrão médio difere entre machos e fêmeas?”. Aqui não se assume previamente qual sexo possui maior comprimento.</p>
 <p>Já o <strong>teste t unicaudal</strong> é utilizado quando existe uma <strong>hipótese direcional</strong>, ou seja, quando se espera previamente que uma média seja maior ou menor que a outra.</p>
 <p>No exemplo do tucunaré, perguntamos: “Os machos possuem comprimento padrão médio maior que as fêmeas?”. No R, isso é implementado com o argumento<code>alternative = c("greater")</code>.</p>
@@ -854,8 +852,7 @@ H₁: a média populacional da variável é diferente do valor de referência.</
 </h3>
 <p>A principal característica do teste t pareado é que cada observação do primeiro grupo possui uma observação correspondente no segundo grupo. Ou seja, os dados vêm dos mesmos indivíduos ou de unidades experimentais que formam pares naturais (desenho amostral do tipo antes e depois).</p>
 <p>O teste não compara diretamente as médias dos grupos. Na verdade, ele calcula a diferença dentro de cada par e testa se a média dessas diferenças é igual a zero.</p>
-<p>H₀: Hipótese nula: a média das diferenças entre as duas medidas pareadas é igual a zero.</p>
-<p>H₁: Hipótese alternativa: a média das diferenças entre as duas medidas pareadas é diferente de zero.</p>
+<p><span class="math inline">\(H_0\)</span>: Hipótese nula: a média das diferenças entre as duas medidas pareadas é igual a zero.<br><span class="math inline">\(H_1\)</span>: Hipótese alternativa: a média das diferenças entre as duas medidas pareadas é diferente de zero.</p>
 <div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filtrar apenas fêmeas</span></span>
 <span><span class="va">femeas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">univ</span>, <span class="va">sexo</span> <span class="op">==</span> <span class="st">"FEMEA"</span><span class="op">)</span></span>
@@ -1024,8 +1021,7 @@ F = \frac{QME}{QMD}
 <h3>
 <span class="header-section-number">13.12.5</span> Análise de variância (ANOVA)<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-vari%C3%A2ncia-anova"><i class="fas fa-link"></i></a>
 </h3>
-<p>H₀: Hipótese nula: todas as médias populacionais dos grupos são iguais.</p>
-<p>H₁: Hipótese alternativa: pelo menos uma das médias populacionais difere das demais.</p>
+<p><span class="math inline">\(H_0\)</span>: Hipótese nula: todas as médias populacionais dos grupos são iguais.<br><span class="math inline">\(H_1\)</span>: Hipótese alternativa: pelo menos uma das médias populacionais difere das demais.</p>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">sexo</span>, data <span class="op">=</span> <span class="va">univ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">anova</span><span class="op">)</span></span>
@@ -1172,12 +1168,12 @@ F = \frac{QME}{QMD}
 <p>Atente que agora temos um delineamento fatorial 3 × 2, com seis combinações possíveis.</p>
 <div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span>,</span>
-<span>                  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MACHO"</span>, <span class="st">"FEMEA"</span>, <span class="st">"imaturo"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MACHO"</span>, <span class="st">"FEMEA"</span>, <span class="st">"imaturo"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">univ</span><span class="op">$</span><span class="va">periodo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">periodo</span>,</span>
-<span>                  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"chuvoso"</span>, <span class="st">"seco"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"chuvoso"</span>, <span class="st">"seco"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">sexo</span>, <span class="va">univ</span><span class="op">$</span><span class="va">periodo</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 'data.frame':    434 obs. of  22 variables:
+<pre><code>## 'data.frame':    434 obs. of  23 variables:
 ##  $ CT_cm   : num  32.4 33.4 27.3 13.2 14.3 22.7 23.2 13.5 24.6 19.4 ...
 ##  $ PT_g    : num  468.8 520 301.5 28.2 38.9 ...
 ##  $ CP_cm   : num  27.2 28.8 23.8 11 11.9 20.5 19.2 11.5 20.5 16 ...
@@ -1200,6 +1196,7 @@ F = \frac{QME}{QMD}
 ##  $ periodo : Factor w/ 2 levels "chuvoso","seco": 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ estação : chr  "inverno" "inverno" "inverno" "inverno" ...
 ##  $ sexo    : Ord.factor w/ 3 levels "MACHO"&lt;"FEMEA"&lt;..: 1 1 1 1 1 1 2 3 1 1 ...
+##  $ sexo2   : chr  "FEMEA" "FEMEA" "FEMEA" "FEMEA" ...
 ##          
 ##           chuvoso seco
 ##   MACHO        68   54
@@ -1244,22 +1241,22 @@ F = \frac{QME}{QMD}
 <h4>
 <span class="header-section-number">13.13.1.1</span> Efeito principal do fator A<a class="anchor" aria-label="anchor" href="#efeito-principal-do-fator-a"><i class="fas fa-link"></i></a>
 </h4>
-<p>Hipótese nula (H₀): as médias populacionais são iguais entre os níveis do fator A, ou seja, o fator A não exerce efeito sobre a variável resposta.</p>
-<p>Hipótese alternativa (H₁): pelo menos uma média difere entre os níveis do fator A.</p>
+<p>Hipótese nula (<span class="math inline">\(H_0\)</span>): as médias populacionais são iguais entre os níveis do fator A, ou seja, o fator A não exerce efeito sobre a variável resposta.<br>
+Hipótese alternativa (<span class="math inline">\(H_1\)</span>): pelo menos uma média difere entre os níveis do fator A.</p>
 </div>
 <div id="efeito-principal-do-fator-b" class="section level4" number="13.13.1.2">
 <h4>
 <span class="header-section-number">13.13.1.2</span> Efeito principal do fator B<a class="anchor" aria-label="anchor" href="#efeito-principal-do-fator-b"><i class="fas fa-link"></i></a>
 </h4>
-<p>Hipótese nula (H₀): as médias populacionais são iguais entre os níveis do fator B, ou seja, o fator B não exerce efeito sobre a variável resposta.</p>
-<p>Hipótese alternativa (H₁): pelo menos uma média difere entre os níveis do fator B.</p>
+<p>Hipótese nula (<span class="math inline">\(H_0\)</span>): as médias populacionais são iguais entre os níveis do fator B, ou seja, o fator B não exerce efeito sobre a variável resposta.<br>
+Hipótese alternativa (<span class="math inline">\(H_1\)</span>): pelo menos uma média difere entre os níveis do fator B.</p>
 </div>
 <div id="interação-entre-os-fatores" class="section level4" number="13.13.1.3">
 <h4>
 <span class="header-section-number">13.13.1.3</span> Interação entre os fatores<a class="anchor" aria-label="anchor" href="#intera%C3%A7%C3%A3o-entre-os-fatores"><i class="fas fa-link"></i></a>
 </h4>
-<p>Hipótese nula (H₀): não existe interação entre os fatores A e B; o efeito de um fator é o mesmo em todos os níveis do outro fator.</p>
-<p>Hipótese alternativa (H₁): existe interação entre os fatores A e B; o efeito de um fator depende do nível do outro fator.</p>
+<p>Hipótese nula (<span class="math inline">\(H_0\)</span>): não existe interação entre os fatores A e B; o efeito de um fator é o mesmo em todos os níveis do outro fator.<br>
+Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe interação entre os fatores A e B; o efeito de um fator depende do nível do outro fator.</p>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">+</span> <span class="va">sexo</span>, data <span class="op">=</span> <span class="va">univ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">anova2</span><span class="op">)</span></span>
@@ -1282,8 +1279,7 @@ F = \frac{QME}{QMD}
 ## ℹ Summaries were computed grouped by periodo and sexo.
 ## ℹ Output is grouped by periodo.
 ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
-## ℹ Use `summarise(.by = c(periodo, sexo))` for per-operation grouping (`?dplyr::dplyr_by`)
-##   instead.</code></pre>
+## ℹ Use `summarise(.by = c(periodo, sexo))` for per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Comparações múltiplas pares: Tukey</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova3</span>, which <span class="op">=</span> <span class="st">"sexo"</span><span class="op">)</span></span>
@@ -2145,7 +2141,7 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 12/07/2026 12:29:37.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/07/2026 18:46:51.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

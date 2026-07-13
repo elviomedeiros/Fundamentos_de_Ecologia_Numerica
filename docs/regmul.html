@@ -119,16 +119,13 @@
 <h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-9"><i class="fas fa-link"></i></a>
 </h3>
 <p>A regressão múltipla é uma extensão da correlação bivariada e tem como objetivo <strong>predizer uma variável dependente a partir de duas ou mais variáveis independentes</strong>. Esse método é amplamente utilizado quando as variáveis preditoras apresentam associação entre si e também com a variável resposta. As variáveis independentes podem ser contínuas ou categóricas, embora variáveis categóricas devam ser previamente convertidas em variáveis <em>dummy</em> para serem incluídas no modelo. Em contraste, a variável dependente deve ser medida em uma escala contínua. Se a variável dependente não for contínua, então a análise discriminante é apropriada <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p>
-<p>Existem diferentes abordagens para regressão múltipla, destacando-se a regressão simultânea (ou padrão), a regressão hierárquica e a regressão <em>stepwise</em> (“passo-a-passo”). Na regressão simultânea, todas as variáveis independentes entram no modelo ao mesmo tempo, permitindo avaliar a contribuição conjunta dos preditores sobre a variável resposta. Na regressão hierárquica, a ordem de entrada das variáveis é definida previamente com base em conhecimento teórico ou hipóteses biológicas. Já na regressão <em>stepwise</em>, a inclusão ou remoção das variáveis ocorre automaticamente a partir de critérios estatísticos, buscando selecionar os melhores preditores do modelo. A regressão <em>stepwise</em> pode ainda ser, <em>forward</em>, <em>backward</em> ou <em>mixed</em>, dependendo da ordem na qual as variáveis são incorporadas. Veremos mais sobre isso a serguir.</p>
-<p>A aplicação da regressão múltipla exige o atendimento de alguns pressupostos estatísticos. Entre os principais estão:</p>
-<ol style="list-style-type: decimal">
-<li>Número adequado de observações em relação ao número de preditores</li>
-<li>Ausência de outliers extremos</li>
-<li>Ausência de <strong>multicolinearidade</strong> entre as variáveis independentes</li>
-<li>Adequação dos resíduos do modelo quanto à normalidade, linearidade, homocedasticidade e independência.</li>
-</ol>
-<p>O resultado da regressão é uma equação que representa a melhor previsão de uma variável dependente a partir de várias variáveis independentes. Para isso, existem três principais modelos de regressão. Regressão padrão ou simultânea, regressão hierárquica e regressão <em>stepwise</em> (“passo-a-passo”). Esses modelos diferem em dois aspectos: primeiro, no tratamento da variabilidade sobreposta devido à correlação das variáveis independentes e, segundo, em termos da ordem de entrada das variáveis independentes na equação. No <strong>modelo padrão ou simultâneo</strong>, todas as variáveis independentes entram na equação de regressão ao mesmo tempo porque se deseja examinar a relação entre todo o conjunto de preditores e a variável dependente. Na <strong>regressão múltipla hierárquica</strong>, determina-se a ordem de entrada das variáveis independentes com base no conhecimento teórico. Na <strong>regressão <em>stepwise</em> </strong>, o número de variáveis independentes inseridas e a ordem de entrada são determinados por critérios estatísticos gerados pelo procedimento <em>stepwise</em>.</p>
-<p>O método de entrada na regressão <em>stpewise</em> pode ser <em>forward</em>, <em>backward</em> ou uma combinação de ambos (<em>mixed</em>). A seleção <em>forward</em> envolve a entrada dos preditores um de cada vez. A ordem de entrada e se o preditor será eventualmente aceito são decididas com base em se o teste <code>F</code> excede um determinado valor crítico e se um nível alfa crítico é atingido. A seleção <em>backward</em> começa com todas as variáveis na equação e gradualmente elimina-se os preditores de baixo desempenho com base em se o valor <code>F</code> parcial é menor que um valor crítico. O critério padrão também deve ser atendido. A seleção <em>mixed</em> (<em>stepwise</em>) é uma combinação dos procedimentos <em>forward</em> e <em>backward</em>. Ela permite a remoção posterior de variáveis que foram previamente inseridas. A escolha da técnica depende amplamente dos objetivos do pesquisador.</p>
+<p>O resultado da regressão é uma equação que representa a melhor previsão de uma variável dependente a partir de várias variáveis independentes.</p>
+<p>Para isso, existem três principais modelos de regressão. <strong>Regressão múltipla simultânea</strong> ou padrão, <strong>regressão múltipla hierárquica</strong> e a <strong>regressão múltipla <em>stepwise</em></strong> (“passo-a-passo”). Esses modelos diferem em dois aspectos: primeiro, na forma como tratam a variabilidade compartilhada decorrente da correlação entre as variáveis independentes; e, segundo, na ordem de entrada das variáveis independentes na equação.</p>
+<p>No <strong>modelo padrão ou simultâneo</strong>, todas as variáveis independentes entram na equação de regressão ao mesmo tempo, porque se deseja examinar a relação entre todo o conjunto de preditores e a variável dependente. Na <strong>regressão múltipla hierárquica</strong>, a ordem de entrada das variáveis é definida previamente, pelo pesquisador, com base em conhecimento teórico ou hipóteses biológicas. Já na <strong>regressão múltipla <em>stepwise</em></strong> , a inclusão ou remoção das variáveis ocorre automaticamente a partir de critérios estatísticos, buscando selecionar os melhores preditores do modelo, gerados pelo procedimento <em>stepwise</em>. A regressão <em>stepwise</em> pode ainda ser, <em>forward</em> (seleção progressiva), <em>backward</em> (seleção regressiva) ou <em>mixed</em> (uma combinação de ambos), dependendo da ordem na qual as variáveis são incorporadas. Veremos mais sobre isso a serguir.</p>
+<p>Na seleção <em>forward</em>, os preditores são adicionados ao modelo um de cada vez. A ordem de entrada e a permanência de cada preditor no modelo são determinadas com base em dois critérios: se o teste F excede um valor crítico preestabelecido e se é atingido um nível crítico de significância.</p>
+<p>Na seleção <em>backward</em>, o modelo é inicialmente ajustado com todas as variáveis independentes e, em seguida, aquelas com menor contribuição são removidas gradualmente, com base no fato de seu valor parcial de F ser inferior a um valor crítico. Além disso, deve ser atendido o critério padrão de significância para remoção.</p>
+<p>A seleção <em>stepwise</em> combina os procedimentos <em>forward</em> e <em>backward</em>, permitindo que variáveis previamente incluídas no modelo sejam posteriormente removidas, caso deixem de atender aos critérios estatísticos estabelecidos.</p>
+<p>A escolha do método depende, em grande parte, dos objetivos do pesquisador, e a aplicação da regressão múltipla exige o atendimento de alguns pressupostos estatísticos <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>.</p>
 <div id="pressupostos-5" class="section level4" number="15.0.0.1">
 <h4>
 <span class="header-section-number">15.0.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-5"><i class="fas fa-link"></i></a>
@@ -144,9 +141,11 @@
 <p>No contexto da biometria de <em>Cichla ocellaris</em>, a regressão múltipla pode ser utilizada para investigar quais variáveis morfométricas melhor predizem o peso corporal dos indivíduos. Nesse caso, o peso total (<code>PT_g</code>) pode ser utilizado como variável dependente, enquanto variáveis como comprimento total (<code>CT_cm</code>), comprimento padrão (<code>CP_cm</code>) podem atuar como variáveis independentes. Assim, o modelo busca explicar a variação do peso corporal a partir de múltiplos atributos biométricos dos indivíduos analisados.</p>
 <p>Com esse tipo de análise, é possível responder questões como:</p>
 <ol style="list-style-type: decimal">
-<li><p>Qual a contribuição conjunta das variáveis biométricas para a predição do peso corporal?</p></li>
-<li><p>Qual variável apresenta maior poder preditivo?</p></li>
-<li><p>Se determinadas hipóteses biológicas previamente propostas são sustentadas pelos dados observados.</p></li>
+<li>Qual a contribuição conjunta das variáveis biométricas para a predição do peso corporal?<br>
+</li>
+<li>Qual variável apresenta maior poder preditivo?<br>
+</li>
+<li>Se determinadas hipóteses biológicas previamente propostas são sustentadas pelos dados observados.</li>
 </ol>
 </div>
 <div id="exemplo-1-1" class="section level4" number="15.0.0.2">
@@ -196,17 +195,17 @@
 ## TU008    0.4    17.0      I 0.2475248    0.1     2.5      IMATURO 0.06188119
 ## TU009    2.0    25.3     II 0.9975062    0.1     6.5 EM MATURACAO 0.04987531
 ## TU010    1.4    17.7     II 1.6147636    0.1       6      IMATURO 0.11534025
-##       mes periodo estação    sexo
-## TU001 ago chuvoso inverno   MACHO
-## TU002 ago chuvoso inverno   MACHO
-## TU003 ago chuvoso inverno   MACHO
-## TU004 ago chuvoso inverno   MACHO
-## TU005 ago chuvoso inverno   MACHO
-## TU006 set chuvoso inverno   MACHO
-## TU007 set chuvoso inverno   FEMEA
-## TU008 set chuvoso inverno imaturo
-## TU009 set chuvoso inverno   MACHO
-## TU010 set chuvoso inverno   MACHO
+##       mes periodo estação    sexo   sexo2
+## TU001 ago chuvoso inverno   MACHO   FEMEA
+## TU002 ago chuvoso inverno   MACHO   FEMEA
+## TU003 ago chuvoso inverno   MACHO   FEMEA
+## TU004 ago chuvoso inverno   MACHO   FEMEA
+## TU005 ago chuvoso inverno   MACHO   FEMEA
+## TU006 set chuvoso inverno   MACHO   FEMEA
+## TU007 set chuvoso inverno   FEMEA   MACHO
+## TU008 set chuvoso inverno imaturo imaturo
+## TU009 set chuvoso inverno   MACHO   FEMEA
+## TU010 set chuvoso inverno   MACHO   FEMEA
 ##       CT_cm  PT_g CP_cm Ctubo_cm  PC_g
 ## TU001  32.4 468.8  27.2     39.8 458.9
 ## TU002  33.4 520.0  28.8     14.3 507.4
@@ -252,7 +251,7 @@
 <pre><code>##  [1] "CT_cm"    "PT_g"     "CP_cm"    "Ctubo_cm" "PC_g"     "p_PT"    
 ##  [7] "Pest_g"   "Cest_cm"  "gr_est"   "ir_est"   "Pint_g"   "Cint_cm" 
 ## [13] "gr_int"   "ir_int"   "Pgon_g"   "Cgon_cm"  "emg"      "ig"      
-## [19] "mes"      "periodo"  "estação"  "sexo"    
+## [19] "mes"      "periodo"  "estação"  "sexo"     "sexo2"   
 ##               CT_cm       PT_g      CP_cm   Ctubo_cm       PC_g       p_PT
 ## CT_cm     1.0000000  0.9057485  0.9990120  0.9091518  0.9039903 -0.5189589
 ## PT_g      0.9057485  1.0000000  0.9039503  0.8093258  0.9999423 -0.3320403
@@ -266,13 +265,13 @@
 <h4>
 <span class="header-section-number">15.1.1.2</span> Exemplo 2<a class="anchor" aria-label="anchor" href="#exemplo-2"><i class="fas fa-link"></i></a>
 </h4>
-<p>Um gerente de marketing de uma grande rede de supermercados queria determinar o efeito do espaço de prateleira e do preço sobre as vendas de alimentos para animais de estimação. Uma amostra aleatória de quinze lojas de mesmo tamanho foi selecionada, e foram registrados as vendas, o espaço de prateleira em metros quadrados e o preço por quilograma. Para demonstrar a aplicação dos três modelos de regressão, você utilizará o mesmo conjunto de dados para responder a três perguntas:</p>
+<p>Um pesquisador deseja determinar o efeito das variáveis ambientais de corpos aquáticos sobre a riqueza de espécies. Para isso, foram amostrados diferentes tipos de ambientes aquáticos e registradas a abundância e densidade de indivíduos, além de vários tipos de variáveis ambientais que refletem a morfologia local, qualidade da água, composição do sedimento e estruturas subaquáticas do habitat marginal. Regressão Múltipla foi utilizada nesse conjunto de dados para responder às seguintes perguntas:</p>
 <ol style="list-style-type: decimal">
-<li>Qual contribuição tanto o espaço de prateleira quanto o preço oferecem para a previsão das vendas de alimentos para animais de estimação?<br>
+<li>Qual contribuição as variáveis morfologicas oferecem para a previsão da riqueza de espécies?<br>
 </li>
-<li>Qual é o melhor preditor das vendas de alimentos para animais de estimação?<br>
+<li>Qual variável morfológica é a melhor preditora da riqueza de espécies?<br>
 </li>
-<li>Pesquisas anteriores sugeriram que o espaço de prateleira é o principal preditor das vendas de alimentos para animais de estimação. Essa hipótese está correta?</li>
+<li>Estudos anteriores sugerem que a largura influencia a riqueza de espécies. Essa hipótese é corroborada pelos dados analisados?</li>
 </ol>
 </div>
 </div>
@@ -1608,68 +1607,43 @@
 ## S-R-SE-3     SE  3.763162 249.4642857  4
 ## S-R-SE-4     SE  8.603085 406.6071429 11</code></pre>
 </div>
-</div>
-<div id="regressão-multipla" class="section level2" number="15.4">
-<h2>
-<span class="header-section-number">15.4</span> Regressão Multipla<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla"><i class="fas fa-link"></i></a>
-</h2>
+<div id="organizando-variáveis-de-interesse" class="section level4" number="15.3.0.3">
+<h4>
+<span class="header-section-number">15.3.0.3</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
+</h4>
+<p>Cada linha deve representar uma observação e cada coluna uma variável.</p>
 <div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">leaps</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">anovas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"t_anovas.csv"</span>,</span>
+<span>                   sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>                   row.names <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                   header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="va">m_hab_part</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"m_hab_part.csv"</span>,</span>
 <span>                       sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>                       row.names <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                       header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                       na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Select only columns starting with "m."</span></span>
+<span><span class="co"># Selecionamos colunas começando com "m."</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">)</span></span>
 <span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^(m)\\."</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">)</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#^(g|m) mais de uma inicial</span></span>
 <span><span class="va">vars</span></span>
 <span><span class="va">m_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">[</span>, <span class="va">vars</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co">#TRANSFORMAÇÃO</span></span>
 <span><span class="va">m_vars</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Srare <span class="op">=</span> <span class="va">anovas</span><span class="op">$</span><span class="va">Srare</span>, <span class="va">m_vars</span><span class="op">)</span></span>
-<span><span class="va">data</span></span>
-<span></span>
-<span><span class="co"># Fit the full model</span></span>
-<span><span class="va">full.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Stepwise regression model</span></span>
-<span><span class="va">step.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC</a></span><span class="op">(</span><span class="va">full.model</span>, direction <span class="op">=</span> <span class="st">"both"</span>, <span class="co">#both, backward, forward</span></span>
-<span>                      trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">data</span>, nvmax <span class="op">=</span> <span class="fl">5</span>, <span class="co">#maximal number of predictors to incorporate in the model</span></span>
-<span>                     method <span class="op">=</span> <span class="st">"seqrep"</span><span class="op">)</span> <span class="co">#sequential replacement, combination of forward and backward selections</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Train model</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span><span class="co"># set up repeated k-fold (number=10) cross-validation ("cv")</span></span>
-<span><span class="va">train.control</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html">trainControl</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"cv"</span>, number <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co"># Train the model</span></span>
-<span><span class="va">step.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html">train</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">data</span>,</span>
-<span>                    method <span class="op">=</span> <span class="st">"leapBackward"</span>,</span>
-<span>                    tuneGrid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>nvmax <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,</span>
-<span>                    trControl <span class="op">=</span> <span class="va">train.control</span><span class="op">)</span></span>
-<span><span class="co">#**You can't directly use two different data frames in train(), because train()</span></span>
-<span><span class="co">#(from caret package) expects all predictor (X) and response (Y) variables</span></span>
-<span><span class="co">#to be in the same data frame.</span></span>
-<span><span class="va">step.model</span><span class="op">$</span><span class="va">results</span></span>
-<span><span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span><span class="op">)</span></span>
-<span><span class="va">nvmax</span> <span class="op">&lt;-</span> <span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span><span class="op">$</span><span class="va">nvmax</span></span>
-<span><span class="va">nvmax</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span>, <span class="va">nvmax</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">lm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span>  <span class="va">m.slope</span> <span class="op">+</span> <span class="va">m.width</span>,</span>
-<span>   data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_model</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_vars</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] "g.river_length" "g.altitude"     "m.depth_mar"    "m.depth_max"   
+<span><span class="va">data</span></span></code></pre></div>
+<pre><code>## null device 
+##           1 
+##  [1] "g.river_length" "g.altitude"     "m.depth_mar"    "m.depth_max"   
 ##  [5] "m.slope"        "m.width"        "q.w_vel"        "q.temp"        
 ##  [9] "q.do"           "q.turb"         "s.mud"          "s.sand"        
 ## [13] "s.rocks"        "h.macroph"      "h.grass"        "h.subveg"      
@@ -1721,8 +1695,185 @@
 ## S-R-SE-1  7.000000    9.018500   10.295630 5.477226  4.431704
 ## S-R-SE-2  3.000000    8.185353   10.246951 5.477226  4.012481
 ## S-R-SE-3  3.763162    5.686241   10.488088 5.477226  2.489980
-## S-R-SE-4  8.603085    5.686241    8.602325 5.477226  2.323790
+## S-R-SE-4  8.603085    5.686241    8.602325 5.477226  2.323790</code></pre>
+</div>
+</div>
+<div id="regressão-multipla-simultânea" class="section level2" number="15.4">
+<h2>
+<span class="header-section-number">15.4</span> Regressão Multipla Simultânea<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><i class="fas fa-link"></i></a>
+</h2>
+<p>Na regressão múltipla simultânea, testamos a hipótese de:</p>
+<p><span class="math inline">\(H_0\)</span>: nenhuma das variáveis explicativas está associada à variável resposra.<br><span class="math inline">\(H_1\)</span>: pelo menos uma das variáveis explicativas está associada à variável resposta.</p>
+<p>No R, implementamos o modelo de RMS usando a fórmula:</p>
+<pre><code>Y ~ X1 + X2 + X3</code></pre>
+<p>onde,</p>
+<p>a primeira coluna da matriz de dados representa a variável resposta <code>Y</code> e as demais colunas representam as variáveis preditoras <code>X</code>. Para isso, usamos a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span> <span class="op">+</span> <span class="va">m.slope</span> <span class="op">+</span> <span class="va">m.width</span>,</span>
+<span>             data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Srare"       "m.depth_mar" "m.depth_max" "m.slope"     "m.width"    
 ## 
+## Call:
+## lm(formula = Srare ~ m.depth_mar + m.depth_max + m.slope + m.width, 
+##     data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.9250 -3.1546 -0.8167  3.3069 10.4837 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)   5.1795    10.8307   0.478    0.639
+## m.depth_mar  -1.2540     1.2626  -0.993    0.335
+## m.depth_max   0.7514     1.2572   0.598    0.558
+## m.slope       0.9270     0.8668   1.069    0.300
+## m.width      -0.5149     0.3466  -1.486    0.156
+## 
+## Residual standard error: 5.219 on 17 degrees of freedom
+## Multiple R-squared:  0.244,  Adjusted R-squared:  0.06611 
+## F-statistic: 1.372 on 4 and 17 DF,  p-value: 0.2852</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-148-1.png" alt="" width="672"></div>
+<p><code>plot(modelo)</code> demonstra o <strong>diagnóstico dos resíduos</strong>, onde são produzidos os gráficos de <strong>resíduos × valores ajustados</strong>, que verifica homocedasticidade (ideal sem padrão), o <strong>q-q plot</strong> dos resíduos, que verifica normalidade (ver Capítulo <a href="norm.html#norm">Estatísticas descritivas e normalidade</a>. Nesse caso os pontos devem seguir aproximadamente a reta. O gráfico de <strong>scale-Location</strong> também avalia homocedasticidade e o gráfico de <strong>resíduos × alavancagem</strong> identifica observações influentes.</p>
+<p>Sobre o modelo ajustado, temos a <strong>equação</strong>:</p>
+<p><span class="math display">\[S_{rare}=\beta_0 + \beta_1(m.depth\_mar)+\beta_2(m.depth\_max)+\beta_3(m.slope)+\beta_4(m.width)+\varepsilon\]</span>
+onde:</p>
+<ul>
+<li>Variável resposta: Srare<br>
+</li>
+<li>Variáveis explicativas:<br>
+</li>
+<li>m.depth_mar<br>
+</li>
+<li>m.depth_max<br>
+</li>
+<li>m.slope<br>
+</li>
+<li>m.width</li>
+</ul>
+<p>Portanto, a equação usada para prever Srare seria:</p>
+<p><span class="math display">\[\widehat{\mathrm{Srare}} =
+5.1795
+- 1.2540(\mathrm{m.depth\_mar})
++ 0.7514(\mathrm{m.depth\_max})
++ 0.9270(\mathrm{m.slope})
+- 0.5149(\mathrm{m.width})\]</span></p>
+<p>Observando os <strong>resíduos</strong>, temos um resumo dos erros do modelo (melhor observado nos gráficos anteriores) com, idealmente, uma média próxima de zero e distribuição aproximadamente simétrica. Isso deve ser confirmado pelos gráficos dos resíduos.</p>
+<p>Além da <strong>tabela de coeficientes</strong>, temos o intercepto <em>estimate</em>, erro padrão residual, r<span class="math inline">\(^2\)</span>, r<span class="math inline">\(^2\)</span> ajustado, teste F e valor de p.</p>
+<p>Sobre os <strong>coeficientes</strong>, o estimate = 5.18, é o valor esperado de Srare quando todas as variáveis são iguais a zero. Como profundidade, largura e declividade iguais a zero não fazem sentido ecologicamente, normalmente o intercepto não é interpretado.</p>
+<p>m.depth_mar: Estimate = -1.254, mantendo todas as outras variáveis constantes, um aumento de 1 unidade em m.depth_mar, reduz a riqueza rarefeita em aproximadamente 1,25 espécies. Entretanto, p = 0.335 não é significativo, logo, não há evidência estatística de que essa variável explique a riqueza.</p>
+<p>O mesmo se aplica as demais variáves.</p>
+<p>m.width: Estimate = -0.515, para cada unidade adicional de largura, a riqueza diminui cerca de 0,52 espécies. Foi a variável mais próxima da significância com p = 0.156.</p>
+<p>O <strong>erro padrão residual</strong> de 5.219 (para 17 graus de liberdade), fignifica que em média, as previsões do modelo erram em aproximadamente 5,2 espécies. Quanto menor esse valor, melhor.</p>
+<p>O <strong>r</strong><span class="math inline">\(^2\)</span> múltiplo de 0.244, significa que o modelo explica 24,4% da variação observada em Srare. Ou seja, aproximadamente 75% da variação continua sem explicação.</p>
+<p>Isso indica um ajuste relativamente fraco.</p>
+<p>O <strong>r</strong><span class="math inline">\(^2\)</span> ajustado de 0.066 é o valor mais importante. Após penalizar o modelo pelo número de variáveis, restam apenas 6,6% da variação realmente explicada. Isso mostra que adicionar quatro variáveis praticamente não melhorou o modelo.</p>
+<p>Por fim, o <strong>teste F</strong> de 1.372 com p = 0.2852, verifica a hipótese de:</p>
+<p><span class="math inline">\(H_0:\ \beta_1 = \beta_2 = \beta_3 = \beta4 = 0\)</span></p>
+<p>ou seja, nenhuma variável explica a riqueza.</p>
+<p>Contra a hipótese alternativa de:</p>
+<p><span class="math inline">\(H_1:\ \beta_1 \neq 0 \ \text{ou}\ \beta_2 \neq 0 \ \text{ou}\ \beta_3 \neq 0 \ \text{ou}\ \beta_4 \neq 0\)</span></p>
+<p>onde, pelo menos um dos coeficientes <span class="math inline">\(\beta\)</span> é diferente de 0, pelo menos uma variável explica a riqueza.</p>
+<p>Como, p = 0.285 não rejeitamos <span class="math inline">\(H_0\)</span>.</p>
+<p>Portanto, o modelo como um todo não é estatisticamente significativo.</p>
+<p>O QUE REPORTAR: O modelo de regressão múltipla simultânea não foi significativo (F₄,₁₇ = 1,37; p = 0,285), explicando apenas 24,4% da variação da riqueza rarefeita (r² = 0,244; r² ajustado = 0,066). Nenhuma das variáveis ambientais avaliadas (m.depth_mar, m.depth_max, m.slope e m.width) apresentou efeito significativo sobre a riqueza rarefeita (todos os p &gt; 0,05), indicando que, para este conjunto de dados, essas variáveis não explicam de forma consistente a variação observada em Srare.</p>
+<p>Verificamos agora a multicolinearidade, usando a função <code><a href="https://rdrr.io/pkg/car/man/vif.html">vif()</a></code> do pacote <code><a href="https://github.com/bprice2652/car_repo">library(car)</a></code></p>
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## m.depth_mar m.depth_max     m.slope     m.width 
+##    4.123894    2.074864    1.324621    3.167376</code></pre>
+<p>A função <code>vif(modelo)</code>do pacote <code><a href="https://github.com/bprice2652/car_repo">library(car)</a></code> calcula o VIF (<em>Variance Inflation Factor</em>), ou Fator de Inflação da Variância. O objetivo do VIF é verificar se existe multicolinearidade entre as variáveis explicativas, isto é, se uma variável pode ser explicada pelas demais <span class="citation">(<a href="#ref-fox2019">FOX; WEISBERG, 2019</a>)</span>.</p>
+<p>O VIF é calculado para cada variável explicativa, e o R ajusta uma regressão em que ela é a variável resposta e as outras variáveis são as preditoras.</p>
+<p>Por exemplo, para m.depth_mar, o R ajusta:</p>
+<pre><code>m.depth_mar ~ m.depth_max + m.slope + m.width</code></pre>
+<p>Obtém-se o coeficiente de determinação dessa regressão (R<span class="math inline">\(^2\)</span>) calculando-se:</p>
+<p><span class="math display">\[VIF = \frac{1}{1 - R^2}\]</span></p>
+<p>Quanto maior o R<span class="math inline">\(^2\)</span>, maior será o VIF. Isso significa que a variável é bem explicada pelas demais, indicando multicolinearidade.</p>
+<p>Seus resultados m.depth_mar 4.123894 m.depth_max 2.074864 m.slope 1.324621 m.width 3.167376</p>
+<p>m.depth_mar (VIF = 4.12) é a variável mais correlacionada com as outras. Isso significa que o erro padrão do seu coeficiente é aproximadamente 4.12, ou:</p>
+<p><span class="math display">\[\sqrt{4.12} = 2.03\]</span>
+vezes maior do que seria se não existisse correlação entre as variáveis. Ainda assim, esse valor não é considerado problemático <span class="citation">(<a href="#ref-fox2019">FOX; WEISBERG, 2019</a>)</span>.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="center">VIF</th>
+<th>Interpretação</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td>Nenhuma multicolinearidade</td>
+</tr>
+<tr class="even">
+<td align="center">1–2</td>
+<td>Multicolinearidade muito baixa</td>
+</tr>
+<tr class="odd">
+<td align="center">2–5</td>
+<td>Multicolinearidade moderada, geralmente aceitável</td>
+</tr>
+<tr class="even">
+<td align="center">&gt; 5</td>
+<td>Multicolinearidade alta, merece atenção</td>
+</tr>
+<tr class="odd">
+<td align="center">&gt; 10</td>
+<td>Multicolinearidade muito alta, normalmente problemática</td>
+</tr>
+</tbody>
+</table></div>
+<p>Portanto, não há evidências de multicolinearidade severa entre as variáveis explicativas. Assim, o fato de nenhuma variável ter sido significativa (p &gt; 0,05) provavelmente não é consequência da multicolinearidade, mas sim porque, para este conjunto de dados, essas variáveis realmente apresentam pouca capacidade de explicar a variação de Srare.</p>
+<p>O QUE REPORTAR: A multicolinearidade entre as variáveis explicativas foi avaliada pelo Fator de Inflação da Variância (VIF). Todos os valores de VIF foram inferiores a 5 (1,32–4,12), indicando ausência de multicolinearidade significativa entre os preditores e sugerindo que as estimativas dos coeficientes não foram substancialmente afetadas pela correlação entre as variáveis independentes.</p>
+</div>
+<div id="regressão-múltipla-hierárquica" class="section level2" number="15.5">
+<h2>
+<span class="header-section-number">15.5</span> Regressão Múltipla Hierárquica<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="regressão-múltipla-stepwise" class="section level2" number="15.6">
+<h2>
+<span class="header-section-number">15.6</span> Regressão Múltipla <em>Stepwise</em><a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Ajuste do modelo completo</span></span>
+<span><span class="va">full.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Modelo de regressão stepwise</span></span>
+<span><span class="va">step.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC</a></span><span class="op">(</span><span class="va">full.model</span>, direction <span class="op">=</span> <span class="st">"both"</span>, <span class="co">#both, backward, forward</span></span>
+<span>                      trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">data</span>, nvmax <span class="op">=</span> <span class="fl">5</span>, <span class="co">#maximal number of predictors to incorporate in the model</span></span>
+<span>                     method <span class="op">=</span> <span class="st">"seqrep"</span><span class="op">)</span> <span class="co">#sequential replacement, combination of forward and backward selections</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Train model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="co"># set up repeated k-fold (number=10) cross-validation ("cv")</span></span>
+<span><span class="va">train.control</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html">trainControl</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"cv"</span>, number <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># Train the model</span></span>
+<span><span class="va">step.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html">train</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>                    method <span class="op">=</span> <span class="st">"leapBackward"</span>,</span>
+<span>                    tuneGrid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>nvmax <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,</span>
+<span>                    trControl <span class="op">=</span> <span class="va">train.control</span><span class="op">)</span></span>
+<span><span class="co">#**You can't directly use two different data frames in train(), because train()</span></span>
+<span><span class="co">#(from caret package) expects all predictor (X) and response (Y) variables</span></span>
+<span><span class="co">#to be in the same data frame.</span></span>
+<span><span class="va">step.model</span><span class="op">$</span><span class="va">results</span></span>
+<span><span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span><span class="op">)</span></span>
+<span><span class="va">nvmax</span> <span class="op">&lt;-</span> <span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span><span class="op">$</span><span class="va">nvmax</span></span>
+<span><span class="va">nvmax</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span>, <span class="va">nvmax</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span>  <span class="va">m.slope</span> <span class="op">+</span> <span class="va">m.width</span>,</span>
+<span>   data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_model</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_vars</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
 ## Call:
 ## lm(formula = Srare ~ m.width, data = data)
 ## 
@@ -1807,11 +1958,7 @@
 <div id="sites-para-consulta-2" class="section level2 unnumbered">
 <h2>Sites para consulta<a class="anchor" aria-label="anchor" href="#sites-para-consulta-2"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a>
-<a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a>
-<a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a></p>
-<p><a href="https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/" class="uri">https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/</a>
-<a href="https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/" class="uri">https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/</a></p>
+<p><a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a><br><a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a><br><a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a><br><a href="https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/" class="uri">https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/</a><br><a href="https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/" class="uri">https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/</a></p>
 </div>
 <div id="script-limpo-5" class="section level2 unnumbered">
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-5"><i class="fas fa-link"></i></a>
@@ -1828,6 +1975,9 @@
 <div id="refs" class="references csl-bib-body" entry-spacing="1">
 <div id="ref-coakes2001" class="csl-entry">
 COAKES, S. J.; STEED, L. G. <strong>SPSS: Analysis Without Anguish: version 10.0 for Windows</strong>. Milton, Qld: John Wiley &amp; Sons Australia, Ltd, 2001.
+</div>
+<div id="ref-fox2019" class="csl-entry">
+FOX, J.; WEISBERG, S. <strong>An R Companion to Applied Regression</strong>. Third edition ed. Los Angeles: SAGE, 2019. Disponível em: &lt;<a href="https://www.john-fox.ca/Companion/">https://www.john-fox.ca/Companion/</a>&gt;
 </div>
 </div>
   <div class="chapter-nav">
@@ -1847,7 +1997,9 @@ COAKES, S. J.; STEED, L. G. <strong>SPSS: Analysis Without Anguish: version 10.0
 </li>
 <li><a class="nav-link" href="#sobre-os-dados-3"><span class="header-section-number">15.2</span> Sobre os dados</a></li>
 <li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-5"><span class="header-section-number">15.3</span> Organização básica</a></li>
-<li><a class="nav-link" href="#regress%C3%A3o-multipla"><span class="header-section-number">15.4</span> Regressão Multipla</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><span class="header-section-number">15.4</span> Regressão Multipla Simultânea</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">15.5</span> Regressão Múltipla Hierárquica</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><span class="header-section-number">15.6</span> Regressão Múltipla Stepwise</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-8">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-para-consulta-2">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-5">Script limpo</a></li>
@@ -1868,7 +2020,7 @@ COAKES, S. J.; STEED, L. G. <strong>SPSS: Analysis Without Anguish: version 10.0
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 12/07/2026 12:29:37.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/07/2026 18:46:51.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
