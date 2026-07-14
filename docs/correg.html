@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content=" 14 Correlação e Regressão | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -248,7 +248,8 @@
 </li>
 <li>Normalidade: Os escores de cada variável devem apresentar distribuição normal.<br>
 </li>
-<li>Linearidade: A relação entre as duas variáveis deve ser linear.<br>
+<li>
+<strong>Linearidade</strong>: A relação entre as duas variáveis deve ser linear.<br>
 </li>
 <li>Homoscedasticidade: A variabilidade dos escores de uma variável deve ser aproximadamente a mesma em todos os valores da outra variável. Ou seja, refere-se à forma como os escores se distribuem uniformemente em torno da linha de regressão.</li>
 </ol>
@@ -272,8 +273,8 @@
 <ol style="list-style-type: decimal">
 <li>Existe correlação significativa entre o comprimento padrão e o comprimento total dos indivíduos?</li>
 </ol>
-<p>Hipótese nula (H₀): não existe correlação linear entre as duas variáveis na população.<br>
-Hipótese alternativa (H₁): existe correlação linear entre as duas variáveis na população.</p>
+<p>Hipótese nula (<span class="math inline">\(H_0\)</span>): não existe correlação linear entre as duas variáveis na população.<br>
+Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correlação linear entre as duas variáveis na população.</p>
 <p>Nesse caso, utiliza-se:</p>
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
@@ -325,7 +326,7 @@ Hipótese alternativa (H₁): existe correlação linear entre as duas variávei
 <p>Eixo x (horizontal): variável explicativa (independente), quando houver uma hipótese causal;<br>
 Eixo y (vertical): variável resposta (dependente).</p>
 <p>Por exemplo, nos dados de tucunaré, como nosso objetivo é verificar se o comprimento padrão (CP) explica o comprimento total (CT), temos que:</p>
-<p>x: comprimento padrão (CP_cm)
+<p>x: comprimento padrão (CP_cm)<br>
 y: comprimento total (CT_cm)</p>
 <p>Se pretendemos ajustar uma <strong>regressão linear</strong>, a variável explicativa deve ser colocada no eixo x e a variável resposta no eixo y, pois a reta de regressão depende dessa escolha (veremos isso a seguir.</p>
 <p>Na <strong>correlação de Spearman</strong>, os dados são transformados em <em>ranks</em> (postos).</p>
@@ -355,7 +356,7 @@ y: comprimento total (CT_cm)</p>
 </table></div>
 <p>Quando existem valores repetidos, no exemplo acima, 12 e 12, ocorrem empates (<em>ties</em>). O teste exato de Spearman assume ranks únicos, sem valores repetidos. Como nossos dados possuem medidas repetidas (muito comum em biometria), o R usa uma aproximação assintótica (removendo os empates), em vez do cálculo exato. Isso não invalida o teste, em caso de amostras grandes, mas significa uma limitação do teste de correlação não-paramétrico.</p>
 <p>O QUE REPORTAR (Pearson): Foi observada correlação linear positiva extremamente forte entre o comprimento padrão (CP_cm) e o comprimento total (CT_cm) dos indivíduos analisados (correlação de Pearson: r = 0,957; p &lt; 0,001; n = 433).</p>
-<p>O QUE REPORTAR (spearman): Foi observada correlação positiva significativa entre comprimento padrão (CP_cm) e o comprimento total (CT_cm) (Spearman: ρ = 0,998; p &lt; 0,001).</p>
+<p>O QUE REPORTAR (spearman): Foi observada correlação positiva significativa entre comprimento padrão (CP_cm) e o comprimento total (CT_cm) (Spearman: <span class="math inline">\(\rho\)</span> = 0,998; p &lt; 0,001).</p>
 </div>
 <div id="correlação-parcial" class="section level2" number="14.6">
 <h2>
@@ -410,7 +411,7 @@ gp = 1. O <strong>valor de p</strong> (&lt;0,001) é extremamente pequeno. Final
 <p>No R, isso é implementando usando a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
 <pre><code>lm(y ~ x, data = dados)</code></pre>
 <p>onde:</p>
-<p>o que está à esquerda de <code>~</code> é a variável dependente (resposta, y);
+<p>o que está à esquerda de <code>~</code> é a variável dependente (resposta, y);<br>
 o que está à direita de <code>~</code> é a variável independente (explicativa, preditora, x).</p>
 </div>
 <div id="exemplo-1" class="section level4" number="14.7.0.2">
@@ -526,7 +527,7 @@ onde:</p>
 </li>
 <li>1,206 é o coeficiente angular (<span class="math inline">\(\beta_1\)</span>)</li>
 </ul>
-<p>O <strong>intercept</strong> (<span class="math inline">\(\beta_0 = 1.147\)</span>) representa o valor esperado de CT_cm quando CP_cm=0 (geralmente sem interpretação biológica, mas importante em Modelos Lineares Generaliados). O <strong>coeficiente angular</strong> (<span class="math inline">\(\beta_1\)</span> = 1,206) indica que, em média, para cada aumento de 1 cm em CP_cm, espera-se aumento aproximado de 1,206 cm em CT_cm. O **erro padrão do coeficiente angular*, que mede a precisão da estimativa de <span class="math inline">\(beta_1\)</span>, foi de 0,00258.</p>
+<p>O <strong>intercept</strong> (<span class="math inline">\(\beta_0 = 0.147\)</span>) representa o valor esperado de CT_cm quando CP_cm=0 (geralmente sem interpretação biológica, mas importante em Modelos Lineares Generaliados). O <strong>coeficiente angular</strong> (<span class="math inline">\(\beta_1\)</span> = 1,206) indica que, em média, para cada aumento de 1 cm em CP_cm, espera-se aumento aproximado de 1,206 cm em CT_cm. O <strong>erro padrão do coeficiente angular</strong>, que mede a precisão da estimativa de <span class="math inline">\(\beta_1\)</span>, foi de 0,00258.</p>
 <p>Os resultados também mostram que O coeficiente de CP_cm é altamente significativo (t=467.22, p&lt;0.001), indicando que o comprimento padrão é um forte preditor do comprimento total. Embora o modelo apresente um erro médio de aproximadamente 0,42 cm na predição do comprimento total, como mostrado no <strong>erro padrão residual</strong> de 0.4216. Os <strong>coeficientes de determinação</strong> (múltiplos e ajustados) de 0.998, indicam que o cerca de 99,8% da variação no comprimento total.</p>
 <p>Finalmente, <strong>o teste F</strong> de 2.183e+05 e seu <strong>valor de p</strong> &lt; 0.001, testam a hipótese de que o modelo não explica a variável resposta:</p>
 <p><span class="math inline">\(H_0\)</span>: Hipótese nula: <span class="math inline">\(\beta_1 = 0\)</span>, ou seja, a variável explicativa não exerce efeito sobre a variável resposta (o modelo não possui poder preditivo).</p>
@@ -730,7 +731,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/07/2026 18:46:51.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 14/07/2026 19:10:52.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

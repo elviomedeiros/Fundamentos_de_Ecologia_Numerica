@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content=" 13 R Módulo 3.2 - Testes estatísticos | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -463,7 +463,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">var_sub</span>, probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-103-1.png" alt="" width="672"></div>
@@ -475,8 +475,8 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="co">#?summary</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/var.html">var</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
+<span><span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
+<span><span class="fu">var</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co">#moda</span></span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    3.50    6.00   10.10   12.32   15.70   36.10 
@@ -508,7 +508,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <span>     xlim <span class="op">=</span> <span class="va">limites</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Histogram"</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -535,7 +535,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">var_sub</span>,</span>
 <span>        <span class="st">"pnorm"</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>,</span>
-<span>        <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in ks.test.default(var_sub, "pnorm", mean(var_sub), sd(var_sub)): não
 ## devem existir empates no teste de Kolmogorov-Smirnov de apenas uma amostra</code></pre>
 <pre><code>## 
@@ -1223,8 +1223,8 @@ F = \frac{QME}{QMD}
 <span>       add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mean_se"</span>, <span class="st">"dotplot"</span><span class="op">)</span>,</span>
 <span>       binwidth <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>       palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Bin width defaults to 1/30 of the range of the data. Pick better value with
-## `binwidth`.</code></pre>
+<pre><code>## Bin width defaults to 1/30 of the range of the data. Pick better
+## value with `binwidth`.</code></pre>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">*</span> <span class="va">sexo</span>, data<span class="op">=</span><span class="va">univ</span>, frame <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"CP_cm"</span><span class="op">)</span></span>
@@ -1279,7 +1279,8 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 ## ℹ Summaries were computed grouped by periodo and sexo.
 ## ℹ Output is grouped by periodo.
 ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
-## ℹ Use `summarise(.by = c(periodo, sexo))` for per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
+## ℹ Use `summarise(.by = c(periodo, sexo))` for per-operation grouping
+##   (`?dplyr::dplyr_by`) instead.</code></pre>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Comparações múltiplas pares: Tukey</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova3</span>, which <span class="op">=</span> <span class="st">"sexo"</span><span class="op">)</span></span>
@@ -1585,7 +1586,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span><span class="co">#Pós-hoc para Kruskal-Wallis</span></span>
 <span><span class="co">#install.packages("FSA")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fishr-core-team.github.io/FSA/">FSA</a></span><span class="op">)</span></span>
-<span><span class="fu">dunnTest</span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://fishr-core-team.github.io/FSA/reference/dunnTest.html">dunnTest</a></span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"bonferroni"</span></span>
@@ -1593,20 +1594,20 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span></span>
 <span><span class="co">#install.packages("rcompanion")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://CRAN.R-project.org/package=rcompanion">rcompanion</a></span><span class="op">)</span></span>
-<span><span class="va">anova2</span> <span class="op">&lt;-</span> <span class="fu">scheirerRayHare</span><span class="op">(</span></span>
+<span><span class="va">anova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rcompanion/man/scheirerRayHare.html">scheirerRayHare</a></span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">+</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">anova2</span></span>
 <span></span>
-<span><span class="va">anova3</span> <span class="op">&lt;-</span> <span class="fu">scheirerRayHare</span><span class="op">(</span></span>
+<span><span class="va">anova3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rcompanion/man/scheirerRayHare.html">scheirerRayHare</a></span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">*</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">anova3</span></span>
 <span></span>
 <span><span class="co">#Se sexo for significativo:</span></span>
-<span><span class="fu">dunnTest</span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://fishr-core-team.github.io/FSA/reference/dunnTest.html">dunnTest</a></span><span class="op">(</span></span>
 <span>  <span class="va">CP_cm</span> <span class="op">~</span> <span class="va">sexo</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">univ</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"bonferroni"</span></span>
@@ -1732,13 +1733,13 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">outliers</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">var_sub</span>, probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="co">#?summary</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/fdth/man/var.html">var</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
+<span><span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#desvio padrão</span></span>
+<span><span class="fu">var</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span> <span class="co">#variância</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co">#moda</span></span>
 <span><span class="va">limites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -1755,7 +1756,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span>     xlim <span class="op">=</span> <span class="va">limites</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Histogram"</span><span class="op">)</span> <span class="co">#adicionamos a função densidade</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
+<span>            sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span>, <span class="co">#cria valores de x dentro do intervalo do gráfico</span></span>
 <span>      col <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>      add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#adiciona ao gráfico atual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -1771,7 +1772,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">var_sub</span>,</span>
 <span>        <span class="st">"pnorm"</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span>,</span>
-<span>        <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span>
+<span>        <span class="fu">sd</span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#install.packages("nortest")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nortest</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">var_sub</span><span class="op">)</span></span>
@@ -1839,7 +1840,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">univ</span>, <span class="va">sexo</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># Conjunto de gráficos</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://rpkgs.datanovia.com/ggpubr/">"ggpubr"</a></span><span class="op">)</span></span>
@@ -1919,7 +1920,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">univ</span>, <span class="va">periodo</span>, <span class="va">sexo</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/fdth/man/sd.html">sd</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  sd <span class="op">=</span> <span class="fu">sd</span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># Comparações múltiplas pares: Tukey</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova3</span>, which <span class="op">=</span> <span class="st">"sexo"</span><span class="op">)</span></span>
@@ -2141,7 +2142,7 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/07/2026 18:46:51.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 14/07/2026 19:10:52.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

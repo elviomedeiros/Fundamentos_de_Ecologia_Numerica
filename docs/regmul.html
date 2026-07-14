@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content=" 15 Regressão múltipla | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -267,7 +267,7 @@
 </h4>
 <p>Um pesquisador deseja determinar o efeito das variáveis ambientais de corpos aquáticos sobre a riqueza de espécies. Para isso, foram amostrados diferentes tipos de ambientes aquáticos e registradas a abundância e densidade de indivíduos, além de vários tipos de variáveis ambientais que refletem a morfologia local, qualidade da água, composição do sedimento e estruturas subaquáticas do habitat marginal. Regressão Múltipla foi utilizada nesse conjunto de dados para responder às seguintes perguntas:</p>
 <ol style="list-style-type: decimal">
-<li>Qual contribuição as variáveis morfologicas oferecem para a previsão da riqueza de espécies?<br>
+<li>Qual contribuição as variáveis morfológicas oferecem para a previsão da riqueza de espécies?<br>
 </li>
 <li>Qual variável morfológica é a melhor preditora da riqueza de espécies?<br>
 </li>
@@ -428,7 +428,6 @@
 <span><span class="va">m_cont</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m_part_cols</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Salvando a matriz final</span></span>
-<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">m_cont</span>, <span class="st">"m_cont.csv"</span>,</span>
 <span>            sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>, <span class="co">#"\t",</span></span>
 <span>            row.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -713,7 +712,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_hab</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#png("fig-hab_pairs.png")</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/pairs.panels.html">pairs.panels</a></span><span class="op">(</span><span class="va">m_hab</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="co">#colunas de interesse</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/pairs.panels.html">pairs.panels</a></span><span class="op">(</span><span class="va">m_hab</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="co">#colunas de interesse</span></span>
 <span>             method <span class="op">=</span> <span class="st">"pearson"</span>, <span class="co"># correlation method</span></span>
 <span>             scale <span class="op">=</span> <span class="cn">FALSE</span>, lm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>             hist.col <span class="op">=</span> <span class="st">"#00AFBB"</span>, pch <span class="op">=</span> <span class="fl">19</span>,</span>
@@ -1069,7 +1068,6 @@
 <span><span class="va">m_cont</span></span>
 <span></span>
 <span><span class="co">##RAREFAÇÃO BASEADA EM CONTAGEM----</span></span>
-<span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">m_cont</span></span>
 <span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html">specnumber</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co">#observed number of species</span></span>
@@ -1082,13 +1080,12 @@
 <span><span class="va">Srare</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">Srare</span>, xlab <span class="op">=</span> <span class="st">"Observed No. of Species"</span>, ylab <span class="op">=</span> <span class="st">"Rarefied No. of Species"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="st">"fig-rarecurve.png"</span><span class="op">)</span></span>
+<span><span class="co">#png("fig-rarecurve.png")</span></span>
 <span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/rarefy.html">rarecurve</a></span><span class="op">(</span><span class="va">data</span>, step <span class="op">=</span> <span class="fl">20</span>, sample <span class="op">=</span> <span class="va">raremax</span>, col <span class="op">=</span> <span class="st">"blue"</span>, cex <span class="op">=</span> <span class="fl">0.6</span>,</span>
 <span>          xlab <span class="op">=</span> <span class="st">"Sample size"</span>, ylab <span class="op">=</span> <span class="st">"Taxa"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co">#c(0,5000)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#dev.off()</span></span>
 <span></span>
 <span><span class="co">##ANOVAS----</span></span>
-<span></span>
 <span><span class="va">anovas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Srare <span class="op">=</span> <span class="va">Srare</span>, <span class="va">m_cont</span><span class="op">)</span></span>
 <span><span class="va">anovas</span> <span class="op">&lt;-</span> <span class="va">anovas</span><span class="op">[</span>,<span class="fl">1</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
 <span><span class="va">anovas</span></span>
@@ -1303,8 +1300,6 @@
 ## 19.932602 11.638514  7.000000  3.000000  3.763162  8.603085 
 ## attr(,"Subsample")
 ## [1] 1280
-## pdf 
-##   2 
 ##              Srare
 ## S-R-CI-1  5.000000
 ## S-R-CI-2 12.719603
@@ -1702,12 +1697,16 @@
 <h2>
 <span class="header-section-number">15.4</span> Regressão Multipla Simultânea<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><i class="fas fa-link"></i></a>
 </h2>
-<p>Na regressão múltipla simultânea, testamos a hipótese de:</p>
+<p>Na regressão múltipla simultânea, tentamos responder a pergunta:</p>
+<ol style="list-style-type: decimal">
+<li>Qual contribuição as variáveis morfológicas oferecem para a previsão da riqueza de espécies?</li>
+</ol>
+<p>Para isso testamos a hipótese de:</p>
 <p><span class="math inline">\(H_0\)</span>: nenhuma das variáveis explicativas está associada à variável resposra.<br><span class="math inline">\(H_1\)</span>: pelo menos uma das variáveis explicativas está associada à variável resposta.</p>
 <p>No R, implementamos o modelo de RMS usando a fórmula:</p>
-<pre><code>Y ~ X1 + X2 + X3</code></pre>
+<pre><code>y ~ x1 + x2 + x3</code></pre>
 <p>onde,</p>
-<p>a primeira coluna da matriz de dados representa a variável resposta <code>Y</code> e as demais colunas representam as variáveis preditoras <code>X</code>. Para isso, usamos a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
+<p>a primeira coluna da matriz de dados representa a variável resposta <code>y</code> e as demais colunas representam as variáveis preditoras <code>x</code>. Para isso, usamos a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
 <div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span> <span class="op">+</span> <span class="va">m.slope</span> <span class="op">+</span> <span class="va">m.width</span>,</span>
@@ -1737,15 +1736,15 @@
 ## Multiple R-squared:  0.244,  Adjusted R-squared:  0.06611 
 ## F-statistic: 1.372 on 4 and 17 DF,  p-value: 0.2852</code></pre>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-148-1.png" alt="" width="672"></div>
-<p><code>plot(modelo)</code> demonstra o <strong>diagnóstico dos resíduos</strong>, onde são produzidos os gráficos de <strong>resíduos × valores ajustados</strong>, que verifica homocedasticidade (ideal sem padrão), o <strong>q-q plot</strong> dos resíduos, que verifica normalidade (ver Capítulo <a href="norm.html#norm">Estatísticas descritivas e normalidade</a>. Nesse caso os pontos devem seguir aproximadamente a reta. O gráfico de <strong>scale-Location</strong> também avalia homocedasticidade e o gráfico de <strong>resíduos × alavancagem</strong> identifica observações influentes.</p>
+<p><code>plot(modelo)</code> demonstra o <strong>diagnóstico dos resíduos</strong>, onde são produzidos os gráficos de <strong>resíduos × valores ajustados</strong>, que verifica homocedasticidade (ideal sem padrão), o <strong>q-q plot</strong> dos resíduos, que verifica normalidade (ver Capítulo <a href="norm.html#norm">Estatísticas descritivas e normalidade</a>. Nesse caso os pontos devem seguir aproximadamente a reta. O gráfico de <strong>scale-location</strong> também avalia homocedasticidade e o gráfico de <strong>resíduos × alavancagem</strong> identifica observações influentes.</p>
 <p>Sobre o modelo ajustado, temos a <strong>equação</strong>:</p>
 <p><span class="math display">\[S_{rare}=\beta_0 + \beta_1(m.depth\_mar)+\beta_2(m.depth\_max)+\beta_3(m.slope)+\beta_4(m.width)+\varepsilon\]</span>
 onde:</p>
 <ul>
 <li>Variável resposta: Srare<br>
 </li>
-<li>Variáveis explicativas:<br>
-</li>
+<li>Variáveis explicativas:
+<ul>
 <li>m.depth_mar<br>
 </li>
 <li>m.depth_max<br>
@@ -1754,21 +1753,25 @@ onde:</p>
 </li>
 <li>m.width</li>
 </ul>
+</li>
+</ul>
 <p>Portanto, a equação usada para prever Srare seria:</p>
-<p><span class="math display">\[\widehat{\mathrm{Srare}} =
+<p><span class="math display">\[
+\widehat{\mathrm{Srare}} =
 5.1795
 - 1.2540(\mathrm{m.depth\_mar})
 + 0.7514(\mathrm{m.depth\_max})
 + 0.9270(\mathrm{m.slope})
-- 0.5149(\mathrm{m.width})\]</span></p>
-<p>Observando os <strong>resíduos</strong>, temos um resumo dos erros do modelo (melhor observado nos gráficos anteriores) com, idealmente, uma média próxima de zero e distribuição aproximadamente simétrica. Isso deve ser confirmado pelos gráficos dos resíduos.</p>
-<p>Além da <strong>tabela de coeficientes</strong>, temos o intercepto <em>estimate</em>, erro padrão residual, r<span class="math inline">\(^2\)</span>, r<span class="math inline">\(^2\)</span> ajustado, teste F e valor de p.</p>
+- 0.5149(\mathrm{m.width})
+\]</span></p>
+<p>Observando os <strong>resíduos</strong>, temos um resumo dos erros do modelo (melhor observado nos gráficos anteriores) com, idealmente, uma mediana próxima de zero e distribuição aproximadamente simétrica. Isso deve ser confirmado pelos gráficos dos resíduos.</p>
+<p>Além da <strong>tabela de coeficientes</strong>, temos o intercepto (<em>Estimate</em>), erro padrão residual, r<span class="math inline">\(^2\)</span>, r<span class="math inline">\(^2\)</span> ajustado, teste F e valor de p.</p>
 <p>Sobre os <strong>coeficientes</strong>, o estimate = 5.18, é o valor esperado de Srare quando todas as variáveis são iguais a zero. Como profundidade, largura e declividade iguais a zero não fazem sentido ecologicamente, normalmente o intercepto não é interpretado.</p>
 <p>m.depth_mar: Estimate = -1.254, mantendo todas as outras variáveis constantes, um aumento de 1 unidade em m.depth_mar, reduz a riqueza rarefeita em aproximadamente 1,25 espécies. Entretanto, p = 0.335 não é significativo, logo, não há evidência estatística de que essa variável explique a riqueza.</p>
 <p>O mesmo se aplica as demais variáves.</p>
 <p>m.width: Estimate = -0.515, para cada unidade adicional de largura, a riqueza diminui cerca de 0,52 espécies. Foi a variável mais próxima da significância com p = 0.156.</p>
 <p>O <strong>erro padrão residual</strong> de 5.219 (para 17 graus de liberdade), fignifica que em média, as previsões do modelo erram em aproximadamente 5,2 espécies. Quanto menor esse valor, melhor.</p>
-<p>O <strong>r</strong><span class="math inline">\(^2\)</span> múltiplo de 0.244, significa que o modelo explica 24,4% da variação observada em Srare. Ou seja, aproximadamente 75% da variação continua sem explicação.</p>
+<p>O <strong>r<span class="math inline">\(^2\)</span></strong> múltiplo de 0.244, significa que o modelo explica 24,4% da variação observada em Srare. Ou seja, aproximadamente 75% da variação continua sem explicação.</p>
 <p>Isso indica um ajuste relativamente fraco.</p>
 <p>O <strong>r</strong><span class="math inline">\(^2\)</span> ajustado de 0.066 é o valor mais importante. Após penalizar o modelo pelo número de variáveis, restam apenas 6,6% da variação realmente explicada. Isso mostra que adicionar quatro variáveis praticamente não melhorou o modelo.</p>
 <p>Por fim, o <strong>teste F</strong> de 1.372 com p = 0.2852, verifica a hipótese de:</p>
@@ -1791,9 +1794,9 @@ onde:</p>
 <p>Por exemplo, para m.depth_mar, o R ajusta:</p>
 <pre><code>m.depth_mar ~ m.depth_max + m.slope + m.width</code></pre>
 <p>Obtém-se o coeficiente de determinação dessa regressão (R<span class="math inline">\(^2\)</span>) calculando-se:</p>
-<p><span class="math display">\[VIF = \frac{1}{1 - R^2}\]</span></p>
-<p>Quanto maior o R<span class="math inline">\(^2\)</span>, maior será o VIF. Isso significa que a variável é bem explicada pelas demais, indicando multicolinearidade.</p>
-<p>Seus resultados m.depth_mar 4.123894 m.depth_max 2.074864 m.slope 1.324621 m.width 3.167376</p>
+<p><span class="math display">\[VIF = \frac{1}{1 - r^2}\]</span></p>
+<p>Quanto maior o r<span class="math inline">\(^2\)</span>, maior será o VIF. Isso significa que a variável é bem explicada pelas demais, indicando multicolinearidade.</p>
+<p>Para os resultados de VIF de m.depth_mar = 4.123894, m.depth_max = 2.074864, m.slope = 1.324621 e m.width = 3.167376, temos por exemplo:</p>
 <p>m.depth_mar (VIF = 4.12) é a variável mais correlacionada com as outras. Isso significa que o erro padrão do seu coeficiente é aproximadamente 4.12, ou:</p>
 <p><span class="math display">\[\sqrt{4.12} = 2.03\]</span>
 vezes maior do que seria se não existisse correlação entre as variáveis. Ainda assim, esse valor não é considerado problemático <span class="citation">(<a href="#ref-fox2019">FOX; WEISBERG, 2019</a>)</span>.</p>
@@ -1826,18 +1829,164 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 </tbody>
 </table></div>
 <p>Portanto, não há evidências de multicolinearidade severa entre as variáveis explicativas. Assim, o fato de nenhuma variável ter sido significativa (p &gt; 0,05) provavelmente não é consequência da multicolinearidade, mas sim porque, para este conjunto de dados, essas variáveis realmente apresentam pouca capacidade de explicar a variação de Srare.</p>
-<p>O QUE REPORTAR: A multicolinearidade entre as variáveis explicativas foi avaliada pelo Fator de Inflação da Variância (VIF). Todos os valores de VIF foram inferiores a 5 (1,32–4,12), indicando ausência de multicolinearidade significativa entre os preditores e sugerindo que as estimativas dos coeficientes não foram substancialmente afetadas pela correlação entre as variáveis independentes.</p>
+<p>O QUE REPORTAR: A multicolinearidade entre as variáveis explicativas foi avaliada pelo Fator de Inflação da Variância (VIF). Todos os valores de VIF foram inferiores a 5 (1,32–4,12), indicando ausência de multicolinearidade entre os preditores e sugerindo que as estimativas dos coeficientes não foram substancialmente afetadas pela correlação entre as variáveis independentes.</p>
 </div>
 <div id="regressão-múltipla-hierárquica" class="section level2" number="15.5">
 <h2>
 <span class="header-section-number">15.5</span> Regressão Múltipla Hierárquica<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><i class="fas fa-link"></i></a>
 </h2>
+<p>Na regressão múltipla hierárquica, respondemos a pergunta:</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Qual variável morfológica é a melhor preditora da riqueza de espécies?</li>
+</ol>
+<p>Nesse caso, as variáveis são inseridas em blocos, definidos a priori com base em uma hipótese biológica ou teórica. O objetivo é verificar quanto cada bloco acrescenta ao poder explicativo do modelo.</p>
+<p>No R, ela é implementada ajustando vários modelos com <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> e comparando-os.</p>
+<p>Podemos testar:</p>
+<p><strong>Bloco 1</strong>: características morfológicas associadas a profundidade
+- m.depth_mar
+- m.depth_max</p>
+<p><strong>Bloco 2</strong>: acrescentamos a variável associada ao declive da margem
+- m.slope</p>
+<p><strong>Bloco 3</strong>: acrescentamos a variável largura
+- m.width</p>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Modelo 1</span></span>
+<span><span class="va">modelo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span>,</span>
+<span>              data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="co">#Modelo 2</span></span>
+<span><span class="va">modelo2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span> <span class="op">+</span></span>
+<span>                        <span class="va">m.slope</span>,</span>
+<span>              data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="co">#Modelo 3</span></span>
+<span><span class="va">modelo3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span> <span class="op">+</span></span>
+<span>                        <span class="va">m.slope</span> <span class="op">+</span></span>
+<span>                        <span class="va">m.width</span>,</span>
+<span>              data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<div id="comparando-os-modelos" class="section level3" number="15.5.1">
+<h3>
+<span class="header-section-number">15.5.1</span> Comparando os modelos<a class="anchor" aria-label="anchor" href="#comparando-os-modelos"><i class="fas fa-link"></i></a>
+</h3>
+<p>A principal comparação é feita com a função <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</p>
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo1</span>, <span class="va">modelo2</span>, <span class="va">modelo3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo3</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: Srare ~ m.depth_mar + m.depth_max
+## Model 2: Srare ~ m.depth_mar + m.depth_max + m.slope
+## Model 3: Srare ~ m.depth_mar + m.depth_max + m.slope + m.width
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     19 586.89                           
+## 2     18 523.07  1    63.826 2.3437 0.1442
+## 3     17 462.96  1    60.106 2.2071 0.1557
+## Analysis of Variance Table
+## 
+## Response: Srare
+##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## m.depth_mar  1  16.89 16.8921  0.5469 0.4686
+## m.depth_max  1   8.59  8.5901  0.2781 0.6041
+## Residuals   19 586.89 30.8890               
+## 
+## Call:
+## lm(formula = Srare ~ m.depth_mar + m.depth_max, data = data)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -5.401 -3.766 -2.436  3.713 14.105 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)   8.5276     8.9970   0.948    0.355
+## m.depth_mar   0.7114     0.7844   0.907    0.376
+## m.depth_max  -0.5807     1.1011  -0.527    0.604
+## 
+## Residual standard error: 5.558 on 19 degrees of freedom
+## Multiple R-squared:  0.04161,    Adjusted R-squared:  -0.05927 
+## F-statistic: 0.4125 on 2 and 19 DF,  p-value: 0.6678
+## 
+## Analysis of Variance Table
+## 
+## Response: Srare
+##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## m.depth_mar  1  16.89  16.892  0.5813 0.4557
+## m.depth_max  1   8.59   8.590  0.2956 0.5933
+## m.slope      1  63.83  63.826  2.1964 0.1556
+## Residuals   18 523.07  29.059               
+## 
+## Call:
+## lm(formula = Srare ~ m.depth_mar + m.depth_max + m.slope, data = data)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -7.638 -3.186 -1.628  3.381 12.204 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  -0.2265    10.5376  -0.021    0.983
+## m.depth_mar   0.1794     0.8412   0.213    0.833
+## m.depth_max  -0.2667     1.0888  -0.245    0.809
+## m.slope       1.2771     0.8617   1.482    0.156
+## 
+## Residual standard error: 5.391 on 18 degrees of freedom
+## Multiple R-squared:  0.1458, Adjusted R-squared:  0.003479 
+## F-statistic: 1.024 on 3 and 18 DF,  p-value: 0.4052
+## 
+## Analysis of Variance Table
+## 
+## Response: Srare
+##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## m.depth_mar  1  16.89  16.892  0.6203 0.4418
+## m.depth_max  1   8.59   8.590  0.3154 0.5817
+## m.slope      1  63.83  63.826  2.3437 0.1442
+## m.width      1  60.11  60.106  2.2071 0.1557
+## Residuals   17 462.96  27.233               
+## 
+## Call:
+## lm(formula = Srare ~ m.depth_mar + m.depth_max + m.slope + m.width, 
+##     data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.9250 -3.1546 -0.8167  3.3069 10.4837 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)   5.1795    10.8307   0.478    0.639
+## m.depth_mar  -1.2540     1.2626  -0.993    0.335
+## m.depth_max   0.7514     1.2572   0.598    0.558
+## m.slope       0.9270     0.8668   1.069    0.300
+## m.width      -0.5149     0.3466  -1.486    0.156
+## 
+## Residual standard error: 5.219 on 17 degrees of freedom
+## Multiple R-squared:  0.244,  Adjusted R-squared:  0.06611 
+## F-statistic: 1.372 on 4 and 17 DF,  p-value: 0.2852</code></pre>
+<p>O QUE REPORTAR (MÉTODOS): Foi realizada uma regressão linear múltipla hierárquica, com as variáveis inseridas em blocos definidos a priori. Inicialmente foram incluídas as variáveis m.depth_mar e m.depth_max (Modelo 1). Em seguida foi adicionada m.slope (Modelo 2) e, por fim, m.width (Modelo 3). A contribuição de cada bloco foi avaliada por meio da comparação entre modelos utilizando o teste F (anova) e pelo coeficiente de determinação (R²).</p>
+<p>O QUE REPORTAR (RESULTADOS): Foi realizada uma regressão linear múltipla hierárquica para avaliar a contribuição incremental das variáveis morfométricas sobre a riqueza rarefeita (Srare). O Modelo 1, contendo m.depth_mar e m.depth_max, não foi estatisticamente significativo (F<span class="math inline">\(_{2,19}\)</span> = 0.41, p = 0.668; r<span class="math inline">\(^2^\)</span> = 0.042). A inclusão de m.slope no Modelo 2 aumentou o coeficiente de determinação para r<span class="math inline">\(^2^\)</span> = 0.146, porém essa melhoria não foi significativa em relação ao Modelo 1 (F<span class="math inline">\(_{1,18}\)</span> = 2.34, p = 0.144). Da mesma forma, a adição de m.width no Modelo 3 elevou o r<span class="math inline">\(^2\)</span> para 0.244, mas não promoveu melhora significativa do ajuste (F<span class="math inline">\(_{1,17}\)</span> = 2.21, p = 0.156). O modelo final também não foi significativo (F<span class="math inline">\(_{4,17}\)</span> = 1.37, p = 0.285).</p>
+<p>Na regressão hierárquica, as hipóteses são testadas a cada etapa, isto é, para cada bloco de variáveis adicionado ao modelo.</p>
+<p>Suponha os modelos:</p>
+<p>Modelo 1: Srare ~ m.depth_mar + m.depth_max<br>
+Modelo 2: Srare ~ m.depth_mar + m.depth_max + m.slope</p>
+<p>Ao comparar modelo1 e modelo2 com <code>anova(modelo1, modelo2)</code>, as hipóteses são:</p>
+<p>Hipótese nula (<span class="math inline">\(H_0\)</span>): O novo bloco não melhora o modelo.<br>
+Hipótese alternativa (<span class="math inline">\(H_1\)</span>): O novo bloco melhora o modelo.</p>
+<p>Ou seja, após considerar m.depth_mar e m.depth_max, a variável m.slope não acrescenta capacidade explicativa para Srare.</p>
+<p>Portanto o teste F, responde à pergunta:</p>
+<p>As variáveis adicionadas neste bloco aumentam significativamente o poder explicativo do modelo?</p>
+<p>Se p &lt; 0,05, rejeita-se <span class="math inline">\(H_0\)</span>: o bloco acrescenta informação ao modelo.<br>
+Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco não melhora significativamente o modelo.</p>
+<p>Diferentemente da <strong>regressão múltipla simultânea</strong>, em que o teste F avalia todo o conjunto de preditores, na <strong>regressão hierárquica</strong> cada teste F avalia apenas a contribuição adicional do bloco recém-incluído, mantendo fixas as variáveis que já estavam no modelo.</p>
+</div>
 </div>
 <div id="regressão-múltipla-stepwise" class="section level2" number="15.6">
 <h2>
 <span class="header-section-number">15.6</span> Regressão Múltipla <em>Stepwise</em><a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<ol start="3" style="list-style-type: decimal">
+<li>Estudos anteriores sugerem que a largura influencia a riqueza de espécies. Essa hipótese é corroborada pelos dados analisados?</li>
+</ol>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Ajuste do modelo completo</span></span>
 <span><span class="va">full.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span></span>
@@ -1998,7 +2147,9 @@ FOX, J.; WEISBERG, S. <strong>An R Companion to Applied Regression</strong>. Thi
 <li><a class="nav-link" href="#sobre-os-dados-3"><span class="header-section-number">15.2</span> Sobre os dados</a></li>
 <li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-5"><span class="header-section-number">15.3</span> Organização básica</a></li>
 <li><a class="nav-link" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><span class="header-section-number">15.4</span> Regressão Multipla Simultânea</a></li>
-<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">15.5</span> Regressão Múltipla Hierárquica</a></li>
+<li>
+<a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">15.5</span> Regressão Múltipla Hierárquica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#comparando-os-modelos"><span class="header-section-number">15.5.1</span> Comparando os modelos</a></li></ul>
+</li>
 <li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><span class="header-section-number">15.6</span> Regressão Múltipla Stepwise</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-8">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-para-consulta-2">Sites para consulta</a></li>
@@ -2020,7 +2171,7 @@ FOX, J.; WEISBERG, S. <strong>An R Companion to Applied Regression</strong>. Thi
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/07/2026 18:46:51.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 14/07/2026 19:10:52.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
