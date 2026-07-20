@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 21 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíba">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="RESUMO Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em...">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta property="og:title" content=" 21 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="RESUMO Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 21 R Módulo 7 - Análise de Classificação Hierárquica - SAHN | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
+<li class="book-part">I. INTRODUÇÃO</li>
+<li><a class="" href="ferram.html"><span class="header-section-number">2</span> Ferramentas</a></li>
+<li><a class="" href="rrstu.html"><span class="header-section-number">3</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">II. TEORIA</li>
+<li><a class="" href="amd.html"><span class="header-section-number">4</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
+<li><a class="" href="tiposE.html"><span class="header-section-number">5</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
+<li><a class="" href="reltrnsT.html"><span class="header-section-number">6</span> Teoria 3 - Relativizações e transformações de dados</a></li>
+<li class="book-part">III. BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">7</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">8</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">9</span> Base de dados II - Habitat</a></li>
+<li class="book-part">IV. ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">10</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
+<li><a class="" href="xls.html"><span class="header-section-number">11</span> R Módulo 2 - Importando planilhas de dados</a></li>
+<li><a class="" href="norm.html"><span class="header-section-number">12</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="testes.html"><span class="header-section-number">13</span> R Módulo 3.2 - Testes estatísticos</a></li>
+<li><a class="" href="correg.html"><span class="header-section-number">14</span> Correlação e Regressão</a></li>
+<li><a class="" href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></li>
+<li><a class="" href="mlgs.html"><span class="header-section-number">16</span> Modelos Lineares Generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
+<li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="active" href="upgma.html"><span class="header-section-number">21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li class="book-part">VI. INFORMAÇÕES GERAIS</li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="upgma" class="section level1" number="21">
+<h1>
+<span class="header-section-number"> 21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN<a class="anchor" aria-label="anchor" href="#upgma"><i class="fas fa-link"></i></a>
+</h1>
+<div id="resumo-15" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-15"><i class="fas fa-link"></i></a>
+</h3>
+<p>Análise de Classificação Hierárquica (SAHN) é um método de análise de dados utilizado para identificar grupos ou clusters de objetos com base em sua similaridade. É amplamente utilizada em várias áreas, incluindo bioinformática, análise de dados espaciais, agronomia, entre outros. A análise de classificação hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.</p>
+</div>
+<div id="apresentação-15" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-15"><i class="fas fa-link"></i></a>
+</h3>
+<p>Análise de Classificação Hierárquica (do inglês, “Hierarchical Agglomerative Clustering Analysis”, ou simplesmente “SAHN”) é um método de análise de dados utilizado para identificar grupos ou “clusters” de objetos com base em sua similaridade. Nessa análise, os objetos são inicialmente considerados como clusters individuais e, em seguida, os objetos mais similares são agrupados em um cluster maior, e assim por diante, até que todos os objetos estejam em um único cluster. Isso resulta em uma árvore hierárquica, conhecida como dendrograma, que mostra a relação de similaridade entre os objetos.</p>
+<p>Existem dois tipos principais de classificação hierárquica: aglomerativa e divisiva. O método aglomerativo é mais comum e começa com cada objeto em seu próprio cluster, e sucessivamente agrupa os objetos mais próximos, enquanto o método divisivo começa com todos os objetos em um único cluster e sucessivamente divide-os em grupos menores.</p>
+<p>Análises de classificação são amplamente utilizadas em várias áreas, incluindo bioinformática, análise de dados espaciais, agronomia, entre outros. Além disso, pode ser utilizada com diferentes medidas de distância e diferentes métodos de agrupamento, como, por exemplo, o método “complete-linkage”, “single-linkage”, “average-linkage”, entre outros.</p>
+<p>A Análise de Classificação Hierárquica é uma técnica exploratória importante que pode ajudar a identificar padrões e relações em dados não estruturados. No entanto, é importante lembrar que a interpretação dos resultados pode ser subjetiva e depender do contexto da aplicação.</p>
+</div>
+<div id="organização-básica-11" class="section level2" number="21.1">
+<h2>
+<span class="header-section-number">21.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-11"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">##LIMPA A MEMORIA</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
+<span><span class="co">#rm(list=ls(all=TRUE)); cat("\014"); dev.off() # tudo na mesma linha</span></span></code></pre></div>
+<div id="pacotes" class="section level3" number="21.1.1">
+<h3>
+<span class="header-section-number">21.1.1</span> Pacotes<a class="anchor" aria-label="anchor" href="#pacotes"><i class="fas fa-link"></i></a>
+</h3>
+<p>Instalando os pacotes necessários para esse módulo</p>
+<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"RColorBrewer"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gplots"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+<p>Os códigos acima, são usados para instalar os pacotes necessários para este módulo. Esses códigos são comandos para instalar pacotes no R. Um pacote é uma coleção de funções, dados e documentação que ampliam as capacidades do R (<a href="https://cran.r-project.org/">R CRAN</a> e <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>). Depois de instalar um pacote, você precisa carregá-lo na sua sessão R com a função <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Por exemplo, no código acima, carregamos o pacote <code>tidyverse</code>, usando a função <code><a href="https://ycphs.github.io/openxlsx/index.html">library(openxlsx)</a></code>. Isso irá permitir que você use as funções do pacote na sua sessão R. Você precisa carregar um pacote toda vez que iniciar uma nova sessão R e quiser usar um pacote instalado. Os demais pacotes instalados serão carregados ao longo desse tutorial a medida que cada pacote for sendo necessário.</p>
+<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
+<p>Definindo o diretório de trabalho e instalando os pacotes necessários:</p>
+<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
+<p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:<br>
+SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
+</div>
+<div id="sobre-os-dados-do-ppbio-3" class="section level3" number="21.1.2">
+<h3>
+<span class="header-section-number">21.1.2</span> Sobre os dados do PPBio<a class="anchor" aria-label="anchor" href="#sobre-os-dados-do-ppbio-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>A planilha <code>ppbio</code> contém os dados de abundância de espécies em diferentes unidades amostrais (UA’s) (Figura <a href="upgma.html#fig:27ppbio">21.1</a> (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram ajustados para os valores de Captura Por Unidade de Esforço (CPUE), nem foram relativizados ou transformados.</p>
+<div class="figure">
+<span style="display:block;" id="fig:27ppbio"></span>
+<img src="imagens/ppbio.png" alt="Parte da planilha de dados brutos do PPBio." width="476"><p class="caption">
+Figura 21.1: Parte da planilha de dados brutos do PPBio.
+</p>
+</div>
+</div>
+<div id="importando-a-planilha-de-trabalho-1" class="section level3" number="21.1.3">
+<h3>
+<span class="header-section-number">21.1.3</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="va">ppbio_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span> <span class="co">#lê ppbio como uma matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio_ma</span><span class="op">)</span></span>
+<span><span class="co">#ppbio</span></span>
+<span><span class="co">#ppbio_ma</span></span></code></pre></div>
+</div>
+</div>
+<div id="reset-point-3" class="section level2" number="21.2">
+<h2>
+<span class="header-section-number">21.2</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point-3"><i class="fas fa-link"></i></a>
+</h2>
+<div id="hello" class="greeting message" style="color: green;">
+<p><span style="color:red">ATENÇÃO</span>
+Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.</p>
+</div>
+<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Aqui usaremos as matrizes transposta/relativizada/transformada/particionada</li>
+</ol>
+<div id="outra-forma-de-achar-e-importar-uma-planilha-1" class="section level4" number="21.2.0.1">
+<h4>
+<span class="header-section-number">21.2.0.1</span> Outra forma de achar e importar uma planilha<a class="anchor" aria-label="anchor" href="#outra-forma-de-achar-e-importar-uma-planilha-1"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.choose.html">file.choose</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="nomenclatura-das-matrizes-em-amd" class="section level2" number="21.3">
+<h2>
+<span class="header-section-number">21.3</span> Nomenclatura das matrizes em AMD<a class="anchor" aria-label="anchor" href="#nomenclatura-das-matrizes-em-amd"><i class="fas fa-link"></i></a>
+</h2>
+<p>No tocante aos tipos de atributos e seu tratamento pré-análises, uma matriz de de dados pode ser dos tipos apresentados na tabela <a href="upgma.html#tab:tbl-mm">21.1</a>, abaixo.</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbl-mm">Tabela 21.1: </span>Nomenclatura das matrizes em AMD em relação aos atributos das colunas.
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Nome
+</th>
+<th style="text-align:center;">
+Atributos (colunas)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz comunitaria
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são táxons (ex. espécies, gêneros, morfotipos)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz ambiental
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são dados ambientais (ex. pH, condutividade, temperatura)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz bruta
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz transposta
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos foram transpostos para as linhas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz relativizada
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz transformada
+</td>
+<td style="text-align:center;width: 2cm; ">
+Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="cluster-1-piloto-automático" class="section level2" number="21.4">
+<h2>
+<span class="header-section-number">21.4</span> Cluster 1: Piloto automático<a class="anchor" aria-label="anchor" href="#cluster-1-piloto-autom%C3%A1tico"><i class="fas fa-link"></i></a>
+</h2>
+<div id="hello" class="greeting message" style="color: red;">
+<p><span style="color:red">ATENÇÃO</span>
+NÃO RECOMENDADO</p>
+</div>
+<p>Aqui fazemos uma Análise Cluster no piloto automático. Não decidimos nenhum dos parâmetros importântes para uma Classificação.</p>
+<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cluster1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster1</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Piloto automatico"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster1</span>, k<span class="op">=</span><span class="fl">3</span>, h <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="co">#?dist</span></span>
+<span><span class="co">#?hclust</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-293-1.png" alt="" width="672"></div>
+<p>É possivel definir uma caixa mostrado os principais grupos formados. Isso pode ser feito estabelecendo quantos grupos se quer mostrar, usando a função <code>k = no. de grupos</code>. Ou pode-se definir os grupos formados até uma determinanda distância, usando a função <code>h = altura dos grupos</code> no eixo das distâncias.</p>
+<div id="histórico-das-fusões" class="section level3" number="21.4.1">
+<h3>
+<span class="header-section-number">21.4.1</span> Histórico das fusões<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">cluster1</span><span class="op">$</span><span class="va">merge</span> <span class="co">#mostra o histórico das fusões</span></span>
+<span><span class="va">idrow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">m_trab</span>, id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co">#cria um df com os numeros das linhas </span></span>
+<span><span class="va">idrow</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span>
+<span><span class="co">#?relocate</span></span></code></pre></div>
+<pre><code>##       [,1] [,2]
+##  [1,]   -2   -3
+##  [2,]  -14    1
+##  [3,]   -8    2
+##  [4,]   -5  -11
+##  [5,]    3    4
+##  [6,]  -15  -18
+##  [7,]  -21    5
+##  [8,]  -17  -23
+##  [9,]  -16    7
+## [10,]   -9  -12
+## [11,]    6    9
+## [12,]  -10   11
+## [13,]   -1   -4
+## [14,]  -20    8
+## [15,]   -6  -13
+## [16,]   12   15
+## [17,]   13   16
+## [18,]  -19   10
+## [19,]   14   17
+## [20,]   -7   19
+## [21,]   18   20
+## [22,]  -22   21
+##         id ap-davis as-bimac as-fasci ch-bimac ci-ocela ci-orien co-macro
+## S-R-CT1  1        0      194       55        0        0        5        0
+## S-R-CP1  2        0       19        0        0        0        0        0
+## S-A-TA1  3        0       23        1       13        0        0        0
+## S-R-CT2  4        0      142        3        3        0       69        0
+## S-R-CP2  5        0        5        1        0       40        9        0
+## S-A-TA2  6        0       46        0      178        0        0        0
+## S-R-CT3  7        0      206       64        0        0       25        0
+## S-R-CP3  8        0       16        0        0       13       24        0
+## S-A-TA3  9        0      234        7      238        0        0        2
+## S-R-CT4 10        0        0        1        0        0        5        0
+## S-R-CP4 11        0        0        0        0       11        6        0
+## S-A-TA4 12        0      394        0      273        0        0        0
+## B-A-MU1 13        0       12        0        0        0        0        0
+## B-A-GU1 14        0        2        2        0        0        0        0
+## B-R-PC2 15        5       44        0        0        2        0        0
+## B-A-MU2 16        0       99        0        0        0        0        0
+## B-A-GU2 17        0        0        0        0        0        0        0
+## B-R-PC3 18       22       75        7        0        4        0        0
+## B-A-MU3 19        0      511        0        0        0        0        0
+## B-A-GU3 20        0        6        0        0        0        0        0
+## B-R-PC4 21        0        7       17        0        0        0        0
+## B-A-MU4 22        0      235        0        0        0        0        0
+## B-A-GU4 23        0       13        0        0        0        0        0
+##         co-heter cr-menez cu-lepid cy-gilbe ge-brasi he-margi ho-malab hy-pusar
+## S-R-CT1        1       14        0        0        3        0        1        9
+## S-R-CP1        0        0        0        0        0        0        5        2
+## S-A-TA1        0        0        0        0        0        0        0        0
+## S-R-CT2        0        4        0        0        0        1       17       43
+## S-R-CP2        0        0        0        0        0        0       10        2
+## S-A-TA2        0        0        0        0        0        0        2        0
+## S-R-CT3        0        8        0        0        1        0       31       11
+## S-R-CP3        0        0        0        0        0        0        4        0
+## S-A-TA3        0        0        0        0        0        0       20        0
+## S-R-CT4        0        1        0       50        3        1        4        3
+## S-R-CP4        0        0        0        0        0        0        2        0
+## S-A-TA4        0        1        0        0        1        0        9        0
+## B-A-MU1        0        0        0        0      190        0        0        0
+## B-A-GU1        0        0        0        0        7        0        0        0
+## B-R-PC2        0        0        0        0        8        0        0        0
+## B-A-MU2        0        0        0        0       67        0        1        0
+## B-A-GU2        0        0        0        0       23        0        0        0
+## B-R-PC3        0        0       21        0       16        0        2        1
+## B-A-MU3        0        0        0        0      145        0        0        0
+## B-A-GU3        0        0        0        0       32        0        0        0
+## B-R-PC4        0        0        0       81        5        0        1        0
+## B-A-MU4        0        0        0        0      509        0        0        0
+## B-A-GU4        0        0        0        0       10        0        0        0
+##         le-melan le-piau le-taeni mo-costa mo-lepid or-nilot pa-manag pimel-sp
+## S-R-CT1        0       3        0        0       39       36        0        6
+## S-R-CP1        0       0        0        0        0        0        0        0
+## S-A-TA1        0       0        0        0        0        0        0        0
+## S-R-CT2        0       1        0        0        1       77        0        0
+## S-R-CP2        0       3        0        0        0        0        0        0
+## S-A-TA2        0       0        0        0        0        0        0        0
+## S-R-CT3        0       2        0        0        0      138        0        0
+## S-R-CP3        0       1        0        0        0        0        0        0
+## S-A-TA3        0       0        0        0        0        0        0        0
+## S-R-CT4        0       0        0        0        0       73        0        0
+## S-R-CP4        0       2        0        0        0        0        0        0
+## S-A-TA4        0       2        0        0        0        1        0        0
+## B-A-MU1        0       0        0        0        0        6        0        0
+## B-A-GU1        0       0        0        0        0        3       11        0
+## B-R-PC2        2       0        1        0        0        5        0        0
+## B-A-MU2        0       0        0        0        0        1        0        0
+## B-A-GU2        0       0        0        0        0       36      102        0
+## B-R-PC3        0       0        0        1        0       65        0        0
+## B-A-MU3        0       0        0        0        0       11        0        0
+## B-A-GU3        0       0        0        0        0      247      250        0
+## B-R-PC4        0       1        0        0        0        9        0        0
+## B-A-MU4        0       0        0        0        0        1        0        0
+## B-A-GU4        0       0        0        0        0      129      190        0
+##         po-retic po-vivip pr-brevi ps-rhomb ps-genise se-heter se-piaba
+## S-R-CT1        0       47        5        0         0       40       68
+## S-R-CP1        0       15        0        0         0       14        0
+## S-A-TA1        0        0        1        0         0        4        0
+## S-R-CT2       20      221       15        0         0       60        0
+## S-R-CP2        0       32        5        0         0        0        0
+## S-A-TA2        0        0        2        0         0        0        0
+## S-R-CT3        5      326      164        1         1       38        0
+## S-R-CP3        0       10        0        0         0        0        0
+## S-A-TA3        0        0        0        0         0        0        0
+## S-R-CT4        0       28       59        0         0        3        0
+## S-R-CP4        0       80        0        0         0        3        0
+## S-A-TA4        0        0        3        0         0        0        0
+## B-A-MU1        0        0        0        0         0        0        0
+## B-A-GU1        0        0        0        0         0        0        0
+## B-R-PC2        0        0        9        0         0       10        0
+## B-A-MU2       10        8        0        0         0        0        0
+## B-A-GU2        0        0        0        0         0        0        0
+## B-R-PC3        0        0        6        0         0       93        0
+## B-A-MU3       46       48        1        0         0        0        0
+## B-A-GU3        0        0        0        0         0        0        0
+## B-R-PC4        0        0        0        0         0       31        0
+## B-A-MU4      266      163        0        0         0        0        0
+## B-A-GU4        0        0        0        0         0        0        0
+##         se-spilo st-noton sy-marmo te-chalc tr-signa
+## S-R-CT1        0        1        0        0       18
+## S-R-CP1        0        0        0        0        0
+## S-A-TA1        0        0        0        0        0
+## S-R-CT2        0       25        0        0       15
+## S-R-CP2        0        0        1        0        0
+## S-A-TA2        0        0        0        0        0
+## S-R-CT3        1      115        0        0        7
+## S-R-CP3        0        0        0        0        0
+## S-A-TA3        0        0        0        0        0
+## S-R-CT4        0       64        0        0      141
+## S-R-CP4        0        0        0        0        0
+## S-A-TA4        0        0        0        0        0
+## B-A-MU1        0        0        0        0        0
+## B-A-GU1        0        0        0        0        0
+## B-R-PC2        0        0        0       76       23
+## B-A-MU2        0        0        0        0        0
+## B-A-GU2        0        0        0        0        0
+## B-R-PC3        0        0        0       58        0
+## B-A-MU3        0        0        0        0        0
+## B-A-GU3        0        0        0        0        0
+## B-R-PC4        0        0        0        0        4
+## B-A-MU4        0        0        0        0        0
+## B-A-GU4        0        0        0        0        0</code></pre>
+<div id="alguns-ajustes-para-melhorar-a-visualização" class="section level4" number="21.4.1.1">
+<h4>
+<span class="header-section-number">21.4.1.1</span> Alguns ajustes para melhorar a visualização<a class="anchor" aria-label="anchor" href="#alguns-ajustes-para-melhorar-a-visualiza%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster1</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
+<span><span class="va">merge</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">merge</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>,<span class="st">"0"</span><span class="op">)</span></span>
+<span><span class="va">merge</span></span>
+<span><span class="va">uas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">m_trab</span>,var <span class="op">=</span> <span class="st">"UAs"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">uas</span></span>
+<span><span class="va">merges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">uas</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UAs"</span><span class="op">)</span><span class="op">]</span>, <span class="va">merge</span><span class="op">)</span></span>
+<span><span class="va">merges</span></span></code></pre></div>
+<pre><code>##     V1  V2
+## 1   -2  -3
+## 2  -14   1
+## 3   -8   2
+## 4   -5 -11
+## 5    3   4
+## 6  -15 -18
+## 7  -21   5
+## 8  -17 -23
+## 9  -16   7
+## 10  -9 -12
+## 11   6   9
+## 12 -10  11
+## 13  -1  -4
+## 14 -20   8
+## 15  -6 -13
+## 16  12  15
+## 17  13  16
+## 18 -19  10
+## 19  14  17
+## 20  -7  19
+## 21  18  20
+## 22 -22  21
+## 23   0   0
+##        UAs ap-davis as-bimac as-fasci ch-bimac ci-ocela ci-orien co-macro
+## 1  S-R-CT1        0      194       55        0        0        5        0
+## 2  S-R-CP1        0       19        0        0        0        0        0
+## 3  S-A-TA1        0       23        1       13        0        0        0
+## 4  S-R-CT2        0      142        3        3        0       69        0
+## 5  S-R-CP2        0        5        1        0       40        9        0
+## 6  S-A-TA2        0       46        0      178        0        0        0
+## 7  S-R-CT3        0      206       64        0        0       25        0
+## 8  S-R-CP3        0       16        0        0       13       24        0
+## 9  S-A-TA3        0      234        7      238        0        0        2
+## 10 S-R-CT4        0        0        1        0        0        5        0
+## 11 S-R-CP4        0        0        0        0       11        6        0
+## 12 S-A-TA4        0      394        0      273        0        0        0
+## 13 B-A-MU1        0       12        0        0        0        0        0
+## 14 B-A-GU1        0        2        2        0        0        0        0
+## 15 B-R-PC2        5       44        0        0        2        0        0
+## 16 B-A-MU2        0       99        0        0        0        0        0
+## 17 B-A-GU2        0        0        0        0        0        0        0
+## 18 B-R-PC3       22       75        7        0        4        0        0
+## 19 B-A-MU3        0      511        0        0        0        0        0
+## 20 B-A-GU3        0        6        0        0        0        0        0
+## 21 B-R-PC4        0        7       17        0        0        0        0
+## 22 B-A-MU4        0      235        0        0        0        0        0
+## 23 B-A-GU4        0       13        0        0        0        0        0
+##    co-heter cr-menez cu-lepid cy-gilbe ge-brasi he-margi ho-malab hy-pusar
+## 1         1       14        0        0        3        0        1        9
+## 2         0        0        0        0        0        0        5        2
+## 3         0        0        0        0        0        0        0        0
+## 4         0        4        0        0        0        1       17       43
+## 5         0        0        0        0        0        0       10        2
+## 6         0        0        0        0        0        0        2        0
+## 7         0        8        0        0        1        0       31       11
+## 8         0        0        0        0        0        0        4        0
+## 9         0        0        0        0        0        0       20        0
+## 10        0        1        0       50        3        1        4        3
+## 11        0        0        0        0        0        0        2        0
+## 12        0        1        0        0        1        0        9        0
+## 13        0        0        0        0      190        0        0        0
+## 14        0        0        0        0        7        0        0        0
+## 15        0        0        0        0        8        0        0        0
+## 16        0        0        0        0       67        0        1        0
+## 17        0        0        0        0       23        0        0        0
+## 18        0        0       21        0       16        0        2        1
+## 19        0        0        0        0      145        0        0        0
+## 20        0        0        0        0       32        0        0        0
+## 21        0        0        0       81        5        0        1        0
+## 22        0        0        0        0      509        0        0        0
+## 23        0        0        0        0       10        0        0        0
+##    le-melan le-piau le-taeni mo-costa mo-lepid or-nilot pa-manag pimel-sp
+## 1         0       3        0        0       39       36        0        6
+## 2         0       0        0        0        0        0        0        0
+## 3         0       0        0        0        0        0        0        0
+## 4         0       1        0        0        1       77        0        0
+## 5         0       3        0        0        0        0        0        0
+## 6         0       0        0        0        0        0        0        0
+## 7         0       2        0        0        0      138        0        0
+## 8         0       1        0        0        0        0        0        0
+## 9         0       0        0        0        0        0        0        0
+## 10        0       0        0        0        0       73        0        0
+## 11        0       2        0        0        0        0        0        0
+## 12        0       2        0        0        0        1        0        0
+## 13        0       0        0        0        0        6        0        0
+## 14        0       0        0        0        0        3       11        0
+## 15        2       0        1        0        0        5        0        0
+## 16        0       0        0        0        0        1        0        0
+## 17        0       0        0        0        0       36      102        0
+## 18        0       0        0        1        0       65        0        0
+## 19        0       0        0        0        0       11        0        0
+## 20        0       0        0        0        0      247      250        0
+## 21        0       1        0        0        0        9        0        0
+## 22        0       0        0        0        0        1        0        0
+## 23        0       0        0        0        0      129      190        0
+##    po-retic po-vivip pr-brevi ps-rhomb ps-genise se-heter se-piaba se-spilo
+## 1         0       47        5        0         0       40       68        0
+## 2         0       15        0        0         0       14        0        0
+## 3         0        0        1        0         0        4        0        0
+## 4        20      221       15        0         0       60        0        0
+## 5         0       32        5        0         0        0        0        0
+## 6         0        0        2        0         0        0        0        0
+## 7         5      326      164        1         1       38        0        1
+## 8         0       10        0        0         0        0        0        0
+## 9         0        0        0        0         0        0        0        0
+## 10        0       28       59        0         0        3        0        0
+## 11        0       80        0        0         0        3        0        0
+## 12        0        0        3        0         0        0        0        0
+## 13        0        0        0        0         0        0        0        0
+## 14        0        0        0        0         0        0        0        0
+## 15        0        0        9        0         0       10        0        0
+## 16       10        8        0        0         0        0        0        0
+## 17        0        0        0        0         0        0        0        0
+## 18        0        0        6        0         0       93        0        0
+## 19       46       48        1        0         0        0        0        0
+## 20        0        0        0        0         0        0        0        0
+## 21        0        0        0        0         0       31        0        0
+## 22      266      163        0        0         0        0        0        0
+## 23        0        0        0        0         0        0        0        0
+##    st-noton sy-marmo te-chalc tr-signa
+## 1         1        0        0       18
+## 2         0        0        0        0
+## 3         0        0        0        0
+## 4        25        0        0       15
+## 5         0        1        0        0
+## 6         0        0        0        0
+## 7       115        0        0        7
+## 8         0        0        0        0
+## 9         0        0        0        0
+## 10       64        0        0      141
+## 11        0        0        0        0
+## 12        0        0        0        0
+## 13        0        0        0        0
+## 14        0        0        0        0
+## 15        0        0       76       23
+## 16        0        0        0        0
+## 17        0        0        0        0
+## 18        0        0       58        0
+## 19        0        0        0        0
+## 20        0        0        0        0
+## 21        0        0        0        4
+## 22        0        0        0        0
+## 23        0        0        0        0
+##        UAs  V1  V2
+## 1  S-R-CT1  -2  -3
+## 2  S-R-CP1 -14   1
+## 3  S-A-TA1  -8   2
+## 4  S-R-CT2  -5 -11
+## 5  S-R-CP2   3   4
+## 6  S-A-TA2 -15 -18
+## 7  S-R-CT3 -21   5
+## 8  S-R-CP3 -17 -23
+## 9  S-A-TA3 -16   7
+## 10 S-R-CT4  -9 -12
+## 11 S-R-CP4   6   9
+## 12 S-A-TA4 -10  11
+## 13 B-A-MU1  -1  -4
+## 14 B-A-GU1 -20   8
+## 15 B-R-PC2  -6 -13
+## 16 B-A-MU2  12  15
+## 17 B-A-GU2  13  16
+## 18 B-R-PC3 -19  10
+## 19 B-A-MU3  14  17
+## 20 B-A-GU3  -7  19
+## 21 B-R-PC4  18  20
+## 22 B-A-MU4 -22  21
+## 23 B-A-GU4   0   0</code></pre>
+</div>
+</div>
+</div>
+<div id="cluster-2-criando-a-matriz-de-distâncias-euclidiana" class="section level2" number="21.5">
+<h2>
+<span class="header-section-number">21.5</span> Cluster 2: Criando a matriz de distâncias Euclidiana<a class="anchor" aria-label="anchor" href="#cluster-2-criando-a-matriz-de-dist%C3%A2ncias-euclidiana"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trab</span>, method <span class="op">=</span> <span class="st">"euclidean"</span>,</span>
+<span>                  diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#m_dists</span></span>
+<span><span class="va">cluster2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">m_dists</span>, method <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span> <span class="co">#método de fusão</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">cluster2</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Dist.Euclidiana"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster2</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#?dist</span></span>
+<span><span class="co">#?hclust</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-296-1.png" alt="" width="672"></div>
+<p>O significado do argumento <code>method =</code> da função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> usada no códico acima, depende do contexto em que ela é usada.</p>
+<ul>
+<li><p>A função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> no R é usada para calcular as distâncias entre as observações em um conjunto de dados. Essa função tem vários métodos de cálculo de distância, que podem ser especificados pelo argumento <code>method =</code>, a exemplo de “euclidean”, “manhattan”, “canberra”, entre outras.</p></li>
+<li><p>Quando o argumento <code>method =</code> é usado em conjunto com a função <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>, como no código acima, para realizar uma análise de classificação (ou cluster) hierárquica, então ela passa a representar um método de fusão, a exemplo de UPGMA, “nearest neighbour”, “furtherst neighbour”, entre outros.</p></li>
+</ul>
+<p>A tabela <a href="upgma.html#tab:27fus">21.2</a> resume os métodos de fusão disponiveis na função <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>.</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:27fus">Tabela 21.2: </span><span id="tab:27fus">Tabela 21.3: </span>Metodos de fusão disponiveis com o argumento <code>method=</code> da função <code>hclust</code>. Lembrando que UPGMA significa “Unweighted Pairwise Group Method with Arithmetic Mean”
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Method=
+</th>
+<th style="text-align:center;">
+Método de fusão
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+ward.D
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de Ward com variância mínima
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+ward.D2
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de Ward com variância mínima ajustada
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+single
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de ligação simples (vizinho mais próximo)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+complete
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de ligação completa (vizinho mais distante)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+average
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de ligação baseado na média, equivale ao UPGMA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+mcquitty
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de ligação de McQuitty, equivale ao WPGMA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+median
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de ligação baseado na mediana, ou WPGMC
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+centroid
+</td>
+<td style="text-align:center;width: 2cm; ">
+Método de ligação baseado no centróide, ou UPGMC
+</td>
+</tr>
+</tbody>
+</table></div>
+<div id="comparação-dos-resultados-obtidos-até-aqui" class="section level3" number="21.5.1">
+<h3>
+<span class="header-section-number">21.5.1</span> Comparação dos resultados obtidos até aqui<a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%A3o-dos-resultados-obtidos-at%C3%A9-aqui"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#dev.off() #limpa os gráficos</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster1</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Piloto automático"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster2</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Dist. Euclidiana"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-297-1.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#dev.off()</span></span></code></pre></div>
+</div>
+</div>
+<div id="cluster-3-relativização-pelo-total-da-coluna" class="section level2" number="21.6">
+<h2>
+<span class="header-section-number">21.6</span> Cluster 3: Relativização pelo total da coluna<a class="anchor" aria-label="anchor" href="#cluster-3-relativiza%C3%A7%C3%A3o-pelo-total-da-coluna"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
+<span><span class="va">m_relcol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/decostand.html">decostand</a></span><span class="op">(</span><span class="va">m_trab</span>,</span>
+<span>                         method<span class="op">=</span><span class="st">"total"</span>, <span class="co">### OUTROS METODOS: total, max, normalize, range, rankm</span></span>
+<span>                         MARGIN <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#1-linha, 2-coluna</span></span>
+<span><span class="co">#View(m_relcol)</span></span>
+<span><span class="co">#m_relcol</span></span></code></pre></div>
+<div id="gráfico-de-clustering-relativizado" class="section level3" number="21.6.1">
+<h3>
+<span class="header-section-number">21.6.1</span> Gráfico de clustering relativizado<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-clustering-relativizado"><i class="fas fa-link"></i></a>
+</h3>
+<p>Agora fazemos a classificação da matriz bruta após ter sido relativizada pelo total das colunas.</p>
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cluster3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster3</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Rel.Coluna"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster3</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-299-1.png" alt="" width="672"></div>
+</div>
+</div>
+<div id="cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada" class="section level2" number="21.7">
+<h2>
+<span class="header-section-number">21.7</span> Cluster 4: Transformação pelo arcoseno da raiz quadrada<a class="anchor" aria-label="anchor" href="#cluster-4-transforma%C3%A7%C3%A3o-pelo-arcoseno-da-raiz-quadrada"><i class="fas fa-link"></i></a>
+</h2>
+<p>Agora aplicaremos a transformação do arcoseno da raiz quadrada na matriz relativizada por colunas. Lembre que em ambas as matrizes entramos dados que variam entre 0 e 1, e os resutados retornados também variam entre 0 e 1, mas em um nível de compressão de valores extremos mais desejável. Usaremos a matriz relativizada/transformada para fazermos a proxima classificação.</p>
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span> <span class="co">#valores de entrada tem que ser entre 0-1</span></span>
+<span><span class="co">#View(m_trns)</span></span>
+<span><span class="co">#m_trns</span></span></code></pre></div>
+<div id="gráfico-de-clustering-relativizadotransformado" class="section level3" number="21.7.1">
+<h3>
+<span class="header-section-number">21.7.1</span> Gráfico de clustering relativizado/transformado<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-clustering-relativizadotransformado"><i class="fas fa-link"></i></a>
+</h3>
+<p>Aqui fazemos uma Análise Cluster no piloto automático, para comparar com os resultados da primeira classificação, que não havia sido relativizada/transformada.</p>
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cluster4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster4</span>,  main <span class="op">=</span> <span class="st">"Cluster Dendrogram - ArcSin.SQRT"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster4</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-301-1.png" alt="" width="672"></div>
+</div>
+</div>
+<div id="cluster-5-controle-total-dos-parâmetros" class="section level2" number="21.8">
+<h2>
+<span class="header-section-number">21.8</span> Cluster 5: Controle total dos parâmetros<a class="anchor" aria-label="anchor" href="#cluster-5-controle-total-dos-par%C3%A2metros"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vegdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                   diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span></span>
+<span><span class="va">cluster5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">vegdist</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster5</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Bray-Curtis"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster5</span>, k <span class="op">=</span> <span class="fl">3</span>, h <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-302-1.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#h = 0.8 fornece os grupos formados na altura h</span></span>
+<span><span class="co">#vegdist</span></span>
+<span><span class="va">cluster5</span><span class="op">$</span><span class="va">merge</span></span>
+<span><span class="va">cluster5</span><span class="op">$</span><span class="va">height</span></span>
+<span><span class="va">idrow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">m_trns</span>, id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">idrow</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           S-R-CT1   S-R-CP1   S-A-TA1   S-R-CT2   S-R-CP2   S-A-TA2   S-R-CT3
+## S-R-CT1 0.0000000 0.8743721 0.9338269 0.6274997 0.8106894 0.9420728 0.6582219
+## S-R-CP1 0.8743721 0.0000000 0.6833816 0.7759468 0.7726098 0.7342613 0.8672111
+## S-A-TA1 0.9338269 0.6833816 0.0000000 0.8789631 0.9178304 0.5700984 0.9404687
+## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068 0.5169933
+## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271 0.8012846
+## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000 0.9412636
+## S-R-CT3 0.6582219 0.8672111 0.9404687 0.5169933 0.8012846 0.9412636 0.0000000
+##       [,1] [,2]
+##  [1,]  -20  -23
+##  [2,]   -8  -11
+##  [3,]  -17    1
+##  [4,]  -19  -22
+##  [5,]   -6  -12
+##  [6,]   -4  -10
+##  [7,]  -16    4
+##  [8,]   -5    2
+##  [9,]  -13    7
+## [10,]   -9    5
+## [11,]   -7    6
+## [12,]  -14    3
+## [13,]   -2   -3
+## [14,]   -1   11
+## [15,]  -15  -18
+## [16,]  -21   14
+## [17,]   10   13
+## [18,]    9   12
+## [19,]    8   16
+## [20,]   17   19
+## [21,]   15   20
+## [22,]   18   21
+##  [1] 0.1402400 0.2637008 0.2827470 0.3726150 0.4095558 0.4631145 0.4766705
+##  [8] 0.5326053 0.5584043 0.5683644 0.5934519 0.6112108 0.6833816 0.6834576
+## [15] 0.6881517 0.7475412 0.7570089 0.7899914 0.8037471 0.8465927 0.8855551
+## [22] 0.9099458
+##         id ap-davis   as-bimac   as-fasci   ch-bimac  ci-ocela  ci-orien
+## S-R-CT1  1 0.000000 0.29580113 0.63106017 0.00000000 0.0000000 0.1880966
+## S-R-CP1  2 0.000000 0.09135411 0.00000000 0.00000000 0.0000000 0.0000000
+## S-A-TA1  3 0.000000 0.10054093 0.07963989 0.13621375 0.0000000 0.0000000
+## S-R-CT2  4 0.000000 0.25205752 0.13823439 0.06527916 0.0000000 0.7679121
+## S-R-CP2  5 0.000000 0.04681561 0.07963989 0.00000000 0.8570719 0.2535816
+## S-A-TA2  6 0.000000 0.14242797 0.00000000 0.52646034 0.0000000 0.0000000
+## S-R-CT3  7 0.000000 0.30509802 0.68988155 0.00000000 0.0000000 0.4313758
+## S-R-CP3  8 0.000000 0.08381382 0.00000000 0.00000000 0.4455406 0.4220958
+## S-A-TA3  9 0.000000 0.32588896 0.21207071 0.61998604 0.0000000 0.0000000
+## S-R-CT4 10 0.000000 0.00000000 0.07963989 0.00000000 0.0000000 0.1880966
+## S-R-CP4 11 0.000000 0.00000000 0.00000000 0.00000000 0.4076059 0.2062968
+## S-A-TA4 12 0.000000 0.42841263 0.00000000 0.67165367 0.0000000 0.0000000
+## B-A-MU1 13 0.000000 0.07256361 0.00000000 0.00000000 0.0000000 0.0000000
+## B-A-GU1 14 0.000000 0.02960230 0.11274751 0.00000000 0.0000000 0.0000000
+## B-R-PC2 15 0.444860 0.13927667 0.00000000 0.00000000 0.1698463 0.0000000
+## B-A-MU2 16 0.000000 0.20977540 0.00000000 0.00000000 0.0000000 0.0000000
+## B-A-GU2 17 0.000000 0.00000000 0.00000000 0.00000000 0.0000000 0.0000000
+## B-R-PC3 18 1.125936 0.18225721 0.21207071 0.00000000 0.2413830 0.0000000
+## B-A-MU3 19 0.000000 0.49281178 0.00000000 0.00000000 0.0000000 0.0000000
+## B-A-GU3 20 0.000000 0.05128768 0.00000000 0.00000000 0.0000000 0.0000000
+## B-R-PC4 21 0.000000 0.05540108 0.33420332 0.00000000 0.0000000 0.0000000
+## B-A-MU4 22 0.000000 0.32661037 0.00000000 0.00000000 0.0000000 0.0000000
+## B-A-GU4 23 0.000000 0.07553213 0.00000000 0.00000000 0.0000000 0.0000000
+##         co-macro co-heter  cr-menez cu-lepid  cy-gilbe   ge-brasi  he-margi
+## S-R-CT1 0.000000 1.570796 0.7853982 0.000000 0.0000000 0.05425923 0.0000000
+## S-R-CP1 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.00000000 0.0000000
+## S-A-TA1 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.00000000 0.0000000
+## S-R-CT2 0.000000 0.000000 0.3875967 0.000000 0.0000000 0.00000000 0.7853982
+## S-R-CP2 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.00000000 0.0000000
+## S-A-TA2 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.00000000 0.0000000
+## S-R-CT3 0.000000 0.000000 0.5639426 0.000000 0.0000000 0.03131633 0.0000000
+## S-R-CP3 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.00000000 0.0000000
+## S-A-TA3 1.570796 0.000000 0.0000000 0.000000 0.0000000 0.00000000 0.0000000
+## S-R-CT4 0.000000 0.000000 0.1901256 0.000000 0.6659445 0.05425923 0.7853982
+## S-R-CP4 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.00000000 0.0000000
+## S-A-TA4 0.000000 0.000000 0.1901256 0.000000 0.0000000 0.03131633 0.0000000
+## B-A-MU1 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.44626053 0.0000000
+## B-A-GU1 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.08293673 0.0000000
+## B-R-PC2 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.08867767 0.0000000
+## B-A-MU2 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.25918549 0.0000000
+## B-A-GU2 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.15073345 0.0000000
+## B-R-PC3 0.000000 0.000000 0.0000000 1.570796 0.0000000 0.12557463 0.0000000
+## B-A-MU3 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.38659505 0.0000000
+## B-A-GU3 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.17806243 0.0000000
+## B-R-PC4 0.000000 0.000000 0.0000000 0.000000 0.9048519 0.07007133 0.0000000
+## B-A-MU4 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.78441777 0.0000000
+## B-A-GU4 0.000000 0.000000 0.0000000 0.000000 0.0000000 0.09917726 0.0000000
+##           ho-malab  hy-pusar le-melan   le-piau le-taeni mo-costa  mo-lepid
+## S-R-CT1 0.09592969 0.3640209 0.000000 0.4636476 0.000000 0.000000 1.4120161
+## S-R-CP1 0.21584866 0.1686344 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## S-A-TA1 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## S-R-CT2 0.40598283 0.8918340 0.000000 0.2611574 0.000000 0.000000 0.1587802
+## S-R-CP2 0.30772498 0.1686344 0.000000 0.4636476 0.000000 0.000000 0.0000000
+## S-A-TA2 0.13587479 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## S-R-CT3 0.56249105 0.4045563 0.000000 0.3737922 0.000000 0.000000 0.0000000
+## S-R-CP3 0.19275669 0.0000000 0.000000 0.2611574 0.000000 0.000000 0.0000000
+## S-A-TA3 0.44266923 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## S-R-CT4 0.19275669 0.2070324 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## S-R-CP4 0.13587479 0.0000000 0.000000 0.3737922 0.000000 0.000000 0.0000000
+## S-A-TA4 0.29145679 0.0000000 0.000000 0.3737922 0.000000 0.000000 0.0000000
+## B-A-MU1 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## B-A-GU1 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## B-R-PC2 0.00000000 0.0000000 1.570796 0.0000000 1.570796 0.000000 0.0000000
+## B-A-MU2 0.09592969 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## B-A-GU2 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## B-R-PC3 0.13587479 0.1189585 0.000000 0.0000000 0.000000 1.570796 0.0000000
+## B-A-MU3 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## B-A-GU3 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## B-R-PC4 0.09592969 0.0000000 0.000000 0.2611574 0.000000 0.000000 0.0000000
+## B-A-MU4 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+## B-A-GU4 0.00000000 0.0000000 0.000000 0.0000000 0.000000 0.000000 0.0000000
+##           or-nilot  pa-manag pimel-sp  po-retic   po-vivip   pr-brevi ps-rhomb
+## S-R-CT1 0.20878001 0.0000000 1.570796 0.0000000 0.22101460 0.13650631 0.000000
+## S-R-CP1 0.00000000 0.0000000 0.000000 0.0000000 0.12416313 0.00000000 0.000000
+## S-A-TA1 0.00000000 0.0000000 0.000000 0.0000000 0.00000000 0.06089569 0.000000
+## S-R-CT2 0.30797141 0.0000000 0.000000 0.2424450 0.49537824 0.23794112 0.000000
+## S-R-CP2 0.00000000 0.0000000 0.000000 0.0000000 0.18188749 0.13650631 0.000000
+## S-A-TA2 0.00000000 0.0000000 0.000000 0.0000000 0.00000000 0.08617291 0.000000
+## S-R-CT3 0.41785958 0.0000000 0.000000 0.1203286 0.61547971 0.89364927 1.570796
+## S-R-CP3 0.00000000 0.0000000 0.000000 0.0000000 0.10129161 0.00000000 0.000000
+## S-A-TA3 0.00000000 0.0000000 0.000000 0.0000000 0.00000000 0.00000000 0.000000
+## S-R-CT4 0.29961011 0.0000000 0.000000 0.0000000 0.17002156 0.48641493 0.000000
+## S-R-CP4 0.00000000 0.0000000 0.000000 0.0000000 0.29005641 0.00000000 0.000000
+## S-A-TA4 0.03455130 0.0000000 0.000000 0.0000000 0.00000000 0.10560544 0.000000
+## B-A-MU1 0.08471752 0.0000000 0.000000 0.0000000 0.00000000 0.00000000 0.000000
+## B-A-GU1 0.05986846 0.1415090 0.000000 0.0000000 0.00000000 0.00000000 0.000000
+## B-R-PC2 0.07732071 0.0000000 0.000000 0.0000000 0.00000000 0.18360401 0.000000
+## B-A-MU2 0.03455130 0.0000000 0.000000 0.1705861 0.09056689 0.00000000 0.000000
+## B-A-GU2 0.20878001 0.4439109 0.000000 0.0000000 0.00000000 0.00000000 0.000000
+## B-R-PC3 0.28223829 0.0000000 0.000000 0.0000000 0.00000000 0.14962891 0.000000
+## B-A-MU3 0.11482305 0.0000000 0.000000 0.3726604 0.22339293 0.06089569 0.000000
+## B-A-GU3 0.57389635 0.7374041 0.000000 0.0000000 0.00000000 0.00000000 0.000000
+## B-R-PC4 0.10381968 0.0000000 0.000000 0.0000000 0.00000000 0.00000000 0.000000
+## B-A-MU4 0.03455130 0.0000000 0.000000 1.0665527 0.42053434 0.00000000 0.000000
+## B-A-GU4 0.40318427 0.6263078 0.000000 0.0000000 0.00000000 0.00000000 0.000000
+##         ps-genise  se-heter se-piaba se-spilo   st-noton sy-marmo  te-chalc
+## S-R-CT1  0.000000 0.3764349 1.570796 0.000000 0.06989994 0.000000 0.0000000
+## S-R-CP1  0.000000 0.2192313 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## S-A-TA1  0.000000 0.1165111 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## S-R-CT2  0.000000 0.4670175 0.000000 0.000000 0.35673339 0.000000 0.0000000
+## S-R-CP2  0.000000 0.0000000 0.000000 0.000000 0.00000000 1.570796 0.0000000
+## S-A-TA2  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## S-R-CT3  1.570796 0.3664456 0.000000 1.570796 0.84652593 0.000000 0.0000000
+## S-R-CP3  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## S-A-TA3  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## S-R-CT4  0.000000 0.1008442 0.000000 0.000000 0.59287085 0.000000 0.0000000
+## S-R-CP4  0.000000 0.1008442 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## S-A-TA4  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-A-MU1  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-A-GU1  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-R-PC2  0.000000 0.1848546 0.000000 0.000000 0.00000000 0.000000 0.8527660
+## B-A-MU2  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-A-GU2  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-R-PC3  0.000000 0.5950206 0.000000 0.000000 0.00000000 0.000000 0.7180303
+## B-A-MU3  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-A-GU3  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-R-PC4  0.000000 0.3295526 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-A-MU4  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+## B-A-GU4  0.000000 0.0000000 0.000000 0.000000 0.00000000 0.000000 0.0000000
+##          tr-signa
+## S-R-CT1 0.2985914
+## S-R-CP1 0.0000000
+## S-A-TA1 0.0000000
+## S-R-CT2 0.2718802
+## S-R-CP2 0.0000000
+## S-A-TA2 0.0000000
+## S-R-CT3 0.1844947
+## S-R-CP3 0.0000000
+## S-A-TA3 0.0000000
+## S-R-CT4 0.9672667
+## S-R-CP4 0.0000000
+## S-A-TA4 0.0000000
+## B-A-MU1 0.0000000
+## B-A-GU1 0.0000000
+## B-R-PC2 0.3389861
+## B-A-MU2 0.0000000
+## B-A-GU2 0.0000000
+## B-R-PC3 0.0000000
+## B-A-MU3 0.0000000
+## B-A-GU3 0.0000000
+## B-R-PC4 0.1391234
+## B-A-MU4 0.0000000
+## B-A-GU4 0.0000000</code></pre>
+<p>No código acima, <code>h = 0.8</code> fornece os grupos formados na altura <code>h</code> do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, “h”) representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo <code>height</code>, isso significa que a distancia entre esses objetos é 0.8.</p>
+</div>
+<div id="construindo-uma-prancha-de-gráficos-comparativos" class="section level2" number="21.9">
+<h2>
+<span class="header-section-number">21.9</span> Construindo uma prancha de gráficos comparativos<a class="anchor" aria-label="anchor" href="#construindo-uma-prancha-de-gr%C3%A1ficos-comparativos"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#dev.off()</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span> <span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster1</span>, main <span class="op">=</span> <span class="st">"Dist.Euclidiana"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster3</span>, main <span class="op">=</span> <span class="st">"Rel.Coluna"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster4</span>, main <span class="op">=</span> <span class="st">"ArcSin.SQRT"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster5</span>, main <span class="op">=</span> <span class="st">"Bray-Curtis"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-303-1.png" alt="" width="768"></div>
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#dev.off()</span></span></code></pre></div>
+</div>
+<div id="construindo-heatmaps" class="section level2" number="21.10">
+<h2>
+<span class="header-section-number">21.10</span> Construindo <code>heatmaps</code><a class="anchor" aria-label="anchor" href="#construindo-heatmaps"><i class="fas fa-link"></i></a>
+</h2>
+<p>Agora que vimos de forma comparativa a importância de se relativizar e transformar nossos dados, e também de escolher de forma consciente a medida de distância e o método de fusão, podemos avançar um pouco mais na interpretação dos nossos dados.</p>
+<p>Um “heatmap”, ou mapa de calor, é uma imagem em cores (basicamente <code>image(t(x))</code>) com um dendrograma adicionado ao lado esquerdo e/ou ao topo. Normalmente, é realizado o reordenamento das linhas e colunas de acordo com algum conjunto de valores (médias de linha ou coluna) dentro das restrições impostas pelo dendrograma.</p>
+<p>Primeiro vamos rever o dendrograma final, usando a Distância de Bray-Curtis e o Método de Fusão UPGMA (ou “average”).</p>
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"RColorBrewer"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/talgalili/gplots">"gplots"</a></span><span class="op">)</span></span>
+<span><span class="va">vegdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                   diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">cluster5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">vegdist</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster5</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Bray-Curtis"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">heatdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span></span>
+<span><span class="co">#heatdist</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-304-1.png" alt="" width="672"></div>
+<p>Na sequência fazemos um <code>heatmap</code> <strong>objetos x objetos</strong>, ou seja a comparação bidimensional das clustereds entre unidades amostrais.</p>
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span><span class="op">)</span> <span class="co">#rev() reverte as cores do heatmap</span></span>
+<span><span class="fu"><a href="https://talgalili.github.io/gplots/reference/heatmap.2.html">heatmap.2</a></span><span class="op">(</span>x<span class="op">=</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x objetos</span></span>
+<span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster5</span><span class="op">)</span>,</span>
+<span>          Colv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster5</span><span class="op">)</span>,</span>
+<span>          key <span class="op">=</span> <span class="cn">T</span>, tracecol <span class="op">=</span> <span class="cn">NA</span>, revC <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          col <span class="op">=</span> <span class="va">heat.colors</span>,  <span class="co">#dissimilaridade = 1 - similaridade</span></span>
+<span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>          xlab <span class="op">=</span> <span class="st">"UA´s"</span>, ylab <span class="op">=</span> <span class="st">"UA´s"</span>,</span>
+<span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-305-1.png" alt="" width="768"></div>
+<p>Agora vamos criar um novo dendrograma, para as espécies, mostrando sua similaridade em termos de em quais UA´s elas são mais comuns.</p>
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cluster6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/vegdist.html">vegdist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                            diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                            upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster6</span>, main <span class="op">=</span> <span class="st">"Dendrograma dos atributos"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-306-1.png" alt="" width="672"></div>
+<p>Na sequencia, fazemos um novo <code>heatmap</code> <strong>objetos x atributos</strong>, com a comparação bidimensional das clustereds formadas entre unidades amostrais em relação as espécies mais comuns que ocorreram em cada unidade amostral.</p>
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://talgalili.github.io/gplots/reference/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x atributos</span></span>
+<span>          Colv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster5</span><span class="op">)</span>,</span>
+<span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster6</span><span class="op">)</span>,</span>
+<span>          key <span class="op">=</span> <span class="cn">T</span>, tracecol <span class="op">=</span> <span class="cn">NA</span>, revC <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          col <span class="op">=</span> <span class="va">col</span>,</span>
+<span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>          xlab <span class="op">=</span> <span class="st">"Unidades amostrais"</span>, ylab <span class="op">=</span> <span class="st">"Espécies"</span>,</span>
+<span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span>  <span class="co"># adjust margin size</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-307-1.png" alt="" width="768"></div>
+<div id="percentual-de-encadeamento-chaining" class="section level3" number="21.10.1">
+<h3>
+<span class="header-section-number">21.10.1</span> Percentual de encadeamento (% chaining)<a class="anchor" aria-label="anchor" href="#percentual-de-encadeamento-chaining"><i class="fas fa-link"></i></a>
+</h3>
+<p>Dendrogram Chaining (ou encadeamento) é um termo usado em análises de cluster hierárquico para se referir ao processo de adição sequencial de pequenos grupos a um ou poucos grandes grupos. É possível usar a porcentagem de encadeamento para ajudar a avaliar a qualidade do dendrograma. Análises altamente encadeadas provavelmente não valem a pena serem exploradas em maiores detalhes, provavelmente há alguma falha nos passos anteriores da análise. Por outro lado, pequenas diferenças na porcentagem de encadeamento na extremidade inferior da escala são geralmente um critério pobre para selecionar um algoritmo de ligação em relação a outro <span class="citation">(<a href="#ref-RN1552"><strong>RN1552?</strong></a>)</span>.</p>
+<p>O método para calcular o grau de encadeamento compara o comprimento médio do caminho do dendrograma com o comprimento mínimo possível (sem encadeamento) e o comprimento máximo possível (encadeamento completo). O comprimento do caminho para cada item no dendrograma é o número de nós que o conectam ao nível mais alto do dendrograma. O encadeamento completo ocorre quando cada fusão envolve a adição de um único item a um único grupo, cada vez mais grande <span class="citation">(<a href="#ref-RN1552"><strong>RN1552?</strong></a>)</span>.</p>
+<p>Com esse código podemos calcular o percentual de encadeamento para cada fusão em <code>cluster1</code> e fazer um gráfico simples para observação.</p>
+<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># calculate the percent chaining for each merge</span></span>
+<span><span class="va">h</span> <span class="op">&lt;-</span> <span class="va">cluster1</span><span class="op">$</span><span class="va">height</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
+<span><span class="va">pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">pc</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">h</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># plot the percent chaining</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pc</span>, type <span class="op">=</span> <span class="st">"h"</span>, xlab <span class="op">=</span> <span class="st">"Merge"</span>, ylab <span class="op">=</span> <span class="st">"Percent chaining"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-308-1.png" alt="" width="672"></div>
+<p>Para calcular o percentual geral de encadeamento em um dendrograma, é necessário calcular a diferença na altura entre cada nó e seus nós filhos e, em seguida, somar essas diferenças. Essa soma representa o comprimento total do dendrograma. Em seguida, é necessário calcular a soma das diferenças na altura entre cada nó que representa uma fusão e a altura de seus dois nós filhos. Essa soma representa o encadeamento total no dendrograma.</p>
+<p>Finalmente, você pode calcular o percentual geral de encadeamento como o encadeamento total dividido pelo comprimento total do dendrograma, multiplicado por 100.</p>
+<p>O eixo Y do gráfico mostra a percentagem de encadeamento, que é a diferença na altura entre fusões sucessivas dividida pela altura total do dendrograma, multiplicada por 100. É possível que a percentagem de encadeamento seja superior a 100 se a altura das duas fusões comparadas for maior que a altura total do dendrograma. Nesse caso, a percentagem de encadeamento é truncada em 100.</p>
+<p>Isso pode acontecer, por exemplo, se a altura de uma fusão for negativa, o que pode ocorrer se a distância entre dois grupos for menor que zero, ou se o dendrograma for escalado ou truncado de alguma forma.</p>
+</div>
+<div id="função-loop-para-comparar-os-encadeamentos" class="section level3" number="21.10.2">
+<h3>
+<span class="header-section-number">21.10.2</span> Função <code>loop</code> para comparar os encadeamentos<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%A3o-loop-para-comparar-os-encadeamentos"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create a list of the four cluster analyses</span></span>
+<span><span class="va">cluster_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">cluster1</span>, <span class="va">cluster2</span>, <span class="va">cluster3</span>, <span class="va">cluster4</span>, <span class="va">cluster5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co">#posicionamento dos gráficos</span></span>
+<span></span>
+<span><span class="co"># loop through the list and calculate percent chaining for each</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">h</span> <span class="op">&lt;-</span> <span class="va">cluster_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">height</span></span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
+<span>  <span class="va">pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">pc</span><span class="op">[</span><span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">h</span><span class="op">[</span><span class="va">j</span><span class="op">]</span> <span class="op">-</span> <span class="va">h</span><span class="op">[</span><span class="va">j</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">h</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="co"># plot the percent chaining for each cluster analysis</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pc</span>, type <span class="op">=</span> <span class="st">"h"</span>, xlab <span class="op">=</span> <span class="st">"Merge"</span>, ylab <span class="op">=</span> <span class="st">"Percent chaining"</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Cluster "</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-309-1.png" alt="" width="768"></div>
+</div>
+</div>
+<div id="apêndices-14" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-14"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="sites-consultados-8" class="section level2 unnumbered">
+<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-8"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://copyprogramming.com/howto/how-to-color-labels-of-dendogram-with-dendextend-and-heatmap-2-using-pre-d#efined-sample-groups" class="uri">https://copyprogramming.com/howto/how-to-color-labels-of-dendogram-with-dendextend-and-heatmap-2-using-pre-d#efined-sample-groups</a>
+<a href="https://www.datacamp.com/tutorial/hierarchical-clustering-R" class="uri">https://www.datacamp.com/tutorial/hierarchical-clustering-R</a></p>
+<div id="outras-formas-de-fazer-a-partição" class="section level3 unnumbered">
+<h3>Outras formas de fazer a partição<a class="anchor" aria-label="anchor" href="#outras-formas-de-fazer-a-parti%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h3>
+<p>m_bruta_part2 &lt;- m_bruta_part<span class="math display">\[colSums(abs(m_bruta_part), na.rm = F) \&gt; 0\]</span>
+m_bruta_part2 &lt;- subset(m_bruta_part, colSums != 0) m_bruta_part2 &lt;-
+m_bruta_part<span class="math display">\[, colSums(m_bruta_part != 0) \&gt; 0\]</span></p>
+</div>
+<div id="código" class="section level3 unnumbered">
+<h3>Código<a class="anchor" aria-label="anchor" href="#c%C3%B3digo"><i class="fas fa-link"></i></a>
+</h3>
+<p>range(euclidma) par(mfrow=c(2,1)) hist(euclidma, breaks = 15, #determina
+o no. de colunas do histograma xlim = range(floor(min(euclidma)),
+ceiling(max(euclidma))), xlab = “Distr. de Frequências”, freq = FALSE)
+curve(dnorm(x, mean=mean(euclidma), sd=sd(euclidma)), add=TRUE)
+boxplot.default(euclidma, horizontal = TRUE, frame = FALSE, xlab=“Distr.
+de Frequências”, ylim=c(floor(min(euclidma)), ceiling(max(euclidma))))</p>
+</div>
+</div>
+<div id="script-limpo-11" class="section level2 unnumbered">
+<h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-11"><i class="fas fa-link"></i></a>
+</h2>
+<p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## dev.off() #apaga os graficos, se houver algum</span></span>
+<span><span class="co">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
+<span><span class="co">## cat("\014") #limpa o console</span></span>
+<span><span class="co">## install.packages("openxlsx") #importa arquivos do excel</span></span>
+<span><span class="co">## install.packages("moments") #calcula assimetria e curtose dos dados</span></span>
+<span><span class="co">## install.packages("matrixStats") #fornece funções rápidas para a estatística de matrizes</span></span>
+<span><span class="co">## install.packages("gt") #ferramenta para criação de tabelas bonitas e personalizáveis</span></span>
+<span><span class="co">## getwd()</span></span>
+<span><span class="co">## setwd("C:/Seu/Diretório/De/Trabalho")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">m_bruta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/peixes06.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="va">m_bruta_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#lê m_bruta como uma matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_bruta_ma</span><span class="op">)</span></span>
+<span><span class="co">#m_bruta</span></span>
+<span><span class="va">m_bruta_ma</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="co">#[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.</span></span>
+<span><span class="co">#m_bruta &lt;- (m_bruta)   # &lt;1&gt;</span></span>
+<span><span class="co">#View(m_bruta)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="co">#?str</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#menor e maior valores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de colunas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de N colunas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de M linhas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html">lengths</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span><span class="op">)</span> <span class="co">#soma os nos. de colunas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span><span class="op">)</span> <span class="co">#tamanho da matriz m x n</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">m_bruta</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="co"># número de observações igual a zero</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">m_bruta</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="co"># número de observações maiores que zero</span></span>
+<span><span class="va">zeros</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">m_bruta</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span> <span class="co"># proporção de zeros na matriz</span></span>
+<span><span class="va">zeros</span></span>
+<span><span class="va">tamanho</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Função <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"range"</span>, <span class="st">"lenght"</span>, <span class="st">"m cols"</span>, <span class="st">"n linhas"</span>, <span class="st">"Tamanho"</span>, <span class="st">"Tamanho"</span>,</span>
+<span>             <span class="st">"Zeros"</span>, <span class="st">"Nao zeros"</span>, <span class="st">"% Zeros"</span><span class="op">)</span>,</span>
+<span>  Resultado <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">" - "</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html">lengths</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">m_bruta</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">m_bruta</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">zeros</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">tamanho</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tamanho</span>, format <span class="op">=</span> <span class="st">"markdown"</span>, caption <span class="op">=</span> <span class="st">"Resumo das informações sobre o tamanho da matriz"</span><span class="op">)</span></span>
+<span><span class="va">euclid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_bruta</span>, method <span class="op">=</span> <span class="st">"euclidian"</span>, diag <span class="op">=</span> <span class="cn">TRUE</span>, upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#?dist</span></span>
+<span><span class="co">#euclid</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span> <span class="co">#mostra as 5 primeiras linhas e colunas da matriz</span></span>
+<span><span class="va">euclid_ma</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#View(euclid_ma)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span></span>
+<span><span class="va">euclid_ma</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="co">#mostra as 5 primeiras linhas e colunas da matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span> <span class="co">#CENTROIDE!! OU Grand mean</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>  <span class="co">#Standard deviation</span></span>
+<span><span class="va">centroide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="va">centroide</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
+<span><span class="va">m</span></span>
+<span><span class="va">m</span><span class="op">*</span><span class="op">(</span><span class="va">m</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="va">Sumario1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Sumario1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Minimo"</span>, <span class="st">"Maximo"</span>, <span class="st">"Desv.Padr"</span>, <span class="st">"Media"</span>, <span class="st">"m(m-1)/2"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">Sumario1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="st">"Valores"</span><span class="op">)</span></span>
+<span><span class="va">Sumario1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">euclid</span>,</span>
+<span>     breaks <span class="op">=</span> <span class="fl">15</span>, <span class="co">#determina o no. de colunas do histograma</span></span>
+<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Distr. de Frequências"</span>,</span>
+<span>     freq <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>, sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot.default</a></span><span class="op">(</span><span class="va">euclid</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span>, frame <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                xlab<span class="op">=</span><span class="st">"Distr. de Frequências"</span>,</span>
+<span>                ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">#Limites do eixo Y</span></span>
+<span><span class="co">## dev.off()</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/matrixStats">matrixStats</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
+<span><span class="va">euclid_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
+<span><span class="va">euclid_ma</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span> <span class="co">#valor errado</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span> <span class="co">#valor errado</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span> <span class="co">#valor errado</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">euclid_ma</span><span class="op">==</span><span class="fl">0</span> <span class="co">#atribui n.a. aos valores = 0</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>  <span class="co">#valor correto, omite valores n.a. do calculo</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co">#valor correto, omite valores n.a. do calculo</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co">#valor correto, omite valores n.a. do calculo</span></span>
+<span><span class="co">#colMeans(euclid_ma, na.rm=T) #omite valores n.a. do calculo</span></span>
+<span><span class="co">#rowMeans(euclid_ma, na.rm=T) #omite valores n.a. do calculo</span></span>
+<span><span class="va">centroide_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">av.dist</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">av.desvpad</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/matrixStats/man/rowSds.html">colSds</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dp.centroide_ma</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">av.dist</span><span class="op">-</span><span class="va">centroide_ma</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/matrixStats/man/rowSds.html">colSds</a></span><span class="op">(</span><span class="va">av.dist</span><span class="op">)</span><span class="op">)</span> <span class="co">#ou z-scores</span></span>
+<span><span class="va">list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">av.dist</span>, <span class="va">av.desvpad</span>, <span class="va">dp.centroide_ma</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">list</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">list</span>, do.NULL <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">list</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Av.Dist"</span>, <span class="st">"Av.StDev"</span>, <span class="st">"DP.Centroide"</span><span class="op">)</span></span>
+<span><span class="va">list2</span> <span class="op">&lt;-</span> <span class="va">list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">list</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,<span class="op">]</span> <span class="co">#[,1] ou o nome da coluna</span></span>
+<span><span class="va">list2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"Av.Dist"</span><span class="op">]</span>,</span>
+<span>     breaks <span class="op">=</span> <span class="fl">15</span>, <span class="co">#determina o no. de colunas do histograma</span></span>
+<span>     xlab <span class="op">=</span> <span class="st">"Distr. de Frequências das Distâncias (em dp) para o centroide"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Distribuição de Frequência da distância média para o centroide"</span>,</span>
+<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">av.dist</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">av.dist</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="co">#substitua aqui o menor e maior valor do `range()`</span></span>
+<span>     freq <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"Av.Dist"</span><span class="op">]</span>,</span>
+<span>     breaks <span class="op">=</span> <span class="fl">15</span>, <span class="co">#determina o no. de colunas do histograma</span></span>
+<span>     xlab <span class="op">=</span> <span class="st">"Distr. de Frequências das Distâncias (em dp) para o centroide"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Curva de normalidade ajustada para a Distribuição de Frequência"</span>,</span>
+<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">av.dist</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">av.dist</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="co">#substitua aqui o menor e maior valor do `range()`</span></span>
+<span>     freq <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"Av.Dist"</span><span class="op">]</span><span class="op">)</span>, sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"Av.Dist"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot.default</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"Av.Dist"</span><span class="op">]</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span>, frame <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                xlab<span class="op">=</span><span class="st">"Distr. de Frequências"</span>,</span>
+<span>                ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">av.dist</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">av.dist</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">#substitua aqui o menor e maior valor do `range()`</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"DP.Centroide"</span><span class="op">]</span>,</span>
+<span>     breaks <span class="op">=</span> <span class="fl">15</span>, <span class="co">#determina o no. de colunas do histograma</span></span>
+<span>     xlab <span class="op">=</span> <span class="st">"Distr. de Frequências das Distâncias dos desvios padões para o centroide"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Distribuição de Frequência dos desvio padões das distâncias médias para o centroide"</span>,</span>
+<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="co">#substitua aqui o menor e maior valor do `range()`</span></span>
+<span>     freq <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"DP.Centroide"</span><span class="op">]</span>,</span>
+<span>     breaks <span class="op">=</span> <span class="fl">15</span>, <span class="co">#determina o no. de colunas do histograma</span></span>
+<span>     xlab <span class="op">=</span> <span class="st">"Distr. de Frequências das Distâncias dos desvios padrões das distâncias médias para o centroide"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Curva de normalidade ajustada para a Distribuição de Frequência"</span>,</span>
+<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="co">#substitua aqui o menor e maior valor do `range()`</span></span>
+<span>     freq <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"DP.Centroide"</span><span class="op">]</span><span class="op">)</span>, sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"DP.Centroide"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot.default</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"DP.Centroide"</span><span class="op">]</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span>, frame <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                xlab<span class="op">=</span><span class="st">"Distr. de Frequências"</span>,</span>
+<span>                ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">#substitua aqui o menor e maior valor do `range()`</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## dev.off()</span></span>
+<span><span class="va">cutoff</span> <span class="op">&lt;-</span> <span class="fl">2.0</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">cutoff</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">listf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">list2</span><span class="op">)</span></span>
+<span><span class="va">listf</span><span class="op">$</span><span class="va">Outliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">listf</span><span class="op">$</span><span class="va">DP.Centroide</span><span class="op">&gt;</span><span class="op">-</span><span class="va">cutoff</span> <span class="co">#CUTOFF MENOR QUE -'cutoff</span></span>
+<span>                         <span class="op">&amp;</span> <span class="va">listf</span><span class="op">$</span><span class="va">DP.Centroide</span><span class="op">&lt;</span><span class="va">cutoff</span>,  <span class="co">#CUTOFF MAIOR QUE 'cutoff'</span></span>
+<span>                         <span class="st">""</span>, <span class="st">"OUT"</span><span class="op">)</span> </span>
+<span><span class="va">listf</span></span>
+<span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Sitios<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">listf</span><span class="op">)</span>,<span class="va">listf</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">part</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B-A-MU4"</span>, <span class="st">"B-A-MU3"</span>, <span class="st">"S-A-TA4"</span>, <span class="st">"S-R-CT3"</span><span class="op">)</span></span>
+<span><span class="va">part</span></span>
+<span><span class="va">m_bruta_part</span> <span class="op">&lt;-</span> <span class="va">m_bruta</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">part</span><span class="op">)</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="co">#m_bruta_part</span></span>
+<span><span class="va">sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_bruta_part</span><span class="op">)</span></span>
+<span><span class="va">sum</span></span>
+<span><span class="va">zero_sum_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_bruta_part</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">zero_sum_cols</span> <span class="co">#nomes das espécies zeradas</span></span>
+<span><span class="va">m_bruta_part2</span> <span class="op">&lt;-</span> <span class="va">m_bruta_part</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_bruta_part</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">]</span> <span class="co">#em != a exclamação inverte o sentido</span></span>
+<span><span class="va">zero_sum_cols2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_bruta_part2</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">zero_sum_cols2</span> <span class="co">#nomes das espécies zeradas</span></span>
+<span><span class="va">sum</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_bruta_part2</span><span class="op">)</span></span>
+<span><span class="va">sum</span></span>
+<span><span class="co">#m_bruta_part2</span></span>
+<span><span class="co">#m_bruta_part2 &lt;- as.matrix(m_bruta_part2)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_bruta_part2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_bruta_part2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## df &lt;- data.frame(Sites = rownames(m_bruta), m_bruta,</span></span>
+<span><span class="co">##                  row.names = NULL,</span></span>
+<span><span class="co">##                  check.names = FALSE) #add titulo a primeira coluna</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## write.table(m_bruta_part2, "m_trabcsv.csv",</span></span>
+<span><span class="co">##             sep = ";", dec = ".", #"\t",</span></span>
+<span><span class="co">##             row.names = TRUE,</span></span>
+<span><span class="co">##             quote = TRUE,</span></span>
+<span><span class="co">##             append = FALSE)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## m_trab &lt;- read.csv("m_trabcsv.csv",</span></span>
+<span><span class="co">##                    sep = ";", dec = ".",</span></span>
+<span><span class="co">##                    row.names = 1,</span></span>
+<span><span class="co">##                    header = TRUE,</span></span>
+<span><span class="co">##                    na.strings = NA,</span></span>
+<span><span class="co">##                    check.names = FALSE, #impede que o R mude os nomes das colunas</span></span>
+<span><span class="co">##                    col.names = gsub("(^|_)([a-z])", "\\1\\U\\2",</span></span>
+<span><span class="co">##                                     names(m_trab), perl = TRUE))</span></span></code></pre></div>
+</div>
+<div id="referências-17" class="section level2 unnumbered">
+<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-17"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></div>
+<div class="next"><a href="kmeans.html"><span class="header-section-number">22</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#upgma"><span class="header-section-number">21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-15">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-15">Apresentação</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-11"><span class="header-section-number">21.1</span> Organização básica</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pacotes"><span class="header-section-number">21.1.1</span> Pacotes</a></li>
+<li><a class="nav-link" href="#sobre-os-dados-do-ppbio-3"><span class="header-section-number">21.1.2</span> Sobre os dados do PPBio</a></li>
+<li><a class="nav-link" href="#importando-a-planilha-de-trabalho-1"><span class="header-section-number">21.1.3</span> Importando a planilha de trabalho</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#reset-point-3"><span class="header-section-number">21.2</span> Reset point</a></li>
+<li><a class="nav-link" href="#nomenclatura-das-matrizes-em-amd"><span class="header-section-number">21.3</span> Nomenclatura das matrizes em AMD</a></li>
+<li>
+<a class="nav-link" href="#cluster-1-piloto-autom%C3%A1tico"><span class="header-section-number">21.4</span> Cluster 1: Piloto automático</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es"><span class="header-section-number">21.4.1</span> Histórico das fusões</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#cluster-2-criando-a-matriz-de-dist%C3%A2ncias-euclidiana"><span class="header-section-number">21.5</span> Cluster 2: Criando a matriz de distâncias Euclidiana</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#compara%C3%A7%C3%A3o-dos-resultados-obtidos-at%C3%A9-aqui"><span class="header-section-number">21.5.1</span> Comparação dos resultados obtidos até aqui</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#cluster-3-relativiza%C3%A7%C3%A3o-pelo-total-da-coluna"><span class="header-section-number">21.6</span> Cluster 3: Relativização pelo total da coluna</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1fico-de-clustering-relativizado"><span class="header-section-number">21.6.1</span> Gráfico de clustering relativizado</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#cluster-4-transforma%C3%A7%C3%A3o-pelo-arcoseno-da-raiz-quadrada"><span class="header-section-number">21.7</span> Cluster 4: Transformação pelo arcoseno da raiz quadrada</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#gr%C3%A1fico-de-clustering-relativizadotransformado"><span class="header-section-number">21.7.1</span> Gráfico de clustering relativizado/transformado</a></li></ul>
+</li>
+<li><a class="nav-link" href="#cluster-5-controle-total-dos-par%C3%A2metros"><span class="header-section-number">21.8</span> Cluster 5: Controle total dos parâmetros</a></li>
+<li><a class="nav-link" href="#construindo-uma-prancha-de-gr%C3%A1ficos-comparativos"><span class="header-section-number">21.9</span> Construindo uma prancha de gráficos comparativos</a></li>
+<li>
+<a class="nav-link" href="#construindo-heatmaps"><span class="header-section-number">21.10</span> Construindo heatmaps</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#percentual-de-encadeamento-chaining"><span class="header-section-number">21.10.1</span> Percentual de encadeamento (% chaining)</a></li>
+<li><a class="nav-link" href="#fun%C3%A7%C3%A3o-loop-para-comparar-os-encadeamentos"><span class="header-section-number">21.10.2</span> Função loop para comparar os encadeamentos</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#ap%C3%AAndices-14">Apêndices</a></li>
+<li>
+<a class="nav-link" href="#sites-consultados-8">Sites consultados</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#outras-formas-de-fazer-a-parti%C3%A7%C3%A3o">Outras formas de fazer a partição</a></li>
+<li><a class="nav-link" href="#c%C3%B3digo">Código</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#script-limpo-11">Script limpo</a></li>
+<li><a class="nav-link" href="#refer%C3%AAncias-17">Referências</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 20/07/2026 13:09:39.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
