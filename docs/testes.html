@@ -97,8 +97,9 @@
 <li><a class="" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
 <li><a class="" href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></li>
-<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
-<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">21</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">22</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">23</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
@@ -409,7 +410,7 @@ Figura 13.3: Estimativa do comprimento padrão (CP) e comprimento total (CT) em 
 <span>        xlab<span class="op">=</span><span class="st">"Class limits"</span><span class="op">)</span> <span class="co">#boxplot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co">#gráficos de volta ao normal</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-101-1.png" alt="" width="672"></div>
-<div id="hello" class="greeting message" style="color: black;">
+<div class="greeting message" style="color: black;">
 <p><span style="color:red">IMPORTANTE</span> Se você recebeu a mensagem de erro <span style="color:red">“Error in plot.new() : figure margins too large”</span>, aumente o tamanho da janela do gráfico e execute as últimas três linhas de comando novamente.</p>
 </div>
 <p>Calculando os outliers.</p>
@@ -1225,9 +1226,8 @@ F = \frac{QME}{QMD}
 <span>       add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mean_se"</span>, <span class="st">"dotplot"</span><span class="op">)</span>,</span>
 <span>       binwidth <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>       palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Bin width defaults to 1/30 of the
-## range of the data. Pick better value
-## with `binwidth`.</code></pre>
+<pre><code>## Bin width defaults to 1/30 of the range of the data. Pick better value with
+## `binwidth`.</code></pre>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">CP_cm</span> <span class="op">~</span> <span class="va">periodo</span> <span class="op">*</span> <span class="va">sexo</span>, data<span class="op">=</span><span class="va">univ</span>, frame <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"CP_cm"</span><span class="op">)</span></span>
@@ -1278,17 +1278,11 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <span>  mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">CP_cm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>## `summarise()` has regrouped the
-## output.
-## ℹ Summaries were computed grouped by
-##   periodo and sexo.
+<pre><code>## `summarise()` has regrouped the output.
+## ℹ Summaries were computed grouped by periodo and sexo.
 ## ℹ Output is grouped by periodo.
-## ℹ Use `summarise(.groups =
-##   "drop_last")` to silence this
-##   message.
-## ℹ Use `summarise(.by = c(periodo,
-##   sexo))` for per-operation grouping
-##   (`?dplyr::dplyr_by`) instead.</code></pre>
+## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+## ℹ Use `summarise(.by = c(periodo, sexo))` for per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Comparações múltiplas pares: Tukey</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">anova3</span>, which <span class="op">=</span> <span class="st">"sexo"</span><span class="op">)</span></span>
@@ -2150,7 +2144,7 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 23/07/2026 12:02:01.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 23/07/2026 13:48:15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
