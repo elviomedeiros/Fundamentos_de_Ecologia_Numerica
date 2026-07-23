@@ -101,6 +101,7 @@
 <li><a class="" href="upgma.html"><span class="header-section-number">22</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="kmeans.html"><span class="header-section-number">23</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
+<li><a class="" href="nomes.html"><span class="header-section-number">24</span> Nomenclatura das matrizes em AMD</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -477,7 +478,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <h2>
 <span class="header-section-number">21.4</span> Cálculo de matriz de distâncias Euclidiana (<code>euclid</code>)<a class="anchor" aria-label="anchor" href="#c%C3%A1lculo-de-matriz-de-dist%C3%A2ncias-euclidiana-euclid"><i class="fas fa-link"></i></a>
 </h2>
-<p>Agora vamos calcular a matriz de <strong>distâncias euclidianas</strong> <span class="citation">(<a href="#ref-RN1278"><strong>RN1278?</strong></a>; <a href="#ref-RN1336"><strong>RN1336?</strong></a>)</span> entre as UA´s usando a função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> (pesquise o que faz essa função usando o comando <code><a href="https://rdrr.io/r/stats/dist.html">?dist</a></code>).</p>
+<p>Agora vamos calcular a matriz de <strong>distâncias euclidianas</strong> <span class="citation">(<a href="#ref-borcard2018">BORCARD; GILLET; LEGENDRE, 2018</a>; <a href="#ref-legendre1998">LEGENDRE; LEGENDRE, 1998</a>)</span> entre as UA´s usando a função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> (pesquise o que faz essa função usando o comando <code><a href="https://rdrr.io/r/stats/dist.html">?dist</a></code>).</p>
 <div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">euclid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_bruta</span>, method <span class="op">=</span> <span class="st">"euclidian"</span>, diag <span class="op">=</span> <span class="cn">TRUE</span>, upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#?dist</span></span></code></pre></div>
@@ -507,7 +508,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 ## S-R-CP1  29.24038  82.79493 208.5234   0.00000  23.25941 271.4922
 ## S-A-TA1  27.09243  77.25283 209.6926  23.25941   0.00000 283.7869
 ## S-R-CT2 294.06292 261.39051 224.9133 271.49217 283.78689   0.0000</code></pre>
-<p>Note que a matriz <code>euclid</code> está como uma classe <code>dist</code>. Uma matriz do tipo <code>dist</code> no R é um objeto que armazena as distâncias entre as linhas de uma matriz ou um data frame. Ela é criada pela função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code>, que calcula as distâncias usando diferentes medidas, como “euclidean”, “manhattan”, “canberra”, “binary” ou “minkowski” <span class="citation">(<a href="#ref-RN419"><strong>RN419?</strong></a>)</span> (Figura <a href="outcentr.html#tab:6tbl-dists">21.4</a>).</p>
+<p>Note que a matriz <code>euclid</code> está como uma classe <code>dist</code>. Uma matriz do tipo <code>dist</code> no R é um objeto que armazena as distâncias entre as linhas de uma matriz ou um data frame. Ela é criada pela função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code>, que calcula as distâncias usando diferentes medidas, como “euclidean”, “manhattan”, “canberra”, “binary” ou “minkowski” <span class="citation">(<a href="#ref-horton2015">HORTON; KLEINMAN, 2015</a>)</span> (Figura <a href="outcentr.html#tab:6tbl-dists">21.4</a>).</p>
 <p>Visualizando a matriz de distâncias, observamos que ela:</p>
 <ul>
 <li><p>é uma matriz quadrada que contém as distâncias entre cada par de elementos do conjuto de dados,</p></li>
@@ -2015,6 +2016,18 @@ de Frequências”, ylim=c(floor(min(euclidma)), ceiling(max(euclidma))))</p>
 
 </div>
 </div>
+<h3>Bibliografia Geral</h3>
+<div id="refs" class="references csl-bib-body" entry-spacing="1">
+<div id="ref-borcard2018" class="csl-entry">
+BORCARD, D.; GILLET, F.; LEGENDRE, P. <strong>Numerical Ecology with R</strong>. Cham: Springer International Publishing, 2018. Disponível em: &lt;<a href="http://link.springer.com/10.1007/978-3-319-71404-2">http://link.springer.com/10.1007/978-3-319-71404-2</a>&gt;
+</div>
+<div id="ref-horton2015" class="csl-entry">
+HORTON, N. J.; KLEINMAN, K. <strong>Using R and RStudio for Data Management, Statistical Analysis, and Graphics</strong>. 0. ed. [s.l.] : Chapman; Hall/CRC, 2015. Disponível em: &lt;<a href="https://www.taylorfrancis.com/books/9781482237375">https://www.taylorfrancis.com/books/9781482237375</a>&gt;
+</div>
+<div id="ref-legendre1998" class="csl-entry">
+LEGENDRE, P.; LEGENDRE, L. <strong>Numerical Ecology</strong>. 2nd English ed ed. Amsterdam, The Netherlands ; New York ; Oxford.
+</div>
+</div>
 
   <div class="chapter-nav">
 <div class="prev"><a href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></div>
@@ -2068,7 +2081,7 @@ de Frequências”, ylim=c(floor(min(euclidma)), ceiling(max(euclidma))))</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 23/07/2026 13:48:15.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 23/07/2026 15:04:56.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
