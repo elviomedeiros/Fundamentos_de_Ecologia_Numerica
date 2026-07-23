@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas....">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content=" 16 Modelos lineares generalizados (GLMs) | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas....">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -123,12 +123,12 @@
 <p>A principal suposição que fizemos até aqui para os modelo lineares (função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>), é que a variância é constante (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (a)). Entretanto, em <strong>dados de contagem</strong>, nos quais a variável resposta assume valores inteiros e frequentemente há muitos zeros no conjunto de dados, a variância pode aumentar linearmente com a média (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (b)). Em <strong>dados de proporção</strong>, nos quais se registra tanto o número de sucessos quanto o número de fracassos de um evento, a variância apresenta uma relação em forma de <em>U</em> invertido com a média (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (c)). Quando a variável resposta segue uma distribuição gama (como em <strong>dados de tempo</strong> até a morte ou tempo até a ocorrência de um evento), a variância aumenta mais rapidamente do que de forma linear em relação à média (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (d)).</p>
 <div class="figure">
 <span style="display:block;" id="fig:4043glm"></span>
-<img src="fundamentos_de_ecologia_numerica_files/figure-html/4043glm-1.png" alt="Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade." width="450px"><p class="caption">
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/4043glm-1.png" alt="Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade." width="550px"><p class="caption">
 Figura 16.1: Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade.
 </p>
 </div>
-<p>Essas quatro relações fundamentam a escolha da família de distribuição em <strong>Modelos Lineares Generalizados (GLMs)</strong>, pois cada tipo de variável resposta apresenta um padrão característico de relação entre a média e a variância.</p>
-<p>Muitos dos métodos estatísticos clássicos, como a <strong>regressão linear</strong> e o <strong>teste t de Student</strong>, assumem que a variância é constante (homocedasticidade). No entanto, em diversas aplicações essa suposição não é válida. É justamente por isso que os <strong>Modelos Lineares Generalizados (GLMs)</strong> são tão úteis, pois permitem modelar adequadamente situações em que a variância depende da média da variável resposta <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>; <a href="#ref-dunn2018">DUNN; SMYTH, 2018</a>; <a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
+<p>Essas quatro relações fundamentam a escolha da família de distribuição em Modelos Lineares Generalizados (GLMs), pois cada tipo de variável resposta apresenta um padrão característico de relação entre a média e a variância.</p>
+<p>Muitos dos métodos estatísticos clássicos, como a <strong>regressão linear</strong> e o <strong>teste t de Student</strong>, assumem que a variância é constante (homocedasticidade). No entanto, em diversas aplicações essa suposição não é válida. É justamente por isso que os GLMs são tão úteis, pois permitem modelar adequadamente situações em que a variância depende da média da variável resposta <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>; <a href="#ref-dunn2018">DUNN; SMYTH, 2018</a>; <a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
 <div id="pressupostos-6" class="section level4" number="16.0.0.1">
 <h4>
 <span class="header-section-number">16.0.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-6"><i class="fas fa-link"></i></a>
@@ -139,7 +139,7 @@ Figura 16.1: Relação entre a média e a variância para diferentes distribuiç
 <h4>
 <span class="header-section-number">16.0.0.2</span> Estrutura de erros:<a class="anchor" aria-label="anchor" href="#estrutura-de-erros"><i class="fas fa-link"></i></a>
 </h4>
-<p>Até este ponto, trabalhamos com análises estatísticas que assumem <strong>erros normalmente distribuídos</strong>. Na prática, entretanto, muitos tipos de dados apresentam distribuições de erro que não seguem a distribuição normal [<span class="citation">CRAWLEY (<a href="#ref-crawley2015">2015</a>)</span>; <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>)</span>]. Alguns exemplos incluem:</p>
+<p>Até este ponto, trabalhamos com análises estatísticas que assumem <strong>erros normalmente distribuídos</strong>. Na prática, entretanto, muitos tipos de dados apresentam distribuições de erro que não seguem a distribuição normal <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>)</span>. Alguns exemplos incluem:</p>
 <ul>
 <li>erros com forte assimetria;</li>
 <li>erros com excesso ou deficiência de curtose;</li>
@@ -207,12 +207,12 @@ onde,</p>
 <li>
 <span class="math inline">\(\mu = E(y)\)</span> é a média esperada da variável resposta;</li>
 <li>
-<span class="math inline">\((g(\cdot))\)</span> é a função de ligação.</li>
+<span class="math inline">\(g(\cdot)\)</span> é a função de ligação.</li>
 </ul>
 <p>Embora a expressão seja simples, seu significado merece atenção. O preditor linear (<span class="math inline">\(\eta\)</span>) é obtido a partir da combinação linear das variáveis explicativas e de seus respectivos coeficientes. Portanto, ele <strong>não corresponde diretamente a um valor da variável resposta</strong>, exceto no caso particular da <strong>função de ligação identidade</strong>, utilizada implicitamente na regressão linear tradicional.</p>
 <p>Em um GLM, a média da variável resposta é inicialmente transformada pela função de ligação, produzindo o preditor linear. Após o ajuste do modelo, a <strong>função inversa da ligação</strong> é aplicada ao preditor linear para obter os valores ajustados na escala original da variável resposta:</p>
 <p><span class="math display">\[
-\mu = g^{-1}(\eta).
+\mu = g^{-1}(\eta)
 \]</span></p>
 <p>Assim, o modelo é ajustado em uma escala linear, mas as previsões são apresentadas na escala original dos dados, o que facilita sua interpretação.</p>
 </div>
@@ -284,9 +284,9 @@ onde,</p>
 </tr>
 </tbody>
 </table></div>
-<p>Cada uma dessas funções foi desenvolvida para estabelecer uma relação adequada entre o <strong>preditor linear</strong> (<span class="math inline">\(\eta\)</span>)) e a <strong>média da variável resposta</strong> (<span class="math inline">\(\mu\)</span>)), respeitando as características da distribuição dos dados. A escolha da função de ligação garante que os valores ajustados permaneçam dentro de limites plausíveis. Por exemplo, a função <strong>log</strong> assegura que as estimativas para dados de contagem sejam sempre positivas, enquanto a função <strong>logito</strong> produz probabilidades compreendidas entre 0 e 1.</p>
-<p>Embora essas sejam as funções de ligação canônicas, elas <strong>não são as únicas opções disponíveis</strong>. Em muitos casos, é possível utilizar outras funções de ligação para uma mesma distribuição. Por exemplo, para a distribuição binomial também podem ser empregadas as funções <strong>probit</strong> e <strong>complementary log-log (cloglog)</strong>, e para a distribuição gama podem ser utilizadas as funções <strong>log</strong> e <strong>identidade</strong>. A função canônica, entretanto, costuma ser a escolha inicial por apresentar propriedades matemáticas convenientes e, frequentemente, proporcionar estimativas mais eficientes <span class="citation">(<a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
-<p>No <strong>R</strong>, basta especificar a família da distribuição para que a função de ligação canônica seja utilizada automaticamente. Para uma regressão linear (distribuição normal e função identidade)(equivalente a <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>):</p>
+<p>Cada uma dessas funções foi desenvolvida para estabelecer uma relação adequada entre o <strong>preditor linear</strong> (<span class="math inline">\(\eta\)</span>) e a <strong>média da variável resposta</strong> (<span class="math inline">\(\mu\)</span>)), respeitando as características da distribuição dos dados. A escolha da função de ligação garante que os valores ajustados permaneçam dentro de limites plausíveis. Por exemplo, a função <strong>log</strong> assegura que as estimativas para dados de contagem sejam sempre positivas, enquanto a função <strong>logito</strong> produz probabilidades compreendidas entre 0 e 1.</p>
+<p>Embora essas sejam as funções de ligação canônicas, elas <strong>não são as únicas opções disponíveis</strong>. Em muitos casos, é possível utilizar outras funções de ligação para uma mesma distribuição. Por exemplo, para a distribuição binomial também podem ser empregadas as funções <strong>probit</strong> e <strong><em>complementary log-log</em></strong> <strong>(cloglog)</strong>, e para a distribuição gama podem ser utilizadas as funções <strong>log</strong> e <strong>identidade</strong>. A função canônica, entretanto, costuma ser a escolha inicial por apresentar propriedades matemáticas convenientes e, frequentemente, proporcionar estimativas mais eficientes <span class="citation">(<a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
+<p>No <strong>R</strong>, basta especificar a família da distribuição para que a função de ligação canônica seja utilizada automaticamente. Para uma regressão linear (distribuição normal e função identidade)(equivalente a <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>:</p>
 <pre><code>glm(y ~ x, family = gaussian(link = "identity"))</code></pre>
 <p>Caso seja desejada outra função de ligação, ela pode ser especificada por meio do argumento <code>link</code>. Para a distribuição <code>Gama</code> com ligação <code>log</code>:</p>
 <pre><code>glm(y ~ x, family = Gamma(link = "log"))</code></pre>
@@ -302,7 +302,7 @@ onde,</p>
 <h2>
 <span class="header-section-number">16.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
@@ -310,7 +310,7 @@ onde,</p>
 <h3>
 <span class="header-section-number">16.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anovas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"t_anovas.csv"</span>,</span>
 <span>                   sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>                   row.names <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -414,14 +414,14 @@ onde,</p>
 <span class="header-section-number">16.1.2</span> ANOVA vs GLM<a class="anchor" aria-label="anchor" href="#anova-vs-glm"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suponha que você queira comparar a riqueza (Srare) entre grupos (Grupos):</p>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="va">anovas</span></span>
 <span><span class="va">modelo_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_aov</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq
 ## Grupos      21  612.4   29.16</code></pre>
 <p>ou</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modelo_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_lm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -433,7 +433,7 @@ onde,</p>
 <ol start="2" style="list-style-type: decimal">
 <li>O mesmo modelo usando GLM</li>
 </ol>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modelo_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>,</span>
 <span>                  data <span class="op">=</span> <span class="va">dados</span>,</span>
 <span>                  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span><span class="op">)</span></span>
@@ -451,7 +451,7 @@ onde,</p>
 ## NULL                      21     612.37
 ## Grupos 21   612.37         0       0.00</code></pre>
 <p>ou</p>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_glm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -491,7 +491,7 @@ onde,</p>
 ## 
 ## Number of Fisher Scoring iterations: 1</code></pre>
 <p>Esse modelo é matematicamente equivalente à ANOVA.</p>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#packageVersion("rlang")</span></span>
@@ -568,9 +568,11 @@ onde,</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/cohen.d.html">cohen.d</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>,</span>
 <span>         data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># Uma forma de calcular d a partir do valor de t e dos graus de liberdade</span></span>
+<span></span>
 <span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/t_to_r.html">t_to_d</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span>, <span class="va">t</span><span class="op">$</span><span class="va">parameter</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># a way to calculate d from t-ratio and df(parameter)</span></span>
+<span><span class="co"># Uma forma de calcular o tamanho de efeito r a partir do valor de t e dos graus de liberdade</span></span>
 <span></span>
 <span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/t_to_r.html">t_to_r</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span>, <span class="va">t</span><span class="op">$</span><span class="va">parameter</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -779,7 +781,7 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 21/07/2026 12:50:52.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 23/07/2026 12:02:01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

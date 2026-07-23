@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content=" 14 Correlação e Regressão | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -140,17 +140,17 @@
 <h2>
 <span class="header-section-number">14.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> <span class="co">#sem notação científica, oposto de scipen = 0</span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -159,7 +159,7 @@
 <span class="header-section-number">14.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vamos importar a planilha de dados univariados <code>tucuna.xlsx</code>. Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -211,7 +211,7 @@
 ## TU009  24.6 200.5  20.5     25.7 195.9
 ## TU010  19.4  86.7  16.0     18.3  84.5</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(univ)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">univ</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">univ</span></span>
@@ -223,8 +223,8 @@
 <h2>
 <span class="header-section-number">14.4</span> Correlação<a class="anchor" aria-label="anchor" href="#correla%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h2>
-<p>O <strong>coeficiente de correlação produto-momento de Pearson</strong> descreve a relação entre duas variáveis numéricas contínuas. A análise de correlação também pode ser aplicada entre variáveis categóricas binárias (coeficiente Phi) ou entre uma variável numérica contínua e uma variável categórica binária (correlação ponto-bisserial) <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>, porém essas abordagens não constituem o foco do presente texto.</p>
-<p>Quando os pressupostos da correlação não podem ser adequadamente atendidos, utiliza-se uma alternativa não-paramétrica, a <em>correlação de postos de Spearman</em>.</p>
+<p>O <strong>coeficiente de correlação produto-momento de Pearson (<span class="math inline">\(r\)</span>)</strong> descreve a relação entre duas variáveis numéricas contínuas. A análise de correlação também pode ser aplicada entre variáveis categóricas binárias (coeficiente Phi) ou entre uma variável numérica contínua e uma variável categórica binária (correlação ponto-bisserial) <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>, porém essas abordagens não constituem o foco do presente texto.</p>
+<p>Quando os pressupostos da correlação não podem ser adequadamente atendidos, utiliza-se uma alternativa não-paramétrica, a <strong>correlação por postos de Spearman (<span class="math inline">\(\rho\)</span>)</strong>.</p>
 <p>Neste capítulo serão abordadas:</p>
 <ul>
 <li>Correlação simples bivariada (coeficiente de correlação produto-momento de Pearson)<br>
@@ -238,9 +238,138 @@
 <p>-1 a +1,</p>
 <p>onde o valor indica a força da relação, enquanto o sinal indica a direção da relação.</p>
 <p>A correlação parcial fornece uma medida única de associação linear entre duas variáveis, ajustando para os efeitos de uma ou mais variáveis adicionais.</p>
-<div id="pressupostos-4" class="section level4" number="14.4.0.1">
+<p>As duas fórmulas medem aspectos diferentes da relação entre duas variáveis.</p>
+<div id="coeficiente-de-correlação-de-pearson-r" class="section level3" number="14.4.1">
+<h3>
+<span class="header-section-number">14.4.1</span> Coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-de-correla%C3%A7%C3%A3o-de-pearson-r"><i class="fas fa-link"></i></a>
+</h3>
+<p><span class="math display">\[
+r=\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
+{\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2}
+\sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}
+\]</span></p>
+<p>onde:</p>
+<ul>
+<li>
+<span class="math inline">\(x_i\)</span> e <span class="math inline">\(y_i\)</span>: valores observados das variáveis (x) e (y) para a observação (i);</li>
+<li>
+<span class="math inline">\(\bar{x}\)</span> e <span class="math inline">\(\bar{y}\)</span>: médias de (x) e (y);</li>
+<li>
+<span class="math inline">\(n\)</span>: número de observações.</li>
+</ul>
+<div id="como-a-fórmula-funciona" class="section level4" number="14.4.1.1">
 <h4>
-<span class="header-section-number">14.4.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.1.1</span> Como a fórmula funciona<a class="anchor" aria-label="anchor" href="#como-a-f%C3%B3rmula-funciona"><i class="fas fa-link"></i></a>
+</h4>
+<p>Primeiro, calculamos o desvio de cada observação em relação à média:</p>
+<p><span class="math display">\[
+x_i-\bar{x}
+\]</span></p>
+<p>e</p>
+<p><span class="math display">\[
+y_i-\bar{y}
+\]</span>
+Segundo, multiplicamos os desvios das duas variáveis:</p>
+<p><span class="math display">\[
+(x_i-\bar{x})(y_i-\bar{y}).
+\]</span></p>
+<p>Se <strong>ambos os desvios forem positivos ou ambos negativos</strong>, o produto é positivo, indicando associação positiva. Se <strong>um desvio for positivo e o outro negativo</strong>, o produto é negativo, indicando associação negativa.</p>
+<p>Terceiro, somamos todos esses produtos, obtendo uma medida da covariação entre as variáveis.</p>
+<p>Por último, dividimos pelo produto dos desvios padrão, padronizando o resultado para que ele varie entre -1 e 1.</p>
+<p>Assim:</p>
+<p><span class="math inline">\(r=1\)</span>: correlação positiva perfeita;
+<span class="math inline">\(r=-1\)</span>: correlação negativa perfeita;
+<span class="math inline">\(r=0\)</span>: ausência de correlação linear.</p>
+</div>
+</div>
+<div id="coeficiente-de-determinação-r2" class="section level3" number="14.4.2">
+<h3>
+<span class="header-section-number">14.4.2</span> Coeficiente de determinação (<span class="math inline">\(r^2\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-de-determina%C3%A7%C3%A3o-r2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Na regressão linear simples, temos:</p>
+<p><span class="math display">\[
+R^2=\frac{\text{SQ}*{\text{Regressão}}}
+{\text{SQ}*{\text{Total}}}.
+\]</span></p>
+<p>onde:</p>
+<ul>
+<li>
+<span class="math inline">\(\text{SQ}_{\text{Total}}\)</span>: soma de quadrados total, representa toda a variação da variável resposta.</li>
+</ul>
+<p>e</p>
+<p><span class="math display">\[
+  \text{SQ}*{\text{Total}}
+  =\sum*{i=1}^{n}(y_i-\bar{y})^2
+\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(\text{SQ}_{\text{Regressão}}\)</span>: soma de quadrados explicada pelo modelo.</li>
+</ul>
+<p>Finalmente,</p>
+<p><span class="math display">\[
+  \text{SQ}*{\text{Regressão}}
+  =\sum*{i=1}^{n}(\hat y_i-\bar y)^2
+\]</span></p>
+<p>onde <span class="math inline">\(\hat y_i\)</span> é o valor previsto pela regressão.</p>
+<div id="como-a-fórmula-funciona-1" class="section level4" number="14.4.2.1">
+<h4>
+<span class="header-section-number">14.4.2.1</span> Como a fórmula funciona<a class="anchor" aria-label="anchor" href="#como-a-f%C3%B3rmula-funciona-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>O coeficiente de determinação calcula a fração da variação total de (y) que é explicada pela regressão.</p>
+<p>Por exemplo, se</p>
+<p><span class="math inline">\(\text{SQ}_{\text{Regressão}}=80\)</span>
+<span class="math inline">\(\text{SQ}_{\text{Total}}=100\)</span>,</p>
+<p>então</p>
+<p><span class="math display">\[
+r^2=\frac{80}{100}=0.80.
+\]</span></p>
+<p>Isso significa que <strong>80% da variação da variável resposta é explicada pelo modelo</strong>, enquanto os 20% restantes são atribuídos a outros fatores ou ao erro aleatório.</p>
+<hr>
+</div>
+</div>
+<div id="relação-entre-r-e-r2" class="section level3" number="14.4.3">
+<h3>
+<span class="header-section-number">14.4.3</span> Relação entre (r) e (R^2)<a class="anchor" aria-label="anchor" href="#rela%C3%A7%C3%A3o-entre-r-e-r2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Na regressão linear simples existe apenas uma variável explicativa, e vale a relação</p>
+<p><span class="math display">\[
+r^2=r^2
+\]</span></p>
+<p>Assim, se</p>
+<p><span class="math display">\[
+r=0.90,
+\]</span></p>
+<p>então</p>
+<p><span class="math display">\[
+R^2=0.90^2=0.81.
+\]</span></p>
+<p>Ou seja, a correlação mede a <strong>força e a direção</strong> da relação linear entre duas variáveis, enquanto o coeficiente de determinação mede <strong>quanto da variação da variável resposta é explicada pelo modelo de regressão</strong>.</p>
+<div id="não-confundir-com-resíduos" class="section level4" number="14.4.3.1">
+<h4>
+<span class="header-section-number">14.4.3.1</span> Não confundir com <strong>resíduos</strong><a class="anchor" aria-label="anchor" href="#n%C3%A3o-confundir-com-res%C3%ADduos"><i class="fas fa-link"></i></a>
+</h4>
+<p>No desvio em relação à média</p>
+<p><span class="math display">\[
+x_i - \bar{x}
+\]</span></p>
+<p>é o <strong>desvio da observação em relação à média</strong> da variável (x).</p>
+<p>Ele indica quanto um valor observado está acima ou abaixo da média e é utilizado no cálculo da variância, covariância e da correlação de Pearson.</p>
+<p>Na regressão, o resíduo é</p>
+<p><span class="math display">\[
+e_i = y_i - \hat{y}_i,
+\]</span></p>
+<p>onde:</p>
+<ul>
+<li>
+<span class="math inline">\(y_i\)</span>: valor observado;</li>
+<li>
+<span class="math inline">\(\hat{y}_i\)</span>: valor previsto pelo modelo.</li>
+</ul>
+<p>O resíduo mede o <strong>erro de predição</strong> da regressão, ou seja, a distância vertical entre o ponto observado e a reta ajustada.</p>
+</div>
+<div id="pressupostos-4" class="section level4" number="14.4.3.2">
+<h4>
+<span class="header-section-number">14.4.3.2</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-4"><i class="fas fa-link"></i></a>
 </h4>
 <p>A análise de correlação possui vários pressupostos:</p>
 <ol style="list-style-type: decimal">
@@ -259,10 +388,11 @@
 <p>O pressuposto 3 pode ser avaliado utilizando os procedimentos descritos nos capítulos anteriores.</p>
 <p>Os pressupostos 4 e 5 podem ser avaliados examinando gráficos de dispersão (<em>scatterplots</em>) das variáveis.</p>
 </div>
-<div id="exemplos-3" class="section level4" number="14.4.0.2">
+<div id="exemplos-3" class="section level4" number="14.4.3.3">
 <h4>
-<span class="header-section-number">14.4.0.2</span> Exemplos<a class="anchor" aria-label="anchor" href="#exemplos-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.3.3</span> Exemplos<a class="anchor" aria-label="anchor" href="#exemplos-3"><i class="fas fa-link"></i></a>
 </h4>
+</div>
 </div>
 </div>
 <div id="correlação-simples-bivariada" class="section level2" number="14.5">
@@ -278,7 +408,7 @@
 <p>Hipótese nula (<span class="math inline">\(H_0\)</span>): não existe correlação linear entre as duas variáveis na população.<br>
 Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correlação linear entre as duas variáveis na população.</p>
 <p>Nesse caso, utiliza-se:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
@@ -371,7 +501,7 @@ y: comprimento total (CT_cm)</p>
 </ol>
 <p>Hipótese nula (<span class="math inline">\(H_0\)</span>): não existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.<br>
 Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span></span>
 <span>  <span class="va">univ</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CP_cm"</span>, <span class="st">"CT_cm"</span>, <span class="st">"PT_g"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>  use <span class="op">=</span> <span class="st">"complete.obs"</span></span>
@@ -430,7 +560,7 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <li>Realização da ANOVA do modelo da regressão</li>
 <li>Aplicação de correção robusta</li>
 </ol>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,</span>
@@ -537,7 +667,7 @@ onde:</p>
 <p>Como p&lt;0.001, rejeita-se <span class="math inline">\(H_0\)</span> e aceota-se <span class="math inline">\(H_1\)</span>, o modelo de regressão é estatisticamente significativo e tem poder preditivo para o comprimento total.</p>
 <p>O QUE REPORTAR: A regressão linear simples revelou que o comprimento padrão foi um preditor significativo do comprimento total (<span class="math inline">\(\beta\)</span> = 1.207 <span class="math inline">\(\pm\)</span> 0.003, t<span class="math inline">\(_{(432)}\)</span> = 467.22, p &lt; 0.001). O modelo apresentou excelente ajuste aos dados (r<span class="math inline">\(^2\)</span> = 0.998; F<span class="math inline">\(_{(1,432)}\)</span> = 218300, p &lt; 0.001), explicando aproximadamente 99,8% da variação no comprimento total. A equação ajustada foi <span class="math inline">\(CT_{cm} = 0.148 + 1.207 \times CP_{cm}\)</span>.</p>
 <p>Na sequência avaliamos homogeneidade de variâncias. Para o caso de heterogeneidade de variâncias devemos usar a <strong>correção robusta de White (HC3)</strong>. Antes disso realizamos uma ANOVA da regressão, para testar se o comprimento padrão explica uma parcela significativa da variação no comprimento total. A diferença entre <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> e <code><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova()</a></code> só aparece em modelos com dois ou mais preditores. <code>Anova(modelo, white.adjust = TRUE)</code> calcula o mesmo teste, mas utilizando a correção robusta de White (HC3) para os erros padrão. Essa correção é recomendada quando há heterocedasticidade (variância não constante dos resíduos).</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -573,7 +703,7 @@ onde:</p>
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
 <p>Em um novo exemplo, podemos analisar comprimento total e peso corporal em peixes. Em estudos de relação peso-comprimento normalmente considera-se comprimento como variável independente e peso como variável dependente.</p>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
@@ -627,7 +757,7 @@ onde:</p>
     geom_tipo()
 ?ggplot</code></pre>
 <p>Esse modelo modular torna possível compor gráficos simples ou complexos com clareza.</p>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
 <span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">univ</span>,</span>
@@ -640,7 +770,8 @@ onde:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,</span>
 <span>              se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula = 'y ~ x'</code></pre>
+<pre><code>## `geom_smooth()` using formula = 'y ~
+## x'</code></pre>
 <pre><code>##  [1] "CT_cm"    "PT_g"     "CP_cm"    "Ctubo_cm" "PC_g"     "p_PT"    
 ##  [7] "Pest_g"   "Cest_cm"  "gr_est"   "ir_est"   "Pint_g"   "Cint_cm" 
 ## [13] "gr_int"   "ir_int"   "Pgon_g"   "Cgon_cm"  "emg"      "ig"      
@@ -706,7 +837,13 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <li><a class="nav-link" href="#sobre-os-dados-2"><span class="header-section-number">14.1</span> Sobre os dados</a></li>
 <li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-3"><span class="header-section-number">14.2</span> Organização básica</a></li>
 <li><a class="nav-link" href="#importando-a-planilha-3"><span class="header-section-number">14.3</span> Importando a planilha</a></li>
-<li><a class="nav-link" href="#correla%C3%A7%C3%A3o"><span class="header-section-number">14.4</span> Correlação</a></li>
+<li>
+<a class="nav-link" href="#correla%C3%A7%C3%A3o"><span class="header-section-number">14.4</span> Correlação</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#coeficiente-de-correla%C3%A7%C3%A3o-de-pearson-r"><span class="header-section-number">14.4.1</span> Coeficiente de correlação de Pearson (\(r\))</a></li>
+<li><a class="nav-link" href="#coeficiente-de-determina%C3%A7%C3%A3o-r2"><span class="header-section-number">14.4.2</span> Coeficiente de determinação (\(r^2\))</a></li>
+<li><a class="nav-link" href="#rela%C3%A7%C3%A3o-entre-r-e-r2"><span class="header-section-number">14.4.3</span> Relação entre (r) e (R^2)</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#correla%C3%A7%C3%A3o-simples-bivariada"><span class="header-section-number">14.5</span> Correlação simples (bivariada)</a></li>
 <li><a class="nav-link" href="#correla%C3%A7%C3%A3o-parcial"><span class="header-section-number">14.6</span> Correlação parcial</a></li>
 <li><a class="nav-link" href="#regress%C3%A3o-simples"><span class="header-section-number">14.7</span> Regressão simples</a></li>
@@ -733,7 +870,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 21/07/2026 12:50:52.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 23/07/2026 12:02:01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
