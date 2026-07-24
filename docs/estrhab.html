@@ -1,32 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
-<meta name="author" content="Prof. Elvio S. F. Medeiros">
-<meta name="author" content="Laboratório de Ecologia">
-<meta name="author" content="Universidade Estadual da Paraíba">
-<meta name="author" content="Campus V, João Pessoa, PB">
-<meta name="description" content="RESUMO  Apresentação   19.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content=" 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
-<meta property="og:type" content="book">
-<meta property="og:description" content="RESUMO  Apresentação   19.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
-<meta name="twitter:description" content="RESUMO  Apresentação   19.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title> 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
+
+    <meta name="author" content="Prof. Elvio S. F. Medeiros" />
+    <meta name="author" content="Laboratório de Ecologia" />
+    <meta name="author" content="Universidade Estadual da Paraíba" />
+    <meta name="author" content="Campus V, João Pessoa, PB" />
+  
+   <meta name="description" content="…. The output format for this example is bookdown::gitbook." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content=" 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="…. The output format for this example is bookdown::gitbook." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica" />
+  
+  <meta name="twitter:description" content="…. The output format for this example is bookdown::gitbook." />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.10.0/transition.js"></script>
+    <script src="libs/bs3compat-0.10.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.10.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+    <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<style type="text/css">
+    <style type="text/css">
     /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
     div.csl-bib-body { }
     div.csl-entry {
@@ -49,13 +72,16 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -68,107 +94,63 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Apresentação</a></li>
-<li class="book-part">I. INTRODUÇÃO</li>
-<li><a class="" href="ferram.html"><span class="header-section-number">2</span> Ferramentas</a></li>
-<li><a class="" href="rrstu.html"><span class="header-section-number">3</span> Introdução ao R/RStudio</a></li>
-<li class="book-part">II. TEORIA</li>
-<li><a class="" href="amd.html"><span class="header-section-number">4</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
-<li><a class="" href="tiposE.html"><span class="header-section-number">5</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
-<li><a class="" href="reltrnsT.html"><span class="header-section-number">6</span> Teoria 3 - Relativizações e transformações de dados</a></li>
-<li class="book-part">III. BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">7</span> Bases de dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">8</span> Base de dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">9</span> Base de dados II - Habitat</a></li>
-<li class="book-part">IV. ESTATÍSTICAS DESCRITIVAS</li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">10</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
-<li><a class="" href="xls.html"><span class="header-section-number">11</span> R Módulo 2 - Importando planilhas de dados</a></li>
-<li><a class="" href="norm.html"><span class="header-section-number">12</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
-<li><a class="" href="testes.html"><span class="header-section-number">13</span> R Módulo 3.2 - Testes estatísticos</a></li>
-<li><a class="" href="correg.html"><span class="header-section-number">14</span> Correlação e Regressão</a></li>
-<li><a class="" href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></li>
-<li><a class="" href="mlgs.html"><span class="header-section-number">16</span> Modelos lineares generalizados (GLMs)</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
-<li><a class="" href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="active" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
-<li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></li>
-<li><a class="" href="outcentr.html"><span class="header-section-number">21</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
-<li><a class="" href="upgma.html"><span class="header-section-number">22</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
-<li><a class="" href="kmeans.html"><span class="header-section-number">23</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
-<li class="book-part">VI. INFORMAÇÕES GERAIS</li>
-<li><a class="" href="nomes.html"><span class="header-section-number">24</span> Nomenclatura das matrizes em AMD</a></li>
-<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estrhab" class="section level1" number="19">
-<h1>
-<span class="header-section-number"> 19</span> R Módulo 4.3 - Estrutura do habitat<a class="anchor" aria-label="anchor" href="#estrhab"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="estrhab" class="section level1" number="19">
+<h1><span class="header-section-number"> 19</span> R Módulo 4.3 - Estrutura do habitat</h1>
 <div id="resumo-13" class="section level3 unnumbered">
-<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-13"><i class="fas fa-link"></i></a>
-</h3>
+<h3>RESUMO</h3>
 </div>
 <div id="apresentação-13" class="section level3 unnumbered">
-<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-13"><i class="fas fa-link"></i></a>
-</h3>
+<h3>Apresentação</h3>
 </div>
 <div id="sobre-os-dados-6" class="section level2" number="19.1">
-<h2>
-<span class="header-section-number">19.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-6"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">19.1</span> Sobre os dados</h2>
 <p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz ambiental</strong> (<a href="https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06p-amb.xlsx</a>) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>) <span class="citation">(<a href="#ref-medeiros2008">MEDEIROS; SILVA; RAMOS, 2008</a>)</span>. Esses são dados de <strong>variáveis ambientais</strong> distribuidas em diversas unidades amostrais (UA’s ou sítios). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram transformados <span class="citation">(<a href="#ref-sokal1995">SOKAL; ROHLF, 1995</a>)</span>. Note que as variáveis foram medidas em diferentes unidades (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada. Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=sharing&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06-grupos.xlsx</a>).</p>
 <p><strong>Revise as informações sobre as bases de dados no Capítulo</strong> <a href="bases.html#bases">7</a><strong>. As dases de dados para esse Módulo podem ser baixadam na Seção</strong> <a href="bases.html#arqs">7.2</a><strong>.</strong></p>
 </div>
 <div id="organização-básica-9" class="section level2" number="19.2">
-<h2>
-<span class="header-section-number">19.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-9"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
+<h2><span class="header-section-number">19.2</span> Organização básica</h2>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="estrhab.html#cb427-1" tabindex="-1"></a><span class="fu">dev.off</span>() <span class="co">#apaga os graficos, se houver algum</span></span>
+<span id="cb427-2"><a href="estrhab.html#cb427-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>)) <span class="co">#limpa a memória</span></span>
+<span id="cb427-3"><a href="estrhab.html#cb427-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\014</span><span class="st">&quot;</span>) <span class="co">#limpa o console </span></span></code></pre></div>
 <div id="instalando-os-pacotes-necessários-para-esse-módulo." class="section level3" number="19.2.1">
-<h3>
-<span class="header-section-number">19.2.1</span> Instalando os pacotes necessários para esse módulo.<a class="anchor" aria-label="anchor" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">19.2.1</span> Instalando os pacotes necessários para esse módulo.</h3>
 <p>Se você ja fez o módulo anterior, não vai precisar instalar nenhum pacote novo. Os pacotes necessários serão carregados ao longo desse módulo.</p>
-<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"psych"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"corrplot"</span><span class="op">)</span></span></code></pre></div>
-<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="estrhab.html#cb428-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;psych&quot;</span>)</span>
+<span id="cb428-2"><a href="estrhab.html#cb428-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;corrplot&quot;</span>)</span></code></pre></div>
+<p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code>getwd()</code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code>setwd()</code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="estrhab.html#cb429-1" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb429-2"><a href="estrhab.html#cb429-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Seu/Diretório/De/Trabalho&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="importando-a-planilha-6" class="section level2" number="19.3">
-<h2>
-<span class="header-section-number">19.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-6"><i class="fas fa-link"></i></a>
-</h2>
-<p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
-- Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
+<h2><span class="header-section-number">19.3</span> Importando a planilha</h2>
+<p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br />
+- Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br />
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado. Vamos trabalhar com os dados do ano 1.</p>
-<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
-<span><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
-<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-amb.xlsx"</span>,</span>
-<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>                   sheet <span class="op">=</span> <span class="st">"ano1"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
-<span><span class="co">#View(ppbio)</span></span>
-<span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="co">#[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.</span></span></code></pre></div>
-<pre><code>## 'data.frame':    23 obs. of  30 variables:
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="estrhab.html#cb430-1" tabindex="-1"></a><span class="co">#dir &lt;- getwd() #criamos um vetor com o diretório  de trbalho </span></span>
+<span id="cb430-2"><a href="estrhab.html#cb430-2" tabindex="-1"></a><span class="co">#shell.exec(dir) #abre o diretorio de trabalho no Windows Explorer</span></span>
+<span id="cb430-3"><a href="estrhab.html#cb430-3" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb430-4"><a href="estrhab.html#cb430-4" tabindex="-1"></a>ppbio <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-amb.xlsx&quot;</span>,</span>
+<span id="cb430-5"><a href="estrhab.html#cb430-5" tabindex="-1"></a>                   <span class="at">rowNames =</span> T, <span class="at">colNames =</span> T,</span>
+<span id="cb430-6"><a href="estrhab.html#cb430-6" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;ano1&quot;</span>)</span>
+<span id="cb430-7"><a href="estrhab.html#cb430-7" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
+<span id="cb430-8"><a href="estrhab.html#cb430-8" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
+<span id="cb430-9"><a href="estrhab.html#cb430-9" tabindex="-1"></a>ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co">#[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.</span></span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    23 obs. of  30 variables:
 ##  $ h.macroph   : num  8.33 0 5.83 0 0 ...
 ##  $ h.grass     : num  20 23.3 0 20 0 ...
 ##  $ h.subveg    : num  10 3 16.7 0 0 ...
@@ -206,53 +188,46 @@
 ## S-R-CT2  0.000000 20.00000  0.00000    0.00000  0.0000000
 ## S-R-CP2  0.000000  0.00000  0.00000   33.33333  1.0000000</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#View(ppbio)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">ppbio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="estrhab.html#cb432-1" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
+<span id="cb432-2"><a href="estrhab.html#cb432-2" tabindex="-1"></a><span class="fu">print</span>(ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb432-3"><a href="estrhab.html#cb432-3" tabindex="-1"></a>ppbio[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb432-4"><a href="estrhab.html#cb432-4" tabindex="-1"></a><span class="fu">str</span>(ppbio)</span>
+<span id="cb432-5"><a href="estrhab.html#cb432-5" tabindex="-1"></a><span class="fu">mode</span>(ppbio)</span>
+<span id="cb432-6"><a href="estrhab.html#cb432-6" tabindex="-1"></a><span class="fu">class</span>(ppbio)</span></code></pre></div>
 </div>
 <div id="reset-point" class="section level2" number="19.4">
-<h2>
-<span class="header-section-number">19.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m_amb</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span>
-<span><span class="co">#pat &lt;- "^S"</span></span>
-<span><span class="co">#m_amb &lt;- m_amb[!grepl(pat, rownames(m_amb)), ] #exclui quem começa com pat</span></span></code></pre></div>
+<h2><span class="header-section-number">19.4</span> Reset point</h2>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="estrhab.html#cb433-1" tabindex="-1"></a>m_amb <span class="ot">&lt;-</span> ppbio</span>
+<span id="cb433-2"><a href="estrhab.html#cb433-2" tabindex="-1"></a><span class="co">#pat &lt;- &quot;^S&quot;</span></span>
+<span id="cb433-3"><a href="estrhab.html#cb433-3" tabindex="-1"></a><span class="co">#m_amb &lt;- m_amb[!grepl(pat, rownames(m_amb)), ] #exclui quem começa com pat</span></span></code></pre></div>
 <p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela <a href="bases.html#tab:300arqs">7.1</a>).</p>
 <p><strong>Revise Seção</strong> <a href="bases.html#abrev">7.2.2</a> <strong>e a Tabela de Abreviações (@ref(tab:200m_2)) na mesma Seção que resumem os tipos de matrizes e suas abreviações, para os nossos códigos.</strong></p>
 </div>
 <div id="correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias" class="section level2" number="19.5">
-<h2>
-<span class="header-section-number">19.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/pairs.panels.html">pairs.panels</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>,</span>
-<span>             method <span class="op">=</span> <span class="st">"pearson"</span>, <span class="co"># correlation method</span></span>
-<span>             scale <span class="op">=</span> <span class="cn">FALSE</span>, lm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>             hist.col <span class="op">=</span> <span class="st">"#00AFBB"</span>, pch <span class="op">=</span> <span class="fl">19</span>,</span>
-<span>             density <span class="op">=</span> <span class="cn">TRUE</span>,  <span class="co"># show density plots</span></span>
-<span>             ellipses <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># show correlation ellipses</span></span>
-<span>             alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
-<span><span class="va">cor</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">cor</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span>
-<span><span class="co">#win.print()</span></span>
-<span><span class="co">#corrplot(cor, method = "circle")</span></span>
-<span><span class="co">#dev.off()</span></span></code></pre></div>
-<pre><code>##  [1] "h.macroph"    "h.grass"      "h.subveg"     "h.overhveg"   "h.litter"    
-##  [6] "h.filalgae"   "h.attalgae"   "h.roots"      "h.lrgdeb"     "h.smldeb"    
-## [11] "s.mud"        "s.sand"       "s.smlgrav"    "s.lrggrav"    "s.cobbles"   
-## [16] "s.rocks"      "s.bedrock"    "m.elev"       "m.river"      "m.stream"    
-## [21] "m.distsource" "m.distmouth"  "m.maxslope"   "m.maxdepth"   "m.habdepth"  
-## [26] "m.width"      "a.veloc"      "a.temp"       "a.do"         "a.transp"    
+<h2><span class="header-section-number">19.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias</h2>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="estrhab.html#cb434-1" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb434-2"><a href="estrhab.html#cb434-2" tabindex="-1"></a><span class="fu">colnames</span>(m_amb)</span>
+<span id="cb434-3"><a href="estrhab.html#cb434-3" tabindex="-1"></a><span class="fu">pairs.panels</span>(m_amb[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],</span>
+<span id="cb434-4"><a href="estrhab.html#cb434-4" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="co"># correlation method</span></span>
+<span id="cb434-5"><a href="estrhab.html#cb434-5" tabindex="-1"></a>             <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">lm =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb434-6"><a href="estrhab.html#cb434-6" tabindex="-1"></a>             <span class="at">hist.col =</span> <span class="st">&quot;#00AFBB&quot;</span>, <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb434-7"><a href="estrhab.html#cb434-7" tabindex="-1"></a>             <span class="at">density =</span> <span class="cn">TRUE</span>,  <span class="co"># show density plots</span></span>
+<span id="cb434-8"><a href="estrhab.html#cb434-8" tabindex="-1"></a>             <span class="at">ellipses =</span> <span class="cn">TRUE</span>, <span class="co"># show correlation ellipses</span></span>
+<span id="cb434-9"><a href="estrhab.html#cb434-9" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb434-10"><a href="estrhab.html#cb434-10" tabindex="-1"></a></span>
+<span id="cb434-11"><a href="estrhab.html#cb434-11" tabindex="-1"></a>cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(m_amb)</span>
+<span id="cb434-12"><a href="estrhab.html#cb434-12" tabindex="-1"></a>cor</span>
+<span id="cb434-13"><a href="estrhab.html#cb434-13" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb434-14"><a href="estrhab.html#cb434-14" tabindex="-1"></a><span class="fu">corrplot</span>(cor, <span class="at">method =</span> <span class="st">&quot;circle&quot;</span>)</span>
+<span id="cb434-15"><a href="estrhab.html#cb434-15" tabindex="-1"></a><span class="co">#win.print()</span></span>
+<span id="cb434-16"><a href="estrhab.html#cb434-16" tabindex="-1"></a><span class="co">#corrplot(cor, method = &quot;circle&quot;)</span></span>
+<span id="cb434-17"><a href="estrhab.html#cb434-17" tabindex="-1"></a><span class="co">#dev.off()</span></span></code></pre></div>
+<pre><code>##  [1] &quot;h.macroph&quot;    &quot;h.grass&quot;      &quot;h.subveg&quot;     &quot;h.overhveg&quot;   &quot;h.litter&quot;    
+##  [6] &quot;h.filalgae&quot;   &quot;h.attalgae&quot;   &quot;h.roots&quot;      &quot;h.lrgdeb&quot;     &quot;h.smldeb&quot;    
+## [11] &quot;s.mud&quot;        &quot;s.sand&quot;       &quot;s.smlgrav&quot;    &quot;s.lrggrav&quot;    &quot;s.cobbles&quot;   
+## [16] &quot;s.rocks&quot;      &quot;s.bedrock&quot;    &quot;m.elev&quot;       &quot;m.river&quot;      &quot;m.stream&quot;    
+## [21] &quot;m.distsource&quot; &quot;m.distmouth&quot;  &quot;m.maxslope&quot;   &quot;m.maxdepth&quot;   &quot;m.habdepth&quot;  
+## [26] &quot;m.width&quot;      &quot;a.veloc&quot;      &quot;a.temp&quot;       &quot;a.do&quot;         &quot;a.transp&quot;    
 ##                h.macroph      h.grass    h.subveg    h.overhveg     h.litter
 ## h.macroph     1.00000000 -0.246531504 -0.13690655 -0.0460990189 -0.062637491
 ## h.grass      -0.24653150  1.000000000  0.48407509 -0.1460764735 -0.001721976
@@ -439,31 +414,28 @@
 ## a.temp       -0.516411771  0.641968008  1.00000000 -0.072530252 -0.241797672
 ## a.do         -0.002086238  0.063666386 -0.07253025  1.000000000  0.109896052
 ## a.transp      0.232399977 -0.111321669 -0.24179767  0.109896052  1.000000000</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-247-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-247-2.png" alt="" width="672"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-247-1.png" alt="" width="672" /><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-247-2.png" alt="" width="672" /></p>
 </div>
 <div id="deletando-variáveis-colineares" class="section level2" number="19.6">
-<h2>
-<span class="header-section-number">19.6</span> Deletando variáveis colineares<a class="anchor" aria-label="anchor" href="#deletando-vari%C3%A1veis-colineares"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">19.6</span> Deletando variáveis colineares</h2>
 <p>Primeiro vamos listar as variáveis com correlação maior que 70% ou r &gt; 0.7.</p>
-<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get upper triangle (to avoid duplicate pairs)</span></span>
-<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
-<span><span class="va">cor_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">r</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Extract unique variable pairs</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>  var1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">[</span><span class="va">cor_pairs</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  var2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">[</span><span class="va">cor_pairs</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  correlation <span class="op">=</span> <span class="va">cor</span><span class="op">[</span><span class="va">cor_pairs</span><span class="op">]</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Remove duplicates (e.g. A-B and B-A)</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">[</span><span class="va">results</span><span class="op">$</span><span class="va">var1</span> <span class="op">&lt;</span> <span class="va">results</span><span class="op">$</span><span class="va">var2</span>, <span class="op">]</span></span>
-<span></span>
-<span><span class="co"># Sort by absolute correlation (descending)</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">correlation</span><span class="op">)</span><span class="op">)</span>, <span class="op">]</span></span>
-<span><span class="va">results</span></span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="estrhab.html#cb436-1" tabindex="-1"></a><span class="co"># Get upper triangle (to avoid duplicate pairs)</span></span>
+<span id="cb436-2"><a href="estrhab.html#cb436-2" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb436-3"><a href="estrhab.html#cb436-3" tabindex="-1"></a>cor_pairs <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">abs</span>(cor) <span class="sc">&gt;</span> r <span class="sc">&amp;</span> <span class="fu">abs</span>(cor) <span class="sc">&lt;</span> <span class="dv">1</span>, <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb436-4"><a href="estrhab.html#cb436-4" tabindex="-1"></a></span>
+<span id="cb436-5"><a href="estrhab.html#cb436-5" tabindex="-1"></a><span class="co"># Extract unique variable pairs</span></span>
+<span id="cb436-6"><a href="estrhab.html#cb436-6" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb436-7"><a href="estrhab.html#cb436-7" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="fu">rownames</span>(cor)[cor_pairs[, <span class="dv">1</span>]],</span>
+<span id="cb436-8"><a href="estrhab.html#cb436-8" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="fu">colnames</span>(cor)[cor_pairs[, <span class="dv">2</span>]],</span>
+<span id="cb436-9"><a href="estrhab.html#cb436-9" tabindex="-1"></a>  <span class="at">correlation =</span> cor[cor_pairs]</span>
+<span id="cb436-10"><a href="estrhab.html#cb436-10" tabindex="-1"></a>)</span>
+<span id="cb436-11"><a href="estrhab.html#cb436-11" tabindex="-1"></a></span>
+<span id="cb436-12"><a href="estrhab.html#cb436-12" tabindex="-1"></a><span class="co"># Remove duplicates (e.g. A-B and B-A)</span></span>
+<span id="cb436-13"><a href="estrhab.html#cb436-13" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[results<span class="sc">$</span>var1 <span class="sc">&lt;</span> results<span class="sc">$</span>var2, ]</span>
+<span id="cb436-14"><a href="estrhab.html#cb436-14" tabindex="-1"></a></span>
+<span id="cb436-15"><a href="estrhab.html#cb436-15" tabindex="-1"></a><span class="co"># Sort by absolute correlation (descending)</span></span>
+<span id="cb436-16"><a href="estrhab.html#cb436-16" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[<span class="fu">order</span>(<span class="sc">-</span><span class="fu">abs</span>(results<span class="sc">$</span>correlation)), ]</span>
+<span id="cb436-17"><a href="estrhab.html#cb436-17" tabindex="-1"></a>results</span></code></pre></div>
 <pre><code>##            var1      var2 correlation
 ## 12 m.distsource  m.stream   0.9875536
 ## 5         s.mud    s.sand  -0.9573283
@@ -473,43 +445,39 @@
 ## 11       m.elev   m.river   0.8525104
 ## 3    h.overhveg   h.roots   0.7224571</code></pre>
 <p>Agora que temos as variáveis correlacionadas, prosseguimos para deleta-las.</p>
-<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span></span>
-<span><span class="va">del_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"m.distsource"</span>, <span class="st">"m.elev"</span><span class="op">)</span> <span class="co">#exemplo, "g.river_length","g.altitude"</span></span>
-<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">del_cols</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] "h.macroph"    "h.grass"      "h.subveg"     "h.overhveg"   "h.litter"    
-##  [6] "h.filalgae"   "h.attalgae"   "h.roots"      "h.lrgdeb"     "h.smldeb"    
-## [11] "s.mud"        "s.sand"       "s.smlgrav"    "s.lrggrav"    "s.cobbles"   
-## [16] "s.rocks"      "s.bedrock"    "m.elev"       "m.river"      "m.stream"    
-## [21] "m.distsource" "m.distmouth"  "m.maxslope"   "m.maxdepth"   "m.habdepth"  
-## [26] "m.width"      "a.veloc"      "a.temp"       "a.do"         "a.transp"</code></pre>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="estrhab.html#cb438-1" tabindex="-1"></a><span class="fu">colnames</span>(m_amb)</span>
+<span id="cb438-2"><a href="estrhab.html#cb438-2" tabindex="-1"></a>del_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;m.distsource&quot;</span>, <span class="st">&quot;m.elev&quot;</span>) <span class="co">#exemplo, &quot;g.river_length&quot;,&quot;g.altitude&quot;</span></span>
+<span id="cb438-3"><a href="estrhab.html#cb438-3" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb) <span class="sc">%in%</span> del_cols)]</span></code></pre></div>
+<pre><code>##  [1] &quot;h.macroph&quot;    &quot;h.grass&quot;      &quot;h.subveg&quot;     &quot;h.overhveg&quot;   &quot;h.litter&quot;    
+##  [6] &quot;h.filalgae&quot;   &quot;h.attalgae&quot;   &quot;h.roots&quot;      &quot;h.lrgdeb&quot;     &quot;h.smldeb&quot;    
+## [11] &quot;s.mud&quot;        &quot;s.sand&quot;       &quot;s.smlgrav&quot;    &quot;s.lrggrav&quot;    &quot;s.cobbles&quot;   
+## [16] &quot;s.rocks&quot;      &quot;s.bedrock&quot;    &quot;m.elev&quot;       &quot;m.river&quot;      &quot;m.stream&quot;    
+## [21] &quot;m.distsource&quot; &quot;m.distmouth&quot;  &quot;m.maxslope&quot;   &quot;m.maxdepth&quot;   &quot;m.habdepth&quot;  
+## [26] &quot;m.width&quot;      &quot;a.veloc&quot;      &quot;a.temp&quot;       &quot;a.do&quot;         &quot;a.transp&quot;</code></pre>
 </div>
 <div id="somando-variáveis-redundantes" class="section level2" number="19.7">
-<h2>
-<span class="header-section-number">19.7</span> Somando variáveis redundantes<a class="anchor" aria-label="anchor" href="#somando-vari%C3%A1veis-redundantes"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">19.7</span> Somando variáveis redundantes</h2>
 <p>Algumas dessa variáveis são redundantes, vamos soma-las.</p>
-<div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.gravel</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.smlgrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.lrggrav</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.cobbles</span></span>
-<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
-<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s.smlgrav"</span>, <span class="st">"s.lrggrav"</span>, <span class="st">"s.cobbles"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.rock</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.rocks</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">s.bedrock</span></span>
-<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
-<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s.rocks"</span>, <span class="st">"s.bedrock"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.algae</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.filalgae</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.attalgae</span></span>
-<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
-<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"h.filalgae"</span>, <span class="st">"h.attalgae"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.debris</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.smldeb</span> <span class="op">+</span> <span class="va">m_amb_part</span><span class="op">$</span><span class="va">h.lrgdeb</span></span>
-<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
-<span>                             <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"h.smldeb"</span>, <span class="st">"h.lrgdeb"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_amb_part</span><span class="op">)</span></span>
-<span><span class="va">m_amb_part</span></span></code></pre></div>
-<pre><code>##  [1] "h.macroph"   "h.grass"     "h.subveg"    "h.overhveg"  "h.litter"   
-##  [6] "h.roots"     "s.mud"       "s.sand"      "m.river"     "m.stream"   
-## [11] "m.distmouth" "m.maxslope"  "m.maxdepth"  "m.habdepth"  "m.width"    
-## [16] "a.veloc"     "a.temp"      "a.do"        "a.transp"    "s.gravel"   
-## [21] "s.rock"      "h.algae"     "h.debris"   
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="estrhab.html#cb440-1" tabindex="-1"></a>m_amb_part<span class="sc">$</span>s.gravel <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>s.smlgrav <span class="sc">+</span> m_amb_part<span class="sc">$</span>s.lrggrav <span class="sc">+</span> m_amb_part<span class="sc">$</span>s.cobbles</span>
+<span id="cb440-2"><a href="estrhab.html#cb440-2" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
+<span id="cb440-3"><a href="estrhab.html#cb440-3" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;s.smlgrav&quot;</span>, <span class="st">&quot;s.lrggrav&quot;</span>, <span class="st">&quot;s.cobbles&quot;</span>))]</span>
+<span id="cb440-4"><a href="estrhab.html#cb440-4" tabindex="-1"></a>m_amb_part<span class="sc">$</span>s.rock <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>s.rocks <span class="sc">+</span> m_amb_part<span class="sc">$</span>s.bedrock</span>
+<span id="cb440-5"><a href="estrhab.html#cb440-5" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
+<span id="cb440-6"><a href="estrhab.html#cb440-6" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;s.rocks&quot;</span>, <span class="st">&quot;s.bedrock&quot;</span>))]</span>
+<span id="cb440-7"><a href="estrhab.html#cb440-7" tabindex="-1"></a>m_amb_part<span class="sc">$</span>h.algae <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>h.filalgae <span class="sc">+</span> m_amb_part<span class="sc">$</span>h.attalgae</span>
+<span id="cb440-8"><a href="estrhab.html#cb440-8" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
+<span id="cb440-9"><a href="estrhab.html#cb440-9" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;h.filalgae&quot;</span>, <span class="st">&quot;h.attalgae&quot;</span>))]</span>
+<span id="cb440-10"><a href="estrhab.html#cb440-10" tabindex="-1"></a>m_amb_part<span class="sc">$</span>h.debris <span class="ot">&lt;-</span> m_amb_part<span class="sc">$</span>h.smldeb <span class="sc">+</span> m_amb_part<span class="sc">$</span>h.lrgdeb</span>
+<span id="cb440-11"><a href="estrhab.html#cb440-11" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> m_amb_part[, <span class="sc">!</span>(<span class="fu">colnames</span>(m_amb_part)</span>
+<span id="cb440-12"><a href="estrhab.html#cb440-12" tabindex="-1"></a>                             <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;h.smldeb&quot;</span>, <span class="st">&quot;h.lrgdeb&quot;</span>))]</span>
+<span id="cb440-13"><a href="estrhab.html#cb440-13" tabindex="-1"></a></span>
+<span id="cb440-14"><a href="estrhab.html#cb440-14" tabindex="-1"></a><span class="fu">colnames</span>(m_amb_part)</span>
+<span id="cb440-15"><a href="estrhab.html#cb440-15" tabindex="-1"></a>m_amb_part</span></code></pre></div>
+<pre><code>##  [1] &quot;h.macroph&quot;   &quot;h.grass&quot;     &quot;h.subveg&quot;    &quot;h.overhveg&quot;  &quot;h.litter&quot;   
+##  [6] &quot;h.roots&quot;     &quot;s.mud&quot;       &quot;s.sand&quot;      &quot;m.river&quot;     &quot;m.stream&quot;   
+## [11] &quot;m.distmouth&quot; &quot;m.maxslope&quot;  &quot;m.maxdepth&quot;  &quot;m.habdepth&quot;  &quot;m.width&quot;    
+## [16] &quot;a.veloc&quot;     &quot;a.temp&quot;      &quot;a.do&quot;        &quot;a.transp&quot;    &quot;s.gravel&quot;   
+## [21] &quot;s.rock&quot;      &quot;h.algae&quot;     &quot;h.debris&quot;   
 ##         h.macroph    h.grass  h.subveg h.overhveg   h.litter  h.roots
 ## S-R-CT1  8.333333 20.0000000 10.000000   0.000000  0.6666667 0.000000
 ## S-R-CP1  0.000000 23.3333340  3.000000  26.666666  2.3333333 3.333333
@@ -607,125 +575,116 @@
 ## B-A-MU4  0.0000000  5.000000 30.0000000 10.4444447
 ## B-A-GU4  1.4166667  0.000000 43.3333333  3.7500000</code></pre>
 <p>Salvando a matriz final particionada de dados ambientais.</p>
-<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">m_amb_part</span>, <span class="st">"m_amb_part.csv"</span>,</span>
-<span>            sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>, <span class="co">#"\t",</span></span>
-<span>            row.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            quote <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">m_amb_part</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"m_amb_part.csv"</span>,</span>
-<span>                  sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
-<span>                  row.names <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                  header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                  na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="estrhab.html#cb442-1" tabindex="-1"></a><span class="fu">write.table</span>(m_amb_part, <span class="st">&quot;m_amb_part.csv&quot;</span>,</span>
+<span id="cb442-2"><a href="estrhab.html#cb442-2" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="co">#&quot;\t&quot;,</span></span>
+<span id="cb442-3"><a href="estrhab.html#cb442-3" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb442-4"><a href="estrhab.html#cb442-4" tabindex="-1"></a>            <span class="at">quote =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb442-5"><a href="estrhab.html#cb442-5" tabindex="-1"></a>            <span class="at">append =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb442-6"><a href="estrhab.html#cb442-6" tabindex="-1"></a>m_amb_part <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;m_amb_part.csv&quot;</span>,</span>
+<span id="cb442-7"><a href="estrhab.html#cb442-7" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>,</span>
+<span id="cb442-8"><a href="estrhab.html#cb442-8" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb442-9"><a href="estrhab.html#cb442-9" tabindex="-1"></a>                  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb442-10"><a href="estrhab.html#cb442-10" tabindex="-1"></a>                  <span class="at">na.strings =</span> <span class="cn">NA</span>)</span></code></pre></div>
 </div>
 <div id="tabela-de-dados-ambientais" class="section level2" number="19.8">
-<h2>
-<span class="header-section-number">19.8</span> Tabela de dados ambientais<a class="anchor" aria-label="anchor" href="#tabela-de-dados-ambientais"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">19.8</span> Tabela de dados ambientais</h2>
 <p>Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba <code>ambientalp</code>, porque nela constam os agrupamentos <em>a-priori</em> para os dados ambientais.</p>
-<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
-<span><span class="va">t_grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx"</span>,</span>
-<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>                   sheet <span class="op">=</span> <span class="st">"ambientalp"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">t_grps</span><span class="op">)</span></span>
-<span><span class="co">#View(ppbio)</span></span>
-<span><span class="va">t_grps</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="co">#[1:4,1:4] mostra apenas as linhas e colunas de 1 a 4.</span></span></code></pre></div>
-<pre><code>## 'data.frame':    23 obs. of  4 variables:
-##  $ area    : chr  "Serido" "Serido" "Serido" "Serido" ...
-##  $ ambiente: chr  "rio" "rio" "acude" "rio" ...
-##  $ UA      : chr  "CT" "CP" "TA" "CT" ...
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="estrhab.html#cb443-1" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb443-2"><a href="estrhab.html#cb443-2" tabindex="-1"></a>t_grps <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx&quot;</span>,</span>
+<span id="cb443-3"><a href="estrhab.html#cb443-3" tabindex="-1"></a>                   <span class="at">rowNames =</span> T, <span class="at">colNames =</span> T,</span>
+<span id="cb443-4"><a href="estrhab.html#cb443-4" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="st">&quot;ambientalp&quot;</span>)</span>
+<span id="cb443-5"><a href="estrhab.html#cb443-5" tabindex="-1"></a><span class="fu">str</span>(t_grps)</span>
+<span id="cb443-6"><a href="estrhab.html#cb443-6" tabindex="-1"></a><span class="co">#View(ppbio)</span></span>
+<span id="cb443-7"><a href="estrhab.html#cb443-7" tabindex="-1"></a>t_grps[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="co">#[1:4,1:4] mostra apenas as linhas e colunas de 1 a 4.</span></span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    23 obs. of  4 variables:
+##  $ area    : chr  &quot;Serido&quot; &quot;Serido&quot; &quot;Serido&quot; &quot;Serido&quot; ...
+##  $ ambiente: chr  &quot;rio&quot; &quot;rio&quot; &quot;acude&quot; &quot;rio&quot; ...
+##  $ UA      : chr  &quot;CT&quot; &quot;CP&quot; &quot;TA&quot; &quot;CT&quot; ...
 ##  $ coleta  : num  1 1 1 2 2 2 3 3 3 4 ...
 ##           area ambiente UA coleta
 ## S-R-CT1 Serido      rio CT      1
 ## S-R-CP1 Serido      rio CP      1
 ## S-A-TA1 Serido    acude TA      1
 ## S-R-CT2 Serido      rio CT      2</code></pre>
-<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
-<span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="va">m_amb_part</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"_"</span>, <span class="st">"."</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="co">#apenas troquei o underscore pelo ponto. </span></span>
-<span></span>
-<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="va">m_trab</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span>Area <span class="op">=</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">area</span>,</span>
-<span>           Habitat <span class="op">=</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">ambiente</span>,</span>
-<span>           Ponto <span class="op">=</span> <span class="va">t_grps</span><span class="op">$</span><span class="va">UA</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, min <span class="op">=</span> <span class="va">min</span>, max <span class="op">=</span> <span class="va">max</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>            .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
-<span>    cols <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Area</span>, <span class="va">Habitat</span>, <span class="va">Ponto</span><span class="op">)</span>,</span>
-<span>    names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>, <span class="st">".value"</span><span class="op">)</span>,</span>
-<span>    names_sep <span class="op">=</span> <span class="st">"_"</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
-<span><span class="va">m_wide</span> <span class="op">&lt;-</span> <span class="va">m</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>stat_string <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Variable</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fq.w.vel"</span><span class="op">)</span>,</span>
-<span>                              <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"("</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">min</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">max</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">")"</span><span class="op">)</span>,</span>
-<span>                              <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"("</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">min</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">max</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="st">"Location"</span>, <span class="va">Area</span>, <span class="va">Habitat</span>, <span class="va">Ponto</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Variable</span>, <span class="va">Location</span>, <span class="va">stat_string</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># find("select"), dplyr::select evita conflito entre package:MASS  package:dplyr</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Location</span>, values_from <span class="op">=</span> <span class="va">stat_string</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">m_wide</span></span>
-<span><span class="va">m_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m_wide</span><span class="op">)</span></span>
-<span><span class="va">m_wide</span></span>
-<span></span>
-<span><span class="co">#Exportando dados para Excel----</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">m_wide</span>, file <span class="op">=</span> <span class="st">"tabela de habitat.xlsx"</span>, rowNames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/loadWorkbook.html">loadWorkbook</a></span><span class="op">(</span><span class="st">"tabela de habitat.xlsx"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"Sheet 1"</span>, x <span class="op">=</span> <span class="va">m_wide</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"tabela de habitat.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#Escolher sumário de uma variavel----</span></span>
-<span><span class="va">m</span></span>
-<span><span class="va">var</span> <span class="op">&lt;-</span> <span class="st">"h.roots"</span></span>
-<span><span class="va">m</span><span class="op">[</span><span class="va">m</span><span class="op">$</span><span class="va">Variable</span> <span class="op">==</span> <span class="va">var</span>, <span class="st">"mean"</span><span class="op">]</span> <span class="co">#cada valor de var</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">m</span><span class="op">$</span><span class="va">Variable</span> <span class="op">==</span> <span class="va">var</span>, <span class="st">"mean"</span><span class="op">]</span><span class="op">)</span> <span class="co">#sumário dos valores de var</span></span>
-<span></span>
-<span><span class="co">#Escolher sumário de um grupo de variáveis do df m----</span></span>
-<span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^h\\."</span>, <span class="va">m</span><span class="op">$</span><span class="va">Variable</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">summaries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#criam uma lista vazia para guardar os sumários</span></span>
-<span><span class="co"># Loop para cada variável do grupo e guarda em summaries</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">var</span> <span class="kw">in</span> <span class="va">vars</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">summaries</span><span class="op">[[</span><span class="va">var</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">m</span><span class="op">$</span><span class="va">Variable</span> <span class="op">==</span> <span class="va">var</span>, <span class="st">"mean"</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="co"># var is a temporary variable used in the for loop to iterate through</span></span>
-<span><span class="co"># each variable name that starts with "h."</span></span>
-<span></span>
-<span><span class="va">summaries</span></span>
-<span><span class="va">summary_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">summaries</span>, <span class="va">as.data.frame.list</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">summary_table</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#sink(file = "summary_h.txt", split = TRUE)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">$</span><span class="va">Mean</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#sink()</span></span>
-<span></span>
-<span><span class="co">#Tabela limpa</span></span>
-<span><span class="va">summary_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span>, <span class="va">summary_table</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">summary_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>, <span class="st">"Min"</span>, <span class="st">"Q1"</span>, <span class="st">"Median"</span>, <span class="st">"Mean"</span>, <span class="st">"Q3"</span>, <span class="st">"Max"</span><span class="op">)</span></span>
-<span><span class="va">summary_table</span></span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="estrhab.html#cb445-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb445-2"><a href="estrhab.html#cb445-2" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb445-3"><a href="estrhab.html#cb445-3" tabindex="-1"></a>m_trab <span class="ot">&lt;-</span> m_amb_part <span class="sc">%&gt;%</span></span>
+<span id="cb445-4"><a href="estrhab.html#cb445-4" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot;.&quot;</span>, .)) <span class="co">#apenas troquei o underscore pelo ponto. </span></span>
+<span id="cb445-5"><a href="estrhab.html#cb445-5" tabindex="-1"></a></span>
+<span id="cb445-6"><a href="estrhab.html#cb445-6" tabindex="-1"></a>m <span class="ot">&lt;-</span> m_trab <span class="sc">%&gt;%</span></span>
+<span id="cb445-7"><a href="estrhab.html#cb445-7" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">Area =</span> t_grps<span class="sc">$</span>area,</span>
+<span id="cb445-8"><a href="estrhab.html#cb445-8" tabindex="-1"></a>           <span class="at">Habitat =</span> t_grps<span class="sc">$</span>ambiente,</span>
+<span id="cb445-9"><a href="estrhab.html#cb445-9" tabindex="-1"></a>           <span class="at">Ponto =</span> t_grps<span class="sc">$</span>UA) <span class="sc">%&gt;%</span></span>
+<span id="cb445-10"><a href="estrhab.html#cb445-10" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric),</span>
+<span id="cb445-11"><a href="estrhab.html#cb445-11" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">min =</span> min, <span class="at">max =</span> max)),</span>
+<span id="cb445-12"><a href="estrhab.html#cb445-12" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb445-13"><a href="estrhab.html#cb445-13" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb445-14"><a href="estrhab.html#cb445-14" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(Area, Habitat, Ponto),</span>
+<span id="cb445-15"><a href="estrhab.html#cb445-15" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;Variable&quot;</span>, <span class="st">&quot;.value&quot;</span>),</span>
+<span id="cb445-16"><a href="estrhab.html#cb445-16" tabindex="-1"></a>    <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span></span>
+<span id="cb445-17"><a href="estrhab.html#cb445-17" tabindex="-1"></a>  )</span>
+<span id="cb445-18"><a href="estrhab.html#cb445-18" tabindex="-1"></a></span>
+<span id="cb445-19"><a href="estrhab.html#cb445-19" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(m)</span>
+<span id="cb445-20"><a href="estrhab.html#cb445-20" tabindex="-1"></a>m_wide <span class="ot">&lt;-</span> m <span class="sc">%&gt;%</span></span>
+<span id="cb445-21"><a href="estrhab.html#cb445-21" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stat_string =</span> <span class="fu">ifelse</span>(Variable <span class="sc">==</span> <span class="fu">c</span>(<span class="st">&quot;fq.w.vel&quot;</span>),</span>
+<span id="cb445-22"><a href="estrhab.html#cb445-22" tabindex="-1"></a>                              <span class="fu">paste0</span>(<span class="fu">round</span>(mean, <span class="dv">3</span>), <span class="st">&quot;(&quot;</span>, <span class="fu">round</span>(min, <span class="dv">3</span>), <span class="st">&quot;-&quot;</span>, <span class="fu">round</span>(max, <span class="dv">3</span>), <span class="st">&quot;)&quot;</span>),</span>
+<span id="cb445-23"><a href="estrhab.html#cb445-23" tabindex="-1"></a>                              <span class="fu">paste0</span>(<span class="fu">round</span>(mean, <span class="dv">1</span>), <span class="st">&quot;(&quot;</span>, <span class="fu">round</span>(min, <span class="dv">1</span>), <span class="st">&quot;-&quot;</span>, <span class="fu">round</span>(max, <span class="dv">1</span>), <span class="st">&quot;)&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb445-24"><a href="estrhab.html#cb445-24" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;Location&quot;</span>, Area, Habitat, Ponto, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb445-25"><a href="estrhab.html#cb445-25" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Variable, Location, stat_string) <span class="sc">%&gt;%</span> <span class="co"># find(&quot;select&quot;), dplyr::select evita conflito entre package:MASS  package:dplyr</span></span>
+<span id="cb445-26"><a href="estrhab.html#cb445-26" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Location, <span class="at">values_from =</span> stat_string)</span>
+<span id="cb445-27"><a href="estrhab.html#cb445-27" tabindex="-1"></a></span>
+<span id="cb445-28"><a href="estrhab.html#cb445-28" tabindex="-1"></a>m_wide</span>
+<span id="cb445-29"><a href="estrhab.html#cb445-29" tabindex="-1"></a>m_wide <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(m_wide)</span>
+<span id="cb445-30"><a href="estrhab.html#cb445-30" tabindex="-1"></a>m_wide</span>
+<span id="cb445-31"><a href="estrhab.html#cb445-31" tabindex="-1"></a></span>
+<span id="cb445-32"><a href="estrhab.html#cb445-32" tabindex="-1"></a><span class="co">#Exportando dados para Excel----</span></span>
+<span id="cb445-33"><a href="estrhab.html#cb445-33" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb445-34"><a href="estrhab.html#cb445-34" tabindex="-1"></a><span class="fu">write.xlsx</span>(m_wide, <span class="at">file =</span> <span class="st">&quot;tabela de habitat.xlsx&quot;</span>, <span class="at">rowNames =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb445-35"><a href="estrhab.html#cb445-35" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">loadWorkbook</span>(<span class="st">&quot;tabela de habitat.xlsx&quot;</span>)</span>
+<span id="cb445-36"><a href="estrhab.html#cb445-36" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="at">sheet =</span> <span class="st">&quot;Sheet 1&quot;</span>, <span class="at">x =</span> m_wide)</span>
+<span id="cb445-37"><a href="estrhab.html#cb445-37" tabindex="-1"></a><span class="fu">saveWorkbook</span>(wb, <span class="st">&quot;tabela de habitat.xlsx&quot;</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb445-38"><a href="estrhab.html#cb445-38" tabindex="-1"></a></span>
+<span id="cb445-39"><a href="estrhab.html#cb445-39" tabindex="-1"></a><span class="co">#Escolher sumário de uma variavel----</span></span>
+<span id="cb445-40"><a href="estrhab.html#cb445-40" tabindex="-1"></a>m</span>
+<span id="cb445-41"><a href="estrhab.html#cb445-41" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="st">&quot;h.roots&quot;</span></span>
+<span id="cb445-42"><a href="estrhab.html#cb445-42" tabindex="-1"></a>m[m<span class="sc">$</span>Variable <span class="sc">==</span> var, <span class="st">&quot;mean&quot;</span>] <span class="co">#cada valor de var</span></span>
+<span id="cb445-43"><a href="estrhab.html#cb445-43" tabindex="-1"></a><span class="fu">summary</span>(m[m<span class="sc">$</span>Variable <span class="sc">==</span> var, <span class="st">&quot;mean&quot;</span>]) <span class="co">#sumário dos valores de var</span></span>
+<span id="cb445-44"><a href="estrhab.html#cb445-44" tabindex="-1"></a></span>
+<span id="cb445-45"><a href="estrhab.html#cb445-45" tabindex="-1"></a><span class="co">#Escolher sumário de um grupo de variáveis do df m----</span></span>
+<span id="cb445-46"><a href="estrhab.html#cb445-46" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">grep</span>(<span class="st">&quot;^h</span><span class="sc">\\</span><span class="st">.&quot;</span>, m<span class="sc">$</span>Variable, <span class="at">value =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb445-47"><a href="estrhab.html#cb445-47" tabindex="-1"></a>summaries <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co">#criam uma lista vazia para guardar os sumários</span></span>
+<span id="cb445-48"><a href="estrhab.html#cb445-48" tabindex="-1"></a><span class="co"># Loop para cada variável do grupo e guarda em summaries</span></span>
+<span id="cb445-49"><a href="estrhab.html#cb445-49" tabindex="-1"></a><span class="cf">for</span> (var <span class="cf">in</span> vars) {</span>
+<span id="cb445-50"><a href="estrhab.html#cb445-50" tabindex="-1"></a>  summaries[[var]] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m[m<span class="sc">$</span>Variable <span class="sc">==</span> var, <span class="st">&quot;mean&quot;</span>])</span>
+<span id="cb445-51"><a href="estrhab.html#cb445-51" tabindex="-1"></a>}</span>
+<span id="cb445-52"><a href="estrhab.html#cb445-52" tabindex="-1"></a><span class="co"># var is a temporary variable used in the for loop to iterate through</span></span>
+<span id="cb445-53"><a href="estrhab.html#cb445-53" tabindex="-1"></a><span class="co"># each variable name that starts with &quot;h.&quot;</span></span>
+<span id="cb445-54"><a href="estrhab.html#cb445-54" tabindex="-1"></a></span>
+<span id="cb445-55"><a href="estrhab.html#cb445-55" tabindex="-1"></a>summaries</span>
+<span id="cb445-56"><a href="estrhab.html#cb445-56" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(summaries, as.data.frame.list))</span>
+<span id="cb445-57"><a href="estrhab.html#cb445-57" tabindex="-1"></a><span class="fu">round</span>(summary_table, <span class="dv">2</span>)</span>
+<span id="cb445-58"><a href="estrhab.html#cb445-58" tabindex="-1"></a><span class="co">#sink(file = &quot;summary_h.txt&quot;, split = TRUE)</span></span>
+<span id="cb445-59"><a href="estrhab.html#cb445-59" tabindex="-1"></a><span class="fu">round</span>(summary_table[<span class="fu">order</span>(summary_table<span class="sc">$</span>Mean, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ], <span class="dv">2</span>)</span>
+<span id="cb445-60"><a href="estrhab.html#cb445-60" tabindex="-1"></a><span class="co">#sink()</span></span>
+<span id="cb445-61"><a href="estrhab.html#cb445-61" tabindex="-1"></a></span>
+<span id="cb445-62"><a href="estrhab.html#cb445-62" tabindex="-1"></a><span class="co">#Tabela limpa</span></span>
+<span id="cb445-63"><a href="estrhab.html#cb445-63" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Variable =</span> <span class="fu">rownames</span>(summary_table), summary_table)</span>
+<span id="cb445-64"><a href="estrhab.html#cb445-64" tabindex="-1"></a><span class="fu">rownames</span>(summary_table) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb445-65"><a href="estrhab.html#cb445-65" tabindex="-1"></a><span class="fu">colnames</span>(summary_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Variable&quot;</span>, <span class="st">&quot;Min&quot;</span>, <span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;Median&quot;</span>, <span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;Max&quot;</span>)</span>
+<span id="cb445-66"><a href="estrhab.html#cb445-66" tabindex="-1"></a>summary_table</span></code></pre></div>
 </div>
 <div id="apêndices-12" class="section level2 unnumbered">
-<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-12"><i class="fas fa-link"></i></a>
-</h2>
+<h2>Apêndices</h2>
 </div>
 <div id="sites-consultados-7" class="section level2 unnumbered">
-<h2>Sites consultados<a class="anchor" aria-label="anchor" href="#sites-consultados-7"><i class="fas fa-link"></i></a>
-</h2>
+<h2>Sites consultados</h2>
 </div>
 <div id="script-limpo-9" class="section level2 unnumbered">
-<h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-9"><i class="fas fa-link"></i></a>
-</h2>
+<h2>Script limpo</h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
 </div>
 <div id="referências-15" class="section level2 unnumbered">
-<h2>Referências<a class="anchor" aria-label="anchor" href="#refer%C3%AAncias-15"><i class="fas fa-link"></i></a>
-</h2>
+<h2>Referências</h2>
 
 </div>
 </div>
@@ -741,49 +700,30 @@ MEDEIROS, E. S. F.; SILVA, M. J.; RAMOS, R. T. C. Application of catchment- and 
 SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Statistics in Biological Research</strong>. 3. ed. New York: W.H. Freeman; Company, 1995. Type: Book.
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></div>
-<div class="next"><a href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li>
-<a class="nav-link" href="#estrhab"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#resumo-13">RESUMO</a></li>
-<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-13">Apresentação</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#sobre-os-dados-6"><span class="header-section-number">19.1</span> Sobre os dados</a></li>
-<li>
-<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-9"><span class="header-section-number">19.2</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><span class="header-section-number">19.2.1</span> Instalando os pacotes necessários para esse módulo.</a></li></ul>
-</li>
-<li><a class="nav-link" href="#importando-a-planilha-6"><span class="header-section-number">19.3</span> Importando a planilha</a></li>
-<li><a class="nav-link" href="#reset-point"><span class="header-section-number">19.4</span> Reset point</a></li>
-<li><a class="nav-link" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><span class="header-section-number">19.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
-<li><a class="nav-link" href="#deletando-vari%C3%A1veis-colineares"><span class="header-section-number">19.6</span> Deletando variáveis colineares</a></li>
-<li><a class="nav-link" href="#somando-vari%C3%A1veis-redundantes"><span class="header-section-number">19.7</span> Somando variáveis redundantes</a></li>
-<li><a class="nav-link" href="#tabela-de-dados-ambientais"><span class="header-section-number">19.8</span> Tabela de dados ambientais</a></li>
-<li><a class="nav-link" href="#ap%C3%AAndices-12">Apêndices</a></li>
-<li><a class="nav-link" href="#sites-consultados-7">Sites consultados</a></li>
-<li><a class="nav-link" href="#script-limpo-9">Script limpo</a></li>
-<li><a class="nav-link" href="#refer%C3%AAncias-15">Referências</a></li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 23/07/2026 15:04:56.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 24/07/2026 16:50:19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -791,7 +731,11 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -803,7 +747,8 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
 for (let popover of popovers) {
   const div = document.createElement('div');
   div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
@@ -821,4 +766,5 @@ for (let popover of popovers) {
 }
 </script>
 </body>
+
 </html>
