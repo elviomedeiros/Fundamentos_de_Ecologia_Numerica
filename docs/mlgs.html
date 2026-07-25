@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 16 Modelos lineares generalizados (GLMs) | Fundamentos de Ecologia Numérica</title>
+<title> 15 Modelos lineares generalizados (GLMs) | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas....">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content=" 16 Modelos lineares generalizados (GLMs) | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 15 Modelos lineares generalizados (GLMs) | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas....">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 16 Modelos lineares generalizados (GLMs) | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 15 Modelos lineares generalizados (GLMs) | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -72,36 +72,36 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Fundamentos de Ecologia Numérica</a></li>
+<li><a class="" href="index.html">Fundamentos de Ecologia Numérica</a></li>
 <li class="book-part">I. INTRODUÇÃO</li>
-<li><a class="" href="ferram.html"><span class="header-section-number">2</span> Ferramentas</a></li>
-<li><a class="" href="rrstu.html"><span class="header-section-number">3</span> Introdução ao R/RStudio</a></li>
+<li><a class="" href="ferram.html"><span class="header-section-number">1</span> Ferramentas</a></li>
+<li><a class="" href="rrstu.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">II. TEORIA</li>
-<li><a class="" href="amd.html"><span class="header-section-number">4</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
-<li><a class="" href="tiposE.html"><span class="header-section-number">5</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
-<li><a class="" href="reltrnsT.html"><span class="header-section-number">6</span> Teoria 3 - Relativizações e transformações de dados</a></li>
+<li><a class="" href="amd.html"><span class="header-section-number">3</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
+<li><a class="" href="tiposE.html"><span class="header-section-number">4</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
+<li><a class="" href="reltrnsT.html"><span class="header-section-number">5</span> Teoria 3 - Relativizações e transformações de dados</a></li>
 <li class="book-part">III. BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">7</span> Bases de dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">8</span> Base de dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">9</span> Base de dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">6</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">7</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">8</span> Base de dados II - Habitat</a></li>
 <li class="book-part">IV. ESTATÍSTICAS DESCRITIVAS</li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">10</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
-<li><a class="" href="xls.html"><span class="header-section-number">11</span> R Módulo 2 - Importando planilhas de dados</a></li>
-<li><a class="" href="norm.html"><span class="header-section-number">12</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
-<li><a class="" href="testes.html"><span class="header-section-number">13</span> R Módulo 3.2 - Testes estatísticos</a></li>
-<li><a class="" href="correg.html"><span class="header-section-number">14</span> Correlação e Regressão</a></li>
-<li><a class="" href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></li>
-<li><a class="active" href="mlgs.html"><span class="header-section-number">16</span> Modelos lineares generalizados (GLMs)</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
-<li><a class="" href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">9</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
+<li><a class="" href="xls.html"><span class="header-section-number">10</span> R Módulo 2 - Importando planilhas de dados</a></li>
+<li><a class="" href="norm.html"><span class="header-section-number">11</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="testes.html"><span class="header-section-number">12</span> R Módulo 3.2 - Testes estatísticos</a></li>
+<li><a class="" href="correg.html"><span class="header-section-number">13</span> Correlação e Regressão</a></li>
+<li><a class="" href="regmul.html"><span class="header-section-number">14</span> Regressão múltipla</a></li>
+<li><a class="active" href="mlgs.html"><span class="header-section-number">15</span> Modelos lineares generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></li>
-<li><a class="" href="outcentr.html"><span class="header-section-number">21</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
-<li><a class="" href="upgma.html"><span class="header-section-number">22</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
-<li><a class="" href="kmeans.html"><span class="header-section-number">23</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
-<li><a class="" href="nomes.html"><span class="header-section-number">24</span> Nomenclatura das matrizes em AMD</a></li>
+<li><a class="" href="nomes.html"><span class="header-section-number">23</span> Nomenclatura das matrizes em AMD</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -110,9 +110,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mlgs" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mlgs" class="section level1" number="15">
 <h1>
-<span class="header-section-number"> 16</span> Modelos lineares generalizados (GLMs)<a class="anchor" aria-label="anchor" href="#mlgs"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 15</span> Modelos lineares generalizados (GLMs)<a class="anchor" aria-label="anchor" href="#mlgs"><i class="fas fa-link"></i></a>
 </h1>
 <div id="resumo-10" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-10"><i class="fas fa-link"></i></a>
@@ -122,24 +122,24 @@
 <div id="apresentação-10" class="section level3 unnumbered">
 <h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-10"><i class="fas fa-link"></i></a>
 </h3>
-<p>A principal suposição que fizemos até aqui para os modelo lineares (função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>), é que a variância é constante (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (a)). Entretanto, em <strong>dados de contagem</strong>, nos quais a variável resposta assume valores inteiros e frequentemente há muitos zeros no conjunto de dados, a variância pode aumentar linearmente com a média (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (b)). Em <strong>dados de proporção</strong>, nos quais se registra tanto o número de sucessos quanto o número de fracassos de um evento, a variância apresenta uma relação em forma de <em>U</em> invertido com a média (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (c)). Quando a variável resposta segue uma distribuição gama (como em <strong>dados de tempo</strong> até a morte ou tempo até a ocorrência de um evento), a variância aumenta mais rapidamente do que de forma linear em relação à média (Figura <a href="mlgs.html#fig:4043glm">16.1</a>, (d)).</p>
+<p>A principal suposição que fizemos até aqui para os modelo lineares (função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>), é que a variância é constante (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (a)). Entretanto, em <strong>dados de contagem</strong>, nos quais a variável resposta assume valores inteiros e frequentemente há muitos zeros no conjunto de dados, a variância pode aumentar linearmente com a média (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (b)). Em <strong>dados de proporção</strong>, nos quais se registra tanto o número de sucessos quanto o número de fracassos de um evento, a variância apresenta uma relação em forma de <em>U</em> invertido com a média (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (c)). Quando a variável resposta segue uma distribuição gama (como em <strong>dados de tempo</strong> até a morte ou tempo até a ocorrência de um evento), a variância aumenta mais rapidamente do que de forma linear em relação à média (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (d)).</p>
 <div class="figure">
 <span style="display:block;" id="fig:4043glm"></span>
 <img src="fundamentos_de_ecologia_numerica_files/figure-html/4043glm-1.png" alt="Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade." width="550px"><p class="caption">
-Figura 16.1: Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade.
+Figura 15.1: Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade.
 </p>
 </div>
 <p>Essas quatro relações fundamentam a escolha da família de distribuição em Modelos Lineares Generalizados (GLMs), pois cada tipo de variável resposta apresenta um padrão característico de relação entre a média e a variância.</p>
 <p>Muitos dos métodos estatísticos clássicos, como a <strong>regressão linear</strong> e o <strong>teste t de Student</strong>, assumem que a variância é constante (homocedasticidade). No entanto, em diversas aplicações essa suposição não é válida. É justamente por isso que os GLMs são tão úteis, pois permitem modelar adequadamente situações em que a variância depende da média da variável resposta <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>; <a href="#ref-dunn2018">DUNN; SMYTH, 2018</a>; <a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
-<div id="pressupostos-6" class="section level4" number="16.0.0.1">
+<div id="pressupostos-6" class="section level4" number="15.0.0.1">
 <h4>
-<span class="header-section-number">16.0.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-6"><i class="fas fa-link"></i></a>
 </h4>
 <p>Um Modelo Linear Generalizado possui três componentes fundamentais: <strong>a estrutura de erros</strong>, <strong>o preditor linear</strong> e <strong>a função de ligação</strong> (<em>link function</em>) <span class="citation">(<a href="#ref-crawley2015">CRAWLEY, 2015</a>)</span>:</p>
 </div>
-<div id="estrutura-de-erros" class="section level4" number="16.0.0.2">
+<div id="estrutura-de-erros" class="section level4" number="15.0.0.2">
 <h4>
-<span class="header-section-number">16.0.0.2</span> Estrutura de erros:<a class="anchor" aria-label="anchor" href="#estrutura-de-erros"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.0.2</span> Estrutura de erros:<a class="anchor" aria-label="anchor" href="#estrutura-de-erros"><i class="fas fa-link"></i></a>
 </h4>
 <p>Até este ponto, trabalhamos com análises estatísticas que assumem <strong>erros normalmente distribuídos</strong>. Na prática, entretanto, muitos tipos de dados apresentam distribuições de erro que não seguem a distribuição normal <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>)</span>. Alguns exemplos incluem:</p>
 <ul>
@@ -161,9 +161,9 @@ Figura 16.1: Relação entre a média e a variância para diferentes distribuiç
 <strong>Distribuição Exponencial</strong>, empregada em dados de tempo até a ocorrência de um evento, como em análises de sobrevivência.</li>
 </ul>
 </div>
-<div id="estrutura-do-modelo" class="section level4" number="16.0.0.3">
+<div id="estrutura-do-modelo" class="section level4" number="15.0.0.3">
 <h4>
-<span class="header-section-number">16.0.0.3</span> Estrutura do modelo:<a class="anchor" aria-label="anchor" href="#estrutura-do-modelo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.0.3</span> Estrutura do modelo:<a class="anchor" aria-label="anchor" href="#estrutura-do-modelo"><i class="fas fa-link"></i></a>
 </h4>
 <p>A estrutura de um modelo relaciona cada valor observado da variável resposta (<strong>y</strong>) a um valor previsto (<strong>ŷ</strong>). Esse valor previsto é obtido por meio de uma transformação aplicada ao resultado do <strong>preditor linear</strong>.</p>
 <p>O <strong>preditor linear</strong>, geralmente representado pela letra grega (<span class="math inline">\(\eta\)</span>) (<em>eta</em>), consiste em uma combinação linear dos efeitos de uma ou mais variáveis explicativas (<span class="math inline">\(x_j\)</span>):</p>
@@ -193,9 +193,9 @@ e quando a função de ligação é o <strong>recíproco</strong> (<em>reciproca
 \]</span></p>
 <p>Assim, embora o ajuste do modelo seja realizado na escala do preditor linear, <strong>os resultados finais são expressos na escala original da variável resposta</strong>, facilitando sua interpretação.</p>
 </div>
-<div id="função-de-ligação" class="section level4" number="16.0.0.4">
+<div id="função-de-ligação" class="section level4" number="15.0.0.4">
 <h4>
-<span class="header-section-number">16.0.0.4</span> Função de ligação:<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.0.4</span> Função de ligação:<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <p>Segundo <span class="citation">CRAWLEY (<a href="#ref-crawley2015">2015</a>)</span>, um dos conceitos mais desafiadores dos GLMs é a compreensão da relação entre os valores da variável resposta, observados nos dados e previstos pelo modelo, e o <strong>preditor linear</strong>. A ideia fundamental é que a <strong>função de ligação</strong> (<em>link function</em>) estabelece a relação entre a <strong>média da variável resposta</strong> e o preditor linear.</p>
 <p><span class="citation">CRAWLEY (<a href="#ref-crawley2015">2015</a>)</span> expressa essa relação em termos matemáticos como:</p>
@@ -219,9 +219,9 @@ onde,</p>
 <p>Assim, o modelo é ajustado em uma escala linear, mas as previsões são apresentadas na escala original dos dados, o que facilita sua interpretação.</p>
 </div>
 </div>
-<div id="escolha-da-função-de-ligação" class="section level3" number="16.0.1">
+<div id="escolha-da-função-de-ligação" class="section level3" number="15.0.1">
 <h3>
-<span class="header-section-number">16.0.1</span> Escolha da função de ligação<a class="anchor" aria-label="anchor" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.1</span> Escolha da função de ligação<a class="anchor" aria-label="anchor" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h3>
 <p>Uma das principais razões para utilizar diferentes funções de ligação é garantir que os valores ajustados permaneçam dentro de limites compatíveis com a natureza da variável resposta.</p>
 <p>Por exemplo:</p>
@@ -235,9 +235,9 @@ onde,</p>
 \eta = \log\left(\frac{p}{1-p}\right)
 \]</span></p>
 <p>em que <span class="math inline">\(p\)</span> representa a probabilidade de ocorrência do evento de interesse. A função inversa do logito garante que todas as probabilidades estimadas permaneçam no intervalo entre 0 e 1.</p>
-<div id="comparação-entre-funções-de-ligação" class="section level4" number="16.0.1.1">
+<div id="comparação-entre-funções-de-ligação" class="section level4" number="15.0.1.1">
 <h4>
-<span class="header-section-number">16.0.1.1</span> Comparação entre funções de ligação<a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%A3o-entre-fun%C3%A7%C3%B5es-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.1.1</span> Comparação entre funções de ligação<a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%A3o-entre-fun%C3%A7%C3%B5es-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <blockquote>
 <p>Uma das vantagens dos GLMs é que diferentes funções de ligação podem ser utilizadas para um mesmo conjunto de dados, permitindo comparar modelos que descrevem diferentes formas de relação entre o preditor linear e a variável resposta.</p>
@@ -246,9 +246,9 @@ onde,</p>
 <p>Como todos esses modelos são ajustados utilizando a mesma estrutura de dados, é possível comparar seus desempenhos por meio da <strong>deviância residual</strong> (<em>residual deviance</em>). Em geral, a função de ligação mais adequada é aquela que produz a <strong>menor deviância residual</strong>, indicando que o modelo descreve os dados de forma mais eficiente.</p>
 <p>Dessa forma, a escolha da função de ligação não altera apenas a forma matemática do modelo, mas também influencia diretamente a qualidade do ajuste e a interpretação dos efeitos das variáveis explicativas sobre a variável resposta.</p>
 </div>
-<div id="funções-canônicas-de-ligação" class="section level4" number="16.0.1.2">
+<div id="funções-canônicas-de-ligação" class="section level4" number="15.0.1.2">
 <h4>
-<span class="header-section-number">16.0.1.2</span> Funções canônicas de ligação<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%B5es-can%C3%B4nicas-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.1.2</span> Funções canônicas de ligação<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%B5es-can%C3%B4nicas-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <p>As <strong>funções de ligação canônicas</strong> (<em>canonical link functions</em>) são as funções de ligação utilizadas no R por padrão quando uma determinada distribuição de erros é especificada no argumento <code>family</code> de um GLM. Em outras palavras, quando nenhuma função de ligação é explicitamente informada, o software adota automaticamente a função de ligação canônica associada à distribuição escolhida.</p>
 <p>As principais combinações entre distribuições de erro e suas respectivas funções de ligação canônicas são apresentadas na Tabela abaixo.</p>
@@ -294,23 +294,23 @@ onde,</p>
 <pre><code>glm(y ~ x, family = Gamma(link = "log"))</code></pre>
 <p>As quatro combinações canônicas apresentadas na tabela correspondem aos modelos mais utilizados na prática e constituem o ponto de partida para a maioria das análises.</p>
 </div>
-<div id="exemplo-1-2" class="section level4" number="16.0.1.3">
+<div id="exemplo-1-2" class="section level4" number="15.0.1.3">
 <h4>
-<span class="header-section-number">16.0.1.3</span> Exemplo 1<a class="anchor" aria-label="anchor" href="#exemplo-1-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.1.3</span> Exemplo 1<a class="anchor" aria-label="anchor" href="#exemplo-1-2"><i class="fas fa-link"></i></a>
 </h4>
 </div>
 </div>
-<div id="organização-básica-6" class="section level2" number="16.1">
+<div id="organização-básica-6" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">16.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div id="organizando-os-dados-1" class="section level3" number="16.1.1">
+<div id="organizando-os-dados-1" class="section level3" number="15.1.1">
 <h3>
-<span class="header-section-number">16.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anovas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"t_anovas.csv"</span>,</span>
@@ -411,9 +411,9 @@ onde,</p>
 ## S-R-SE-3      S  3.763162 249.4642857  4
 ## S-R-SE-4      S  8.603085 406.6071429 11</code></pre>
 </div>
-<div id="anova-vs-glm" class="section level3" number="16.1.2">
+<div id="anova-vs-glm" class="section level3" number="15.1.2">
 <h3>
-<span class="header-section-number">16.1.2</span> ANOVA vs GLM<a class="anchor" aria-label="anchor" href="#anova-vs-glm"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1.2</span> ANOVA vs GLM<a class="anchor" aria-label="anchor" href="#anova-vs-glm"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suponha que você queira comparar a riqueza (Srare) entre grupos (Grupos):</p>
 <div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
@@ -745,22 +745,22 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></div>
-<div class="next"><a href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></div>
+<div class="prev"><a href="regmul.html"><span class="header-section-number">14</span> Regressão múltipla</a></div>
+<div class="next"><a href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#mlgs"><span class="header-section-number">16</span> Modelos lineares generalizados (GLMs)</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#mlgs"><span class="header-section-number">15</span> Modelos lineares generalizados (GLMs)</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-10">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-10">Apresentação</a></li>
-<li><a class="nav-link" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><span class="header-section-number">16.0.1</span> Escolha da função de ligação</a></li>
+<li><a class="nav-link" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><span class="header-section-number">15.0.1</span> Escolha da função de ligação</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><span class="header-section-number">16.1</span> Organização básica</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">16.1.1</span> Organizando os dados</a></li>
-<li><a class="nav-link" href="#anova-vs-glm"><span class="header-section-number">16.1.2</span> ANOVA vs GLM</a></li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><span class="header-section-number">15.1</span> Organização básica</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">15.1.1</span> Organizando os dados</a></li>
+<li><a class="nav-link" href="#anova-vs-glm"><span class="header-section-number">15.1.2</span> ANOVA vs GLM</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#ap%C3%AAndices-9">Apêndices</a></li>
@@ -783,7 +783,7 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 25/07/2026 10:57:15.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 25/07/2026 11:21:33.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,19 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
+<title> 18 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
-<meta name="description" content="RESUMO  Apresentação   19.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
+<meta name="description" content="RESUMO  Apresentação   18.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content=" 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 18 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
-<meta property="og:description" content="RESUMO  Apresentação   19.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
+<meta property="og:description" content="RESUMO  Apresentação   18.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 19 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
-<meta name="twitter:description" content="RESUMO  Apresentação   19.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
+<meta name="twitter:title" content=" 18 R Módulo 4.3 - Estrutura do habitat | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO  Apresentação   18.1 Sobre os dados Usaremos para esse tutorial dois conjuntos de dados. A Matriz ambiental (ppbio06p-amb.xlsx) de dados coletados no Programa de Pesquisa em Biodiversidade...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -72,36 +72,36 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Fundamentos de Ecologia Numérica</a></li>
+<li><a class="" href="index.html">Fundamentos de Ecologia Numérica</a></li>
 <li class="book-part">I. INTRODUÇÃO</li>
-<li><a class="" href="ferram.html"><span class="header-section-number">2</span> Ferramentas</a></li>
-<li><a class="" href="rrstu.html"><span class="header-section-number">3</span> Introdução ao R/RStudio</a></li>
+<li><a class="" href="ferram.html"><span class="header-section-number">1</span> Ferramentas</a></li>
+<li><a class="" href="rrstu.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
 <li class="book-part">II. TEORIA</li>
-<li><a class="" href="amd.html"><span class="header-section-number">4</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
-<li><a class="" href="tiposE.html"><span class="header-section-number">5</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
-<li><a class="" href="reltrnsT.html"><span class="header-section-number">6</span> Teoria 3 - Relativizações e transformações de dados</a></li>
+<li><a class="" href="amd.html"><span class="header-section-number">3</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
+<li><a class="" href="tiposE.html"><span class="header-section-number">4</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
+<li><a class="" href="reltrnsT.html"><span class="header-section-number">5</span> Teoria 3 - Relativizações e transformações de dados</a></li>
 <li class="book-part">III. BASES DE DADOS</li>
-<li><a class="" href="bases.html"><span class="header-section-number">7</span> Bases de dados. Dados do PPBio Semiárido</a></li>
-<li><a class="" href="basepeixes.html"><span class="header-section-number">8</span> Base de dados I - Peixes</a></li>
-<li><a class="" href="basehab.html"><span class="header-section-number">9</span> Base de dados II - Habitat</a></li>
+<li><a class="" href="bases.html"><span class="header-section-number">6</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">7</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">8</span> Base de dados II - Habitat</a></li>
 <li class="book-part">IV. ESTATÍSTICAS DESCRITIVAS</li>
-<li><a class="" href="tiposR.html"><span class="header-section-number">10</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
-<li><a class="" href="xls.html"><span class="header-section-number">11</span> R Módulo 2 - Importando planilhas de dados</a></li>
-<li><a class="" href="norm.html"><span class="header-section-number">12</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
-<li><a class="" href="testes.html"><span class="header-section-number">13</span> R Módulo 3.2 - Testes estatísticos</a></li>
-<li><a class="" href="correg.html"><span class="header-section-number">14</span> Correlação e Regressão</a></li>
-<li><a class="" href="regmul.html"><span class="header-section-number">15</span> Regressão múltipla</a></li>
-<li><a class="" href="mlgs.html"><span class="header-section-number">16</span> Modelos lineares generalizados (GLMs)</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">17</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
-<li><a class="" href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="active" href="estrhab.html"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">9</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
+<li><a class="" href="xls.html"><span class="header-section-number">10</span> R Módulo 2 - Importando planilhas de dados</a></li>
+<li><a class="" href="norm.html"><span class="header-section-number">11</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="testes.html"><span class="header-section-number">12</span> R Módulo 3.2 - Testes estatísticos</a></li>
+<li><a class="" href="correg.html"><span class="header-section-number">13</span> Correlação e Regressão</a></li>
+<li><a class="" href="regmul.html"><span class="header-section-number">14</span> Regressão múltipla</a></li>
+<li><a class="" href="mlgs.html"><span class="header-section-number">15</span> Modelos lineares generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
+<li><a class="active" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></li>
-<li><a class="" href="outcentr.html"><span class="header-section-number">21</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
-<li><a class="" href="upgma.html"><span class="header-section-number">22</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
-<li><a class="" href="kmeans.html"><span class="header-section-number">23</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 5 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
-<li><a class="" href="nomes.html"><span class="header-section-number">24</span> Nomenclatura das matrizes em AMD</a></li>
+<li><a class="" href="nomes.html"><span class="header-section-number">23</span> Nomenclatura das matrizes em AMD</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -110,9 +110,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estrhab" class="section level1" number="19">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estrhab" class="section level1" number="18">
 <h1>
-<span class="header-section-number"> 19</span> R Módulo 4.3 - Estrutura do habitat<a class="anchor" aria-label="anchor" href="#estrhab"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 18</span> R Módulo 4.3 - Estrutura do habitat<a class="anchor" aria-label="anchor" href="#estrhab"><i class="fas fa-link"></i></a>
 </h1>
 <div id="resumo-13" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-13"><i class="fas fa-link"></i></a>
@@ -122,24 +122,24 @@
 <h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-13"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="sobre-os-dados-6" class="section level2" number="19.1">
+<div id="sobre-os-dados-6" class="section level2" number="18.1">
 <h2>
-<span class="header-section-number">19.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Usaremos para esse tutorial dois conjuntos de dados. A <strong>Matriz ambiental</strong> (<a href="https://docs.google.com/spreadsheets/d/1V_QxcorksaSOa40Uzj1z2jy02WgKeFTx/edit?usp=drive_link&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06p-amb.xlsx</a>) de dados coletados no Programa de Pesquisa em Biodiversidade - PPBio (Veja <a href="https://ppbio.inpa.gov.br/Sobre">Programa de Pesquisa em Biodiversidade – PPBio</a>) <span class="citation">(<a href="#ref-medeiros2008">MEDEIROS; SILVA; RAMOS, 2008</a>)</span>. Esses são dados de <strong>variáveis ambientais</strong> distribuidas em diversas unidades amostrais (UA’s ou sítios). Essa é a <strong>matriz bruta de dados</strong>, porque os valores ainda não foram transformados <span class="citation">(<a href="#ref-sokal1995">SOKAL; ROHLF, 1995</a>)</span>. Note que as variáveis foram medidas em diferentes unidades (cm, m, °C, mg/L, etc.), com uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada. Além disso usaremos a <strong>tabela de agrupamentos</strong> (<a href="https://docs.google.com/spreadsheets/d/1H52eBBxZ1k-6Xgrse87etq6mq3mMUTZi/edit?usp=sharing&amp;ouid=101766125969589673518&amp;rtpof=true&amp;sd=true">ppbio06-grupos.xlsx</a>).</p>
-<p><strong>Revise as informações sobre as bases de dados no Capítulo</strong> <a href="bases.html#bases">7</a><strong>. As dases de dados para esse Módulo podem ser baixadam na Seção</strong> <a href="bases.html#arqs">7.2</a><strong>.</strong></p>
+<p><strong>Revise as informações sobre as bases de dados no Capítulo</strong> <a href="bases.html#bases">6</a><strong>. As dases de dados para esse Módulo podem ser baixadam na Seção</strong> <a href="bases.html#arqs">6.2</a><strong>.</strong></p>
 </div>
-<div id="organização-básica-9" class="section level2" number="19.2">
+<div id="organização-básica-9" class="section level2" number="18.2">
 <h2>
-<span class="header-section-number">19.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-9"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div id="instalando-os-pacotes-necessários-para-esse-módulo." class="section level3" number="19.2.1">
+<div id="instalando-os-pacotes-necessários-para-esse-módulo." class="section level3" number="18.2.1">
 <h3>
-<span class="header-section-number">19.2.1</span> Instalando os pacotes necessários para esse módulo.<a class="anchor" aria-label="anchor" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.2.1</span> Instalando os pacotes necessários para esse módulo.<a class="anchor" aria-label="anchor" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><i class="fas fa-link"></i></a>
 </h3>
 <p>Se você ja fez o módulo anterior, não vai precisar instalar nenhum pacote novo. Os pacotes necessários serão carregados ao longo desse módulo.</p>
 <div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
@@ -151,9 +151,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="importando-a-planilha-6" class="section level2" number="19.3">
+<div id="importando-a-planilha-6" class="section level2" number="18.3">
 <h2>
-<span class="header-section-number">19.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.3</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.<br>
 - Ajuste a primeira linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.<br>
@@ -214,20 +214,20 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="reset-point" class="section level2" number="19.4">
+<div id="reset-point" class="section level2" number="18.4">
 <h2>
-<span class="header-section-number">19.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4</span> Reset point<a class="anchor" aria-label="anchor" href="#reset-point"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_amb</span> <span class="op">&lt;-</span> <span class="va">ppbio</span></span>
 <span><span class="co">#pat &lt;- "^S"</span></span>
 <span><span class="co">#m_amb &lt;- m_amb[!grepl(pat, rownames(m_amb)), ] #exclui quem começa com pat</span></span></code></pre></div>
-<p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela <a href="bases.html#tab:300arqs">7.1</a>).</p>
-<p><strong>Revise Seção</strong> <a href="bases.html#abrev">7.2.2</a> <strong>e a Tabela de Abreviações (@ref(tab:200m_2)) na mesma Seção que resumem os tipos de matrizes e suas abreviações, para os nossos códigos.</strong></p>
+<p>Aqui cria-se um novo objeto do R (<code>m_trab</code>, ou a matriz de trabalho, para esse momento) que substitui a matriz de dados original, por uma nova matriz que pode ser a matriz relativizada, transformada, transposta, etc. Dessa forma, mantemos a matriz de dados original caso precisemos dela novamente (Veja a Tabela <a href="bases.html#tab:300arqs">6.1</a>).</p>
+<p><strong>Revise Seção</strong> <a href="bases.html#abrev">6.2.2</a> <strong>e a Tabela de Abreviações (@ref(tab:200m_2)) na mesma Seção que resumem os tipos de matrizes e suas abreviações, para os nossos códigos.</strong></p>
 </div>
-<div id="correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias" class="section level2" number="19.5">
+<div id="correlograma-e-remoção-de-variáveis-redundantes-ou-desnecessárias" class="section level2" number="18.5">
 <h2>
-<span class="header-section-number">19.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
@@ -441,9 +441,9 @@
 ## a.transp      0.232399977 -0.111321669 -0.24179767  0.109896052  1.000000000</code></pre>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-247-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-247-2.png" alt="" width="672"></p>
 </div>
-<div id="deletando-variáveis-colineares" class="section level2" number="19.6">
+<div id="deletando-variáveis-colineares" class="section level2" number="18.6">
 <h2>
-<span class="header-section-number">19.6</span> Deletando variáveis colineares<a class="anchor" aria-label="anchor" href="#deletando-vari%C3%A1veis-colineares"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.6</span> Deletando variáveis colineares<a class="anchor" aria-label="anchor" href="#deletando-vari%C3%A1veis-colineares"><i class="fas fa-link"></i></a>
 </h2>
 <p>Primeiro vamos listar as variáveis com correlação maior que 70% ou r &gt; 0.7.</p>
 <div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
@@ -484,9 +484,9 @@
 ## [21] "m.distsource" "m.distmouth"  "m.maxslope"   "m.maxdepth"   "m.habdepth"  
 ## [26] "m.width"      "a.veloc"      "a.temp"       "a.do"         "a.transp"</code></pre>
 </div>
-<div id="somando-variáveis-redundantes" class="section level2" number="19.7">
+<div id="somando-variáveis-redundantes" class="section level2" number="18.7">
 <h2>
-<span class="header-section-number">19.7</span> Somando variáveis redundantes<a class="anchor" aria-label="anchor" href="#somando-vari%C3%A1veis-redundantes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.7</span> Somando variáveis redundantes<a class="anchor" aria-label="anchor" href="#somando-vari%C3%A1veis-redundantes"><i class="fas fa-link"></i></a>
 </h2>
 <p>Algumas dessa variáveis são redundantes, vamos soma-las.</p>
 <div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
@@ -619,9 +619,9 @@
 <span>                  header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                  na.strings <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="tabela-de-dados-ambientais" class="section level2" number="19.8">
+<div id="tabela-de-dados-ambientais" class="section level2" number="18.8">
 <h2>
-<span class="header-section-number">19.8</span> Tabela de dados ambientais<a class="anchor" aria-label="anchor" href="#tabela-de-dados-ambientais"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8</span> Tabela de dados ambientais<a class="anchor" aria-label="anchor" href="#tabela-de-dados-ambientais"><i class="fas fa-link"></i></a>
 </h2>
 <p>Nessa etapa precisaremos da tabela de grupos. Selecionamos a aba <code>ambientalp</code>, porque nela constam os agrupamentos <em>a-priori</em> para os dados ambientais.</p>
 <div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
@@ -742,27 +742,27 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="partdiv.html"><span class="header-section-number">18</span> R Modulo 4.2 - Decomposição da diversidade</a></div>
-<div class="next"><a href="reltrns.html"><span class="header-section-number">20</span> R Modulo 5 - Relativizações e transformações</a></div>
+<div class="prev"><a href="partdiv.html"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a></div>
+<div class="next"><a href="reltrns.html"><span class="header-section-number">19</span> R Modulo 5 - Relativizações e transformações</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#estrhab"><span class="header-section-number">19</span> R Módulo 4.3 - Estrutura do habitat</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#estrhab"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-13">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-13">Apresentação</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#sobre-os-dados-6"><span class="header-section-number">19.1</span> Sobre os dados</a></li>
+<li><a class="nav-link" href="#sobre-os-dados-6"><span class="header-section-number">18.1</span> Sobre os dados</a></li>
 <li>
-<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-9"><span class="header-section-number">19.2</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><span class="header-section-number">19.2.1</span> Instalando os pacotes necessários para esse módulo.</a></li></ul>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-9"><span class="header-section-number">18.2</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#instalando-os-pacotes-necess%C3%A1rios-para-esse-m%C3%B3dulo."><span class="header-section-number">18.2.1</span> Instalando os pacotes necessários para esse módulo.</a></li></ul>
 </li>
-<li><a class="nav-link" href="#importando-a-planilha-6"><span class="header-section-number">19.3</span> Importando a planilha</a></li>
-<li><a class="nav-link" href="#reset-point"><span class="header-section-number">19.4</span> Reset point</a></li>
-<li><a class="nav-link" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><span class="header-section-number">19.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
-<li><a class="nav-link" href="#deletando-vari%C3%A1veis-colineares"><span class="header-section-number">19.6</span> Deletando variáveis colineares</a></li>
-<li><a class="nav-link" href="#somando-vari%C3%A1veis-redundantes"><span class="header-section-number">19.7</span> Somando variáveis redundantes</a></li>
-<li><a class="nav-link" href="#tabela-de-dados-ambientais"><span class="header-section-number">19.8</span> Tabela de dados ambientais</a></li>
+<li><a class="nav-link" href="#importando-a-planilha-6"><span class="header-section-number">18.3</span> Importando a planilha</a></li>
+<li><a class="nav-link" href="#reset-point"><span class="header-section-number">18.4</span> Reset point</a></li>
+<li><a class="nav-link" href="#correlograma-e-remo%C3%A7%C3%A3o-de-vari%C3%A1veis-redundantes-ou-desnecess%C3%A1rias"><span class="header-section-number">18.5</span> Correlograma e remoção de variáveis redundantes ou desnecessárias</a></li>
+<li><a class="nav-link" href="#deletando-vari%C3%A1veis-colineares"><span class="header-section-number">18.6</span> Deletando variáveis colineares</a></li>
+<li><a class="nav-link" href="#somando-vari%C3%A1veis-redundantes"><span class="header-section-number">18.7</span> Somando variáveis redundantes</a></li>
+<li><a class="nav-link" href="#tabela-de-dados-ambientais"><span class="header-section-number">18.8</span> Tabela de dados ambientais</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-12">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-consultados-7">Sites consultados</a></li>
 <li><a class="nav-link" href="#script-limpo-9">Script limpo</a></li>
@@ -783,7 +783,7 @@ SOKAL, R. R.; ROHLF, F. J. <strong>Biometry: The Principles and Practice of Stat
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 25/07/2026 10:57:15.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 25/07/2026 11:21:33.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
