@@ -140,7 +140,7 @@ Figura 12.1: Resumo esquemático dos possíveis testes estatísticos paramétric
 <h2>
 <span class="header-section-number">12.1</span> Sobre os dados<a class="anchor" aria-label="anchor" href="#sobre-os-dados-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>Considere os dados merísticos (ou médições morfológicas) da espécie de peixe <em>Cichla ocellaris</em> (tucunaré amarelo) do reservatório da barragem de Gramame, PB <span class="citation">(<a href="#ref-medeiros1994">MEDEIROS; ROSA, 1994</a>)</span> (Figura <a href="testes.html#fig:4032tucu">12.2</a>). Existem 421 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da espécie, um conjunto de dados formidável.</p>
+<p>Considere os dados merísticos (ou médições morfológicas) da espécie de peixe <em>Cichla ocellaris</em> (tucunaré amarelo) do reservatório da barragem de Gramame, PB <span class="citation">(<a href="#ref-medeiros1994">MEDEIROS; ROSA, 1994</a>)</span> (Figura <a href="testes.html#fig:4032tucu">12.2</a>). Existem 434 medições do comprimemto total (CT), comprimento padrão (CP) e peso total (PT), além do sexo (MACHO, FÊMEA ou imaturo), e outros descritores da estrutura populacional da espécie, um conjunto de dados formidável.</p>
 <div class="figure">
 <span style="display:block;" id="fig:4032tucu"></span>
 <img src="imagens/tucuna.png" alt="Dados merísticos da espécie de peixe *Cichla ocellaris* (tucunaré amarelo) do reservatório da barragem  de Gramame, PB." width="450px"><p class="caption">
@@ -733,11 +733,13 @@ p&lt;0,05: rejeita-se <span class="math inline">\(H_1\)</span></p>
 </h4>
 <p>De acordo com <span class="citation">CÂMARA; CHELLAPPA; CHELLAPPA (<a href="#ref-c%C3%A2mara2002">2002</a>)</span>, o tamanho da primeira maturação sexual de <em>Cichla ocellaris</em> é 26,2cm para os machos e 21,4 para fêmeas. Já <span class="citation">GOMIERO; BRAGA (<a href="#ref-gomiero2004">2004</a>)</span>, encontrou o L<sub>50</sub> e L<sub>100</sub> da primeira maturação sexual para fêmeas da espécie sendo 20 e 29 cm, respectivamente.</p>
 <p>A partir daqui, podemos seguir com três tipos de perguntas para o nosso conjunto de dados:</p>
+<blockquote>
 <ol style="list-style-type: decimal">
 <li><p>O comprimento médio dos indivíduos amostrados difere do tamanho de primeira maturação sexual descrito na literatura? (Teste t para uma amostra)</p></li>
 <li><p>O comprimento médio difere entre machos e fêmeas de <em>Cichla ocellaris</em>? (Teste t para grupos independentes)</p></li>
 <li><p>Existe diferença no comprimento dos indivíduos antes e após a maturação sexual? (Teste t para medidas repetidas)</p></li>
 </ol>
+</blockquote>
 </div>
 <div id="teste-t-para-uma-amostra-one-sample-t-test" class="section level3" number="12.11.1">
 <h3>
@@ -1214,11 +1216,13 @@ F = \frac{QME}{QMD}
 ##   imaturo      60  161</code></pre>
 <p>Cada célula da tabela criada, representa uma combinação entre <code>sexo</code> (MACHO, FÊMEA, imaturo) e período (chuvoso, seco).</p>
 <p>A partir desse desenho, podemos responder às seguintes perguntas:</p>
+<blockquote>
 <ol style="list-style-type: decimal">
 <li><p>O sexo influencia o comprimento dos indivíduos?</p></li>
 <li><p>O período do ano influencia o comprimento dos indivíduos?</p></li>
 <li><p>A influência do sexo sobre o comprimento depende do período do ano?</p></li>
 </ol>
+</blockquote>
 <p>Ou seja, deseja-se avaliar a possível interação entre sexo e período sobre a estrutura de tamanho populacional de <em>Cichla ocellaris</em>.</p>
 </div>
 <div id="gráficos-exploratórios-1" class="section level3" number="12.13.1">
@@ -1637,7 +1641,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe intera�
 <div class="center">
 <p><strong>NOTA</strong></p>
 </div>
-<p>Baixe esse arquivo de atividade sobre testes estatísticos no R (<a href="listas/lista8-testes.docx">LISTA DE EXERCÍCIOS</a>) e esse sobre testes t no R (<a href="listas/lista9-testest.docx">LISTA DE EXERCÍCIOS</a>), responda às questões. Se achar necessário, insira “chunks” de scripts do R, prints de tela ou cópias de gráficos, resultados ou mensagens de erro.</p>
+<p>Baixe esse arquivo de atividade sobre testes estatísticos no R (<a href="listas/lista8-testes.docx">LISTA DE EXERCÍCIOS</a>), esse sobre testes t no R (<a href="listas/lista9-testest.docx">LISTA DE EXERCÍCIOS</a>) e esse sobre ANOVA no R (<a href="listas/lista10-anovas.docx">LISTA DE EXERCÍCIOS</a>), responda às questões. Se achar necessário, insira “chunks” de scripts do R, prints de tela ou cópias de gráficos, resultados ou mensagens de erro.</p>
 </div>
 <div class="infobox note">
 <div class="center">
@@ -2157,7 +2161,7 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 28/07/2026 18:32:05.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 02/08/2026 15:14:54.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
