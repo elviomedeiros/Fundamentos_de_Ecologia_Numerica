@@ -123,29 +123,85 @@
 <div id="resumo-10" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-10"><i class="fas fa-link"></i></a>
 </h3>
-<p>Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas. Se quisermos que nossas análises sejam imparciais e que nossas interpretações sejam cientificamente corretas, precisamos de métodos capazes de lidar com essas situações. Em dados de contagem, por exemplo, nos quais a variável resposta assume valores inteiros e frequentemente há muitos zeros no conjunto de dados, a variância pode aumentar linearmente com a média. Em dados de proporção, nos quais registramos tanto o número de sucessos quanto o número de fracassos de um evento, a variância apresenta uma relação em forma de <em>U</em> invertido com a média. Já quando a variável resposta segue uma distribuição gama (como em dados de tempo até a morte ou tempo até a ocorrência de um evento), a variância aumenta mais rapidamente do que de forma linear em relação à média. Assim, na prática, os dados frequentemente apresentam outros tipos de padrões de relação entre média e variância (veja Crawley <span class="citation">(<a href="#ref-crawley2005">2005</a>)</span> e <span class="citation">(<a href="#ref-crawley2015">2015</a>)</span>, de onde esse capítulo é baseado). A maneira de tratar todos esses problemas dentro de um único arcabouço teórico foi desenvolvida por John Nelder <span class="citation">(<a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>)</span>, que denominou essa abordagem de <strong>Modelos Lineares Generalizados</strong> (<em>Generalized Linear Models</em>), ou simplesmente <strong>GLMs</strong> (originalmente chamados de <em>glims</em>).</p>
+<p>Até este ponto, assumimos que a variância é constante e que os erros seguem uma distribuição normal. Entretanto, para muitos tipos de dados, uma ou ambas essas suposições não são válidas. Se quisermos que nossas análises sejam imparciais e que nossas interpretações sejam cientificamente corretas, precisamos de métodos capazes de lidar com essas situações. Em dados de contagem, por exemplo, nos quais a variável resposta assume valores inteiros e frequentemente há muitos zeros no conjunto de dados, a variância pode aumentar linearmente com a média. Em dados de proporção, nos quais registramos tanto o número de sucessos quanto o número de fracassos de um evento, a variância apresenta uma relação em forma de <em>U</em> invertido com a média. Já quando a variável resposta segue uma distribuição gama (como em dados de tempo até a morte ou tempo até a ocorrência de um evento), a variância aumenta mais rapidamente do que de forma linear em relação à média. Assim, na prática, os dados frequentemente apresentam outros tipos de padrões de relação entre média e variância (veja Crawley <span class="citation">(<a href="#ref-crawley2005">2005</a>)</span> e <span class="citation">(<a href="#ref-crawley2015">2015</a>)</span>), de onde esse capítulo é baseado). A maneira de tratar todos esses problemas dentro de um único arcabouço teórico foi desenvolvida por John Nelder <span class="citation">(<a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>)</span>, que denominou essa abordagem de <strong>Modelos Lineares Generalizados</strong> (<em>Generalized Linear Models</em>), ou simplesmente <strong>GLMs</strong> (originalmente chamados de <em>glims</em>).</p>
 </div>
 <div id="apresentação-10" class="section level3 unnumbered">
 <h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-10"><i class="fas fa-link"></i></a>
 </h3>
-<p>A principal suposição que fizemos até aqui para os modelo lineares (função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>), é que a variância é constante (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (a)). Entretanto, em <strong>dados de contagem</strong>, nos quais a variável resposta assume valores inteiros e frequentemente há muitos zeros no conjunto de dados, a variância pode aumentar linearmente com a média (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (b)). Em <strong>dados de proporção</strong>, nos quais se registra tanto o número de sucessos quanto o número de fracassos de um evento, a variância apresenta uma relação em forma de <em>U</em> invertido com a média (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (c)). Quando a variável resposta segue uma distribuição gama (como em <strong>dados de tempo</strong> até a morte ou tempo até a ocorrência de um evento), a variância aumenta mais rapidamente do que de forma linear em relação à média (Figura <a href="mlgs.html#fig:4043glm">15.1</a>, (d)).</p>
+</div>
+<div id="por-que-precisamos-de-modelos-lineares-generalizados" class="section level3" number="15.0.1">
+<h3>
+<span class="header-section-number">15.0.1</span> Por que precisamos de Modelos Lineares Generalizados?<a class="anchor" aria-label="anchor" href="#por-que-precisamos-de-modelos-lineares-generalizados"><i class="fas fa-link"></i></a>
+</h3>
+<p>Os Modelos Lineares Generalizados (<em>Generalized Linear Models</em> – GLMs) representam uma extensão dos modelos lineares clássicos, permitindo analisar uma ampla variedade de tipos de dados encontrados em Biologia, Ecologia e Ciências Ambientais <span class="citation">(<a href="#ref-dunn2018">DUNN; SMYTH, 2018</a>; <a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>)</span>.</p>
+<p>Até este ponto, foram apresentados métodos como o teste t, ANOVA, correlação de Pearson e regressão linear simples. Todos esses métodos pertencem à família dos modelos lineares e compartilham um conjunto de pressupostos que devem ser atendidos para que as inferências estatísticas sejam válidas.</p>
+<p>Em uma regressão linear simples, por exemplo, assume-se que:</p>
+<ul>
+<li>a variável resposta é contínua;</li>
+<li>os resíduos seguem uma distribuição Normal;</li>
+<li>existe uma relação linear entre a variável resposta e os preditores;</li>
+<li>a variância dos resíduos é constante (homocedasticidade).</li>
+</ul>
+<p>Quando essas premissas são atendidas, a regressão linear fornece estimativas confiáveis e de fácil interpretação. Entretanto, muitos conjuntos de dados biológicos não apresentam essas características.</p>
+<p>Na Ecologia, por exemplo, é comum trabalhar com variáveis resposta como:</p>
+<ul>
+<li>número de espécies;</li>
+<li>abundância de indivíduos;</li>
+<li>presença ou ausência de uma espécie;</li>
+<li>proporção de sobrevivência;</li>
+<li>porcentagem de cobertura vegetal;</li>
+<li>concentração de nutrientes;</li>
+<li>biomassa de organismos.</li>
+</ul>
+<p>Essas variáveis frequentemente apresentam distribuições diferentes da Normal, além de relações entre média e variância incompatíveis com a regressão linear clássica.</p>
+<p>No exemplo que viemos tratando, a relação peso x comprimento ou comprimento total x comprimento padrão, não podem assumir valores negativos (Figura <a href="mlgs.html#fig:4043glm">15.1</a>). Entretanto, um modelo linear pode produzir previsões biologicamente impossíveis, peso ou comprimento taltal negativos. Veja resultados prévios abaixo.</p>
 <div class="figure">
 <span style="display:block;" id="fig:4043glm"></span>
-<img src="fundamentos_de_ecologia_numerica_files/figure-html/4043glm-1.png" alt="Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade." width="550px"><p class="caption">
-Figura 15.1: Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade.
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/4043glm-1.png" alt="Esse exemplo mostra uma variável de contagem (número de espécies) em função da largura de riachos. Observe que a reta ajustada produz previsões negativas para riachos muito estreitos, algo biologicamente impossível" width="550px"><p class="caption">
+Figura 15.1: Esse exemplo mostra uma variável de contagem (número de espécies) em função da largura de riachos. Observe que a reta ajustada produz previsões negativas para riachos muito estreitos, algo biologicamente impossível
+</p>
+</div>
+<p>Da mesma forma, probabilidades e proporções estão naturalmente limitadas ao intervalo entre 0 e 1, mas uma regressão linear pode gerar valores menores que 0 ou maiores que 1.</p>
+<p>Essas limitações motivaram o desenvolvimento dos Modelos Lineares Generalizados (GLMs), que mantêm a estrutura dos modelos lineares tradicionais, mas permitem utilizar diferentes distribuições de probabilidade e diferentes funções de ligação (link functions) de acordo com a natureza da variável resposta.</p>
+<p>Assim, enquanto a regressão linear utiliza exclusivamente a distribuição Normal, os GLMs possibilitam modelar variáveis de contagem, proporções, probabilidades e outras distribuições frequentemente encontradas em estudos ecológicos.</p>
+</div>
+<div id="tipos-de-distribuição-em-glms" class="section level3" number="15.0.2">
+<h3>
+<span class="header-section-number">15.0.2</span> Tipos de distribuição em GLM’s<a class="anchor" aria-label="anchor" href="#tipos-de-distribui%C3%A7%C3%A3o-em-glms"><i class="fas fa-link"></i></a>
+</h3>
+<p>A principal suposição que fizemos até aqui para os modelo lineares (função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>), é que a variância é constante (Figura <a href="mlgs.html#fig:4043glm2">15.2</a>, (a)). Nesse caso, a escolha da distribuição depende da natureza da variável resposta. Variáveis contínuas aproximadamente simétricas costumam ser modeladas por uma distribuição Normal, enquanto contagens, proporções e variáveis contínuas positivas requerem outras distribuições.</p>
+<p>Em <strong>dados de contagem</strong>, nos quais a variável resposta assume valores inteiros e frequentemente há muitos zeros no conjunto de dados, a variância pode aumentar linearmente com a média (Figura <a href="mlgs.html#fig:4043glm2">15.2</a>, (b)). Em <strong>dados de proporção</strong>, nos quais se registra tanto o número de sucessos quanto o número de fracassos de um evento, a variância apresenta uma relação em forma de <em>U</em> invertido com a média (Figura <a href="mlgs.html#fig:4043glm2">15.2</a>, (c)). Quando a variável resposta segue uma distribuição gama (como em <strong>dados de tempo</strong> até a morte ou tempo até a ocorrência de um evento), a variância aumenta mais rapidamente do que de forma linear em relação à média (Figura <a href="mlgs.html#fig:4043glm2">15.2</a>, (d)).</p>
+<div class="figure">
+<span style="display:block;" id="fig:4043glm2"></span>
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/4043glm2-1.png" alt="Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade." width="550px"><p class="caption">
+Figura 15.2: Relação entre a média e a variância para diferentes distribuições de probabilidade utilizadas em Modelos Lineares Generalizados (GLMs). (a) Distribuição normal, com variância constante; (b) distribuição de Poisson, em que a variância é igual à média; (c) distribuição binomial, cuja variância apresenta uma relação em forma de U invertido com a média; e (d) distribuição gama, em que a variância aumenta proporcionalmente ao quadrado da média. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade.
+</p>
+</div>
+<p>Aqui vemos a dispersão da variância em resposta a média para as famílias de distribuições mais comuns em GLM (Figura <a href="mlgs.html#fig:4043glm3">15.3</a>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:4043glm3"></span>
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/4043glm3-1.png" alt="Relação da dispersão da variância em resposta a média para as famílias de distribuição mais comuns em GLM. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade." width="550px"><p class="caption">
+Figura 15.3: Relação da dispersão da variância em resposta a média para as famílias de distribuição mais comuns em GLM. Essas diferentes relações entre média e variância justificam o uso de famílias de distribuições específicas em GLMs, em substituição aos modelos lineares clássicos que assumem homocedasticidade.
 </p>
 </div>
 <p>Essas quatro relações fundamentam a escolha da família de distribuição em Modelos Lineares Generalizados (GLMs), pois cada tipo de variável resposta apresenta um padrão característico de relação entre a média e a variância.</p>
+<p>As principais distribuições utilizadas em Modelos Lineares Generalizados são mostradas abaixo (Figura <a href="mlgs.html#fig:4043distglm">15.4</a>). As distribuições Normal, Gamma e Beta são contínuas, portanto possuem uma função densidade (<span class="math inline">\(f(x)\)</span>). Já as distribuições Poisson e Binomial são discretas. Elas possuem uma função de massa de probabilidade (<span class="math inline">\(P(X=x)\)</span>), definida apenas para valores inteiros. Além da forma da distribuição, cada família possui uma relação característica entre a média e a variância. Nos modelos lineares clássicos assume-se variância constante. Nos GLMs, entretanto, a variância pode aumentar linearmente com a média (Poisson), atingir um máximo (Binomial) ou crescer aproximadamente com o quadrado da média (Gamma) (Figura <a href="mlgs.html#fig:4043glm">15.1</a>). Essa flexibilidade permite modelar adequadamente diferentes tipos de dados biológicos.</p>
+<div class="figure">
+<span style="display:block;" id="fig:4043distglm"></span>
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/4043distglm-1.png" alt="Principais distribuições utilizadas em Modelos Lineares Generalizados." width="600px"><p class="caption">
+Figura 15.4: Principais distribuições utilizadas em Modelos Lineares Generalizados.
+</p>
+</div>
 <p>Muitos dos métodos estatísticos clássicos, como a <strong>regressão linear</strong> e o <strong>teste t de Student</strong>, assumem que a variância é constante (homocedasticidade). No entanto, em diversas aplicações essa suposição não é válida. É justamente por isso que os GLMs são tão úteis, pois permitem modelar adequadamente situações em que a variância depende da média da variável resposta <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>; <a href="#ref-dunn2018">DUNN; SMYTH, 2018</a>; <a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
-<div id="pressupostos-6" class="section level4" number="15.0.0.1">
+<div id="pressupostos-6" class="section level4" number="15.0.2.1">
 <h4>
-<span class="header-section-number">15.0.0.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.2.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-6"><i class="fas fa-link"></i></a>
 </h4>
 <p>Um Modelo Linear Generalizado possui três componentes fundamentais: <strong>a estrutura de erros</strong>, <strong>o preditor linear</strong> e <strong>a função de ligação</strong> (<em>link function</em>) <span class="citation">(<a href="#ref-crawley2015">CRAWLEY, 2015</a>)</span>:</p>
 </div>
-<div id="estrutura-de-erros" class="section level4" number="15.0.0.2">
+<div id="estrutura-de-erros" class="section level4" number="15.0.2.2">
 <h4>
-<span class="header-section-number">15.0.0.2</span> Estrutura de erros:<a class="anchor" aria-label="anchor" href="#estrutura-de-erros"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.2.2</span> Estrutura de erros:<a class="anchor" aria-label="anchor" href="#estrutura-de-erros"><i class="fas fa-link"></i></a>
 </h4>
 <p>Até este ponto, trabalhamos com análises estatísticas que assumem <strong>erros normalmente distribuídos</strong>. Na prática, entretanto, muitos tipos de dados apresentam distribuições de erro que não seguem a distribuição normal <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>)</span>. Alguns exemplos incluem:</p>
 <ul>
@@ -166,10 +222,39 @@ Figura 15.1: Relação entre a média e a variância para diferentes distribuiç
 <li>
 <strong>Distribuição Exponencial</strong>, empregada em dados de tempo até a ocorrência de um evento, como em análises de sobrevivência.</li>
 </ul>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Tipo de variável resposta</th>
+<th align="left">Distribuição recomendada</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Contínua</td>
+<td align="left">Normal (Gaussiana)</td>
+</tr>
+<tr class="even">
+<td align="left">Contagem</td>
+<td align="left">Poisson</td>
+</tr>
+<tr class="odd">
+<td align="left">Presença/Ausência</td>
+<td align="left">Binomial</td>
+</tr>
+<tr class="even">
+<td align="left">Proporção</td>
+<td align="left">Binomial ou Beta*</td>
+</tr>
+<tr class="odd">
+<td align="left">Tempo ou valores positivos</td>
+<td align="left">Gamma</td>
+</tr>
+</tbody>
+</table></div>
+<p>* A distribuição <strong>Binomial</strong> é utilizada quando a proporção é obtida a partir de um número conhecido de ensaios (por exemplo, número de sementes germinadas em 100 sementes). A distribuição <strong>Beta</strong> é indicada para proporções contínuas restritas ao intervalo (0,1), como a fração de cobertura vegetal ou a proporção de área ocupada por uma espécie.</p>
 </div>
-<div id="estrutura-do-modelo" class="section level4" number="15.0.0.3">
+<div id="estrutura-do-modelo" class="section level4" number="15.0.2.3">
 <h4>
-<span class="header-section-number">15.0.0.3</span> Estrutura do modelo:<a class="anchor" aria-label="anchor" href="#estrutura-do-modelo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.2.3</span> Estrutura do modelo:<a class="anchor" aria-label="anchor" href="#estrutura-do-modelo"><i class="fas fa-link"></i></a>
 </h4>
 <p>A estrutura de um modelo relaciona cada valor observado da variável resposta (<strong>y</strong>) a um valor previsto (<strong>ŷ</strong>). Esse valor previsto é obtido por meio de uma transformação aplicada ao resultado do <strong>preditor linear</strong>.</p>
 <p>O <strong>preditor linear</strong>, geralmente representado pela letra grega (<span class="math inline">\(\eta\)</span>) (<em>eta</em>), consiste em uma combinação linear dos efeitos de uma ou mais variáveis explicativas (<span class="math inline">\(x_j\)</span>):</p>
@@ -199,9 +284,9 @@ e quando a função de ligação é o <strong>recíproco</strong> (<em>reciproca
 \]</span></p>
 <p>Assim, embora o ajuste do modelo seja realizado na escala do preditor linear, <strong>os resultados finais são expressos na escala original da variável resposta</strong>, facilitando sua interpretação.</p>
 </div>
-<div id="função-de-ligação" class="section level4" number="15.0.0.4">
+<div id="função-de-ligação" class="section level4" number="15.0.2.4">
 <h4>
-<span class="header-section-number">15.0.0.4</span> Função de ligação:<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.2.4</span> Função de ligação:<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <p>Segundo <span class="citation">CRAWLEY (<a href="#ref-crawley2015">2015</a>)</span>, um dos conceitos mais desafiadores dos GLMs é a compreensão da relação entre os valores da variável resposta, observados nos dados e previstos pelo modelo, e o <strong>preditor linear</strong>. A ideia fundamental é que a <strong>função de ligação</strong> (<em>link function</em>) estabelece a relação entre a <strong>média da variável resposta</strong> e o preditor linear.</p>
 <p><span class="citation">CRAWLEY (<a href="#ref-crawley2015">2015</a>)</span> expressa essa relação em termos matemáticos como:</p>
@@ -225,9 +310,9 @@ onde,</p>
 <p>Assim, o modelo é ajustado em uma escala linear, mas as previsões são apresentadas na escala original dos dados, o que facilita sua interpretação.</p>
 </div>
 </div>
-<div id="escolha-da-função-de-ligação" class="section level3" number="15.0.1">
+<div id="escolha-da-função-de-ligação" class="section level3" number="15.0.3">
 <h3>
-<span class="header-section-number">15.0.1</span> Escolha da função de ligação<a class="anchor" aria-label="anchor" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.3</span> Escolha da função de ligação<a class="anchor" aria-label="anchor" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h3>
 <p>Uma das principais razões para utilizar diferentes funções de ligação é garantir que os valores ajustados permaneçam dentro de limites compatíveis com a natureza da variável resposta.</p>
 <p>Por exemplo:</p>
@@ -241,9 +326,9 @@ onde,</p>
 \eta = \log\left(\frac{p}{1-p}\right)
 \]</span></p>
 <p>em que <span class="math inline">\(p\)</span> representa a probabilidade de ocorrência do evento de interesse. A função inversa do logito garante que todas as probabilidades estimadas permaneçam no intervalo entre 0 e 1.</p>
-<div id="comparação-entre-funções-de-ligação" class="section level4" number="15.0.1.1">
+<div id="comparação-entre-funções-de-ligação" class="section level4" number="15.0.3.1">
 <h4>
-<span class="header-section-number">15.0.1.1</span> Comparação entre funções de ligação<a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%A3o-entre-fun%C3%A7%C3%B5es-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.3.1</span> Comparação entre funções de ligação<a class="anchor" aria-label="anchor" href="#compara%C3%A7%C3%A3o-entre-fun%C3%A7%C3%B5es-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <blockquote>
 <p>Uma das vantagens dos GLMs é que diferentes funções de ligação podem ser utilizadas para um mesmo conjunto de dados, permitindo comparar modelos que descrevem diferentes formas de relação entre o preditor linear e a variável resposta.</p>
@@ -252,9 +337,9 @@ onde,</p>
 <p>Como todos esses modelos são ajustados utilizando a mesma estrutura de dados, é possível comparar seus desempenhos por meio da <strong>deviância residual</strong> (<em>residual deviance</em>). Em geral, a função de ligação mais adequada é aquela que produz a <strong>menor deviância residual</strong>, indicando que o modelo descreve os dados de forma mais eficiente.</p>
 <p>Dessa forma, a escolha da função de ligação não altera apenas a forma matemática do modelo, mas também influencia diretamente a qualidade do ajuste e a interpretação dos efeitos das variáveis explicativas sobre a variável resposta.</p>
 </div>
-<div id="funções-canônicas-de-ligação" class="section level4" number="15.0.1.2">
+<div id="funções-canônicas-de-ligação" class="section level4" number="15.0.3.2">
 <h4>
-<span class="header-section-number">15.0.1.2</span> Funções canônicas de ligação<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%B5es-can%C3%B4nicas-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.3.2</span> Funções canônicas de ligação<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%B5es-can%C3%B4nicas-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <p>As <strong>funções de ligação canônicas</strong> (<em>canonical link functions</em>) são as funções de ligação utilizadas no R por padrão quando uma determinada distribuição de erros é especificada no argumento <code>family</code> de um GLM. Em outras palavras, quando nenhuma função de ligação é explicitamente informada, o software adota automaticamente a função de ligação canônica associada à distribuição escolhida.</p>
 <p>As principais combinações entre distribuições de erro e suas respectivas funções de ligação canônicas são apresentadas na Tabela abaixo.</p>
@@ -300,9 +385,9 @@ onde,</p>
 <pre><code>glm(y ~ x, family = Gamma(link = "log"))</code></pre>
 <p>As quatro combinações canônicas apresentadas na tabela correspondem aos modelos mais utilizados na prática e constituem o ponto de partida para a maioria das análises.</p>
 </div>
-<div id="exemplo-1-2" class="section level4" number="15.0.1.3">
+<div id="exemplo-1-2" class="section level4" number="15.0.3.3">
 <h4>
-<span class="header-section-number">15.0.1.3</span> Exemplo 1<a class="anchor" aria-label="anchor" href="#exemplo-1-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.3.3</span> Exemplo 1<a class="anchor" aria-label="anchor" href="#exemplo-1-2"><i class="fas fa-link"></i></a>
 </h4>
 </div>
 </div>
@@ -703,7 +788,29 @@ onde,</p>
 ## r     |         95% CI
 ## ----------------------
 ## -0.68 | [-0.82, -0.36]</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-4.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-5.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-6.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-7.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-8.png" alt="" width="672"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-4.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-5.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-6.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-7.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-8.png" alt="" width="672"></p>
+</div>
+</div>
+<div id="material-de-apoio-8" class="section level2" number="15.2">
+<h2>
+<span class="header-section-number">15.2</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-8"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="teste-seus-conhecimentos-7" class="section level2" number="15.3">
+<h2>
+<span class="header-section-number">15.3</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-7"><i class="fas fa-link"></i></a>
+</h2>
+<div class="infobox note">
+<div class="center">
+<p><strong>NOTA</strong></p>
+</div>
+<p>Baixe esse arquivo de atividade sobre correlação e regressão R (<a href="listas/.docx">LISTA DE EXERCÍCIOS</a>) e responda às questões. Se achar necessário, insira “chunks” de scripts do R, prints de tela ou cópias de gráficos, resultados ou mensagens de erro.</p>
+</div>
+<div class="infobox note">
+<div class="center">
+<p><strong>NOTA</strong></p>
+</div>
+<p>Baixe esse arquivo de exercício e resolva as questões no R (<a href="exerc/.R">Exercício 5</a>).</p>
 </div>
 </div>
 <div id="apêndices-9" class="section level2 unnumbered">
@@ -713,7 +820,7 @@ onde,</p>
 <div id="sites-para-consulta-3" class="section level2 unnumbered">
 <h2>Sites para consulta<a class="anchor" aria-label="anchor" href="#sites-para-consulta-3"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a><br><a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a><br><a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a></p>
+<p><a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a><br><a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a><br><a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a><br><a href="https://bedeffinianrowedavies.com/statisticstutorials/introductionglms" class="uri">https://bedeffinianrowedavies.com/statisticstutorials/introductionglms</a></p>
 </div>
 <div id="script-limpo-6" class="section level2 unnumbered">
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-6"><i class="fas fa-link"></i></a>
@@ -760,7 +867,9 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <a class="nav-link" href="#mlgs"><span class="header-section-number">15</span> Modelos lineares generalizados (GLMs)</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-10">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-10">Apresentação</a></li>
-<li><a class="nav-link" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><span class="header-section-number">15.0.1</span> Escolha da função de ligação</a></li>
+<li><a class="nav-link" href="#por-que-precisamos-de-modelos-lineares-generalizados"><span class="header-section-number">15.0.1</span> Por que precisamos de Modelos Lineares Generalizados?</a></li>
+<li><a class="nav-link" href="#tipos-de-distribui%C3%A7%C3%A3o-em-glms"><span class="header-section-number">15.0.2</span> Tipos de distribuição em GLM’s</a></li>
+<li><a class="nav-link" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><span class="header-section-number">15.0.3</span> Escolha da função de ligação</a></li>
 </ul>
 </li>
 <li>
@@ -769,6 +878,8 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <li><a class="nav-link" href="#anova-vs-glm"><span class="header-section-number">15.1.2</span> ANOVA vs GLM</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#material-de-apoio-8"><span class="header-section-number">15.2</span> Material de apoio</a></li>
+<li><a class="nav-link" href="#teste-seus-conhecimentos-7"><span class="header-section-number">15.3</span> TESTE SEUS CONHECIMENTOS</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-9">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-para-consulta-3">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-6">Script limpo</a></li>
@@ -789,7 +900,7 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 02/08/2026 19:11:04.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 03/08/2026 11:11:09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

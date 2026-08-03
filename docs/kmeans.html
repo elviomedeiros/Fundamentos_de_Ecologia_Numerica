@@ -324,7 +324,7 @@ m_trab
 ## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068
 ## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271
 ## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-347-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-346-1.png" alt="" width="672"></div>
 </div>
 <div id="histórico-das-fusões-1" class="section level2" number="22.4">
 <h2>
@@ -435,7 +435,7 @@ Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a aná
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1]  0 98</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-353-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-352-1.png" alt="" width="672"></div>
 <div id="relativização-e-transformação" class="section level4" number="22.6.1.1">
 <h4>
 <span class="header-section-number">22.6.1.1</span> Relativização e transformação<a class="anchor" aria-label="anchor" href="#relativiza%C3%A7%C3%A3o-e-transforma%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
@@ -447,7 +447,7 @@ Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a aná
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.000000 9.899495</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-354-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-353-1.png" alt="" width="672"></div>
 </div>
 <div id="gráficos-comparativos" class="section level4" number="22.6.1.2">
 <h4>
@@ -462,7 +462,7 @@ Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a aná
 <span>        ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>        main <span class="op">=</span> <span class="st">"Dados relativizados e transformados"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-355-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-354-1.png" alt="" width="672"></div>
 <div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos</span></span></code></pre></div>
 </div>
@@ -544,7 +544,7 @@ Figura 22.1: Gráficos para cada método de proposição para o número de clust
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_cluster.html">fviz_cluster</a></span><span class="op">(</span><span class="va">kmeans</span>, data <span class="op">=</span> <span class="va">m_trns_s</span>, outlier.color <span class="op">=</span> <span class="st">"black"</span>, outlier.shape <span class="op">=</span> <span class="fl">19</span>,</span>
 <span>             ellipse.type <span class="op">=</span> <span class="st">"convex"</span><span class="op">)</span> <span class="co">#ou "confidence"</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-358-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-357-1.png" alt="" width="672"></div>
 <pre><code>## K-means clustering with 3 clusters of sizes 3, 9, 11
 ## 
 ## Cluster means:
@@ -794,7 +794,7 @@ Figura 22.1: Gráficos para cada método de proposição para o número de clust
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 02/08/2026 19:11:04.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 03/08/2026 11:11:09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -289,7 +289,7 @@ Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, lo
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster1</span>, k<span class="op">=</span><span class="fl">3</span>, h <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="co">#?dist</span></span>
 <span><span class="co">#?hclust</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-321-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-320-1.png" alt="" width="672"></div>
 <p>É possivel definir uma caixa mostrado os principais grupos formados. Isso pode ser feito estabelecendo quantos grupos se quer mostrar, usando a função <code>k = no. de grupos</code>. Ou pode-se definir os grupos formados até uma determinanda distância, usando a função <code>h = altura dos grupos</code> no eixo das distâncias.</p>
 <div id="histórico-das-fusões" class="section level3" number="21.4.1">
 <h3>
@@ -641,7 +641,7 @@ Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, lo
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster2</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#?dist</span></span>
 <span><span class="co">#?hclust</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-324-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-323-1.png" alt="" width="672"></div>
 <p>O significado do argumento <code>method =</code> da função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> usada no códico acima, depende do contexto em que ela é usada.</p>
 <ul>
 <li><p>A função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> no R é usada para calcular as distâncias entre as observações em um conjunto de dados. Essa função tem vários métodos de cálculo de distância, que podem ser especificados pelo argumento <code>method =</code>, a exemplo de “euclidean”, “manhattan”, “canberra”, entre outras.</p></li>
@@ -738,7 +738,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster2</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Dist. Euclidiana"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-325-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-324-1.png" alt="" width="672"></div>
 </div>
 </div>
 <div id="cluster-3-relativização-pelo-total-da-coluna" class="section level2" number="21.6">
@@ -761,7 +761,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <code class="sourceCode R"><span><span class="va">cluster3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_relcol</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster3</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Rel.Coluna"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster3</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-327-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-326-1.png" alt="" width="672"></div>
 </div>
 </div>
 <div id="cluster-4-transformação-pelo-arcoseno-da-raiz-quadrada" class="section level2" number="21.7">
@@ -782,7 +782,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <code class="sourceCode R"><span><span class="va">cluster4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster4</span>,  main <span class="op">=</span> <span class="st">"Cluster Dendrogram - ArcSin.SQRT"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster4</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-329-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-328-1.png" alt="" width="672"></div>
 </div>
 </div>
 <div id="cluster-5-controle-total-dos-parâmetros" class="section level2" number="21.8">
@@ -806,7 +806,7 @@ Método de ligação baseado no centróide, ou UPGMC
 ## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271 0.8012846
 ## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000 0.9412636
 ## S-R-CT3 0.6582219 0.8672111 0.9404687 0.5169933 0.8012846 0.9412636 0.0000000</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-330-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-329-1.png" alt="" width="672"></div>
 <p>Alguns ajustes para melhorar a visualização.</p>
 <div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cluster5</span><span class="op">$</span><span class="va">merge</span></span>
@@ -1175,7 +1175,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster5</span>, main <span class="op">=</span> <span class="st">"Bray-Curtis"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-332-1.png" alt="" width="768"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-331-1.png" alt="" width="768"></div>
 </div>
 <div id="construindo-heatmaps" class="section level2" number="21.10">
 <h2>
@@ -1195,7 +1195,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <span></span>
 <span><span class="va">heatdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span></span>
 <span><span class="co">#heatdist</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-333-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-332-1.png" alt="" width="672"></div>
 <p>Na sequência fazemos um <code>heatmap</code> <strong>objetos x objetos</strong>, ou seja a comparação bidimensional das clustereds entre unidades amostrais.</p>
 <div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span><span class="op">)</span> <span class="co">#rev() reverte as cores do heatmap</span></span>
@@ -1207,14 +1207,14 @@ Método de ligação baseado no centróide, ou UPGMC
 <span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>          xlab <span class="op">=</span> <span class="st">"UA´s"</span>, ylab <span class="op">=</span> <span class="st">"UA´s"</span>,</span>
 <span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-334-1.png" alt="" width="768"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-333-1.png" alt="" width="768"></div>
 <p>Agora vamos criar um novo dendrograma, para as espécies, mostrando sua similaridade em termos de em quais UA´s elas são mais comuns.</p>
 <div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cluster6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/vegdist.html">vegdist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
 <span>                            diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                            upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cluster6</span>, main <span class="op">=</span> <span class="st">"Dendrograma dos atributos"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-335-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-334-1.png" alt="" width="672"></div>
 <p>Na sequência, fazemos um novo <code>heatmap</code> <strong>objetos x atributos</strong>, com a comparação bidimensional das clustereds formadas entre unidades amostrais em relação as espécies mais comuns que ocorreram em cada unidade amostral.</p>
 <div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://talgalili.github.io/gplots/reference/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x atributos</span></span>
@@ -1225,7 +1225,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>          xlab <span class="op">=</span> <span class="st">"Unidades amostrais"</span>, ylab <span class="op">=</span> <span class="st">"Espécies"</span>,</span>
 <span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span>  <span class="co"># adjust margin size</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-336-1.png" alt="" width="768"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-335-1.png" alt="" width="768"></div>
 <div id="percentual-de-encadeamento-chaining" class="section level3" number="21.10.1">
 <h3>
 <span class="header-section-number">21.10.1</span> Percentual de encadeamento (% chaining)<a class="anchor" aria-label="anchor" href="#percentual-de-encadeamento-chaining"><i class="fas fa-link"></i></a>
@@ -1243,7 +1243,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <span><span class="op">}</span></span>
 <span><span class="co"># plot the percent chaining</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pc</span>, type <span class="op">=</span> <span class="st">"h"</span>, xlab <span class="op">=</span> <span class="st">"Merge"</span>, ylab <span class="op">=</span> <span class="st">"Percent chaining"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-337-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-336-1.png" alt="" width="672"></div>
 <p>Para calcular o percentual geral de encadeamento em um dendrograma, é necessário calcular a diferença na altura entre cada nó e seus nós filhos e, em seguida, somar essas diferenças. Essa soma representa o comprimento total do dendrograma. Em seguida, é necessário calcular a soma das diferenças na altura entre cada nó que representa uma fusão e a altura de seus dois nós filhos. Essa soma representa o encadeamento total no dendrograma.</p>
 <p>Finalmente, você pode calcular o percentual geral de encadeamento como o encadeamento total dividido pelo comprimento total do dendrograma, multiplicado por 100.</p>
 <p>O eixo y do gráfico mostra a percentagem de encadeamento, que é a diferença na altura entre fusões sucessivas dividida pela altura total do dendrograma, multiplicada por 100. É possível que a percentagem de encadeamento seja superior a 100 se a altura das duas fusões comparadas for maior que a altura total do dendrograma. Nesse caso, a percentagem de encadeamento é truncada em 100.</p>
@@ -1270,7 +1270,7 @@ Método de ligação baseado no centróide, ou UPGMC
 <span><span class="co"># plot the percent chaining for each cluster analysis</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pc</span>, type <span class="op">=</span> <span class="st">"h"</span>, xlab <span class="op">=</span> <span class="st">"Merge"</span>, ylab <span class="op">=</span> <span class="st">"Percent chaining"</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Cluster "</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-338-1.png" alt="" width="768"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-337-1.png" alt="" width="768"></div>
 </div>
 </div>
 <div id="apêndices-15" class="section level2 unnumbered">
@@ -1567,7 +1567,7 @@ MCCUNE, B.; GRACE, J. B. <strong>Analysis of Ecological Communities</strong>. Gl
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 02/08/2026 19:11:04.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 03/08/2026 11:11:09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

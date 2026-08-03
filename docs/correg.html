@@ -153,8 +153,8 @@
 <p>Ou seja, o valor absoluto de <span class="math inline">\(r\)</span> indica a força da associação, enquanto o sinal (+ ou −) indica sua direção.</p>
 <div class="figure">
 <span style="display:block;" id="fig:rmdcorrel"></span>
-<img src="imagens/correlacoes.png" alt="Exemplos de diferentes intensidades e direções de correlação de Pearson" width="600px"><p class="caption">
-Figura 13.1: Exemplos de diferentes intensidades e direções de correlação de Pearson
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/rmdcorrel-1.png" alt="Exemplos de diferentes intensidades e direções de correlação de Pearson." width="600px"><p class="caption">
+Figura 13.1: Exemplos de diferentes intensidades e direções de correlação de Pearson.
 </p>
 </div>
 <div id="coeficiente-de-correlação-de-pearson-r" class="section level3" number="13.1.1">
@@ -462,7 +462,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correla
 ## sample estimates:
 ##       rho 
 ## 0.9976789</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-134-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672"></div>
 <p>Interpretação:</p>
 <p>Os resultados da <strong>correlação de Pearson</strong> (<code>cor.test(x, y, method = "pearson")</code>) revelam a <strong>estatística do teste</strong>, t = 467.22 (para 432 <strong>graus de liberdade</strong>), indicando forte evidência contra a hipótese nula, e o <strong>valor de p</strong>, &lt;0.001, indicando que a correlação é estatisticamente significativa. Também é mostrado o <strong>coeficiente de correlação</strong> (r) de 0.9990 e o intervalo de confiança (95%) de 0.9988 ≤ ρ ≤ 0.9992.</p>
 <p>Em uma correlação simples (bivariada), não existe uma distinção estatística obrigatória entre variável explicativa (independente) e variável resposta (dependente). A correlação mede apenas a força e a direção da associação entre duas variáveis (sem assumir causalidade), e o coeficiente de correlação é o mesmo independentemente da ordem das variáveis.</p>
@@ -638,7 +638,7 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 ## Residual standard error: 0.4216 on 432 degrees of freedom
 ## Multiple R-squared:  0.998,  Adjusted R-squared:  0.998 
 ## F-statistic: 2.183e+05 on 1 and 432 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-135-1.png" alt="" width="672"></div>
 <p>No caso do nosso exemplo, o modelo de regressão linear simples pode ser representado por:</p>
 <p><span class="math display">\[
 \widehat{CT_{cm}} = \beta_0 + \beta_1 CP_{cm} + \varepsilon
@@ -711,7 +711,7 @@ onde:</p>
 ## Residuals 432                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-137-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
 <p>A função <code>plot(modelo)</code> cria uma prancha de gráficos, que demonstra o <strong>diagnóstico dos resíduos</strong>. São produzidos os gráficos de <strong>resíduos × valores ajustados</strong>, que verifica homocedasticidade (ideal sem padrão), o <strong>q-q plot dos resíduos</strong>, que verifica normalidade (ver Capítulo <a href="norm.html#norm">Estatísticas descritivas e normalidade</a>). Nesse caso os pontos devem seguir aproximadamente a reta. O gráfico de <strong><em>scale-location</em></strong> também avalia homocedasticidade e o gráfico de <strong>resíduos × alavancagem</strong> que inclui as curvas da <em>Cook’s distance</em>, que quando presentes, identificam observações influentes.</p>
 <p>Agora plotamos o gráfico com a linha de regressão baseada no nosso modelo usando a função <code><a href="https://rdrr.io/r/graphics/abline.html">abline()</a></code> e inserimos a equação da regressão.</p>
 <div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
@@ -737,7 +737,7 @@ onde:</p>
 <span><span class="op">)</span></span>
 <span><span class="co"># Inserir texto</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5</span>, y <span class="op">=</span> <span class="fl">45</span>, labels <span class="op">=</span> <span class="va">eq</span>, cex <span class="op">=</span> <span class="fl">1.1</span>, pos <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-137-1.png" alt="" width="672"></div>
 <p>Em um novo exemplo, podemos analisar comprimento total e peso corporal em peixes. Em estudos de relação peso-comprimento normalmente considera-se comprimento como variável independente e peso como variável dependente.</p>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
@@ -745,7 +745,7 @@ onde:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#Automatizando a entrada do modelo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">~</span> <span class="va">df</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-139-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672"></div>
 </div>
 </div>
 <div id="gráfico-de-dispersão-scatterplot" class="section level2" number="13.8">
@@ -816,7 +816,7 @@ onde:</p>
 ## FEMEA MACHO 
 ##    21    39 
 ## [1] "MACHO" "FEMEA"</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-140-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-139-1.png" alt="" width="672"></div>
 <p>O gráfico acima ilustra uma regressão linear simples entre <code>CP_cm</code> e <code>Pgon_g</code>, com ajuste separado por <code>sexo</code>. As diferenças entre as retas e a dispersão dos pontos sugerem que o peso gonadal não depende apenas do comprimento corporal, mas também de outras características do indivíduo. Por isso, podemos testar como uma análise seguinte a <strong>regressão múltipla</strong>, incorporando simultaneamente <code>CP_cm</code>, <code>sexo</code> e outras possíveis covariáveis relevantes para estimar efeitos parciais e testar interações.</p>
 <p>Assim, embora a regressão simples seja útil para descrever a associação bivariada, ela não controla simultaneamente múltiplas fontes de variação.</p>
 </div>
@@ -930,7 +930,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 02/08/2026 19:11:04.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 03/08/2026 11:11:09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

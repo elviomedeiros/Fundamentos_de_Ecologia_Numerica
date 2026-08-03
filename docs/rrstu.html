@@ -341,6 +341,27 @@ Figura 2.3: Usaremos uma matriz multivariada (sítios x espécies, matriz comuni
 </h3>
 <p>Você pode salvar imagens gráficas do RStudio como metarquivos do Windows (.wmf) ou metarquivos aprimorados (*.emf), usando linhas de comando ou a interface gráfica. Um gráfico salvo dessa forma é uma imagem vetorial que pode ser aberta em um pacote gráfico ou colada em processadores de texto e redimensionada ou editada sem perda de detalhes. No entanto, certifique-se de não alterar a proporção de aspecto ao redimensionar. Se o formato *.emf não for lido corretamente por seu outro software, tente salvar o gráfico no formato .wmf.</p>
 </div>
+<div id="packs" class="section level3" number="2.7.8">
+<h3>
+<span class="header-section-number">2.7.8</span> Pacotes (<code>packages</code>)<a class="anchor" aria-label="anchor" href="#packs"><i class="fas fa-link"></i></a>
+</h3>
+<p>Os pacotes do R são conjuntos de funções, dados e ferramentas desenvolvidos para ampliar as capacidades da linguagem. Eles permitem executar tarefas específicas de forma mais simples e eficiente, como análises estatísticas, criação de gráficos, manipulação de dados, modelagem ecológica e análise multivariada.</p>
+<p>O R já possui funções básicas instaladas, porém muitos recursos adicionais são disponibilizados por meio de pacotes criados pela comunidade científica e por desenvolvedores. Assim, os pacotes tornam o R extremamente flexível e adaptável para diferentes áreas do conhecimento.</p>
+<p>Para utilizar um pacote, primeiro é necessário instalá-lo com:</p>
+<pre><code>install.packages("nome_do_pacote")</code></pre>
+<p>Depois, o pacote deve ser carregado na sessão do R usando:</p>
+<pre><code><a href="https://rdrr.io/r/base/library.html">library(nome_do_pacote)</a></code></pre>
+<p>Por exemplo, o pacote <code>vegan</code> <span class="citation">(<a href="#ref-dixon2003">DIXON, 2003</a>)</span> é amplamente utilizado em ecologia numérica, enquanto o <code>ggplot2</code> <span class="citation">(<a href="#ref-wickham2016">WICKHAM, 2016</a>)</span> é muito usado para criação de gráficos. A autoria de um pacote pode ser referenciada usando a função <code>citation("nome_do_pacote")</code></p>
+<div class="infobox2 stopred">
+<div class="center">
+<p><span style="color:white"><strong>ATENÇÃO</strong></span></p>
+</div>
+<p>O link para baixar os pacotes necessárias para repetir os tutoriais desse site são encontrados aqui na seção <a href="rrstu.html#packs">Pacotes</a> do Capítulo <a href="rrstu.html#rrstu">Introdução ao R/RStudio</a>.</p>
+<div class="center">
+<p>Ou, baixe aqui o arquivo <a href="pacotes.R">Pacotes</a></p>
+</div>
+</div>
+</div>
 </div>
 <div id="conclusão" class="section level2" number="2.8">
 <h2>
@@ -413,6 +434,9 @@ Genetic markers in the playground of multivariate analysis (<a href="https://www
 
 <h3>Bibliografia Geral</h3>
 <div id="refs" class="references csl-bib-body" entry-spacing="1">
+<div id="ref-dixon2003" class="csl-entry">
+DIXON, P. VEGAN, a package of R functions for community ecology. <strong>Journal of Vegetation Science</strong>, [s. l.], v. 14, n. 6, p. 927–930, 2003. Disponível em: &lt;<a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1654-1103.2003.tb02228.x">https://onlinelibrary.wiley.com/doi/10.1111/j.1654-1103.2003.tb02228.x</a>&gt;
+</div>
 <div id="ref-gotelli2011" class="csl-entry">
 GOTELLI, N. J.; ELLISON, A. M. <strong>Princípios de Estatística em Ecologia</strong>. 1. ed. [s.l.] : Artmed, 2011.
 </div>
@@ -427,6 +451,9 @@ SILVA, F. R.; GONÇALVES-SOUZA, T.; PATERNO, G. B.; PROVETE, D. B.; VANCINE, M. 
 </div>
 <div id="ref-valentin2000" class="csl-entry">
 VALENTIN, J. L. <strong>Ecologia Numérica. Uma Introdução à Análise Multivariada de Dados Ecológicos</strong>. 1. ed. Rio de Janeiro: Interciência, 2000. Type: Book.
+</div>
+<div id="ref-wickham2016" class="csl-entry">
+WICKHAM, H. <strong>ggplot2: Elegant Graphics for Data Analysis</strong>. [s.l.] : Springer-Verlag New York, 2016. Disponível em: &lt;<a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>&gt;
 </div>
 </div>
   <div class="chapter-nav">
@@ -470,6 +497,7 @@ VALENTIN, J. L. <strong>Ecologia Numérica. Uma Introdução à Análise Multiva
 <li><a class="nav-link" href="#editando-a-matriz-de-dados"><span class="header-section-number">2.7.5</span> Editando a matriz de dados</a></li>
 <li><a class="nav-link" href="#arquivos-de-resultados"><span class="header-section-number">2.7.6</span> Arquivos de resultados</a></li>
 <li><a class="nav-link" href="#gr%C3%A1ficos"><span class="header-section-number">2.7.7</span> Gráficos</a></li>
+<li><a class="nav-link" href="#packs"><span class="header-section-number">2.7.8</span> Pacotes (packages)</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#conclus%C3%A3o"><span class="header-section-number">2.8</span> Conclusão</a></li>
@@ -496,7 +524,7 @@ VALENTIN, J. L. <strong>Ecologia Numérica. Uma Introdução à Análise Multiva
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 02/08/2026 19:11:04.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 03/08/2026 11:11:09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
