@@ -193,6 +193,13 @@ Figura 15.4: Principais distribuições utilizadas em Modelos Lineares Generaliz
 </p>
 </div>
 <p>Muitos dos métodos estatísticos clássicos, como a <strong>regressão linear</strong> e o <strong>teste t de Student</strong>, assumem que a variância é constante (homocedasticidade). No entanto, em diversas aplicações essa suposição não é válida. É justamente por isso que os GLMs são tão úteis, pois permitem modelar adequadamente situações em que a variância depende da média da variável resposta <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>; <a href="#ref-dunn2018">DUNN; SMYTH, 2018</a>; <a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
+<p>Mas qual distribuição escolher? Abaixo segue um esquema ((Figura <a href="mlgs.html#fig:esquemadistribs">15.5</a>) adaptado de <a href="https://bedeffinianrowedavies.com/">Davies</a> (<span class="citation">(<a href="#ref-davies2021"><strong>davies2021?</strong></a>)</span>; <span class="citation">(<a href="#ref-davies2022"><strong>davies2022?</strong></a>)</span>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:esquemadistribs"></span>
+<img src="imagens/distribuicoes.png" alt="Tipos de distribuição em relação a variável resposta em GLM's (Adaptado de Davies, B.F.R. em 2026. Fonte: &lt;https://bedeffinianrowedavies.com/&gt;)." width="500px"><p class="caption">
+Figura 15.5: Tipos de distribuição em relação a variável resposta em GLM’s (Adaptado de Davies, B.F.R. em 2026. Fonte: <a href="https://bedeffinianrowedavies.com/" class="uri">https://bedeffinianrowedavies.com/</a>).
+</p>
+</div>
 <div id="pressupostos-6" class="section level4" number="15.0.2.1">
 <h4>
 <span class="header-section-number">15.0.2.1</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-6"><i class="fas fa-link"></i></a>
@@ -211,7 +218,7 @@ Figura 15.4: Principais distribuições utilizadas em Modelos Lineares Generaliz
 <li>erros que não podem produzir valores ajustados negativos, como em dados de contagem.</li>
 </ul>
 <p>As principais alternativas para lidar com essas situações consistem em <strong>transformar a variável resposta</strong> ou utilizar <strong>métodos não-paramétricos</strong> <span class="citation">(<a href="#ref-sokal1995">SOKAL; ROHLF, 1995</a>)</span>. Os <strong>Modelos Lineares Generalizados</strong> representam uma abordagem mais flexível, pois permitem especificar diferentes distribuições de probabilidade para os erros, de acordo com a natureza da variável resposta.</p>
-<p>Entre as distribuições de erro mais utilizadas em GLMs destacam-se:</p>
+<p>Entre as distribuições de erro mais utilizadas em GLMs destacam-se <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>:</p>
 <ul>
 <li>
 <strong>Distribuição de Poisson</strong>, apropriada para dados de contagem;</li>
@@ -303,7 +310,7 @@ onde,</p>
 <span class="math inline">\(g(\cdot)\)</span> é a função de ligação.</li>
 </ul>
 <p>Embora a expressão seja simples, seu significado merece atenção. O preditor linear (<span class="math inline">\(\eta\)</span>) é obtido a partir da combinação linear das variáveis explicativas e de seus respectivos coeficientes. Portanto, ele <strong>não corresponde diretamente a um valor da variável resposta</strong>, exceto no caso particular da <strong>função de ligação identidade</strong>, utilizada implicitamente na regressão linear tradicional.</p>
-<p>Em um GLM, a média da variável resposta é inicialmente transformada pela função de ligação, produzindo o preditor linear. Após o ajuste do modelo, a <strong>função inversa da ligação</strong> é aplicada ao preditor linear para obter os valores ajustados na escala original da variável resposta:</p>
+<p>Em um GLM, a média da variável resposta é inicialmente transformada pela função de ligação, produzindo o preditor linear. Após o ajuste do modelo, a <strong>função inversa da ligação</strong> é aplicada ao preditor linear para obter os valores ajustados na escala original da variável resposta <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>:</p>
 <p><span class="math display">\[
 \mu = g^{-1}(\eta)
 \]</span></p>
@@ -314,7 +321,7 @@ onde,</p>
 <h3>
 <span class="header-section-number">15.0.3</span> Escolha da função de ligação<a class="anchor" aria-label="anchor" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h3>
-<p>Uma das principais razões para utilizar diferentes funções de ligação é garantir que os valores ajustados permaneçam dentro de limites compatíveis com a natureza da variável resposta.</p>
+<p>Uma das principais razões para utilizar diferentes funções de ligação é garantir que os valores ajustados permaneçam dentro de limites compatíveis com a natureza da variável resposta <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>.</p>
 <p>Por exemplo:</p>
 <p>Em <strong>dados de contagem</strong>, os valores previstos devem ser sempre <strong>maiores ou iguais a zero</strong>, pois contagens negativas não fazem sentido. Nesse caso, a <strong>função de ligação logarítmica</strong> (<em>log link</em>) é uma escolha apropriada, pois sua função inversa é a exponencial:</p>
 <p><span class="math display">\[
@@ -342,7 +349,7 @@ onde,</p>
 <span class="header-section-number">15.0.3.2</span> Funções canônicas de ligação<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%B5es-can%C3%B4nicas-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <p>As <strong>funções de ligação canônicas</strong> (<em>canonical link functions</em>) são as funções de ligação utilizadas no R por padrão quando uma determinada distribuição de erros é especificada no argumento <code>family</code> de um GLM. Em outras palavras, quando nenhuma função de ligação é explicitamente informada, o software adota automaticamente a função de ligação canônica associada à distribuição escolhida.</p>
-<p>As principais combinações entre distribuições de erro e suas respectivas funções de ligação canônicas são apresentadas na Tabela abaixo.</p>
+<p>As principais combinações entre distribuições de erro e suas respectivas funções de ligação canônicas são apresentadas na Tabela abaixo <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
 <col width="34%">
@@ -385,10 +392,19 @@ onde,</p>
 <pre><code>glm(y ~ x, family = Gamma(link = "log"))</code></pre>
 <p>As quatro combinações canônicas apresentadas na tabela correspondem aos modelos mais utilizados na prática e constituem o ponto de partida para a maioria das análises.</p>
 </div>
-<div id="exemplo-1-2" class="section level4" number="15.0.3.3">
+<div id="exemplo-1-distribuição-gaussiana" class="section level4" number="15.0.3.3">
 <h4>
-<span class="header-section-number">15.0.3.3</span> Exemplo 1<a class="anchor" aria-label="anchor" href="#exemplo-1-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.0.3.3</span> Exemplo 1: Distribuição Gaussiana<a class="anchor" aria-label="anchor" href="#exemplo-1-distribui%C3%A7%C3%A3o-gaussiana"><i class="fas fa-link"></i></a>
 </h4>
+<p>Vejamos um fluxo de trabalho prático:</p>
+<ol style="list-style-type: decimal">
+<li><p>Formular a pergunta científica e traduzi-la em um modelo estatístico.</p></li>
+<li><p>Escolher a distribuição da variável resposta.</p></li>
+<li><p>Ajustar o modelo .</p></li>
+<li><p>Verificar os diagnósticos do modelo: Gráfico de resíduos <em>versus</em> valores ajustados (<em>Residuals vs. Fitted</em>) e no gráfico Q-Q (<em>Normal Q-Q</em>) antes de interpretar os resultados.</p></li>
+<li><p>Interpretar o modelo por meio da visualização das predições: Gerar valores preditos, intervalos de confiança e os sobrepor aos dados observados, facilitando a interpretação dos resultados.</p></li>
+</ol>
+<p>Nesse primeiro exemplo, vamos usar a distribuição Gaussiana (apropriada para dados contínuos), utilizando <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> e <code>glm(..., family = gaussian)</code>, uma vez que <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> é, essencialmente, um GLM Gaussiano, e é equivalente a <code>glm(..., family = gaussian)</code>.</p>
 </div>
 </div>
 <div id="organização-básica-6" class="section level2" number="15.1">
@@ -399,11 +415,495 @@ onde,</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div id="organizando-os-dados-1" class="section level3" number="15.1.1">
-<h3>
-<span class="header-section-number">15.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
-</h3>
 <div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
+<span>                  rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                  sheet <span class="op">=</span> <span class="st">"tucuna"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">CP_cm</span><span class="op">~</span><span class="va">sexo</span><span class="op">*</span><span class="va">periodo</span>, data <span class="op">=</span> <span class="va">univ</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">ModelOutputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Fitted<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span>,</span>
+<span>                         Residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">p1</span><span class="op">&lt;-</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ModelOutputs</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Fitted</span>, y <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Resíduos"</span>, x <span class="op">=</span> <span class="st">"Valores ajustados"</span><span class="op">)</span></span>
+<span><span class="va">p2</span><span class="op">&lt;-</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ModelOutputs</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Quantis dos dados"</span>,x <span class="op">=</span> <span class="st">"Quantis teóricos"</span><span class="op">)</span></span>
+<span><span class="va">p1</span><span class="op">+</span><span class="va">p2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = CP_cm ~ sexo * periodo, data = univ)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -11.904  -3.421  -1.600   2.929  27.720 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)              14.9026     0.9833  15.156  &lt; 2e-16 ***
+## sexoimaturo              -7.7226     1.2566  -6.145 1.83e-09 ***
+## sexoMACHO                 2.7650     1.2277   2.252   0.0248 *  
+## periodoseco               0.6427     1.2884   0.499   0.6182    
+## sexoimaturo:periodoseco  -0.1022     1.5813  -0.065   0.9485    
+## sexoMACHO:periodoseco     1.6934     1.6973   0.998   0.3190    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.061 on 428 degrees of freedom
+## Multiple R-squared:   0.41,  Adjusted R-squared:  0.4031 
+## F-statistic: 59.49 on 5 and 428 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-165-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-165-2.png" alt="" width="672"></p>
+<p>O modelo está usando os três sexos, mas nesse caso o R utiliza codificação por tratamento (<em>treatment contrasts</em>): um dos níveis é escolhido como categoria de referência, e apenas os demais aparecem como coeficientes.</p>
+<p>No seu modelo apresentado, o nível <code>FÊMEA</code> foi escolhido como referência. Assim, no modelo, <code>FÊMEA</code> (referência) equivale ao intercepto. Temos 3 níveis, mas apenas 2 coeficientes, porque o terceiro está embutido no intercepto.</p>
+<p>Nesse caso, o intercepto vale 14.90. Esse é o comprimento médio (CP_cm) das fêmeas, no período chuvoso (também referência, note que que ele não aparece no modelo). O coeficiente <code>sexoMACHO</code> (<em>Estimate</em> = 2.765 e p = 0.0248), significa que, no período chuvoso, machos possuem, em média, 14.90 + 2.77 = 17.67 cm. Enquanto fêmeas possuem 14.90 cm. Já o coeficiente <code>sexoimaturo</code> (<em>Estimate</em> = -7.723), significa que os imaturos são, em média, 14.90 - 7.72 = 7.18 cm menores que as fêmeas no período chuvoso.</p>
+<p>Para mudar para que <code>MACHO</code> seja a referência, pode-se redefinir o fator <code>univ$sexo &lt;- relevel(univ$sexo, ref = "MACHO")</code>.</p>
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mjskay.github.io/ggdist/">ggdist</a></span><span class="op">)</span></span>
+<span><span class="va">p_box</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
+<span>                   y <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                   fill <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sexo"</span>, y <span class="op">=</span> <span class="st">"Variável resposta (CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p_cloud</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">univ</span>,</span>
+<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
+<span>                    y <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                    fill <span class="op">=</span> <span class="va">periodo</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/ggdist/reference/stat_halfeye.html">stat_halfeye</a></span><span class="op">(</span>adjust <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>               width <span class="op">=</span> <span class="fl">.6</span>, </span>
+<span>               .width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.95</span><span class="op">)</span>,</span>
+<span>               alpha<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span>               position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span> <span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sexo"</span>,y<span class="op">=</span><span class="st">"Variável resposta (CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p_box</span><span class="op">+</span><span class="va">p_cloud</span></span>
+<span></span>
+<span><span class="va">NewData_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>periodo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"chuvoso"</span>,<span class="st">"seco"</span><span class="op">)</span>,</span>
+<span>                       sexo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FEMEA"</span>,<span class="st">"imaturo"</span>,<span class="st">"MACHO"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">Pred</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm1</span>,<span class="va">NewData_1</span>,se.fit<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">NewData</span> <span class="op">&lt;-</span> <span class="va">NewData_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>response<span class="op">=</span><span class="va">Pred</span><span class="op">$</span><span class="va">fit</span>,</span>
+<span>         se.fit<span class="op">=</span><span class="va">Pred</span><span class="op">$</span><span class="va">se.fit</span>,</span>
+<span>         Upr<span class="op">=</span><span class="va">response</span><span class="op">+</span><span class="op">(</span><span class="va">se.fit</span><span class="op">*</span><span class="fl">1.96</span><span class="op">)</span>,</span>
+<span>         Lwr<span class="op">=</span><span class="va">response</span><span class="op">-</span><span class="op">(</span><span class="va">se.fit</span><span class="op">*</span><span class="fl">1.96</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">NewData</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
+<span>                 y <span class="op">=</span> <span class="va">response</span>,</span>
+<span>                 colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>             position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
+<span>                    ymax <span class="op">=</span> <span class="va">Upr</span>,</span>
+<span>                    ymin <span class="op">=</span> <span class="va">Lwr</span>,</span>
+<span>                    colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>                width <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                position<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Sexo"</span>,y<span class="op">=</span><span class="st">"Variável resposta (CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Plot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">univ</span>,</span>
+<span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
+<span>                  y <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                  fill <span class="op">=</span> <span class="va">periodo</span>,</span>
+<span>                  colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggdist</span><span class="fu">::</span><span class="fu"><a href="https://mjskay.github.io/ggdist/reference/stat_halfeye.html">stat_halfeye</a></span><span class="op">(</span>adjust <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>                       width <span class="op">=</span> <span class="fl">.6</span>, </span>
+<span>                       .width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.95</span><span class="op">)</span>,</span>
+<span>                       alpha <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>                       position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>, <span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>, <span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sexo"</span>,y <span class="op">=</span> <span class="st">"Variável resposta (CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Plot2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">NewData</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>, y <span class="op">=</span> <span class="va">response</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>             position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>, ymax <span class="op">=</span> <span class="va">Upr</span>,</span>
+<span>                    ymin <span class="op">=</span> <span class="va">Lwr</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>                width <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Sexo"</span>,y<span class="op">=</span><span class="st">"Variável resposta modelada(CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">Plot1</span><span class="op">+</span><span class="va">Plot2</span></span></code></pre></div>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-166-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-166-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-166-3.png" alt="" width="672"></p>
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Plot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">univ</span>,</span>
+<span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
+<span>                  y <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                  fill <span class="op">=</span> <span class="va">periodo</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggdist</span><span class="fu">::</span><span class="fu"><a href="https://mjskay.github.io/ggdist/reference/stat_halfeye.html">stat_halfeye</a></span><span class="op">(</span>adjust <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>                       width <span class="op">=</span> <span class="fl">.6</span>, </span>
+<span>                       .width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.95</span><span class="op">)</span>,</span>
+<span>                       alpha <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>                       position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>, <span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>, <span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"sexo"</span>,y <span class="op">=</span> <span class="st">"Variável resposta (CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Plot2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">NewData</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>, y <span class="op">=</span> <span class="va">response</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>             position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>, ymax <span class="op">=</span> <span class="va">Upr</span>,</span>
+<span>                    ymin <span class="op">=</span> <span class="va">Lwr</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>                width <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>, <span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sexo"</span>,y <span class="op">=</span> <span class="st">"Modelo da variável resposta (CT(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">Plot1</span><span class="op">+</span><span class="va">Plot2</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-167-1.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">NewData</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>, y <span class="op">=</span> <span class="va">response</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>             position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>, ymax <span class="op">=</span> <span class="va">Upr</span>,</span>
+<span>                    ymin <span class="op">=</span> <span class="va">Lwr</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>                width <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">univ</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
+<span>                                     y <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                                     colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
+<span>             position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_jitterdodge.html">position_jitterdodge</a></span><span class="op">(</span>jitter.width <span class="op">=</span> <span class="fl">0.4</span>,</span>
+<span>                                           dodge.width <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,</span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>             size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>, <span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sexo"</span>, y <span class="op">=</span> <span class="st">"Variável resposta (CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-168-1.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
+<span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">univ</span>,</span>
+<span>                <span class="va">sexo</span> <span class="op">!=</span> <span class="st">"imaturo"</span> <span class="op">&amp;</span> <span class="va">Pgon_g</span><span class="op">&gt;</span><span class="fl">0.2</span> <span class="op">&amp;</span> <span class="va">Pgon_g</span><span class="op">&lt;</span><span class="fl">10</span><span class="op">)</span> <span class="co">#ou `filter` do dplyr</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">sexo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">sexo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                 y <span class="op">=</span> <span class="va">Pgon_g</span>,</span>
+<span>                 color <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,</span>
+<span>              se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Dados observados</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                 y <span class="op">=</span> <span class="va">Pgon_g</span>,</span>
+<span>                 colour <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span>,</span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>             size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Comprimento padrão (cm)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Peso da gônada (g)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Ajuste do modelo</span></span>
+<span><span class="va">lm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Pgon_g</span> <span class="op">~</span> <span class="va">sexo</span> <span class="op">*</span> <span class="va">CP_cm</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Diagnóstico do modelo</span></span>
+<span><span class="va">ModelOutputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Fitted <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lm2</span><span class="op">)</span>,</span>
+<span>  Residuals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">lm2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ModelOutputs</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Fitted</span>,</span>
+<span>                 y <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>             colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Valores ajustados"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Resíduos"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ModelOutputs</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Quartis teóricos"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Quartis amostrais"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Conjunto de dados para predição</span></span>
+<span><span class="va">NewData_</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span></span>
+<span>  CP_cm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">CP_cm</span><span class="op">)</span>,</span>
+<span>              to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">CP_cm</span><span class="op">)</span>,</span>
+<span>              length.out <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>,</span>
+<span>  sexo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FEMEA"</span>,<span class="st">"MACHO"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Limites observados para cada sexo</span></span>
+<span><span class="co"># (evita extrapolar além dos dados)</span></span>
+<span><span class="va">FEMEA_var</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sexo</span> <span class="op">==</span> <span class="st">"FEMEA"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">CP_cm</span><span class="op">)</span>,</span>
+<span>            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">CP_cm</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">MACHO_var</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sexo</span> <span class="op">==</span> <span class="st">"MACHO"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">CP_cm</span><span class="op">)</span>,</span>
+<span>            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">CP_cm</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">NewData_3</span> <span class="op">&lt;-</span> <span class="va">NewData_</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    Range <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">sexo</span> <span class="op">==</span> <span class="st">"FEMEA"</span> <span class="op">&amp;</span></span>
+<span>        <span class="va">CP_cm</span> <span class="op">&gt;=</span> <span class="va">FEMEA_var</span><span class="op">$</span><span class="va">min</span> <span class="op">&amp;</span></span>
+<span>        <span class="va">CP_cm</span> <span class="op">&lt;=</span> <span class="va">FEMEA_var</span><span class="op">$</span><span class="va">max</span> <span class="op">~</span> <span class="st">"Good"</span>,</span>
+<span>      </span>
+<span>      <span class="va">sexo</span> <span class="op">==</span> <span class="st">"MACHO"</span> <span class="op">&amp;</span></span>
+<span>        <span class="va">CP_cm</span> <span class="op">&gt;=</span> <span class="va">MACHO_var</span><span class="op">$</span><span class="va">min</span> <span class="op">&amp;</span></span>
+<span>        <span class="va">CP_cm</span> <span class="op">&lt;=</span> <span class="va">MACHO_var</span><span class="op">$</span><span class="va">max</span> <span class="op">~</span> <span class="st">"Good"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Range</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Range</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Predições do modelo</span></span>
+<span><span class="va">Pred_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm2</span>, <span class="va">NewData_3</span>, se.fit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">NewData_2</span> <span class="op">&lt;-</span> <span class="va">NewData_3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>response <span class="op">=</span> <span class="va">Pred_2</span><span class="op">$</span><span class="va">fit</span>,</span>
+<span>         se.fit <span class="op">=</span> <span class="va">Pred_2</span><span class="op">$</span><span class="va">se.fit</span>,</span>
+<span>         Upr <span class="op">=</span> <span class="va">response</span> <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">se.fit</span>,</span>
+<span>         Lwr <span class="op">=</span> <span class="va">response</span> <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">se.fit</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apenas as curvas ajustadas</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">NewData_2</span>,</span>
+<span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                  ymin <span class="op">=</span> <span class="va">Lwr</span>,</span>
+<span>                  ymax <span class="op">=</span> <span class="va">Upr</span>,</span>
+<span>                  fill <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span>,</span>
+<span>              alpha <span class="op">=</span> <span class="fl">0.30</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">NewData_2</span>,</span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                y <span class="op">=</span> <span class="va">response</span>,</span>
+<span>                colour <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span>,</span>
+<span>            linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Comprimento padrão (cm)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Peso da gônada previsto (g)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Dados observados e modelo ajustado</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                 y <span class="op">=</span> <span class="va">Pgon_g</span>,</span>
+<span>                 colour <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span>,</span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>             size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">NewData_2</span>,</span>
+<span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                  ymin <span class="op">=</span> <span class="va">Lwr</span>,</span>
+<span>                  ymax <span class="op">=</span> <span class="va">Upr</span>,</span>
+<span>                  fill <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span>,</span>
+<span>              alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">NewData_2</span>,</span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CP_cm</span>,</span>
+<span>                y <span class="op">=</span> <span class="va">response</span>,</span>
+<span>                colour <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span>,</span>
+<span>            linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkcyan"</span>,<span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Comprimento padrão (cm)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Peso da gônada (g)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "CT_cm"    "PT_g"     "CP_cm"    "Ctubo_cm" "PC_g"     "p_PT"    
+##  [7] "Pest_g"   "Cest_cm"  "gr_est"   "ir_est"   "Pint_g"   "Cint_cm" 
+## [13] "gr_int"   "ir_int"   "Pgon_g"   "Cgon_cm"  "emg"      "ig"      
+## [19] "mes"      "periodo"  "estação"  "sexo"     "sexo2"   
+## 
+## FEMEA MACHO 
+##    21    39 
+## [1] "MACHO" "FEMEA"
+## 
+## Call:
+## lm(formula = Pgon_g ~ sexo * CP_cm, data = dados)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.7401 -0.3473 -0.2079  0.3214  5.6282 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -6.73940    1.69138  -3.985 0.000197 ***
+## sexoMACHO        6.18466    2.24380   2.756 0.007875 ** 
+## CP_cm            0.41581    0.06933   5.998 1.53e-07 ***
+## sexoMACHO:CP_cm -0.36462    0.08640  -4.220 9.03e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.296 on 56 degrees of freedom
+## Multiple R-squared:  0.5956, Adjusted R-squared:  0.5739 
+## F-statistic: 27.49 on 3 and 56 DF,  p-value: 4.621e-11</code></pre>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-4.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-5.png" alt="" width="672"></p>
+<p>Como há uma interação significativa (sexo × CP_cm, p &lt; 0,001), esse gráfico é especialmente interessante porque mostra que as inclinações das retas são diferentes entre machos e fêmeas, e isso é justamente o que o termo de interação está testando. Em vez de interpretar apenas a tabela de coeficientes, o gráfico permite visualizar como a relação entre comprimento e peso da gônada muda entre os sexos. Isso segue exatamente a abordagem adotada no tutorial que você está utilizando.</p>
+<p>Hoje é mais comum usar o pacote <code>emmeans</code> para interpretar modelos com interações. Além de <code>summary(lm2)</code>, podemos fazer:</p>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvlenth.github.io/emmeans/">emmeans</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">lm2</span>, <span class="va">pairwise</span> <span class="op">~</span> <span class="va">sexo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emtrends.html">emtrends</a></span><span class="op">(</span><span class="va">lm2</span>, <span class="va">pairwise</span> <span class="op">~</span> <span class="va">sexo</span>, var <span class="op">=</span> <span class="st">"CP_cm"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $emmeans
+##  sexo  emmean    SE df lower.CL upper.CL
+##  FEMEA  4.414 0.342 56    3.729     5.10
+##  MACHO  0.818 0.221 56    0.375     1.26
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast      estimate    SE df t.ratio p.value
+##  FEMEA - MACHO      3.6 0.407 56   8.828 &lt;0.0001
+## 
+## 
+## $emtrends
+##  sexo  CP_cm.trend     SE df lower.CL upper.CL
+##  FEMEA      0.4158 0.0693 56   0.2769    0.555
+##  MACHO      0.0512 0.0516 56  -0.0521    0.154
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast      estimate     SE df t.ratio p.value
+##  FEMEA - MACHO    0.365 0.0864 56   4.220 &lt;0.0001</code></pre>
+<p>O primeiro compara as médias ajustadas entre os sexos (quando apropriado) e o segundo testa formalmente se as inclinações das retas diferem entre machos e fêmeas, que é exatamente a hipótese representada pelo termo de interação sexo:CP_cm. Isso complementa a interpretação gráfica apresentada.</p>
+<pre><code>plot(univ$CP_cm,
+     univ$CT_cm,
+     pch = 16,
+     xlab = "Comprimento padrão (cm)",
+     ylab = "Comprimento total (cm)")
+
+modelo &lt;- glm(CT_cm ~ CP_cm,
+              family = gaussian,
+              data = univ)
+
+summary(modelo)
+
+modelo &lt;- lm(CT_cm ~ CP_cm,
+             data = univ)
+
+novo &lt;- data.frame(
+  CP_cm = seq(min(univ$CP_cm),
+              max(univ$CP_cm),
+              length.out = 200)
+)
+
+pred &lt;- predict(modelo,
+                newdata = novo,
+                se.fit = TRUE)
+
+novo$fit &lt;- pred$fit
+novo$lwr &lt;- pred$fit - 1.96 * pred$se.fit
+novo$upr &lt;- pred$fit + 1.96 * pred$se.fit
+
+plot(univ$CP_cm,
+     univ$CT_cm,
+     pch = 16,
+     xlab = "Comprimento padrão (cm)",
+     ylab = "Comprimento total (cm)")
+
+polygon(c(novo$CP_cm,
+          rev(novo$CP_cm)),
+        c(novo$lwr,
+          rev(novo$upr)),
+        col = "grey85",
+        border = NA)
+
+lines(novo$CP_cm,
+      novo$fit,
+      lwd = 2)
+
+par(mfrow = c(2,2))
+plot(modelo)
+par(mfrow = c(1,1))
+
+summary(modelo)
+
+coef(glm(CT_cm ~ CP_cm,
+         family = gaussian,
+         data = univ))
+
+coef(lm(CT_cm ~ CP_cm,
+        data = univ))
+
+##############
+
+t.test(CP_cm ~ periodo,
+       data = univ)
+
+modelo &lt;- glm(CP_cm ~ periodo,
+              family = gaussian,
+              data = univ)
+
+summary(modelo)
+
+modelo &lt;- lm(CP_cm ~ periodo,
+             data = univ)
+
+summary(modelo)
+
+boxplot(CP_cm ~ periodo,
+        data = univ,
+        col = "lightgray",
+        xlab = "Sex",
+        ylab = "Standard length (cm)")
+
+stripchart(CP_cm ~ periodo,
+           data = univ,
+           vertical = TRUE,
+           method = "jitter",
+           pch = 16,
+           xlab = "Sex",
+           ylab = "Standard length (cm)")
+
+aggregate(CP_cm ~ periodo,
+          data = univ,
+          mean)
+
+predict(modelo)</code></pre>
+<div id="exemplo-2-1" class="section level4" number="15.1.0.1">
+<h4>
+<span class="header-section-number">15.1.0.1</span> Exemplo 2<a class="anchor" aria-label="anchor" href="#exemplo-2-1"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+</div>
+<div id="organização-básica-7" class="section level2" number="15.2">
+<h2>
+<span class="header-section-number">15.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-7"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
+<div id="organizando-os-dados-1" class="section level3" number="15.2.1">
+<h3>
+<span class="header-section-number">15.2.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anovas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"t_anovas.csv"</span>,</span>
 <span>                   sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>                   row.names <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -502,19 +1002,19 @@ onde,</p>
 ## S-R-SE-3      S  3.763162 249.4642857  4
 ## S-R-SE-4      S  8.603085 406.6071429 11</code></pre>
 </div>
-<div id="anova-vs-glm" class="section level3" number="15.1.2">
+<div id="anova-vs-glm" class="section level3" number="15.2.2">
 <h3>
-<span class="header-section-number">15.1.2</span> ANOVA vs GLM<a class="anchor" aria-label="anchor" href="#anova-vs-glm"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.2</span> ANOVA vs GLM<a class="anchor" aria-label="anchor" href="#anova-vs-glm"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suponha que você queira comparar a riqueza (Srare) entre grupos (Grupos):</p>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="va">anovas</span></span>
 <span><span class="va">modelo_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_aov</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq
 ## Grupos      21  612.4   29.16</code></pre>
 <p>ou</p>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modelo_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_lm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -526,7 +1026,7 @@ onde,</p>
 <ol start="2" style="list-style-type: decimal">
 <li>O mesmo modelo usando GLM</li>
 </ol>
-<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modelo_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>,</span>
 <span>                  data <span class="op">=</span> <span class="va">dados</span>,</span>
 <span>                  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span><span class="op">)</span></span>
@@ -544,7 +1044,7 @@ onde,</p>
 ## NULL                      21     612.37
 ## Grupos 21   612.37         0       0.00</code></pre>
 <p>ou</p>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_glm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -584,7 +1084,7 @@ onde,</p>
 ## 
 ## Number of Fisher Scoring iterations: 1</code></pre>
 <p>Esse modelo é matematicamente equivalente à ANOVA.</p>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#packageVersion("rlang")</span></span>
@@ -788,17 +1288,17 @@ onde,</p>
 ## r     |         95% CI
 ## ----------------------
 ## -0.68 | [-0.82, -0.36]</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-4.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-5.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-6.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-7.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-8.png" alt="" width="672"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-4.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-5.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-6.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-7.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-177-8.png" alt="" width="672"></p>
 </div>
 </div>
-<div id="material-de-apoio-8" class="section level2" number="15.2">
+<div id="material-de-apoio-8" class="section level2" number="15.3">
 <h2>
-<span class="header-section-number">15.2</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-8"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="teste-seus-conhecimentos-7" class="section level2" number="15.3">
+<div id="teste-seus-conhecimentos-7" class="section level2" number="15.4">
 <h2>
-<span class="header-section-number">15.3</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-7"><i class="fas fa-link"></i></a>
 </h2>
 <div class="infobox note">
 <div class="center">
@@ -872,14 +1372,15 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <li><a class="nav-link" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><span class="header-section-number">15.0.3</span> Escolha da função de ligação</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><span class="header-section-number">15.1</span> Organização básica</a></li>
 <li>
-<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-6"><span class="header-section-number">15.1</span> Organização básica</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">15.1.1</span> Organizando os dados</a></li>
-<li><a class="nav-link" href="#anova-vs-glm"><span class="header-section-number">15.1.2</span> ANOVA vs GLM</a></li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-7"><span class="header-section-number">15.2</span> Organização básica</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">15.2.1</span> Organizando os dados</a></li>
+<li><a class="nav-link" href="#anova-vs-glm"><span class="header-section-number">15.2.2</span> ANOVA vs GLM</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#material-de-apoio-8"><span class="header-section-number">15.2</span> Material de apoio</a></li>
-<li><a class="nav-link" href="#teste-seus-conhecimentos-7"><span class="header-section-number">15.3</span> TESTE SEUS CONHECIMENTOS</a></li>
+<li><a class="nav-link" href="#material-de-apoio-8"><span class="header-section-number">15.3</span> Material de apoio</a></li>
+<li><a class="nav-link" href="#teste-seus-conhecimentos-7"><span class="header-section-number">15.4</span> TESTE SEUS CONHECIMENTOS</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-9">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-para-consulta-3">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-6">Script limpo</a></li>
@@ -900,7 +1401,7 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 03/08/2026 12:12:18.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 04/08/2026 13:30:39.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

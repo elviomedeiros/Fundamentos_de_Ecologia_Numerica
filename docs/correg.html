@@ -144,7 +144,7 @@
 </li>
 <li>Correlação parcial</li>
 </ul>
-<p>A correlação bivariada simples, refere-se à correlação entre duas variáveis contínuas e é a medida mais comum de relação linear. Ela mede a intensidade e a direção da relação linear entre duas variáveis quantitativas contínuas. O coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>) quantifica o grau com que as duas variáveis variam conjuntamente (Figura <a href="correg.html#fig:rmdcorrel">13.1</a>). A correlação parcial fornece uma medida única de associação linear entre duas variáveis, ajustando para os efeitos de uma ou mais variáveis adicionais.</p>
+<p>A correlação bivariada simples, refere-se à correlação entre duas variáveis contínuas e é a medida mais comum de relação linear. Ela mede a força e a direção da relação linear entre duas variáveis quantitativas contínuas. O coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>) quantifica o grau com que as duas variáveis variam conjuntamente (Figura <a href="correg.html#fig:rmdcorrel">13.1</a>). A correlação parcial fornece uma medida única de associação linear entre duas variáveis, ajustando para os efeitos de uma ou mais variáveis adicionais.</p>
 <p>As duas fórmulas medem aspectos diferentes da relação entre duas variáveis.</p>
 <p>O coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>) possui valores possíveis variando de:</p>
 <p>-1 a +1,</p>
@@ -153,8 +153,8 @@
 <p>Ou seja, o valor absoluto de <span class="math inline">\(r\)</span> indica a força da associação, enquanto o sinal (+ ou −) indica sua direção.</p>
 <div class="figure">
 <span style="display:block;" id="fig:rmdcorrel"></span>
-<img src="fundamentos_de_ecologia_numerica_files/figure-html/rmdcorrel-1.png" alt="Exemplos de diferentes intensidades e direções de correlação de Pearson." width="600px"><p class="caption">
-Figura 13.1: Exemplos de diferentes intensidades e direções de correlação de Pearson.
+<img src="fundamentos_de_ecologia_numerica_files/figure-html/rmdcorrel-1.png" alt="Exemplos de diferentes forças e direções de correlação de Pearson." width="600px"><p class="caption">
+Figura 13.1: Exemplos de diferentes forças e direções de correlação de Pearson.
 </p>
 </div>
 <div id="coeficiente-de-correlação-de-pearson-r" class="section level3" number="13.1.1">
@@ -198,6 +198,102 @@ Segundo, multiplicamos os desvios das duas variáveis:</p>
 <p><span class="math inline">\(r=1\)</span>: correlação positiva perfeita;
 <span class="math inline">\(r=-1\)</span>: correlação negativa perfeita;
 <span class="math inline">\(r=0\)</span>: ausência de correlação linear.</p>
+<p>Exemplo de calculo de r:</p>
+<p>Considerando os dadoss</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="right">x</th>
+<th align="right">y</th>
+<th align="right">xy</th>
+<th align="right">x²</th>
+<th align="right">y²</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">15</td>
+<td align="right">9</td>
+<td align="right">25</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">16</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">6</td>
+<td align="right">30</td>
+<td align="right">25</td>
+<td align="right">36</td>
+</tr>
+<tr class="even">
+<td align="right"><strong>Σ</strong></td>
+<td align="right"><strong>Σ</strong></td>
+<td align="right"><strong>69</strong></td>
+<td align="right"><strong>55</strong></td>
+<td align="right"><strong>90</strong></td>
+</tr>
+<tr class="odd">
+<td align="right"><strong>Média</strong></td>
+<td align="right"></td>
+<td align="right"><strong>Σx = 15</strong></td>
+<td align="right"><strong>Σy = 20</strong></td>
+<td align="right"><strong>n = 5</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Temos:</p>
+<p><span class="math inline">\(n=5\)</span>
+<span class="math inline">\(\sum x=15\)</span>
+<span class="math inline">\(\sum y=20\)</span>
+<span class="math inline">\(\sum y=69\)</span>
+<span class="math inline">\(\sum x^2=55\)</span>
+<span class="math inline">\(\sum y^2=90\)</span></p>
+<p>Substituindo na fórmula:</p>
+<p><span class="math display">\[
+r=
+\frac{5(69)-15(20)}
+{\sqrt{\left[5(55)-15^2\right]
+\left[5(90)-20^2\right]}}
+\]</span></p>
+<p>Calculando o numerador:</p>
+<p><span class="math display">\[
+r=\frac{345-300}
+{\sqrt{(275-225)(450-400)}}
+\]</span>
+<span class="math display">\[
+r=\frac{45}
+{\sqrt{50\times50}}
+\]</span>
+<span class="math display">\[
+r=\frac{45}{50}
+\]</span></p>
+<p>Resultado:</p>
+<p><span class="math display">\[
+r=0.90
+\]</span></p>
+<p>Interpretação</p>
+<p>Como r=0,90, existe uma forte correlação linear positiva entre X e Y: à medida que X aumenta, Y tende a aumentar. Além disso,</p>
+<p><span class="math inline">\(R^2=r^2=(0,90)^2=0,81\)</span>,</p>
+<p>indicando que 81% da variação de y é explicada pela relação linear com X.</p>
 </div>
 </div>
 <div id="coeficiente-de-determinação-r2" class="section level3" number="13.1.2">
@@ -214,7 +310,6 @@ R^2=\frac{\text{SQ}*{\text{Regressão}}}
 <li>
 <span class="math inline">\(\text{SQ}_{\text{Total}}\)</span>: soma de quadrados total, representa toda a variação da variável resposta.</li>
 </ul>
-<p>e</p>
 <p><span class="math display">\[
   \text{SQ}*{\text{Total}}
   =\sum*{i=1}^{n}(y_i-\bar{y})^2
@@ -223,7 +318,6 @@ R^2=\frac{\text{SQ}*{\text{Regressão}}}
 <li>
 <span class="math inline">\(\text{SQ}_{\text{Regressão}}\)</span>: soma de quadrados explicada pelo modelo.</li>
 </ul>
-<p>Finalmente,</p>
 <p><span class="math display">\[
   \text{SQ}*{\text{Regressão}}
   =\sum*{i=1}^{n}(\hat y_i-\bar y)^2
@@ -557,10 +651,133 @@ gp = 1. O <strong>valor de p</strong> (&lt;0,001) é extremamente pequeno. Final
 o que está à direita de <code>~</code> é a variável independente (explicativa, preditora, x).</p>
 <p>PERGUNTA: A variação em uma variável explicativa (x) permite explicar ou prever a variação em uma variável resposta (y)?</p>
 <p><span class="math inline">\(H_0\)</span>: Hipótese nula: <span class="math inline">\(\beta_1 = 0\)</span>, ou seja, a variável explicativa não exerce efeito sobre a variável resposta (o modelo não possui poder preditivo).<br><span class="math inline">\(H_1\)</span>: Hipótese alternativa: <span class="math inline">\(\beta_1 \neq 0\)</span>, ou seja, a variável explicativa exerce efeito sobre a variável resposta (o modelo possui poder preditivo).</p>
+<p>O principal resultado da regressão linear é a <em>equação da reta</em>, que descreve a relação entre as variáveis na regressão:</p>
+<p><span class="math display">\[
+\hat{y}=\beta_0+\beta_1 x + \varepsilon
+\]</span></p>
+<p>onde:</p>
+<ul>
+<li>
+<span class="math inline">\(\hat{y}\)</span> = valor estimado (predito) da variável resposta;</li>
+<li>
+<span class="math inline">\(x\)</span> = variável independente (preditora);</li>
+<li>
+<span class="math inline">\(\beta_0\)</span> = intercepto da reta, ou seja, o valor estimado de <span class="math inline">\(y\)</span> quando <span class="math inline">\(x=0\)</span>;</li>
+<li>
+<span class="math inline">\(\beta_1\)</span> = coeficiente angular (inclinação da reta), que representa a variação esperada em <span class="math inline">\(y\)</span> para cada unidade de aumento em <span class="math inline">\(X\)</span>.</li>
+<li>
+<span class="math inline">\(\varepsilon\)</span> = erro aleatório associado ao modelo.</li>
+</ul>
 </div>
-<div id="exemplo-1" class="section level4" number="13.7.0.2">
+</div>
+<div id="coeficiente-angular-beta_1" class="section level2" number="13.8">
+<h2>
+<span class="header-section-number">13.8</span> Coeficiente angular (<span class="math inline">\(\beta_1\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-angular-beta_1"><i class="fas fa-link"></i></a>
+</h2>
+<p>O coeficiente angular (<span class="math inline">\(\beta_0\)</span>) representa a <strong>inclinação da reta de regressão</strong>, indicando quanto a variável resposta (<span class="math inline">\(y\)</span>) varia, em média, para cada aumento de uma unidade na variável preditora (<span class="math inline">\(x\)</span>):</p>
+<p><span class="math display">\[
+\beta_1=
+\frac{n\sum xy-\sum x\sum y}
+{n\sum x^2-\left(\sum x\right)^2}
+\]</span></p>
+<p>onde:</p>
+<ul>
+<li>
+<span class="math inline">\(n\)</span> = número de observações;</li>
+<li>
+<span class="math inline">\(\sum X\)</span> = soma dos valores de <span class="math inline">\(X\)</span>;</li>
+<li>
+<span class="math inline">\(\sum Y\)</span> = soma dos valores de <span class="math inline">\(Y\)</span>;</li>
+<li>
+<span class="math inline">\(\sum XY\)</span> = soma do produto entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>;</li>
+<li>
+<span class="math inline">\(\sum X^2\)</span> = soma dos quadrados dos valores de <span class="math inline">\(X\)</span>.</li>
+</ul>
+<div id="exemplo-de-cálculo-de-beta_0" class="section level3" number="13.8.1">
+<h3>
+<span class="header-section-number">13.8.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_0\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><i class="fas fa-link"></i></a>
+</h3>
+<p>Considerando:</p>
+<ul>
+<li><span class="math inline">\(n=5\)</span></li>
+<li><span class="math inline">\(\sum x=15\)</span></li>
+<li><span class="math inline">\(\sum y=20\)</span></li>
+<li><span class="math inline">\(\sum xy=69\)</span></li>
+<li><span class="math inline">\(\sum x^2=55\)</span></li>
+</ul>
+<p>Substituindo na fórmula:</p>
+<p><span class="math display">\[
+\beta_1=
+\frac{5(69)-15(20)}
+{5(55)-15^2}
+\]</span></p>
+<p><span class="math display">\[
+\beta_1=
+\frac{345-300}
+{275-225}
+\]</span></p>
+<p><span class="math display">\[
+\beta_1=\frac{45}{50}=0.90
+\]</span></p>
+<p>Assim, o coeficiente angular da reta é</p>
+<p><span class="math display">\[
+\beta_1=0.90.
+\]</span></p>
+</div>
+</div>
+<div id="intercepto-beta_0" class="section level2" number="13.9">
+<h2>
+<span class="header-section-number">13.9</span> Intercepto (<span class="math inline">\(\beta_0\)</span>)<a class="anchor" aria-label="anchor" href="#intercepto-beta_0"><i class="fas fa-link"></i></a>
+</h2>
+<p>O intercepto (<span class="math inline">\(beta_0\)</span>) representa o valor esperado da variável resposta (<span class="math inline">\(y\)</span>) quando a variável independente (<span class="math inline">\(y\)</span>) é igual a zero. Graficamente, corresponde ao ponto onde a reta intercepta o eixo <span class="math inline">\(y\)</span>.</p>
+<p>O intercepto é calculado por</p>
+<p><span class="math display">\[
+\beta_0=\bar{y}-\beta_1\bar{x}
+\]</span></p>
+<p>em que</p>
+<p><span class="math display">\[
+\bar{x}=\frac{\sum x}{n}
+\qquad\text{e}\qquad
+\bar{y}=\frac{\sum y}{n}.
+\]</span></p>
+<div id="exemplo-de-cálculo-de-beta_0-1" class="section level3" number="13.9.1">
+<h3>
+<span class="header-section-number">13.9.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_0\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_0-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Primeiro calculam-se as médias:</p>
+<p><span class="math display">\[
+\bar{x}=\frac{15}{5}=3
+\]</span></p>
+<p><span class="math display">\[
+\bar{y}=\frac{20}{5}=4
+\]</span></p>
+<p>Como <span class="math inline">\(\beta_1=0.90\)</span>,</p>
+<p><span class="math display">\[
+\beta_0=4-(0.90\times3)
+\]</span></p>
+<p><span class="math display">\[
+\beta_0=4-2.70
+\]</span></p>
+<p><span class="math display">\[
+\beta_0=1.30
+\]</span></p>
+<p>Portanto, o intercepto da reta é</p>
+<p><span class="math display">\[
+\beta_0=1.30.
+\]</span></p>
+</div>
+</div>
+<div id="equação-da-reta" class="section level2" number="13.10">
+<h2>
+<span class="header-section-number">13.10</span> Equação da reta<a class="anchor" aria-label="anchor" href="#equa%C3%A7%C3%A3o-da-reta"><i class="fas fa-link"></i></a>
+</h2>
+<p>Substituindo os valores de <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span>, obtém-se a equação da regressão linear simples:</p>
+<p><span class="math display">\[
+\hat{y}=1.30+0.90y.
+\]</span></p>
+<div id="exemplo-1" class="section level4" number="13.10.0.1">
 <h4>
-<span class="header-section-number">13.7.0.2</span> Exemplo<a class="anchor" aria-label="anchor" href="#exemplo-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.10.0.1</span> Exemplo<a class="anchor" aria-label="anchor" href="#exemplo-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>No script a seguir, seguimos as seguintes etapas:</p>
 <ol style="list-style-type: decimal">
@@ -748,14 +965,14 @@ onde:</p>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672"></div>
 </div>
 </div>
-<div id="gráfico-de-dispersão-scatterplot" class="section level2" number="13.8">
+<div id="gráfico-de-dispersão-scatterplot" class="section level2" number="13.11">
 <h2>
-<span class="header-section-number">13.8</span> Gráfico de dispersão (<em>scatterplot</em>)<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-dispers%C3%A3o-scatterplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.11</span> Gráfico de dispersão (<em>scatterplot</em>)<a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-de-dispers%C3%A3o-scatterplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Um gráfico de dispersão mostra a relação entre duas variáveis quantitativas, representando cada observação como um ponto no plano cartesiano. Faremos isso usando o pacote <code>ggplot2</code>.</p>
-<div id="ggplot" class="section level3" number="13.8.1">
+<div id="ggplot" class="section level3" number="13.11.1">
 <h3>
-<span class="header-section-number">13.8.1</span> O que é ggplot2?<a class="anchor" aria-label="anchor" href="#ggplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.11.1</span> O que é ggplot2?<a class="anchor" aria-label="anchor" href="#ggplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>O <code>ggplot2</code> é um pacote de visualização de dados para R, que permite definir visualmente o que se quer mostrar através de camadas adicionadas usando o símbolo <strong><code>+</code></strong>, usando os seguintes componentes principais:</p>
 <ol style="list-style-type: lower-alpha">
@@ -821,14 +1038,14 @@ onde:</p>
 <p>Assim, embora a regressão simples seja útil para descrever a associação bivariada, ela não controla simultaneamente múltiplas fontes de variação.</p>
 </div>
 </div>
-<div id="material-de-apoio-6" class="section level2" number="13.9">
+<div id="material-de-apoio-6" class="section level2" number="13.12">
 <h2>
-<span class="header-section-number">13.9</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-6"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="teste-seus-conhecimentos-5" class="section level2" number="13.10">
+<div id="teste-seus-conhecimentos-5" class="section level2" number="13.13">
 <h2>
-<span class="header-section-number">13.10</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.13</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-5"><i class="fas fa-link"></i></a>
 </h2>
 <div class="infobox note">
 <div class="center">
@@ -840,7 +1057,7 @@ onde:</p>
 <div class="center">
 <p><strong>NOTA</strong></p>
 </div>
-<p>Baixe esse arquivo de exercício e resolva as questões no R (<a href="exerc/ex5.R">Exercício 5</a>).</p>
+<p>Baixe esse arquivo de exercício e resolva as questões no R (<a href="exerc/ex6-simpregres.R">Exercício 6</a>).</p>
 </div>
 </div>
 <div id="apêndices-7" class="section level2 unnumbered">
@@ -906,10 +1123,17 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <li><a class="nav-link" href="#correla%C3%A7%C3%A3o-parcial"><span class="header-section-number">13.6</span> Correlação parcial</a></li>
 <li><a class="nav-link" href="#regress%C3%A3o-simples"><span class="header-section-number">13.7</span> Regressão simples</a></li>
 <li>
-<a class="nav-link" href="#gr%C3%A1fico-de-dispers%C3%A3o-scatterplot"><span class="header-section-number">13.8</span> Gráfico de dispersão (scatterplot)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ggplot"><span class="header-section-number">13.8.1</span> O que é ggplot2?</a></li></ul>
+<a class="nav-link" href="#coeficiente-angular-beta_1"><span class="header-section-number">13.8</span> Coeficiente angular (\(\beta_1\))</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><span class="header-section-number">13.8.1</span> Exemplo de cálculo de \(\beta_0\)</a></li></ul>
 </li>
-<li><a class="nav-link" href="#material-de-apoio-6"><span class="header-section-number">13.9</span> Material de apoio</a></li>
-<li><a class="nav-link" href="#teste-seus-conhecimentos-5"><span class="header-section-number">13.10</span> TESTE SEUS CONHECIMENTOS</a></li>
+<li>
+<a class="nav-link" href="#intercepto-beta_0"><span class="header-section-number">13.9</span> Intercepto (\(\beta_0\))</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#exemplo-de-c%C3%A1lculo-de-beta_0-1"><span class="header-section-number">13.9.1</span> Exemplo de cálculo de \(\beta_0\)</a></li></ul>
+</li>
+<li><a class="nav-link" href="#equa%C3%A7%C3%A3o-da-reta"><span class="header-section-number">13.10</span> Equação da reta</a></li>
+<li>
+<a class="nav-link" href="#gr%C3%A1fico-de-dispers%C3%A3o-scatterplot"><span class="header-section-number">13.11</span> Gráfico de dispersão (scatterplot)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ggplot"><span class="header-section-number">13.11.1</span> O que é ggplot2?</a></li></ul>
+</li>
+<li><a class="nav-link" href="#material-de-apoio-6"><span class="header-section-number">13.12</span> Material de apoio</a></li>
+<li><a class="nav-link" href="#teste-seus-conhecimentos-5"><span class="header-section-number">13.13</span> TESTE SEUS CONHECIMENTOS</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-7">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-para-consulta-1">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-4">Script limpo</a></li>
@@ -930,7 +1154,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 03/08/2026 12:12:18.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 04/08/2026 13:30:39.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

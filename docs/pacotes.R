@@ -62,6 +62,8 @@ devtools::install_github("dustinfife/flexplot")
 install.packages("effectsize")
 install.packages("flexplot")
 install.packages("ggplot2")
+install.packages("patchwork")
+install.packages("ggdist")
 
 ###CAPÍTULO 4.5.1 ----
 
