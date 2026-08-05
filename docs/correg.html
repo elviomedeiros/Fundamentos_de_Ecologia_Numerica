@@ -134,7 +134,7 @@
 <h2>
 <span class="header-section-number">13.1</span> Correlação<a class="anchor" aria-label="anchor" href="#correla%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h2>
-<p>O <strong>coeficiente de correlação produto-momento de Pearson (<span class="math inline">\(r\)</span>)</strong> descreve a relação entre duas variáveis numéricas contínuas. A análise de correlação também pode ser aplicada entre variáveis categóricas binárias (coeficiente Phi) ou entre uma variável numérica contínua e uma variável categórica binária (correlação ponto-bisserial) <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>, porém essas abordagens não constituem o foco do presente texto.</p>
+<p>O <strong>coeficiente de correlação produto-momento de Pearson (<span class="math inline">\(r\)</span>)</strong> descreve a relação entre duas variáveis numéricas contínuas. A análise de correlação também pode ser aplicada entre variáveis categóricas binárias (coeficiente Phi) ou entre uma variável numérica contínua e uma variável categórica binária (correlação ponto-bisserial) <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>, porém essas abordagens não constituem o foco do presente texto (veja <a href="https://onlinelibrary.wiley.com/doi/10.1111/1467-9639.00013">Matthews</a> <span class="citation">(<a href="#ref-matthews2000"><strong>matthews2000?</strong></a>)</span>).</p>
 <p>Quando os pressupostos da correlação não podem ser adequadamente atendidos, utiliza-se uma alternativa não-paramétrica, a <strong>correlação por postos de Spearman (<span class="math inline">\(\rho\)</span>)</strong>.</p>
 <p>Neste capítulo serão abordadas:</p>
 <ul>
@@ -195,115 +195,294 @@ Segundo, multiplicamos os desvios das duas variáveis:</p>
 <p>Terceiro, somamos todos esses produtos, obtendo uma medida da covariação entre as variáveis.</p>
 <p>Por último, dividimos pelo produto dos desvios padrão, padronizando o resultado para que ele varie entre -1 e 1.</p>
 <p>Assim:</p>
-<p><span class="math inline">\(r=1\)</span>: correlação positiva perfeita;
-<span class="math inline">\(r=-1\)</span>: correlação negativa perfeita;
-<span class="math inline">\(r=0\)</span>: ausência de correlação linear.</p>
+<p><span class="math inline">\(r=1\)</span>: correlação positiva perfeita;<br><span class="math inline">\(r=-1\)</span>: correlação negativa perfeita;<br><span class="math inline">\(r=0\)</span>: ausência de correlação linear.</p>
 <p>Exemplo de calculo de r:</p>
-<p>Considerando os dadoss</p>
+</div>
+</div>
+<div id="exemplo-de-cálculo-de-r" class="section level3" number="13.1.2">
+<h3>
+<span class="header-section-number">13.1.2</span> Exemplo de cálculo de <span class="math inline">\(r\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>Considerando os dados apresentados na tabela abaixo, temos os seguintes valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> para as 5 observaçõeos:</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
-<th align="right">x</th>
-<th align="right">y</th>
-<th align="right">xy</th>
-<th align="right">x²</th>
-<th align="right">y²</th>
+<th align="center">Obs</th>
+<th align="right"><span class="math inline">\(x_i\)</span></th>
+<th align="right"><span class="math inline">\(y_i\)</span></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="center">1</td>
 <td align="right">1</td>
 <td align="right">2</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">4</td>
 </tr>
 <tr class="even">
+<td align="center">2</td>
 <td align="right">2</td>
 <td align="right">3</td>
-<td align="right">6</td>
-<td align="right">4</td>
-<td align="right">9</td>
 </tr>
 <tr class="odd">
+<td align="center">3</td>
 <td align="right">3</td>
 <td align="right">5</td>
-<td align="right">15</td>
-<td align="right">9</td>
-<td align="right">25</td>
 </tr>
 <tr class="even">
+<td align="center">4</td>
 <td align="right">4</td>
 <td align="right">4</td>
-<td align="right">16</td>
-<td align="right">16</td>
-<td align="right">16</td>
 </tr>
 <tr class="odd">
+<td align="center">5</td>
 <td align="right">5</td>
 <td align="right">6</td>
-<td align="right">30</td>
-<td align="right">25</td>
-<td align="right">36</td>
-</tr>
-<tr class="even">
-<td align="right"><strong>Σ</strong></td>
-<td align="right"><strong>Σ</strong></td>
-<td align="right"><strong>69</strong></td>
-<td align="right"><strong>55</strong></td>
-<td align="right"><strong>90</strong></td>
-</tr>
-<tr class="odd">
-<td align="right"><strong>Média</strong></td>
-<td align="right"></td>
-<td align="right"><strong>Σx = 15</strong></td>
-<td align="right"><strong>Σy = 20</strong></td>
-<td align="right"><strong>n = 5</strong></td>
 </tr>
 </tbody>
 </table></div>
-<p>Temos:</p>
-<p><span class="math inline">\(n=5\)</span>
-<span class="math inline">\(\sum x=15\)</span>
-<span class="math inline">\(\sum y=20\)</span>
-<span class="math inline">\(\sum y=69\)</span>
-<span class="math inline">\(\sum x^2=55\)</span>
-<span class="math inline">\(\sum y^2=90\)</span></p>
-<p>Substituindo na fórmula:</p>
+<p>Primeiramente, calculam-se as médias das duas variáveis:</p>
+<p><span class="math display">\[
+\bar{x}=\frac{\sum x}{n}=\frac{15}{5}=3
+\]</span></p>
+<p><span class="math display">\[
+\bar{y}=\frac{\sum y}{n}=\frac{20}{5}=4
+\]</span></p>
+<p>Em seguida, calcula-se o desvio de cada observação em relação à sua média, como apresentado na Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, abaixo:</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:rmdtabr2">Tabela 13.1: </span>Cálculo dos desvios em relação às médias utilizados no coeficiente de correlação de Pearson.
+</caption>
+<thead><tr>
+<th style="text-align:center;">
+Obs
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(x_i\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(y_i\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(x_i-\bar{x}\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(y_i-\bar{y}\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\((x_i-\bar{x})(y_i-\bar{y})\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\((x_i-\bar{x})^2\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\((y_i-\bar{y})^2\)</span>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+<td style="text-align:center;width: 2cm; ">
+2
+</td>
+<td style="text-align:center;width: 2cm; ">
+-2
+</td>
+<td style="text-align:center;width: 2cm; ">
+-2
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 1.5cm; ">
+2
+</td>
+<td style="text-align:center;width: 2cm; ">
+2
+</td>
+<td style="text-align:center;width: 2cm; ">
+3
+</td>
+<td style="text-align:center;width: 2cm; ">
+-1
+</td>
+<td style="text-align:center;width: 2cm; ">
+-1
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 1.5cm; ">
+3
+</td>
+<td style="text-align:center;width: 2cm; ">
+3
+</td>
+<td style="text-align:center;width: 2cm; ">
+5
+</td>
+<td style="text-align:center;width: 2cm; ">
+0
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+<td style="text-align:center;width: 2cm; ">
+0
+</td>
+<td style="text-align:center;width: 2cm; ">
+0
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 1.5cm; ">
+4
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+<td style="text-align:center;width: 2cm; ">
+0
+</td>
+<td style="text-align:center;width: 2cm; ">
+0
+</td>
+<td style="text-align:center;width: 2cm; ">
+1
+</td>
+<td style="text-align:center;width: 2cm; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 1.5cm; ">
+5
+</td>
+<td style="text-align:center;width: 2cm; ">
+5
+</td>
+<td style="text-align:center;width: 2cm; ">
+6
+</td>
+<td style="text-align:center;width: 2cm; ">
+2
+</td>
+<td style="text-align:center;width: 2cm; ">
+2
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+<td style="text-align:center;width: 2cm; ">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 1.5cm; ">
+</td>
+<td style="text-align:center;width: 2cm; ">
+<span class="math inline">\(\bar{x}=3\)</span>
+</td>
+<td style="text-align:center;width: 2cm; ">
+<span class="math inline">\(\bar{y}=4\)</span>
+</td>
+<td style="text-align:center;width: 2cm; ">
+</td>
+<td style="text-align:center;width: 2cm; ">
+</td>
+<td style="text-align:center;width: 2cm; ">
+<span class="math inline">\(\sum = 9\)</span>
+</td>
+<td style="text-align:center;width: 2cm; ">
+<span class="math inline">\(\sum = 10\)</span>
+</td>
+<td style="text-align:center;width: 2cm; ">
+<span class="math inline">\(\sum = 10\)</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Assim,</p>
+<p><span class="math display">\[
+\sum (x_i-\bar{x})(y_i-\bar{y})=9
+\]</span></p>
+<p><span class="math display">\[
+\sum (x_i-\bar{x})^2=10
+\]</span></p>
+<p><span class="math display">\[
+\sum (y_i-\bar{y})^2=10
+\]</span></p>
+<p>Substituindo esses valores na fórmula do coeficiente de correlação de Pearson,</p>
 <p><span class="math display">\[
 r=
-\frac{5(69)-15(20)}
-{\sqrt{\left[5(55)-15^2\right]
-\left[5(90)-20^2\right]}}
+\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
+{\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2}
+\sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}
 \]</span></p>
-<p>Calculando o numerador:</p>
+<p>tem-se</p>
 <p><span class="math display">\[
-r=\frac{345-300}
-{\sqrt{(275-225)(450-400)}}
-\]</span>
-<span class="math display">\[
-r=\frac{45}
-{\sqrt{50\times50}}
-\]</span>
-<span class="math display">\[
-r=\frac{45}{50}
+r=
+\frac{9}
+{\sqrt{10}\times\sqrt{10}}
 \]</span></p>
-<p>Resultado:</p>
+<p>Como</p>
 <p><span class="math display">\[
-r=0.90
+\sqrt{10}\times\sqrt{10}=10,
 \]</span></p>
-<p>Interpretação</p>
-<p>Como r=0,90, existe uma forte correlação linear positiva entre X e Y: à medida que X aumenta, Y tende a aumentar. Além disso,</p>
-<p><span class="math inline">\(R^2=r^2=(0,90)^2=0,81\)</span>,</p>
-<p>indicando que 81% da variação de y é explicada pela relação linear com X.</p>
+<p>segue que</p>
+<p><span class="math display">\[
+r=\frac{9}{10}=0,90.
+\]</span></p>
 </div>
-</div>
-<div id="coeficiente-de-determinação-r2" class="section level3" number="13.1.2">
+<div id="interpretação" class="section level3" number="13.1.3">
 <h3>
-<span class="header-section-number">13.1.2</span> Coeficiente de determinação (<span class="math inline">\(r^2\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-de-determina%C3%A7%C3%A3o-r2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1.3</span> Interpretação<a class="anchor" aria-label="anchor" href="#interpreta%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h3>
+<p>Como <span class="math inline">\(r=0,90\)</span>, existe uma <strong>forte correlação linear positiva</strong> entre as variáveis <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>. Isso indica que, à medida que os valores de <span class="math inline">\(x\)</span> aumentam, os valores de <span class="math inline">\(y\)</span> também tendem a aumentar.</p>
+</div>
+<div id="coeficiente-de-determinação-r2" class="section level3" number="13.1.4">
+<h3>
+<span class="header-section-number">13.1.4</span> Coeficiente de determinação (<span class="math inline">\(r^2\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-de-determina%C3%A7%C3%A3o-r2"><i class="fas fa-link"></i></a>
+</h3>
+<p>O coeficiente de determinação é obtido por:</p>
+<p><span class="math display">\[
+R^2=r^2=(0,90)^2=0,81.
+\]</span></p>
+<p>Portanto, <strong>81% da variação observada em <span class="math inline">\(y\)</span> é explicada pela relação linear com <span class="math inline">\(x\)</span></strong>, enquanto os 19% restantes são atribuídos a outros fatores ou à variabilidade aleatória.</p>
 <p>Na regressão linear simples, temos:</p>
 <p><span class="math display">\[
 R^2=\frac{\text{SQ}*{\text{Regressão}}}
-{\text{SQ}*{\text{Total}}}.
+{\text{SQ}*{\text{Total}}}
 \]</span></p>
 <p>onde:</p>
 <ul>
@@ -323,9 +502,9 @@ R^2=\frac{\text{SQ}*{\text{Regressão}}}
   =\sum*{i=1}^{n}(\hat y_i-\bar y)^2
 \]</span></p>
 <p>onde <span class="math inline">\(\hat y_i\)</span> é o valor previsto pela regressão.</p>
-<div id="como-a-fórmula-funciona-1" class="section level4" number="13.1.2.1">
+<div id="como-a-fórmula-funciona-1" class="section level4" number="13.1.4.1">
 <h4>
-<span class="header-section-number">13.1.2.1</span> Como a fórmula funciona<a class="anchor" aria-label="anchor" href="#como-a-f%C3%B3rmula-funciona-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1.4.1</span> Como a fórmula funciona<a class="anchor" aria-label="anchor" href="#como-a-f%C3%B3rmula-funciona-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>O coeficiente de determinação calcula a fração da variação total de (y) que é explicada pela regressão.</p>
 <p>Por exemplo, se</p>
@@ -333,14 +512,14 @@ R^2=\frac{\text{SQ}*{\text{Regressão}}}
 <span class="math inline">\(\text{SQ}_{\text{Total}}=100\)</span>,</p>
 <p>então</p>
 <p><span class="math display">\[
-r^2=\frac{80}{100}=0.80.
+r^2=\frac{80}{100}=0,80
 \]</span></p>
 <p>Isso significa que <strong>80% da variação da variável resposta é explicada pelo modelo</strong>, enquanto os 20% restantes são atribuídos a outros fatores ou ao erro aleatório.</p>
 </div>
 </div>
-<div id="relação-entre-r-e-r2" class="section level3" number="13.1.3">
+<div id="relação-entre-r-e-r2" class="section level3" number="13.1.5">
 <h3>
-<span class="header-section-number">13.1.3</span> Relação entre <span class="math inline">\(r\)</span> e <span class="math inline">\(R^2\)</span><a class="anchor" aria-label="anchor" href="#rela%C3%A7%C3%A3o-entre-r-e-r2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1.5</span> Relação entre <span class="math inline">\(r\)</span> e <span class="math inline">\(R^2\)</span><a class="anchor" aria-label="anchor" href="#rela%C3%A7%C3%A3o-entre-r-e-r2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Na regressão linear simples existe apenas uma variável explicativa, e vale a relação</p>
 <p><span class="math display">\[
@@ -348,16 +527,16 @@ r^2=R^2
 \]</span></p>
 <p>Assim, se</p>
 <p><span class="math display">\[
-r=0.90,
+r=0,90,
 \]</span></p>
 <p>então</p>
 <p><span class="math display">\[
-R^2=0.90^2=0.81.
+R^2=0,90^2=0,81.
 \]</span></p>
 <p>Ou seja, a correlação mede a <strong>força e a direção</strong> da relação linear entre duas variáveis, enquanto o coeficiente de determinação mede <strong>quanto da variação da variável resposta é explicada pelo modelo de regressão</strong>.</p>
-<div id="não-confundir-com-resíduos" class="section level4" number="13.1.3.1">
+<div id="não-confundir-com-resíduos" class="section level4" number="13.1.5.1">
 <h4>
-<span class="header-section-number">13.1.3.1</span> Não confundir com <strong>resíduos</strong><a class="anchor" aria-label="anchor" href="#n%C3%A3o-confundir-com-res%C3%ADduos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1.5.1</span> Não confundir com <strong>resíduos</strong><a class="anchor" aria-label="anchor" href="#n%C3%A3o-confundir-com-res%C3%ADduos"><i class="fas fa-link"></i></a>
 </h4>
 <p>No desvio em relação à média</p>
 <p><span class="math display">\[
@@ -378,9 +557,9 @@ e_i = y_i - \hat{y}_i,
 </ul>
 <p>O resíduo mede o <strong>erro de predição</strong> da regressão, ou seja, a distância vertical entre o ponto observado e a reta ajustada.</p>
 </div>
-<div id="pressupostos-4" class="section level4" number="13.1.3.2">
+<div id="pressupostos-4" class="section level4" number="13.1.5.2">
 <h4>
-<span class="header-section-number">13.1.3.2</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1.5.2</span> Pressupostos<a class="anchor" aria-label="anchor" href="#pressupostos-4"><i class="fas fa-link"></i></a>
 </h4>
 <p>A análise de correlação possui vários pressupostos:</p>
 <ol style="list-style-type: decimal">
@@ -674,54 +853,65 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <h2>
 <span class="header-section-number">13.8</span> Coeficiente angular (<span class="math inline">\(\beta_1\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-angular-beta_1"><i class="fas fa-link"></i></a>
 </h2>
-<p>O coeficiente angular (<span class="math inline">\(\beta_0\)</span>) representa a <strong>inclinação da reta de regressão</strong>, indicando quanto a variável resposta (<span class="math inline">\(y\)</span>) varia, em média, para cada aumento de uma unidade na variável preditora (<span class="math inline">\(x\)</span>):</p>
+<p>Sendo a equação geral da reta dada por:</p>
 <p><span class="math display">\[
-\beta_1=
-\frac{n\sum xy-\sum x\sum y}
-{n\sum x^2-\left(\sum x\right)^2}
+\hat{y}=\beta_0+\beta_1 x
+\]</span></p>
+<p>O coeficiente angular (<span class="math inline">\(\beta_1\)</span>) representa a <strong>inclinação da reta de regressão</strong>, indicando quanto a variável resposta (<span class="math inline">\(y\)</span>) varia, em média, para cada aumento de uma unidade na variável preditora (<span class="math inline">\(x\)</span>):</p>
+<p><span class="math display">\[
+\beta_1 =
+\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
+{\sum_{i=1}^{n}(x_i-\bar{x})^2}
 \]</span></p>
 <p>onde:</p>
 <ul>
 <li>
-<span class="math inline">\(n\)</span> = número de observações;</li>
+<span class="math inline">\(x_i\)</span> = valor observado de <span class="math inline">\(x\)</span>;</li>
 <li>
-<span class="math inline">\(\sum X\)</span> = soma dos valores de <span class="math inline">\(X\)</span>;</li>
+<span class="math inline">\(y_i\)</span> = valor observado de <span class="math inline">\(y\)</span>;</li>
 <li>
-<span class="math inline">\(\sum Y\)</span> = soma dos valores de <span class="math inline">\(Y\)</span>;</li>
+<span class="math inline">\(\bar{x}\)</span> = média de <span class="math inline">\(x\)</span>;</li>
 <li>
-<span class="math inline">\(\sum XY\)</span> = soma do produto entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>;</li>
-<li>
-<span class="math inline">\(\sum X^2\)</span> = soma dos quadrados dos valores de <span class="math inline">\(X\)</span>.</li>
+<span class="math inline">\(\bar{y}\)</span> = média de <span class="math inline">\(y\)</span>.</li>
 </ul>
-<div id="exemplo-de-cálculo-de-beta_0" class="section level3" number="13.8.1">
+<div id="exemplo-de-cálculo-de-beta_1" class="section level3" number="13.8.1">
 <h3>
-<span class="header-section-number">13.8.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_0\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.8.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_1\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Considerando:</p>
-<ul>
-<li><span class="math inline">\(n=5\)</span></li>
-<li><span class="math inline">\(\sum x=15\)</span></li>
-<li><span class="math inline">\(\sum y=20\)</span></li>
-<li><span class="math inline">\(\sum xy=69\)</span></li>
-<li><span class="math inline">\(\sum x^2=55\)</span></li>
-</ul>
+<p>Considerando os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos apresentados na Tabela Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
+<p><span class="math display">\[
+x=(1,2,3,4,5)
+\]</span></p>
+<p><span class="math display">\[
+y=(2,3,5,4,6)
+\]</span>
+e</p>
+<p><span class="math display">\[
+\bar{x}=3
+\]</span></p>
+<p><span class="math display">\[
+\bar{y}=4
+\]</span>
+Já calculamos</p>
+<p><span class="math display">\[
+\sum(x_i-\bar{x})(y_i-\bar{y})=9
+\]</span>
+e</p>
+<p><span class="math display">\[
+\sum(x_i-\bar{x})^2=10
+\]</span></p>
 <p>Substituindo na fórmula:</p>
 <p><span class="math display">\[
 \beta_1=
-\frac{5(69)-15(20)}
-{5(55)-15^2}
+\frac{9}
+{10}
 \]</span></p>
 <p><span class="math display">\[
-\beta_1=
-\frac{345-300}
-{275-225}
-\]</span></p>
-<p><span class="math display">\[
-\beta_1=\frac{45}{50}=0.90
+\beta_1=0,9
 \]</span></p>
 <p>Assim, o coeficiente angular da reta é</p>
 <p><span class="math display">\[
-\beta_1=0.90.
+\beta_1=0,90.
 \]</span></p>
 </div>
 </div>
@@ -738,32 +928,33 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <p><span class="math display">\[
 \bar{x}=\frac{\sum x}{n}
 \qquad\text{e}\qquad
-\bar{y}=\frac{\sum y}{n}.
+\bar{y}=\frac{\sum y}{n}
 \]</span></p>
-<div id="exemplo-de-cálculo-de-beta_0-1" class="section level3" number="13.9.1">
+<div id="exemplo-de-cálculo-de-beta_0" class="section level3" number="13.9.1">
 <h3>
-<span class="header-section-number">13.9.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_0\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_0-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.9.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_0\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><i class="fas fa-link"></i></a>
 </h3>
-<p>Primeiro calculam-se as médias:</p>
+<p>Mais uma vez, tomando-se os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos apresentados na Tabela Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
 <p><span class="math display">\[
 \bar{x}=\frac{15}{5}=3
 \]</span></p>
+<p>e</p>
 <p><span class="math display">\[
 \bar{y}=\frac{20}{5}=4
 \]</span></p>
-<p>Como <span class="math inline">\(\beta_1=0.90\)</span>,</p>
+<p>Como <span class="math inline">\(\beta_1=0.90\)</span>, temos:</p>
 <p><span class="math display">\[
-\beta_0=4-(0.90\times3)
+\beta_0=4-(0,90\times3)
 \]</span></p>
 <p><span class="math display">\[
-\beta_0=4-2.70
+\beta_0=4-2,70
 \]</span></p>
 <p><span class="math display">\[
-\beta_0=1.30
+\beta_0=1,30
 \]</span></p>
 <p>Portanto, o intercepto da reta é</p>
 <p><span class="math display">\[
-\beta_0=1.30.
+\beta_0=1,30.
 \]</span></p>
 </div>
 </div>
@@ -771,9 +962,23 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <h2>
 <span class="header-section-number">13.10</span> Equação da reta<a class="anchor" aria-label="anchor" href="#equa%C3%A7%C3%A3o-da-reta"><i class="fas fa-link"></i></a>
 </h2>
-<p>Substituindo os valores de <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span>, obtém-se a equação da regressão linear simples:</p>
+<p>Substituindo os valores de <span class="math inline">\(\beta_0\)</span> e <span class="math inline">\(\beta_1\)</span>, obtém-se a equação da regressão linear simples:</p>
 <p><span class="math display">\[
-\hat{y}=1.30+0.90y.
+\hat{y}=1,3+0,9x
+\]</span>
+Dessa forma, podemos prever <span class="math inline">\(\hat{y}\)</span> a partir de um valor de <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[
+\hat{y}=1,3+0,9x
+\]</span>
+Para <span class="math inline">\(x=6\)</span>, temos:</p>
+<p><span class="math display">\[
+\hat{y}=1,3+0,9(6)
+\]</span></p>
+<p><span class="math display">\[
+\hat{y}=1,3+5,4
+\]</span></p>
+<p><span class="math display">\[
+\hat{y}=6,7
 \]</span></p>
 <div id="exemplo-1" class="section level4" number="13.10.0.1">
 <h4>
@@ -1112,8 +1317,10 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <li>
 <a class="nav-link" href="#correla%C3%A7%C3%A3o"><span class="header-section-number">13.1</span> Correlação</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#coeficiente-de-correla%C3%A7%C3%A3o-de-pearson-r"><span class="header-section-number">13.1.1</span> Coeficiente de correlação de Pearson (\(r\))</a></li>
-<li><a class="nav-link" href="#coeficiente-de-determina%C3%A7%C3%A3o-r2"><span class="header-section-number">13.1.2</span> Coeficiente de determinação (\(r^2\))</a></li>
-<li><a class="nav-link" href="#rela%C3%A7%C3%A3o-entre-r-e-r2"><span class="header-section-number">13.1.3</span> Relação entre \(r\) e \(R^2\)</a></li>
+<li><a class="nav-link" href="#exemplo-de-c%C3%A1lculo-de-r"><span class="header-section-number">13.1.2</span> Exemplo de cálculo de \(r\)</a></li>
+<li><a class="nav-link" href="#interpreta%C3%A7%C3%A3o"><span class="header-section-number">13.1.3</span> Interpretação</a></li>
+<li><a class="nav-link" href="#coeficiente-de-determina%C3%A7%C3%A3o-r2"><span class="header-section-number">13.1.4</span> Coeficiente de determinação (\(r^2\))</a></li>
+<li><a class="nav-link" href="#rela%C3%A7%C3%A3o-entre-r-e-r2"><span class="header-section-number">13.1.5</span> Relação entre \(r\) e \(R^2\)</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#sobre-os-dados-2"><span class="header-section-number">13.2</span> Sobre os dados</a></li>
@@ -1123,10 +1330,10 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <li><a class="nav-link" href="#correla%C3%A7%C3%A3o-parcial"><span class="header-section-number">13.6</span> Correlação parcial</a></li>
 <li><a class="nav-link" href="#regress%C3%A3o-simples"><span class="header-section-number">13.7</span> Regressão simples</a></li>
 <li>
-<a class="nav-link" href="#coeficiente-angular-beta_1"><span class="header-section-number">13.8</span> Coeficiente angular (\(\beta_1\))</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><span class="header-section-number">13.8.1</span> Exemplo de cálculo de \(\beta_0\)</a></li></ul>
+<a class="nav-link" href="#coeficiente-angular-beta_1"><span class="header-section-number">13.8</span> Coeficiente angular (\(\beta_1\))</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#exemplo-de-c%C3%A1lculo-de-beta_1"><span class="header-section-number">13.8.1</span> Exemplo de cálculo de \(\beta_1\)</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#intercepto-beta_0"><span class="header-section-number">13.9</span> Intercepto (\(\beta_0\))</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#exemplo-de-c%C3%A1lculo-de-beta_0-1"><span class="header-section-number">13.9.1</span> Exemplo de cálculo de \(\beta_0\)</a></li></ul>
+<a class="nav-link" href="#intercepto-beta_0"><span class="header-section-number">13.9</span> Intercepto (\(\beta_0\))</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><span class="header-section-number">13.9.1</span> Exemplo de cálculo de \(\beta_0\)</a></li></ul>
 </li>
 <li><a class="nav-link" href="#equa%C3%A7%C3%A3o-da-reta"><span class="header-section-number">13.10</span> Equação da reta</a></li>
 <li>
@@ -1154,7 +1361,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 04/08/2026 13:30:39.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 14:31:05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
