@@ -4,25 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 13 Correlação e Regressão | Fundamentos de Ecologia Numérica</title>
+<title> 13 R Módulo 5 - Correlação e Regressão | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content=" 13 Correlação e Regressão | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 13 R Módulo 5 - Correlação e Regressão | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 13 Correlação e Regressão | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 13 R Módulo 5 - Correlação e Regressão | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.3.36/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.3.36/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.3.36/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.3.36/utils.src.js"></script><script src="libs/rglwidgetClass-1.3.36/buffer.src.js"></script><script src="libs/rglwidgetClass-1.3.36/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.3.36/shaders.src.js"></script><script src="libs/rglwidgetClass-1.3.36/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.3.36/textures.src.js"></script><script src="libs/rglwidgetClass-1.3.36/projection.src.js"></script><script src="libs/rglwidgetClass-1.3.36/mouse.src.js"></script><script src="libs/rglwidgetClass-1.3.36/init.src.js"></script><script src="libs/rglwidgetClass-1.3.36/pieces.src.js"></script><script src="libs/rglwidgetClass-1.3.36/draw.src.js"></script><script src="libs/rglwidgetClass-1.3.36/controls.src.js"></script><script src="libs/rglwidgetClass-1.3.36/selection.src.js"></script><script src="libs/rglwidgetClass-1.3.36/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.3.36/pretty.src.js"></script><script src="libs/rglwidgetClass-1.3.36/axes.src.js"></script><script src="libs/rglwidgetClass-1.3.36/animation.src.js"></script><script src="libs/CanvasMatrix4-1.3.36/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -93,21 +94,24 @@
 <li class="book-part">IV. ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="tiposR.html"><span class="header-section-number">9</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
 <li><a class="" href="xls.html"><span class="header-section-number">10</span> R Módulo 2 - Importando planilhas de dados</a></li>
-<li><a class="" href="norm.html"><span class="header-section-number">11</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
-<li><a class="" href="testes.html"><span class="header-section-number">12</span> R Módulo 3.2 - Testes estatísticos</a></li>
-<li><a class="active" href="correg.html"><span class="header-section-number">13</span> Correlação e Regressão</a></li>
-<li><a class="" href="regmul.html"><span class="header-section-number">14</span> Regressão múltipla</a></li>
-<li><a class="" href="mlgs.html"><span class="header-section-number">15</span> Modelos lineares generalizados (GLMs)</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
-<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="norm.html"><span class="header-section-number">11</span> R Módulo 3 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="testes.html"><span class="header-section-number">12</span> R Módulo 4 - Testes estatísticos</a></li>
+<li><a class="active" href="correg.html"><span class="header-section-number">13</span> R Módulo 5 - Correlação e Regressão</a></li>
+<li><a class="" href="regmul.html"><span class="header-section-number">14</span> R Módulo 6 - Regressão múltipla</a></li>
+<li><a class="" href="mlgs.html"><span class="header-section-number">15</span> R Módulo 7 - Modelos lineares generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 8.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 8.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 9 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 5 - Relativizações e transformações</a></li>
-<li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
-<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
-<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 10.2 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 10.2 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 11.1 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 11.2 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="pca.html"><span class="header-section-number">23</span> R Módulo 12 - Análise de Componentes Principais - PCA</a></li>
+<li><a class="" href="nmds.html"><span class="header-section-number">24</span> R Módulo 13.1 - Análise de Ordenação - NMDS</a></li>
+<li><a class="" href="nmds2.html"><span class="header-section-number">25</span> R Modulo 13.2 - Análise de Ordenação - NMDS</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
-<li><a class="" href="nomes.html"><span class="header-section-number">23</span> Nomenclatura das matrizes em AMD</a></li>
+<li><a class="" href="nomes.html"><span class="header-section-number">26</span> Nomenclatura das matrizes em AMD</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -118,7 +122,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="correg" class="section level1" number="13">
 <h1>
-<span class="header-section-number"> 13</span> Correlação e Regressão<a class="anchor" aria-label="anchor" href="#correg"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 13</span> R Módulo 5 - Correlação e Regressão<a class="anchor" aria-label="anchor" href="#correg"><i class="fas fa-link"></i></a>
 </h1>
 <div id="resumo-8" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-8"><i class="fas fa-link"></i></a>
@@ -598,26 +602,37 @@ e_i = y_i - \hat{y}_i,
 <h2>
 <span class="header-section-number">13.3</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-3"><i class="fas fa-link"></i></a>
 </h2>
+<div id="pacotes-do-módulo-3" class="section level3" number="13.3.1">
+<h3>
+<span class="header-section-number">13.3.1</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Instalando os pacotes necessários para esse módulo.</p>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
+<div id="limpando-a-memória-1" class="section level4 unnumbered">
+<h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-1"><i class="fas fa-link"></i></a>
+</h4>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> <span class="co">#sem notação científica, oposto de scipen = 0</span></span></code></pre></div>
-<p>Instalando os pacotes necessários para esse módulo</p>
+</div>
+<div id="definindo-diretório-de-trabalho-2" class="section level4 unnumbered">
+<h4>Definindo diretório de trabalho<a class="anchor" aria-label="anchor" href="#definindo-diret%C3%B3rio-de-trabalho-2"><i class="fas fa-link"></i></a>
+</h4>
 <div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span></code></pre></div>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
 </div>
 <div id="importando-a-planilha-3" class="section level2" number="13.4">
 <h2>
 <span class="header-section-number">13.4</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vamos importar a planilha de dados univariados <code>tucuna.xlsx</code>. Note que o símbolo <span style="color:green"><code>#</code></span> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -669,7 +684,7 @@ e_i = y_i - \hat{y}_i,
 ## TU009  24.6 200.5  20.5     25.7 195.9
 ## TU010  19.4  86.7  16.0     18.3  84.5</code></pre>
 <p>Exibindo os dados importados (esses comando são “case-sensitive” <code>ignore.case(object)</code>).</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(univ)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">univ</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">univ</span></span>
@@ -693,7 +708,7 @@ e_i = y_i - \hat{y}_i,
 <p>Hipótese nula (<span class="math inline">\(H_0\)</span>): não existe correlação linear entre as duas variáveis na população.<br>
 Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correlação linear entre as duas variáveis na população.</p>
 <p>Nesse caso, utiliza-se:</p>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
@@ -735,7 +750,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correla
 ## sample estimates:
 ##       rho 
 ## 0.9976789</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-131-1.png" alt="" width="672"></div>
 <p>Interpretação:</p>
 <p>Os resultados da <strong>correlação de Pearson</strong> (<code>cor.test(x, y, method = "pearson")</code>) revelam a <strong>estatística do teste</strong>, t = 467.22 (para 432 <strong>graus de liberdade</strong>), indicando forte evidência contra a hipótese nula, e o <strong>valor de p</strong>, &lt;0.001, indicando que a correlação é estatisticamente significativa. Também é mostrado o <strong>coeficiente de correlação</strong> (r) de 0.9990 e o intervalo de confiança (95%) de 0.9988 ≤ ρ ≤ 0.9992.</p>
 <p>Em uma correlação simples (bivariada), não existe uma distinção estatística obrigatória entre variável explicativa (independente) e variável resposta (dependente). A correlação mede apenas a força e a direção da associação entre duas variáveis (sem assumir causalidade), e o coeficiente de correlação é o mesmo independentemente da ordem das variáveis.</p>
@@ -784,7 +799,7 @@ y: comprimento total (CT_cm)</p>
 <p>PERGUNTA: Comprimento padrão e comprimento total ainda se correlacionam independentemente do peso?</p>
 <p>Hipótese nula (<span class="math inline">\(H_0\)</span>): não existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.<br>
 Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correlação linear entre as duas variáveis na população, após controlar o efeito de uma terceira variável.</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span></span>
 <span>  <span class="va">univ</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CP_cm"</span>, <span class="st">"CT_cm"</span>, <span class="st">"PT_g"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>  use <span class="op">=</span> <span class="st">"complete.obs"</span></span>
@@ -843,7 +858,7 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <li>
 <span class="math inline">\(\beta_0\)</span> = intercepto da reta, ou seja, o valor estimado de <span class="math inline">\(y\)</span> quando <span class="math inline">\(x=0\)</span>;</li>
 <li>
-<span class="math inline">\(\beta_1\)</span> = coeficiente angular (inclinação da reta), que representa a variação esperada em <span class="math inline">\(y\)</span> para cada unidade de aumento em <span class="math inline">\(X\)</span>.</li>
+<span class="math inline">\(\beta_1\)</span> = coeficiente angular (inclinação da reta), que representa a variação esperada em <span class="math inline">\(y\)</span> para cada unidade de aumento em <span class="math inline">\(x\)</span>.</li>
 <li>
 <span class="math inline">\(\varepsilon\)</span> = erro aleatório associado ao modelo.</li>
 </ul>
@@ -878,7 +893,7 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <h3>
 <span class="header-section-number">13.8.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_1\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Considerando os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos apresentados na Tabela Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
+<p>Considerando os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos já apresentados na Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
 <p><span class="math display">\[
 x=(1,2,3,4,5)
 \]</span></p>
@@ -919,7 +934,7 @@ e</p>
 <h2>
 <span class="header-section-number">13.9</span> Intercepto (<span class="math inline">\(\beta_0\)</span>)<a class="anchor" aria-label="anchor" href="#intercepto-beta_0"><i class="fas fa-link"></i></a>
 </h2>
-<p>O intercepto (<span class="math inline">\(beta_0\)</span>) representa o valor esperado da variável resposta (<span class="math inline">\(y\)</span>) quando a variável independente (<span class="math inline">\(y\)</span>) é igual a zero. Graficamente, corresponde ao ponto onde a reta intercepta o eixo <span class="math inline">\(y\)</span>.</p>
+<p>O intercepto (<span class="math inline">\(\beta_0\)</span>) representa o valor esperado da variável resposta (<span class="math inline">\(y\)</span>) quando a variável independente (<span class="math inline">\(y\)</span>) é igual a zero. Graficamente, corresponde ao ponto onde a reta intercepta o eixo <span class="math inline">\(y\)</span>.</p>
 <p>O intercepto é calculado por</p>
 <p><span class="math display">\[
 \beta_0=\bar{y}-\beta_1\bar{x}
@@ -934,7 +949,7 @@ e</p>
 <h3>
 <span class="header-section-number">13.9.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_0\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><i class="fas fa-link"></i></a>
 </h3>
-<p>Mais uma vez, tomando-se os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos apresentados na Tabela Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
+<p>Mais uma vez, tomando-se os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos apresentados na Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
 <p><span class="math display">\[
 \bar{x}=\frac{15}{5}=3
 \]</span></p>
@@ -942,7 +957,7 @@ e</p>
 <p><span class="math display">\[
 \bar{y}=\frac{20}{5}=4
 \]</span></p>
-<p>Como <span class="math inline">\(\beta_1=0.90\)</span>, temos:</p>
+<p>Como <span class="math inline">\(\beta_1=0,90\)</span>, temos:</p>
 <p><span class="math display">\[
 \beta_0=4-(0,90\times3)
 \]</span></p>
@@ -994,7 +1009,7 @@ Para <span class="math inline">\(x=6\)</span>, temos:</p>
 <li>Realização da ANOVA do modelo da regressão</li>
 <li>Aplicação de correção robusta</li>
 </ol>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,</span>
@@ -1060,7 +1075,7 @@ Para <span class="math inline">\(x=6\)</span>, temos:</p>
 ## Residual standard error: 0.4216 on 432 degrees of freedom
 ## Multiple R-squared:  0.998,  Adjusted R-squared:  0.998 
 ## F-statistic: 2.183e+05 on 1 and 432 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-135-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672"></div>
 <p>No caso do nosso exemplo, o modelo de regressão linear simples pode ser representado por:</p>
 <p><span class="math display">\[
 \widehat{CT_{cm}} = \beta_0 + \beta_1 CP_{cm} + \varepsilon
@@ -1099,7 +1114,7 @@ onde:</p>
 <p>Como p&lt;0.001, rejeita-se <span class="math inline">\(H_0\)</span> e aceita-se <span class="math inline">\(H_1\)</span>, o modelo de regressão é estatisticamente significativo e tem poder preditivo para o comprimento total.</p>
 <p>O QUE REPORTAR: A regressão linear simples revelou que o comprimento padrão foi um preditor significativo do comprimento total (<span class="math inline">\(\beta\)</span> = 1.207 <span class="math inline">\(\pm\)</span> 0.003, t<span class="math inline">\(_{(432)}\)</span> = 467.22, p &lt; 0.001). O modelo apresentou excelente ajuste aos dados (r<span class="math inline">\(^2\)</span> = 0.998; F<span class="math inline">\(_{(1,432)}\)</span> = 218300, p &lt; 0.001), explicando aproximadamente 99,8% da variação no comprimento total. A equação ajustada foi <span class="math inline">\(CT_{cm} = 0.148 + 1.207 \times CP_{cm}\)</span>.</p>
 <p>Na sequência avaliamos homogeneidade de variâncias. Para o caso de heterogeneidade de variâncias devemos usar a <strong>correção robusta de White (HC3)</strong>. Antes disso realizamos uma ANOVA da regressão, para testar se o comprimento padrão explica uma parcela significativa da variação no comprimento total. A diferença entre <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> e <code><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova()</a></code> só aparece em modelos com dois ou mais preditores. <code>Anova(modelo, white.adjust = TRUE)</code> calcula o mesmo teste, mas utilizando a correção robusta de White (HC3) para os erros padrão. Essa correção é recomendada quando há heterocedasticidade (variância não constante dos resíduos).</p>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -1133,10 +1148,10 @@ onde:</p>
 ## Residuals 432                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-134-1.png" alt="" width="672"></div>
 <p>A função <code>plot(modelo)</code> cria uma prancha de gráficos, que demonstra o <strong>diagnóstico dos resíduos</strong>. São produzidos os gráficos de <strong>resíduos × valores ajustados</strong>, que verifica homocedasticidade (ideal sem padrão), o <strong>q-q plot dos resíduos</strong>, que verifica normalidade (ver Capítulo <a href="norm.html#norm">Estatísticas descritivas e normalidade</a>). Nesse caso os pontos devem seguir aproximadamente a reta. O gráfico de <strong><em>scale-location</em></strong> também avalia homocedasticidade e o gráfico de <strong>resíduos × alavancagem</strong> que inclui as curvas da <em>Cook’s distance</em>, que quando presentes, identificam observações influentes.</p>
 <p>Agora plotamos o gráfico com a linha de regressão baseada no nosso modelo usando a função <code><a href="https://rdrr.io/r/graphics/abline.html">abline()</a></code> e inserimos a equação da regressão.</p>
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">]</span>,</span>
@@ -1159,15 +1174,15 @@ onde:</p>
 <span><span class="op">)</span></span>
 <span><span class="co"># Inserir texto</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5</span>, y <span class="op">=</span> <span class="fl">45</span>, labels <span class="op">=</span> <span class="va">eq</span>, cex <span class="op">=</span> <span class="fl">1.1</span>, pos <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-137-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-135-1.png" alt="" width="672"></div>
 <p>Em um novo exemplo, podemos analisar comprimento total e peso corporal em peixes. Em estudos de relação peso-comprimento normalmente considera-se comprimento como variável independente e peso como variável dependente.</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">univ</span><span class="op">$</span><span class="va">CP_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">CT_cm</span>, <span class="va">univ</span><span class="op">$</span><span class="va">PT_g</span><span class="op">)</span></span>
 <span><span class="co">#df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#Automatizando a entrada do modelo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">~</span> <span class="va">df</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
 </div>
 </div>
 <div id="gráfico-de-dispersão-scatterplot" class="section level2" number="13.11">
@@ -1216,7 +1231,7 @@ onde:</p>
     geom_tipo()
 ?ggplot</code></pre>
 <p>Esse modelo modular torna possível compor gráficos simples ou complexos com clareza.</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
 <span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">univ</span>,</span>
@@ -1238,7 +1253,7 @@ onde:</p>
 ## FEMEA MACHO 
 ##    21    39 
 ## [1] "MACHO" "FEMEA"</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-139-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-137-1.png" alt="" width="672"></div>
 <p>O gráfico acima ilustra uma regressão linear simples entre <code>CP_cm</code> e <code>Pgon_g</code>, com ajuste separado por <code>sexo</code>. As diferenças entre as retas e a dispersão dos pontos sugerem que o peso gonadal não depende apenas do comprimento corporal, mas também de outras características do indivíduo. Por isso, podemos testar como uma análise seguinte a <strong>regressão múltipla</strong>, incorporando simultaneamente <code>CP_cm</code>, <code>sexo</code> e outras possíveis covariáveis relevantes para estimar efeitos parciais e testar interações.</p>
 <p>Assim, embora a regressão simples seja útil para descrever a associação bivariada, ela não controla simultaneamente múltiplas fontes de variação.</p>
 </div>
@@ -1303,13 +1318,13 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="testes.html"><span class="header-section-number">12</span> R Módulo 3.2 - Testes estatísticos</a></div>
-<div class="next"><a href="regmul.html"><span class="header-section-number">14</span> Regressão múltipla</a></div>
+<div class="prev"><a href="testes.html"><span class="header-section-number">12</span> R Módulo 4 - Testes estatísticos</a></div>
+<div class="next"><a href="regmul.html"><span class="header-section-number">14</span> R Módulo 6 - Regressão múltipla</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#correg"><span class="header-section-number">13</span> Correlação e Regressão</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#correg"><span class="header-section-number">13</span> R Módulo 5 - Correlação e Regressão</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-8">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-8">Apresentação</a></li>
 </ul>
@@ -1324,7 +1339,9 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 </ul>
 </li>
 <li><a class="nav-link" href="#sobre-os-dados-2"><span class="header-section-number">13.2</span> Sobre os dados</a></li>
-<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-3"><span class="header-section-number">13.3</span> Organização básica</a></li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-3"><span class="header-section-number">13.3</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#pacotes-do-m%C3%B3dulo-3"><span class="header-section-number">13.3.1</span> Pacotes do módulo</a></li></ul>
+</li>
 <li><a class="nav-link" href="#importando-a-planilha-3"><span class="header-section-number">13.4</span> Importando a planilha</a></li>
 <li><a class="nav-link" href="#correla%C3%A7%C3%A3o-simples-bivariada"><span class="header-section-number">13.5</span> Correlação simples (bivariada)</a></li>
 <li><a class="nav-link" href="#correla%C3%A7%C3%A3o-parcial"><span class="header-section-number">13.6</span> Correlação parcial</a></li>
@@ -1361,7 +1378,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 14:31:05.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 19:09:58.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

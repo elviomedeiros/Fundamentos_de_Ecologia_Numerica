@@ -1,0 +1,2661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> 23 R Módulo 12 - Análise de Componentes Principais - PCA | Fundamentos de Ecologia Numérica</title>
+<meta name="author" content="Prof. Elvio S. F. Medeiros">
+<meta name="author" content="Laboratório de Ecologia">
+<meta name="author" content="Universidade Estadual da Paraíba">
+<meta name="author" content="Campus V, João Pessoa, PB">
+<meta name="description" content="RESUMO Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content=" 23 R Módulo 12 - Análise de Componentes Principais - PCA | Fundamentos de Ecologia Numérica">
+<meta property="og:type" content="book">
+<meta property="og:description" content="RESUMO Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 23 R Módulo 12 - Análise de Componentes Principais - PCA | Fundamentos de Ecologia Numérica">
+<meta name="twitter:description" content="RESUMO Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.3.36/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.3.36/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.3.36/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.3.36/utils.src.js"></script><script src="libs/rglwidgetClass-1.3.36/buffer.src.js"></script><script src="libs/rglwidgetClass-1.3.36/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.3.36/shaders.src.js"></script><script src="libs/rglwidgetClass-1.3.36/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.3.36/textures.src.js"></script><script src="libs/rglwidgetClass-1.3.36/projection.src.js"></script><script src="libs/rglwidgetClass-1.3.36/mouse.src.js"></script><script src="libs/rglwidgetClass-1.3.36/init.src.js"></script><script src="libs/rglwidgetClass-1.3.36/pieces.src.js"></script><script src="libs/rglwidgetClass-1.3.36/draw.src.js"></script><script src="libs/rglwidgetClass-1.3.36/controls.src.js"></script><script src="libs/rglwidgetClass-1.3.36/selection.src.js"></script><script src="libs/rglwidgetClass-1.3.36/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.3.36/pretty.src.js"></script><script src="libs/rglwidgetClass-1.3.36/axes.src.js"></script><script src="libs/rglwidgetClass-1.3.36/animation.src.js"></script><script src="libs/CanvasMatrix4-1.3.36/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 1em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB">Fundamentos de Ecologia Numérica</a>:
+        <small class="text-muted">Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Fundamentos de Ecologia Numérica</a></li>
+<li><a class="" href="motiv.html">Motivação</a></li>
+<li><a class="" href="plano.html">Plano de estudo</a></li>
+<li><a class="" href="org.html">Organização do livro</a></li>
+<li><a class="" href="estudar.html">Como estudar por esse livro?</a></li>
+<li><a class="" href="cita.html">Como citar esse livro</a></li>
+<li><a class="" href="download.html">Download da versão impressa</a></li>
+<li class="book-part">I. INTRODUÇÃO</li>
+<li><a class="" href="ferram.html"><span class="header-section-number">1</span> Ferramentas</a></li>
+<li><a class="" href="rrstu.html"><span class="header-section-number">2</span> Introdução ao R/RStudio</a></li>
+<li class="book-part">II. TEORIA</li>
+<li><a class="" href="amd.html"><span class="header-section-number">3</span> Teoria 1 - Introdução à Análise Multivariada de Dados (AMD)</a></li>
+<li><a class="" href="tiposE.html"><span class="header-section-number">4</span> Teoria 2 - Tipos de dados usados em AMD</a></li>
+<li><a class="" href="reltrnsT.html"><span class="header-section-number">5</span> Teoria 3 - Relativizações e transformações de dados</a></li>
+<li class="book-part">III. BASES DE DADOS</li>
+<li><a class="" href="bases.html"><span class="header-section-number">6</span> Bases de dados. Dados do PPBio Semiárido</a></li>
+<li><a class="" href="basepeixes.html"><span class="header-section-number">7</span> Base de dados I - Peixes</a></li>
+<li><a class="" href="basehab.html"><span class="header-section-number">8</span> Base de dados II - Habitat</a></li>
+<li class="book-part">IV. ESTATÍSTICAS DESCRITIVAS</li>
+<li><a class="" href="tiposR.html"><span class="header-section-number">9</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
+<li><a class="" href="xls.html"><span class="header-section-number">10</span> R Módulo 2 - Importando planilhas de dados</a></li>
+<li><a class="" href="norm.html"><span class="header-section-number">11</span> R Módulo 3 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="testes.html"><span class="header-section-number">12</span> R Módulo 4 - Testes estatísticos</a></li>
+<li><a class="" href="correg.html"><span class="header-section-number">13</span> R Módulo 5 - Correlação e Regressão</a></li>
+<li><a class="" href="regmul.html"><span class="header-section-number">14</span> R Módulo 6 - Regressão múltipla</a></li>
+<li><a class="" href="mlgs.html"><span class="header-section-number">15</span> R Módulo 7 - Modelos lineares generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 8.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 8.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 9 - Estrutura do habitat</a></li>
+<li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 10.2 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 10.2 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 11.1 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 11.2 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="active" href="pca.html"><span class="header-section-number">23</span> R Módulo 12 - Análise de Componentes Principais - PCA</a></li>
+<li><a class="" href="nmds.html"><span class="header-section-number">24</span> R Módulo 13.1 - Análise de Ordenação - NMDS</a></li>
+<li><a class="" href="nmds2.html"><span class="header-section-number">25</span> R Modulo 13.2 - Análise de Ordenação - NMDS</a></li>
+<li class="book-part">VI. INFORMAÇÕES GERAIS</li>
+<li><a class="" href="nomes.html"><span class="header-section-number">26</span> Nomenclatura das matrizes em AMD</a></li>
+<li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pca" class="section level1" number="23">
+<h1>
+<span class="header-section-number"> 23</span> R Módulo 12 - Análise de Componentes Principais - PCA<a class="anchor" aria-label="anchor" href="#pca"><i class="fas fa-link"></i></a>
+</h1>
+<div id="resumo-17" class="section level3 unnumbered">
+<h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-17"><i class="fas fa-link"></i></a>
+</h3>
+<p>Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma representação compacta dos dados, preservando as principais tendências e padrões presentes nos mesmos</p>
+</div>
+<div id="apresentação-18" class="section level3 unnumbered">
+<h3>Apresentação<a class="anchor" aria-label="anchor" href="#apresenta%C3%A7%C3%A3o-18"><i class="fas fa-link"></i></a>
+</h3>
+<p>A Análise de Componentes Principais (PCA) é uma técnica estatística que é frequentemente usada para reduzir a dimensionalidade e extrair informações relevantes de conjuntos de dados complexos. Ela é amplamente utilizada em várias áreas, como ciência de dados, aprendizado de máquina e reconhecimento de padrões.</p>
+<p>O objetivo da PCA é encontrar um novo conjunto de variáveis, chamadas de <strong>componentes principais</strong>, que são combinações lineares das variáveis originais. Essas combinações lineares são eixos ortogonais escolhidos de forma a maximizar a variância dos dados ao longo dos componentes principais sucessivos. Isso significa que os primeiros componentes principais capturam a maior parte da variabilidade dos dados, enquanto os componentes posteriores capturam cada vez menos.</p>
+<p>Ao aplicar a PCA, a dimensionalidade do conjunto de dados pode ser reduzida, o que é útil quando há muitas variáveis e se deseja simplificar a análise. Além disso, a PCA também pode ser usada para visualizar os dados em um espaço de menor dimensão, permitindo a identificação de padrões, tendências e relacionamentos entre as observações. Um benefício adicional da PCA é a possibilidade de remover ruídos e redundâncias dos dados. Ao eliminar os componentes principais com menor variância, pode-se reduzir o impacto de pequenos erros de medição ou características menos relevantes do conjunto de dados.</p>
+</div>
+<div id="organização-básica-15" class="section level2" number="23.1">
+<h2>
+<span class="header-section-number">23.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-15"><i class="fas fa-link"></i></a>
+</h2>
+<div id="pacotes-do-módulo-6" class="section level3" number="23.1.1">
+<h3>
+<span class="header-section-number">23.1.1</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>Instalando os pacotes necessários para esse módulo.</p>
+<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gplots"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"psych"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></span></code></pre></div>
+<div id="limpando-a-memória-6" class="section level4 unnumbered">
+<h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-6"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">##LIMPA A MEMORIA</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
+<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+<p>Os códigos acima, são usados para instalar os pacotes necessários para este módulo. O comando <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> será usado para carregarmos esses pacote a medida que eles forem sendo necessários.</p>
+</div>
+<div id="definindo-diretório-de-trabalho-3" class="section level4 unnumbered">
+<h4>Definindo diretório de trabalho<a class="anchor" aria-label="anchor" href="#definindo-diret%C3%B3rio-de-trabalho-3"><i class="fas fa-link"></i></a>
+</h4>
+<p>Para definir o diretório de trabalho usa-se os códigos abaixo. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
+<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
+<p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:<br>
+SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
+</div>
+</div>
+</div>
+<div id="sobre-os-dados-do-ppbio-6" class="section level2" number="23.2">
+<h2>
+<span class="header-section-number">23.2</span> Sobre os dados do PPBio<a class="anchor" aria-label="anchor" href="#sobre-os-dados-do-ppbio-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>A planilha <code>ppbio</code> contém os dados de abundância de espécies em diferentes unidades amostrais (UA’s). A base teórica dos dados do PPBio para o presente estudo pode ser vista em <a href="www.quarto.com">Base Teórica</a>. Leia antes de prosseguir.</p>
+<div id="a-planilha-ppbio-habitat" class="section level3" number="23.2.1">
+<h3>
+<span class="header-section-number">23.2.1</span> A planilha PPBio Habitat<a class="anchor" aria-label="anchor" href="#a-planilha-ppbio-habitat"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para esse módulo também usaremos a planilha <code>ppbioh</code>. Esta é uma <strong>matriz de dados ambiental</strong>, guardados na nO arquivo <code>ppbio06h.xlsx</code>, que traz os dados brutos de 26 localidades (UAs) em períodos diferentes (objetos) x 35 variáveis ambienteis (atributos) medidas em diferentes escalas espaciais, antes de qualquer modificação. As unidades de medição incluem cm, m, °C, mg/L, %, entre outros (dados publicados por <span class="citation">(<a href="#ref-RN2491"><strong>RN2491?</strong></a>)</span>. Esses dados tem uma alta amplitude de variação, sugerido uso de matriz transformada e/ou reescalada. As bases teóricas dos dados do PPBio para o presente estudo pode ser vista em <a href="www.quarto.com">Base Teórica</a>. Leia antes de prosseguir.</p>
+</div>
+</div>
+<div id="importando-a-planilha-de-trabalho-3" class="section level2" number="23.3">
+<h2>
+<span class="header-section-number">23.3</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span>
+<span><span class="va">ppbio_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-amb.xlsx"</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"ano1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span></span>
+<span><span class="va">ppbio_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">ppbio</span><span class="op">)</span> <span class="co">#lê ppbio como uma matriz</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ppbio_ma</span><span class="op">)</span></span>
+<span><span class="co">#ppbio</span></span>
+<span><span class="co">#ppbio_ma</span></span></code></pre></div>
+<div id="outra-forma-de-achar-e-importar-uma-planilha-1" class="section level3" number="23.3.1">
+<h3>
+<span class="header-section-number">23.3.1</span> Outra forma de achar e importar uma planilha<a class="anchor" aria-label="anchor" href="#outra-forma-de-achar-e-importar-uma-planilha-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.choose.html">file.choose</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                   sheet <span class="op">=</span> <span class="st">"Sheet1"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="particionando-as-variáveis-de-interesse" class="section level2" number="23.4">
+<h2>
+<span class="header-section-number">23.4</span> Particionando as variáveis de interesse<a class="anchor" aria-label="anchor" href="#particionando-as-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
+</h2>
+<p>Use o script abaixo apenas se for necessário escolher quais variáveis entrar na análise e particionar a matriz para as variáveis geomorfológicas da matriz ambiental <code>m.variáveis</code>.</p>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="pca.html#cb621-1" tabindex="-1"></a><span class="co">#Lista as colunas</span></span>
+<span id="cb621-2"><a href="pca.html#cb621-2" tabindex="-1"></a><span class="fu">colnames</span>(ppbio_a)</span>
+<span id="cb621-3"><a href="pca.html#cb621-3" tabindex="-1"></a><span class="co">#Escolher quais colunas usar por nome</span></span>
+<span id="cb621-4"><a href="pca.html#cb621-4" tabindex="-1"></a><span class="fu">colnames</span>(ppbio_a)[<span class="fu">rev</span>(<span class="fu">order</span>(<span class="fu">colSums</span>(ppbio_a)))] <span class="co">#ordena por maior soma</span></span>
+<span id="cb621-5"><a href="pca.html#cb621-5" tabindex="-1"></a><span class="co">#Usar a função subset()</span></span>
+<span id="cb621-6"><a href="pca.html#cb621-6" tabindex="-1"></a>m_part <span class="ot">&lt;-</span> <span class="fu">subset</span>(ppbio_a[, <span class="fu">c</span>(<span class="st">"a.veloc"</span>, <span class="st">"a.temp"</span>, <span class="st">"a.do"</span>, <span class="st">"a.transp"</span>)]) <span class="co">#escolhe colunas por nome</span></span>
+<span id="cb621-7"><a href="pca.html#cb621-7" tabindex="-1"></a>m_part <span class="ot">&lt;-</span> <span class="fu">subset</span>(ppbio_a[<span class="fu">c</span>(<span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>),]) <span class="co">#escolhe linhas por nome</span></span>
+<span id="cb621-8"><a href="pca.html#cb621-8" tabindex="-1"></a>m_part <span class="ot">&lt;-</span> <span class="fu">subset</span>(ppbio_a[, <span class="dv">18</span><span class="sc">:</span><span class="dv">26</span>]) <span class="co">#escolhe as colunas de 18 a 26</span></span>
+<span id="cb621-9"><a href="pca.html#cb621-9" tabindex="-1"></a>m_part <span class="ot">&lt;-</span> <span class="fu">subset</span>(ppbio_a, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(a.veloc, a.temp, a.do, a.transp) <span class="co">#exclui colunas por nome</span></span>
+<span id="cb621-10"><a href="pca.html#cb621-10" tabindex="-1"></a><span class="co">#m_part</span></span>
+<span id="cb621-11"><a href="pca.html#cb621-11" tabindex="-1"></a><span class="co">#Escolhe as colunas que começam com a inicial "vari"</span></span>
+<span id="cb621-12"><a href="pca.html#cb621-12" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb621-13"><a href="pca.html#cb621-13" tabindex="-1"></a>vari <span class="ot">&lt;-</span> <span class="st">"m."</span></span>
+<span id="cb621-14"><a href="pca.html#cb621-14" tabindex="-1"></a>m_part <span class="ot">&lt;-</span> <span class="fu">rename_with</span>(<span class="fu">select</span>(ppbio_a, <span class="fu">starts_with</span>(vari)), <span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">"."</span>, .))</span></code></pre></div>
+</div>
+<div id="reinício-1-1" class="section level2" number="23.5">
+<h2>
+<span class="header-section-number">23.5</span> REINÍCIO 1<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio-1-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="hello" class="greeting message" style="color: green;">
+<p>Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.</p>
+</div>
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span>
+<span><span class="co">#m_trab &lt;- (m_part)   # &lt;1&gt;</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Substitua a nova matriz aqui. Caso seja necessário.</li>
+</ol>
+<p>No interesse de sistematizar o uso das várias matrizes que são comumente usadas em uma AMD, a tabela a seguir (Tabela @ref(tab:29m_) resume seus tipos e abreviações.</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:29m_)(#tab:29m_)Nomenclatura das matrizes em AMD em relação aos atributos das colunas.
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Nome
+</th>
+<th style="text-align:center;">
+Atributos (colunas)
+</th>
+<th style="text-align:center;">
+Abreviação no R
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz comunitaria
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são táxons ou OTU’s (Unidades Taxonômicas Operacionais) (ex. espécies, gêneros, morfotipos)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_com
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz ambiental
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são dados ambientais e variáveis físicas e químicas (ex. pH, condutividade, temperatura)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_amb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz de habitat
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos são elementos da estrutura do habitat (ex. macróficas, algas, pedras, lama, etc)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_hab
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz bruta
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos ainda não receberam nenhum tipo de tratamento estatísco (valores brutos, como coletados)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_brt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz transposta
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos foram transpostos para as linhas
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_t
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz relativizada
+</td>
+<td style="text-align:center;width: 2cm; ">
+Os atributos foram relativizados por um critério de tamanho ou de variação (ex. dividir os valores de cada coluna pela soma)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_rel
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz transformada
+</td>
+<td style="text-align:center;width: 2cm; ">
+Foi aplicado um operador matemático a todos os atributos (ex. raiz quadrada, log)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_trns
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Matriz de trabalho
+</td>
+<td style="text-align:center;width: 2cm; ">
+Qualquer matriz que seja o foco da análise atual (ex. comunitária, relativizada, etc)
+</td>
+<td style="text-align:center;width: 2cm; ">
+m_trab
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="classificação-1" class="section level2" number="23.6">
+<h2>
+<span class="header-section-number">23.6</span> Classificação<a class="anchor" aria-label="anchor" href="#classifica%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para conhecermos os dados, vamos criar uma classificação baseada na distância Bray-Curtis e UPGMA como método de fusão, a partir da matriz de dados <code>ppbioh</code> relativizada pelo total das colunas e transformada pelo arco seno da raiz quadrada.</p>
+<div id="dendrograma-e-heatmap" class="section level3" number="23.6.1">
+<h3>
+<span class="header-section-number">23.6.1</span> Dendrograma e Heatmap<a class="anchor" aria-label="anchor" href="#dendrograma-e-heatmap"><i class="fas fa-link"></i></a>
+</h3>
+<p>Ao criar a matriz transformada <code>m_trns</code> verifique o tipo de relativização/transformação, ela deve ser específica para cada tipo de matriz, comunitária e ambiental.</p>
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Dendrograma</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
+<span><span class="co">#relativização/transformação da matriz comunitária</span></span>
+<span><span class="va">m_trns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/decostand.html">decostand</a></span></span>
+<span>                    <span class="op">(</span><span class="va">m_trab</span>, method<span class="op">=</span><span class="st">"total"</span>, MARGIN <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#transformação da matriz ambiental</span></span>
+<span><span class="co">#m_trns &lt;- sqrt(m_trab)</span></span>
+<span><span class="va">vegdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">m_trns</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                   diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">cluster_uas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">vegdist</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">cluster_uas</span>, main <span class="op">=</span> <span class="st">"Cluster Dendrogram - Bray-Curtis"</span>,</span>
+<span>      hang <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="co">#testar com -.01</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust</a></span><span class="op">(</span><span class="va">cluster_uas</span>, k <span class="op">=</span> <span class="fl">3</span>, h <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span>
+<span><span class="co">#h = 0.8 fornece os grupos formados na altura h</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">#Heatmap</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/talgalili/gplots">"gplots"</a></span><span class="op">)</span></span>
+<span><span class="va">heatdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span></span>
+<span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span><span class="op">)</span> <span class="co">#rev() reverte as cores do heatmap</span></span>
+<span><span class="fu"><a href="https://talgalili.github.io/gplots/reference/heatmap.2.html">heatmap.2</a></span><span class="op">(</span>x<span class="op">=</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">vegdist</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x objetos</span></span>
+<span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">)</span>,</span>
+<span>          Colv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">)</span>,</span>
+<span>          key <span class="op">=</span> <span class="cn">T</span>, tracecol <span class="op">=</span> <span class="cn">NA</span>, revC <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          col <span class="op">=</span> <span class="va">heat.colors</span>,  <span class="co">#dissimilaridade = 1 - similaridade</span></span>
+<span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>          xlab <span class="op">=</span> <span class="st">"UA´s"</span>, ylab <span class="op">=</span> <span class="st">"UA´s"</span>,</span>
+<span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="va">cluster_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/vegdist.html">vegdist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"bray"</span>,</span>
+<span>                            diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                            upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">cluster_spp</span>, main <span class="op">=</span> <span class="st">"Dendrograma dos atributos"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://talgalili.github.io/gplots/reference/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span>, <span class="co">#objetos x atributos</span></span>
+<span>          Colv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">)</span>,</span>
+<span>          Rowv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="va">cluster_spp</span><span class="op">)</span>,</span>
+<span>          key <span class="op">=</span> <span class="cn">T</span>, tracecol <span class="op">=</span> <span class="cn">NA</span>, revC <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          col <span class="op">=</span> <span class="va">col</span>,</span>
+<span>          density.info <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>          xlab <span class="op">=</span> <span class="st">"Unidades amostrais"</span>, ylab <span class="op">=</span> <span class="st">"Espécies"</span>,</span>
+<span>          mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span>  <span class="co"># adjust margin size</span></span></code></pre></div>
+<pre><code>##           S-R-CT1   S-R-CP1   S-A-TA1   S-R-CT2   S-R-CP2   S-A-TA2
+## S-R-CT1 0.0000000 0.8743721 0.9338269 0.6274997 0.8106894 0.9420728
+## S-R-CP1 0.8743721 0.0000000 0.6833816 0.7759468 0.7726098 0.7342613
+## S-A-TA1 0.9338269 0.6833816 0.0000000 0.8789631 0.9178304 0.5700984
+## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068
+## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271
+## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000</code></pre>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-2.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-3.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-4.png" alt="" width="768"></p>
+</div>
+<div id="histórico-das-fusões-2" class="section level3" number="23.6.2">
+<h3>
+<span class="header-section-number">23.6.2</span> Histórico das fusões<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de “-”) ou grupo de objetos (indicado pela ausência do sinall de “-”) que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a <code>m-1</code> última fusão entre os dois últimos grupos. Nesse caso, 22.</p>
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
+<span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
+<span><span class="va">merge</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">merge</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>,<span class="st">"0"</span><span class="op">)</span></span>
+<span><span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">height</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">height</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1.0"</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Cluster_uas <span class="op">=</span> <span class="va">merge</span>, Height <span class="op">=</span> <span class="va">height</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cluster1"</span>, <span class="st">"Cluster2"</span>, <span class="st">"Height"</span><span class="op">)</span></span>
+<span><span class="va">UA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>, <span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">UA</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UAs"</span><span class="op">)</span></span>
+<span><span class="va">No.UA</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">No.UA</span>, <span class="va">UA</span>, <span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="va">fusoes</span><span class="op">$</span><span class="va">Histórico</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span></span>
+<span><span class="co">#fusoes</span></span>
+<span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="va">fusoes</span><span class="op">)</span></span></code></pre></div>
+<div id="ilarcemocv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ilarcemocv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ilarcemocv thead, #ilarcemocv tbody, #ilarcemocv tfoot, #ilarcemocv tr, #ilarcemocv td, #ilarcemocv th {
+  border-style: none;
+}
+
+#ilarcemocv p {
+  margin: 0;
+  padding: 0;
+}
+
+#ilarcemocv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ilarcemocv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ilarcemocv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ilarcemocv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ilarcemocv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ilarcemocv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ilarcemocv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ilarcemocv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ilarcemocv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ilarcemocv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ilarcemocv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ilarcemocv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ilarcemocv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ilarcemocv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ilarcemocv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ilarcemocv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ilarcemocv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ilarcemocv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ilarcemocv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ilarcemocv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ilarcemocv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ilarcemocv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ilarcemocv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ilarcemocv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ilarcemocv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ilarcemocv .gt_left {
+  text-align: left;
+}
+
+#ilarcemocv .gt_center {
+  text-align: center;
+}
+
+#ilarcemocv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ilarcemocv .gt_font_normal {
+  font-weight: normal;
+}
+
+#ilarcemocv .gt_font_bold {
+  font-weight: bold;
+}
+
+#ilarcemocv .gt_font_italic {
+  font-style: italic;
+}
+
+#ilarcemocv .gt_super {
+  font-size: 65%;
+}
+
+#ilarcemocv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ilarcemocv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ilarcemocv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ilarcemocv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ilarcemocv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ilarcemocv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ilarcemocv .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ilarcemocv .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ilarcemocv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="No.UA">No.UA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="UAs">UAs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Cluster1">Cluster1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Cluster2">Cluster2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Height">Height</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Histórico">Histórico</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="No.UA" class="gt_row gt_right">1</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT1</td>
+<td headers="Cluster1" class="gt_row gt_right">-20</td>
+<td headers="Cluster2" class="gt_row gt_right">-23</td>
+<td headers="Height" class="gt_row gt_right">0.14</td>
+<td headers="Histórico" class="gt_row gt_right">1</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">2</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP1</td>
+<td headers="Cluster1" class="gt_row gt_right">-8</td>
+<td headers="Cluster2" class="gt_row gt_right">-11</td>
+<td headers="Height" class="gt_row gt_right">0.26</td>
+<td headers="Histórico" class="gt_row gt_right">2</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">3</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA1</td>
+<td headers="Cluster1" class="gt_row gt_right">-17</td>
+<td headers="Cluster2" class="gt_row gt_right">1</td>
+<td headers="Height" class="gt_row gt_right">0.28</td>
+<td headers="Histórico" class="gt_row gt_right">3</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">4</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT2</td>
+<td headers="Cluster1" class="gt_row gt_right">-19</td>
+<td headers="Cluster2" class="gt_row gt_right">-22</td>
+<td headers="Height" class="gt_row gt_right">0.37</td>
+<td headers="Histórico" class="gt_row gt_right">4</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">5</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP2</td>
+<td headers="Cluster1" class="gt_row gt_right">-6</td>
+<td headers="Cluster2" class="gt_row gt_right">-12</td>
+<td headers="Height" class="gt_row gt_right">0.41</td>
+<td headers="Histórico" class="gt_row gt_right">5</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">6</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA2</td>
+<td headers="Cluster1" class="gt_row gt_right">-4</td>
+<td headers="Cluster2" class="gt_row gt_right">-10</td>
+<td headers="Height" class="gt_row gt_right">0.46</td>
+<td headers="Histórico" class="gt_row gt_right">6</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">7</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT3</td>
+<td headers="Cluster1" class="gt_row gt_right">-16</td>
+<td headers="Cluster2" class="gt_row gt_right">4</td>
+<td headers="Height" class="gt_row gt_right">0.48</td>
+<td headers="Histórico" class="gt_row gt_right">7</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">8</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP3</td>
+<td headers="Cluster1" class="gt_row gt_right">-5</td>
+<td headers="Cluster2" class="gt_row gt_right">2</td>
+<td headers="Height" class="gt_row gt_right">0.53</td>
+<td headers="Histórico" class="gt_row gt_right">8</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">9</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA3</td>
+<td headers="Cluster1" class="gt_row gt_right">-13</td>
+<td headers="Cluster2" class="gt_row gt_right">7</td>
+<td headers="Height" class="gt_row gt_right">0.56</td>
+<td headers="Histórico" class="gt_row gt_right">9</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">10</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CT4</td>
+<td headers="Cluster1" class="gt_row gt_right">-9</td>
+<td headers="Cluster2" class="gt_row gt_right">5</td>
+<td headers="Height" class="gt_row gt_right">0.57</td>
+<td headers="Histórico" class="gt_row gt_right">10</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">11</td>
+<td headers="UAs" class="gt_row gt_left">S-R-CP4</td>
+<td headers="Cluster1" class="gt_row gt_right">-7</td>
+<td headers="Cluster2" class="gt_row gt_right">6</td>
+<td headers="Height" class="gt_row gt_right">0.59</td>
+<td headers="Histórico" class="gt_row gt_right">11</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">12</td>
+<td headers="UAs" class="gt_row gt_left">S-A-TA4</td>
+<td headers="Cluster1" class="gt_row gt_right">-14</td>
+<td headers="Cluster2" class="gt_row gt_right">3</td>
+<td headers="Height" class="gt_row gt_right">0.61</td>
+<td headers="Histórico" class="gt_row gt_right">12</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">13</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU1</td>
+<td headers="Cluster1" class="gt_row gt_right">-2</td>
+<td headers="Cluster2" class="gt_row gt_right">-3</td>
+<td headers="Height" class="gt_row gt_right">0.68</td>
+<td headers="Histórico" class="gt_row gt_right">13</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">14</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU1</td>
+<td headers="Cluster1" class="gt_row gt_right">-1</td>
+<td headers="Cluster2" class="gt_row gt_right">11</td>
+<td headers="Height" class="gt_row gt_right">0.68</td>
+<td headers="Histórico" class="gt_row gt_right">14</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">15</td>
+<td headers="UAs" class="gt_row gt_left">B-R-PC2</td>
+<td headers="Cluster1" class="gt_row gt_right">-15</td>
+<td headers="Cluster2" class="gt_row gt_right">-18</td>
+<td headers="Height" class="gt_row gt_right">0.69</td>
+<td headers="Histórico" class="gt_row gt_right">15</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">16</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU2</td>
+<td headers="Cluster1" class="gt_row gt_right">-21</td>
+<td headers="Cluster2" class="gt_row gt_right">14</td>
+<td headers="Height" class="gt_row gt_right">0.75</td>
+<td headers="Histórico" class="gt_row gt_right">16</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">17</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU2</td>
+<td headers="Cluster1" class="gt_row gt_right">10</td>
+<td headers="Cluster2" class="gt_row gt_right">13</td>
+<td headers="Height" class="gt_row gt_right">0.76</td>
+<td headers="Histórico" class="gt_row gt_right">17</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">18</td>
+<td headers="UAs" class="gt_row gt_left">B-R-PC3</td>
+<td headers="Cluster1" class="gt_row gt_right">9</td>
+<td headers="Cluster2" class="gt_row gt_right">12</td>
+<td headers="Height" class="gt_row gt_right">0.79</td>
+<td headers="Histórico" class="gt_row gt_right">18</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">19</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU3</td>
+<td headers="Cluster1" class="gt_row gt_right">8</td>
+<td headers="Cluster2" class="gt_row gt_right">16</td>
+<td headers="Height" class="gt_row gt_right">0.8</td>
+<td headers="Histórico" class="gt_row gt_right">19</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">20</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU3</td>
+<td headers="Cluster1" class="gt_row gt_right">17</td>
+<td headers="Cluster2" class="gt_row gt_right">19</td>
+<td headers="Height" class="gt_row gt_right">0.85</td>
+<td headers="Histórico" class="gt_row gt_right">20</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">21</td>
+<td headers="UAs" class="gt_row gt_left">B-R-PC4</td>
+<td headers="Cluster1" class="gt_row gt_right">15</td>
+<td headers="Cluster2" class="gt_row gt_right">20</td>
+<td headers="Height" class="gt_row gt_right">0.89</td>
+<td headers="Histórico" class="gt_row gt_right">21</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">22</td>
+<td headers="UAs" class="gt_row gt_left">B-A-MU4</td>
+<td headers="Cluster1" class="gt_row gt_right">18</td>
+<td headers="Cluster2" class="gt_row gt_right">21</td>
+<td headers="Height" class="gt_row gt_right">0.91</td>
+<td headers="Histórico" class="gt_row gt_right">22</td>
+</tr>
+<tr>
+<td headers="No.UA" class="gt_row gt_right">23</td>
+<td headers="UAs" class="gt_row gt_left">B-A-GU4</td>
+<td headers="Cluster1" class="gt_row gt_right">0</td>
+<td headers="Cluster2" class="gt_row gt_right">0</td>
+<td headers="Height" class="gt_row gt_right">1.0</td>
+<td headers="Histórico" class="gt_row gt_right">23</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>No código acima, <code>h = 0.8</code> fornece os grupos formados na altura <code>h</code> do eixos das distâncias do dendrograma. Ou seja, no dendrograma, o eixo y (HEIGHT, “h”) representa o valor da distancia escolhida entre os objetos ou grupos de objetos. Portanto, se dois objetos ou grupos de objetos foram agrupados num dado valor (0.8, por exemplo) no eixo <code>height</code>, isso significa que a distancia entre esses objetos é 0.8.</p>
+</div>
+</div>
+<div id="análise-de-componentes-principais" class="section level2" number="23.7">
+<h2>
+<span class="header-section-number">23.7</span> Análise de Componentes Principais<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-componentes-principais"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
+<span><span class="va">pca</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pca</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Standard deviations (1, .., p=23):
+##  [1] 158.01389020213522940139 117.39438554555447069561  97.32313697572153898818
+##  [4]  80.11127025705162907343  56.90494295355772180756  36.18527459059050244150
+##  [7]  27.28016486608409607584  23.27454072572619736547  19.91894284722440389146
+## [10]  16.99348908875181862754  16.63323464718068933621  10.48148753941499755626
+## [13]   8.56036329961227515639   7.06662064957879465510   5.71124015575507648634
+## [16]   2.88611797965249339271   2.03147987965600185234   0.75955876839102431930
+## [19]   0.29362619045076132629   0.18182557620300196510   0.03663790949642085903
+## [22]   0.00211025305681815161   0.00000000000001303502
+## 
+## Rotation (n x k) = (35 x 23):
+##                      PC1            PC2             PC3            PC4
+## ap-davis  -0.00267799605 -0.00069911915 -0.000896593750 -0.00234345146
+## as-bimac   0.80170123969 -0.41283036302  0.094306277560  0.17690789109
+## as-fasci   0.01693654219 -0.01821444254  0.112305748442 -0.04067228941
+## ch-bimac   0.15509522679 -0.46234401444 -0.268879232349  0.11287604727
+## ci-ocela  -0.01209479631  0.00240106826 -0.005063953127 -0.02668038216
+## ci-orien   0.00488254067 -0.00160192511  0.098213681362 -0.05481270060
+## co-macro   0.00041322605 -0.00130947274 -0.000793691349  0.00030077806
+## co-heter   0.00009931644 -0.00020400953  0.000179655580 -0.00009695888
+## cr-menez   0.00384428738 -0.00412306110  0.019022145181 -0.00630587680
+## cu-lepid  -0.00190872921 -0.00060573673 -0.000061788162 -0.00089324907
+## cy-gilbe  -0.02583879098  0.00592316035 -0.002037307278 -0.03927267284
+## ge-brasi   0.44959549702  0.68802065193 -0.294617818540  0.09954123075
+## he-margi  -0.00010846834  0.00005431431  0.001078166364 -0.00065418424
+## ho-malab   0.01191149402 -0.02288031235  0.052364989903 -0.02383822971
+## hy-pusar   0.00609477313 -0.00260919092  0.056748122658 -0.02504332062
+## le-melan  -0.00027134999 -0.00002581513 -0.000332745318 -0.00056306669
+## le-piau    0.00049330993 -0.00225033761  0.003508004964 -0.00365096441
+## le-taeni  -0.00013567499 -0.00001290756 -0.000166372659 -0.00028153334
+## mo-costa  -0.00009089187 -0.00002884461 -0.000002942293 -0.00004253567
+## mo-lepid   0.00396856990 -0.00796914178  0.007860081399 -0.00417841606
+## or-nilot  -0.07663761706  0.06161634148  0.419233687416  0.52846557872
+## pa-manag  -0.13572616898  0.08859849181  0.109884368843  0.74500640156
+## pimel-sp   0.00059589863 -0.00122405720  0.001077933483 -0.00058175329
+## po-retic   0.23073055093  0.31626769500 -0.082354452605  0.01163029452
+## po-vivip   0.22405542499  0.17125434489  0.674528799458 -0.28235564839
+## pr-brevi   0.02637952514 -0.00839979274  0.294268050645 -0.09695396855
+## ps-rhomb   0.00022828132 -0.00004507314  0.001654928172 -0.00043602669
+## ps-genise  0.00022828132 -0.00004507314  0.001654928172 -0.00043602669
+## se-heter  -0.00158679887 -0.01199029249  0.112362155432 -0.06935520390
+## se-piaba   0.00675351782 -0.01387264825  0.012216579469 -0.00659320398
+## se-spilo   0.00022828132 -0.00004507314  0.001654928172 -0.00043602669
+## st-noton   0.01569577189 -0.00141327499  0.226212005969 -0.07662405320
+## sy-marmo  -0.00018269468  0.00003929503 -0.000084613415 -0.00040231045
+## te-chalc  -0.01558302788 -0.00265396195 -0.012814975098 -0.02386360302
+## tr-signa  -0.02780075709  0.00510964087  0.054815144244 -0.05479263139
+##                      PC5              PC6           PC7           PC8
+## ap-davis  -0.01705698357  0.0057478794654 -0.1411264218  0.0558249509
+## as-bimac  -0.37297550564  0.0345839246154  0.0491906461 -0.0250126748
+## as-fasci  -0.00999325404  0.0260981283102 -0.0540373517  0.2134907933
+## ch-bimac   0.80534137869  0.0159920141155 -0.1304168070  0.0081347532
+## ci-ocela  -0.00829823818 -0.0545108620276  0.0491022816 -0.0164460743
+## ci-orien   0.02617210101 -0.1278298853377 -0.0517140860 -0.2959174438
+## co-macro   0.00253983497 -0.0000054919640 -0.0005399856  0.0001785373
+## co-heter  -0.00110572138 -0.0000084770470 -0.0013066049 -0.0007831078
+## cr-menez  -0.00711542099 -0.0000001036594 -0.0152759144 -0.0006263837
+## cu-lepid  -0.01392753604  0.0032695559261 -0.1271040647  0.0471377741
+## cy-gilbe  -0.01157464680  0.3003103851787 -0.0238003214 -0.2360337115
+## ge-brasi   0.15301724414  0.1206568721075 -0.0346826009  0.2349154598
+## he-margi   0.00045195847  0.0032036511864 -0.0010580469 -0.0082142941
+## ho-malab   0.05960820933 -0.0166198222979  0.0110423015  0.0297983317
+## hy-pusar   0.00828561257 -0.0651459707097 -0.0745355547 -0.1938354558
+## le-melan  -0.00098649261  0.0009290521600 -0.0031879130  0.0025770084
+## le-piau   -0.00029200968 -0.0060533852513  0.0030794031 -0.0038076597
+## le-taeni  -0.00049324631  0.0004645260800 -0.0015939565  0.0012885042
+## mo-costa  -0.00066321600  0.0001556931393 -0.0060525745  0.0022446559
+## mo-lepid  -0.04288704163 -0.0022097265732 -0.0527036320 -0.0358275453
+## or-nilot   0.07441173218  0.2027643042634 -0.3089283375  0.0473009474
+## pa-manag   0.03256418406 -0.1659167452896  0.2111266988 -0.0890189061
+## pimel-sp  -0.00663432825 -0.0000508622817 -0.0078396295 -0.0046986467
+## po-retic   0.16209517800 -0.0256115932848 -0.1310391226 -0.3955084723
+## po-vivip   0.31747610493 -0.3159738640940  0.0850376686 -0.1576149719
+## pr-brevi   0.13583352392  0.3200241717708  0.1570716178  0.4781978982
+## ps-rhomb   0.00079700390  0.0002874215451  0.0011697262  0.0043303329
+## ps-genise  0.00079700390  0.0002874215451  0.0011697262  0.0043303329
+## se-heter  -0.07818616380 -0.0639138533356 -0.6984719023 -0.0076474844
+## se-piaba  -0.07518905354 -0.0005764391931 -0.0888491339 -0.0532513287
+## se-spilo   0.00079700390  0.0002874215451  0.0011697262  0.0043303329
+## st-noton   0.11026748017  0.3113644244983  0.1335924881  0.1776577023
+## sy-marmo  -0.00007825343 -0.0008257423139  0.0012481609 -0.0002598481
+## te-chalc  -0.07595324736  0.0443341841600 -0.4721900169  0.2281163604
+## tr-signa   0.00720533654  0.7033077064327  0.0159506042 -0.4507108498
+##                     PC9           PC10          PC11          PC12
+## ap-davis   0.0601921950  0.01630076896 -0.0184553990  0.0776046642
+## as-bimac   0.0458316784 -0.00488178469 -0.0300740997  0.0023793271
+## as-fasci  -0.5251337058  0.17169530455 -0.0674143959 -0.1087620383
+## ch-bimac  -0.0526838452 -0.02059487010  0.0417460287 -0.0519231998
+## ci-ocela   0.0583494749  0.06085292053  0.0128783329  0.3121339305
+## ci-orien   0.1157917320 -0.22175191129  0.2169892747 -0.0796787774
+## co-macro  -0.0008428680  0.00007873604  0.0002001520 -0.0005488835
+## co-heter  -0.0083412062  0.00382309243  0.0039790922 -0.0017327593
+## cr-menez  -0.1108485457  0.04389448465  0.0536870908 -0.0346147093
+## cu-lepid   0.0373568189 -0.01151047832 -0.0192556243  0.1286300817
+## cy-gilbe  -0.2138260683 -0.37638410156 -0.6750894802 -0.3221057903
+## ge-brasi  -0.0494014554 -0.25755793746  0.1899811583 -0.1386335963
+## he-margi   0.0029504025 -0.00389488360  0.0050196638 -0.0018473078
+## ho-malab   0.0231377009 -0.03211063901 -0.0062073149  0.0551002450
+## hy-pusar   0.0120044033 -0.12819263604  0.1559303129 -0.1352201837
+## le-melan   0.0084225920  0.01134374612  0.0006868639 -0.0228602638
+## le-piau   -0.0220530269  0.00844401665  0.0023895609  0.0073147219
+## le-taeni   0.0042112960  0.00567187306  0.0003434320 -0.0114301319
+## mo-costa   0.0017788961 -0.00054811802 -0.0009169345  0.0061252420
+## mo-lepid  -0.3233139472  0.14503584651  0.1584135512 -0.0712036084
+## or-nilot  -0.0162159927 -0.19463075652  0.1295203828  0.3325824118
+## pa-manag   0.0114493662  0.17055768728 -0.1255398750 -0.3204147782
+## pimel-sp  -0.0500472374  0.02293855457  0.0238745533 -0.0103965560
+## po-retic   0.0099306329  0.53886908050 -0.3828544593  0.3691269151
+## po-vivip   0.0366669781  0.00167677315  0.0269013619 -0.2198091979
+## pr-brevi   0.0259118245  0.15879135761 -0.1638071209  0.0756696929
+## ps-rhomb  -0.0004480707  0.00084720191 -0.0020432922  0.0003759334
+## ps-genise -0.0004480707  0.00084720191 -0.0020432922  0.0003759334
+## se-heter  -0.1166124978 -0.18879709359 -0.1016001573  0.0954412824
+## se-piaba  -0.5672020244  0.25997028509  0.2705782708 -0.1178276342
+## se-spilo  -0.0004480707  0.00084720191 -0.0020432922  0.0003759334
+## st-noton   0.0512256753  0.01050433014 -0.0356702545  0.0646856738
+## sy-marmo   0.0006785948  0.00104143085  0.0001405891  0.0066708268
+## te-chalc   0.4232344711  0.39927150760 -0.0270813721 -0.5134259897
+## tr-signa   0.0955352069  0.14917378682  0.3283846054 -0.1153445147
+##                    PC13          PC14          PC15          PC16          PC17
+## ap-davis   0.0749429383 -0.1168020317  0.0790303145  0.1027900660  0.2405865030
+## as-bimac   0.0020776546 -0.0150980593 -0.0054162457  0.0009944375 -0.0003535457
+## as-fasci  -0.0912981412 -0.0213500629 -0.1810832749 -0.1762749174  0.2084786820
+## ch-bimac  -0.0197828264 -0.0267813655  0.0238740750  0.0416015974 -0.0048042368
+## ci-ocela  -0.5952072080 -0.6784391061  0.0814485471  0.0964266863 -0.1732170002
+## ci-orien  -0.0795730923 -0.0933271830 -0.7572121312  0.2758930389  0.3035357720
+## co-macro  -0.0017082489 -0.0028870206 -0.0049803194 -0.0974186207  0.0788340068
+## co-heter  -0.0014481204 -0.0002229518 -0.0001782463  0.0018039689 -0.0006804530
+## cr-menez  -0.0077242288 -0.0026323484 -0.0366525241  0.0370970493 -0.0784818331
+## cu-lepid   0.1094127330 -0.1394917698  0.0960870883  0.1197005224  0.2780399142
+## cy-gilbe  -0.2654178257 -0.0095993430  0.0037291571  0.0582411935 -0.0071264901
+## ge-brasi  -0.0263919885 -0.0918341398  0.0075135310  0.0029004513  0.0076792479
+## he-margi   0.0038445664 -0.0014359141 -0.0023117775 -0.0039233304 -0.0111834525
+## ho-malab  -0.0770206328 -0.1777240324 -0.1745654834 -0.8544034134  0.2337333204
+## hy-pusar   0.0652120472 -0.0013400087 -0.2201788849 -0.2275657378 -0.7478089874
+## le-melan  -0.0158719699  0.0117328813 -0.0086529398 -0.0090441925 -0.0202773629
+## le-piau   -0.0550367638 -0.0510962716  0.0267686347  0.0704058762 -0.0090227832
+## le-taeni  -0.0079359850  0.0058664407 -0.0043264699 -0.0045220962 -0.0101386814
+## mo-costa   0.0052101301 -0.0066424652  0.0045755756  0.0057000249  0.0132399959
+## mo-lepid  -0.0547234439 -0.0078892707 -0.0120334819  0.0659865662 -0.0419112055
+## or-nilot  -0.3159531837  0.3530933921  0.0213976904 -0.0162856719 -0.0117555877
+## pa-manag   0.2414887778 -0.3446069205 -0.0110668995  0.0158771077  0.0163433464
+## pimel-sp  -0.0086887224 -0.0013377109 -0.0010694776  0.0108238131 -0.0040827181
+## po-retic   0.0580951820  0.1452872911 -0.1952113443 -0.0173765377 -0.0527300395
+## po-vivip  -0.0437320102 -0.0039910271  0.3076510426  0.0212029766  0.0722959367
+## pr-brevi   0.1168351489 -0.1341847586 -0.2658935778  0.1734715315 -0.1976962882
+## ps-rhomb   0.0004583116  0.0002882704 -0.0021843381  0.0007429851  0.0006469279
+## ps-genise  0.0004583116  0.0002882704 -0.0021843381  0.0007429851  0.0006469279
+## se-heter   0.4310314784 -0.3619456413  0.0713499273  0.0026535545 -0.0745842780
+## se-piaba  -0.0984721873 -0.0151607235 -0.0121207460  0.1226698823 -0.0462708051
+## se-spilo   0.0004583116  0.0002882704 -0.0021843381  0.0007429851  0.0006469279
+## st-noton   0.2289331416 -0.0903985176 -0.2011376630  0.0065146546 -0.0424567234
+## sy-marmo  -0.0131566533 -0.0171056453  0.0016910489 -0.0088693444 -0.0371670961
+## te-chalc  -0.3009473085  0.0605865071 -0.0634283255 -0.0130778721 -0.0026200254
+## tr-signa   0.0975177019 -0.1660069310  0.1896927418 -0.0673522307  0.1085918277
+##                    PC18          PC19         PC20           PC21          PC22
+## ap-davis   0.3504077600 -0.2193026939 -0.287365846 -0.07857387870  0.1890705323
+## as-bimac   0.0006659144  0.0014014159  0.001258845  0.00078767308 -0.0014385684
+## as-fasci   0.4876927223  0.1006826053  0.487129961  0.11214664068  0.0109905100
+## ch-bimac   0.0042054207  0.0089402853  0.005422511  0.00347618052 -0.0051527896
+## ci-ocela   0.0665951773  0.0868906586  0.032484331  0.05132143545 -0.0898260097
+## ci-orien  -0.0539671769  0.0364566444  0.037602504 -0.01553684799  0.0339935662
+## co-macro   0.1166195114  0.1868080050 -0.014132739 -0.87127105661 -0.3654391372
+## co-heter  -0.0034373430 -0.0004036606 -0.005880177 -0.00002335142  0.0001951877
+## cr-menez  -0.0859221178 -0.3850403202  0.083629766 -0.08889200979  0.2129092465
+## cu-lepid   0.4040679475 -0.2515065839 -0.328203261 -0.09362664731  0.2244324236
+## cy-gilbe  -0.0283293005 -0.0499585236 -0.160514808 -0.02781085991  0.0203220573
+## ge-brasi  -0.0057516329  0.0042312148  0.005349544  0.00075873916  0.0002149985
+## he-margi   0.0199042487 -0.0090510313  0.001514489 -0.07173085956 -0.1484307281
+## ho-malab  -0.2443426965 -0.1293882371 -0.206783113  0.00389667598  0.1119924469
+## hy-pusar   0.4062480495 -0.1213731434 -0.085982818 -0.07757736128  0.1236944821
+## le-melan  -0.0291606073  0.0176721576  0.022586456  0.00780447216 -0.0184196599
+## le-piau   -0.1812664418 -0.7769560785  0.381335312 -0.15701527423 -0.1988989479
+## le-taeni  -0.0145803037  0.0088360788  0.011293228  0.00390223608 -0.0092098299
+## mo-costa   0.0192413308 -0.0119765040 -0.015628727 -0.00445841178  0.0106872583
+## mo-lepid  -0.1154104199 -0.0248062636 -0.228084202 -0.07955715745 -0.1603119866
+## or-nilot   0.0019919202 -0.0065101752 -0.005674463 -0.00091680343 -0.0002007340
+## pa-manag  -0.0052873292  0.0087158062  0.008167607  0.00135316924  0.0003078364
+## pimel-sp  -0.0206240580 -0.0024219636 -0.035281063 -0.00014010850  0.0011711259
+## po-retic   0.0057253203 -0.0136438507 -0.004085891 -0.00084699471 -0.0081744718
+## po-vivip   0.0019058361  0.0114082273 -0.006556515 -0.00123188697  0.0148843924
+## pr-brevi  -0.2255878632  0.0735364603  0.002421692 -0.24789721475  0.3911506220
+## ps-rhomb  -0.0034264576  0.0006969712 -0.002644040  0.01592149557  0.0200212955
+## ps-genise -0.0034264576  0.0006969712 -0.002644040  0.01592149557  0.0200212955
+## se-heter  -0.2105600063  0.1219485063  0.150358281  0.02361627447 -0.0700011221
+## se-piaba  -0.2337393243 -0.0274489213 -0.399852047 -0.00158789637  0.0132727605
+## se-spilo  -0.0034264576  0.0006969712 -0.002644040  0.01592149557  0.0200212955
+## st-noton   0.1491996117 -0.1460414830 -0.261483091  0.30738526219 -0.6478745318
+## sy-marmo   0.0214315598  0.0083531005 -0.005428304 -0.01859026535  0.1035737330
+## te-chalc   0.0078941097 -0.0230952425 -0.048180805  0.03798205890 -0.0800860952
+## tr-signa   0.0313982144  0.0641504152  0.183756837 -0.02226556250  0.1144374076
+##                     PC23
+## ap-davis  -0.74268483894
+## as-bimac   0.00002416892
+## as-fasci  -0.00077078724
+## ch-bimac   0.00030813179
+## ci-ocela   0.01090436532
+## ci-orien  -0.00210919776
+## co-macro   0.00709557518
+## co-heter  -0.00687474563
+## cr-menez   0.18091345737
+## cu-lepid   0.61602790084
+## cy-gilbe  -0.00051782377
+## ge-brasi  -0.00001112178
+## he-margi   0.00886709313
+## ho-malab  -0.00447648887
+## hy-pusar  -0.02744451235
+## le-melan  -0.05105191173
+## le-piau   -0.08144439026
+## le-taeni  -0.02414026438
+## mo-costa   0.03081809636
+## mo-lepid   0.10352199710
+## or-nilot   0.00001331111
+## pa-manag  -0.00001928082
+## pimel-sp   0.01940860711
+## po-retic  -0.00037951469
+## po-vivip   0.00060843953
+## pr-brevi  -0.02437474792
+## ps-rhomb   0.00330646166
+## ps-genise  0.00330646166
+## se-heter   0.00471017298
+## se-piaba  -0.09156420464
+## se-spilo   0.00330646166
+## st-noton   0.02499256836
+## sy-marmo   0.02810562356
+## te-chalc   0.05299650336
+## tr-signa  -0.00175599828
+## Importance of components:
+##                             PC1      PC2     PC3     PC4      PC5      PC6
+## Standard deviation     158.0139 117.3944 97.3231 80.1113 56.90494 36.18527
+## Proportion of Variance   0.4046   0.2233  0.1535  0.1040  0.05247  0.02122
+## Cumulative Proportion    0.4046   0.6279  0.7814  0.8854  0.93784  0.95905
+##                             PC7      PC8      PC9     PC10     PC11     PC12
+## Standard deviation     27.28016 23.27454 19.91894 16.99349 16.63323 10.48149
+## Proportion of Variance  0.01206  0.00878  0.00643  0.00468  0.00448  0.00178
+## Cumulative Proportion   0.97111  0.97989  0.98632  0.99100  0.99548  0.99726
+##                           PC13    PC14    PC15    PC16    PC17    PC18   PC19
+## Standard deviation     8.56036 7.06662 5.71124 2.88612 2.03148 0.75956 0.2936
+## Proportion of Variance 0.00119 0.00081 0.00053 0.00013 0.00007 0.00001 0.0000
+## Cumulative Proportion  0.99845 0.99926 0.99979 0.99992 0.99999 1.00000 1.0000
+##                          PC20    PC21    PC22                PC23
+## Standard deviation     0.1818 0.03664 0.00211 0.00000000000001304
+## Proportion of Variance 0.0000 0.00000 0.00000 0.00000000000000000
+## Cumulative Proportion  1.0000 1.00000 1.00000 1.00000000000000000</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-377-1.png" alt="" width="672"></div>
+<p>Uma PCA sempre retorna <code>n</code> componentes principais (PCs), onde n é o número de objetos da <code>n x m</code> matrix de dados.</p>
+<div id="subsetting-as-variáveis-para-a-pca" class="section level3" number="23.7.1">
+<h3>
+<span class="header-section-number">23.7.1</span> Subsetting as variáveis para a PCA<a class="anchor" aria-label="anchor" href="#subsetting-as-vari%C3%A1veis-para-a-pca"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para escolher quais variáveis entrar na PCA podemos:</p>
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Remover a primeira coluna</span></span>
+<span><span class="va">pca_part1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Usar apenas as 5 primeiras colunas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span> <span class="co">#lista as colunas</span></span>
+<span><span class="va">pca_part2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">#Escolher quais colunas usar por nome</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="co">#ordena por maior soma</span></span>
+<span><span class="va">pca_part3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="op">~</span><span class="va">as</span><span class="op">-</span><span class="va">bimac</span> <span class="op">+</span> <span class="va">ge</span><span class="op">-</span><span class="va">brasi</span>, data <span class="op">=</span> <span class="va">m_trns</span><span class="op">)</span> <span class="co">#usa apenas as colunas listadas</span></span>
+<span><span class="co">#"-" deve ser substituido, o R não o reconhece como  texto</span></span>
+<span></span>
+<span><span class="co">#Usar a função subset()</span></span>
+<span><span class="va">pca_part4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">pca_part4</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>Continuando …</p>
+</div>
+<div id="explorando-correlações-multivariadas" class="section level3" number="23.7.2">
+<h3>
+<span class="header-section-number">23.7.2</span> Explorando correlações multivariadas<a class="anchor" aria-label="anchor" href="#explorando-correla%C3%A7%C3%B5es-multivariadas"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#attach(m_trns)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span>, <span class="va">m_trns</span><span class="op">$</span><span class="st">"ge-brasi"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-1.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#plot(m_trns$"m.elev", m_trns$"m.river")</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"ge-brasi"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-2.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#plot(scale(m_trns$"m.elev"), scale(m_trns$"m.river"))</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-3.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#plot((m_trns$"m.elev" - mean(m_trns$"m.elev")) / sd(m_trns$"m.elev"))</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/pairs.panels.html">pairs.panels</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, </span>
+<span>             method <span class="op">=</span> <span class="st">"pearson"</span>, <span class="co"># correlation method</span></span>
+<span>             scale <span class="op">=</span> <span class="cn">FALSE</span>, lm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>             hist.col <span class="op">=</span> <span class="st">"#00AFBB"</span>, pch <span class="op">=</span> <span class="fl">19</span>,</span>
+<span>             density <span class="op">=</span> <span class="cn">TRUE</span>,  <span class="co"># show density plots</span></span>
+<span>             ellipses <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># show correlation ellipses</span></span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>             <span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-4.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Ordem pela soma das colunas</span></span>
+<span><span class="co"># Passo 1</span></span>
+<span><span class="va">col_sums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
+<span><span class="co"># Passo 2</span></span>
+<span><span class="va">ordered_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">col_sums</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># Passo 3</span></span>
+<span><span class="va">ordered</span> <span class="op">&lt;-</span> <span class="va">m_trns</span><span class="op">[</span>, <span class="va">ordered_indices</span><span class="op">]</span></span>
+<span><span class="va">ordered</span></span></code></pre></div>
+<pre><code>##           as-bimac   ho-malab   or-nilot   po-vivip  se-heter   ge-brasi
+## S-R-CT1 0.29580113 0.09592969 0.20878001 0.22101460 0.3764349 0.05425923
+## S-R-CP1 0.09135411 0.21584866 0.00000000 0.12416313 0.2192313 0.00000000
+## S-A-TA1 0.10054093 0.00000000 0.00000000 0.00000000 0.1165111 0.00000000
+## S-R-CT2 0.25205752 0.40598283 0.30797141 0.49537824 0.4670175 0.00000000
+## S-R-CP2 0.04681561 0.30772498 0.00000000 0.18188749 0.0000000 0.00000000
+## S-A-TA2 0.14242797 0.13587479 0.00000000 0.00000000 0.0000000 0.00000000
+## S-R-CT3 0.30509802 0.56249105 0.41785958 0.61547971 0.3664456 0.03131633
+## S-R-CP3 0.08381382 0.19275669 0.00000000 0.10129161 0.0000000 0.00000000
+## S-A-TA3 0.32588896 0.44266923 0.00000000 0.00000000 0.0000000 0.00000000
+## S-R-CT4 0.00000000 0.19275669 0.29961011 0.17002156 0.1008442 0.05425923
+## S-R-CP4 0.00000000 0.13587479 0.00000000 0.29005641 0.1008442 0.00000000
+## S-A-TA4 0.42841263 0.29145679 0.03455130 0.00000000 0.0000000 0.03131633
+## B-A-MU1 0.07256361 0.00000000 0.08471752 0.00000000 0.0000000 0.44626053
+## B-A-GU1 0.02960230 0.00000000 0.05986846 0.00000000 0.0000000 0.08293673
+## B-R-PC2 0.13927667 0.00000000 0.07732071 0.00000000 0.1848546 0.08867767
+## B-A-MU2 0.20977540 0.09592969 0.03455130 0.09056689 0.0000000 0.25918549
+## B-A-GU2 0.00000000 0.00000000 0.20878001 0.00000000 0.0000000 0.15073345
+## B-R-PC3 0.18225721 0.13587479 0.28223829 0.00000000 0.5950206 0.12557463
+## B-A-MU3 0.49281178 0.00000000 0.11482305 0.22339293 0.0000000 0.38659505
+## B-A-GU3 0.05128768 0.00000000 0.57389635 0.00000000 0.0000000 0.17806243
+## B-R-PC4 0.05540108 0.09592969 0.10381968 0.00000000 0.3295526 0.07007133
+## B-A-MU4 0.32661037 0.00000000 0.03455130 0.42053434 0.0000000 0.78441777
+## B-A-GU4 0.07553213 0.00000000 0.40318427 0.00000000 0.0000000 0.09917726
+##           le-piau   as-fasci   pr-brevi  ci-orien  hy-pusar  tr-signa  ci-ocela
+## S-R-CT1 0.4636476 0.63106017 0.13650631 0.1880966 0.3640209 0.2985914 0.0000000
+## S-R-CP1 0.0000000 0.00000000 0.00000000 0.0000000 0.1686344 0.0000000 0.0000000
+## S-A-TA1 0.0000000 0.07963989 0.06089569 0.0000000 0.0000000 0.0000000 0.0000000
+## S-R-CT2 0.2611574 0.13823439 0.23794112 0.7679121 0.8918340 0.2718802 0.0000000
+## S-R-CP2 0.4636476 0.07963989 0.13650631 0.2535816 0.1686344 0.0000000 0.8570719
+## S-A-TA2 0.0000000 0.00000000 0.08617291 0.0000000 0.0000000 0.0000000 0.0000000
+## S-R-CT3 0.3737922 0.68988155 0.89364927 0.4313758 0.4045563 0.1844947 0.0000000
+## S-R-CP3 0.2611574 0.00000000 0.00000000 0.4220958 0.0000000 0.0000000 0.4455406
+## S-A-TA3 0.0000000 0.21207071 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+## S-R-CT4 0.0000000 0.07963989 0.48641493 0.1880966 0.2070324 0.9672667 0.0000000
+## S-R-CP4 0.3737922 0.00000000 0.00000000 0.2062968 0.0000000 0.0000000 0.4076059
+## S-A-TA4 0.3737922 0.00000000 0.10560544 0.0000000 0.0000000 0.0000000 0.0000000
+## B-A-MU1 0.0000000 0.00000000 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+## B-A-GU1 0.0000000 0.11274751 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+## B-R-PC2 0.0000000 0.00000000 0.18360401 0.0000000 0.0000000 0.3389861 0.1698463
+## B-A-MU2 0.0000000 0.00000000 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+## B-A-GU2 0.0000000 0.00000000 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+## B-R-PC3 0.0000000 0.21207071 0.14962891 0.0000000 0.1189585 0.0000000 0.2413830
+## B-A-MU3 0.0000000 0.00000000 0.06089569 0.0000000 0.0000000 0.0000000 0.0000000
+## B-A-GU3 0.0000000 0.00000000 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+## B-R-PC4 0.2611574 0.33420332 0.00000000 0.0000000 0.0000000 0.1391234 0.0000000
+## B-A-MU4 0.0000000 0.00000000 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+## B-A-GU4 0.0000000 0.00000000 0.00000000 0.0000000 0.0000000 0.0000000 0.0000000
+##          cr-menez   ch-bimac  po-retic  pa-manag   st-noton  he-margi ap-davis
+## S-R-CT1 0.7853982 0.00000000 0.0000000 0.0000000 0.06989994 0.0000000 0.000000
+## S-R-CP1 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## S-A-TA1 0.0000000 0.13621375 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## S-R-CT2 0.3875967 0.06527916 0.2424450 0.0000000 0.35673339 0.7853982 0.000000
+## S-R-CP2 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## S-A-TA2 0.0000000 0.52646034 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## S-R-CT3 0.5639426 0.00000000 0.1203286 0.0000000 0.84652593 0.0000000 0.000000
+## S-R-CP3 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## S-A-TA3 0.0000000 0.61998604 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## S-R-CT4 0.1901256 0.00000000 0.0000000 0.0000000 0.59287085 0.7853982 0.000000
+## S-R-CP4 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## S-A-TA4 0.1901256 0.67165367 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## B-A-MU1 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## B-A-GU1 0.0000000 0.00000000 0.0000000 0.1415090 0.00000000 0.0000000 0.000000
+## B-R-PC2 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 0.444860
+## B-A-MU2 0.0000000 0.00000000 0.1705861 0.0000000 0.00000000 0.0000000 0.000000
+## B-A-GU2 0.0000000 0.00000000 0.0000000 0.4439109 0.00000000 0.0000000 0.000000
+## B-R-PC3 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 1.125936
+## B-A-MU3 0.0000000 0.00000000 0.3726604 0.0000000 0.00000000 0.0000000 0.000000
+## B-A-GU3 0.0000000 0.00000000 0.0000000 0.7374041 0.00000000 0.0000000 0.000000
+## B-R-PC4 0.0000000 0.00000000 0.0000000 0.0000000 0.00000000 0.0000000 0.000000
+## B-A-MU4 0.0000000 0.00000000 1.0665527 0.0000000 0.00000000 0.0000000 0.000000
+## B-A-GU4 0.0000000 0.00000000 0.0000000 0.6263078 0.00000000 0.0000000 0.000000
+##         co-macro co-heter cu-lepid  cy-gilbe le-melan le-taeni mo-costa
+## S-R-CT1 0.000000 1.570796 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-R-CP1 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-A-TA1 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-R-CT2 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-R-CP2 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-A-TA2 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-R-CT3 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-R-CP3 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-A-TA3 1.570796 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-R-CT4 0.000000 0.000000 0.000000 0.6659445 0.000000 0.000000 0.000000
+## S-R-CP4 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## S-A-TA4 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-A-MU1 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-A-GU1 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-R-PC2 0.000000 0.000000 0.000000 0.0000000 1.570796 1.570796 0.000000
+## B-A-MU2 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-A-GU2 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-R-PC3 0.000000 0.000000 1.570796 0.0000000 0.000000 0.000000 1.570796
+## B-A-MU3 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-A-GU3 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-R-PC4 0.000000 0.000000 0.000000 0.9048519 0.000000 0.000000 0.000000
+## B-A-MU4 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+## B-A-GU4 0.000000 0.000000 0.000000 0.0000000 0.000000 0.000000 0.000000
+##         pimel-sp ps-rhomb ps-genise se-piaba se-spilo sy-marmo  te-chalc
+## S-R-CT1 1.570796 0.000000  0.000000 1.570796 0.000000 0.000000 0.0000000
+## S-R-CP1 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-A-TA1 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-R-CT2 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-R-CP2 0.000000 0.000000  0.000000 0.000000 0.000000 1.570796 0.0000000
+## S-A-TA2 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-R-CT3 0.000000 1.570796  1.570796 0.000000 1.570796 0.000000 0.0000000
+## S-R-CP3 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-A-TA3 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-R-CT4 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-R-CP4 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## S-A-TA4 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-A-MU1 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-A-GU1 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-R-PC2 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.8527660
+## B-A-MU2 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-A-GU2 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-R-PC3 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.7180303
+## B-A-MU3 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-A-GU3 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-R-PC4 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-A-MU4 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+## B-A-GU4 0.000000 0.000000  0.000000 0.000000 0.000000 0.000000 0.0000000
+##          mo-lepid
+## S-R-CT1 1.4120161
+## S-R-CP1 0.0000000
+## S-A-TA1 0.0000000
+## S-R-CT2 0.1587802
+## S-R-CP2 0.0000000
+## S-A-TA2 0.0000000
+## S-R-CT3 0.0000000
+## S-R-CP3 0.0000000
+## S-A-TA3 0.0000000
+## S-R-CT4 0.0000000
+## S-R-CP4 0.0000000
+## S-A-TA4 0.0000000
+## B-A-MU1 0.0000000
+## B-A-GU1 0.0000000
+## B-R-PC2 0.0000000
+## B-A-MU2 0.0000000
+## B-A-GU2 0.0000000
+## B-R-PC3 0.0000000
+## B-A-MU3 0.0000000
+## B-A-GU3 0.0000000
+## B-R-PC4 0.0000000
+## B-A-MU4 0.0000000
+## B-A-GU4 0.0000000</code></pre>
+<p>Note que, no R, escalar os dados (argumento <code>scale=TRUE</code>) já significa centrar (argumento <code>center=TRUE</code>) e escalar, uma vez que no ambiente de programação do R base, ao escalar os dados são primeiro centrados (argumento <code>center=TRUE</code> como o padrão) (mas veja também a Tabela <a href="pca.html#tab:29term">23.1</a>).</p>
+<p>Nos argumentos da função <code><a href="https://rdrr.io/r/stats/prcomp.html">prcomp()</a></code>:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>center</code>, um valor lógico (TRUE, FALSE) indicando se as variáveis devem ser deslocadas para serem centradas em zero. O valor é passado para a função “scale”.</p></li>
+<li><p><code>scale</code>, um valor lógico (TRUE, FALSE) indicando se as variáveis devem ser escaladas para terem variância unitária antes da análise, é recomendável fazer a escala. Ao escalar os dados também são automáticamente centrados.</p></li>
+</ol>
+<div id="hello" class="greeting message" style="color: green;">
+<p><span style="color:red">Nota importante sobre terminologia</span>
+Na literatura de estatística multivariada (e univariada), as palavras transformação, padronização, relativização e ponderação infelizmente não são usadas de forma consistente. Nesta disciplina usamos da seguinte forma:</p>
+</div>
+<dl>
+<dt>Transformar (ou ponderar)</dt>
+<dd>
+<p>para a aplicação de uma única função a todos os valores em uma matriz de dados independentemente de linhas e/ou colunas. Este é o significado normal no contexto
+univariado, e também é aplicável para dados multivariados.</p>
+</dd>
+<dt>Relativizar (ou padronizar)</dt>
+<dd>
+<p>para a aplicação de uma função a todos os valores na matriz de dados, onde a função envolve alguma propriedade estatística de cada linha e/ou coluna. No contexto univariado, a padronização geralmente significa converter para z-scores, mas no contexto multivariado, esse conceito precisa ser ampliado, por isso a conversão para z-scores também pode ser chamada de “scaling” ou centralização.</p>
+</dd>
+<dt>Normalizar,</dt>
+<dd>
+<p>para dividir pela norma, ou reescalar os valores para variar entre 0 e 1.</p>
+</dd>
+</dl>
+<p>Portanto, nessa disciplina, usamos esses termos conforme definido acima, para fins de consistência (Tabela <a href="pca.html#tab:29term">23.1</a>). Mas ver também as terminologias definidas para as funções e argumentos do R, no menu de ajuda do programa.</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:29term">Tabela 23.1: </span><span id="tab:29term">Tabela 23.2: </span>Resumo sobre terminologia usada conforme definido para fins de consistência.
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Termo
+</th>
+<th style="text-align:center;">
+Descrição
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Transformar (ou ponderar)
+</td>
+<td style="text-align:center;width: 2cm; ">
+Aplicação de uma única função matemática a todos os valores. Ex. Log, Raiz, etc.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Relativizar
+</td>
+<td style="text-align:center;width: 2cm; ">
+≅ Normalizar
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Padronizar (✓)
+</td>
+<td style="text-align:center;width: 2cm; ">
+Reescalar os dados para apresentarem uma média = 0 e um desvio padrão = 1, subtraindo a média de cada valor e dividindo pelo desvio padrão
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Normalizar (✓)
+</td>
+<td style="text-align:center;width: 2cm; ">
+Dividir pela norma. Reescalar os valores para variar entre 0 e 1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Centrar
+</td>
+<td style="text-align:center;width: 2cm; ">
+≅ Padronizar
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Reescalar
+</td>
+<td style="text-align:center;width: 2cm; ">
+Adicionar ou subtrair uma constante, e então multiplicar ou dividir por uma constante. Significa mudar a unidade de medida. Ex. Celsius para Fahrenheit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Escalar (X)
+</td>
+<td style="text-align:center;width: 2cm; ">
+≅ Relativizar. Dividir cada variável por um fator. Variáveis diferentes têm fatores de escalar diferentes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+(✓) termo consistente na literatura; (X) termo pode ter mais de um significado diferente; (≅) equivalente a
+</td>
+<td style="text-align:center;width: 2cm; ">
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="centrando-e-re-escalando-a-matriz-de-dados" class="section level3" number="23.7.3">
+<h3>
+<span class="header-section-number">23.7.3</span> Centrando e re-escalando a matriz de dados<a class="anchor" aria-label="anchor" href="#centrando-e-re-escalando-a-matriz-de-dados"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pca_ce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="co">#pca_ce</span></span>
+<span><span class="va">pca_cs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#pca_cs</span></span>
+<span><span class="va">pca_sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#pca_sc</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca_ce</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca_cs</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca_sc</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pca_sc</span> <span class="co">#fornece os desvios padrões, Rotação dos eixos e Eigenvetores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca_sc</span>, type <span class="op">=</span> <span class="st">"l"</span>, main <span class="op">=</span> <span class="st">"Scree Plot (scaled data - m_trns)"</span><span class="op">)</span> <span class="co">#scree plot</span></span></code></pre></div>
+<pre><code>## Standard deviations (1, .., p=23):
+##  [1] 2.9778939983230974242190 2.1644396714603693077095 2.0972394083071006498642
+##  [4] 1.7168298709083065212155 1.7090548385875545811530 1.5508287329671699428246
+##  [7] 1.5177638567853024564869 1.4977889768330849840083 1.1649121171933214391458
+## [10] 0.9349685330871373434292 0.7893534518843133840349 0.7441209702398828840231
+## [13] 0.5698406715075876594057 0.4254210308301644150042 0.3607452986461873734036
+## [16] 0.2929443600039773887289 0.2222686342044159490960 0.1819861053121031302382
+## [19] 0.0912532680805259871493 0.0842701171203218413197 0.0292561578260803860363
+## [22] 0.0083685736440149219306 0.0000000000000003174372
+## 
+## Rotation (n x k) = (35 x 23):
+##                    PC1          PC2           PC3          PC4          PC5
+## ap-davis  -0.027062956  0.012030911 -0.4592798495  0.015778481  0.104272007
+## as-bimac   0.096351241 -0.047527063  0.0376530068 -0.139570986  0.343703163
+## as-fasci   0.277575759 -0.105650202 -0.0576715526 -0.024049339  0.135237205
+## ch-bimac  -0.042124368  0.006105661  0.1104835413  0.137639783  0.219626640
+## ci-ocela  -0.022140373  0.028324938 -0.0644894474  0.460385667  0.017450582
+## ci-orien   0.235518043  0.076047786  0.0485055621  0.190257783 -0.135845376
+## co-macro  -0.025249104  0.010151230  0.0681498126  0.098997451  0.187829821
+## co-heter   0.143832533 -0.410781488 -0.0005612607 -0.036387406  0.021642519
+## cr-menez   0.303527645 -0.172446766  0.0203027148 -0.053368695  0.005614225
+## cu-lepid  -0.011980373  0.008219528 -0.3941736843  0.019629193  0.154714748
+## cy-gilbe   0.029836262  0.035010251 -0.0048656863 -0.013782174 -0.317814501
+## ge-brasi  -0.090791485  0.004209403  0.0464768578 -0.374084849  0.117744918
+## he-margi   0.130228283  0.083615325  0.0043094573  0.004363546 -0.410554031
+## ho-malab   0.221907840  0.161364893  0.0543481979  0.261850662  0.132081361
+## hy-pusar   0.262210436 -0.004230543 -0.0238386450  0.060114378 -0.137107010
+## le-melan  -0.042173295  0.011424528 -0.2326564454 -0.007414336 -0.112260557
+## le-piau    0.200480994 -0.105391793  0.0843084982  0.319193450  0.062755117
+## le-taeni  -0.042173295  0.011424528 -0.2326564454 -0.007414336 -0.112260557
+## mo-costa  -0.011980373  0.008219528 -0.3941736843  0.019629193  0.154714748
+## mo-lepid   0.157109073 -0.405481519  0.0006837207 -0.030349893  0.001077896
+## or-nilot   0.140713855  0.058993003 -0.1019822450 -0.258499279 -0.153312047
+## pa-manag  -0.086352106  0.007358406  0.0449945641 -0.200703433 -0.117458940
+## pimel-sp   0.143832533 -0.410781488 -0.0005612607 -0.036387406  0.021642519
+## po-retic   0.002024157  0.047986763  0.0927351724 -0.280446697  0.133152109
+## po-vivip   0.251539653  0.103798909  0.0913328943 -0.058427637  0.046091782
+## pr-brevi   0.278334782  0.189021785 -0.0731776225 -0.039119120 -0.029408558
+## ps-rhomb   0.241161665  0.214008484  0.0099854935 -0.091478365  0.190925505
+## ps-genise  0.241161665  0.214008484  0.0099854935 -0.091478365  0.190925505
+## se-heter   0.203307860 -0.051101779 -0.3011067344  0.012039189 -0.010578855
+## se-piaba   0.143832533 -0.410781488 -0.0005612607 -0.036387406  0.021642519
+## se-spilo   0.241161665  0.214008484  0.0099854935 -0.091478365  0.190925505
+## st-noton   0.279427497  0.201351983  0.0089077683 -0.085001135 -0.124141460
+## sy-marmo   0.001111992  0.020862303  0.0445566240  0.391896305  0.007811830
+## te-chalc  -0.040903442  0.014358554 -0.4418626861  0.007132930  0.014095673
+## tr-signa   0.154898517  0.001117533 -0.0755832209 -0.056153166 -0.411277309
+##                    PC6          PC7          PC8          PC9         PC10
+## ap-davis  -0.087340966  0.022789392  0.052608968 -0.007059014  0.053258116
+## as-bimac   0.123166832  0.142676376  0.301691682 -0.113133543  0.102230284
+## as-fasci   0.004882505 -0.152653307 -0.052590968  0.208473428  0.081030224
+## ch-bimac   0.143126088 -0.268340921  0.381027636 -0.119341924  0.053259265
+## ci-ocela  -0.045963186  0.236305384 -0.240763021  0.021401034  0.219250830
+## ci-orien  -0.083634172  0.191096926  0.041620156 -0.264440305 -0.182250706
+## co-macro   0.116602919 -0.246049324  0.333141919 -0.108839869  0.436067494
+## co-heter   0.032864543 -0.016821248 -0.050983942  0.019779845  0.065180248
+## cr-menez   0.038281785 -0.023510829  0.017128490 -0.074357925 -0.023722494
+## cu-lepid  -0.297411128 -0.009148553  0.085246509  0.041993704  0.053798819
+## cy-gilbe  -0.047265413 -0.127300650  0.122159541  0.579185854  0.120782500
+## ge-brasi  -0.042105974  0.373657306  0.004502258  0.123390085  0.246322229
+## he-margi  -0.102909301  0.091989740  0.323895419 -0.136208501  0.062100108
+## ho-malab   0.011048110 -0.087662008  0.205753701 -0.096280545  0.093262075
+## hy-pusar  -0.110148623  0.140051465  0.150079701 -0.294104047 -0.123164780
+## le-melan   0.518778148  0.084202498 -0.074830640 -0.125195160  0.006502085
+## le-piau   -0.004733128  0.093265505 -0.135899528  0.067589687 -0.065627367
+## le-taeni   0.518778148  0.084202498 -0.074830640 -0.125195160  0.006502085
+## mo-costa  -0.297411128 -0.009148553  0.085246509  0.041993704  0.053798819
+## mo-lepid   0.019460030  0.004740075 -0.021516048 -0.030872730  0.034206407
+## or-nilot  -0.206129373 -0.179082563 -0.174304500 -0.308503549  0.283452956
+## pa-manag  -0.169441824 -0.243085865 -0.315826392 -0.410212739  0.250571290
+## pimel-sp   0.032864543 -0.016821248 -0.050983942  0.019779845  0.065180248
+## po-retic  -0.022304373  0.478718534  0.132448970  0.038650006  0.175055057
+## po-vivip  -0.030174960  0.343002884  0.008106629 -0.057302192 -0.027372495
+## pr-brevi   0.100418344 -0.047920036 -0.031829864  0.083713722  0.132248374
+## ps-rhomb   0.085584577 -0.097656984 -0.196383086  0.079397315 -0.030162019
+## ps-genise  0.085584577 -0.097656984 -0.196383086  0.079397315 -0.030162019
+## se-heter  -0.131552786  0.013333052  0.099204022  0.043654863 -0.246762176
+## se-piaba   0.032864543 -0.016821248 -0.050983942  0.019779845  0.065180248
+## se-spilo   0.085584577 -0.097656984 -0.196383086  0.079397315 -0.030162019
+## st-noton   0.017710893 -0.051357879  0.032174476  0.060605226  0.090579097
+## sy-marmo  -0.049438917  0.198022443 -0.216483345  0.030733739  0.494821047
+## te-chalc   0.210037882  0.059874505 -0.002389475 -0.070313093  0.040543401
+## tr-signa   0.134224035 -0.018848696  0.167097019  0.171758609  0.260561019
+##                   PC11         PC12          PC13        PC14         PC15
+## ap-davis  -0.052391842  0.023492536  0.0698691582 -0.03652085 -0.020277984
+## as-bimac  -0.260821962 -0.319253832 -0.0489802231  0.65295145  0.227038392
+## as-fasci   0.262323834 -0.091587820 -0.1258449613 -0.03134603 -0.085634613
+## ch-bimac  -0.386500844 -0.186751513  0.0310594079 -0.51920688 -0.136792636
+## ci-ocela  -0.001666336  0.061942173  0.3255037537  0.06499016  0.081227258
+## ci-orien   0.154621098 -0.006773654  0.2824129078  0.13168024 -0.285671819
+## co-macro   0.580179830  0.167701252  0.1532761693  0.07927341 -0.037659750
+## co-heter  -0.018021389  0.100740023  0.0359268401 -0.02938755  0.037672927
+## cr-menez  -0.142282592 -0.017627339 -0.0071836059 -0.04902558 -0.151690308
+## cu-lepid  -0.085170716  0.069318761  0.0814894454 -0.02508927 -0.006863662
+## cy-gilbe   0.151719628 -0.479016127  0.0290987757  0.04062945  0.002284994
+## ge-brasi   0.018759828  0.002535690  0.0232970373 -0.01557995 -0.672304923
+## he-margi  -0.094653008  0.098521964 -0.0192926386  0.00964539 -0.077508944
+## ho-malab   0.085863087 -0.043610475  0.0020790384 -0.04756982 -0.012083117
+## hy-pusar   0.122813230 -0.037876910 -0.4045968056 -0.04611556 -0.125750895
+## le-melan   0.075220439 -0.112513964 -0.0190854228 -0.03433036 -0.036948248
+## le-piau   -0.118748861 -0.448733217  0.3320590664 -0.06271555 -0.171512220
+## le-taeni   0.075220439 -0.112513964 -0.0190854228 -0.03433036 -0.036948248
+## mo-costa  -0.085170716  0.069318761  0.0814894454 -0.02508927 -0.006863662
+## mo-lepid   0.006732798  0.072873403 -0.0005639698 -0.03276838 -0.007147368
+## or-nilot  -0.041209657 -0.266448972  0.0756472140  0.11857100 -0.069302504
+## pa-manag   0.043094916 -0.257617097  0.0883629668 -0.16198025  0.170017255
+## pimel-sp  -0.018021389  0.100740023  0.0359268401 -0.02938755  0.037672927
+## po-retic   0.101307708 -0.130585749  0.0680831001 -0.41816045  0.285468062
+## po-vivip   0.137394927  0.020169788  0.1504346005 -0.15117792  0.377921388
+## pr-brevi  -0.265612454  0.143817661 -0.0325695699 -0.01500143  0.067416898
+## ps-rhomb   0.009185436  0.061195583 -0.0058677853 -0.01708984 -0.036117613
+## ps-genise  0.009185436  0.061195583 -0.0058677853 -0.01708984 -0.036117613
+## se-heter   0.261228907 -0.225487433 -0.2451655237 -0.11124458  0.119852098
+## se-piaba  -0.018021389  0.100740023  0.0359268401 -0.02938755  0.037672927
+## se-spilo   0.009185436  0.061195583 -0.0058677853 -0.01708984 -0.036117613
+## st-noton  -0.117480878  0.188974140  0.0557419439 -0.00137243  0.002582531
+## sy-marmo  -0.118819425 -0.028306304 -0.5812571116 -0.01998176 -0.008449701
+## te-chalc   0.002744511 -0.042380097  0.0387651882 -0.04340393 -0.033441904
+## tr-signa  -0.186732628  0.177477927  0.1688680540  0.01223931  0.129621641
+##                   PC16         PC17         PC18         PC19         PC20
+## ap-davis  -0.013988807 -0.010494110  0.076000968 -0.125874642  0.011120744
+## as-bimac  -0.091467837 -0.003014948  0.021975319 -0.014406194  0.124368819
+## as-fasci  -0.354031621  0.230162969  0.208873931 -0.136744115 -0.403177150
+## ch-bimac  -0.188734228  0.087894819 -0.329496126 -0.058895336  0.061963245
+## ci-ocela  -0.102753023 -0.040726254 -0.260436140  0.112786644  0.046694798
+## ci-orien  -0.535059793 -0.192669759 -0.068231662  0.029270215  0.150380014
+## co-macro   0.062555500  0.252277293  0.029636353  0.113233920  0.159290561
+## co-heter  -0.002178025 -0.106421565 -0.088379920 -0.030411965  0.047305260
+## cr-menez   0.068648786  0.033679104  0.308195454  0.111217676  0.019486783
+## cu-lepid  -0.015827650 -0.005733052  0.081141316 -0.113520819  0.023581781
+## cy-gilbe  -0.116204238 -0.192687991 -0.137838601 -0.280179618  0.191786851
+## ge-brasi   0.231880996 -0.025732578 -0.131672550 -0.005316511  0.171543902
+## he-margi  -0.032802927  0.229261301  0.146580298 -0.106277880 -0.036240102
+## ho-malab   0.392217016 -0.669804927  0.094968035 -0.059206050 -0.226277541
+## hy-pusar   0.042069034 -0.021245611 -0.007666585 -0.226899662  0.091128305
+## le-melan   0.002586800 -0.013601034 -0.001778585 -0.049869433 -0.029895319
+## le-piau    0.304378737  0.319634915  0.314362123  0.095368275 -0.024950394
+## le-taeni   0.002586800 -0.013601034 -0.001778585 -0.049869433 -0.029895319
+## mo-costa  -0.015827650 -0.005733052  0.081141316 -0.113520819  0.023581781
+## mo-lepid  -0.037345193 -0.056549443 -0.081730042 -0.104337971  0.048329363
+## or-nilot   0.041539802  0.038270328 -0.406050425  0.165257373 -0.506578225
+## pa-manag  -0.015770557 -0.090866647  0.277055089 -0.130426088  0.448315276
+## pimel-sp  -0.002178025 -0.106421565 -0.088379920 -0.030411965  0.047305260
+## po-retic  -0.278306844 -0.183368800  0.232081886  0.263103425 -0.161551042
+## po-vivip   0.266396563  0.287621536 -0.298931710 -0.466295217  0.003812905
+## pr-brevi  -0.089685577  0.105158973 -0.074767102  0.174350796  0.209992267
+## ps-rhomb  -0.034106148 -0.044541787 -0.024332481 -0.035597515  0.090158191
+## ps-genise -0.034106148 -0.044541787 -0.024332481 -0.035597515  0.090158191
+## se-heter   0.160782388  0.070267059 -0.237250617  0.561103709  0.268086256
+## se-piaba  -0.002178025 -0.106421565 -0.088379920 -0.030411965  0.047305260
+## se-spilo  -0.034106148 -0.044541787 -0.024332481 -0.035597515  0.090158191
+## st-noton   0.017236237  0.036359594  0.075959858  0.034556862  0.045521296
+## sy-marmo  -0.071593814  0.054135346  0.022820956 -0.001247621  0.040587276
+## te-chalc  -0.008406060 -0.014423429  0.052081470 -0.113843962 -0.007857648
+## tr-signa   0.114936013 -0.062638204  0.081685210  0.174716655  0.003816642
+##                   PC21          PC22         PC23
+## ap-davis  -0.042025345 -0.0055123298 -0.555097549
+## as-bimac   0.060578276 -0.0856841649 -0.076488618
+## as-fasci   0.367682175  0.1300082838 -0.257429566
+## ch-bimac   0.076776250 -0.0994002342 -0.050129359
+## ci-ocela   0.266895114 -0.2299020966 -0.180930065
+## ci-orien  -0.087266808  0.1735266637  0.074372061
+## co-macro  -0.088984032 -0.0205905010  0.145446643
+## co-heter  -0.049029405 -0.0254227140  0.010344983
+## cr-menez  -0.037782094  0.0971509755  0.099377701
+## cu-lepid  -0.028205940 -0.0091995235  0.290382862
+## cy-gilbe  -0.113076580  0.0029789613  0.082677728
+## ge-brasi   0.139409903  0.0686675554 -0.129926218
+## he-margi  -0.416057330 -0.0964808077 -0.219706485
+## ho-malab  -0.018321037  0.2069341607 -0.139334575
+## hy-pusar   0.434225870 -0.2842541470  0.219652736
+## le-melan  -0.041187376  0.0085176283  0.017797083
+## le-piau   -0.058004252 -0.0536530959  0.104961491
+## le-taeni  -0.041187376  0.0085176283  0.023806349
+## mo-costa  -0.028205940 -0.0091995235  0.272761537
+## mo-lepid  -0.232344432 -0.0182694555 -0.061989901
+## or-nilot  -0.105946300 -0.0237608135  0.120676958
+## pa-manag   0.145734983  0.0507261741 -0.158597808
+## pimel-sp  -0.049029405 -0.0254227140  0.005500468
+## po-retic  -0.089106741 -0.0960243465  0.093871813
+## po-vivip   0.003587281  0.1977776654 -0.009371896
+## pr-brevi   0.113033315  0.6587666543  0.084000011
+## ps-rhomb  -0.121519638 -0.2146663113  0.062039862
+## ps-genise -0.121519638 -0.2146663113  0.062039862
+## se-heter  -0.028573318 -0.0125880835 -0.181441492
+## se-piaba  -0.049029405 -0.0254227140  0.005500468
+## se-spilo  -0.121519638 -0.2146663113  0.062039862
+## st-noton  -0.058802940 -0.2650109116 -0.286978308
+## sy-marmo  -0.227340620  0.0279591652  0.052270568
+## te-chalc  -0.050824713  0.0006039269  0.165369626
+## tr-signa   0.381435954 -0.1871680041  0.145187830
+## List of 5
+##  $ sdev    : num [1:23] 2.98 2.16 2.1 1.72 1.71 ...
+##  $ rotation: num [1:35, 1:23] -0.0271 0.0964 0.2776 -0.0421 -0.0221 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##   .. ..$ : chr [1:23] "PC1" "PC2" "PC3" "PC4" ...
+##  $ center  : Named num [1:35] 0.0683 0.1612 0.1117 0.0878 0.0922 ...
+##   ..- attr(*, "names")= chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##  $ scale   : Named num [1:35] 0.248 0.143 0.195 0.209 0.212 ...
+##   ..- attr(*, "names")= chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##  $ x       : num [1:23, 1:23] 5.8511 -0.9176 -1.5375 4.8717 0.0452 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:23] "S-R-CT1" "S-R-CP1" "S-A-TA1" "S-R-CT2" ...
+##   .. ..$ : chr [1:23] "PC1" "PC2" "PC3" "PC4" ...
+##  - attr(*, "class")= chr "prcomp"
+## Importance of components:
+##                           PC1    PC2    PC3     PC4     PC5     PC6     PC7
+## Standard deviation     2.9779 2.1644 2.0972 1.71683 1.70905 1.55083 1.51776
+## Proportion of Variance 0.2534 0.1338 0.1257 0.08421 0.08345 0.06872 0.06582
+## Cumulative Proportion  0.2534 0.3872 0.5129 0.59710 0.68056 0.74927 0.81509
+##                           PC8     PC9    PC10   PC11    PC12    PC13    PC14
+## Standard deviation     1.4978 1.16491 0.93497 0.7894 0.74412 0.56984 0.42542
+## Proportion of Variance 0.0641 0.03877 0.02498 0.0178 0.01582 0.00928 0.00517
+## Cumulative Proportion  0.8792 0.91796 0.94293 0.9607 0.97656 0.98583 0.99100
+##                           PC15    PC16    PC17    PC18    PC19    PC20    PC21
+## Standard deviation     0.36075 0.29294 0.22227 0.18199 0.09125 0.08427 0.02926
+## Proportion of Variance 0.00372 0.00245 0.00141 0.00095 0.00024 0.00020 0.00002
+## Cumulative Proportion  0.99472 0.99717 0.99859 0.99953 0.99977 0.99997 1.00000
+##                            PC22                  PC23
+## Standard deviation     0.008369 0.0000000000000003174
+## Proportion of Variance 0.000000 0.0000000000000000000
+## Cumulative Proportion  1.000000 1.0000000000000000000</code></pre>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-380-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-380-2.png" alt="" width="768"></p>
+<p>No <code>scree plot</code> o eixo x representa os componentes principais (n x k) = (35) x (23). O eixo y representa a variância de cada componente principal, expressa como o desvio padrão ao elevado ao quadrado (<span class="math inline">\(DP^2\)</span>), que também é o <code>eigenvalor</code> daquele eixo. Por exemplo, o desvio padrão do primeiro componente foi de 2.977894, que elevado ao quadrado resulta em 8.8678527, como apresentado no gráfico. Para o segundo PC, temos PC2 2.1644397 <sup>2</sup> = 4.6847991.</p>
+<div id="sobre-o-scree-plot" class="section level4" number="23.7.3.1">
+<h4>
+<span class="header-section-number">23.7.3.1</span> Sobre o <code>scree plot</code><a class="anchor" aria-label="anchor" href="#sobre-o-scree-plot"><i class="fas fa-link"></i></a>
+</h4>
+<p>O scree plot <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;A palavra “scree” tem origem na língua inglesa e é uma abreviação de “screening”, que significa triagem ou seleção. Nesse contexto, o termo “scree plot” é uma representação gráfica utilizada para auxiliar na triagem ou seleção dos componentes principais ou fatores mais relevantes em uma análise multivariada.&lt;/p&gt;"><sup>19</sup></a> é um gráfico que exibe a magnitude das autovalores resultantes de uma análise de componentes principais (PCA) ou de uma análise de fator. Os autovalores representam a quantidade de variação explicada por cada componente principal ou fator.</p>
+<p>No scree plot, os autovalores são plotados no eixo vertical em ordem decrescente, enquanto os números dos componentes principais ou fatores correspondentes são plotados no eixo horizontal. O gráfico geralmente é exibido como um gráfico de linha ou de barras.</p>
+<p>O objetivo do scree plot é ajudar a identificar o número de componentes principais ou fatores significativos a serem retidos. Normalmente, procura-se um ponto de “cotovelo” no gráfico, onde a inclinação da curva dos autovalores diminui significativamente. Esse ponto indica que os componentes principais ou fatores além dele contribuem menos para a variação total dos dados.</p>
+</div>
+<div id="descendo-os-nomes-das-uas-1" class="section level4" number="23.7.3.2">
+<h4>
+<span class="header-section-number">23.7.3.2</span> Descendo os nomes das UAs<a class="anchor" aria-label="anchor" href="#descendo-os-nomes-das-uas-1"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">add.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">m_trns</span>, var <span class="op">=</span> <span class="st">"UAs"</span><span class="op">)</span></span>
+<span><span class="co">#add.col</span></span>
+<span><span class="va">agrup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">add.col</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span> <span class="co">#descendo os nomes</span></span>
+<span><span class="co">#agrup</span></span>
+<span><span class="va">m_pca_agrup</span> <span class="op">&lt;-</span> <span class="va">add.col</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Agrupamentos<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">agrup</span><span class="op">)</span>,.before<span class="op">=</span><span class="va">UAs</span><span class="op">)</span></span>
+<span><span class="va">m_pca_agrup</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##   Agrupamentos     UAs ap-davis   as-bimac   as-fasci
+## 1           CT S-R-CT1        0 0.29580113 0.63106017
+## 2           CP S-R-CP1        0 0.09135411 0.00000000
+## 3           TA S-A-TA1        0 0.10054093 0.07963989
+## 4           CT S-R-CT2        0 0.25205752 0.13823439
+## 5           CP S-R-CP2        0 0.04681561 0.07963989</code></pre>
+</div>
+</div>
+</div>
+<div id="fazendo-a-pca" class="section level2" number="23.8">
+<h2>
+<span class="header-section-number">23.8</span> Fazendo a PCA<a class="anchor" aria-label="anchor" href="#fazendo-a-pca"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pca_sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">pca_sc</span> <span class="co">#fornece os desvios padrões, Rotação dos eixos e Eigenvetores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca_sc</span>, type <span class="op">=</span> <span class="st">"l"</span>, main <span class="op">=</span> <span class="st">"Scree Plot (scaled data - m_trns)"</span><span class="op">)</span> <span class="co">#scree plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html">biplot</a></span><span class="op">(</span><span class="va">pca_sc</span>, choices<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, scale <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>       main<span class="op">=</span><span class="st">"Biplot da PCA. PPBio Comunidade"</span>,</span>
+<span>       xlab <span class="op">=</span> <span class="st">"PC1 UAs"</span>,</span>
+<span>       ylab <span class="op">=</span> <span class="st">"PC2 UAs"</span>,</span>
+<span>       cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="co">#PCA plot</span></span>
+<span><span class="co"># Calculando o percentual de variação explicado</span></span>
+<span><span class="va">var_exp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">pca_sc</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">var_exp</span></span></code></pre></div>
+<pre><code>## Standard deviations (1, .., p=23):
+##  [1] 2.9778939983230974242190 2.1644396714603693077095 2.0972394083071006498642
+##  [4] 1.7168298709083065212155 1.7090548385875545811530 1.5508287329671699428246
+##  [7] 1.5177638567853024564869 1.4977889768330849840083 1.1649121171933214391458
+## [10] 0.9349685330871373434292 0.7893534518843133840349 0.7441209702398828840231
+## [13] 0.5698406715075876594057 0.4254210308301644150042 0.3607452986461873734036
+## [16] 0.2929443600039773887289 0.2222686342044159490960 0.1819861053121031302382
+## [19] 0.0912532680805259871493 0.0842701171203218413197 0.0292561578260803860363
+## [22] 0.0083685736440149219306 0.0000000000000003174372
+## 
+## Rotation (n x k) = (35 x 23):
+##                    PC1          PC2           PC3          PC4          PC5
+## ap-davis  -0.027062956  0.012030911 -0.4592798495  0.015778481  0.104272007
+## as-bimac   0.096351241 -0.047527063  0.0376530068 -0.139570986  0.343703163
+## as-fasci   0.277575759 -0.105650202 -0.0576715526 -0.024049339  0.135237205
+## ch-bimac  -0.042124368  0.006105661  0.1104835413  0.137639783  0.219626640
+## ci-ocela  -0.022140373  0.028324938 -0.0644894474  0.460385667  0.017450582
+## ci-orien   0.235518043  0.076047786  0.0485055621  0.190257783 -0.135845376
+## co-macro  -0.025249104  0.010151230  0.0681498126  0.098997451  0.187829821
+## co-heter   0.143832533 -0.410781488 -0.0005612607 -0.036387406  0.021642519
+## cr-menez   0.303527645 -0.172446766  0.0203027148 -0.053368695  0.005614225
+## cu-lepid  -0.011980373  0.008219528 -0.3941736843  0.019629193  0.154714748
+## cy-gilbe   0.029836262  0.035010251 -0.0048656863 -0.013782174 -0.317814501
+## ge-brasi  -0.090791485  0.004209403  0.0464768578 -0.374084849  0.117744918
+## he-margi   0.130228283  0.083615325  0.0043094573  0.004363546 -0.410554031
+## ho-malab   0.221907840  0.161364893  0.0543481979  0.261850662  0.132081361
+## hy-pusar   0.262210436 -0.004230543 -0.0238386450  0.060114378 -0.137107010
+## le-melan  -0.042173295  0.011424528 -0.2326564454 -0.007414336 -0.112260557
+## le-piau    0.200480994 -0.105391793  0.0843084982  0.319193450  0.062755117
+## le-taeni  -0.042173295  0.011424528 -0.2326564454 -0.007414336 -0.112260557
+## mo-costa  -0.011980373  0.008219528 -0.3941736843  0.019629193  0.154714748
+## mo-lepid   0.157109073 -0.405481519  0.0006837207 -0.030349893  0.001077896
+## or-nilot   0.140713855  0.058993003 -0.1019822450 -0.258499279 -0.153312047
+## pa-manag  -0.086352106  0.007358406  0.0449945641 -0.200703433 -0.117458940
+## pimel-sp   0.143832533 -0.410781488 -0.0005612607 -0.036387406  0.021642519
+## po-retic   0.002024157  0.047986763  0.0927351724 -0.280446697  0.133152109
+## po-vivip   0.251539653  0.103798909  0.0913328943 -0.058427637  0.046091782
+## pr-brevi   0.278334782  0.189021785 -0.0731776225 -0.039119120 -0.029408558
+## ps-rhomb   0.241161665  0.214008484  0.0099854935 -0.091478365  0.190925505
+## ps-genise  0.241161665  0.214008484  0.0099854935 -0.091478365  0.190925505
+## se-heter   0.203307860 -0.051101779 -0.3011067344  0.012039189 -0.010578855
+## se-piaba   0.143832533 -0.410781488 -0.0005612607 -0.036387406  0.021642519
+## se-spilo   0.241161665  0.214008484  0.0099854935 -0.091478365  0.190925505
+## st-noton   0.279427497  0.201351983  0.0089077683 -0.085001135 -0.124141460
+## sy-marmo   0.001111992  0.020862303  0.0445566240  0.391896305  0.007811830
+## te-chalc  -0.040903442  0.014358554 -0.4418626861  0.007132930  0.014095673
+## tr-signa   0.154898517  0.001117533 -0.0755832209 -0.056153166 -0.411277309
+##                    PC6          PC7          PC8          PC9         PC10
+## ap-davis  -0.087340966  0.022789392  0.052608968 -0.007059014  0.053258116
+## as-bimac   0.123166832  0.142676376  0.301691682 -0.113133543  0.102230284
+## as-fasci   0.004882505 -0.152653307 -0.052590968  0.208473428  0.081030224
+## ch-bimac   0.143126088 -0.268340921  0.381027636 -0.119341924  0.053259265
+## ci-ocela  -0.045963186  0.236305384 -0.240763021  0.021401034  0.219250830
+## ci-orien  -0.083634172  0.191096926  0.041620156 -0.264440305 -0.182250706
+## co-macro   0.116602919 -0.246049324  0.333141919 -0.108839869  0.436067494
+## co-heter   0.032864543 -0.016821248 -0.050983942  0.019779845  0.065180248
+## cr-menez   0.038281785 -0.023510829  0.017128490 -0.074357925 -0.023722494
+## cu-lepid  -0.297411128 -0.009148553  0.085246509  0.041993704  0.053798819
+## cy-gilbe  -0.047265413 -0.127300650  0.122159541  0.579185854  0.120782500
+## ge-brasi  -0.042105974  0.373657306  0.004502258  0.123390085  0.246322229
+## he-margi  -0.102909301  0.091989740  0.323895419 -0.136208501  0.062100108
+## ho-malab   0.011048110 -0.087662008  0.205753701 -0.096280545  0.093262075
+## hy-pusar  -0.110148623  0.140051465  0.150079701 -0.294104047 -0.123164780
+## le-melan   0.518778148  0.084202498 -0.074830640 -0.125195160  0.006502085
+## le-piau   -0.004733128  0.093265505 -0.135899528  0.067589687 -0.065627367
+## le-taeni   0.518778148  0.084202498 -0.074830640 -0.125195160  0.006502085
+## mo-costa  -0.297411128 -0.009148553  0.085246509  0.041993704  0.053798819
+## mo-lepid   0.019460030  0.004740075 -0.021516048 -0.030872730  0.034206407
+## or-nilot  -0.206129373 -0.179082563 -0.174304500 -0.308503549  0.283452956
+## pa-manag  -0.169441824 -0.243085865 -0.315826392 -0.410212739  0.250571290
+## pimel-sp   0.032864543 -0.016821248 -0.050983942  0.019779845  0.065180248
+## po-retic  -0.022304373  0.478718534  0.132448970  0.038650006  0.175055057
+## po-vivip  -0.030174960  0.343002884  0.008106629 -0.057302192 -0.027372495
+## pr-brevi   0.100418344 -0.047920036 -0.031829864  0.083713722  0.132248374
+## ps-rhomb   0.085584577 -0.097656984 -0.196383086  0.079397315 -0.030162019
+## ps-genise  0.085584577 -0.097656984 -0.196383086  0.079397315 -0.030162019
+## se-heter  -0.131552786  0.013333052  0.099204022  0.043654863 -0.246762176
+## se-piaba   0.032864543 -0.016821248 -0.050983942  0.019779845  0.065180248
+## se-spilo   0.085584577 -0.097656984 -0.196383086  0.079397315 -0.030162019
+## st-noton   0.017710893 -0.051357879  0.032174476  0.060605226  0.090579097
+## sy-marmo  -0.049438917  0.198022443 -0.216483345  0.030733739  0.494821047
+## te-chalc   0.210037882  0.059874505 -0.002389475 -0.070313093  0.040543401
+## tr-signa   0.134224035 -0.018848696  0.167097019  0.171758609  0.260561019
+##                   PC11         PC12          PC13        PC14         PC15
+## ap-davis  -0.052391842  0.023492536  0.0698691582 -0.03652085 -0.020277984
+## as-bimac  -0.260821962 -0.319253832 -0.0489802231  0.65295145  0.227038392
+## as-fasci   0.262323834 -0.091587820 -0.1258449613 -0.03134603 -0.085634613
+## ch-bimac  -0.386500844 -0.186751513  0.0310594079 -0.51920688 -0.136792636
+## ci-ocela  -0.001666336  0.061942173  0.3255037537  0.06499016  0.081227258
+## ci-orien   0.154621098 -0.006773654  0.2824129078  0.13168024 -0.285671819
+## co-macro   0.580179830  0.167701252  0.1532761693  0.07927341 -0.037659750
+## co-heter  -0.018021389  0.100740023  0.0359268401 -0.02938755  0.037672927
+## cr-menez  -0.142282592 -0.017627339 -0.0071836059 -0.04902558 -0.151690308
+## cu-lepid  -0.085170716  0.069318761  0.0814894454 -0.02508927 -0.006863662
+## cy-gilbe   0.151719628 -0.479016127  0.0290987757  0.04062945  0.002284994
+## ge-brasi   0.018759828  0.002535690  0.0232970373 -0.01557995 -0.672304923
+## he-margi  -0.094653008  0.098521964 -0.0192926386  0.00964539 -0.077508944
+## ho-malab   0.085863087 -0.043610475  0.0020790384 -0.04756982 -0.012083117
+## hy-pusar   0.122813230 -0.037876910 -0.4045968056 -0.04611556 -0.125750895
+## le-melan   0.075220439 -0.112513964 -0.0190854228 -0.03433036 -0.036948248
+## le-piau   -0.118748861 -0.448733217  0.3320590664 -0.06271555 -0.171512220
+## le-taeni   0.075220439 -0.112513964 -0.0190854228 -0.03433036 -0.036948248
+## mo-costa  -0.085170716  0.069318761  0.0814894454 -0.02508927 -0.006863662
+## mo-lepid   0.006732798  0.072873403 -0.0005639698 -0.03276838 -0.007147368
+## or-nilot  -0.041209657 -0.266448972  0.0756472140  0.11857100 -0.069302504
+## pa-manag   0.043094916 -0.257617097  0.0883629668 -0.16198025  0.170017255
+## pimel-sp  -0.018021389  0.100740023  0.0359268401 -0.02938755  0.037672927
+## po-retic   0.101307708 -0.130585749  0.0680831001 -0.41816045  0.285468062
+## po-vivip   0.137394927  0.020169788  0.1504346005 -0.15117792  0.377921388
+## pr-brevi  -0.265612454  0.143817661 -0.0325695699 -0.01500143  0.067416898
+## ps-rhomb   0.009185436  0.061195583 -0.0058677853 -0.01708984 -0.036117613
+## ps-genise  0.009185436  0.061195583 -0.0058677853 -0.01708984 -0.036117613
+## se-heter   0.261228907 -0.225487433 -0.2451655237 -0.11124458  0.119852098
+## se-piaba  -0.018021389  0.100740023  0.0359268401 -0.02938755  0.037672927
+## se-spilo   0.009185436  0.061195583 -0.0058677853 -0.01708984 -0.036117613
+## st-noton  -0.117480878  0.188974140  0.0557419439 -0.00137243  0.002582531
+## sy-marmo  -0.118819425 -0.028306304 -0.5812571116 -0.01998176 -0.008449701
+## te-chalc   0.002744511 -0.042380097  0.0387651882 -0.04340393 -0.033441904
+## tr-signa  -0.186732628  0.177477927  0.1688680540  0.01223931  0.129621641
+##                   PC16         PC17         PC18         PC19         PC20
+## ap-davis  -0.013988807 -0.010494110  0.076000968 -0.125874642  0.011120744
+## as-bimac  -0.091467837 -0.003014948  0.021975319 -0.014406194  0.124368819
+## as-fasci  -0.354031621  0.230162969  0.208873931 -0.136744115 -0.403177150
+## ch-bimac  -0.188734228  0.087894819 -0.329496126 -0.058895336  0.061963245
+## ci-ocela  -0.102753023 -0.040726254 -0.260436140  0.112786644  0.046694798
+## ci-orien  -0.535059793 -0.192669759 -0.068231662  0.029270215  0.150380014
+## co-macro   0.062555500  0.252277293  0.029636353  0.113233920  0.159290561
+## co-heter  -0.002178025 -0.106421565 -0.088379920 -0.030411965  0.047305260
+## cr-menez   0.068648786  0.033679104  0.308195454  0.111217676  0.019486783
+## cu-lepid  -0.015827650 -0.005733052  0.081141316 -0.113520819  0.023581781
+## cy-gilbe  -0.116204238 -0.192687991 -0.137838601 -0.280179618  0.191786851
+## ge-brasi   0.231880996 -0.025732578 -0.131672550 -0.005316511  0.171543902
+## he-margi  -0.032802927  0.229261301  0.146580298 -0.106277880 -0.036240102
+## ho-malab   0.392217016 -0.669804927  0.094968035 -0.059206050 -0.226277541
+## hy-pusar   0.042069034 -0.021245611 -0.007666585 -0.226899662  0.091128305
+## le-melan   0.002586800 -0.013601034 -0.001778585 -0.049869433 -0.029895319
+## le-piau    0.304378737  0.319634915  0.314362123  0.095368275 -0.024950394
+## le-taeni   0.002586800 -0.013601034 -0.001778585 -0.049869433 -0.029895319
+## mo-costa  -0.015827650 -0.005733052  0.081141316 -0.113520819  0.023581781
+## mo-lepid  -0.037345193 -0.056549443 -0.081730042 -0.104337971  0.048329363
+## or-nilot   0.041539802  0.038270328 -0.406050425  0.165257373 -0.506578225
+## pa-manag  -0.015770557 -0.090866647  0.277055089 -0.130426088  0.448315276
+## pimel-sp  -0.002178025 -0.106421565 -0.088379920 -0.030411965  0.047305260
+## po-retic  -0.278306844 -0.183368800  0.232081886  0.263103425 -0.161551042
+## po-vivip   0.266396563  0.287621536 -0.298931710 -0.466295217  0.003812905
+## pr-brevi  -0.089685577  0.105158973 -0.074767102  0.174350796  0.209992267
+## ps-rhomb  -0.034106148 -0.044541787 -0.024332481 -0.035597515  0.090158191
+## ps-genise -0.034106148 -0.044541787 -0.024332481 -0.035597515  0.090158191
+## se-heter   0.160782388  0.070267059 -0.237250617  0.561103709  0.268086256
+## se-piaba  -0.002178025 -0.106421565 -0.088379920 -0.030411965  0.047305260
+## se-spilo  -0.034106148 -0.044541787 -0.024332481 -0.035597515  0.090158191
+## st-noton   0.017236237  0.036359594  0.075959858  0.034556862  0.045521296
+## sy-marmo  -0.071593814  0.054135346  0.022820956 -0.001247621  0.040587276
+## te-chalc  -0.008406060 -0.014423429  0.052081470 -0.113843962 -0.007857648
+## tr-signa   0.114936013 -0.062638204  0.081685210  0.174716655  0.003816642
+##                   PC21          PC22         PC23
+## ap-davis  -0.042025345 -0.0055123298 -0.555097549
+## as-bimac   0.060578276 -0.0856841649 -0.076488618
+## as-fasci   0.367682175  0.1300082838 -0.257429566
+## ch-bimac   0.076776250 -0.0994002342 -0.050129359
+## ci-ocela   0.266895114 -0.2299020966 -0.180930065
+## ci-orien  -0.087266808  0.1735266637  0.074372061
+## co-macro  -0.088984032 -0.0205905010  0.145446643
+## co-heter  -0.049029405 -0.0254227140  0.010344983
+## cr-menez  -0.037782094  0.0971509755  0.099377701
+## cu-lepid  -0.028205940 -0.0091995235  0.290382862
+## cy-gilbe  -0.113076580  0.0029789613  0.082677728
+## ge-brasi   0.139409903  0.0686675554 -0.129926218
+## he-margi  -0.416057330 -0.0964808077 -0.219706485
+## ho-malab  -0.018321037  0.2069341607 -0.139334575
+## hy-pusar   0.434225870 -0.2842541470  0.219652736
+## le-melan  -0.041187376  0.0085176283  0.017797083
+## le-piau   -0.058004252 -0.0536530959  0.104961491
+## le-taeni  -0.041187376  0.0085176283  0.023806349
+## mo-costa  -0.028205940 -0.0091995235  0.272761537
+## mo-lepid  -0.232344432 -0.0182694555 -0.061989901
+## or-nilot  -0.105946300 -0.0237608135  0.120676958
+## pa-manag   0.145734983  0.0507261741 -0.158597808
+## pimel-sp  -0.049029405 -0.0254227140  0.005500468
+## po-retic  -0.089106741 -0.0960243465  0.093871813
+## po-vivip   0.003587281  0.1977776654 -0.009371896
+## pr-brevi   0.113033315  0.6587666543  0.084000011
+## ps-rhomb  -0.121519638 -0.2146663113  0.062039862
+## ps-genise -0.121519638 -0.2146663113  0.062039862
+## se-heter  -0.028573318 -0.0125880835 -0.181441492
+## se-piaba  -0.049029405 -0.0254227140  0.005500468
+## se-spilo  -0.121519638 -0.2146663113  0.062039862
+## st-noton  -0.058802940 -0.2650109116 -0.286978308
+## sy-marmo  -0.227340620  0.0279591652  0.052270568
+## te-chalc  -0.050824713  0.0006039269  0.165369626
+## tr-signa   0.381435954 -0.1871680041  0.145187830
+## List of 5
+##  $ sdev    : num [1:23] 2.98 2.16 2.1 1.72 1.71 ...
+##  $ rotation: num [1:35, 1:23] -0.0271 0.0964 0.2776 -0.0421 -0.0221 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##   .. ..$ : chr [1:23] "PC1" "PC2" "PC3" "PC4" ...
+##  $ center  : Named num [1:35] 0.0683 0.1612 0.1117 0.0878 0.0922 ...
+##   ..- attr(*, "names")= chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##  $ scale   : Named num [1:35] 0.248 0.143 0.195 0.209 0.212 ...
+##   ..- attr(*, "names")= chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##  $ x       : num [1:23, 1:23] 5.8511 -0.9176 -1.5375 4.8717 0.0452 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:23] "S-R-CT1" "S-R-CP1" "S-A-TA1" "S-R-CT2" ...
+##   .. ..$ : chr [1:23] "PC1" "PC2" "PC3" "PC4" ...
+##  - attr(*, "class")= chr "prcomp"
+## Importance of components:
+##                           PC1    PC2    PC3     PC4     PC5     PC6     PC7
+## Standard deviation     2.9779 2.1644 2.0972 1.71683 1.70905 1.55083 1.51776
+## Proportion of Variance 0.2534 0.1338 0.1257 0.08421 0.08345 0.06872 0.06582
+## Cumulative Proportion  0.2534 0.3872 0.5129 0.59710 0.68056 0.74927 0.81509
+##                           PC8     PC9    PC10   PC11    PC12    PC13    PC14
+## Standard deviation     1.4978 1.16491 0.93497 0.7894 0.74412 0.56984 0.42542
+## Proportion of Variance 0.0641 0.03877 0.02498 0.0178 0.01582 0.00928 0.00517
+## Cumulative Proportion  0.8792 0.91796 0.94293 0.9607 0.97656 0.98583 0.99100
+##                           PC15    PC16    PC17    PC18    PC19    PC20    PC21
+## Standard deviation     0.36075 0.29294 0.22227 0.18199 0.09125 0.08427 0.02926
+## Proportion of Variance 0.00372 0.00245 0.00141 0.00095 0.00024 0.00020 0.00002
+## Cumulative Proportion  0.99472 0.99717 0.99859 0.99953 0.99977 0.99997 1.00000
+##                            PC22                  PC23
+## Standard deviation     0.008369 0.0000000000000003174
+## Proportion of Variance 0.000000 0.0000000000000000000
+## Cumulative Proportion  1.000000 1.0000000000000000000
+##  [1] 25.34 13.39 12.57  8.42  8.35  6.87  6.58  6.41  3.88  2.50  1.78  1.58
+## [13]  0.93  0.52  0.37  0.25  0.14  0.09  0.02  0.02  0.00  0.00  0.00</code></pre>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-382-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-382-2.png" alt="" width="768"></p>
+</div>
+<div id="interpretando-o-biplot-gerado-no-código-anterior" class="section level2" number="23.9">
+<h2>
+<span class="header-section-number">23.9</span> Interpretando o <code>biplot</code> gerado no código anterior<a class="anchor" aria-label="anchor" href="#interpretando-o-biplot-gerado-no-c%C3%B3digo-anterior"><i class="fas fa-link"></i></a>
+</h2>
+<p>O biplot é uma forma gráfica de representar os resultados de uma Análise de Componentes Principais. Ele exibe tanto os dados originais (eixos z e w) quanto as projeções dos dados no espaço de componentes principais (eixos y e z).</p>
+<p>O biplot consiste em dois tipos principais de informações:</p>
+<dl>
+<dt>Vetores de variáveis (eixos z e w):</dt>
+<dd>
+<p>Esses vetores representam as direções das variáveis originais no espaço dos componentes principais. Eles mostram como as variáveis originais contribuem para a formação dos componentes principais (PC1 = x e PC2 = y). O comprimento do vetor indica a magnitude da contribuição, enquanto a direção indica a relação entre as variáveis. Se os vetores estiverem próximos ou apontarem na mesma direção, as variáveis estão correlacionadas positivamente. Se estiverem em direções opostas, as variáveis estão correlacionadas negativamente.</p>
+</dd>
+<dt>Pontos de dados (eixos x e y):</dt>
+<dd>
+<p>Esses pontos representam as observações ou amostras no espaço dos componentes principais (PC1 = x e PC2 = y). Eles mostram como as amostras são posicionadas em relação aos componentes principais. A distância entre os pontos de dados indica a dissimilaridade entre as amostras. Além disso, a orientação das amostras em relação aos vetores de variáveis pode revelar padrões ou grupos nos dados.</p>
+</dd>
+</dl>
+<p>Com base nesses elementos, a interpretação do biplot envolve:</p>
+<ol style="list-style-type: decimal">
+<li><p>Identificar quais variáveis têm uma contribuição significativa para cada componente principal com base nos comprimentos e direções dos vetores de variáveis.
+Observar a posição das amostras em relação aos vetores de variáveis para entender a relação entre as variáveis e as amostras.</p></li>
+<li><p>Identificar padrões, grupos ou similaridades entre as amostras com base na proximidade ou orientação relativa entre os pontos de dados e os vetores de variáveis.</p></li>
+</ol>
+<p>Lembre-se de que a interpretação do biplot deve ser feita considerando o contexto específico dos dados e os objetivos da análise. É uma ferramenta <strong>visual</strong> poderosa para explorar e entender a estrutura dos dados em um espaço de dimensões reduzidas fornecido pela PCA.</p>
+</div>
+<div id="extraindo-pc-escores" class="section level2" number="23.10">
+<h2>
+<span class="header-section-number">23.10</span> Extraindo PC escores<a class="anchor" aria-label="anchor" href="#extraindo-pc-escores"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
+<span><span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span></span>
+<span><span class="va">pca_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Agrupamento <span class="op">=</span> <span class="va">m_pca_agrup</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">m_trns</span>, <span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pca_scores</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pc1_uas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#pc1_uas</span></span>
+<span><span class="va">pc2_uas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#pc2_uas</span></span>
+<span><span class="va">pc_uas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>PC1 <span class="op">=</span> <span class="va">pc1_uas</span>, PC2 <span class="op">=</span> <span class="va">pc2_uas</span><span class="op">)</span></span>
+<span><span class="va">sorted_pc_uas</span> <span class="op">&lt;-</span> <span class="va">pc_uas</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">pc_uas</span><span class="op">$</span><span class="va">PC1</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">sorted_pc_uas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">sorted_pc_uas</span>, var <span class="op">=</span> <span class="st">"UAs"</span><span class="op">)</span></span>
+<span><span class="va">sorted_pc_uas</span></span>
+<span></span>
+<span><span class="va">pc1_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#pc1_spp</span></span>
+<span><span class="va">pc2_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#pc2_spp</span></span>
+<span><span class="va">pc_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>PC1 <span class="op">=</span> <span class="va">pc1_spp</span>, PC2 <span class="op">=</span> <span class="va">pc2_spp</span><span class="op">)</span></span>
+<span><span class="va">sorted_pc_spp</span> <span class="op">&lt;-</span> <span class="va">pc_spp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">pc_spp</span><span class="op">$</span><span class="va">PC1</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">sorted_pc_spp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">sorted_pc_spp</span>, var <span class="op">=</span> <span class="st">"Spp"</span><span class="op">)</span></span>
+<span><span class="va">sorted_pc_spp</span></span>
+<span></span>
+<span><span class="co">#nrow(sorted_pc_uas)-nrow(sorted_pc_spp)</span></span>
+<span><span class="co">#sorted_pc_uas[nrow(sorted_pc_uas) + 12,] &lt;- c("&lt;NA&gt;", "&lt;NA&gt;", "&lt;NA&gt;")</span></span>
+<span><span class="co">#cbind(sorted_pc_uas, sorted_pc_spp)</span></span></code></pre></div>
+<pre><code>## List of 5
+##  $ sdev    : num [1:23] 2.98 2.16 2.1 1.72 1.71 ...
+##  $ rotation: num [1:35, 1:23] -0.0271 0.0964 0.2776 -0.0421 -0.0221 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##   .. ..$ : chr [1:23] "PC1" "PC2" "PC3" "PC4" ...
+##  $ center  : Named num [1:35] 0.0683 0.1612 0.1117 0.0878 0.0922 ...
+##   ..- attr(*, "names")= chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##  $ scale   : Named num [1:35] 0.248 0.143 0.195 0.209 0.212 ...
+##   ..- attr(*, "names")= chr [1:35] "ap-davis" "as-bimac" "as-fasci" "ch-bimac" ...
+##  $ x       : num [1:23, 1:23] 5.8511 -0.9176 -1.5375 4.8717 0.0452 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:23] "S-R-CT1" "S-R-CP1" "S-A-TA1" "S-R-CT2" ...
+##   .. ..$ : chr [1:23] "PC1" "PC2" "PC3" "PC4" ...
+##  - attr(*, "class")= chr "prcomp"
+##                 PC1         PC2         PC3         PC4         PC5         PC6
+## S-R-CT1  5.85105744 -8.82796488 -0.01132451 -0.49199918  0.28998703  0.36258851
+## S-R-CP1 -0.91757223  0.12627832  0.32391765  0.36858648 -0.02292561 -0.19004812
+## S-A-TA1 -1.53750944 -0.11298841  0.40837481  0.06690873  0.09830630  0.11254072
+## S-R-CT2  4.87171227  0.91910477  0.22353703  0.72154630 -2.45023210 -1.31285559
+## S-R-CP2  0.04523546  0.44834464  0.89901525  5.29888450  0.10467032 -0.54545055
+## S-A-TA2 -1.61319476  0.11816001  0.88001176  0.49870372  0.66801411  0.52072955
+## S-R-CT3  9.81037268  4.59918336  0.20147646 -1.23689171  2.55820125  0.94423903
+## S-R-CP3 -0.69723407  0.22531807  0.77770656  2.11984916 -0.10308086 -0.22723275
+## S-A-TA3 -1.02712477  0.21815663  1.37505303  1.33855832  2.51672233  1.28645874
+## S-R-CT4  2.44803106  1.56373630 -0.10339619 -0.64002593 -5.15048179 -0.25589670
+## S-R-CP4 -0.57823119  0.12388772  0.67673783  1.96759655 -0.12448356 -0.31261875
+## S-A-TA4 -0.50257898 -0.16488081  1.25820602  1.06300234  1.75655653  0.86214369
+## B-A-MU1 -1.99779984 -0.04748766  0.62573538 -0.99661390  0.04734736 -0.15662577
+## B-A-GU1 -1.77100314 -0.10616896  0.53719025 -0.34524072 -0.25967854 -0.19225605
+## B-R-PC2 -1.71559499  0.24552063 -4.69428952 -0.10025027 -1.50417357  5.72358471
+## B-A-MU2 -1.59876211  0.06710220  0.79247606 -0.76216747  0.50569114  0.04087203
+## B-A-GU2 -1.98048993  0.02969047  0.55187482 -0.95520472 -0.67223122 -0.66276637
+## B-R-PC3 -0.48735740  0.17664308 -7.95320925  0.26540905  2.07301513 -3.28128274
+## B-A-MU3 -1.26045668  0.08362190  0.94309134 -1.86682141  1.25501661  0.13858178
+## B-A-GU3 -1.76850031  0.15340197  0.40971585 -1.90700598 -1.03219526 -1.31347339
+## B-R-PC4 -0.32773736 -0.23716405 -0.04312575  0.24473765 -1.38073700 -0.44493703
+## B-A-MU4 -1.43128908  0.31957076  1.44301123 -3.24838971  1.63005571 -0.12251150
+## B-A-GU4 -1.81397262  0.07893394  0.47821388 -1.40317178 -0.80336431 -0.97378344
+##                PC7          PC8         PC9         PC10          PC11
+## S-R-CT1 -0.1777565 -0.524678697  0.12313116  0.261377838 -0.0515098222
+## S-R-CP1 -0.2033520  0.220274923  0.06966880 -1.303857315  0.5594701706
+## S-A-TA1 -0.6875339  0.002717604  0.47269734 -1.055605365 -0.1372960396
+## S-R-CT2  2.0267556  2.694439302 -2.80614524 -1.103088081  0.6294143994
+## S-R-CP2  2.0925777 -2.227842642  0.19132005  1.984270683 -0.3396168541
+## S-A-TA2 -1.1727314  0.928756702  0.03325672 -0.705949623 -1.1731128480
+## S-R-CT3 -1.0319781 -2.020989712  0.49425481 -0.120952032  0.0262543679
+## S-R-CP3  0.6671641 -0.682082666 -0.13834139 -0.943118153  0.2795978234
+## S-A-TA3 -2.6000958  3.428382791 -0.67753713  1.748664392  1.6583050151
+## S-R-CT4 -0.6836199  1.911074979  1.63459044  1.447167275 -1.0032231934
+## S-R-CP4  0.7918579 -0.954791270  0.25149321 -1.084883157  0.4511765740
+## S-A-TA4 -0.9637275  1.687967335 -0.33081243 -0.421261775 -2.2907175439
+## B-A-MU1  0.3173828 -0.416749638  0.56821197 -0.297427173 -0.0074839289
+## B-A-GU1 -0.6668111 -0.731342354  0.25793191 -0.629726588  0.2213618116
+## B-R-PC2  0.8897995 -0.770086456 -0.77935016  0.026073863  0.2149996005
+## B-A-MU2  0.6094416  0.143154653  0.37331004 -0.360175550 -0.0706771864
+## B-A-GU2 -0.9822287 -1.369309214 -0.65733113  0.002898752  0.1552650850
+## B-R-PC3 -0.0966762  0.877276764  0.26141426  0.215737425 -0.2434400808
+## B-A-MU3  1.7616914  0.649877185  0.15477231  0.260679358 -0.5352736803
+## B-A-GU3 -1.6082547 -2.081728584 -1.92811503  1.046874093  0.0331061926
+## B-R-PC4 -1.1305162  0.120178076  3.17545261 -0.476885659  1.2649687830
+## B-A-MU4  4.2764982  0.802688120  0.72201392  0.971065669  0.3575991871
+## B-A-GU4 -1.4278867 -1.687187203 -1.46588705  0.538121123  0.0008321673
+##                PC12         PC13        PC14         PC15          PC16
+## S-R-CT1  0.25588681  0.053516126 -0.02439833  0.022490002 -0.0008574168
+## S-R-CP1  0.57127628 -0.902845370 -0.02175385  0.607605805  0.6880719705
+## S-A-TA1  0.63640916 -0.589501644 -0.06778057  0.304770863 -0.4408416570
+## S-R-CT2 -0.62747527 -0.483393208 -0.02525386 -0.237991755 -0.1232728823
+## S-R-CP2 -0.07190002 -0.865832590 -0.01658939 -0.005044306 -0.0281841242
+## S-A-TA2  0.35756378 -0.338659504 -0.80396491  0.071450962 -0.4642495762
+## S-R-CT3  0.15544112 -0.008740572 -0.01418844 -0.021561510 -0.0134264659
+## S-R-CP3  0.35678430  1.470221607  0.46642005 -0.181814836 -0.5335699573
+## S-A-TA3  0.42597308  0.228318071  0.06581490 -0.022482135  0.0246260381
+## S-R-CT4  0.97324918  0.443685887  0.03631831  0.174058731  0.1054304135
+## S-R-CP4  0.16884364  1.364082037 -0.31601832  0.342030055  0.5447615459
+## S-A-TA4 -1.44841071  0.290172320 -0.05671285 -0.195617418  0.3318313764
+## B-A-MU1  0.83083252 -0.287483442  0.25591658 -1.334260666  0.3357252382
+## B-A-GU1  0.73715371 -0.342447266 -0.05478795 -0.036842653 -0.3031782881
+## B-R-PC2 -0.28579345 -0.028429383 -0.02850198 -0.022057382  0.0010183379
+## B-A-MU2  0.49155065 -0.253695289  0.45465436 -0.038395606  0.1688231274
+## B-A-GU2  0.25006141 -0.057227391 -0.30232926 -0.095138018  0.0180475514
+## B-R-PC3  0.17607457  0.121385556 -0.02082978 -0.004097472 -0.0062308242
+## B-A-MU3 -0.29843855 -0.139126181  1.34781114  0.478926449 -0.1358093880
+## B-A-GU3 -0.80825500  0.217608411 -0.03295249 -0.027902294  0.0883647466
+## B-R-PC4 -2.19387530 -0.273901847  0.01423421 -0.126445576 -0.1331469714
+## B-A-MU4 -0.19897330  0.306986188 -0.90235150  0.075016277 -0.0655285908
+## B-A-GU4 -0.45397862  0.075307483  0.04724393  0.273302485 -0.0584042040
+##                 PC17          PC18           PC19          PC20          PC21
+## S-R-CT1 -0.024118193 -0.0134273042 -0.00116171633  0.0015410453 -0.0001925085
+## S-R-CP1 -0.459574997 -0.0549858969  0.06614078766  0.0062261609  0.0415195411
+## S-A-TA1  0.386708237  0.0169955378  0.28741076279  0.0237185719 -0.0317262415
+## S-R-CT2  0.100373669  0.0088508126 -0.02515575706  0.0003136294 -0.0064106256
+## S-R-CP2  0.012268629  0.0034671215 -0.00004765826  0.0013221961 -0.0008926277
+## S-A-TA2 -0.134056095 -0.4549138585 -0.16097025419  0.0048481722 -0.0032076913
+## S-R-CT3 -0.010094452 -0.0036967630 -0.00135980082  0.0029370487 -0.0004771334
+## S-R-CP3 -0.497906383  0.0295410956  0.07421368994  0.0137456044  0.0169326112
+## S-A-TA3  0.057173304  0.0045025649  0.00432545860  0.0051891473 -0.0003493859
+## S-R-CT4 -0.028584458  0.0219189487  0.01954641654 -0.0019448349  0.0041534787
+## S-R-CP4  0.497457467 -0.1455579538 -0.06690163020 -0.0140562259 -0.0138821612
+## S-A-TA4 -0.006197207  0.2735160477  0.06298471647 -0.0104228993  0.0103432407
+## B-A-MU1  0.118523549 -0.2004980289  0.04290608360  0.0338770636  0.0160797670
+## B-A-GU1  0.235267281  0.4122349815 -0.13334194182 -0.1903778962  0.0554849606
+## B-R-PC2 -0.003082386 -0.0002702152 -0.00190497838 -0.0009738883 -0.0001617177
+## B-A-MU2 -0.252432655  0.1473141679 -0.09494944837 -0.1114981673 -0.1052479463
+## B-A-GU2 -0.001435726  0.2703824867 -0.09094402940  0.2624713851 -0.0065609148
+## B-R-PC3 -0.001299275  0.0123275642 -0.00433641793  0.0007682146 -0.0001107475
+## B-A-MU3  0.223189719 -0.1941917296 -0.07971528921  0.0641722957  0.0275850983
+## B-A-GU3 -0.047755308 -0.2517803640  0.08662587179 -0.1634079683  0.0037355850
+## B-R-PC4 -0.031993510 -0.0415627810 -0.02738282035  0.0090185752 -0.0035960073
+## B-A-MU4 -0.103102966  0.0798716419  0.05950786335 -0.0105405618  0.0083372902
+## B-A-GU4 -0.029328245  0.0799619242 -0.01548990843  0.0730733316 -0.0113558640
+##                    PC22                       PC23
+## S-R-CT1 -0.000008167395  0.00000000000000532907052
+## S-R-CP1 -0.000399496835  0.00000000000000030531133
+## S-A-TA1  0.001567727533 -0.00000000000000063837824
+## S-R-CT2  0.000020373434 -0.00000000000000036082248
+## S-R-CP2  0.000008982265 -0.00000000000000038857806
+## S-A-TA2 -0.001002821605 -0.00000000000000008326673
+## S-R-CT3 -0.000068964492 -0.00000000000000049960036
+## S-R-CP3  0.000611395153 -0.00000000000000052735594
+## S-A-TA3 -0.000006614980 -0.00000000000000041633363
+## S-R-CT4 -0.000063200260  0.00000000000000022204460
+## S-R-CP4 -0.000870980652  0.00000000000000002775558
+## S-A-TA4  0.000424638941 -0.00000000000000069388939
+## B-A-MU1 -0.006780379068 -0.00000000000000008326673
+## B-A-GU1 -0.000402595246 -0.00000000000000019428903
+## B-R-PC2  0.000002736405  0.00000000000000000000000
+## B-A-MU2  0.001987879557 -0.00000000000000008326673
+## B-A-GU2  0.017987071196 -0.00000000000000013877788
+## B-R-PC3 -0.000002955473 -0.00000000000000116573418
+## B-A-MU3  0.003978444443 -0.00000000000000038857806
+## B-A-GU3  0.015006892598 -0.00000000000000030531133
+## B-R-PC4  0.000047675750 -0.00000000000000057245875
+## B-A-MU4 -0.001737415605 -0.00000000000000038857806
+## B-A-GU4 -0.030300225664 -0.00000000000000013877788
+##         Agrupamento ap-davis   as-bimac   as-fasci   ch-bimac  ci-ocela
+## S-R-CT1          CT        0 0.29580113 0.63106017 0.00000000 0.0000000
+## S-R-CP1          CP        0 0.09135411 0.00000000 0.00000000 0.0000000
+## S-A-TA1          TA        0 0.10054093 0.07963989 0.13621375 0.0000000
+## S-R-CT2          CT        0 0.25205752 0.13823439 0.06527916 0.0000000
+## S-R-CP2          CP        0 0.04681561 0.07963989 0.00000000 0.8570719
+## S-A-TA2          TA        0 0.14242797 0.00000000 0.52646034 0.0000000
+##          ci-orien co-macro co-heter  cr-menez cu-lepid cy-gilbe   ge-brasi
+## S-R-CT1 0.1880966        0 1.570796 0.7853982        0        0 0.05425923
+## S-R-CP1 0.0000000        0 0.000000 0.0000000        0        0 0.00000000
+## S-A-TA1 0.0000000        0 0.000000 0.0000000        0        0 0.00000000
+## S-R-CT2 0.7679121        0 0.000000 0.3875967        0        0 0.00000000
+## S-R-CP2 0.2535816        0 0.000000 0.0000000        0        0 0.00000000
+## S-A-TA2 0.0000000        0 0.000000 0.0000000        0        0 0.00000000
+##          he-margi   ho-malab  hy-pusar le-melan   le-piau le-taeni mo-costa
+## S-R-CT1 0.0000000 0.09592969 0.3640209        0 0.4636476        0        0
+## S-R-CP1 0.0000000 0.21584866 0.1686344        0 0.0000000        0        0
+## S-A-TA1 0.0000000 0.00000000 0.0000000        0 0.0000000        0        0
+## S-R-CT2 0.7853982 0.40598283 0.8918340        0 0.2611574        0        0
+## S-R-CP2 0.0000000 0.30772498 0.1686344        0 0.4636476        0        0
+## S-A-TA2 0.0000000 0.13587479 0.0000000        0 0.0000000        0        0
+##          mo-lepid  or-nilot pa-manag pimel-sp po-retic  po-vivip   pr-brevi
+## S-R-CT1 1.4120161 0.2087800        0 1.570796 0.000000 0.2210146 0.13650631
+## S-R-CP1 0.0000000 0.0000000        0 0.000000 0.000000 0.1241631 0.00000000
+## S-A-TA1 0.0000000 0.0000000        0 0.000000 0.000000 0.0000000 0.06089569
+## S-R-CT2 0.1587802 0.3079714        0 0.000000 0.242445 0.4953782 0.23794112
+## S-R-CP2 0.0000000 0.0000000        0 0.000000 0.000000 0.1818875 0.13650631
+## S-A-TA2 0.0000000 0.0000000        0 0.000000 0.000000 0.0000000 0.08617291
+##         ps-rhomb ps-genise  se-heter se-piaba se-spilo   st-noton sy-marmo
+## S-R-CT1        0         0 0.3764349 1.570796        0 0.06989994 0.000000
+## S-R-CP1        0         0 0.2192313 0.000000        0 0.00000000 0.000000
+## S-A-TA1        0         0 0.1165111 0.000000        0 0.00000000 0.000000
+## S-R-CT2        0         0 0.4670175 0.000000        0 0.35673339 0.000000
+## S-R-CP2        0         0 0.0000000 0.000000        0 0.00000000 1.570796
+## S-A-TA2        0         0 0.0000000 0.000000        0 0.00000000 0.000000
+##         te-chalc  tr-signa         PC1        PC2
+## S-R-CT1        0 0.2985914  5.85105744 -8.8279649
+## S-R-CP1        0 0.0000000 -0.91757223  0.1262783
+## S-A-TA1        0 0.0000000 -1.53750944 -0.1129884
+## S-R-CT2        0 0.2718802  4.87171227  0.9191048
+## S-R-CP2        0 0.0000000  0.04523546  0.4483446
+## S-A-TA2        0 0.0000000 -1.61319476  0.1181600
+##        UAs   PC1   PC2
+## 1  S-R-CT3  9.81  4.60
+## 2  S-R-CT1  5.85 -8.83
+## 3  S-R-CT2  4.87  0.92
+## 4  S-R-CT4  2.45  1.56
+## 5  S-R-CP2  0.05  0.45
+## 6  B-R-PC4 -0.33 -0.24
+## 7  B-R-PC3 -0.49  0.18
+## 8  S-A-TA4 -0.50 -0.16
+## 9  S-R-CP4 -0.58  0.12
+## 10 S-R-CP3 -0.70  0.23
+## 11 S-R-CP1 -0.92  0.13
+## 12 S-A-TA3 -1.03  0.22
+## 13 B-A-MU3 -1.26  0.08
+## 14 B-A-MU4 -1.43  0.32
+## 15 S-A-TA1 -1.54 -0.11
+## 16 B-A-MU2 -1.60  0.07
+## 17 S-A-TA2 -1.61  0.12
+## 18 B-R-PC2 -1.72  0.25
+## 19 B-A-GU1 -1.77 -0.11
+## 20 B-A-GU3 -1.77  0.15
+## 21 B-A-GU4 -1.81  0.08
+## 22 B-A-GU2 -1.98  0.03
+## 23 B-A-MU1 -2.00 -0.05
+##          Spp   PC1   PC2
+## 1   cr-menez  0.30 -0.17
+## 2   as-fasci  0.28 -0.11
+## 3   pr-brevi  0.28  0.19
+## 4   st-noton  0.28  0.20
+## 5   hy-pusar  0.26  0.00
+## 6   po-vivip  0.25  0.10
+## 7   ci-orien  0.24  0.08
+## 8   ps-rhomb  0.24  0.21
+## 9  ps-genise  0.24  0.21
+## 10  se-spilo  0.24  0.21
+## 11  ho-malab  0.22  0.16
+## 12   le-piau  0.20 -0.11
+## 13  se-heter  0.20 -0.05
+## 14  mo-lepid  0.16 -0.41
+## 15  tr-signa  0.15  0.00
+## 16  co-heter  0.14 -0.41
+## 17  or-nilot  0.14  0.06
+## 18  pimel-sp  0.14 -0.41
+## 19  se-piaba  0.14 -0.41
+## 20  he-margi  0.13  0.08
+## 21  as-bimac  0.10 -0.05
+## 22  cy-gilbe  0.03  0.04
+## 23  po-retic  0.00  0.05
+## 24  sy-marmo  0.00  0.02
+## 25  cu-lepid -0.01  0.01
+## 26  mo-costa -0.01  0.01
+## 27  ci-ocela -0.02  0.03
+## 28  ap-davis -0.03  0.01
+## 29  co-macro -0.03  0.01
+## 30  ch-bimac -0.04  0.01
+## 31  le-melan -0.04  0.01
+## 32  le-taeni -0.04  0.01
+## 33  te-chalc -0.04  0.01
+## 34  ge-brasi -0.09  0.00
+## 35  pa-manag -0.09  0.01</code></pre>
+</div>
+<div id="gráfico-melhorado-com-ggplot" class="section level2" number="23.11">
+<h2>
+<span class="header-section-number">23.11</span> Gráfico melhorado com <code>ggplot</code><a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-melhorado-com-ggplot"><i class="fas fa-link"></i></a>
+</h2>
+<p>Ou talves seja melhor melhorar usando os pacotes <code>FactoMineR</code> e <code>factoextra</code> com o código disponível nos Apêndices (<a href="pca.html#pca-usando-o-pacote-factominer">PCA usando o pacote FactoMineR</a>).</p>
+<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pca_scores</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">PC1</span>, <span class="va">PC2</span>, col <span class="op">=</span> <span class="va">Agrupamento</span>, fill <span class="op">=</span> <span class="va">Agrupamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"polygon"</span>, col <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Too few points to calculate an ellipse</code></pre>
+<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">m_trns</span>, <span class="va">pca_scores</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="st">"PC2"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                    PC1          PC2
+## ap-davis  -0.080590613  0.026040181
+## as-bimac   0.286923782 -0.102869461
+## as-fasci   0.826591188 -0.228673488
+## ch-bimac  -0.125441902  0.013215335
+## ci-ocela  -0.065931684  0.061307620
+## ci-orien   0.701347767  0.164600846
+## co-macro  -0.075189155  0.021971726
+## co-heter   0.428318038 -0.889111748
+## cr-menez   0.903873153 -0.373250621
+## cu-lepid  -0.035676280  0.017790673
+## cy-gilbe   0.088849225  0.075777577
+## ge-brasi  -0.270367417  0.009110999
+## he-margi   0.387806023  0.180980327
+## ho-malab   0.660818025  0.349264575
+## hy-pusar   0.780834884 -0.009156755
+## le-melan  -0.125587603  0.024727701
+## le-piau    0.597011150 -0.228114179
+## le-taeni  -0.125587603  0.024727701
+## mo-costa  -0.035676280  0.017790673
+## mo-lepid   0.467854167 -0.877640286
+## or-nilot   0.419030943  0.127686796
+## pa-manag  -0.257147417  0.015926826
+## pimel-sp   0.428318038 -0.889111748
+## po-retic   0.006027726  0.103864453
+## po-vivip   0.749058423  0.224666477
+## pr-brevi   0.828851478  0.409126251
+## ps-rhomb   0.718153876  0.463208453
+## ps-genise  0.718153876  0.463208453
+## se-heter   0.605429256 -0.110606717
+## se-piaba   0.428318038 -0.889111748
+## se-spilo   0.718153876  0.463208453
+## st-noton   0.832105466  0.435814221
+## sy-marmo   0.003311395  0.045155197
+## te-chalc  -0.121806115  0.031078223
+## tr-signa   0.461271364  0.002418833</code></pre>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-384-1.png" alt="" width="672"></div>
+<p>Fizemos uma PCA. Pergunta… É recomendavel uma análise métrica para dados de comunidade?</p>
+</div>
+<div id="apêndices-17" class="section level2 unnumbered">
+<h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-17"><i class="fas fa-link"></i></a>
+</h2>
+<div id="pca-usando-o-pacote-factominer" class="section level3 unnumbered">
+<h3>PCA usando o pacote FactoMineR<a class="anchor" aria-label="anchor" href="#pca-usando-o-pacote-factominer"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/" class="uri">http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/</a></p>
+<div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://factominer.free.fr">FactoMineR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kassambara/factoextra">factoextra</a></span><span class="op">)</span></span>
+<span><span class="va">pca_fm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FactoMineR/man/PCA.html">PCA</a></span><span class="op">(</span><span class="va">m_trns</span>, graph <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">eigenval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/eigenvalue.html">get_eigenvalue</a></span><span class="op">(</span><span class="va">pca_fm</span><span class="op">)</span></span>
+<span><span class="va">eigenval</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/eigenvalue.html">fviz_eig</a></span><span class="op">(</span><span class="va">pca_fm</span>, addlabels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/get_pca.html">get_pca_var</a></span><span class="op">(</span><span class="va">pca_fm</span><span class="op">)</span></span>
+<span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/get_pca.html">get_pca_ind</a></span><span class="op">(</span><span class="va">pca_fm</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_var</a></span><span class="op">(</span><span class="va">pca_fm</span>, col.var <span class="op">=</span> <span class="st">"red"</span>, repel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_ind</a></span><span class="op">(</span><span class="va">pca_fm</span>, col.ind <span class="op">=</span> <span class="st">"blue"</span>, repel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">grupo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">m_pca_agrup</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_biplot</a></span><span class="op">(</span><span class="va">pca_fm</span>, habillage <span class="op">=</span> <span class="va">grupo</span>, title<span class="op">=</span><span class="st">"PCA no FactoMineR"</span>, repel <span class="op">=</span> <span class="cn">TRUE</span>, addEllipses <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                geom.ind <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"point"</span>,<span class="st">"text"</span><span class="op">)</span>,</span>
+<span>                pointshape <span class="op">=</span> <span class="fl">21</span>,</span>
+<span>                pointsize <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                fill.ind <span class="op">=</span> <span class="va">m_pca_agrup</span><span class="op">$</span><span class="va">Agrupamentos</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Biplot PCA no FactoMineR"</span>, <span class="co">#substitui o title</span></span>
+<span>       fill <span class="op">=</span> <span class="st">"Grupos"</span><span class="op">)</span> <span class="co">#substitui o habillage</span></span>
+<span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">pca_fm</span><span class="op">$</span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span>, is.corr <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">pca_fm</span><span class="op">$</span><span class="va">var</span><span class="op">$</span><span class="va">contrib</span>, is.corr <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_contrib.html">fviz_contrib</a></span><span class="op">(</span><span class="va">pca_fm</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span>, top <span class="op">=</span> <span class="fl">10</span>, title <span class="op">=</span> <span class="st">"10 mais para a PC1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_contrib.html">fviz_contrib</a></span><span class="op">(</span><span class="va">pca_fm</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">2</span>, top <span class="op">=</span> <span class="fl">10</span>, title <span class="op">=</span> <span class="st">"10 mais para a PC2"</span><span class="op">)</span></span>
+<span><span class="va">pca_sign</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FactoMineR/man/dimdesc.html">dimdesc</a></span><span class="op">(</span><span class="va">pca_fm</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, proba <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">pca_sign</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="kmeans.html"><span class="header-section-number">22</span> R Módulo 11.2 - Análise de Classificação Não-hierárquica - K-Means</a></div>
+<div class="next"><a href="nmds.html"><span class="header-section-number">24</span> R Módulo 13.1 - Análise de Ordenação - NMDS</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#pca"><span class="header-section-number">23</span> R Módulo 12 - Análise de Componentes Principais - PCA</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resumo-17">RESUMO</a></li>
+<li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-18">Apresentação</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-15"><span class="header-section-number">23.1</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#pacotes-do-m%C3%B3dulo-6"><span class="header-section-number">23.1.1</span> Pacotes do módulo</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#sobre-os-dados-do-ppbio-6"><span class="header-section-number">23.2</span> Sobre os dados do PPBio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#a-planilha-ppbio-habitat"><span class="header-section-number">23.2.1</span> A planilha PPBio Habitat</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#importando-a-planilha-de-trabalho-3"><span class="header-section-number">23.3</span> Importando a planilha de trabalho</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#outra-forma-de-achar-e-importar-uma-planilha-1"><span class="header-section-number">23.3.1</span> Outra forma de achar e importar uma planilha</a></li></ul>
+</li>
+<li><a class="nav-link" href="#particionando-as-vari%C3%A1veis-de-interesse"><span class="header-section-number">23.4</span> Particionando as variáveis de interesse</a></li>
+<li><a class="nav-link" href="#rein%C3%ADcio-1-1"><span class="header-section-number">23.5</span> REINÍCIO 1</a></li>
+<li>
+<a class="nav-link" href="#classifica%C3%A7%C3%A3o-1"><span class="header-section-number">23.6</span> Classificação</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dendrograma-e-heatmap"><span class="header-section-number">23.6.1</span> Dendrograma e Heatmap</a></li>
+<li><a class="nav-link" href="#hist%C3%B3rico-das-fus%C3%B5es-2"><span class="header-section-number">23.6.2</span> Histórico das fusões</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#an%C3%A1lise-de-componentes-principais"><span class="header-section-number">23.7</span> Análise de Componentes Principais</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#subsetting-as-vari%C3%A1veis-para-a-pca"><span class="header-section-number">23.7.1</span> Subsetting as variáveis para a PCA</a></li>
+<li><a class="nav-link" href="#explorando-correla%C3%A7%C3%B5es-multivariadas"><span class="header-section-number">23.7.2</span> Explorando correlações multivariadas</a></li>
+<li><a class="nav-link" href="#centrando-e-re-escalando-a-matriz-de-dados"><span class="header-section-number">23.7.3</span> Centrando e re-escalando a matriz de dados</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#fazendo-a-pca"><span class="header-section-number">23.8</span> Fazendo a PCA</a></li>
+<li><a class="nav-link" href="#interpretando-o-biplot-gerado-no-c%C3%B3digo-anterior"><span class="header-section-number">23.9</span> Interpretando o biplot gerado no código anterior</a></li>
+<li><a class="nav-link" href="#extraindo-pc-escores"><span class="header-section-number">23.10</span> Extraindo PC escores</a></li>
+<li><a class="nav-link" href="#gr%C3%A1fico-melhorado-com-ggplot"><span class="header-section-number">23.11</span> Gráfico melhorado com ggplot</a></li>
+<li>
+<a class="nav-link" href="#ap%C3%AAndices-17">Apêndices</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#pca-usando-o-pacote-factominer">PCA usando o pacote FactoMineR</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 19:09:58.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

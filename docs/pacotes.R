@@ -5,7 +5,7 @@
 
 ###CAPÍTULO 1.1 ----
 
-install.packages("knitr")
+#install.packages("knitr")
 
 ###CAPÍTULO 3 ----
 
@@ -14,29 +14,31 @@ install.packages("gt")
 install.packages("knitr")
 install.packages("kableExtra")
 
-###CAPÍTULO 4.2 ----
-
+# R MÓDULO 2 ----
+install.packages("tidyverse")
 install.packages("readxl")
 install.packages("openxlsx")
 install.packages("readODS")
-install.packages("tidyverse")
-install.packages("dplyr")
 
-###CAPÍTULO 4.3.1 ----
-
-install.packages("fdth")
+# R MÓDULO 3 ----
+install.packages("openxlsx")
 install.packages("moments")
 install.packages("nortest")
+install.packages("fdth")
 
-###CAPÍTULO 4.3.2 ----
-
+# R MÓDULO 4 ----
+install.packages("openxlsx")
+install.packages("moments")
+install.packages("nortest")
+install.packages("fdth")
+install.packages("dplyr")
+install.packages("car")
 install.packages("ggpubr")
 install.packages("MASS")
-install.packages("car")
-install.packages("gplots")
 install.packages("multcomp")
 install.packages("FSA")
 install.packages("rcompanion")
+install.packages("gplots")
 
 ###CAPÍTULO 4.4.1 ----
 
@@ -81,3 +83,15 @@ install.packages("VennDiagram")
 install.packages("ggvenn")
 install.packages("ggVennDiagram")
 install.packages("gplots")
+
+###MÓDULO 9 - PCA ----
+install.packages("tidyverse")
+install.packages("openxlsx")
+install.packages("vegan")
+install.packages("gplots")
+install.packages("psych")
+install.packages("ggplot2")
+
+### MÓDULO 10 -NMDS1 ----
+install.packages("openxlsx")
+install.packages("rgl")

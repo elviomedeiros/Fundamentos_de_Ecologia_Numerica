@@ -4,25 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> 14 Regressão múltipla | Fundamentos de Ecologia Numérica</title>
+<title> 14 R Módulo 6 - Regressão múltipla | Fundamentos de Ecologia Numérica</title>
 <meta name="author" content="Prof. Elvio S. F. Medeiros">
 <meta name="author" content="Laboratório de Ecologia">
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content=" 14 Regressão múltipla | Fundamentos de Ecologia Numérica">
+<meta property="og:title" content=" 14 R Módulo 6 - Regressão múltipla | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 14 Regressão múltipla | Fundamentos de Ecologia Numérica">
+<meta name="twitter:title" content=" 14 R Módulo 6 - Regressão múltipla | Fundamentos de Ecologia Numérica">
 <meta name="twitter:description" content="RESUMO A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.3.36/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.3.36/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-1.3.36/rglClass.src.js"></script><script src="libs/rglwidgetClass-1.3.36/utils.src.js"></script><script src="libs/rglwidgetClass-1.3.36/buffer.src.js"></script><script src="libs/rglwidgetClass-1.3.36/subscenes.src.js"></script><script src="libs/rglwidgetClass-1.3.36/shaders.src.js"></script><script src="libs/rglwidgetClass-1.3.36/shadersrc.src.js"></script><script src="libs/rglwidgetClass-1.3.36/textures.src.js"></script><script src="libs/rglwidgetClass-1.3.36/projection.src.js"></script><script src="libs/rglwidgetClass-1.3.36/mouse.src.js"></script><script src="libs/rglwidgetClass-1.3.36/init.src.js"></script><script src="libs/rglwidgetClass-1.3.36/pieces.src.js"></script><script src="libs/rglwidgetClass-1.3.36/draw.src.js"></script><script src="libs/rglwidgetClass-1.3.36/controls.src.js"></script><script src="libs/rglwidgetClass-1.3.36/selection.src.js"></script><script src="libs/rglwidgetClass-1.3.36/rglTimer.src.js"></script><script src="libs/rglwidgetClass-1.3.36/pretty.src.js"></script><script src="libs/rglwidgetClass-1.3.36/axes.src.js"></script><script src="libs/rglwidgetClass-1.3.36/animation.src.js"></script><script src="libs/CanvasMatrix4-1.3.36/CanvasMatrix.src.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -93,21 +94,24 @@
 <li class="book-part">IV. ESTATÍSTICAS DESCRITIVAS</li>
 <li><a class="" href="tiposR.html"><span class="header-section-number">9</span> R Módulo 1 - Sintaxe e Tipos de dados no R</a></li>
 <li><a class="" href="xls.html"><span class="header-section-number">10</span> R Módulo 2 - Importando planilhas de dados</a></li>
-<li><a class="" href="norm.html"><span class="header-section-number">11</span> R Módulo 3.1 - Estatísticas descritivas e normalidade</a></li>
-<li><a class="" href="testes.html"><span class="header-section-number">12</span> R Módulo 3.2 - Testes estatísticos</a></li>
-<li><a class="" href="correg.html"><span class="header-section-number">13</span> Correlação e Regressão</a></li>
-<li><a class="active" href="regmul.html"><span class="header-section-number">14</span> Regressão múltipla</a></li>
-<li><a class="" href="mlgs.html"><span class="header-section-number">15</span> Modelos lineares generalizados (GLMs)</a></li>
-<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 4.1 - Estrutura da comunidade</a></li>
-<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 4.2 - Decomposição da diversidade</a></li>
-<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 4.3 - Estrutura do habitat</a></li>
+<li><a class="" href="norm.html"><span class="header-section-number">11</span> R Módulo 3 - Estatísticas descritivas e normalidade</a></li>
+<li><a class="" href="testes.html"><span class="header-section-number">12</span> R Módulo 4 - Testes estatísticos</a></li>
+<li><a class="" href="correg.html"><span class="header-section-number">13</span> R Módulo 5 - Correlação e Regressão</a></li>
+<li><a class="active" href="regmul.html"><span class="header-section-number">14</span> R Módulo 6 - Regressão múltipla</a></li>
+<li><a class="" href="mlgs.html"><span class="header-section-number">15</span> R Módulo 7 - Modelos lineares generalizados (GLMs)</a></li>
+<li><a class="" href="estrcom.html"><span class="header-section-number">16</span> R Módulo 8.1 - Estrutura da comunidade</a></li>
+<li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 8.2 - Decomposição da diversidade</a></li>
+<li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 9 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 5 - Relativizações e transformações</a></li>
-<li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 6 - Análise de outliers baseada no desvio padrão do centróide</a></li>
-<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 7 - Análise de Classificação Hierárquica - SAHN</a></li>
-<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 8 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 10.2 - Relativizações e transformações</a></li>
+<li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 10.2 - Análise de outliers baseada no desvio padrão do centróide</a></li>
+<li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 11.1 - Análise de Classificação Hierárquica - SAHN</a></li>
+<li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 11.2 - Análise de Classificação Não-hierárquica - K-Means</a></li>
+<li><a class="" href="pca.html"><span class="header-section-number">23</span> R Módulo 12 - Análise de Componentes Principais - PCA</a></li>
+<li><a class="" href="nmds.html"><span class="header-section-number">24</span> R Módulo 13.1 - Análise de Ordenação - NMDS</a></li>
+<li><a class="" href="nmds2.html"><span class="header-section-number">25</span> R Modulo 13.2 - Análise de Ordenação - NMDS</a></li>
 <li class="book-part">VI. INFORMAÇÕES GERAIS</li>
-<li><a class="" href="nomes.html"><span class="header-section-number">23</span> Nomenclatura das matrizes em AMD</a></li>
+<li><a class="" href="nomes.html"><span class="header-section-number">26</span> Nomenclatura das matrizes em AMD</a></li>
 <li><a class="" href="bibliografia-geral.html">Bibliografia Geral</a></li>
 </ul>
 
@@ -118,7 +122,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regmul" class="section level1" number="14">
 <h1>
-<span class="header-section-number"> 14</span> Regressão múltipla<a class="anchor" aria-label="anchor" href="#regmul"><i class="fas fa-link"></i></a>
+<span class="header-section-number"> 14</span> R Módulo 6 - Regressão múltipla<a class="anchor" aria-label="anchor" href="#regmul"><i class="fas fa-link"></i></a>
 </h1>
 <div id="resumo-9" class="section level3 unnumbered">
 <h3>RESUMO<a class="anchor" aria-label="anchor" href="#resumo-9"><i class="fas fa-link"></i></a>
@@ -168,15 +172,28 @@
 <h2>
 <span class="header-section-number">14.1</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div id="pacotes-do-módulo-4" class="section level3" number="14.1.1">
+<h3>
+<span class="header-section-number">14.1.1</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>Instalando os pacotes necessários para esse módulo.</p>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span></code></pre></div>
+<div id="limpando-a-memória-2" class="section level4 unnumbered">
+<h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-2"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div id="organizando-os-dados" class="section level3" number="14.1.1">
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
+<span><span class="co">#options(scipen = 999) notação científica</span></span></code></pre></div>
+</div>
+</div>
+<div id="organizando-os-dados" class="section level3" number="14.1.2">
 <h3>
-<span class="header-section-number">14.1.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1.2</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -227,11 +244,11 @@
 ## TU008  13.5 161.6  11.5     17.5 157.0
 ## TU009  24.6 200.5  20.5     25.7 195.9
 ## TU010  19.4  86.7  16.0     18.3  84.5</code></pre>
-<div id="correlograma-e-redução-de-variáveis-desnecessárias" class="section level4" number="14.1.1.1">
+<div id="correlograma-e-redução-de-variáveis-desnecessárias" class="section level4" number="14.1.2.1">
 <h4>
-<span class="header-section-number">14.1.1.1</span> Correlograma e redução de variáveis desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-redu%C3%A7%C3%A3o-de-vari%C3%A1veis-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1.2.1</span> Correlograma e redução de variáveis desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-redu%C3%A7%C3%A3o-de-vari%C3%A1veis-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Correlograma e redução de variáveis desnecessárias</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
@@ -269,11 +286,11 @@
 ## Ctubo_cm  0.9091518  0.8093258  0.9071124  1.0000000  0.8062440 -0.4330032
 ## PC_g      0.9039903  0.9999423  0.9021382  0.8062440  1.0000000 -0.3321762
 ## p_PT     -0.5189589 -0.3320403 -0.5159241 -0.4330032 -0.3321762  1.0000000</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-143-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-143-2.png" alt="" width="672"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-142-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-142-2.png" alt="" width="672"></p>
 </div>
-<div id="exemplo-2" class="section level4" number="14.1.1.2">
+<div id="exemplo-2" class="section level4" number="14.1.2.2">
 <h4>
-<span class="header-section-number">14.1.1.2</span> Exemplo 2<a class="anchor" aria-label="anchor" href="#exemplo-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1.2.2</span> Exemplo 2<a class="anchor" aria-label="anchor" href="#exemplo-2"><i class="fas fa-link"></i></a>
 </h4>
 <p>Um pesquisador deseja determinar o efeito das variáveis ambientais de corpos aquáticos sobre a riqueza de espécies. Para isso, foram amostrados diferentes tipos de ambientes aquáticos e registradas a abundância e densidade de indivíduos, além de vários tipos de variáveis ambientais que refletem a morfologia local, qualidade da água, composição do sedimento e estruturas subaquáticas do habitat marginal. Regressão Múltipla foi utilizada nesse conjunto de dados para responder às seguintes perguntas:</p>
 <ol style="list-style-type: decimal">
@@ -314,11 +331,20 @@
 <h2>
 <span class="header-section-number">14.3</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-5"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div id="limpando-a-memória-3" class="section level4 unnumbered">
+<h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-3"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
+<span><span class="co">#options(scipen = 999) notação científica</span></span></code></pre></div>
+</div>
+<div id="organizando-os-dados-1" class="section level3" number="14.3.1">
+<h3>
+<span class="header-section-number">14.3.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">densidade</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06com-bentos.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -698,11 +724,11 @@
 ##               3              13              66            4018             130 
 ##     Planorbidae        Physidae      Sphaeridae       Thiaridae        Veliidae 
 ##             717              30               1           14152               3</code></pre>
-<div id="correlograma-e-redução-de-variáveis-desnecessárias-1" class="section level4" number="14.3.0.1">
+<div id="correlograma-e-redução-de-variáveis-desnecessárias-1" class="section level4" number="14.3.1.1">
 <h4>
-<span class="header-section-number">14.3.0.1</span> Correlograma e redução de variáveis desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-redu%C3%A7%C3%A3o-de-vari%C3%A1veis-desnecess%C3%A1rias-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3.1.1</span> Correlograma e redução de variáveis desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-redu%C3%A7%C3%A3o-de-vari%C3%A1veis-desnecess%C3%A1rias-1"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span></span>
@@ -1061,11 +1087,11 @@
 ## S-R-SE-3  3.0000000  0.0000000  2.2222222
 ## S-R-SE-4  0.3333333  7.5000000  5.0000000</code></pre>
 </div>
-<div id="calculando-a-riqueza-de-espécies" class="section level4" number="14.3.0.2">
+<div id="calculando-a-riqueza-de-espécies" class="section level4" number="14.3.1.2">
 <h4>
-<span class="header-section-number">14.3.0.2</span> Calculando a riqueza de espécies<a class="anchor" aria-label="anchor" href="#calculando-a-riqueza-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3.1.2</span> Calculando a riqueza de espécies<a class="anchor" aria-label="anchor" href="#calculando-a-riqueza-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span>
@@ -1612,12 +1638,12 @@
 ## S-R-SE-3     SE  3.763162 249.4642857  4
 ## S-R-SE-4     SE  8.603085 406.6071429 11</code></pre>
 </div>
-<div id="organizando-variáveis-de-interesse" class="section level4" number="14.3.0.3">
+<div id="organizando-variáveis-de-interesse" class="section level4" number="14.3.1.3">
 <h4>
-<span class="header-section-number">14.3.0.3</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3.1.3</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
 </h4>
 <p>Cada linha deve representar uma observação e cada coluna uma variável.</p>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span>
@@ -1703,6 +1729,7 @@
 ## S-R-SE-4  8.603085    5.686241    8.602325 5.477226  2.323790</code></pre>
 </div>
 </div>
+</div>
 <div id="regressão-multipla-simultânea" class="section level2" number="14.4">
 <h2>
 <span class="header-section-number">14.4</span> Regressão Multipla Simultânea<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><i class="fas fa-link"></i></a>
@@ -1715,7 +1742,7 @@
 <pre><code>y ~ x1 + x2 + x3</code></pre>
 <p>onde,</p>
 <p>a primeira coluna da matriz de dados representa a variável resposta <code>y</code> e as demais colunas representam as variáveis preditoras <code>x</code>. Para isso, usamos a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span></span>
 <span><span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span> <span class="op">+</span> <span class="va">m.slope</span> <span class="op">+</span> <span class="va">m.width</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
@@ -1743,7 +1770,7 @@
 ## Residual standard error: 5.219 on 17 degrees of freedom
 ## Multiple R-squared:  0.244,  Adjusted R-squared:  0.06611 
 ## F-statistic: 1.372 on 4 and 17 DF,  p-value: 0.2852</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-149-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-148-1.png" alt="" width="672"></div>
 <p>A função <code>plot(modelo)</code> cria uma prancha de gráficos, que demonstra o <strong>diagnóstico dos resíduos</strong>. São produzidos os gráficos de <strong>resíduos × valores ajustados</strong>, que verifica homocedasticidade (ideal sem padrão), o <strong>q-q plot dos resíduos</strong>, que verifica normalidade ((ver Capítulo <a href="norm.html#norm">Estatísticas descritivas e normalidade</a>). Nesse caso os pontos devem seguir aproximadamente a reta. O gráfico de <strong><em>scale-location</em></strong> também avalia homocedasticidade e o gráfico de <strong>resíduos × alavancagem</strong> que inclui as curvas da <em>Cook’s distance</em>, que quando presentes, identificam observações influentes.</p>
 <p>Sobre o modelo ajustado, temos a <strong>equação</strong>:</p>
 <p><span class="math display">\[\widehat{S_{rare}}=\beta_0 + \beta_1(m.depth\_mar)+\beta_2(m.depth\_max)+\beta_3(m.slope)+\beta_4(m.width)+\varepsilon\]</span>
@@ -1792,7 +1819,7 @@ onde:</p>
 <p>Portanto, o modelo como um todo não é estatisticamente significativo.</p>
 <p>O QUE REPORTAR: O modelo de regressão múltipla simultânea não foi significativo (F₄,₁₇ = 1,37; p = 0,285), explicando apenas 24,4% da variação da riqueza rarefeita (r² = 0,244; r² ajustado = 0,066). Nenhuma das variáveis ambientais avaliadas (m.depth_mar, m.depth_max, m.slope e m.width) apresentou efeito significativo sobre a riqueza rarefeita (todos os p &gt; 0,05), indicando que, para este conjunto de dados, essas variáveis não explicam de forma consistente a variação observada em Srare.</p>
 <p>Verificamos agora a multicolinearidade, usando a função <code><a href="https://rdrr.io/pkg/car/man/vif.html">vif()</a></code> do pacote <code><a href="https://github.com/bprice2652/car_repo">library(car)</a></code></p>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## m.depth_mar m.depth_max     m.slope     m.width 
@@ -1855,7 +1882,7 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 - m.slope</p>
 <p><strong>Bloco 3</strong>: acrescentamos a variável largura
 - m.width</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Modelo 1</span></span>
 <span><span class="va">modelo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
@@ -1873,7 +1900,7 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 <span class="header-section-number">14.5.0.1</span> Comparando os modelos<a class="anchor" aria-label="anchor" href="#comparando-os-modelos"><i class="fas fa-link"></i></a>
 </h4>
 <p>A principal comparação é feita com a função <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo1</span>, <span class="va">modelo2</span>, <span class="va">modelo3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span></span>
@@ -1995,7 +2022,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <span class="header-section-number">14.6.0.1</span> <em>Forward selection</em><a class="anchor" aria-label="anchor" href="#forward-selection"><i class="fas fa-link"></i></a>
 </h4>
 <p>Na seleção progressiva (<em>forward selection</em>), inicia-se com um modelo nulo (<code>y ~ .</code>), que não contém variáveis preditoras (x). Em seguida, as variáveis são adicionadas ao modelo, uma de cada vez, de acordo com sua significância estatística, até que nenhuma nova variável contribua significativamente para melhorar o modelo.</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize an empty model (with all predictors)</span></span>
 <span><span class="va">null_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="co"># Forward stepwise regression</span></span>
@@ -2048,7 +2075,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <span class="header-section-number">14.6.0.2</span> <em>Backward elimination</em><a class="anchor" aria-label="anchor" href="#backward-elimination"><i class="fas fa-link"></i></a>
 </h4>
 <p>Nesse método, começamos com um modelo que inclui todas as variáveis preditoras e, de forma iterativa, removemos a variável menos estatisticamente significativa a cada etapa, até que a remoção de novas variáveis deixe de melhorar o modelo.</p>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize a model with all predictors</span></span>
 <span><span class="va">null_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="co"># Backward stepwise regression</span></span>
@@ -2113,7 +2140,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <span class="header-section-number">14.6.0.3</span> <em>Both-directions</em><a class="anchor" aria-label="anchor" href="#both-directions"><i class="fas fa-link"></i></a>
 </h4>
 <p>Na regressão bidirecional, o algoritmo combina as abordagens <em>forward</em> e <em>backward</em>, otimizando o modelo ao adicionar variáveis estatisticamente significativas e remover aquelas que não são significativas.</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize a model with all predictors</span></span>
 <span><span class="va">null_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="co"># Both-direction stepwise regression</span></span>
@@ -2183,14 +2210,14 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <h4>
 <span class="header-section-number">14.6.0.4</span> Visualizando resíduos<a class="anchor" aria-label="anchor" href="#visualizando-res%C3%ADduos"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Resíduos para cada modelo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo_for</span><span class="op">$</span><span class="va">residuals</span>, main <span class="op">=</span> <span class="st">"Forward Residuals"</span>, ylab <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo_back</span><span class="op">$</span><span class="va">residuals</span>, main <span class="op">=</span> <span class="st">"Backward Residuals"</span>, ylab <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo_both</span><span class="op">$</span><span class="va">residuals</span>, main <span class="op">=</span> <span class="st">"Both-Direction Residuals"</span>, ylab <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-156-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-155-1.png" alt="" width="672"></div>
 </div>
 <div id="exemplo-3" class="section level4" number="14.6.0.5">
 <h4>
@@ -2202,7 +2229,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <span class="header-section-number">14.6.0.6</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Cada linha deve representar uma observação e cada coluna uma variável.</p>
-<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span>
@@ -2293,7 +2320,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 </h4>
 <p>Existem diversas funções e pacotes no R para realizar a regressão <em>stepwise</em>. Entre eles, destaca-se a função <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code>, disponível no pacote <code>MASS</code>, que seleciona o melhor modelo com base no <strong>Critério de Informação de Akaike (AIC)</strong>.</p>
 <p>A função possui o argumento <code>direction</code>, que define a estratégia de seleção a ser utilizada (“both”, “backward” e “forward”).</p>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Ajuste do modelo completo</span></span>
 <span><span class="va">full.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="co"># Modelo de regressão stepwise</span></span>
@@ -2324,7 +2351,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <p>A função <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code>, disponível no pacote <code>leaps</code>, também pode ser utilizada para realizar a seleção de variáveis. Ela possui o argumento <code>nvmax</code>, que especifica o número máximo de variáveis preditoras a serem incluídas no modelo.</p>
 <p>Diferentemente da função <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code>, <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> não retorna apenas um único modelo. Em vez disso, ela ajusta e retorna <strong>vários modelos</strong>, com diferentes números de variáveis preditoras, até o limite definido por <code>nvmax</code>. Assim, cabe ao usuário comparar o desempenho desses modelos para escolher o mais adequado.</p>
 <p>A função <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> também possui o argumento <code>method</code>, que pode assumir os valores “backward”, “forward” e “seqrep” (<code>seqrep</code> realiza a substituição sequencial (<em>sequential replacement</em>), combinando etapas de inclusão e remoção de variáveis durante o processo de seleção).</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span>, nvmax <span class="op">=</span> <span class="fl">5</span>, <span class="co">#maximal number of predictors to incorporate in the model</span></span>
 <span>                     method <span class="op">=</span> <span class="st">"seqrep"</span><span class="op">)</span> <span class="co">#sequential replacement, combination of forward and backward selections</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span></span></code></pre></div>
@@ -2346,7 +2373,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <p>Usamos a função <code><a href="https://rdrr.io/pkg/caret/man/train.html">train()</a></code> do pacote <code>caret</code>, para um fluxo de trabalho simplificado para realizar a seleção de variáveis por meio dos pacotes <code>leaps</code> e <code>MASS</code>. Ela também possui o argumento <code>method</code> (“leapBackward”, “leapForward” e “leapSeq”).</p>
 <p>Nesse caso, também é necessário especificar o parâmetro de ajuste <code>nvmax</code>, que corresponde ao número máximo de variáveis preditoras a serem incorporadas ao modelo. Por exemplo, é possível variar <code>nvmax</code> de 1 a 5. Nesse caso, a função busca os melhores modelos de diferentes tamanhos, até o melhor modelo com quatro variáveis.</p>
 <p>Para avaliar o desempenho desses modelos, é utilizada a validação cruzada com 10 partições (<em>10-fold cross-validation</em>), estimando o erro médio de predição (<strong>RMSE</strong>) de cada um dos modelos. A métrica estatística RMSE é então utilizada para comparar os modelos e selecionar automaticamente o melhor, sendo considerado melhor aquele que apresenta o menor valor de RMSE.</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Train model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="co"># set up repeated k-fold (number=10) cross-validation ("cv")</span></span>
@@ -2375,7 +2402,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 </ul>
 <p>No exemplo apresentado, observa-se que o modelo com quatro variáveis (<code>nvmax = 4</code>) é o que apresenta o menor valor de RMSE.</p>
 <p>Na sequência, obtemos Os melhores valores do parâmetro de ajuste (<code>nvmax</code>) selecionados automaticamente pela função <code><a href="https://rdrr.io/pkg/caret/man/train.html">train()</a></code>, o melhor conjunto de variáveis para cada tamanho de modelo (função <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>), desde o melhor modelo com uma variável até o melhor modelo com quatro variáveis e os coeficientes de regressão do modelo final (<code>id = 4</code>).</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span><span class="op">)</span></span>
 <span><span class="va">nvmax</span> <span class="op">&lt;-</span> <span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span><span class="op">$</span><span class="va">nvmax</span></span>
@@ -2402,7 +2429,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ##  -94.396637  -19.972427   16.108337    3.252551    1.146074</code></pre>
 <p>Esses resultados indicam que o melhor modelo é aquele com <strong><code>nvmax = 4</code></strong> variáveis preditoras. O asterisco (*) indica que uma determinada variável está incluída no modelo correspondente.</p>
 <p>Finalmente podemos refazer o modelo usando apenas os preditores selecionados:</p>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span>, <span class="va">nvmax</span><span class="op">)</span></span>
 <span><span class="va">lm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">q.w_vel</span> <span class="op">+</span> <span class="va">q.temp</span> <span class="op">+</span> <span class="va">q.do</span> <span class="op">+</span> <span class="va">q.turb</span>,</span>
 <span>   data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
@@ -2486,22 +2513,27 @@ FOX, J.; WEISBERG, S. <strong>An R Companion to Applied Regression</strong>. Thi
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="correg.html"><span class="header-section-number">13</span> Correlação e Regressão</a></div>
-<div class="next"><a href="mlgs.html"><span class="header-section-number">15</span> Modelos lineares generalizados (GLMs)</a></div>
+<div class="prev"><a href="correg.html"><span class="header-section-number">13</span> R Módulo 5 - Correlação e Regressão</a></div>
+<div class="next"><a href="mlgs.html"><span class="header-section-number">15</span> R Módulo 7 - Modelos lineares generalizados (GLMs)</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#regmul"><span class="header-section-number">14</span> Regressão múltipla</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#regmul"><span class="header-section-number">14</span> R Módulo 6 - Regressão múltipla</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#resumo-9">RESUMO</a></li>
 <li><a class="nav-link" href="#apresenta%C3%A7%C3%A3o-9">Apresentação</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-4"><span class="header-section-number">14.1</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#organizando-os-dados"><span class="header-section-number">14.1.1</span> Organizando os dados</a></li></ul>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-4"><span class="header-section-number">14.1</span> Organização básica</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pacotes-do-m%C3%B3dulo-4"><span class="header-section-number">14.1.1</span> Pacotes do módulo</a></li>
+<li><a class="nav-link" href="#organizando-os-dados"><span class="header-section-number">14.1.2</span> Organizando os dados</a></li>
+</ul>
 </li>
 <li><a class="nav-link" href="#sobre-os-dados-3"><span class="header-section-number">14.2</span> Sobre os dados</a></li>
-<li><a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-5"><span class="header-section-number">14.3</span> Organização básica</a></li>
+<li>
+<a class="nav-link" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-5"><span class="header-section-number">14.3</span> Organização básica</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">14.3.1</span> Organizando os dados</a></li></ul>
+</li>
 <li><a class="nav-link" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><span class="header-section-number">14.4</span> Regressão Multipla Simultânea</a></li>
 <li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">14.5</span> Regressão Múltipla Hierárquica</a></li>
 <li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><span class="header-section-number">14.6</span> Regressão Múltipla Stepwise</a></li>
@@ -2527,7 +2559,7 @@ FOX, J.; WEISBERG, S. <strong>An R Companion to Applied Regression</strong>. Thi
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 14:31:05.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 19:09:58.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
