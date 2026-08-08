@@ -40,21 +40,31 @@ install.packages("FSA")
 install.packages("rcompanion")
 install.packages("gplots")
 
-###CAPÍTULO 4.4.1 ----
+# R MÓDULO 5 ----
 
+install.packages("openxlsx")
 install.packages("ppcor")
+install.packages("tibble")
+install.packages("knitr")
+install.packages("kableExtra")
+install.packages("car")
 install.packages("ggplot2")
 
-###CAPÍTULO 4.4.2 ----
+# R MÓDULO 6 ----
 
-install.packages("psych")
-install.packages("corrplot")
-install.packages("vegan")
+install.packages("MASS")
+install.packages("car")
 install.packages("caret")
+install.packages("corrplot")
 install.packages("leaps")
+install.packages("openxlsx")
+install.packages("psych")
+install.packages("tidyverse")
+install.packages("vegan")
 
-###CAPÍTULO 4.4.3 ----
+# R MÓDULO 7 ----
 
+install.packages("openxlsx")
 packageVersion("rlang")
 remove.packages("rlang")
 install.packages("rlang")
@@ -66,32 +76,42 @@ install.packages("flexplot")
 install.packages("ggplot2")
 install.packages("patchwork")
 install.packages("ggdist")
-
-###CAPÍTULO 4.5.1 ----
-
-install.packages("tibble")
+install.packages("dplyr")
+install.packages("emmeans")
+install.packages("ggdist")
+install.packages("psych")
 install.packages("tidyverse")
-install.packages("forcats")
-install.packages("Rcpp")
-install.packages("tidyr")
-install.packages("iNEXT")
 
-###CAPÍTULO 4.5.2 ---- ESSE NÃO PRECISA
+# R MÓDULO 8.1 ----
 
-install.packages("eulerr")
-install.packages("VennDiagram")
-install.packages("ggvenn")
-install.packages("ggVennDiagram")
-install.packages("gplots")
-
-###MÓDULO 9 - PCA ----
-install.packages("tidyverse")
 install.packages("openxlsx")
 install.packages("vegan")
-install.packages("gplots")
-install.packages("psych")
+install.packages("moments")
+install.packages("gt")
 install.packages("ggplot2")
+install.packages("tidyr")
+install.packages("tidyverse")
+install.packages("iNEXT")
 
-### MÓDULO 10 -NMDS1 ----
+# R MÓDULO 8.2 ----
+
 install.packages("openxlsx")
-install.packages("rgl")
+install.packages("dplyr")
+install.packages("eulerr")
+install.packages("VennDiagram")
+install.packages("ggVennDiagram")
+install.packages("ggvenn")
+install.packages("gplots")
+install.packages("knitr")
+install.packages("kableExtra")
+install.packages("tidyverse") #atente para alguma msg de erro qdo executar essa linha
+install.packages("gt")
+install.packages("vegan")
+
+# R MÓDULO 9 ----
+
+install.packages("openxlsx")
+install.packages("psych")
+install.packages("corrplot")
+install.packages("dplyr")
+install.packages("tidyr")

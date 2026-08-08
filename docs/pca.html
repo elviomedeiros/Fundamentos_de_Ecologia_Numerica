@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="RESUMO Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma...">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content=" 23 R Módulo 12 - Análise de Componentes Principais - PCA | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="RESUMO Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="RESUMO Análise de Componentes Principais (PCA) é uma técnica poderosa para redução de dimensionalidade, extração de informações relevantes e visualização de dados complexos. Ela fornece uma...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.3.36/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.3.36/rgl.css" rel="stylesheet">
@@ -145,7 +145,7 @@
 <span class="header-section-number">23.1.1</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
@@ -155,11 +155,11 @@
 <div id="limpando-a-memória-6" class="section level4 unnumbered">
 <h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-6"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">##LIMPA A MEMORIA</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar os pacotes necessários para este módulo. O comando <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> será usado para carregarmos esses pacote a medida que eles forem sendo necessários.</p>
 </div>
@@ -167,7 +167,7 @@
 <h4>Definindo diretório de trabalho<a class="anchor" aria-label="anchor" href="#definindo-diret%C3%B3rio-de-trabalho-3"><i class="fas fa-link"></i></a>
 </h4>
 <p>Para definir o diretório de trabalho usa-se os códigos abaixo. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:<br>
@@ -192,7 +192,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <span class="header-section-number">23.3</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -213,7 +213,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <span class="header-section-number">23.4</span> Particionando as variáveis de interesse<a class="anchor" aria-label="anchor" href="#particionando-as-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
 </h2>
 <p>Use o script abaixo apenas se for necessário escolher quais variáveis entrar na análise e particionar a matriz para as variáveis geomorfológicas da matriz ambiental <code>m.variáveis</code>.</p>
-<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Lista as colunas</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ppbio_a</span><span class="op">)</span></span>
 <span><span class="co">#Escolher quais colunas usar por nome</span></span>
@@ -237,7 +237,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <div id="hello" class="greeting message" style="color: green;">
 <p>Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.</p>
 </div>
-<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span>
 <span><span class="co">#m_trab &lt;- (m_part)   # &lt;1&gt;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
@@ -361,7 +361,7 @@ m_trab
 <span class="header-section-number">23.6.1</span> Dendrograma e Heatmap<a class="anchor" aria-label="anchor" href="#dendrograma-e-heatmap"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ao criar a matriz transformada <code>m_trns</code> verifique o tipo de relativização/transformação, ela deve ser específica para cada tipo de matriz, comunitária e ambiental.</p>
-<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Dendrograma</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
 <span><span class="co">#relativização/transformação da matriz comunitária</span></span>
@@ -417,7 +417,7 @@ m_trab
 <span class="header-section-number">23.6.2</span> Histórico das fusões<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de “-”) ou grupo de objetos (indicado pela ausência do sinall de “-”) que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a <code>m-1</code> última fusão entre os dois últimos grupos. Nesse caso, 22.</p>
-<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
 <span><span class="va">merge</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">merge</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>,<span class="st">"0"</span><span class="op">)</span></span>
@@ -1085,7 +1085,7 @@ m_trab
 <h2>
 <span class="header-section-number">23.7</span> Análise de Componentes Principais<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-componentes-principais"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="va">pca</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
@@ -1341,7 +1341,7 @@ m_trab
 <span class="header-section-number">23.7.1</span> Subsetting as variáveis para a PCA<a class="anchor" aria-label="anchor" href="#subsetting-as-vari%C3%A1veis-para-a-pca"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para escolher quais variáveis entrar na PCA podemos:</p>
-<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Remover a primeira coluna</span></span>
 <span><span class="va">pca_part1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
@@ -1351,6 +1351,8 @@ m_trab
 <span></span>
 <span><span class="co">#Escolher quais colunas usar por nome</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="co">#ordena por maior soma</span></span>
+<span><span class="va">pca_part3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="op">~</span><span class="va">as</span><span class="op">-</span><span class="va">bimac</span> <span class="op">+</span> <span class="va">ge</span><span class="op">-</span><span class="va">brasi</span>, data <span class="op">=</span> <span class="va">m_trns</span><span class="op">)</span> <span class="co">#usa apenas as colunas listadas</span></span>
+<span><span class="co">#"-" deve ser substituido, o R não o reconhece como  texto</span></span>
 <span><span class="va">pca_part3</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"as-bimac"</span>, <span class="st">"ge-brasi"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co">#usa apenas as colunas listadas</span></span>
 <span><span class="co">#"-" deve ser substituido, o R não o reconhece como  texto</span></span>
 <span><span class="co">#colnames(m_trns) &lt;- gsub("-", "_", colnames(m_trns))</span></span>
@@ -1365,21 +1367,21 @@ m_trab
 <h3>
 <span class="header-section-number">23.7.2</span> Explorando correlações multivariadas<a class="anchor" aria-label="anchor" href="#explorando-correla%C3%A7%C3%B5es-multivariadas"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#attach(m_trns)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span>, <span class="va">m_trns</span><span class="op">$</span><span class="st">"ge-brasi"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-378-1.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot(m_trns$"m.elev", m_trns$"m.river")</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"ge-brasi"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-378-2.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot(scale(m_trns$"m.elev"), scale(m_trns$"m.river"))</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-378-3.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot((m_trns$"m.elev" - mean(m_trns$"m.elev")) / sd(m_trns$"m.elev"))</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
@@ -1392,7 +1394,7 @@ m_trab
 <span>             alpha <span class="op">=</span> <span class="fl">0.5</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-378-4.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Ordem pela soma das colunas</span></span>
 <span><span class="co"># Passo 1</span></span>
 <span><span class="va">col_sums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
@@ -1652,7 +1654,7 @@ Escalar (X)
 <h3>
 <span class="header-section-number">23.7.3</span> Centrando e re-escalando a matriz de dados<a class="anchor" aria-label="anchor" href="#centrando-e-re-escalando-a-matriz-de-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca_ce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="co">#pca_ce</span></span>
 <span><span class="va">pca_cs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -1907,7 +1909,7 @@ Escalar (X)
 <h4>
 <span class="header-section-number">23.7.3.2</span> Descendo os nomes das UAs<a class="anchor" aria-label="anchor" href="#descendo-os-nomes-das-uas-1"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">add.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">m_trns</span>, var <span class="op">=</span> <span class="st">"UAs"</span><span class="op">)</span></span>
 <span><span class="co">#add.col</span></span>
 <span><span class="va">agrup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">add.col</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span> <span class="co">#descendo os nomes</span></span>
@@ -1927,7 +1929,7 @@ Escalar (X)
 <h2>
 <span class="header-section-number">23.8</span> Fazendo a PCA<a class="anchor" aria-label="anchor" href="#fazendo-a-pca"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca_sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">pca_sc</span> <span class="co">#fornece os desvios padrões, Rotação dos eixos e Eigenvetores</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
@@ -2195,7 +2197,7 @@ Escalar (X)
 <h2>
 <span class="header-section-number">23.10</span> Extraindo PC escores<a class="anchor" aria-label="anchor" href="#extraindo-pc-escores"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
 <span><span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span></span>
 <span><span class="va">pca_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Agrupamento <span class="op">=</span> <span class="va">m_pca_agrup</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">m_trns</span>, <span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
@@ -2465,13 +2467,13 @@ Escalar (X)
 <span class="header-section-number">23.11</span> Gráfico melhorado com <code>ggplot</code><a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-melhorado-com-ggplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Ou talves seja melhor melhorar usando os pacotes <code>FactoMineR</code> e <code>factoextra</code> com o código disponível nos Apêndices (<a href="pca.html#pca-usando-o-pacote-factominer">PCA usando o pacote FactoMineR</a>).</p>
-<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pca_scores</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">PC1</span>, <span class="va">PC2</span>, col <span class="op">=</span> <span class="va">Agrupamento</span>, fill <span class="op">=</span> <span class="va">Agrupamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"polygon"</span>, col <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Too few points to calculate an ellipse</code></pre>
-<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">m_trns</span>, <span class="va">pca_scores</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="st">"PC2"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                    PC1          PC2
 ## ap-davis  -0.080590613  0.026040181
@@ -2519,9 +2521,9 @@ Escalar (X)
 <h3>PCA usando o pacote FactoMineR<a class="anchor" aria-label="anchor" href="#pca-usando-o-pacote-factominer"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/" class="uri">http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/</a></p>
-<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb652"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://factominer.free.fr">FactoMineR</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kassambara/factoextra">factoextra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.sthda.com/english/rpkgs/factoextra">factoextra</a></span><span class="op">)</span></span>
 <span><span class="va">pca_fm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FactoMineR/man/PCA.html">PCA</a></span><span class="op">(</span><span class="va">m_trns</span>, graph <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">eigenval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/eigenvalue.html">get_eigenvalue</a></span><span class="op">(</span><span class="va">pca_fm</span><span class="op">)</span></span>
 <span><span class="va">eigenval</span></span>
@@ -2615,7 +2617,7 @@ MEDEIROS, E. S. F.; SILVA, M. J.; RAMOS, R. T. C. Application of catchment- and 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 07/08/2026 21:17:32.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 08/08/2026 09:23:09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

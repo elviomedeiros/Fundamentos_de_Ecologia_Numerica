@@ -10,7 +10,7 @@
 <meta name="author" content="Universidade Estadual da Paraíba">
 <meta name="author" content="Campus V, João Pessoa, PB">
 <meta name="description" content="Apresentação A análise de outliers baseada no desvio padrão do centróide em análise multivariada é uma técnica utilizada para identificar valores discrepantes em uma matriz de dados com várias...">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content=" 20 R Módulo 10.2 - Análise de outliers baseada no desvio padrão do centróide | Fundamentos de Ecologia Numérica">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Apresentação A análise de outliers baseada no desvio padrão do centróide em análise multivariada é uma técnica utilizada para identificar valores discrepantes em uma matriz de dados com várias...">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="Apresentação A análise de outliers baseada no desvio padrão do centróide em análise multivariada é uma técnica utilizada para identificar valores discrepantes em uma matriz de dados com várias...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/rglWebGL-binding-1.3.36/rglWebGL.js"></script><link href="libs/rglwidgetClass-1.3.36/rgl.css" rel="stylesheet">
@@ -244,19 +244,19 @@ Figura 20.4: <em>Hoplias malabaricus</em>, espécie que cresce para se tornar um
 <h2>
 <span class="header-section-number">20.2</span> Organização básica<a class="anchor" aria-label="anchor" href="#organiza%C3%A7%C3%A3o-b%C3%A1sica-12"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span></code></pre></div>
 <p>Instalando os pacotes necessários para esse módulo</p>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span> <span class="co">#importa arquivos do excel</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"moments"</span><span class="op">)</span> <span class="co">#calcula assimetria e curtose dos dados</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"matrixStats"</span><span class="op">)</span> <span class="co">#fornece funções rápidas para a estatística de matrizes</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gt"</span><span class="op">)</span> <span class="co">#ferramenta para criação de tabelas bonitas e personalizáveis</span></span></code></pre></div>
 <p>Agora vamos <strong>definir o diretório de trabalho</strong>. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
 <p>Definindo o diretório de trabalho e installando os pacotes necessários:</p>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 <div id="importando-a-planilha-8" class="section level3" number="20.2.1">
@@ -268,7 +268,7 @@ Figura 20.4: <em>Hoplias malabaricus</em>, espécie que cresce para se tornar um
 - Ajuste o parâmetro <code>sheet = "Sheet1"</code> para refletir a aba correta do arquivo .xlsx a ser importado.</p>
 <p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:<br>
 SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">m_bruta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06c-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -333,19 +333,19 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <div class="greeting message" style="color: green;">
 <p><span style="color:red">ATENÇÃO</span> Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.</p>
 </div>
-<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#m_bruta &lt;- (m_bruta)   # &lt;1&gt;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Aqui usaremos as matrizes relativizadas/transformadas/particionadas, etc</li>
 </ol>
 <p>Podemos exibir a planilha depois de ter sido importada para o ambiente R/RStudio usando as funções <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code>, <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> ou <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>. Note que essas funções são case-sensitive. A função <code>ignore.case()</code> é uma função do pacote stringr que modifica um padrão para que ele não considere o caso das letras nas correspondências. Por exemplo, se você quiser encontrar todas as ocorrências da letra “a” em um vetor de caracteres, independente de ser “A” ou “a”, você pode usar essa função.</p>
-<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#View(m_bruta)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span></code></pre></div>
 <p>A função <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> no RStudio é uma forma de ver as primeiras (n=6) linhas de um objeto, como um vetor, uma matriz, um data frame ou uma lista. Ela é útil para ter uma ideia do conteúdo e da estrutura do objeto.</p>
 <p>Também podemos explorar as características da planilha usando as funções <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>, <code><a href="https://rdrr.io/r/base/mode.html">mode()</a></code>, <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> e <code><a href="https://rdrr.io/r/base/length.html">length()</a></code>. O número de observações ou tamanho do vetor depende do tipo de dados, se eles são uma <code>matrix</code> ou um <code>data.frame</code>.</p>
-<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
@@ -394,7 +394,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <h3>
 <span class="header-section-number">20.3.1</span> Tamanho da matriz<a class="anchor" aria-label="anchor" href="#tamanho-da-matriz-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#menor e maior valores</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de colunas</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="co">#no. de N colunas</span></span>
@@ -416,7 +416,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 ## [1] 78.68132</code></pre>
 <p>A matriz de dados apresenta um total de 910 valores que variam entre 0, 511 (menor e maior valores). A matriz m x n tem 26 linhas e 35 colunas. Existem 716 observações iguais a zero e 194 observações maiores que zero, representando um percentual de 78.7% dos valores sendo zeros.</p>
 <p>Essas informações podem ser resumidas na Tabela <a href="outcentr.html#tab:6tbl-tam">20.3</a> que será gerada abaixo.</p>
-<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tamanho</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  Comando <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"range"</span>, <span class="st">"lenght"</span>, <span class="st">"m cols"</span>, <span class="st">"n linhas"</span>, <span class="st">"Tamanho"</span>, <span class="st">"Tamanho"</span>,</span>
 <span>             <span class="st">"Zeros"</span>, <span class="st">"Nao zeros"</span>, <span class="st">"% Zeros"</span><span class="op">)</span>,</span>
@@ -489,12 +489,12 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <span class="header-section-number">20.4</span> Cálculo de matriz de distâncias Euclidiana (<code>euclid</code>)<a class="anchor" aria-label="anchor" href="#c%C3%A1lculo-de-matriz-de-dist%C3%A2ncias-euclidiana-euclid"><i class="fas fa-link"></i></a>
 </h2>
 <p>Agora vamos calcular a matriz de <strong>distâncias euclidianas</strong> <span class="citation">(<a href="#ref-borcard2018">BORCARD; GILLET; LEGENDRE, 2018</a>; <a href="#ref-legendre1998">LEGENDRE; LEGENDRE, 1998</a>)</span> entre as UA´s usando a função <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> (pesquise o que faz essa função usando o comando <code><a href="https://rdrr.io/r/stats/dist.html">?dist</a></code>).</p>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">euclid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">m_bruta</span>, method <span class="op">=</span> <span class="st">"euclidian"</span>, diag <span class="op">=</span> <span class="cn">TRUE</span>, upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#?dist</span></span></code></pre></div>
 <!--- #15.358=Standard deviation e 93.898=Grand mean, eram os  valores originais do PC-ORD para os  dados OakRaw (transformados e relativisados)--->
 <p>Pronto, calculamos a matriz de distâncias (Euclidiana). Agora podemos visualizar a matriz.</p>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#euclid</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
@@ -582,7 +582,7 @@ Minkowski
 </tbody>
 </table></div>
 <p>A matriz <code>euclid</code> está como uma classe <code>dist</code>, mas podemos transformá-la em uma classe <code>matrix</code> usando a função <code><a href="https://rdrr.io/r/base/matrix.html">as.matrix()</a></code>.</p>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">euclid_ma</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#View(euclid_ma)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">euclid_ma</span><span class="op">)</span></span>
@@ -608,7 +608,7 @@ Minkowski
 <span class="header-section-number">20.5</span> Calculando o centróide da matriz de distâncias <code>euclid</code><a class="anchor" aria-label="anchor" href="#calculando-o-centr%C3%B3ide-da-matriz-de-dist%C3%A2ncias-euclid"><i class="fas fa-link"></i></a>
 </h2>
 <p>Primeiro algumas informações básicas da matriz</p>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
@@ -626,7 +626,7 @@ Minkowski
 ## [1] 285.9043</code></pre>
 <p>A função <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> calcula a média de todos os valores da matriz de distâncias, ou seja, a média multivariada, que é o centróide. Nesse caso o <strong>centroide assume o valor de 285.9</strong>.</p>
 <p>Usamos agora a fórmula <code>m*(m-1)/2</code>, onde <code>m</code> é o no. de objetos sendo comparados, para calcular quantas distâcias temos na nossa matriz.</p>
-<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span></span>
 <span><span class="va">m</span></span>
@@ -639,7 +639,7 @@ Minkowski
 ##   16.28  142.70  242.82  285.90  423.64  707.33</code></pre>
 <p>Temos então que m é <strong>26 objetos</strong> (ou linhas), e portanto, a matriz de distâncias tem <strong>325 valores</strong>.</p>
 <p>Fazemos agora um breve sumário do que foi calculado até agora com base na matriz de distâncias <code>euclid</code>.</p>
-<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Sumario1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>,</span>
 <span>                  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>,</span>
 <span>                  <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span>,</span>
@@ -656,10 +656,10 @@ Minkowski
 <span class="header-section-number">20.6</span> Distribuição de frequências da matriz de distâncias <code>euclid</code><a class="anchor" aria-label="anchor" href="#distribui%C3%A7%C3%A3o-de-frequ%C3%AAncias-da-matriz-de-dist%C3%A2ncias-euclid"><i class="fas fa-link"></i></a>
 </h2>
 <p>O código abaixo vai plotar um histograma e um boxplot da distribuição de dados armazenada em <code>euclid</code>. Também é adicionada uma curva normal teórica ao histograma utilizando a média e o desvio padrão dos dados (Figura <a href="outcentr.html#fig:6euclid">20.5</a>). Atente que o comando <code>par(mfrow=c(2,1))</code> define o layout dos gráficos, especificando que serão plotados 2 gráficos em uma coluna. As funções <code>floor(min(euclid)), ceiling(max(euclid))</code> definem os limites dos graficos pelo valores mínimo e máximo do objeto (<code>euclid</code>).</p>
-<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1]  16.27882 707.32666</code></pre>
-<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">euclid</span>,</span>
 <span>     breaks <span class="op">=</span> <span class="fl">15</span>, <span class="co">#determina o no. de colunas do histograma</span></span>
@@ -677,7 +677,7 @@ Figura 20.5: Distribuições de frequências da matriz de distâncias <code>eucl
 </p>
 </div>
 <p>O comando abaixo apaga os gráficos, use-o apenas se necessário.</p>
-<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="procurando-outliers" class="section level2" number="20.7">
@@ -694,14 +694,15 @@ Figura 20.5: Distribuições de frequências da matriz de distâncias <code>eucl
 <h4>
 <span class="header-section-number">20.7.1.1</span> Removendo os zeros da matriz de distâncias<a class="anchor" aria-label="anchor" href="#removendo-os-zeros-da-matriz-de-dist%C3%A2ncias"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/matrixStats">matrixStats</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: pacote 'matrixStats' foi compilado no R versão 4.5.3</code></pre>
 <pre><code>## 
 ## Anexando pacote: 'matrixStats'</code></pre>
 <pre><code>## O seguinte objeto é mascarado por 'package:dplyr':
 ## 
 ##     count</code></pre>
-<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="va">euclid_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">euclid</span><span class="op">)</span></span>
 <span><span class="va">euclid_ma</span></span>
@@ -833,7 +834,7 @@ Figura 20.5: Distribuições de frequências da matriz de distâncias <code>eucl
 <h4>
 <span class="header-section-number">20.7.1.2</span> Criando uma Lista<a class="anchor" aria-label="anchor" href="#criando-uma-lista"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">centroide_ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">av.dist</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">av.desvpad</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/matrixStats/man/rowSds.html">colSds</a></span><span class="op">(</span><span class="va">euclid_ma</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -868,7 +869,7 @@ Figura 20.5: Distribuições de frequências da matriz de distâncias <code>eucl
 ## B-A-MU4 624.1237  45.46670  2.99776610
 ## B-A-GU4 298.2560 130.86907  0.10947773</code></pre>
 <p>Ordenamos as distâncias da maior para a menor.</p>
-<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">list</span>, do.NULL <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">list</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Av.Dist"</span>, <span class="st">"Av.StDev"</span>, <span class="st">"DP.Centroide"</span><span class="op">)</span></span>
 <span><span class="va">list2</span> <span class="op">&lt;-</span> <span class="va">list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">list</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,<span class="op">]</span> <span class="co">#[,1] ou o nome da coluna</span></span>
@@ -908,7 +909,7 @@ Figura 20.5: Distribuições de frequências da matriz de distâncias <code>eucl
 <span class="header-section-number">20.7.2</span> Distribuição de frequências das distâncias médias para o centróide <code>av.dist</code><a class="anchor" aria-label="anchor" href="#distribui%C3%A7%C3%A3o-de-frequ%C3%AAncias-das-dist%C3%A2ncias-m%C3%A9dias-para-o-centr%C3%B3ide-av.dist"><i class="fas fa-link"></i></a>
 </h3>
 <p>Observe o valor maximo e minimo gerados pela função <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> e substitua nas linhas de código assinaladas com <code>#</code>. Aqui o menor valor foi 195.7828431 e o maior valor foi 624.1236964. Use valores maiores para facilitar a visualização no gráfico (Figura <a href="outcentr.html#fig:6avdist">20.6</a>).</p>
-<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"Av.Dist"</span><span class="op">]</span>,</span>
 <span>     breaks <span class="op">=</span> <span class="fl">15</span>, <span class="co">#determina o no. de colunas do histograma</span></span>
@@ -932,14 +933,14 @@ Figura 20.5: Distribuições de frequências da matriz de distâncias <code>eucl
 Figura 20.6: Distribuição de frequências das distâncias médias para o centroide.
 </p>
 </div>
-<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div id="distribuição-de-frequências-dos-desvios-padões-das-distâncias-médias-para-o-centróide-dp.centroide" class="section level4" number="20.7.2.1">
 <h4>
 <span class="header-section-number">20.7.2.1</span> Distribuição de frequências dos desvios padões das distâncias médias para o centróide <code>DP.Centroide</code><a class="anchor" aria-label="anchor" href="#distribui%C3%A7%C3%A3o-de-frequ%C3%AAncias-dos-desvios-pad%C3%B5es-das-dist%C3%A2ncias-m%C3%A9dias-para-o-centr%C3%B3ide-dp.centroide"><i class="fas fa-link"></i></a>
 </h4>
 <p>Observe o valor máximo e mínimo gerados pela função <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> e substitua nas linhas de código assinaladas com <code>#</code>. Aqui o menor valor foi -0.7987804 e o maior valor foi 2.9977661. Use valores maiores para facilitar a visualização no gráfico (Figura <a href="outcentr.html#fig:4centro">20.7</a>).</p>
-<div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">dp.centroide_ma</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">list2</span><span class="op">[</span>, <span class="st">"DP.Centroide"</span><span class="op">]</span>,</span>
@@ -964,11 +965,11 @@ Figura 20.6: Distribuição de frequências das distâncias médias para o centr
 Figura 20.7: Distribuição de frequências dos desvios padões das distâncias médias para o centroide.
 </p>
 </div>
-<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.7987804  2.9977661</code></pre>
 <p>Se necessário apague os gráficos</p>
-<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -978,10 +979,10 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
 <span class="header-section-number">20.8</span> Lista final de outliers<a class="anchor" aria-label="anchor" href="#lista-final-de-outliers"><i class="fas fa-link"></i></a>
 </h2>
 <p>Agora fazemos a lista final de distâncias com os outliers baseados em um ‘cutoff’.</p>
-<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutoff</span> <span class="op">&lt;-</span> <span class="fl">2.0</span></span></code></pre></div>
 <p>Note que o ‘cutoff’ foi estabelecido no código acima no <code>vetor</code> ‘cutoff &lt;-’. Ou seja, o ‘cutoff’ definindo quem serão considerados outliers, foi estabelecido como sendo valores de <strong>+2.0</strong> e <strong>-2.0</strong> desvios padrões da média multivariada ou centroide. Valores acima ou abaixo do ‘cutoff’ definido recebem o nome “OUT”, na coluna “Outliers”. Criada com o código abaixo.</p>
-<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">cutoff</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">listf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">list2</span><span class="op">)</span></span>
@@ -1018,23 +1019,23 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
 ## S-R-CP3 199.1922 170.79087  -0.76856181         
 ## S-A-TA1 195.8495 170.39163  -0.79818963         
 ## S-R-CP1 195.7828 170.97514  -0.79878039</code></pre>
-<div id="hbawtpxozq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hbawtpxozq table {
+<div id="awtpxozqcc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#awtpxozqcc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hbawtpxozq thead, #hbawtpxozq tbody, #hbawtpxozq tfoot, #hbawtpxozq tr, #hbawtpxozq td, #hbawtpxozq th {
+#awtpxozqcc thead, #awtpxozqcc tbody, #awtpxozqcc tfoot, #awtpxozqcc tr, #awtpxozqcc td, #awtpxozqcc th {
   border-style: none;
 }
 
-#hbawtpxozq p {
+#awtpxozqcc p {
   margin: 0;
   padding: 0;
 }
 
-#hbawtpxozq .gt_table {
+#awtpxozqcc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1060,12 +1061,12 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-left-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_caption {
+#awtpxozqcc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hbawtpxozq .gt_title {
+#awtpxozqcc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1077,7 +1078,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-bottom-width: 0;
 }
 
-#hbawtpxozq .gt_subtitle {
+#awtpxozqcc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1089,7 +1090,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-top-width: 0;
 }
 
-#hbawtpxozq .gt_heading {
+#awtpxozqcc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1101,13 +1102,13 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-right-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_bottom_border {
+#awtpxozqcc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_col_headings {
+#awtpxozqcc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1122,7 +1123,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-right-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_col_heading {
+#awtpxozqcc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1142,7 +1143,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   overflow-x: hidden;
 }
 
-#hbawtpxozq .gt_column_spanner_outer {
+#awtpxozqcc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1154,15 +1155,15 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   padding-right: 4px;
 }
 
-#hbawtpxozq .gt_column_spanner_outer:first-child {
+#awtpxozqcc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hbawtpxozq .gt_column_spanner_outer:last-child {
+#awtpxozqcc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hbawtpxozq .gt_column_spanner {
+#awtpxozqcc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1174,11 +1175,11 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   width: 100%;
 }
 
-#hbawtpxozq .gt_spanner_row {
+#awtpxozqcc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hbawtpxozq .gt_group_heading {
+#awtpxozqcc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1204,7 +1205,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   text-align: left;
 }
 
-#hbawtpxozq .gt_empty_group_heading {
+#awtpxozqcc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1219,15 +1220,15 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   vertical-align: middle;
 }
 
-#hbawtpxozq .gt_from_md > :first-child {
+#awtpxozqcc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hbawtpxozq .gt_from_md > :last-child {
+#awtpxozqcc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hbawtpxozq .gt_row {
+#awtpxozqcc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1246,7 +1247,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   overflow-x: hidden;
 }
 
-#hbawtpxozq .gt_stub {
+#awtpxozqcc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1259,7 +1260,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   padding-right: 5px;
 }
 
-#hbawtpxozq .gt_stub_row_group {
+#awtpxozqcc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1273,15 +1274,15 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   vertical-align: top;
 }
 
-#hbawtpxozq .gt_row_group_first td {
+#awtpxozqcc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hbawtpxozq .gt_row_group_first th {
+#awtpxozqcc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hbawtpxozq .gt_summary_row {
+#awtpxozqcc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1291,16 +1292,16 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   padding-right: 5px;
 }
 
-#hbawtpxozq .gt_first_summary_row {
+#awtpxozqcc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_first_summary_row.thick {
+#awtpxozqcc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hbawtpxozq .gt_last_summary_row {
+#awtpxozqcc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1310,7 +1311,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-bottom-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_grand_summary_row {
+#awtpxozqcc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1320,7 +1321,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   padding-right: 5px;
 }
 
-#hbawtpxozq .gt_first_grand_summary_row {
+#awtpxozqcc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1330,7 +1331,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-top-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_last_grand_summary_row_top {
+#awtpxozqcc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1340,11 +1341,11 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-bottom-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_striped {
+#awtpxozqcc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hbawtpxozq .gt_table_body {
+#awtpxozqcc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1353,7 +1354,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-bottom-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_footnotes {
+#awtpxozqcc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1367,7 +1368,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-right-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_footnote {
+#awtpxozqcc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1376,7 +1377,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   padding-right: 5px;
 }
 
-#hbawtpxozq .gt_sourcenotes {
+#awtpxozqcc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1390,7 +1391,7 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   border-right-color: #D3D3D3;
 }
 
-#hbawtpxozq .gt_sourcenote {
+#awtpxozqcc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1398,72 +1399,72 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
   padding-right: 5px;
 }
 
-#hbawtpxozq .gt_left {
+#awtpxozqcc .gt_left {
   text-align: left;
 }
 
-#hbawtpxozq .gt_center {
+#awtpxozqcc .gt_center {
   text-align: center;
 }
 
-#hbawtpxozq .gt_right {
+#awtpxozqcc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hbawtpxozq .gt_font_normal {
+#awtpxozqcc .gt_font_normal {
   font-weight: normal;
 }
 
-#hbawtpxozq .gt_font_bold {
+#awtpxozqcc .gt_font_bold {
   font-weight: bold;
 }
 
-#hbawtpxozq .gt_font_italic {
+#awtpxozqcc .gt_font_italic {
   font-style: italic;
 }
 
-#hbawtpxozq .gt_super {
+#awtpxozqcc .gt_super {
   font-size: 65%;
 }
 
-#hbawtpxozq .gt_footnote_marks {
+#awtpxozqcc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hbawtpxozq .gt_asterisk {
+#awtpxozqcc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hbawtpxozq .gt_indent_1 {
+#awtpxozqcc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hbawtpxozq .gt_indent_2 {
+#awtpxozqcc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hbawtpxozq .gt_indent_3 {
+#awtpxozqcc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hbawtpxozq .gt_indent_4 {
+#awtpxozqcc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hbawtpxozq .gt_indent_5 {
+#awtpxozqcc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hbawtpxozq .katex-display {
+#awtpxozqcc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hbawtpxozq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#awtpxozqcc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1667,11 +1668,11 @@ Figura 20.7: Distribuição de frequências dos desvios padões das distâncias 
 <span class="header-section-number">20.9</span> Particionando a matriz<a class="anchor" aria-label="anchor" href="#particionando-a-matriz"><i class="fas fa-link"></i></a>
 </h2>
 <p>Talvez seja necessário particionar a matriz bruta para remover os outliers. Isso pode ser feito com os códigos abaixo. Atente para o <code>vetor</code> <strong><code>part</code></strong>. Ele define quais objetos ou UA’s serão particionados.</p>
-<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">part</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B-A-MU4"</span>, <span class="st">"B-A-MU3"</span>, <span class="st">"S-A-TA4"</span>, <span class="st">"S-R-CT3"</span><span class="op">)</span></span>
 <span><span class="va">part</span></span></code></pre></div>
 <pre><code>## [1] "B-A-MU4" "B-A-MU3" "S-A-TA4" "S-R-CT3"</code></pre>
-<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_bruta_part</span> <span class="op">&lt;-</span> <span class="va">m_bruta</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">part</span><span class="op">)</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#m_bruta_part</span></span></code></pre></div>
 <p>Criamos uma nova matriz particionada <code>m_bruta_part</code> sem <strong>B-A-MU4, B-A-MU3, S-A-TA4, S-R-CT3</strong>, que apresentavam valores acima do cutoff para outliers.</p>
@@ -1693,7 +1694,7 @@ Figura 20.9: <em>Pseudancistrus genisetiger</em>, uma espécie endêmica das bac
 </div>
 <p>Use o a função <code>View(m_bruta_part)</code> e procure linhas ou colunas na matriz <code>m_bruta_part</code> onde todos os valores são zero. Quais espécies você encontrou que deixaram de ocorrer na comunidade depois que as UA’s outliers foram removidas?.</p>
 <p>Complicado? Os códigos abaixo resolvem isso, e mostram algumas propriedades da nova matriz <code>m_bruta_part2</code> depois de particionada pela segunda vez para remover linhas/colunas “zeradas”.</p>
-<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_bruta_part</span><span class="op">)</span></span>
 <span><span class="va">sum</span></span>
 <span><span class="va">zero_sum_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_bruta_part</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
@@ -1767,7 +1768,7 @@ Figura 20.9: <em>Pseudancistrus genisetiger</em>, uma espécie endêmica das bac
 <span class="header-section-number">20.10</span> Exportando a matrix final de trabalho<a class="anchor" aria-label="anchor" href="#exportando-a-matrix-final-de-trabalho"><i class="fas fa-link"></i></a>
 </h2>
 <p>Agora vamos exportar a matrix de trabalho, nesse casso a matrix <code>m_bruta_part2</code>, como um arquivo de valores separados por vírgula (<code>m_bruta_part2csv.csv</code>). Na verdade, separado por <code>";"</code>, como definido na funçao <code>sep = ";"</code>. O arquivo será exportado para o diretório de trabalho. Na mesma sequência de códigos, importamos <code>m_bruta_part2csv.csv</code> como nossa matriz de trabalho <code>m_trab</code>.</p>
-<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Sites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">m_bruta</span><span class="op">)</span>, <span class="va">m_bruta</span>,</span>
 <span>                 row.names <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>                 check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#add titulo a primeira coluna</span></span>
@@ -1820,7 +1821,7 @@ de Frequências”, ylim=c(floor(min(euclidma)), ceiling(max(euclidma))))</p>
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-11"><i class="fas fa-link"></i></a>
 </h2>
 <p>Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os <span style="color:green"><code>#</code></span> ou <span style="color:green"><code>##</code></span> caso necessite executar essas linhas.</p>
-<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## dev.off() #apaga os graficos, se houver algum</span></span>
 <span><span class="co">## rm(list=ls(all=TRUE)) #limpa a memória</span></span>
 <span><span class="co">## cat("\014") #limpa o console</span></span>
@@ -2090,7 +2091,7 @@ LEGENDRE, P.; LEGENDRE, L. <strong>Numerical Ecology</strong>. 2nd English ed ed
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 07/08/2026 21:17:32.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 08/08/2026 09:23:09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
