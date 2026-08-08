@@ -197,7 +197,7 @@ Figura 15.4: Principais distribuições utilizadas em Modelos Lineares Generaliz
 </p>
 </div>
 <p>Muitos dos métodos estatísticos clássicos, como a <strong>regressão linear</strong> e o <strong>teste t de Student</strong>, assumem que a variância é constante (homocedasticidade). No entanto, em diversas aplicações essa suposição não é válida. É justamente por isso que os GLMs são tão úteis, pois permitem modelar adequadamente situações em que a variância depende da média da variável resposta <span class="citation">(<a href="#ref-crawley2005">CRAWLEY, 2005</a>, <a href="#ref-crawley2015">2015</a>; <a href="#ref-dunn2018">DUNN; SMYTH, 2018</a>; <a href="#ref-mccullagh1989">MCCULLAGH; NELDER, 1989</a>; <a href="#ref-nelder1972">NELDER; WEDDERBURN, 1972</a>; <a href="#ref-zuur2009">ZUUR et al., 2009</a>)</span>.</p>
-<p>Mas qual distribuição escolher? Abaixo segue um esquema ((Figura <a href="mlgs.html#fig:esquemadistribs">15.5</a>) adaptado de <a href="https://bedeffinianrowedavies.com/">Davies</a> (<span class="citation">(<a href="#ref-davies2021"><strong>davies2021?</strong></a>)</span>; <span class="citation">(<a href="#ref-davies2022"><strong>davies2022?</strong></a>)</span>).</p>
+<p>Mas qual distribuição escolher? Abaixo segue um esquema ((Figura <a href="mlgs.html#fig:esquemadistribs">15.5</a>) adaptado de <a href="https://bedeffinianrowedavies.com/">Davies</a> <span class="citation">(<a href="#ref-davies2021">DAVIES et al., 2021</a>, <a href="#ref-davies2022">2022</a>)</span>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:esquemadistribs"></span>
 <img src="imagens/distribuicoes.png" alt="Tipos de distribuição em relação a variável resposta em GLM's (Adaptado de Davies, B.F.R. em 2026. Fonte: &lt;https://bedeffinianrowedavies.com/&gt;)." width="500px"><p class="caption">
@@ -222,7 +222,7 @@ Figura 15.5: Tipos de distribuição em relação a variável resposta em GLM’
 <li>erros que não podem produzir valores ajustados negativos, como em dados de contagem.</li>
 </ul>
 <p>As principais alternativas para lidar com essas situações consistem em <strong>transformar a variável resposta</strong> ou utilizar <strong>métodos não-paramétricos</strong> <span class="citation">(<a href="#ref-sokal1995">SOKAL; ROHLF, 1995</a>)</span>. Os <strong>Modelos Lineares Generalizados</strong> representam uma abordagem mais flexível, pois permitem especificar diferentes distribuições de probabilidade para os erros, de acordo com a natureza da variável resposta.</p>
-<p>Entre as distribuições de erro mais utilizadas em GLMs destacam-se <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>:</p>
+<p>Entre as distribuições de erro mais utilizadas em GLMs destacam-se <span class="citation">(<a href="#ref-faraway2016">FARAWAY, 2016</a>)</span>:</p>
 <ul>
 <li>
 <strong>Distribuição de Poisson</strong>, apropriada para dados de contagem;</li>
@@ -269,9 +269,7 @@ Figura 15.5: Tipos de distribuição em relação a variável resposta em GLM’
 </h4>
 <p>A estrutura de um modelo relaciona cada valor observado da variável resposta (<strong>y</strong>) a um valor previsto (<strong>ŷ</strong>). Esse valor previsto é obtido por meio de uma transformação aplicada ao resultado do <strong>preditor linear</strong>.</p>
 <p>O <strong>preditor linear</strong>, geralmente representado pela letra grega (<span class="math inline">\(\eta\)</span>) (<em>eta</em>), consiste em uma combinação linear dos efeitos de uma ou mais variáveis explicativas (<span class="math inline">\(x_j\)</span>):</p>
-<p><span class="math display">\[
-\eta_i = \beta_0 + \sum_{j=1}^{p} x_{ij}\beta_j,
-\]</span></p>
+<p><span class="math display">\[\eta_i = \beta_0 + \sum_{j=1}^{p} x_{ij}\beta_j,\]</span></p>
 <p>em que:</p>
 <ul>
 <li>
@@ -286,13 +284,9 @@ Figura 15.5: Tipos de distribuição em relação a variável resposta em GLM’
 <p>Em uma <strong>regressão linear simples</strong>, o preditor linear possui dois parâmetros: o intercepto (<span class="math inline">\(\beta_0\)</span>) e o coeficiente angular (<span class="math inline">\(\beta_1\)</span>). Em uma <strong>ANOVA de um fator</strong> com quatro tratamentos, o preditor linear contém quatro termos, correspondentes às médias estimadas para cada nível do fator. Quando o modelo inclui <strong>covariáveis</strong>, cada uma delas acrescenta um novo termo ao preditor linear, representando sua inclinação (coeficiente de regressão). Em uma <strong>ANOVA fatorial</strong>, os termos de interação também adicionam parâmetros ao modelo. O número de parâmetros depende dos graus de liberdade envolvidos. Por exemplo, a interação entre um fator com dois níveis e outro com quatro níveis acrescenta três parâmetros, pois <span class="math inline">\(((2-1)(4-1)=3)\)</span>.</p>
 <p>No caso dos GLMs, para avaliar o ajuste de um modelo, calcula-se inicialmente o valor do <strong>preditor linear</strong> (<span class="math inline">\(\eta\)</span>) para cada observação da variável resposta. Em seguida, esse valor é relacionado à variável resposta por meio da <strong>função de ligação</strong> (<em>link function</em>). A função de ligação transforma a média da variável resposta para uma escala em que a relação com os preditores seja linear. Após estimar o preditor linear, o modelo aplica a <strong>função inversa da ligação</strong> para retornar os valores previstos à escala original da variável resposta. Esses valores são conhecidos como <strong>valores ajustados</strong> (<em>fitted values</em>).</p>
 <p>Por exemplo, quando a função de ligação é o <strong>logaritmo</strong> (<em>log link</em>), o valor ajustado é obtido aplicando a função exponencial ao preditor linear:</p>
-<p><span class="math display">\[
-\hat{\mu}=e^{\eta}
-\]</span>
+<p><span class="math display">\[\hat{\mu}=e^{\eta}\]</span>
 e quando a função de ligação é o <strong>recíproco</strong> (<em>reciprocal link</em>), o valor ajustado corresponde ao inverso do preditor linear:</p>
-<p><span class="math display">\[
-\hat{\mu}=\frac{1}{\eta}
-\]</span></p>
+<p><span class="math display">\[\hat{\mu}=\frac{1}{\eta}\]</span></p>
 <p>Assim, embora o ajuste do modelo seja realizado na escala do preditor linear, <strong>os resultados finais são expressos na escala original da variável resposta</strong>, facilitando sua interpretação.</p>
 </div>
 <div id="função-de-ligação" class="section level4" number="15.0.2.4">
@@ -301,9 +295,7 @@ e quando a função de ligação é o <strong>recíproco</strong> (<em>reciproca
 </h4>
 <p>Segundo <span class="citation">CRAWLEY (<a href="#ref-crawley2015">2015</a>)</span>, um dos conceitos mais desafiadores dos GLMs é a compreensão da relação entre os valores da variável resposta, observados nos dados e previstos pelo modelo, e o <strong>preditor linear</strong>. A ideia fundamental é que a <strong>função de ligação</strong> (<em>link function</em>) estabelece a relação entre a <strong>média da variável resposta</strong> e o preditor linear.</p>
 <p><span class="citation">CRAWLEY (<a href="#ref-crawley2015">2015</a>)</span> expressa essa relação em termos matemáticos como:</p>
-<p><span class="math display">\[
-\eta = g(\mu),
-\]</span>
+<p><span class="math display">\[\eta = g(\mu),\]</span>
 onde,</p>
 <ul>
 <li>
@@ -314,10 +306,8 @@ onde,</p>
 <span class="math inline">\(g(\cdot)\)</span> é a função de ligação.</li>
 </ul>
 <p>Embora a expressão seja simples, seu significado merece atenção. O preditor linear (<span class="math inline">\(\eta\)</span>) é obtido a partir da combinação linear das variáveis explicativas e de seus respectivos coeficientes. Portanto, ele <strong>não corresponde diretamente a um valor da variável resposta</strong>, exceto no caso particular da <strong>função de ligação identidade</strong>, utilizada implicitamente na regressão linear tradicional.</p>
-<p>Em um GLM, a média da variável resposta é inicialmente transformada pela função de ligação, produzindo o preditor linear. Após o ajuste do modelo, a <strong>função inversa da ligação</strong> é aplicada ao preditor linear para obter os valores ajustados na escala original da variável resposta <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>:</p>
-<p><span class="math display">\[
-\mu = g^{-1}(\eta)
-\]</span></p>
+<p>Em um GLM, a média da variável resposta é inicialmente transformada pela função de ligação, produzindo o preditor linear. Após o ajuste do modelo, a <strong>função inversa da ligação</strong> é aplicada ao preditor linear para obter os valores ajustados na escala original da variável resposta <span class="citation">(<a href="#ref-faraway2016">FARAWAY, 2016</a>)</span>:</p>
+<p><span class="math display">\[\mu = g^{-1}(\eta)\]</span></p>
 <p>Assim, o modelo é ajustado em uma escala linear, mas as previsões são apresentadas na escala original dos dados, o que facilita sua interpretação.</p>
 </div>
 </div>
@@ -325,17 +315,13 @@ onde,</p>
 <h3>
 <span class="header-section-number">15.0.3</span> Escolha da função de ligação<a class="anchor" aria-label="anchor" href="#escolha-da-fun%C3%A7%C3%A3o-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h3>
-<p>Uma das principais razões para utilizar diferentes funções de ligação é garantir que os valores ajustados permaneçam dentro de limites compatíveis com a natureza da variável resposta <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>.</p>
+<p>Uma das principais razões para utilizar diferentes funções de ligação é garantir que os valores ajustados permaneçam dentro de limites compatíveis com a natureza da variável resposta <span class="citation">(<a href="#ref-faraway2016">FARAWAY, 2016</a>)</span>.</p>
 <p>Por exemplo:</p>
 <p>Em <strong>dados de contagem</strong>, os valores previstos devem ser sempre <strong>maiores ou iguais a zero</strong>, pois contagens negativas não fazem sentido. Nesse caso, a <strong>função de ligação logarítmica</strong> (<em>log link</em>) é uma escolha apropriada, pois sua função inversa é a exponencial:</p>
-<p><span class="math display">\[
-\mu = e^{\eta}
-\]</span></p>
+<p><span class="math display">\[\mu = e^{\eta}\]</span></p>
 <p>que produz apenas valores positivos.</p>
 <p>Da mesma forma, quando a variável resposta representa uma <strong>proporção</strong> ou uma <strong>probabilidade</strong>, os valores ajustados devem estar obrigatoriamente entre 0 e 1. Para esses casos, utiliza-se geralmente a <strong>função de ligação logito</strong> (<em>logit link</em>), definida como:</p>
-<p><span class="math display">\[
-\eta = \log\left(\frac{p}{1-p}\right)
-\]</span></p>
+<p><span class="math display">\[\eta = \log\left(\frac{p}{1-p}\right)\]</span></p>
 <p>em que <span class="math inline">\(p\)</span> representa a probabilidade de ocorrência do evento de interesse. A função inversa do logito garante que todas as probabilidades estimadas permaneçam no intervalo entre 0 e 1.</p>
 <div id="comparação-entre-funções-de-ligação" class="section level4" number="15.0.3.1">
 <h4>
@@ -353,12 +339,12 @@ onde,</p>
 <span class="header-section-number">15.0.3.2</span> Funções canônicas de ligação<a class="anchor" aria-label="anchor" href="#fun%C3%A7%C3%B5es-can%C3%B4nicas-de-liga%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h4>
 <p>As <strong>funções de ligação canônicas</strong> (<em>canonical link functions</em>) são as funções de ligação utilizadas no R por padrão quando uma determinada distribuição de erros é especificada no argumento <code>family</code> de um GLM. Em outras palavras, quando nenhuma função de ligação é explicitamente informada, o software adota automaticamente a função de ligação canônica associada à distribuição escolhida.</p>
-<p>As principais combinações entre distribuições de erro e suas respectivas funções de ligação canônicas são apresentadas na Tabela abaixo <span class="citation">(<a href="#ref-faraway2016"><strong>faraway2016?</strong></a>)</span>.</p>
+<p>As principais combinações entre distribuições de erro e suas respectivas funções de ligação canônicas são apresentadas na Tabela abaixo <span class="citation">(<a href="#ref-faraway2016">FARAWAY, 2016</a>)</span>.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
 <col width="34%">
-<col width="40%">
-<col width="25%">
+<col width="39%">
+<col width="26%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Distribuição de erros (<code>family</code>)</th>
@@ -1369,8 +1355,17 @@ CRAWLEY, M. J. <strong>Statistics: An Introduction using R</strong>. 1. ed. [s.l
 <div id="ref-crawley2015" class="csl-entry">
 CRAWLEY, M. J. <strong>Statistics: An Introduction Using R</strong>. 2. ed ed. Chichester: Wiley, 2015.
 </div>
+<div id="ref-davies2022" class="csl-entry">
+DAVIES, B. F. R.; HOLMES, L.; BICKNELL, A.; ATTRILL, M. J.; SHEEHAN, E. V. A decade implementing ecosystem approach to fisheries management improves diversity of taxa and traits within a marine protected area in the UK. <strong>Diversity and Distributions</strong>, [s. l.], v. 28, n. 1, p. 173–188, 2022. Disponível em: &lt;<a href="https://onlinelibrary.wiley.com/doi/10.1111/ddi.13451">https://onlinelibrary.wiley.com/doi/10.1111/ddi.13451</a>&gt;
+</div>
+<div id="ref-davies2021" class="csl-entry">
+DAVIES, B. F. R.; HOLMES, L.; REES, A.; ATTRILL, M. J.; CARTWRIGHT, A. Y.; SHEEHAN, E. V. Ecosystem Approach to Fisheries Management works -How switching from mobile to static fishing gear improves populations of fished and non<span>-</span>fished species inside a marine<span>-</span>protected area. <strong>Journal of Applied Ecology</strong>, [s. l.], v. 58, n. 11, p. 2463–2478, 2021. Disponível em: &lt;<a href="https://bedeffinianrowedavies.com/">https://bedeffinianrowedavies.com/</a>&gt;
+</div>
 <div id="ref-dunn2018" class="csl-entry">
 DUNN, P. K.; SMYTH, G. K. <strong>Generalized Linear Models With Examples in R</strong>. New York, NY: Springer New York, 2018. Disponível em: &lt;<a href="http://link.springer.com/10.1007/978-1-4419-0118-7">http://link.springer.com/10.1007/978-1-4419-0118-7</a>&gt;
+</div>
+<div id="ref-faraway2016" class="csl-entry">
+FARAWAY, J. J. <strong>Extending the Linear Model with R: Generalized Linear, Mixed Effects and Nonparametric Regression Models, Second Edition</strong>. 2nd ed ed. Boca Raton: CRC Press, 2016.
 </div>
 <div id="ref-mccullagh1989" class="csl-entry">
 MCCULLAGH, P.; NELDER, J. A. <strong><a href="https://doi.org/10.1201/9780203753736">Generalized Linear Models</a></strong>. 2. ed. London, UK: Chapman; Hall, 1989.
@@ -1431,7 +1426,7 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 19:09:58.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 07/08/2026 21:17:32.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

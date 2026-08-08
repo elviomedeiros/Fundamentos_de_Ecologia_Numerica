@@ -138,8 +138,8 @@
 <h2>
 <span class="header-section-number">13.1</span> Correlação<a class="anchor" aria-label="anchor" href="#correla%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h2>
-<p>O <strong>coeficiente de correlação produto-momento de Pearson (<span class="math inline">\(r\)</span>)</strong> descreve a relação entre duas variáveis numéricas contínuas. A análise de correlação também pode ser aplicada entre variáveis categóricas binárias (coeficiente Phi) ou entre uma variável numérica contínua e uma variável categórica binária (correlação ponto-bisserial) <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>, porém essas abordagens não constituem o foco do presente texto (veja <a href="https://onlinelibrary.wiley.com/doi/10.1111/1467-9639.00013">Matthews</a> <span class="citation">(<a href="#ref-matthews2000"><strong>matthews2000?</strong></a>)</span>).</p>
-<p>Quando os pressupostos da correlação não podem ser adequadamente atendidos, utiliza-se uma alternativa não-paramétrica, a <strong>correlação por postos de Spearman (<span class="math inline">\(\rho\)</span>)</strong>.</p>
+<p>O <strong>coeficiente de correlação produto-momento de Pearson (</strong><span class="math inline">\(r\)</span>) descreve a relação entre duas variáveis numéricas contínuas. A análise de correlação também pode ser aplicada entre variáveis categóricas binárias (coeficiente Phi) ou entre uma variável numérica contínua e uma variável categórica binária (correlação ponto-bisserial) <span class="citation">(<a href="#ref-coakes2001">COAKES; STEED, 2001</a>)</span>, porém essas abordagens não constituem o foco do presente texto (veja <a href="https://onlinelibrary.wiley.com/doi/10.1111/1467-9639.00013">Matthews</a> <span class="citation">(<a href="#ref-matthews2000">2000</a>)</span>).</p>
+<p>Quando os pressupostos da correlação não podem ser adequadamente atendidos, utiliza-se uma alternativa não-paramétrica, a <strong>correlação por postos de Spearman (</strong><span class="math inline">\(\rho\)</span>).</p>
 <p>Neste capítulo serão abordadas:</p>
 <ul>
 <li>Correlação simples bivariada (coeficiente de correlação produto-momento de Pearson)<br>
@@ -165,11 +165,9 @@ Figura 13.1: Exemplos de diferentes forças e direções de correlação de Pear
 <h3>
 <span class="header-section-number">13.1.1</span> Coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-de-correla%C3%A7%C3%A3o-de-pearson-r"><i class="fas fa-link"></i></a>
 </h3>
-<p><span class="math display">\[
-r=\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
+<p><span class="math display">\[r=\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
 {\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2}
-\sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}
-\]</span></p>
+\sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}\]</span></p>
 <p>onde:</p>
 <ul>
 <li>
@@ -184,17 +182,11 @@ r=\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
 <span class="header-section-number">13.1.1.1</span> Como a fórmula funciona<a class="anchor" aria-label="anchor" href="#como-a-f%C3%B3rmula-funciona"><i class="fas fa-link"></i></a>
 </h4>
 <p>Primeiro, calculamos o desvio de cada observação em relação à média:</p>
-<p><span class="math display">\[
-x_i-\bar{x}
-\]</span></p>
+<p><span class="math display">\[x_i-\bar{x}\]</span></p>
 <p>e</p>
-<p><span class="math display">\[
-y_i-\bar{y}
-\]</span>
+<p><span class="math display">\[y_i-\bar{y}\]</span>
 Segundo, multiplicamos os desvios das duas variáveis:</p>
-<p><span class="math display">\[
-(x_i-\bar{x})(y_i-\bar{y}).
-\]</span></p>
+<p><span class="math display">\[(x_i-\bar{x})(y_i-\bar{y}).\]</span></p>
 <p>Se <strong>ambos os desvios forem positivos ou ambos negativos</strong>, o produto é positivo, indicando associação positiva. Se <strong>um desvio for positivo e o outro negativo</strong>, o produto é negativo, indicando associação negativa.</p>
 <p>Terceiro, somamos todos esses produtos, obtendo uma medida da covariação entre as variáveis.</p>
 <p>Por último, dividimos pelo produto dos desvios padrão, padronizando o resultado para que ele varie entre -1 e 1.</p>
@@ -243,12 +235,8 @@ Segundo, multiplicamos os desvios das duas variáveis:</p>
 </tbody>
 </table></div>
 <p>Primeiramente, calculam-se as médias das duas variáveis:</p>
-<p><span class="math display">\[
-\bar{x}=\frac{\sum x}{n}=\frac{15}{5}=3
-\]</span></p>
-<p><span class="math display">\[
-\bar{y}=\frac{\sum y}{n}=\frac{20}{5}=4
-\]</span></p>
+<p><span class="math display">\[\bar{x}=\frac{\sum x}{n}=\frac{15}{5}=3\]</span></p>
+<p><span class="math display">\[\bar{y}=\frac{\sum y}{n}=\frac{20}{5}=4\]</span></p>
 <p>Em seguida, calcula-se o desvio de cada observação em relação à sua média, como apresentado na Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, abaixo:</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -437,36 +425,22 @@ Obs
 </tbody>
 </table></div>
 <p>Assim,</p>
-<p><span class="math display">\[
-\sum (x_i-\bar{x})(y_i-\bar{y})=9
-\]</span></p>
-<p><span class="math display">\[
-\sum (x_i-\bar{x})^2=10
-\]</span></p>
-<p><span class="math display">\[
-\sum (y_i-\bar{y})^2=10
-\]</span></p>
+<p><span class="math display">\[\sum (x_i-\bar{x})(y_i-\bar{y})=9\]</span></p>
+<p><span class="math display">\[\sum (x_i-\bar{x})^2=10\]</span></p>
+<p><span class="math display">\[\sum (y_i-\bar{y})^2=10\]</span></p>
 <p>Substituindo esses valores na fórmula do coeficiente de correlação de Pearson,</p>
-<p><span class="math display">\[
-r=
+<p><span class="math display">\[r=
 \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
 {\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2}
-\sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}
-\]</span></p>
+\sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}\]</span></p>
 <p>tem-se</p>
-<p><span class="math display">\[
-r=
+<p><span class="math display">\[r=
 \frac{9}
-{\sqrt{10}\times\sqrt{10}}
-\]</span></p>
+{\sqrt{10}\times\sqrt{10}}\]</span></p>
 <p>Como</p>
-<p><span class="math display">\[
-\sqrt{10}\times\sqrt{10}=10,
-\]</span></p>
+<p><span class="math display">\[\sqrt{10}\times\sqrt{10}=10,\]</span></p>
 <p>segue que</p>
-<p><span class="math display">\[
-r=\frac{9}{10}=0,90.
-\]</span></p>
+<p><span class="math display">\[r=\frac{9}{10}=0,90.\]</span></p>
 </div>
 <div id="interpretação" class="section level3" number="13.1.3">
 <h3>
@@ -479,32 +453,24 @@ r=\frac{9}{10}=0,90.
 <span class="header-section-number">13.1.4</span> Coeficiente de determinação (<span class="math inline">\(r^2\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-de-determina%C3%A7%C3%A3o-r2"><i class="fas fa-link"></i></a>
 </h3>
 <p>O coeficiente de determinação é obtido por:</p>
-<p><span class="math display">\[
-R^2=r^2=(0,90)^2=0,81.
-\]</span></p>
-<p>Portanto, <strong>81% da variação observada em <span class="math inline">\(y\)</span> é explicada pela relação linear com <span class="math inline">\(x\)</span></strong>, enquanto os 19% restantes são atribuídos a outros fatores ou à variabilidade aleatória.</p>
+<p><span class="math display">\[R^2=r^2=(0,90)^2=0,81.\]</span></p>
+<p>Portanto, <strong>81% da variação observada em</strong> <span class="math inline">\(y\)</span> é explicada pela relação linear com <span class="math inline">\(x\)</span>, enquanto os 19% restantes são atribuídos a outros fatores ou à variabilidade aleatória.</p>
 <p>Na regressão linear simples, temos:</p>
-<p><span class="math display">\[
-R^2=\frac{\text{SQ}*{\text{Regressão}}}
-{\text{SQ}*{\text{Total}}}
-\]</span></p>
+<p><span class="math display">\[R^2=\frac{\text{SQ}*{\text{Regressão}}}
+{\text{SQ}*{\text{Total}}}\]</span></p>
 <p>onde:</p>
 <ul>
 <li>
 <span class="math inline">\(\text{SQ}_{\text{Total}}\)</span>: soma de quadrados total, representa toda a variação da variável resposta.</li>
 </ul>
-<p><span class="math display">\[
-  \text{SQ}*{\text{Total}}
-  =\sum*{i=1}^{n}(y_i-\bar{y})^2
-\]</span></p>
+<p><span class="math display">\[  \text{SQ}*{\text{Total}}
+  =\sum*{i=1}^{n}(y_i-\bar{y})^2\]</span></p>
 <ul>
 <li>
 <span class="math inline">\(\text{SQ}_{\text{Regressão}}\)</span>: soma de quadrados explicada pelo modelo.</li>
 </ul>
-<p><span class="math display">\[
-  \text{SQ}*{\text{Regressão}}
-  =\sum*{i=1}^{n}(\hat y_i-\bar y)^2
-\]</span></p>
+<p><span class="math display">\[  \text{SQ}*{\text{Regressão}}
+  =\sum*{i=1}^{n}(\hat y_i-\bar y)^2\]</span></p>
 <p>onde <span class="math inline">\(\hat y_i\)</span> é o valor previsto pela regressão.</p>
 <div id="como-a-fórmula-funciona-1" class="section level4" number="13.1.4.1">
 <h4>
@@ -512,12 +478,9 @@ R^2=\frac{\text{SQ}*{\text{Regressão}}}
 </h4>
 <p>O coeficiente de determinação calcula a fração da variação total de (y) que é explicada pela regressão.</p>
 <p>Por exemplo, se</p>
-<p><span class="math inline">\(\text{SQ}_{\text{Regressão}}=80\)</span>
-<span class="math inline">\(\text{SQ}_{\text{Total}}=100\)</span>,</p>
+<p><span class="math inline">\(\text{SQ}_{\text{Regressão}}=80\)</span> <span class="math inline">\(\text{SQ}_{\text{Total}}=100\)</span>,</p>
 <p>então</p>
-<p><span class="math display">\[
-r^2=\frac{80}{100}=0,80
-\]</span></p>
+<p><span class="math display">\[r^2=\frac{80}{100}=0,80\]</span></p>
 <p>Isso significa que <strong>80% da variação da variável resposta é explicada pelo modelo</strong>, enquanto os 20% restantes são atribuídos a outros fatores ou ao erro aleatório.</p>
 </div>
 </div>
@@ -526,32 +489,22 @@ r^2=\frac{80}{100}=0,80
 <span class="header-section-number">13.1.5</span> Relação entre <span class="math inline">\(r\)</span> e <span class="math inline">\(R^2\)</span><a class="anchor" aria-label="anchor" href="#rela%C3%A7%C3%A3o-entre-r-e-r2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Na regressão linear simples existe apenas uma variável explicativa, e vale a relação</p>
-<p><span class="math display">\[
-r^2=R^2
-\]</span></p>
+<p><span class="math display">\[r^2=R^2\]</span></p>
 <p>Assim, se</p>
-<p><span class="math display">\[
-r=0,90,
-\]</span></p>
+<p><span class="math display">\[r=0,90,\]</span></p>
 <p>então</p>
-<p><span class="math display">\[
-R^2=0,90^2=0,81.
-\]</span></p>
+<p><span class="math display">\[R^2=0,90^2=0,81.\]</span></p>
 <p>Ou seja, a correlação mede a <strong>força e a direção</strong> da relação linear entre duas variáveis, enquanto o coeficiente de determinação mede <strong>quanto da variação da variável resposta é explicada pelo modelo de regressão</strong>.</p>
 <div id="não-confundir-com-resíduos" class="section level4" number="13.1.5.1">
 <h4>
 <span class="header-section-number">13.1.5.1</span> Não confundir com <strong>resíduos</strong><a class="anchor" aria-label="anchor" href="#n%C3%A3o-confundir-com-res%C3%ADduos"><i class="fas fa-link"></i></a>
 </h4>
 <p>No desvio em relação à média</p>
-<p><span class="math display">\[
-x_i - \bar{x}
-\]</span></p>
+<p><span class="math display">\[x_i - \bar{x}\]</span></p>
 <p>é o <strong>desvio da observação em relação à média</strong> da variável (x).</p>
 <p>Ele indica quanto um valor observado está acima ou abaixo da média e é utilizado no cálculo da variância, covariância e da correlação de Pearson.</p>
 <p>Na regressão, o resíduo é</p>
-<p><span class="math display">\[
-e_i = y_i - \hat{y}_i,
-\]</span></p>
+<p><span class="math display">\[e_i = y_i - \hat{y}_i,\]</span></p>
 <p>onde:</p>
 <ul>
 <li>
@@ -818,8 +771,7 @@ Hipótese alternativa (<span class="math inline">\(H_1\)</span>): existe correla
 ##    estimate p.value statistic   n gp  Method
 ## 1 0.9945978       0  198.9168 434  1 pearson</code></pre>
 <p>Interpretação:</p>
-<p>O resultado da <strong>correlação parcial</strong> (<code><a href="https://rdrr.io/pkg/ppcor/man/pcor.test.html">pcor.test()</a></code>) de Pearson, isto é, a correlação entre CP_cm e CT_cm após controlar o efeito de uma terceira variável (PT_g), demonstra um <strong>coeficiente de correlação parcial</strong> <span class="math inline">\(r_p\)</span> de 0.9945 (<em>estimate</em>), mesmo após remover o efeito do peso (PT_g). A <strong>estaística t</strong> (<em>statistic</em>) de 198.91 utilizada para testar a significância da correlação parcial e o <strong>número de observações</strong> (n) também são apresentados. O <strong>número de variáveis controladas</strong> (neste caso, apenas PT_g), é demonstrado em
-gp = 1. O <strong>valor de p</strong> (&lt;0,001) é extremamente pequeno. Finalmemte, o <strong>método utilizado</strong> (correlação parcial de Pearson) é apresentado.</p>
+<p>O resultado da <strong>correlação parcial</strong> (<code><a href="https://rdrr.io/pkg/ppcor/man/pcor.test.html">pcor.test()</a></code>) de Pearson, isto é, a correlação entre CP_cm e CT_cm após controlar o efeito de uma terceira variável (PT_g), demonstra um <strong>coeficiente de correlação parcial</strong> <span class="math inline">\(r_p\)</span> de 0.9945 (<em>estimate</em>), mesmo após remover o efeito do peso (PT_g). A <strong>estaística t</strong> (<em>statistic</em>) de 198.91 utilizada para testar a significância da correlação parcial e o <strong>número de observações</strong> (n) também são apresentados. O <strong>número de variáveis controladas</strong> (neste caso, apenas PT_g), é demonstrado em gp = 1. O <strong>valor de p</strong> (&lt;0,001) é extremamente pequeno. Finalmemte, o <strong>método utilizado</strong> (correlação parcial de Pearson) é apresentado.</p>
 <p>Tivemos uma correlação parcial forte e positiva (r = 0.9945) entre CP_cm e CT_cm, mesmo após remover o efeito do PT_g (peso total) (p &lt; 0,001). Isso indica que a associação entre comprimento padrão e comprimento total permanece muito forte independentemente do peso corporal.</p>
 <p>O QUE REPORTAR: Análise de correlação parcial revelou associação positiva extremamente forte entre comprimento padrão e comprimento total, mesmo após o controle do peso corporal (r = 0,9945; p &lt; 0,001).</p>
 </div>
@@ -846,9 +798,7 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <p>PERGUNTA: A variação em uma variável explicativa (x) permite explicar ou prever a variação em uma variável resposta (y)?</p>
 <p><span class="math inline">\(H_0\)</span>: Hipótese nula: <span class="math inline">\(\beta_1 = 0\)</span>, ou seja, a variável explicativa não exerce efeito sobre a variável resposta (o modelo não possui poder preditivo).<br><span class="math inline">\(H_1\)</span>: Hipótese alternativa: <span class="math inline">\(\beta_1 \neq 0\)</span>, ou seja, a variável explicativa exerce efeito sobre a variável resposta (o modelo possui poder preditivo).</p>
 <p>O principal resultado da regressão linear é a <em>equação da reta</em>, que descreve a relação entre as variáveis na regressão:</p>
-<p><span class="math display">\[
-\hat{y}=\beta_0+\beta_1 x + \varepsilon
-\]</span></p>
+<p><span class="math display">\[\hat{y}=\beta_0+\beta_1 x + \varepsilon\]</span></p>
 <p>onde:</p>
 <ul>
 <li>
@@ -869,15 +819,11 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <span class="header-section-number">13.8</span> Coeficiente angular (<span class="math inline">\(\beta_1\)</span>)<a class="anchor" aria-label="anchor" href="#coeficiente-angular-beta_1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Sendo a equação geral da reta dada por:</p>
-<p><span class="math display">\[
-\hat{y}=\beta_0+\beta_1 x
-\]</span></p>
+<p><span class="math display">\[\hat{y}=\beta_0+\beta_1 x\]</span></p>
 <p>O coeficiente angular (<span class="math inline">\(\beta_1\)</span>) representa a <strong>inclinação da reta de regressão</strong>, indicando quanto a variável resposta (<span class="math inline">\(y\)</span>) varia, em média, para cada aumento de uma unidade na variável preditora (<span class="math inline">\(x\)</span>):</p>
-<p><span class="math display">\[
-\beta_1 =
+<p><span class="math display">\[\beta_1 =
 \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
-{\sum_{i=1}^{n}(x_i-\bar{x})^2}
-\]</span></p>
+{\sum_{i=1}^{n}(x_i-\bar{x})^2}\]</span></p>
 <p>onde:</p>
 <ul>
 <li>
@@ -894,40 +840,22 @@ o que está à direita de <code>~</code> é a variável independente (explicativ
 <span class="header-section-number">13.8.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_1\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Considerando os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos já apresentados na Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
-<p><span class="math display">\[
-x=(1,2,3,4,5)
-\]</span></p>
-<p><span class="math display">\[
-y=(2,3,5,4,6)
-\]</span>
+<p><span class="math display">\[x=(1,2,3,4,5)\]</span></p>
+<p><span class="math display">\[y=(2,3,5,4,6)\]</span>
 e</p>
-<p><span class="math display">\[
-\bar{x}=3
-\]</span></p>
-<p><span class="math display">\[
-\bar{y}=4
-\]</span>
+<p><span class="math display">\[\bar{x}=3\]</span></p>
+<p><span class="math display">\[\bar{y}=4\]</span>
 Já calculamos</p>
-<p><span class="math display">\[
-\sum(x_i-\bar{x})(y_i-\bar{y})=9
-\]</span>
+<p><span class="math display">\[\sum(x_i-\bar{x})(y_i-\bar{y})=9\]</span>
 e</p>
-<p><span class="math display">\[
-\sum(x_i-\bar{x})^2=10
-\]</span></p>
+<p><span class="math display">\[\sum(x_i-\bar{x})^2=10\]</span></p>
 <p>Substituindo na fórmula:</p>
-<p><span class="math display">\[
-\beta_1=
+<p><span class="math display">\[\beta_1=
 \frac{9}
-{10}
-\]</span></p>
-<p><span class="math display">\[
-\beta_1=0,9
-\]</span></p>
+{10}\]</span></p>
+<p><span class="math display">\[\beta_1=0,9\]</span></p>
 <p>Assim, o coeficiente angular da reta é</p>
-<p><span class="math display">\[
-\beta_1=0,90.
-\]</span></p>
+<p><span class="math display">\[\beta_1=0,90.\]</span></p>
 </div>
 </div>
 <div id="intercepto-beta_0" class="section level2" number="13.9">
@@ -936,41 +864,25 @@ e</p>
 </h2>
 <p>O intercepto (<span class="math inline">\(\beta_0\)</span>) representa o valor esperado da variável resposta (<span class="math inline">\(y\)</span>) quando a variável independente (<span class="math inline">\(y\)</span>) é igual a zero. Graficamente, corresponde ao ponto onde a reta intercepta o eixo <span class="math inline">\(y\)</span>.</p>
 <p>O intercepto é calculado por</p>
-<p><span class="math display">\[
-\beta_0=\bar{y}-\beta_1\bar{x}
-\]</span></p>
+<p><span class="math display">\[\beta_0=\bar{y}-\beta_1\bar{x}\]</span></p>
 <p>em que</p>
-<p><span class="math display">\[
-\bar{x}=\frac{\sum x}{n}
+<p><span class="math display">\[\bar{x}=\frac{\sum x}{n}
 \qquad\text{e}\qquad
-\bar{y}=\frac{\sum y}{n}
-\]</span></p>
+\bar{y}=\frac{\sum y}{n}\]</span></p>
 <div id="exemplo-de-cálculo-de-beta_0" class="section level3" number="13.9.1">
 <h3>
 <span class="header-section-number">13.9.1</span> Exemplo de cálculo de <span class="math inline">\(\beta_0\)</span><a class="anchor" aria-label="anchor" href="#exemplo-de-c%C3%A1lculo-de-beta_0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Mais uma vez, tomando-se os valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> e os demais cálculos apresentados na Tabela <a href="correg.html#tab:rmdtabr2">13.1</a>, temos:</p>
-<p><span class="math display">\[
-\bar{x}=\frac{15}{5}=3
-\]</span></p>
+<p><span class="math display">\[\bar{x}=\frac{15}{5}=3\]</span></p>
 <p>e</p>
-<p><span class="math display">\[
-\bar{y}=\frac{20}{5}=4
-\]</span></p>
+<p><span class="math display">\[\bar{y}=\frac{20}{5}=4\]</span></p>
 <p>Como <span class="math inline">\(\beta_1=0,90\)</span>, temos:</p>
-<p><span class="math display">\[
-\beta_0=4-(0,90\times3)
-\]</span></p>
-<p><span class="math display">\[
-\beta_0=4-2,70
-\]</span></p>
-<p><span class="math display">\[
-\beta_0=1,30
-\]</span></p>
+<p><span class="math display">\[\beta_0=4-(0,90\times3)\]</span></p>
+<p><span class="math display">\[\beta_0=4-2,70\]</span></p>
+<p><span class="math display">\[\beta_0=1,30\]</span></p>
 <p>Portanto, o intercepto da reta é</p>
-<p><span class="math display">\[
-\beta_0=1,30.
-\]</span></p>
+<p><span class="math display">\[\beta_0=1,30.\]</span></p>
 </div>
 </div>
 <div id="equação-da-reta" class="section level2" number="13.10">
@@ -978,23 +890,13 @@ e</p>
 <span class="header-section-number">13.10</span> Equação da reta<a class="anchor" aria-label="anchor" href="#equa%C3%A7%C3%A3o-da-reta"><i class="fas fa-link"></i></a>
 </h2>
 <p>Substituindo os valores de <span class="math inline">\(\beta_0\)</span> e <span class="math inline">\(\beta_1\)</span>, obtém-se a equação da regressão linear simples:</p>
-<p><span class="math display">\[
-\hat{y}=1,3+0,9x
-\]</span>
+<p><span class="math display">\[\hat{y}=1,3+0,9x\]</span>
 Dessa forma, podemos prever <span class="math inline">\(\hat{y}\)</span> a partir de um valor de <span class="math inline">\(x\)</span>:</p>
-<p><span class="math display">\[
-\hat{y}=1,3+0,9x
-\]</span>
+<p><span class="math display">\[\hat{y}=1,3+0,9x\]</span>
 Para <span class="math inline">\(x=6\)</span>, temos:</p>
-<p><span class="math display">\[
-\hat{y}=1,3+0,9(6)
-\]</span></p>
-<p><span class="math display">\[
-\hat{y}=1,3+5,4
-\]</span></p>
-<p><span class="math display">\[
-\hat{y}=6,7
-\]</span></p>
+<p><span class="math display">\[\hat{y}=1,3+0,9(6)\]</span></p>
+<p><span class="math display">\[\hat{y}=1,3+5,4\]</span></p>
+<p><span class="math display">\[\hat{y}=6,7\]</span></p>
 <div id="exemplo-1" class="section level4" number="13.10.0.1">
 <h4>
 <span class="header-section-number">13.10.0.1</span> Exemplo<a class="anchor" aria-label="anchor" href="#exemplo-1"><i class="fas fa-link"></i></a>
@@ -1077,9 +979,7 @@ Para <span class="math inline">\(x=6\)</span>, temos:</p>
 ## F-statistic: 2.183e+05 on 1 and 432 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672"></div>
 <p>No caso do nosso exemplo, o modelo de regressão linear simples pode ser representado por:</p>
-<p><span class="math display">\[
-\widehat{CT_{cm}} = \beta_0 + \beta_1 CP_{cm} + \varepsilon
-\]</span></p>
+<p><span class="math display">\[\widehat{CT_{cm}} = \beta_0 + \beta_1 CP_{cm} + \varepsilon\]</span></p>
 <p>onde:</p>
 <ul>
 <li>
@@ -1099,9 +999,7 @@ Para <span class="math inline">\(x=6\)</span>, temos:</p>
 <p>Interpretação:</p>
 <p>A função <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> fornece todas as informações necessárias para interpretar os resultados da regressão linear.</p>
 <p>A fórmula utilizada dentro da função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> indica que <code>CT_cm</code> é a variável resposta (dependente) e <code>CP_cm</code> é a variável explicativa (independente). A <strong>equação do modelo ajustado</strong> seria:</p>
-<p><span class="math display">\[
-\widehat{CT_{cm}} = 0.147 + 1.206 \times CP_{cm}
-\]</span>
+<p><span class="math display">\[\widehat{CT_{cm}} = 0.147 + 1.206 \times CP_{cm}\]</span>
 onde:</p>
 <ul>
 <li>0,147 é o intercepto (<span class="math inline">\(\beta_0\)</span>)<br>
@@ -1310,6 +1208,9 @@ CLEOPHAS, T. J.; ZWINDERMAN, A. H. <strong>SPSS for Starters and 2nd Levelers</s
 <div id="ref-coakes2001" class="csl-entry">
 COAKES, S. J.; STEED, L. G. <strong>SPSS: Analysis Without Anguish: version 10.0 for Windows</strong>. Milton, Qld: John Wiley &amp; Sons Australia, Ltd, 2001.
 </div>
+<div id="ref-matthews2000" class="csl-entry">
+MATTHEWS, R. Storks deliver babies ( <span><em>p</em></span> = 0.008). <strong>Teaching Statistics</strong>, [s. l.], v. 22, n. 2, p. 36–38, 2000. Disponível em: &lt;<a href="https://onlinelibrary.wiley.com/doi/10.1111/1467-9639.00013">https://onlinelibrary.wiley.com/doi/10.1111/1467-9639.00013</a>&gt;
+</div>
 <div id="ref-mcdonald2014" class="csl-entry">
 MCDONALD, J. H. <strong>Handbook of Biolological Statistics</strong>. Third ed. Baltimore, Maryland, U.S.A.: Sparky House Publishing, 2014. Disponível em: &lt;<a href="https://www.biostathandbook.com/permissions.html;%20www.biostathandbook.com/HandbookBioStatThird.pdf">https://www.biostathandbook.com/permissions.html; www.biostathandbook.com/HandbookBioStatThird.pdf</a>&gt;
 </div>
@@ -1378,7 +1279,7 @@ ROYCE, W. F. Standard length versus total length. <strong>Transactions of the Am
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 05/08/2026 19:09:58.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 07/08/2026 21:17:32.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
