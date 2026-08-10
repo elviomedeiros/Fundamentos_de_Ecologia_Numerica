@@ -1,0 +1,189 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Teoria 2 - Tipos de dados
+
+### Tipos de dados usados em (AMD)  {-}
+
+### Apresentação  {-}
+
+Os conjuntos de dados multivariados em ecologia são inerentemente grandes e de estrutura complexa. Existem várias maneiras de representá-los e, mais importante do que com estatísticas univariadas, decisões conscientes devem ser feitas sobre quais subconjuntos vamos analisar. Essas decisões refletem as perguntas que estamos fazendo. Há também a necessidade de considerar se quaisquer transformações e/ou padronizações precisam ser aplicadas antes da análise adequada. Novamente, essas operações de dados são influenciadas pelas perguntas que estamos fazendo. O que exatamente constitui o conjunto de ferramentas que chamamos de **análise multivariada** depende da disciplina em que se trabalha. Isso decorre da natureza dos dados comumente disponíveis para análise e do tipo de perguntas feitas em cada disciplina. Na ecologia, como em outras disciplinas, um conjunto dessas técnicas foi altamente ajustado para auxiliar na exploração de dados. A maioria deles se encaixa na rubrica de classificação ou ordenação.
+
+Uma visão geral dessas abordagens, os dados em que operam e as sequências analíticas típicas serão apresentadas ao longo deste livro.
+
+É importante ressaltar que esse livro se baseia fortemente nos textos clássicos de Ecologia Numérica (@RN1278, @RN1552, @RN1012, @RN67, @RN181, entre outros), bem como em sites da internet e livros e apostilhas publicados on-line. Busco aqui mais trazer um compilado de informações úteis para o novato e, quem sabe, para o veterano, do que apresentar um texto totalmennte novo. Afinal o objetivo principal deste livro é ser o apoio a minha disciplina na graduação.
+
+Então vamos lá...    
+
+### Plano de estudo {-}
+
+Aqui você aprenderá sobre essas decisões importantes e como tomá-las. Você verá por que é necessário considerar as propriedades dos objetos, atributos e valores, com cuidado, antes de passar para a análise.
+
+Você desenvolverá uma compreensão básica da matriz de dados brutos e como os dados multivariados podem ser representados. A partir de um conceito simples de similaridade, você desenvolverá uma compreensão do que são classificação e ordenação, e como elas diferem de outras técnicas multivariadas.
+
+Enfim, você terá uma visão geral das etapas possíveis em uma análise multivariada. Estude esse texto, pensando que você deverá der ser capaz de fazer o seguinte:
+  
+●	Decidir como particionar grandes conjuntos de dados multivariados;  
+●	Identificar outliers univariados e multivariados e decidir como tratá-los;    
+●	Determinar o método apropriado de transformação e padronização para um problema específico.  
+
+Nesta disciplina você aprenderá os seguintes procedimentos de análise:
+
+●	Particionamento por exclusão seletiva de atributos e objetos  
+●	Transposição e randomização de uma matriz de dados  
+●	Codificação de atributos e transformação de seus valores  
+●	Padronização de valores por objetos ou atributos  
+●	Resumo univariado de objetos e atributos e teste para outliers  
+
+Este conteúdo é baseado na suposição de que você concluiu a disciplina de Bioestatística e requer base em estatísticas descritivas univariadas e a capacidade de instalar e importar dados para o RStudio. Algumas lacunas no conhecimento poderão ser abordadas de forma assíncrona e através de material de apoio.
+
+## Tipos de dados
+
+Em ecologia numérica, um objeto pode ser descrito por caracteres ou variáveis de três tipos diferentes: quantitativos, semiquantitativos ou qualitativos [@RN2759, @RN2092].
+
+Os **dados quantitativos** implicam em relações de mensuração, medida ou contagem, e podem ser classificados em dois subtipos: discretos e intervalares.
+Dados **discretos** envolvem valores que assumem um conjunto finito de valores possíveis e possuem *zero verdadeiro*, como a contagem de indivíduos de determinados organismos, altura, peso e comprimento. Já dados **intervalares** envolvem valores que pertencem a um intervalo de números reais e *não possuem zero verdadeiro*, como muitas das medidas de variáveis físicas e químicas. Por exemplo, uma temperatura de zero graus celsisus indica o estado de congelamento da água, mas não significa que não há temperatura. Já a contagem de zero indivíduos em uma amostra significa que realmente não há indivíduos ali. Além disso, dados intervalares também dependem da com resolução do instrumento que os mede.
+
+Os **dados semiquantitativos**, por sua vez, são oriundos de variáveis quantitativas codificadas por meio de valores inteiros crescentes. São úteis quando, por razão metodológica, há impossibilidade de se medir com precisão a variável quantitativa. Um exemplo disso é o pH medido usando uma escala de cores e codificamos como 1, 2 e 3, ou ácido, neutro e alcalino. Nesse caso, a matemática deve ser usada com ressalva. 1+1 não é 2, ácido + ácido não é neutro...
+
+Por último, temos os **dados qualitativos**, que expressam atributos e qualidades do objeto pesquisado. Para cada objeto, existe apenas uma alternativa, possuir ou não possuir um determinado caractere, o que representa uma resposta `sim ou não`, `tudo ou nada`, ou como conhecemos em ecologia, `presente ou ausente`. Nesse caso usamos a codificação binária de 1 ou 0 (respectivamente). Em ecologia, frequentemente se usa a presença/ausência de determinada espécie em cada sítio.
+
+Os dados semiquantitativos e qualitativos podem ser apresentar ainda duas possibilidades. Podem ser ordinais e nominais. Os dados (semi)qualitativos *ordinais* são aqueles em que é possível atribuir alguma ordem aos indivíduos depois de atribuída a característica, como escolaridade ou o exemplo do pH acima. Já os dados (semi)qualitativos *nominais* são aqueles em que não é possível atribuir ordem às variáveis, como profissão ou presença/ausência.
+
+Em estudos ecológicos, é comum que se utilize uma grande variedade de descritores, com dados de tipos diferentes, tornando necessária a **homogeneização dos dados**  [@RN2759]. Enquanto planejamos nosso estudo, devemos atentar para o fato de que os dados qualitativos não podem ser "transformados" em dados quantitativos, o que representa uma perda de informação proveniente dos dados quantitativos.
+
+> A transformação a que me refiro acima não é aquela que usamos nos valores para diminuir o tamanho dos números e facilitar sua manipulação e interpretação, bem como a normalização da distribuição de frequências dos dados (diminuição da assumetria - cauda - dos dados), para que se permita a aplicação de testes estatísticos paramétricos. Esse tipo de transformação é importante, já que dados ecológicos são, via de regra, fortemente unicaudais devido à alta frequência de valores nulos (zeros). Esse tema será tratado nos capítulos sobre [Estatística descritiva univariada] e [Relativizações e Transformações].
+
+Mas voltando ao tema da homogeneização, dados qualitativos não podem ser "transformados" em dados quantitativos. Isso significa que, se quisermos manter todas as variáves amostradas, os dados quantitativos é que terão de ser "transformados" em dados qualitativos, ou semiquatitativos. A perda de informação proveniente dos dados quantitativos após a homogeneização é demonstrada nos exemplos a seguir.
+
+## Pré-análises
+
+## Tipos de dados e suas transformações
+
+O exame cuidadoso dos dados brutos é essencial para uma análise multivariada bem-sucedida. Três questões primárias precisam ser consideradas:  
+
+1.	que objeto e atributos dos dados serão úteis para abordar quais questões (necessita particionamento?);  
+2.	os dados necessitam de relativizações e transformações (padronizações)? 
+a.	como os atributos são escalados (necessita codificação e transformação?);  
+b.	as escalas são comparáveis (comensuráveis) entre os atributos (necessita padronização?), e 
+3.	existem outliers (necessita sua exclusão)?  
+Trataremos de cada um deles separadamente.  
+1. Particionando seu conjunto de dados  
+Infelizmente, em muitos casos, os dados para análise multivariada vêm de programas de amostragem que foram mal planejados. Isso pode surgir da decisão inicial de “coletar os dados primeiro, decidir o que fazer depois”. Nesses casos, um rico conjunto de dados pode resultar, mas requer particionamento cuidadoso para obter o máximo valor de sua análise.  
+A necessidade de particionamento surge do fato de os dados serem frequentemente hiper dimensionais de várias maneiras possíveis. Em primeiro lugar, muitas vezes temos objetos, atributos e períodos como uma característica dos dados, dando origem a uma caixa de dados 3D. Em segundo lugar, tanto os objetos quanto os atributos (e tempos) podem ser agrupados (ou agrupáveis), hierarquicamente ou não. Isso torna problemática qualquer análise multivariada da matriz de dados completa; por causa da heterogeneidade dos conjuntos, estamos chamando objetos e/ou atributos.  
+O agrupamento de atributos é comum; por exemplo, frequentemente medimos a composição de espécies, bem como atributos ambientais físicos para o mesmo conjunto de objetos. Dado que o número de espécies registradas é desconhecido para começar e o número de medidas ambientais que podemos tomar é arbitrário, há um problema em decidir como ponderar esses dois conjuntos de atributos na medição da similaridade entre objetos. A composição das espécies deve ser igualmente considerada em relação às condições ambientais? Não existe uma resposta simples.  
+A aplicação da navalha de Ockham (lei da parcimônia) sugeriria que poderíamos evitar o problema fazendo análises separadas dos dois conjuntos de atributos e, em seguida, comparando os resultados para responder a uma questão específica sobre as relações entre espécies e ambientes. Apesar disso, tentativas foram feitas para superar esse problema de atributos agrupados diretamente, mas ainda é preciso decidir que peso dar a cada conjunto de atributos.  
+A adição do tempo como uma terceira dimensão à nossa caixa de dados também apresenta uma dificuldade, uma vez que a maioria das técnicas multivariadas opera apenas em uma matriz de atributos de objetos por atributos (n x m). Portanto, não podemos analisar diretamente uma caixa 3-D. No entanto, existem várias opções para reduzir os dados a uma caixa 2-D. Os mais comuns são os seguintes.  
+●	Poderíamos usar a análise de série temporal, se tivéssemos tempos suficientes (mais de 100?), para resumir as tendências temporais de cada atributo em um único valor.  
+●	Podemos calcular a média ao longo dos tempos ou, mais comumente, considerar os tempos como objetos separados. Neste caso, cada objeto se torna uma combinação de objeto * tempo.  
+●	Outra possibilidade é considerar o tempo como um atributo de perfil por meio de uma medida de similaridade capaz de considerar perfis.  
+Objetos agrupados são bastante comuns e geralmente surgem da necessidade de subamostrar. Nesse caso, precisamos decidir cuidadosamente quais de nossas unidades de amostragem serão os objetos definidos.  
+Por exemplo, em estudos de dietas de animais com base no conteúdo intestinal, nossa unidade de amostragem é um único intestino. No entanto, podemos decidir que este nível de resolução não é representativo, pois reflete simplesmente a última refeição de um animal. Diante dessa situação, escolheríamos agregar as unidades a um nível que se adequasse ao nosso conceito de padrão alimentar de uma espécie. Isso é semelhante ao problema de pseudoreplicação. 
+2. Escalas de atributos  
+Lembre-se de que existem quatro escalas de atributos fundamentais. Estes influenciam as possíveis transformações e a escolha da medida de similaridade. A escala nominal é a menos desejável e a escala de razão é a mais desejável na análise multivariada. Exceto para dados 0/1 (presença-ausência), a maioria das medidas de similaridade opera nos dados assumindo o nível de razão. Os dados de presença / ausência de espécies, codificados como binários 1 e 0, às vezes são descritos como escala nominal. No entanto, pode ser considerada uma forma de escala de razão truncada, ao invés de nominal. Todas as variáveis naturais de nível de razão são truncadas por causa da faixa de valores reais possíveis. As árvores não excedem a altura de 100 m com muita frequência, por exemplo.  
+As propriedades essenciais das quatro escalas de atributos podem ser resumidas como segue. Uma discussão mais aprofundada das escalas de medição é fornecida subsequentemente. 
+Escala	Operadores matemáticos com significado válido	Exemplo do maior operador
+Nominal	= ≠	5 não é 10
+Ordinal	= ≠ > < 	5 é menor que 10 
+Intervalar	= ≠ > < + −	5 é 5 de distância de 10
+Razão	= ≠ > < + − × ÷	5 é metade de 10
+Codificação dos atributos  
+Existem quatro principais maneiras pelas quais podemos considerar a alteração dos valores de nossos atributos, conforme registrado nas planilhas de dados, antes de iniciar a análise adequada. Os dois primeiros envolvem operações em cada valor, independentemente das propriedades da linha ou coluna. O terceiro e o quarto métodos envolvem operações em valores dependentes de alguma propriedade geral da linha e/ou coluna.  
+1. Enumeração  
+A maioria dos softwares requer a codificação de variáveis medidas (possível exceção de categorias) como números no arquivo de dados. Os dados nominais podem requerer codificação usando variáveis dummy (variáveis semiquantitativas).  
+A codificação deve levar a um dimensionamento de nossos atributos de forma que sejam proporcionais a todos os atributos que desejamos incluir em qualquer análise específica. No cálculo da similaridade, geralmente precisamos adicionar e subtrair valores de atributos. Portanto, é importante, neste estágio, verificar se tais operações fazem sentido com nossos atributos e suas escalas.  
+Dois ou mais atributos podem ser definidos como proporcionais se medem propriedades qualitativamente comparáveis nos objetos. Em um conjunto de dados comunitários, não teríamos atributos proporcionais se as espécies de ervas fossem medidas como frequência, enquanto as árvores e arbustos fossem medidos como densidades. Uma possibilidade é separar os conjuntos de atributos e analisá-los. Outra é convertê-los todos para uma escala comum sem unidade usando padronização, mais sobre isso em breve. No entanto, embora tal operação remova as diferenças de escala, ela não muda o fato de que a frequência e a densidade são incomensuráveis.  
+2. Transformar ou ponderar (peso)  
+Como uma transformação, aqui nos referimos à aplicação de um operador matemático a cada valor na matriz de dados brutos, independente de todos os outros. Podemos obter a raiz quadrada ou log de cada valor, por exemplo.  
+As razões para fazer esse tipo de transformação geralmente são para reduzir a distribuição distorcida de valores. Os dados de contagem da população, por exemplo, quase sempre têm uma distribuição de frequência fortemente inclinada para a direita. Outra razão para a transformação é reduzir os efeitos indevidos dos poucos valores grandes em certas medidas de similaridade (especialmente a de Bray-Curtis). 
+3. Centralização  
+Às vezes referida com padronização, a centralização envolve uma tradução da escala para cada linha ou coluna. A maneira mais comum de fazer isso é subtrair a média da linha ou coluna de cada valor nessa linha ou coluna específica (e dividir pelo desvio padrão daquela linha ou coluna, ver próximo tópico). Isso faz com que a média dos valores centralizados se torne zero e, portanto, igual nas linhas ou colunas centralizadas.  
+Por exemplo, usando um conjunto de dados de uma comunidade (locais*espécies), a centralização pela média das espécies tornaria a origem do espaço da espécie igual ao local médio, mas preservaria as distâncias relativas entre os locais. Centralizar pela média do sítio significaria traduzir os locais para o plano diagonal onde suas posições relativas mudariam (Figura 6).  
+
+
+Figura 6. Efeitos da centralização nas posições 2-D dos sítios para duas espécies. Dados brutos mostrados como letras (ver Figura 1), sites centrados por espécies significam como a´, b´, etc. Sites centrados pela média do site significam como a”, b”, etc. Os sites c”, d” e e” são idênticos, assim como f” e h”.
+   
+
+A centralização remove os efeitos das diferenças nas médias de nossos atributos. Ela converte cerca de metade dos nossos valores em valores negativos e, portanto, geralmente é aplicada apenas em conjunto com padronizações e medidas de similaridade que podem lidar com valores negativos.
+
+4. Padronização (“Scaling”)  
+Também por vezes referida como “scaling” (ver documentação do R/RStudio, por exemplo), refere-se às operações nas linhas ou colunas da matriz de dados brutos de forma a eliminar diferenças entre elas em termos de tamanho e dispersão. Transformar, em sentido estrito, é converter os valores de uma variável em seus z-scores. Isso envolve a subtração da média e a divisão pelo desvio padrão. A variável terá então uma média zero, variância unitária e será expressa em unidades de desvio padrão, não nas unidades de medida originais.  
+Existem outras maneiras de padronizar (que comumente nos referimos como relativizações), incluindo expressar um valor como uma fração do intervalo de uma variável. Em geral, padronizamos dividindo cada valor por uma medida de tamanho ou por uma medida de dispersão para cada atributo específico. As medidas de tamanho comuns são a média, o máximo e o total. As medidas de dispersão comuns são o desvio padrão, o intervalo (min-max) e a norma (Raiz ∑x2).
+Quando nossas variáveis são medidas em escalas diferentes, como é comum para dados ambientais, não podemos somar ou multiplicar de forma significativa. Da mesma forma, se nossas unidades de amostragem são de intensidade diferente (tamanho, volume, duração e dependendo da natureza das variáveis), então não podemos compará-las diretamente. Em ambas as situações, a padronização é obrigatória antes do cálculo das medidas de similaridade. No entanto, vale ressaltar que algumas medidas incorporam a padronização necessária em sua formulação, que veremos subsequentemente. 
+
+Para dados comunitários, todos os atributos são normalmente a mesma medida e, portanto, são formalmente comensuráveis. Eles podem ou não ser ecologicamente proporcionais. Por exemplo, poderíamos equalizar a densidade de um deserto efêmero (talvez 1000/ m2) com a de um arbusto de vida longa (1/1000 m2)? Para esses dados, a decisão sobre a padronização se resume à natureza das perguntas feitas.  
+Ao padronizar, podemos alterar marcadamente os pesos a priori dos atributos e/ou objetos para as análises subsequentes. Isso é exemplificado na figura 7. 
+
+Figura 7. Efeitos das padronizações nas posições do espaço 2-D das espécies. Dados brutos mostrados na Figura 1. Sítios padronizados pelo total, mostrados como a´, b´, etc., sítios padronizados pela norma mostrados como a”, b”, etc., sítios padronizados pelo valor máximo do sítio mostrados como a*, b*, etc. Observe como essas três formas projetam os sites em uma hipotenusa, esfera e cubo unitários, respectivamente. Estes têm seus equivalentes em espaços multidimensionais.  
+ 
+
+Os efeitos da padronização  
+Em geral, podemos pensar na soma dos quadrados de um objeto ou atributo como um índice a priori de sua contribuição para análises multivariadas subsequentes (Noy-Meir et al. 1975). As somas relativas dos quadrados podem ser marcadamente alteradas por padronizações. Para um conjunto típico de dados de comunidade, podemos resumir seus efeitos conforme a tabela a seguir.
+
+Tabela 4. Impacto geral das padronizações em um conjunto de dados da comunidade. Conclusões semelhantes para quaisquer conjuntos de dados.  
+
+Padronização aplicada	Pesos a priori das espécies	Pesos a priori dos sítios
+Nenhuma	Alto para espécies com alta abundância ou alta frequência, e com maior variância	Alto para sites com abundância total alta ou alta riqueza, e com maior variância
+Pelo desvio padrão das espécies *	Pesos equalizados	Maior para sites com mais espécies raras, e com maior variância
+Pela norma do site *	Maior para espécies com alta abundância e frequência, e maior variância 	Pesos equalizados
+Por sítios e espécies (padronização dupla)	Pesos equalizados	Pesos equalizados
+* as formas mais comuns
+
+A padronização das espécies usando o desvio padrão (DP) está implícita no uso do coeficiente de correlação ou quiquadrado como medidas de similaridade. Isso dá ênfase a uma proporção relativamente pequena de sítios ricos em espécies mais raras. Esses sites dominam os resultados multivariados, sejam eles ordenação ou classificação, e muitas vezes deixam a maior proporção de sites como um lote indistinto. Se removemos espécies mais raras dos dados, então não sobra muita coisa para a análise encontrar. Devemos considerar se isso está de acordo com os objetivos de nossa análise. A padronização por espécies está alinhada com o interesse nos padrões de distribuição de todas as espécies.  
+A padronização de sites, por outro lado, dá ênfase à composição dos sites. Usando a norma como divisor, a análise enfatizará as espécies dominantes mais comuns e os sítios em que ocorrem.  
+A padronização dupla remove mais informações dos dados brutos em comparação com as abordagens de linha ou coluna sozinhas. Ele tenta equalizar os pesos a priori para linhas e colunas. Isso tenderá a enfatizar as espécies menos abundantes que ocorrem nos locais mais pobres.
+
+Nota importante sobre a terminologia  
+Na literatura de estatística multivariada (e univariada), as palavras transformação, padronização, relativização e ponderação infelizmente não são usadas de forma consistente. Nesta disciplina usamos da seguinte forma.   
+Transformar (ou ponderar), para a aplicação de uma única função a todos os valores em uma matriz de dados independentemente de linhas e/ou colunas. Este é o significado normal no contexto univariado, e também é aplicável para dados multivariados.
+Relativizar (ou padronizar), para a aplicação de uma função a todos os valores na matriz de dados, onde a função envolve alguma propriedade estatística de cada linha e/ou coluna. No contexto univariado, a padronização geralmente significa converter para z-scores, mas no contexto multivariado, esse conceito precisa ser ampliado, por isso a conversão para z-scores também pode ser chamada de "scaling" ou centralização. 
+Normalizar, para dividir pela norma, ou reescalar os valores para variar entre 0 e 1. 
+Portanto, nessa disciplina, usamos esses termos conforme definido acima, para fins de consistência.  
+
+Termo	Descrição
+Transformar (ou ponderar)	Aplicação de uma única função matemática a todos os valores. Ex. Log, Raiz, etc.
+Relativizar	≅ Normalizar
+Padronizar ✓	Reescalar os dados para apresentarem uma média = 0 e um desvio padrão = 1, subtraindo a média de cada valor e dividir pelo desvio padrão. 
+Normalizar ✓	Dividir pela norma. Reescalar os valores para variar entre 0 e 1.
+Centrar	≅ Padronizar
+Reescalar	Adicionar ou subtrair uma constante, e então multiplicar ou dividir por uma constante. Significa mudar a unidade de medida. Ex. Celsius para Fahrenheit
+Escalar x	≅ Relativizar. Dividir cada variável por um fator. Variáveis diferentes têm fatores de escalar diferentes
+✓ termo consistente na literatura
+x termo pode ter mais de um significado diferente
+≅ equivalente a
+Antes das principais etapas analíticas na análise multivariada, uma matriz de dados pode precisar ser enumerada, transformada ou padronizada. A enumeração (traduzir categorias em números como variáveis fictícias) pode ser mais bem realizada na planilha em vez de editar no RStudio, mas transformar, centralizar e padronizar são simples no ambiente do R/RStudio.  
+Transformando uma matriz de dados  
+Aprendendo como converter dados numéricos em dados de presença-ausência, P = 0. Esta é a transformação mais extrema que se pode aplicar. Ele converte todos os valores diferentes de zero em um.  
+Consideração deve ser dada aos efeitos de cada método de transformação. As transformações afetam a média, a variação e a assimetria de um conjunto de dados. Algumas das razões para a transformação ficarão mais evidentes subsequentemente. 
+Potência, para dados numéricos, eleva o valor a uma potência, um valor de 2 = ao quadrado, 1 = nenhum efeito, 0 = presença/ausência, 0,5 = raiz quadrada, 0,25 = raiz quarta.  
+Log, para dados numéricos, eleva o log10 do valor. Mas lembre-se de que você não pode registrar zeros ou números negativos. Nesses casos usa-se o log (x+1).  
+Arcoseno, para dados percentuais, usa o arco seno dos valores 0 <x <1  
+Arcoseno da raiz quadrada, para dados de proporção, um método mais extremo para valores 0 < x <1.  
+
+Embora a transformação de uma matriz possa às vezes, e indiscutivelmente, ser realizada em certas colunas, em vez de todas as colunas, esteja ciente de que é normal aplicar este processo a todos valores para os dados da comunidade. Ou seja, uma transformação seletiva dos dados de comunidade tornariam as colunas incomensuráveis umas com as outras.  
+Padronização ou Relativização? 
+Os dados são geralmente padronizados quando as estatísticas de linha ou coluna são muito diferentes e essas diferenças não são importantes para as questões do estudo. A padronização minimiza essas diferenças.  
+Um método é padronizar os dados pelo valor máximo registrado em uma unidade de amostragem (ou seja, padronizar pelo máximo da coluna ou linha, o que se referir a UA). Fazendo com que todas as UAs tenham o mesmo máximo; eliminamos as diferenças devido às diferentes riquezas do local (para dados de presença) ou abundâncias totais (dados de abundância). Qualquer análise subsequente enfatiza a composição relativa da UA. Considerações estatísticas semelhantes, mas não ecológicas, se aplicam quando padronizamos por espécie.  
+3. Buscando objetos incomuns (outliers)  
+Os dados discrepantes (outliers) para classificação e ordenação são considerados pouco importantes, mas, mesmo assim, devem ser verificados. Eles têm pouco efeito sobre os resultados da classificação, uma vez que são, de fato, grupos facilmente identificáveis e não afetam o resto da análise. Com a ordenação, no entanto, os outliers dominarão os resultados, assim como fazem na regressão. Considere seriamente excluí-los da análise de ordenação.  
+Outliers podem ser identificados de uma perspectiva univariada, bivariada e multivariada, cada um com uma implicação ligeiramente diferente para a análise e tratamento de dados. Os objetos podem aparecer como outliers em algumas visualizações e não em outras.  
+Se tivermos um grupo significativo de objetos como outliers univariados (> ± 2,5 DP), isso sugeriria que as variáveis em questão podem estar distorcidas para a direita e precisam ser transformadas.  
+Um gráfico de objetos em todos os pares de variáveis (uma matriz de gráfico de dispersão) ajudará a detectar valores discrepantes bivariados. Em dados multivariados, outliers bivariados podem ser um indicador da presença de relações não lineares entre as variáveis. Isso tem implicações na escolha da medida de similaridade e do método de ordenação.  
+Um teste para outliers multivariados (objetos com um conjunto incomum de valores) é o cálculo da distância de cada objeto para a média multivariada (o centróide). Essa distância é chamada de distância de Mahalanobis e pode ser testada quanto à significância (Hair et al. 1998). 
+Se encontrarmos outliers multivariados, precisamos considerar porque eles estão ali, e se desejamos excluí-los ou não. Se eles estão muito isolados, por assim dizer, devemos considerar excluí-los pelo menos das análises de ordenação. Se eles estão apenas no final de uma cadeia de objetos de distância crescente do centroide, então não há muito sentido em excluí-los. 
+
+Conclusão  
+Foi apresentado o exame importantíssimo da matriz de dados brutos e como os dados multivariados podem ser representados e usados para calcular a similaridade. Também foi definido a que a classificação e ordenação se propõem e suas distinções de algumas outras técnicas multivariadas de uso comum.  
+Foi estabelecido aqui a lógica prática e os métodos comuns para particionar dados, recodificar objetos e atributos e verificar se há outliers. Um tempo considerável deve ser necessariamente dedicado para esta etapa na análise multivariada, ele nunca é desperdiçado, pois garante a escolha adequada dos métodos, orienta a análise subsequente de forma eficiente e evita a armadilha de realizar todas as análises concebíveis e selecionar a que “melhor se adequa” aos nossos desejos, e por fim, proporciona maior percepção na interpretação dos resultados.  
+Referências  
+
+Hair, J. F. J., Anderson, R. E., Tatham, R. L., & Black, W. C. (1998). Multivariate Data Analysis. New Jersey: Prentice Hall.
+Legendre, P., & Legendre, L. (1998). Numerical Ecology (2nd English ed ed.). Amsterdam, The Netherlands ; New York ; Oxford.
+Mueller-Dombois, D., & Ellenberg, H. (1974). Aims and Methods of Vegetation Ecology. New York: John Wiley & Sons.
+Noy-Meir, I., Walker, D., & Williams, W. T. (1975). Data Transformations in Ecological Ordination: II. On the Meaning of Data Standardization. Journal of Ecology, 63(3), 779-800. Retrieved from https://www.jstor.org/stable/2258601
+Tukey, J. W. (1977). Exploratory Data Analysis: Addison-Wesley, Reading, Mass.
+
+## Referências {-}

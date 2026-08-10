@@ -1,0 +1,562 @@
+# dev.off() #apaga os graficos, se houver algum
+# rm(list=ls(all=TRUE)) #limpa a memória
+# cat("\014") #limpa o console
+library(openxlsx)
+densidade <- read.xlsx("D:/Elvio/OneDrive/MSS/_Bentos-2006/Bentos2006/zoobentos2006_com.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "densidade")
+habitat <- read.xlsx("D:/Elvio/OneDrive/MSS/_Bentos-2006/Bentos2006/zoobentos2006_hab.xlsx",
+                    rowNames = T,
+                    colNames = T,
+                    sheet = "ambiente")
+grupos <- read.xlsx("D:/Elvio/OneDrive/MSS/_Bentos-2006/Bentos2006/zoobentos2006_hab.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "grupos")
+densidade[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+# Removendo linhas e colunas zeradas
+rownames(densidade)
+rowSums(densidade)
+colSums(densidade)
+matriz <- densidade
+# Linhas zeradas
+sum <- rowSums(matriz)
+sum
+zero_sum <- rownames(matriz)[which(rowSums(matriz) == 0)]
+zero_sum # nomes das linhas zeradas
+m_part_rows <- matriz[(rowSums(matriz) != 0), ] #em != a exclamação inverte o sentido
+zero_sum2 <- rownames(m_part_rows)[which(rowSums(m_part_rows) == 0)]
+zero_sum2 #nomes das linhas zeradas
+sum <- rowSums(m_part_rows)
+sum
+# Colunas zeradas
+sum <- colSums(m_part_rows)
+sum
+zero_sum <- names(which(colSums(m_part_rows) == 0))
+zero_sum #nomes das espécies zeradas
+m_part_cols <- m_part_rows[, (colSums(m_part_rows) != 0)] #remove colunas zeradas
+zero_sum2 <- names(which(colSums(m_part_cols) == 0))
+zero_sum2 #nomes das espécies zeradas
+sum <- colSums(m_part_cols)
+sum
+m_dens <- as.data.frame(m_part_cols)
+# Particionando a matriz ambiental
+rownames(habitat)
+del_rows <- c("B-A-MU-1", "B-R-EP-1")
+del_rows
+m_hab <- habitat[!(row.names(habitat) %in% c(del_rows)),]
+m_hab
+# Particionando tabela de grupos
+t_grps <- grupos[!(row.names(grupos) %in% del_rows),]
+# Salvando as matrizes finais particionadas
+write.table(m_dens, "m_dens.csv",
+            sep = ";", dec = ".", #"\t",
+            row.names = TRUE,
+            quote = TRUE,
+            append = FALSE)
+write.table(t_grps, "t_grps.csv",
+            sep = ";", dec = ".", #"\t",
+            row.names = TRUE,
+            quote = TRUE,
+            append = FALSE)
+write.table(m_hab, "m_hab.csv",
+            sep = ";", dec = ".", #"\t",
+            row.names = TRUE,
+            quote = TRUE,
+            append = FALSE)
+t_grps <- read.csv("t_grps.csv",
+                   sep = ";", dec = ".",
+                   row.names = 1,
+                   header = TRUE,
+                   na.strings = NA)
+m_dens <- read.csv("m_dens.csv",
+                   sep = ";", dec = ".",
+                   row.names = 1,
+                   header = TRUE,
+                   na.strings = NA)
+m_hab <- read.csv("m_hab.csv",
+                   sep = ";", dec = ".",
+                   row.names = 1,
+                   header = TRUE,
+                   na.strings = NA)
+# Particionando a matriz de contagem
+contagem <- read.xlsx("D:/Elvio/OneDrive/MSS/_Bentos-2006/Bentos2006/zoobentos2006_com.xlsx",
+                       rowNames = T,
+                       colNames = T,
+                       sheet = "contagem")
+contagem[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+matriz <- contagem
+# Linhas zeradas
+sum <- rowSums(matriz)
+sum
+zero_sum <- rownames(matriz)[which(rowSums(matriz) == 0)]
+zero_sum # nomes das linhas zeradas
+m_part_rows <- matriz[(rowSums(matriz) != 0), ] #em != a exclamação inverte o sentido
+zero_sum2 <- rownames(m_part_rows)[which(rowSums(m_part_rows) == 0)]
+zero_sum2 #nomes das linhas zeradas
+sum <- rowSums(m_part_rows)
+sum
+# Colunas zeradas
+sum <- colSums(m_part_rows)
+sum
+zero_sum <- names(which(colSums(m_part_rows) == 0))
+zero_sum #nomes das espécies zeradas
+m_part_cols <- m_part_rows[, (colSums(m_part_rows) != 0)] #remove colunas zeradas
+zero_sum2 <- names(which(colSums(m_part_cols) == 0))
+zero_sum2 #nomes das espécies zeradas
+sum <- colSums(m_part_cols)
+sum
+m_cont <- as.data.frame(m_part_cols)
+# Salvando a matriz final
+write.table(m_cont, "m_cont.csv",
+            sep = ";", dec = ".", #"\t",
+            row.names = TRUE,
+            quote = TRUE,
+            append = FALSE)
+m_cont <- read.csv("m_cont.csv",
+                   sep = ";", dec = ".",
+                   row.names = 1,
+                   header = TRUE,
+                   na.strings = NA)
+dev.off()
+rm(list=ls(all=TRUE))
+cat("\014")
+t_grps <- read.csv("t_grps.csv",
+                   sep = ";", dec = ".",
+                   row.names = 1,
+                   header = TRUE,
+                   na.strings = NA)
+m_hab <- read.csv("m_hab.csv",
+                  sep = ";", dec = ".",
+                  row.names = 1,
+                  header = TRUE,
+                  na.strings = NA)
+# Correlograma e redução de variáveis desnecessárias
+library(psych)
+colnames(m_hab)
+#png("fig-hab_pairs.png")
+pairs.panels(m_hab[,1:2], #colunas de interesse
+             method = "pearson", # correlation method
+             scale = FALSE, lm = FALSE,
+             hist.col = "#00AFBB", pch = 19,
+             density = TRUE,  # show density plots
+             ellipses = TRUE, # show correlation ellipses
+             alpha = 0.5)
+#dev.off()
+cor <- cor(m_hab)
+cor
+library(corrplot)
+#png("fig-hab_corrplot.png")
+corrplot(cor, method = "circle")
+#dev.off()
+## Impressão em papel
+#win.print()
+#corrplot(cor, method = "circle")
+#dev.off()
+# Deletando colineares
+#sink(file = "colineares.txt", append = F, split = T)
+colnames(m_hab)
+del_cols <- c() #"g.river_length","g.altitude" #NÃO DELETEI VARIÁVEIS
+m_hab_part <- m_hab[, !(colnames(m_hab) %in% del_cols)]
+# Somando redundantes
+m_hab_part$s.gravel <- m_hab_part$s.smlgrav + m_hab_part$s.lrggrav + m_hab_part$s.cobbles
+m_hab_part <- m_hab_part[, !(colnames(m_hab_part)
+                             %in% c("s.smlgrav", "s.lrggrav", "s.cobbles"))]
+m_hab_part$s.rocks <- m_hab_part$s.rocks + m_hab_part$s.bedrock
+m_hab_part <- m_hab_part[, !(colnames(m_hab_part)
+                             %in% c("s.bedrock"))] #rocks novo substitui o antigo
+m_hab_part$h.algae <- m_hab_part$h.filalgae + m_hab_part$h.attalgae
+m_hab_part <- m_hab_part[, !(colnames(m_hab_part)
+                             %in% c("h.filalgae", "h.attalgae"))]
+m_hab_part$h.debris <- m_hab_part$h.smldeb + m_hab_part$h.lrgdeb
+m_hab_part <- m_hab_part[, !(colnames(m_hab_part)
+                             %in% c("h.smldeb", "h.lrgdeb"))]
+colnames(m_hab_part)
+m_hab_part
+#sink()
+write.table(m_hab_part, "m_hab_part.csv",
+            sep = ";", dec = ".", #"\t",
+            row.names = TRUE,
+            quote = TRUE,
+            append = FALSE)
+m_hab_part <- read.csv("m_hab_part.csv",
+                  sep = ";", dec = ".",
+                  row.names = 1,
+                  header = TRUE,
+                  na.strings = NA)
+# # Tabela de habitat
+# library(dplyr)
+# library(tidyr)
+# m_trab <- m_hab_part %>%
+#   rename_with(~ gsub("_", ".", .))
+# m <- m_trab %>%
+#   group_by(Area = t_grps$area,
+#            Habitat = t_grps$ambiente,
+#            Ponto = t_grps$UA) %>%
+#   summarise(across(where(is.numeric),
+#                    list(mean = mean, min = min, max = max)),
+#             .groups = 'drop') %>%
+#   pivot_longer(
+#     cols = -c(Area, Habitat, Ponto),
+#     names_to = c("Variable", ".value"),
+#     names_sep = "_"
+#   )
+# 
+# m <- as.data.frame(m)
+# m_wide <- m %>%
+#   mutate(stat_string = ifelse(Variable == c("q.w.vel"),
+#                               paste0(round(mean, 3), " (", round(min, 3), "-", round(max, 3), ")"),
+#                               paste0(round(mean, 1), " (", round(min, 1), "-", round(max, 1), ")"))) %>%
+#   unite("Location", Area, Habitat, Ponto, sep = "_") %>%
+#   select(Variable, Location, stat_string) %>%
+#   pivot_wider(names_from = Location, values_from = stat_string)
+# 
+# m_wide
+# m_wide <- as.data.frame(m_wide)
+# m_wide
+# 
+# # Definindo a ordem das linhas
+# ordem <- c("g.river.length", "g.altitude",
+#            "m.depth.mar", "m.depth.max", "m.slope", "m.width",
+#            "q.w.vel", "q.temp", "q.do", "q.turb", "s.mud",
+#            "s.sand", "s.gravel", "s.rocks",
+#            "h.macroph", "h.grass", "h.subveg", "h.overhveg", "h.litter",
+#            "h.algae", "h.roots", "h.debris"
+# )
+# 
+# # Usando fatores (fica salvo no arquivo)
+# #m_wide$Variable <- factor(m_wide$Variable, levels = ordem)
+# #m_wide <- m_wide[order(m_wide$Variable), ]
+# 
+# m_wide <- m_wide[match(ordem, m_wide$Variable), ]
+# m_wide
+# 
+# # Salvado m_wide
+# write.table(m_wide, "m_wide_hab.txt",
+#             sep = ";", dec = ".", #"\t",
+#             row.names = TRUE,
+#             quote = TRUE,
+#             append = FALSE)
+# m_wide_hab <- read.table("m_wide_hab.txt",
+#                   sep = ";", dec = ".",
+#                   row.names = 1,
+#                   header = TRUE,
+#                   na.strings = NA)
+# 
+# # Exportando dados para Excel
+# library(openxlsx)
+# #write.xlsx(m_wide, file = "tabela de habitat.xlsx", rowNames = FALSE) #só roda essa linhas a primeira vez
+# wb <- loadWorkbook("tabela de habitat.xlsx")
+# writeData(wb, sheet = "Sheet 1", x = m_wide)
+# saveWorkbook(wb, "tabela de habitat.xlsx", overwrite = TRUE)
+# # Escolher sumário de uma variavel
+# m
+# var <- "h.roots"
+# m[m$Variable == var, "mean"] #cada valor de var
+# summary(m[m$Variable == var, "mean"]) #sumário dos valores de var
+# 
+# # Escolher sumário de um grupo de variáveis do df m
+# vars <- unique(grep("^h\\.", m$Variable, value = TRUE))
+# summaries <- list() #criam uma lista vazia para guardar os sumários
+# # Loop para cada variável do grupo e guarda em summaries
+# for (var in vars) {
+#   summaries[[var]] <- summary(m[m$Variable == var, "mean"])
+# }
+# #var is a temporary variable used in the for loop to iterate through
+# #each variable name that starts with "h."
+# 
+# summaries
+# summary_table <- do.call(rbind, lapply(summaries, as.data.frame.list))
+# round(summary_table, 2)
+# #sink(file = "summary_h.txt", split = TRUE)
+# round(summary_table[order(summary_table$Mean, decreasing = FALSE), ], 2)
+# #sink()
+# 
+# # Tabela limpa
+# summary_table <- cbind(Variable = rownames(summary_table), summary_table)
+# rownames(summary_table) <- NULL
+# colnames(summary_table) <- c("Variable", "Min", "Q1", "Median", "Mean", "Q3", "Max")
+# summary_table
+# library(readr)
+# library(dplyr)
+# library(gt)
+# m_wide_hab <- read.table("m_wide_hab.txt",
+#                   sep = ";", dec = ".",
+#                   row.names = 1,
+#                   header = TRUE,
+#                   na.strings = NA)
+# 
+# #m_mapa <- read_tsv("column_labels.txt", show_col_types = FALSE)
+# dados <- m_wide_hab
+# dados
+# nomes <- names(dados)[-1]
+# nomes
+# 
+# df_nomes <- data.frame(
+#   original = nomes,
+#   final    = nomes,
+#   stringsAsFactors = FALSE)
+# 
+# df_nomes
+# df_nomes$final <- gsub("_", "<br>", df_nomes$final)
+# dados <- mutate(dados,across(-Variable, ~ gsub(" \\(", "<br>(", .)))
+# #fix(df_nomes)
+# write.table(df_nomes, "df_nomes.txt")
+# df_nomes <- read.table("df_nomes.txt")
+# 
+# labels_finais <- setNames(
+#   lapply(df_nomes$final, md),
+#   nomes)
+# 
+# tabela_gt <- dados %>%
+#   gt(rowname_col = "Variable") %>%
+# #  tab_header(
+# #    title = "Características Ambientais",
+# #    subtitle = "Valores apresentados como média (mín–máx)"
+# #  ) %>%
+#   fmt_markdown(
+#     columns = -Variable) %>%
+#   cols_align(
+#     align = "right",
+#     columns = -Variable) %>%
+#   cols_label(.list = labels_finais)
+# 
+# tabela_gt
+# gtsave(tabela_gt, "gt-hab_gttable.html")
+# gtsave(tabela_gt, "fig-hab_gttable.png")
+# saveRDS(tabela_gt, "gt-hab_gttable.rds")
+# 
+# # Importando tabela final ajustada no Excel
+# library(readxl)
+# hab_gttable <- read_excel(
+#   path  = "tabela de habitat.xlsx",
+#   sheet = "tabela_final",
+#   range = "C1:J27")
+# hab_gttable
+# library(gt)
+# hab_gttable <- gt(hab_gttable)
+# hab_gttable <- sub_missing(hab_gttable,
+#                       columns = everything(), missing_text = "")
+# #hab_gttable <- fmt_number(hab_gttable, columns = "F.O.(%)", decimals = 1)
+# hab_gttable
+# gtsave(hab_gttable, "gt-hab_gttable_xlsx.html")
+# saveRDS(hab_gttable, "gt-hab_gttable_xlsx.rds")
+# 
+# #BENTOS2006 - RAREFAÇÃO E ANOVAS----
+# #####....----
+# 
+# #ORGANIZANADO DADOS----
+# 
+# dev.off() #apaga os graficos, se houver algum
+# rm(list=ls(all=TRUE)) #limpa a memória
+# cat("\014") #limpa o console
+# 
+# m_cont <- read.csv("m_cont.csv",
+#                    sep = ";", dec = ".",
+#                    row.names = 1,
+#                    header = TRUE,
+#                    na.strings = NA)
+# m_cont
+# 
+# ##RAREFAÇÃO BASEADA EM CONTAGEM----
+# 
+# library(vegan)
+# data <- m_cont
+# S <- specnumber(data) #observed number of species
+# S
+# #raremax <- min(rowSums(data))
+# raremax <- round(mean(rowSums(data)))
+# #raremax <- 1000
+# raremax
+# Srare <- rarefy(data, raremax)
+# Srare
+# plot(S, Srare, xlab = "Observed No. of Species", ylab = "Rarefied No. of Species")
+# abline(0, 1)
+# png("fig-rarecurve.png")
+# rarecurve(data, step = 20, sample = raremax, col = "blue", cex = 0.6,
+#           xlab = "Sample size", ylab = "Taxa", xlim = c()) #c(0,5000)
+# dev.off()
+# 
+# ##ANOVAS----
+# 
+# anovas <- cbind(Srare = Srare, m_cont)
+# anovas <- anovas[,1, drop = FALSE]
+# anovas
+# m_dens <- read.csv("m_dens.csv",
+#                    sep = ";", dec = ".",
+#                    row.names = 1,
+#                    header = TRUE,
+#                    na.strings = NA)
+# m_dens
+# anovas$dens <- rowMeans(m_dens, na.rm = TRUE)
+# anovas
+# S <- specnumber(m_dens)
+# anovas$S <- S
+# anovas
+# S
+# 
+# ###CRIANDO GRUPOS----
+# library(tidyverse)
+# anovas <- cbind(Grupos = rownames(anovas), anovas)
+# anovas
+# grps <- substr(anovas[, 1], 5,6)
+# grps
+# anovas <- mutate(anovas, Grupos = c(grps))
+# anovas
+# 
+# ###SALVANDO MATRIZ FINAL ANOVAS----
+# write.table(anovas, "t_anovas.csv",
+#             sep = ";", dec = ".", #"\t",
+#             row.names = TRUE,
+#             quote = TRUE,
+#             append = FALSE)
+# anovas <- read.csv("t_anovas.csv",
+#                    sep = ";", dec = ".",
+#                    row.names = 1,
+#                    header = TRUE,
+#                    na.strings = NA)
+# anovas
+# 
+# ##ANOVA----
+# 
+# sink(file = "anovas.txt", split = T)
+# anova <- aov(Srare ~ Grupos, data = anovas)
+# anova
+# summary(anova)
+# TukeyHSD(anova)
+# 
+# ###RESUMO DO TUKEY----
+# tukey <- TukeyHSD(anova)
+# tukey_df <- as.data.frame(tukey$Grupos)
+# tukey_df$Comparison <- rownames(tukey_df)
+# significant <- subset(tukey_df, `p adj` < 0.05)
+# print(significant)
+# sink()
+# 
+# ##ANOVA PLOT----
+# 
+# levels(anovas$Grupos)  #to check existing levels
+# anovas$Grupos <- factor(anovas$Grupos,
+#                         levels = c("MU", "SA", "EP", "RE", "CI", "SE")) #define a ordem
+# #anovas %>%
+# #  group_by(Grupos) %>%
+# #  summarise(
+# #    count = n(),
+# #    mean = mean(Srare, na.rm = TRUE),
+# #    sd = sd(Srare, na.rm = TRUE))
+# 
+# rareplot <- ggplot(anovas, aes(x = Grupos, y = Srare)) +
+#   geom_jitter(width = 0.2, alpha = 0.6, color = "black") +  # jittered points (small)
+#   stat_summary(fun = mean, geom = "point", size = 4, color = "black") +  # large mean point
+#   stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1, color = "black") +  # SE bars
+#   labs(x = "Study sites", y = "Rarefied richness", title = "") +
+#   theme_minimal()
+# rareplot
+# ggsave(rareplot, dpi = 300, filename = "fig-rarerich.png", bg = "white")
+#BENTOS2006 - REGRESSÕES----
+#####....----
+#CORRELAÇÃO--------
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console
+anovas <- read.csv("t_anovas.csv",
+                   sep = ";", dec = ".",
+                   row.names = 1,
+                   header = TRUE,
+                   na.strings = NA)
+ggplot(anovas, aes(x = dens, y = Srare)) +
+  geom_point(size = 3, color = "#00AFBB") +
+  geom_smooth(method = "lm", color = "#FC4E07", se = TRUE) +
+  labs(
+    x = "dens",
+    y = "Srare",
+    title = "Correlação entre dens e Srare"
+  ) +
+  theme_minimal()
+cor.test(anovas$dens, anovas$Srare, method = "pearson")
+#STEPWISE REGRESSION----
+#browseURL("https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/")
+#browseURL("https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/")
+library(tidyverse)
+library(caret)
+library(leaps)
+library(MASS)
+##ORGANIZANDO OS DADOS----
+m_hab_part <- read.csv("m_hab_part.csv",
+                       sep = ";", dec = ".",
+                       row.names = 1,
+                       header = TRUE,
+                       na.strings = NA)
+# Select only columns starting with "m."
+colnames(m_hab_part)
+vars <- grep("^(m)\\.", colnames(m_hab_part), value = TRUE) #^(g|m) mais de uma inicial
+vars
+m_vars <- sqrt((m_hab_part[, vars])) #TRANSFORMAÇÃO
+m_vars
+data <- cbind(Srare = anovas$Srare, m_vars)
+data
+# Fit the full model
+full.model <- lm(Srare ~., data = data)
+# Stepwise regression model
+step.model <- stepAIC(full.model, direction = "both", #both, backward, forward
+                      trace = FALSE)
+summary(step.model)
+models <- regsubsets(Srare ~., data = data, nvmax = 5, #maximal number of predictors to incorporate in the model
+                     method = "seqrep") #sequential replacement, combination of forward and backward selections
+summary(models)
+# Train model
+set.seed(123)
+# set up repeated k-fold (number=10) cross-validation ("cv")
+train.control <- trainControl(method = "cv", number = 10)
+# Train the model
+step.model <- train(Srare ~., data = data,
+                    method = "leapBackward",
+                    tuneGrid = data.frame(nvmax = 1:5),
+                    trControl = train.control)
+#**You can't directly use two different data frames in train(), because train()
+#(from caret package) expects all predictor (X) and response (Y) variables
+#to be in the same data frame.
+step.model$results
+step.model$bestTune
+summary(step.model$finalModel)
+nvmax <- step.model$bestTune$nvmax
+nvmax
+coef(step.model$finalModel, nvmax)
+lm_model <- lm(Srare ~  m.slope + m.width,
+   data = data)
+summary(lm_model)
+colnames(m_vars)
+###ALGUNS GRÁFICOS----
+par(mfrow = c(2,2))
+plot(step.model)
+varImp(step.model)
+#library(car)
+#crPlots(step.model)
+#par(mfrow = c(1,1))
+#REMOVENDO ESPÉCIES RARAS----
+browseURL("https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/data-adjustments/")
+library("labdsv")
+colnames(m_part)
+m_dom <- dropspc(m_part, minabu=5)
+m_dom
+colnames(m_dom)
+m_5 <- vegtab(comm = m_part, minval = (0.50 * nrow(m_part))) #minval=5% of the number of samples
+t(m_5)
+colnames(m_5)
+m_pa <- m_part; m_pa[m_pa != 0] <- 1
+#SEPARANDO B e S
+pat <- "^B"
+m_trab <- m_trab[!grepl(pat, rownames(m_trab)), ] #exclui quem começa com pat
+#REMOVENDO ESPÉCIES RARAS
+browseURL("https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/data-adjustments/")
+install.packages("labdsv")
+library("labdsv")
+colnames(m_part)
+m_dom <- dropspc(m_part, minabu=5)
+m_dom
+colnames(m_dom)
+m_5 <- vegtab(comm = m_part, minval = (0.50 * nrow(m_part))) #minval=5% of the number of samples
+t(m_5)
+colnames(m_5)
+m_pa <- m_part; m_pa[m_pa != 0] <- 1

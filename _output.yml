@@ -1,0 +1,22 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><a href="./">Fundamentos de Ecologia Numérica</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: default
+  keep_tex: yes
+#bookdown::epub_book: default
+bookdown::bs4_book:
+    split_by: chapter
+    split_bib: yes
+    css: style.css

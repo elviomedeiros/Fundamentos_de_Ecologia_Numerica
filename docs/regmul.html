@@ -103,7 +103,7 @@
 <li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 8.2 - Decomposição da diversidade</a></li>
 <li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 9 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 10.2 - Relativizações e transformações</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 10.1 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 10.2 - Análise de outliers baseada no desvio padrão do centróide</a></li>
 <li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 11.1 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 11.2 - Análise de Classificação Não-hierárquica - K-Means</a></li>
@@ -192,7 +192,7 @@
 <span class="header-section-number">14.2.1</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-4"><i class="fas fa-link"></i></a>
 </h3>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("MASS")</span></span>
 <span><span class="co">#install.packages("car")</span></span>
 <span><span class="co">#install.packages("caret")</span></span>
@@ -205,7 +205,7 @@
 <div id="limpando-a-memória-2" class="section level4 unnumbered">
 <h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-2"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
@@ -216,7 +216,7 @@
 <h3>
 <span class="header-section-number">14.2.2</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                    rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -271,7 +271,7 @@
 <h4>
 <span class="header-section-number">14.2.2.1</span> Correlograma e redução de variáveis desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-redu%C3%A7%C3%A3o-de-vari%C3%A1veis-desnecess%C3%A1rias"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Correlograma e redução de variáveis desnecessárias</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
@@ -357,7 +357,7 @@
 <div id="limpando-a-memória-3" class="section level4 unnumbered">
 <h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-3"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
@@ -368,7 +368,7 @@
 <h2>
 <span class="header-section-number">14.5</span> Importando a planilha<a class="anchor" aria-label="anchor" href="#importando-a-planilha-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">densidade</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06com-bentos.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -393,7 +393,7 @@
 <h3>
 <span class="header-section-number">14.5.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Removendo linhas e colunas zeradas</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">densidade</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">densidade</span><span class="op">)</span></span>
@@ -756,7 +756,7 @@
 <h4>
 <span class="header-section-number">14.5.1.1</span> Correlograma e redução de variáveis desnecessárias<a class="anchor" aria-label="anchor" href="#correlograma-e-redu%C3%A7%C3%A3o-de-vari%C3%A1veis-desnecess%C3%A1rias-1"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span></span>
@@ -1119,7 +1119,7 @@
 <h4>
 <span class="header-section-number">14.5.1.2</span> Calculando a riqueza de espécies<a class="anchor" aria-label="anchor" href="#calculando-a-riqueza-de-esp%C3%A9cies"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span>
@@ -1666,12 +1666,18 @@
 ## S-R-SE-3     SE  3.763162 249.4642857  4
 ## S-R-SE-4     SE  8.603085 406.6071429 11</code></pre>
 </div>
-<div id="organizando-variáveis-de-interesse" class="section level4" number="14.5.1.3">
+</div>
+</div>
+<div id="id_4042reinicio" class="section level2" number="14.6">
+<h2>
+<span class="header-section-number">14.6</span> REINÍCIO<a class="anchor" aria-label="anchor" href="#id_4042reinicio"><i class="fas fa-link"></i></a>
+</h2>
+<div id="organizando-variáveis-de-interesse" class="section level4" number="14.6.0.1">
 <h4>
-<span class="header-section-number">14.5.1.3</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.6.0.1</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
 </h4>
 <p>Cada linha deve representar uma observação e cada coluna uma variável.</p>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span>
@@ -1696,8 +1702,11 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">)</span></span>
 <span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^(m)\\."</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">)</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#^(g|m) mais de uma inicial</span></span>
 <span><span class="va">vars</span></span>
-<span><span class="va">m_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">[</span>, <span class="va">vars</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co">#TRANSFORMAÇÃO</span></span>
-<span><span class="va">m_vars</span></span>
+<span><span class="co"># Transformações</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
+<span><span class="va">m_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">[</span>, <span class="va">vars</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co">#raiz</span></span>
+<span><span class="co">#m_vars &lt;- asin(sqrt(decostand((m_hab_part[, vars]), method = "total", MARGIN = 2)))</span></span>
+<span><span class="co"># Dados</span></span>
 <span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Srare <span class="op">=</span> <span class="va">anovas</span><span class="op">$</span><span class="va">Srare</span>, <span class="va">m_vars</span><span class="op">)</span></span>
 <span><span class="va">dados</span></span></code></pre></div>
 <pre><code>## null device 
@@ -1709,29 +1718,6 @@
 ## [17] "h.overhveg"     "h.litter"       "h.roots"        "s.gravel"      
 ## [21] "h.algae"        "h.debris"      
 ## [1] "m.depth_mar" "m.depth_max" "m.slope"     "m.width"    
-##          m.depth_mar m.depth_max  m.slope   m.width
-## S-R-CI-1    4.760952    7.745967 7.745967  4.152108
-## S-R-CI-2    5.715476    8.246211 7.745967  4.297674
-## S-R-CI-3    5.715476    8.888194 7.745967  3.885872
-## S-R-CI-4    6.733003    8.000000 7.745967  3.271085
-## B-A-SA-1    2.857738    7.745967 5.477226 18.165902
-## B-A-SA-2    2.645751    8.306624 5.477226 17.916473
-## B-A-SA-3    2.614065    8.246211 5.477226 17.725688
-## B-A-SA-4    2.160247    7.937254 5.477226 17.014700
-## B-A-MU-2    4.690416   10.723805 5.477226 15.736264
-## B-A-MU-3    5.066228   10.816654 5.477226 15.314372
-## B-A-MU-4    6.429101   10.583005 5.477226 15.459625
-## B-R-EP-2    7.023769   10.488088 9.486833  5.440588
-## B-R-EP-3    7.071068    8.944272 9.486833  5.224940
-## B-R-EP-4    7.268654    9.746794 9.486833  4.472136
-## S-A-RE-1    7.393691   12.409674 7.745967 10.099505
-## S-A-RE-2    6.137318   10.862780 7.745967 10.000000
-## S-A-RE-3    4.725816   10.440307 7.745967  9.380832
-## S-A-RE-4    5.507571    9.327379 7.745967  8.497058
-## S-R-SE-1    9.018500   10.295630 5.477226  4.431704
-## S-R-SE-2    8.185353   10.246951 5.477226  4.012481
-## S-R-SE-3    5.686241   10.488088 5.477226  2.489980
-## S-R-SE-4    5.686241    8.602325 5.477226  2.323790
 ##              Srare m.depth_mar m.depth_max  m.slope   m.width
 ## S-R-CI-1  5.000000    4.760952    7.745967 7.745967  4.152108
 ## S-R-CI-2 12.719603    5.715476    8.246211 7.745967  4.297674
@@ -1757,10 +1743,9 @@
 ## S-R-SE-4  8.603085    5.686241    8.602325 5.477226  2.323790</code></pre>
 </div>
 </div>
-</div>
-<div id="regressão-multipla-simultânea" class="section level2" number="14.6">
+<div id="regressão-multipla-simultânea" class="section level2" number="14.7">
 <h2>
-<span class="header-section-number">14.6</span> Regressão Multipla Simultânea<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.7</span> Regressão Multipla Simultânea<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><i class="fas fa-link"></i></a>
 </h2>
 <p>Na regressão múltipla simultânea, tentamos responder a pergunta:</p>
 <p>PERGUNTA (1): Qual contribuição as variáveis morfológicas oferecem para a previsão da riqueza de espécies?</p>
@@ -1770,7 +1755,7 @@
 <pre><code>y ~ x1 + x2 + x3</code></pre>
 <p>onde,</p>
 <p>a primeira coluna da matriz de dados representa a variável resposta <code>y</code> e as demais colunas representam as variáveis preditoras <code>x</code>. Para isso, usamos a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span></span>
 <span><span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span> <span class="op">+</span> <span class="va">m.slope</span> <span class="op">+</span> <span class="va">m.width</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
@@ -1849,7 +1834,7 @@ onde:</p>
 <p>Portanto, o modelo como um todo não é estatisticamente significativo.</p>
 <p>O QUE REPORTAR: O modelo de regressão múltipla simultânea não foi significativo (F₄,₁₇ = 1,37; p = 0,285), explicando apenas 24,4% da variação da riqueza rarefeita (r² = 0,244; r² ajustado = 0,066). Nenhuma das variáveis ambientais avaliadas (m.depth_mar, m.depth_max, m.slope e m.width) apresentou efeito significativo sobre a riqueza rarefeita (todos os p &gt; 0,05), indicando que, para este conjunto de dados, essas variáveis não explicam de forma consistente a variação observada em Srare.</p>
 <p>Verificamos agora a multicolinearidade, usando a função <code><a href="https://rdrr.io/pkg/car/man/vif.html">vif()</a></code> do pacote <code><a href="https://github.com/bprice2652/car_repo">library(car)</a></code></p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## m.depth_mar m.depth_max     m.slope     m.width 
@@ -1898,9 +1883,9 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 <p>Portanto, não há evidências de multicolinearidade severa entre as variáveis explicativas. Assim, o fato de nenhuma variável ter sido significativa (p &gt; 0,05) provavelmente não é consequência da multicolinearidade, mas sim porque, para este conjunto de dados, essas variáveis realmente apresentam pouca capacidade de explicar a variação de Srare.</p>
 <p>O QUE REPORTAR: A multicolinearidade entre as variáveis explicativas foi avaliada pelo Fator de Inflação da Variância (VIF). Todos os valores de VIF foram inferiores a 5 (1,32–4,12), indicando ausência de multicolinearidade entre os preditores e sugerindo que as estimativas dos coeficientes não foram substancialmente afetadas pela correlação entre as variáveis independentes.</p>
 </div>
-<div id="regressão-múltipla-hierárquica" class="section level2" number="14.7">
+<div id="regressão-múltipla-hierárquica" class="section level2" number="14.8">
 <h2>
-<span class="header-section-number">14.7</span> Regressão Múltipla Hierárquica<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8</span> Regressão Múltipla Hierárquica<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><i class="fas fa-link"></i></a>
 </h2>
 <p>Na regressão múltipla hierárquica, respondemos a pergunta:</p>
 <p>PERGUNTA (2): Estudos anteriores sugerem que a profundidade influencia a riqueza de espécies. Essa hipótese é corroborada pelos dados analisados?</p>
@@ -1914,7 +1899,7 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 - m.slope</p>
 <p><strong>Bloco 3</strong>: acrescentamos a variável largura
 - m.width</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Modelo 1</span></span>
 <span><span class="va">modelo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">m.depth_mar</span> <span class="op">+</span> <span class="va">m.depth_max</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
@@ -1927,12 +1912,12 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 <span>                        <span class="va">m.slope</span> <span class="op">+</span></span>
 <span>                        <span class="va">m.width</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span></code></pre></div>
-<div id="comparando-os-modelos" class="section level4" number="14.7.0.1">
+<div id="comparando-os-modelos" class="section level4" number="14.8.0.1">
 <h4>
-<span class="header-section-number">14.7.0.1</span> Comparando os modelos<a class="anchor" aria-label="anchor" href="#comparando-os-modelos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.1</span> Comparando os modelos<a class="anchor" aria-label="anchor" href="#comparando-os-modelos"><i class="fas fa-link"></i></a>
 </h4>
 <p>A principal comparação é feita com a função <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo1</span>, <span class="va">modelo2</span>, <span class="va">modelo3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span></span>
@@ -2044,31 +2029,24 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <p>Diferentemente da <strong>regressão múltipla simultânea</strong>, em que o teste F avalia todo o conjunto de preditores, na <strong>regressão hierárquica</strong> cada teste F avalia apenas a contribuição adicional do bloco recém-incluído, mantendo fixas as variáveis que já estavam no modelo.</p>
 </div>
 </div>
-<div id="regressão-múltipla-stepwise" class="section level2" number="14.8">
+<div id="regressão-múltipla-stepwise" class="section level2" number="14.9">
 <h2>
-<span class="header-section-number">14.8</span> Regressão Múltipla <em>Stepwise</em><a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9</span> Regressão Múltipla <em>Stepwise</em><a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><i class="fas fa-link"></i></a>
 </h2>
 <p>PERGUNTA (3): Qual variável morfológica é a melhor preditora da riqueza de espécies?</p>
-<div id="forward-selection" class="section level4" number="14.8.0.1">
-<h4>
-<span class="header-section-number">14.8.0.1</span> <em>Forward selection</em><a class="anchor" aria-label="anchor" href="#forward-selection"><i class="fas fa-link"></i></a>
-</h4>
-<p>Na seleção progressiva (<em>forward selection</em>), inicia-se com um modelo nulo (<code>y ~ .</code>), que não contém variáveis preditoras (x). Em seguida, as variáveis são adicionadas ao modelo, uma de cada vez, de acordo com sua significância estatística, até que nenhuma nova variável contribua significativamente para melhorar o modelo.</p>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize an empty model (with all predictors)</span></span>
-<span><span class="va">null_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
-<span><span class="co"># Forward stepwise regression</span></span>
-<span><span class="va">modelo_for</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">null_model</span>, direction <span class="op">=</span> <span class="st">"forward"</span>,</span>
-<span>                   scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="op">~</span> <span class="va">.</span><span class="op">)</span>,</span>
-<span>                   k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#AIC</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_for</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Start:  AIC=77.03
-## Srare ~ m.depth_mar + m.depth_max + m.slope + m.width
-## 
-## 
+<p>Quando temos muitas variáveis candidatas, podemos utilizar <strong>métodos de seleção de modelos</strong> para identificar um subconjunto de preditores que forneça uma combinação adequada entre qualidade do ajuste e complexidade do modelo.</p>
+<p>Neste exemplo, a variável resposta é <code>Srare</code>, que representa a riqueza de espécies rarefeita, enquanto as demais variáveis representam características ambientais potencialmente relacionadas à riqueza.</p>
+<p>É importante distinguir duas ideias:</p>
+<p>ajuste do modelo: quão bem o modelo descreve os dados observados;
+capacidade preditiva: quão bem o modelo consegue prever observações que não foram utilizadas para ajustá-lo.</p>
+<p>Os métodos <em>stepwise</em> são métodos de seleção de modelos, onde <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> e <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code> utilizam principalmente critérios de informação, como o <em>Akaike Information Criterion (AIC)</em>, para comparar modelos.</p>
+<p>Podemos começar a partir do <em>modelo completo</em> (Adaptado de <a href="https://www.datanovia.com/learn/machine-learning/model-selection/stepwise-regression">Datanovia, 2026</a>):</p>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">full_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">full_model</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = Srare ~ m.depth_mar + m.depth_max + m.slope + m.width, 
-##     data = dados)
+## lm(formula = Srare ~ ., data = dados)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
@@ -2085,35 +2063,25 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ## Residual standard error: 5.219 on 17 degrees of freedom
 ## Multiple R-squared:  0.244,  Adjusted R-squared:  0.06611 
 ## F-statistic: 1.372 on 4 and 17 DF,  p-value: 0.2852</code></pre>
-<p>No código acima, utilizamos o conjunto de dados <code>dados</code>. Inicialmente, ajustamos um modelo nulo utilizando a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, ou seja, um modelo que contém apenas o intercepto. Em seguida, aplicamos a função <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> com o argumento <code>direction = "forward"</code> para realizar a seleção progressiva. O argumento <code>scope</code> define o intervalo de modelos que será considerado durante o processo de seleção. Nesse caso, <code>lower = ~ 1</code> representa o modelo nulo, enquanto <code>upper = ~ .</code> representa o modelo completo, contendo todas as variáveis preditoras disponíveis, exceto a variável resposta (<code>SRare</code>).</p>
-<p>A função <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> adiciona, de forma iterativa, as variáveis mais estatisticamente significativas ao modelo até encontrar o modelo considerado ótimo, de acordo com o critério de seleção especificado (como AIC ou BIC, <strong><em>Bayesian Information Criterion</em></strong>).</p>
-<p>O critério utilizado é o <strong><em>Akaike Information Criterion</em> (AIC)</strong>. No <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code>, isso é controlado pelo argumento k:</p>
-<ul>
-<li>AIC: k = 2 (padrão)</li>
-<li>BIC: k = log(n), onde n é o número de observações</li>
-</ul>
-<pre><code> k = log(nrow(dados))</code></pre>
-<p>Depende do objetivo:</p>
-<p><strong>AIC:</strong> quando o foco é maximizar a capacidade preditiva do modelo. É o mais utilizado em problemas de previsão.<br><strong>BIC:</strong> quando o objetivo é identificar o modelo mais simples que explica os dados. É mais conservador e tende a selecionar menos variáveis.</p>
-<div class="infobox note">
+<p>Ao usarmos <code>Srare ~ .</code> definimos o início a partir do <strong>modelo completo</strong>, como todas as variáveis preditoras (nesse caso partimos para a seleção <em>backward</em>). Se <code>Srare ~ 1</code>, temos como início um <strong>modelo nulo</strong>, onde o <code>1</code> corresponde ao intercepto e nenhuma variável preditora foi inicialmente incluída (nesse caso partimos para a seleção <em>forward</em>).</p>
+<div class="infobox2 stopred">
 <div class="center">
-<p><strong>NOTA</strong></p>
-</div>
-<p>O <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> usa <strong>AIC</strong> (ou <strong>BIC)</strong>, não p-valores para escolher as variáveis que entram no modelo final.</p>
+<p><span style="color:white"><strong>REINÍCIO</strong></span></p>
 </div>
 </div>
-<div id="backward-elimination" class="section level4" number="14.8.0.2">
+<p>Se for necessário, volte até a seção de <a href="regmul.html#id_4042reinicio">REINÍCIO</a> desse capítulo e refaça as análises com novas variáveis preditoras.</p>
+<div id="backward-elimination" class="section level4" number="14.9.0.1">
 <h4>
-<span class="header-section-number">14.8.0.2</span> <em>Backward elimination</em><a class="anchor" aria-label="anchor" href="#backward-elimination"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.0.1</span> <em>Backward elimination</em><a class="anchor" aria-label="anchor" href="#backward-elimination"><i class="fas fa-link"></i></a>
 </h4>
-<p>Nesse método, começamos com um modelo que inclui todas as variáveis preditoras e, de forma iterativa, removemos a variável menos estatisticamente significativa a cada etapa, até que a remoção de novas variáveis deixe de melhorar o modelo.</p>
+<p>Nesse método, começamos com um modelo que inclui todas as variáveis preditoras (modelo completo) e, de forma iterativa, removemos a variável menos estatisticamente significativa a cada etapa, até que a remoção de novas variáveis deixe de melhorar o modelo.</p>
 <div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize a model with all predictors</span></span>
-<span><span class="va">null_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
-<span><span class="co"># Backward stepwise regression</span></span>
-<span><span class="va">modelo_back</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">null_model</span>, direction <span class="op">=</span> <span class="st">"backward"</span>,</span>
+<code class="sourceCode R"><span><span class="co"># Iniciando com um modelo completo com todos os preditores</span></span>
+<span><span class="va">full_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
+<span><span class="co"># Seleção regressiva</span></span>
+<span><span class="va">modelo_back</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">full_model</span>, direction <span class="op">=</span> <span class="st">"backward"</span>,</span>
 <span>                   scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="op">~</span> <span class="va">.</span><span class="op">)</span>,</span>
-<span>                   k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#AIC</span></span>
+<span>                   k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#k=2=AIC, k=log(n)=BIC</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_back</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Start:  AIC=77.03
 ## Srare ~ m.depth_mar + m.depth_max + m.slope + m.width
@@ -2166,19 +2134,77 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ## Residual standard error: 5.09 on 20 degrees of freedom
 ## Multiple R-squared:  0.1537, Adjusted R-squared:  0.1114 
 ## F-statistic: 3.633 on 1 and 20 DF,  p-value: 0.07112</code></pre>
+<p>O algoritmo avalia a remoção de cada variável possível. Como o modelo completo é <code>Srare ~ m.depth_mar + m.depth_max + m.slope + m.width</code>, o algoritmo compara modelos como:</p>
+<p>Srare ~ m.depth_mar + m.depth_max + m.slope
+Srare ~ m.depth_mar + m.depth_max + m.width
+Srare ~ m.depth_max + m.slope + m.width</p>
+<p>E assim sucessivamente. A variável cuja remoção produz o maior benefício segundo o AIC (ver a seguir) é retirada. O processo continua até que a remoção de qualquer variável adicional não reduza mais o AIC.</p>
+<p>Lembre que esse processo não é simplesmente “remover a variável menos significativa”. O algoritmo não está executando uma eliminação baseada exclusivamente em valores de p. Ele está procurando alterações que melhorem o critério de seleção.</p>
 </div>
-<div id="both-directions" class="section level4" number="14.8.0.3">
+<div id="forward-selection" class="section level4" number="14.9.0.2">
 <h4>
-<span class="header-section-number">14.8.0.3</span> <em>Both-directions</em><a class="anchor" aria-label="anchor" href="#both-directions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.0.2</span> <em>Forward selection</em><a class="anchor" aria-label="anchor" href="#forward-selection"><i class="fas fa-link"></i></a>
 </h4>
-<p>Na regressão bidirecional, o algoritmo combina as abordagens <em>forward</em> e <em>backward</em>, otimizando o modelo ao adicionar variáveis estatisticamente significativas e remover aquelas que não são significativas.</p>
+<p>Na seleção progressiva (<em>forward selection</em>), inicia-se com um modelo nulo ou vazio (<code>y ~ 1</code>), que não contém variáveis preditoras (x), apenas o intercepto = 1. A partir desse modelo, cada variável candidata é adicionada individualmente. O algoritmo compara os modelos resultantes e seleciona a alteração que produz a maior melhora segundo o critério utilizado. O processo continua enquanto uma nova variável melhorar o critério de seleção.</p>
 <div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize a model with all predictors</span></span>
-<span><span class="va">null_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
-<span><span class="co"># Both-direction stepwise regression</span></span>
-<span><span class="va">modelo_both</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">null_model</span>, direction <span class="op">=</span> <span class="st">"both"</span>,</span>
+<code class="sourceCode R"><span><span class="co"># Iniciando com um modelo nulo (com todos os preditores)</span></span>
+<span><span class="va">null_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
+<span><span class="co"># Seleção progressiva</span></span>
+<span><span class="va">modelo_for</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">null_model</span>, direction <span class="op">=</span> <span class="st">"forward"</span>,</span>
+<span>                   scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="op">~</span> <span class="va">.</span><span class="op">)</span>, <span class="co">#ou upper = ~ m.depth_mar + m.depth_max + m.slope + m.width </span></span>
+<span>                   k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#k=2=AIC, k=log(n)=BIC</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_for</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Start:  AIC=75.18
+## Srare ~ 1
+## 
+## 
+## Call:
+## lm(formula = Srare ~ 1, data = dados)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -5.989 -3.989 -1.989  3.890 12.943 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    6.989      1.151   6.071 5.04e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.4 on 21 degrees of freedom</code></pre>
+<p>No código acima, utilizamos o conjunto de dados <code>dados</code>. Inicialmente, ajustamos um modelo nulo utilizando a função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, ou seja, um modelo que contém apenas o intercepto. Em seguida, aplicamos a função <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> com o argumento <code>direction = "forward"</code> para realizar a seleção progressiva. O argumento <code>scope</code> define o intervalo de modelos que será considerado durante o processo de seleção. Nesse caso, <code>lower = ~ 1</code> representa o modelo nulo, apenas com o intercepto,, enquanto <code>upper = ~ .</code> representa o modelo completo, contendo todas as variáveis preditoras disponíveis, exceto a variável resposta (<code>SRare</code>).</p>
+<p>A função <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> adiciona, de forma iterativa, as variáveis mais estatisticamente significativas ao modelo até encontrar o modelo considerado ótimo, de acordo com o critério de seleção especificado (como AIC ou BIC, <strong><em>Bayesian Information Criterion</em></strong>).</p>
+<p>O critério utilizado é o <strong><em>Akaike Information Criterion</em> (AIC)</strong>. No <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code>, isso é controlado pelo argumento k:</p>
+<ul>
+<li>AIC: k = 2 (padrão)</li>
+<li>BIC: k = log(n), onde n é o número de observações</li>
+</ul>
+<pre><code> k = log(nrow(dados))</code></pre>
+<p>Depende do objetivo:</p>
+<p><strong>AIC:</strong> quando o foco é maximizar a capacidade preditiva do modelo. É o mais utilizado em problemas de previsão.<br><strong>BIC:</strong> quando o objetivo é identificar o modelo mais simples que explica os dados. É mais conservador e tende a selecionar menos variáveis.</p>
+<div class="infobox note">
+<div class="center">
+<p><strong>NOTA</strong></p>
+</div>
+<p>O <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> usa <strong>AIC</strong> (ou <strong>BIC)</strong>, não p-valores para escolher as variáveis que entram no modelo final.</p>
+</div>
+<p>No conjunto de dados utilizado neste exemplo, os <strong>três procedimentos de seleção</strong> (<em>forward</em>, <em>backward</em> e <em>both-direction</em>) podem ser comparados para verificar se chegam ao mesmo conjunto de variáveis preditoras. Quando os três métodos selecionam o mesmo modelo, isso fornece um resultado mais consistente e indica que a seleção das variáveis é menos dependente da estratégia utilizada.</p>
+<p>Entretanto, essa concordância não deve ser esperada em todos os casos. Com um número maior de variáveis preditoras, ou quando elas apresentam <strong>alta correlação entre si</strong>, os métodos <em>forward</em>, <em>backward</em> e <em>both-direction</em> podem selecionar modelos diferentes. Isso ocorre porque a <strong>ordem em que as variáveis entram ou saem do modelo altera a contribuição aparente das demais variáveis em cada etapa</strong>.</p>
+<p>Essa <strong>dependência do caminho (<em>path dependence</em>)</strong> é uma das limitações conhecidas dos métodos <em>stepwise</em>: diferentes estratégias de seleção podem conduzir a diferentes modelos, mesmo quando aplicadas ao mesmo conjunto de dados.</p>
+<p>Vejamos a seguir os resultados para <em>both-directions</em>.</p>
+</div>
+<div id="both-directions" class="section level4" number="14.9.0.3">
+<h4>
+<span class="header-section-number">14.9.0.3</span> <em>Both-directions</em><a class="anchor" aria-label="anchor" href="#both-directions"><i class="fas fa-link"></i></a>
+</h4>
+<p>Na regressão bidirecional (ou mista), o algoritmo combina as abordagens <em>forward</em> e <em>backward</em>, e permite tanto adicionar quanto remover variáveis, otimizando o modelo ao adicionar variáveis estatisticamente significativas e remover aquelas que não são significativas.</p>
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Iniciando com um modelo completo com todos os preditores</span></span>
+<span><span class="va">full_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
+<span><span class="co"># Seleção mista</span></span>
+<span><span class="va">modelo_both</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">full_model</span>, direction <span class="op">=</span> <span class="st">"both"</span>,</span>
 <span>                   scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="op">~</span> <span class="va">.</span><span class="op">)</span>,</span>
-<span>                   k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#AIC</span></span>
+<span>                   k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#k=2=AIC, k=log(n)=BIC</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_both</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Start:  AIC=77.03
 ## Srare ~ m.depth_mar + m.depth_max + m.slope + m.width
@@ -2237,31 +2263,37 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ## Residual standard error: 5.09 on 20 degrees of freedom
 ## Multiple R-squared:  0.1537, Adjusted R-squared:  0.1114 
 ## F-statistic: 3.633 on 1 and 20 DF,  p-value: 0.07112</code></pre>
+<p>Nesse caso, depois de uma variável ser adicionada, outra variável pode posteriormente ser removida caso isso melhore o critério de seleção. Essa estratégia é mais flexível que forward ou backward, pois permite que o modelo seja modificado nos dois sentidos durante a busca.</p>
 </div>
-<div id="visualizando-resíduos" class="section level4" number="14.8.0.4">
+<div id="visualizando-resíduos" class="section level4" number="14.9.0.4">
 <h4>
-<span class="header-section-number">14.8.0.4</span> Visualizando resíduos<a class="anchor" aria-label="anchor" href="#visualizando-res%C3%ADduos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.0.4</span> Visualizando resíduos<a class="anchor" aria-label="anchor" href="#visualizando-res%C3%ADduos"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<p>Depois de selecionar os modelos, podemos visualizar seus resíduos:</p>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Resíduos para cada modelo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo_for</span><span class="op">$</span><span class="va">residuals</span>, main <span class="op">=</span> <span class="st">"Forward Residuals"</span>, ylab <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo_back</span><span class="op">$</span><span class="va">residuals</span>, main <span class="op">=</span> <span class="st">"Backward Residuals"</span>, ylab <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo_both</span><span class="op">$</span><span class="va">residuals</span>, main <span class="op">=</span> <span class="st">"Both-Direction Residuals"</span>, ylab <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-156-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-157-1.png" alt="" width="672"></div>
+<p>Os resíduos representam a diferença entre os valores observados e os valores estimados pelo modelo. A inspeção dos resíduos é importante porque um modelo selecionado pelo AIC pode apresentar um bom critério de informação e, ainda assim, violar pressupostos da regressão linear.</p>
 </div>
-<div id="exemplo-3" class="section level4" number="14.8.0.5">
+<div id="exemplo-com-stepaic-e-leaps" class="section level4" number="14.9.0.5">
 <h4>
-<span class="header-section-number">14.8.0.5</span> Exemplo 3<a class="anchor" aria-label="anchor" href="#exemplo-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.0.5</span> Exemplo com <code>stepAIC</code> e <code>leaps</code><a class="anchor" aria-label="anchor" href="#exemplo-com-stepaic-e-leaps"><i class="fas fa-link"></i></a>
 </h4>
+<p>Agora vamos usar duas abordagens complementares.</p>
+<p>Usaremos as funções <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">MASS::stepAIC</a></code> (realiza uma busca stepwise orientada pelo AIC) e <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">leaps::regsubsets</a></code>, que avalia conjuntos de variáveis de diferentes tamanhos. Dessa forma, escolheremos um modelo com base no <strong>AIC/BIC</strong> e, em seguida, avaliaremos a capacidade preditiva dos modelos usando <strong>validação cruzada</strong> em um fluxo de trabalho do <code>tidymodels</code>. Essa distinção é importante. Um <em>modelo pode apresentar excelente ajuste aos dados utilizados na análise, mas isso não significa necessariamente que ele terá bom desempenho em novos dados</em>.</p>
+<p>Veremos as limitações conhecidas do método stepwise (<strong><span class="math inline">\(r^2\)</span> inflado, instabilidade e valores de p distorcidos</strong>). O exemplo foi desenvolvido para um conjuntos de dados ambientais (x) e riqueza de espécies (y) <span class="citation">(<a href="#ref-medeiros2024">MEDEIROS et al., 2024</a>)</span>, adaptado de <a href="https://www.datanovia.com/learn/machine-learning/model-selection/stepwise-regression">Datanovia, 2026</a>.</p>
 </div>
-<div id="organizando-variáveis-de-interesse-1" class="section level4" number="14.8.0.6">
+<div id="organizando-variáveis-de-interesse-1" class="section level4" number="14.9.0.6">
 <h4>
-<span class="header-section-number">14.8.0.6</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.0.6</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Cada linha deve representar uma observação e cada coluna uma variável.</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console</span></span>
@@ -2286,8 +2318,12 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">)</span></span>
 <span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^(q)\\."</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">)</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">#^(g|m) mais de uma inicial</span></span>
 <span><span class="va">vars</span></span>
-<span><span class="va">m_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">[</span>, <span class="va">vars</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co">#TRANSFORMAÇÃO</span></span>
+<span><span class="co"># Transformações</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
+<span><span class="va">m_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_hab_part</span><span class="op">[</span>, <span class="va">vars</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co">#raiz</span></span>
+<span><span class="co">#m_vars &lt;- asin(sqrt(decostand((m_hab_part[, vars]), method = "total", MARGIN = 2)))</span></span>
 <span><span class="va">m_vars</span></span>
+<span><span class="co"># Dados</span></span>
 <span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Srare <span class="op">=</span> <span class="va">anovas</span><span class="op">$</span><span class="va">Srare</span>, <span class="va">m_vars</span><span class="op">)</span></span>
 <span><span class="va">dados</span></span></code></pre></div>
 <pre><code>## null device 
@@ -2346,19 +2382,24 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ## S-R-SE-3  3.763162 0.0000000 5.316641 2.449490 4.163332
 ## S-R-SE-4  8.603085 0.0000000 5.709641 2.449490 4.000000</code></pre>
 </div>
-<div id="treinando-o-modelo" class="section level4" number="14.8.0.7">
+<div id="comparando-tamanhos-de-modelos" class="section level4" number="14.9.0.7">
 <h4>
-<span class="header-section-number">14.8.0.7</span> Treinando o modelo<a class="anchor" aria-label="anchor" href="#treinando-o-modelo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.0.7</span> Comparando tamanhos de modelos<a class="anchor" aria-label="anchor" href="#comparando-tamanhos-de-modelos"><i class="fas fa-link"></i></a>
 </h4>
-<p>Existem diversas funções e pacotes no R para realizar a regressão <em>stepwise</em>. Entre eles, destaca-se a função <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code>, disponível no pacote <code>MASS</code>, que seleciona o melhor modelo com base no <strong>Critério de Informação de Akaike (AIC)</strong>.</p>
-<p>A função possui o argumento <code>direction</code>, que define a estratégia de seleção a ser utilizada (“both”, “backward” e “forward”).</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Ajuste do modelo completo</span></span>
-<span><span class="va">full.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
-<span><span class="co"># Modelo de regressão stepwise</span></span>
-<span><span class="va">step.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC</a></span><span class="op">(</span><span class="va">full.model</span>, direction <span class="op">=</span> <span class="st">"both"</span>, <span class="co">#both, backward, forward</span></span>
+<p>Existem diversas funções e pacotes no R para realizar a regressão <em>stepwise</em>. Entre eles, destaca-se a função <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code>, disponível no pacote <code>MASS</code>, que seleciona o melhor modelo com base no <strong>Critério de Informação de Akaike (AIC)</strong>. A função possui o argumento <code>direction</code>, que define a estratégia de seleção a ser utilizada (<em>both</em>, <em>backward</em> e <em>forward</em>).</p>
+<p>A cada etapa, o <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code> considera adicionar ou remover uma variável e calcula o AIC de cada candidata. Ele avança para a alteração que <strong>mais reduz o AIC</strong> e para quando nenhuma adição ou remoção melhora o valor. Como</p>
+<p><span class="math display">\[
+AIC = (falta\ de\ ajuste) + (penalização\ pelo\ número\ de\ termos),
+\]</span></p>
+<p>ele equilibra automaticamente a precisão e a complexidade, sem necessidade de um ponto de corte arbitrário de <em>p</em>. <code>trace = FALSE</code> impede que o R mostre no console o registro detalhado de cada etapa da seleção.</p>
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span><span class="co"># Ajuste do modelo completo</span></span>
+<span><span class="va">full_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
+<span><span class="co"># Modelo de regressão stepwise AIC</span></span>
+<span><span class="va">step_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC</a></span><span class="op">(</span><span class="va">full_model</span>, direction <span class="op">=</span> <span class="st">"both"</span>, <span class="co">#both, backward, forward</span></span>
 <span>                      trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step_model</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Srare ~ q.w_vel + q.temp + q.do + q.turb, data = dados)
@@ -2380,13 +2421,14 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ## Residual standard error: 4.558 on 17 degrees of freedom
 ## Multiple R-squared:  0.4233, Adjusted R-squared:  0.2876 
 ## F-statistic: 3.119 on 4 and 17 DF,  p-value: 0.04274</code></pre>
-<p>A função <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code>, disponível no pacote <code>leaps</code>, também pode ser utilizada para realizar a seleção de variáveis. Ela possui o argumento <code>nvmax</code>, que especifica o número máximo de variáveis preditoras a serem incluídas no modelo.</p>
-<p>Diferentemente da função <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code>, <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> não retorna apenas um único modelo. Em vez disso, ela ajusta e retorna <strong>vários modelos</strong>, com diferentes números de variáveis preditoras, até o limite definido por <code>nvmax</code>. Assim, cabe ao usuário comparar o desempenho desses modelos para escolher o mais adequado.</p>
-<p>A função <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> também possui o argumento <code>method</code>, que pode assumir os valores “backward”, “forward” e “seqrep” (<code>seqrep</code> realiza a substituição sequencial (<em>sequential replacement</em>), combinando etapas de inclusão e remoção de variáveis durante o processo de seleção).</p>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span>, nvmax <span class="op">=</span> <span class="fl">5</span>, <span class="co">#maximal number of predictors to incorporate in the model</span></span>
+<p>A principal função utilizada para a seleção <em>stepwise</em> no R é a <strong><code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code></strong>, disponível no pacote <strong>MASS</strong>. Ela adiciona e remove variáveis preditoras com o objetivo de minimizar o <strong>AIC (<em>Akaike Information Criterion</em>)</strong>, um critério que recompensa um bom ajuste, mas <strong>penaliza cada termo adicional</strong>. Dessa forma, <strong>o AIC tende naturalmente a favorecer modelos menores</strong>, a menos que uma nova variável proporcione uma melhoria suficiente no ajuste para justificar sua inclusão.</p>
+<p>Podemos usar ainda, a função <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code>, disponível no pacote <code>leaps</code>, para realizar a seleção de variáveis. Ela possui o argumento <code>nvmax</code>, que especifica o número máximo de variáveis preditoras a serem incluídas no modelo.</p>
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">leaps</span><span class="op">)</span></span>
+<span><span class="va">modelos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span>, nvmax <span class="op">=</span> <span class="fl">5</span>, <span class="co">#no. de variáveis do modelo</span></span>
 <span>                     method <span class="op">=</span> <span class="st">"seqrep"</span><span class="op">)</span> <span class="co">#sequential replacement, combination of forward and backward selections</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelos</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">modelos</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Subset selection object
 ## Call: regsubsets.formula(Srare ~ ., data = dados, nvmax = 5, method = "seqrep")
 ## 4 Variables  (and intercept)
@@ -2401,15 +2443,92 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ## 1  ( 1 ) " "     "*"    " "  " "   
 ## 2  ( 1 ) "*"     "*"    " "  " "   
 ## 3  ( 1 ) "*"     "*"    " "  "*"   
-## 4  ( 1 ) "*"     "*"    "*"  "*"</code></pre>
+## 4  ( 1 ) "*"     "*"    "*"  "*"   
+## (Intercept)      q.temp 
+##   -33.02560     7.37911</code></pre>
+<p>Diferentemente da função <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code>, <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> não retorna apenas um único modelo. Em vez disso, ela ajusta e retorna <strong>vários modelos</strong>, com diferentes números de variáveis preditoras, até o limite definido por <code>nvmax</code>. Assim, cabe ao usuário comparar o desempenho desses modelos para escolher o mais adequado.</p>
+<p>A função <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> também possui o argumento <code>method</code>, que pode assumir os valores “backward”, “forward” e “seqrep” (<code>seqrep</code> realiza a substituição sequencial (<em>sequential replacement</em>), combinando etapas de inclusão e remoção de variáveis durante o processo de seleção).</p>
+<p>Assim, a seleção deixa de ser apenas uma pergunta do tipo “qual variável entra ou sai?” e passa a ser também, *qual tamanho de modelo fornece o melhor compromisso entre desempenho e complexidade?“.</p>
+<p>Dessa forma, lemos a tabela resultante linha por linha. Cada linha representa o <strong>melhor modelo daquele tamanho</strong>, e um <strong><code>"*"</code></strong> indica as variáveis incluídas no modelo:</p>
+<ul>
+<li>
+<strong>1 variável:</strong> <code>q.temp</code> sozinha, o preditor individual mais forte da Srare.</li>
+<li>
+<strong>2 variáveis:</strong> adiciona <code>q.w_vel</code>.</li>
+<li>
+<strong>3 variáveis:</strong> adiciona <code>q.turb</code>.</li>
+<li>
+<strong>4 variáveis:</strong> adiciona <code>q.do</code>, modelo completo.</li>
+</ul>
+<p>Nesse método, é possível a substituição de algumas variáveis por por outras (é aqui que a <strong>substituição sequencial</strong> ganha seu nome). O método pode <em>substituir</em> uma variável, e não apenas adicionar novas variáveis.</p>
+<p>A função <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> não escolhe um único modelo vencedor — ela fornece os modelos candidatos. Para escolher entre eles, devemos compará-los utilizando um critério. O <strong>BIC (Bayesian Information Criterion)</strong> penaliza a complexidade do modelo de forma mais rigorosa que o AIC e, portanto, tende a favorecer modelos menores; o <strong><span class="math inline">\(r^2\)</span> ajustado</strong> recompensa um bom ajuste, mas aplica uma penalização pela inclusão de termos adicionais. Ambos são apresentados no resultado a seguir.</p>
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">leaps</span><span class="op">)</span></span>
+<span><span class="va">modelos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span>, nvmax <span class="op">=</span> <span class="fl">4</span>, method <span class="op">=</span> <span class="st">"seqrep"</span><span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelos</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelos</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">modelos</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">which</span></span>
+<span></span>
+<span><span class="co"># Uma linha por tamanho de modelo</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  n_vars <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="co">#de 1 a x preditores</span></span>
+<span>  adjR2  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">adjr2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  BIC    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">bic</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Concordância entre o critérios</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span>, nvmax <span class="op">=</span> <span class="fl">4</span>, method <span class="op">=</span> <span class="st">"seqrep"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Qual melhor tamanho para os dois critérios</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>best_by_adjR2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">adjr2</span><span class="op">)</span>,</span>
+<span>  best_by_BIC   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">bic</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(Srare ~ ., data = dados, nvmax = 4, method = "seqrep")
+## 4 Variables  (and intercept)
+##         Forced in Forced out
+## q.w_vel     FALSE      FALSE
+## q.temp      FALSE      FALSE
+## q.do        FALSE      FALSE
+## q.turb      FALSE      FALSE
+## 1 subsets of each size up to 4
+## Selection Algorithm: 'sequential replacement'
+##          q.w_vel q.temp q.do q.turb
+## 1  ( 1 ) " "     "*"    " "  " "   
+## 2  ( 1 ) "*"     "*"    " "  " "   
+## 3  ( 1 ) "*"     "*"    " "  "*"   
+## 4  ( 1 ) "*"     "*"    "*"  "*"   
+## (Intercept)      q.temp 
+##   -33.02560     7.37911 
+##   (Intercept) q.w_vel q.temp  q.do q.turb
+## 1        TRUE   FALSE   TRUE FALSE  FALSE
+## 2        TRUE    TRUE   TRUE FALSE  FALSE
+## 3        TRUE    TRUE   TRUE FALSE   TRUE
+## 4        TRUE    TRUE   TRUE  TRUE   TRUE
+##   n_vars adjR2  BIC
+## 1      1 0.097 2.87
+## 2      2 0.173 2.89
+## 3      3 0.241 2.90
+## 4      4 0.288 3.35
+## best_by_adjR2   best_by_BIC 
+##             4             1</code></pre>
+<p>Nesse resultado, podemos comparar as três maneiras diferentes de decidir qual tamanho de modelo é mais adequado (<code>stepAIC</code>, calculada anteriormente, <span class="math inline">\(r^2\)</span> e <code>BIC</code>). O ponto principal é que os critérios podem fazer escolhas diferentes porque atribuem pesos diferentes à complexidade do modelo.</p>
+<p>O <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">regsubsets()</a></code> encontrou o melhor modelo para cada número de variáveis, mas ele não está dizendo inicialmente “o modelo de 4 é o melhor”. Ele está dizendo, “Se você quiser um modelo com 1 variável, este é o melhor. Se quiser 2, este é o melhor. Se quiser 3, este é o melhor…”. Depois você decide qual desses modelos prefere.</p>
+<p>Neste conjunto de dados, os dois critérios de seleção apresentam resultados diferentes. O <strong><span class="math inline">\(r^2\)</span> ajustado</strong> aumenta progressivamente com o número de preditores, atingindo seu maior valor no modelo com quatro variáveis (<span class="math inline">\(r^2\)</span> ajustado = 0,288). Portanto, segundo esse critério, o modelo de quatro variáveis apresenta o melhor ajuste entre os modelos avaliados. O <strong>BIC</strong>, por outro lado, apresenta seu menor valor no modelo com apenas uma variável (BIC = 2,87). Como valores menores de BIC indicam modelos preferíveis, o critério favorece o modelo mais simples. A inclusão de uma segunda, terceira ou quarta variável aumenta o BIC para 2,89, 2,90 e 3,35, respectivamente, indicando que, segundo o BIC, o ganho de ajuste proporcionado pelas variáveis adicionais não é suficiente para compensar o aumento da complexidade do modelo.</p>
+<p>Assim, o <span class="math inline">\(r^2\)</span> ajustado favorece o modelo com quatro variáveis, enquanto o BIC favorece o modelo com uma variável. Essa discordância ilustra que diferentes critérios de seleção podem levar a diferentes modelos e que a escolha não deve ser baseada exclusivamente em uma única medida de ajuste.</p>
+<p>As vezes, os critérios (AIC, <span class="math inline">\(r^2\)</span> e BIC) discordam sobre o número de variáveis para os modelos. Isso é justamente o motivo pelo qual o próximo passo é importante: a <strong>validação cruzada</strong>.</p>
+<p>Nesse caso, você quer saber <strong>se o modelo que parece melhor nos dados utilizados para construir os modelos também apresenta bom desempenho quando precisa prever dados que não foram utilizados no ajuste</strong>.</p>
+</div>
+<div id="treinando-o-modelo-validação-cruzada" class="section level4" number="14.9.0.8">
+<h4>
+<span class="header-section-number">14.9.0.8</span> Treinando o modelo: validação cruzada<a class="anchor" aria-label="anchor" href="#treinando-o-modelo-valida%C3%A7%C3%A3o-cruzada"><i class="fas fa-link"></i></a>
+</h4>
 <p>Usamos a função <code><a href="https://rdrr.io/pkg/caret/man/train.html">train()</a></code> do pacote <code>caret</code>, para um fluxo de trabalho simplificado para realizar a seleção de variáveis por meio dos pacotes <code>leaps</code> e <code>MASS</code>. Ela também possui o argumento <code>method</code> (“leapBackward”, “leapForward” e “leapSeq”).</p>
 <p>Nesse caso, também é necessário especificar o parâmetro de ajuste <code>nvmax</code>, que corresponde ao número máximo de variáveis preditoras a serem incorporadas ao modelo. Por exemplo, é possível variar <code>nvmax</code> de 1 a 5. Nesse caso, a função busca os melhores modelos de diferentes tamanhos, até o melhor modelo com quatro variáveis.</p>
 <p>Para avaliar o desempenho desses modelos, é utilizada a validação cruzada com 10 partições (<em>10-fold cross-validation</em>), estimando o erro médio de predição (<strong>RMSE</strong>) de cada um dos modelos. A métrica estatística RMSE é então utilizada para comparar os modelos e selecionar automaticamente o melhor, sendo considerado melhor aquele que apresenta o menor valor de RMSE.</p>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Train model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="co"># set up repeated k-fold (number=10) cross-validation ("cv")</span></span>
-<span><span class="va">train.control</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html">trainControl</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"cv"</span>, number <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co">#5, boot, LOOCV</span></span>
+<span><span class="va">train.control</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html">trainControl</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"cv"</span>, number <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co">#5, boot, LOOCV</span></span>
 <span><span class="co"># Train the model</span></span>
 <span><span class="va">step.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html">train</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">dados</span>,</span>
 <span>                    method <span class="op">=</span> <span class="st">"leapSeq"</span>, <span class="co">#leapBackward, leapForward, leapSeq</span></span>
@@ -2419,11 +2538,11 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <span><span class="co">#(from caret package) expects all predictor (X) and response (Y) variables</span></span>
 <span><span class="co">#to be in the same data frame.</span></span>
 <span><span class="va">step.model</span><span class="op">$</span><span class="va">results</span></span></code></pre></div>
-<pre><code>##   nvmax     RMSE  Rsquared      MAE   RMSESD RsquaredSD    MAESD
-## 1     1 5.089398 0.8435254 4.558268 2.024500  0.3335191 1.884537
-## 2     2 5.461844 0.9013086 5.241949 1.734071  0.2053764 1.730369
-## 3     3 5.163835 0.8914627 4.898494 2.135903  0.2559743 2.047153
-## 4     4 4.853016 0.9294455 4.504808 2.148373  0.2034874 2.066347</code></pre>
+<pre><code>##   nvmax     RMSE   Rsquared      MAE    RMSESD RsquaredSD     MAESD
+## 1     1 5.542141 0.07483222 4.767476 0.3643588  0.1191826 0.4847890
+## 2     2 5.276084 0.24144818 4.573071 1.3838448  0.1998173 1.3179933
+## 3     3 5.262189 0.30674358 4.594676 0.8049777  0.2187421 0.5275076
+## 4     4 5.136648 0.30879297 4.373279 0.9563346  0.2303967 0.1535192</code></pre>
 <p>Os resultados mostram diferentes métricas e seus respectivos desvios padrão, utilizadas para comparar a precisão dos melhores modelos. As colunas são:</p>
 <ul>
 <li>
@@ -2434,7 +2553,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 </ul>
 <p>No exemplo apresentado, observa-se que o modelo com quatro variáveis (<code>nvmax = 4</code>) é o que apresenta o menor valor de RMSE.</p>
 <p>Na sequência, obtemos Os melhores valores do parâmetro de ajuste (<code>nvmax</code>) selecionados automaticamente pela função <code><a href="https://rdrr.io/pkg/caret/man/train.html">train()</a></code>, o melhor conjunto de variáveis para cada tamanho de modelo (função <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>), desde o melhor modelo com uma variável até o melhor modelo com quatro variáveis e os coeficientes de regressão do modelo final (<code>id = 4</code>).</p>
-<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span><span class="op">)</span></span>
 <span><span class="va">nvmax</span> <span class="op">&lt;-</span> <span class="va">step.model</span><span class="op">$</span><span class="va">bestTune</span><span class="op">$</span><span class="va">nvmax</span></span>
@@ -2461,7 +2580,7 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 ##  -94.396637  -19.972427   16.108337    3.252551    1.146074</code></pre>
 <p>Esses resultados indicam que o melhor modelo é aquele com <strong><code>nvmax = 4</code></strong> variáveis preditoras. O asterisco (*) indica que uma determinada variável está incluída no modelo correspondente.</p>
 <p>Finalmente podemos refazer o modelo usando apenas os preditores selecionados:</p>
-<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">step.model</span><span class="op">$</span><span class="va">finalModel</span>, <span class="va">nvmax</span><span class="op">)</span></span>
 <span><span class="va">lm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">q.w_vel</span> <span class="op">+</span> <span class="va">q.temp</span> <span class="op">+</span> <span class="va">q.do</span> <span class="op">+</span> <span class="va">q.turb</span>,</span>
 <span>   data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
@@ -2493,14 +2612,14 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <p>O QUE REPORTAR (RESULTADOS): O Modelo de Regressão Múltipla <em>Stepwise</em> (SMRM) com seleção de variáveis pelo método <em>sequential replacement</em> foi aplicado separadamente para cada um dos quatro conjuntos de variáveis ambientais (morfologia, qualidade da água, composição do sedimento e estruturas do habitat marginal). Dentre as variáveis de qualidade da água, a SMRM identificou um modelo contendo velocidade da água, temperatura, oxigênio dissolvido e turbidez como preditores de Srare. O modelo selecionado apresentou o melhor desempenho na validação cruzada (RMSE = 4.85; r<span class="math inline">\(^2\)</span> = 0.929) e foi estatisticamente significativo (F<span class="math inline">\(_{4,17}\)</span> = 3.12, p = 0.043), explicando 42,3% da variação na riqueza rarefeita (r<span class="math inline">\(^2\)</span> ajustado = 0.288). A velocidade da água teve efeito negativo significativo (<span class="math inline">\(\beta\)</span> = -19.97, p = 0.041), enquanto a temperatura apresentou efeito positivo significativo (<span class="math inline">\(\beta\)</span> = 16.11, p = 0.005). As variáveis oxigênio dissolvido e turbidez não apresentaram efeitos significativos no modelo final (p &gt; 0.05).</p>
 </div>
 </div>
-<div id="material-de-apoio-7" class="section level2" number="14.9">
+<div id="material-de-apoio-7" class="section level2" number="14.10">
 <h2>
-<span class="header-section-number">14.9</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.10</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-7"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="teste-seus-conhecimentos-6" class="section level2" number="14.10">
+<div id="teste-seus-conhecimentos-6" class="section level2" number="14.11">
 <h2>
-<span class="header-section-number">14.10</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.11</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-6"><i class="fas fa-link"></i></a>
 </h2>
 <div class="infobox note">
 <div class="center">
@@ -2522,7 +2641,8 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <div id="sites-para-consulta-2" class="section level2 unnumbered">
 <h2>Sites para consulta<a class="anchor" aria-label="anchor" href="#sites-para-consulta-2"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a><br><a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a><br><a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a><br><a href="https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/" class="uri">https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/</a><br><a href="https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/" class="uri">https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/</a> <a href="https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/" class="uri">https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/</a><br><a href="https://www.r-bloggers.com/2021/10/multiple-linear-regression-made-simple/" class="uri">https://www.r-bloggers.com/2021/10/multiple-linear-regression-made-simple/</a><br><a href="https://www.datanovia.com/learn/machine-learning/model-selection/stepwise-regression" class="uri">https://www.datanovia.com/learn/machine-learning/model-selection/stepwise-regression</a></p>
+<p>stackoverflow: <a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a><br><a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a><br><a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a><br><a href="https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/" class="uri">https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/</a><br><a href="https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/" class="uri">https://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/</a> <a href="https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/" class="uri">https://www.r-bloggers.com/2023/12/a-complete-guide-to-stepwise-regression-in-r/</a><br><a href="https://www.r-bloggers.com/2021/10/multiple-linear-regression-made-simple/">R-bloggers1</a><br>
+[Datanovia]<a href="https://www.datanovia.com/learn/machine-learning/model-selection/stepwise-regression" class="uri">https://www.datanovia.com/learn/machine-learning/model-selection/stepwise-regression</a></p>
 </div>
 <div id="script-limpo-5" class="section level2 unnumbered">
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-5"><i class="fas fa-link"></i></a>
@@ -2545,6 +2665,9 @@ FOX, J.; WEISBERG, S. <strong>An R Companion to Applied Regression</strong>. Thi
 </div>
 <div id="ref-medeiros1994" class="csl-entry">
 MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perciformes: Cichlidae) Bloch &amp; Schneider, 1801 na represa do rio Gramame, Alhandra / PB. <strong>Resumos. II Encontro de Iniciação Científica da UFPB</strong>, [s. l.], p. 82–82, 1994.
+</div>
+<div id="ref-medeiros2024" class="csl-entry">
+MEDEIROS, E. S. F.; SILVA, M. J.; RAMOS, T. P. A.; RAMOS, R. T. C. Environmental variables as predictors of fish community composition in semiarid aquatic systems. <strong>Acta Limnologica Brasiliensia</strong>, [s. l.], v. 36, p. e4, 2024. Disponível em: &lt;<a href="http://www.scielo.br/scielo.php?script=sci_arttext&amp;pid=S2179-975X2024000100702&amp;tlng=en">http://www.scielo.br/scielo.php?script=sci_arttext&amp;pid=S2179-975X2024000100702&amp;tlng=en</a>&gt;
 </div>
 </div>
   <div class="chapter-nav">
@@ -2571,11 +2694,12 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <li>
 <a class="nav-link" href="#importando-a-planilha-4"><span class="header-section-number">14.5</span> Importando a planilha</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">14.5.1</span> Organizando os dados</a></li></ul>
 </li>
-<li><a class="nav-link" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><span class="header-section-number">14.6</span> Regressão Multipla Simultânea</a></li>
-<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">14.7</span> Regressão Múltipla Hierárquica</a></li>
-<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><span class="header-section-number">14.8</span> Regressão Múltipla Stepwise</a></li>
-<li><a class="nav-link" href="#material-de-apoio-7"><span class="header-section-number">14.9</span> Material de apoio</a></li>
-<li><a class="nav-link" href="#teste-seus-conhecimentos-6"><span class="header-section-number">14.10</span> TESTE SEUS CONHECIMENTOS</a></li>
+<li><a class="nav-link" href="#id_4042reinicio"><span class="header-section-number">14.6</span> REINÍCIO</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><span class="header-section-number">14.7</span> Regressão Multipla Simultânea</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">14.8</span> Regressão Múltipla Hierárquica</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><span class="header-section-number">14.9</span> Regressão Múltipla Stepwise</a></li>
+<li><a class="nav-link" href="#material-de-apoio-7"><span class="header-section-number">14.10</span> Material de apoio</a></li>
+<li><a class="nav-link" href="#teste-seus-conhecimentos-6"><span class="header-section-number">14.11</span> TESTE SEUS CONHECIMENTOS</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-8">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-para-consulta-2">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-5">Script limpo</a></li>
@@ -2596,7 +2720,7 @@ MEDEIROS, E. S. F.; ROSA, I. L. Reprodução de tucunaré Cichla ocellaris (Perc
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 08/08/2026 11:03:05.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/08/2026 19:23:25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

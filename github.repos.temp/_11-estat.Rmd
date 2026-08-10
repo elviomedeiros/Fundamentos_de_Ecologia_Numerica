@@ -1,0 +1,312 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# (PART) PARTE {-}
+
+# Análises Univariadas
+
+**RESUMO**
+
+O objetivo deste texto é revisar análises descritivas apropriadas para dados univariados.
+A estatística descritiva tem um papel importante a desempenhar na ciência. Quando problemas específicos são tratados na ciência, os dados precisam ser coletados, analisados e apresentados de forma concisa para que outros possam se beneficiar do que foi encontrado.
+Geralmente não é possível apresentar um conjunto de dados completo em uma publicação ou em um seminário e, mesmo que fosse, é improvável isso permitisse uma boa comunicação dos resultados da pesquisa. Em vez disso, os dados são geralmente resumidos como tabelas de frequência, histogramas e estatísticas descritivas que os leitores ou ouvintes podem assimilar prontamente, mas que ainda transmitem os elementos essenciais do conjunto de dados original.
+O principal objetivo do cálculo das estatísticas descritivas é transmitir informações essenciais contidas em um conjunto de dados da forma mais concisa e clara pos
+
+### Plano de estudo 
+
+Nesta disciplina você aprenderá os seguintes procedimentos de análise:  
+●	Apreciar as várias opções para resumir dados univariados.  
+●	Níveis de medição - o que significam e a influência que têm em sua escolha de estatísticas descritivas.  
+●	A distinção entre o valor médio de um conjunto de dados e a variabilidade de um conjunto de dados - entre média e variância.  
+●	Forma da distribuição de um conjunto de dados e, em particular, o conceito de normalidade e a influência que tem na sua escolha de estatísticas descritivas.  
+●	As formas padrão de relatar seus resultados em um artigo ou relatório científico.
+
+### Pré-requisitos 
+
+Este texto foi escrito partindo do pressuposto de que você tem alguma experiência com estatística elementar de nível superior. Boas habilidades editores de planilhas e um conhecimento do sistema operacional Microsoft Windows (operação do mouse, recortar, colar, etc) também são considerados.  
+
+## Principais conceitos 
+
+### Amostragem e sua apresentação
+
+Nas ciências biológicas, o trabalho é frequentemente realizado em **populações** de organismos. Quase invariavelmente, essas populações são muito grandes para estudar em sua totalidade. Por exemplo, um ornitólogo não poderia esperar capturar todos os indivíduos das espécies de pássaros que escolheu estudar. Os estudos geralmente exigem que subconjuntos de toda a população sejam coletados. Esses subconjuntos são chamados de **amostras**.
+A maioria das vantagens da amostragem são bastante óbvias. É mais barato e rápido obter informações de uma amostra do que de uma população inteira, que pode ser muito grande. Dados mais abrangentes podem ser obtidos estudando uma amostra relativamente pequena em detalhes, ao invés de uma grande população superficialmente. A amostragem pode ser o único meio de obter dados se o processo de medição for destrutivo. O biólogo que examina ovários para julgar a proporção de focas fêmeas que se reproduzem a cada ano certamente se recusará a matar todos os indivíduos para coletar dados. Qualquer que seja o motivo para a obtenção de uma amostra, é importante que a amostra seja **representativa** da população da qual foi retirada. Só então será possível estender suas descobertas a toda a população. 
+
+```{r _01fig1, echo=FALSE, fig.cap="Comprimentos (em cm) de 500 brotos do arbusto Banksia ericifolia de charnecas** na da Baía de Jervis."}
+knitr::include_graphics("imagens/rm1.fig1.png")
+```
+
+Um dos primeiros passos em qualquer análise é **resumir** as informações contidas na amostra. Isso é necessário porque examinar superficialmente os dados brutos em amostras mesmo de tamanho moderado (Tabela \@ref(tab:_01fig1)) provavelmente não fornecerá grandes insights. Tampouco vale a pena apresentar um conjunto de dados brutos inteiro em um relatório ou manuscrito, exceto talvez em um apêndice, porque o leitor não pode obter as tendências que o autor considera importantes, diretamente dos dados brutos. Poucos leitores se importariam.
+
+### A tabela de frequência
+ 
+A tabulação da frequência é um método muito popular para resumir dados porque mesmo conjuntos de dados muito grandes podem ser condensados para uma forma exequível sem perda substancial de informação. Considere os dados sobre o comprimento dos brotos de Banksia ericifolia mostrados na Tabela 1.
+ 
+Existem 500 medições, um conjunto de dados formidável. Por inspeção, o comprimento mínimo do broto é 10,0 e o máximo é 44,9 cm. Esses valores definem o intervalo da amostra. Agora precisamos subdividir o intervalo em intervalos ou classes, cada um com o mesmo tamanho. Geralmente, é aconselhável arredondar o valor mínimo para baixo e o valor máximo para valores apropriados ao decidir as classes de intervalos. Nesse caso, parece sensato dividir a faixa de 10 a 45 cm em sete intervalos a cada 5 cm de largura.  
+
+Se contarmos o número de brotos que se encontram em cada um dos sete intervalos, temos a base para a tabulação da frequência. Essa tabulação é mostrada na Tabela 2. A coluna de frequência foi obtida contando o número de medições que existem dentro de cada classe. A coluna de frequência percentual foi obtida representando cada contagem como uma porcentagem da contagem total. A frequência cumulativa e as frequências percentuais cumulativas foram obtidas somando progressivamente as frequências correspondentes.
+
+```{r _01fig1, echo=FALSE, fig.cap="Tabela 2. Uma tabela de frequência de comprimento de brotos para o arbusto Banksia ericifolia de Jervis Bay"}
+knitr::include_graphics("imagens/rm1.fig1.png")
+```
+
+Tabelas de frequência fornecem resumos de conjuntos de dados sem perda substancial de informação. Neste caso, houve perda mínima de informação - por exemplo, o comprimento médio do broto calculado diretamente da tabulação de frequência (usando os pontos médios da classe) de 28,85 está de acordo com o valor de 28,97 calculado a partir dos dados brutos. Um leitor de um artigo contendo uma tabulação de frequência teria acesso a quase tanta informação como se todos os dados tivessem sido publicados, mas a tabela ocupa muito menos espaço e ocuparia apenas um pouco mais de espaço se baseada em 5 milhões de medições em vez de apenas 500.
+As tabelas de frequência incluídas em relatórios ou artigos geralmente não contêm todos os quatro tipos de frequência mostrados na tabulação acima. As colunas mais comuns a serem incluídas são:
+  
+• Classes de intervalos  
+• Frequências brutas  
+• Frequências percentuais  
+
+Frequências percentuais, embora sejam as mais comumente usadas, podem ser muito enganosas se o tamanho da amostra for pequeno. Para pequenas amostras, as tabulações de frequência devem conter apenas frequências brutas. Ao lidar com uma amostra grande, você pode optar por não incluir as frequências brutas, mas deve fornecer o tamanho total da amostra em que as frequências percentuais foram baseadas. 
+
+### Histogramas e gráficos de barras
+
+Tabelas de frequência podem ser representadas como um gráfico de frequência (bruto ou percentual) em relação à variável de medição. As informações contidas na tabela de frequência de comprimentos de brotos de Banksia ericifolia são representadas graficamente pelo histograma mostrado na Figura 1. A forma da distribuição de frequência é geralmente de maior interesse do que as alturas absolutas de cada coluna, portanto, os histogramas são geralmente construídos a partir de frequências percentuais. No R eles também podem ser construídos a partir da densidade. 
+
+____________________________________________
+Usando R para representar graficamente a função de densidade de probabilidade (PDF). Na teoria da probabilidade, uma função de densidade de probabilidade (PDF) ou densidade de uma variável aleatória contínua* (que assume um número infinito de valores possíveis) é definida como uma função que indica a probabilidade relativa dessa variável aleatória assumir um determinado valor. Isso significa que se estivermos interessados em saber a probabilidade de que X caia em algum intervalo (a, b) de um determinado conjunto de valores, precisaremos encontrar P (a <X <b). Em outras palavras, a probabilidade de a variável aleatória X cair dentro de um determinado intervalo de valores é dada pela integral da densidade dessa variável ao longo desse intervalo, ou seja, é dada pela área sob a função de densidade, estando acima do eixo horizontal e entre os valores mais baixos e mais altos do intervalo. *A função de densidade de probabilidade f(X) representa uma variável aleatória contínua X. (Mais detalhes em Anexos).
+_____________________________________________
+
+Os comprimentos dos brotos de *Banksia ericifolia* são exemplos de medições contínuas - eles são livres para tomar qualquer número inteiro ou fracionário dentro de seu intervalo. Para medições discretas, como cor de cabelo ou a classe de sexo, as tabulações de frequência podem ser representadas como **gráficos de barras**. Os gráficos de barras são semelhantes em construção aos histogramas, exceto que as colunas verticais usadas que representam as frequências das classes são espaçadas para indicar que os dados são discretos (Figura 1).
+
+```{r _01fig1, echo=FALSE, fig.cap="Figura 1. Histograma mostrando a distribuição de comprimentos para brotos de Banksia ericifolia (n = 500) (esquerda) e gráfico de barras mostrando as proporções relativas de juvenis não sexados (J), machos maduros (M) e fêmeas maduras em uma população tartarugas no Parque Nacional de Kakadu (n = 32) (direita)."}
+knitr::include_graphics("imagens/rm1.fig1.png")
+```
+
+Os pacotes estatísticos modernos têm grande versatilidade na produção gráfica. A experimentação com as opções descritas nos manuais permitirá que você produza gráficos de frequência, histogramas, gráficos de barras horizontais, diagramas de blocos e gráficos de pizza. 
+
+## Estatísticas univariadas
+
+O termo **estatística** não se refere apenas à disciplina acadêmica que trata de medição, resumo, inferência e teste de hipóteses. O termo também se refere a características de valor único de amostras. A média, mediana, desvio padrão e assimetria (skewness) da amostra são estatísticas. Cada um deles descreve algum aspecto da amostra.  
+Embora a tabulação de frequência (ou histograma) resuma um conjunto de dados com pouca perda de informação, como uma descrição ela carece de definição suficiente para satisfazer a maioria dos pesquisadores. Várias estatísticas de sumarização são geralmente apresentadas além de ou no lugar da tabulação de frequência ou histograma.  
+As estatísticas comumente usadas se enquadram em uma de três categorias - **médias** ou estatísticas de localização, estatísticas de dispersão ou **variabilidade** e estatísticas de **forma**.
+
+### Médias
+  
+Uma média é um valor único que resume a posição das medições da amostra em relação à faixa de valores possíveis para as medições. Quando questionado sobre o tamanho de um dado animal, seria apropriado responder com o comprimento médio do corpo adulto. Esse valor pode não fornecer uma indicação precisa do tamanho de um indivíduo em particular, mas dá uma boa indicação do tamanho em geral.
+Várias médias estão disponíveis. A mais comum é a **Média Aritmética** calculada pela soma de todas as medições em uma amostra e então dividindo pelo número total de medições, da seguinte forma:
+ 
+A **Mediana** é o valor que possui 50% dos outros valores maiores que ele e 50% dos outros valores menores que ele. Para calcular a mediana, você deve classificar as medidas em ordem de magnitude e, em seguida, selecionar um valor que divide igualmente o número de medidas na amostra.  
+
+A **moda** é o valor que ocorre mais comumente em uma amostra. Para dados contínuos que foram agrupados, é sensato definir a Moda como o ponto médio do intervalo de classe em uma tabulação de frequência que contém a maioria dos valores. Fórmulas de interpolação estão disponíveis para melhorar a resposta.  
+Outras médias também[em podem ser usadas, como a média harmônica e a média geométrica. Eles têm aplicações específicas e não serão tratadas aqui.
+
+### Medidas de variabilidade  
+
+É possível imaginar dois histogramas com a mesma média, mas que diferem na distribuição das medidas sobre suas médias (Figura 2). Claramente, uma média não fornece um resumo adequado de um conjunto de dados. Outras estatísticas são necessárias, entre as quais estão estatísticas de variabilidade ou dispersão de medições sobre a média.
+
+```{r _01fig1, echo=FALSE, fig.cap="Figura 2. Dois histogramas com idênticas médias, mas diferindo na variabilidade sobre essas médias."}
+knitr::include_graphics("imagens/rm1.fig1.png")
+```
+ 
+Uma medida simples de variabilidade é o **intervalo**. É a diferença entre o maior e o menor valor em uma amostra. O intervalo é obviamente afetado por até mesmo um único valor atípico e, por esse motivo, é apenas uma estimativa grosseira da variabilidade de todas as observações em uma amostra. O intervalo também tem valor limitado porque não pode ser usado facilmente na teoria de amostragem, da qual depende grande parte das estatísticas. De longe, a medida mais importante de variabilidade é o **Desvio Padrão**.
+ 
+Os desvios de todas as observações da média de amostra são elevados ao quadrado para remover os sinais negativos e, em seguida, somados. Os desvios quadrados somados ou somas dos quadrados são então divididos por n-1. A raiz quadrada é então obtida para garantir que as unidades do desvio padrão sejam as mesmas da variável medida. O desvio padrão é uma espécie de desvio absoluto médio das medições de sua média, embora bastante distinto do desvio absoluto médio definido em muitos livros didáticos, mas não mais amplamente utilizado.
+
+A **Variância** ou quadrado médio é simplesmente o desvio padrão ao quadrado.
+
+O **Coeficiente de Variação** é usado para comparar a variabilidade de duas amostras que têm médias amplamente diferentes. Nesses casos, é útil medir a variabilidade em termos relativos, dividindo o desvio padrão pela média. O resultado é o coeficiente de variação, geralmente expresso como uma porcentagem.
+ 
+O coeficiente de variação tem a vantagem adicional de não ter unidades e pode ser usado para comparar a variabilidade de duas medidas muito diferentes, por exemplo, para comparar a variabilidade no peso corporal ou na concentração de um hormônio no sangue.  
+O **Intervalo Interquartil** é outra medida útil de variabilidade. Lembre-se de que a mediana é o valor abaixo do qual 50% de todos os valores da amostra se encontram. Da mesma forma, podemos definir o primeiro quartil como o valor abaixo do qual se encontram 25% de todos os valores da amostra e o terceiro quartil como o valor abaixo do qual se encontram 75% dos valores. O intervalo interquartil é a diferença entre o primeiro e o terceiro quartis e é uma medida de variabilidade melhor, em algumas circunstâncias, ao desvio padrão.  
+Os 5º (quinto) e 95º (nonagésimo quinto) **percentis** eliminam 5% dos valores mais extremos na distribuição de valores da amostra. O 1º e o 99º Percentis podem ser definidos de forma semelhante. Como acontece com os quartis, uma lista de percentis pode ser muito mais informativa do que o desvio padrão para resumir a dispersão de valores sobre a média ou mediana, especialmente quando a dispersão é assimétrica.  
+O **Índice de Uniformidade J'** (Pielou, 1966) é uma medida apropriada da variabilidade entre medidas de nível nominal, como cor de cabelo ou classe de sexo.
+ e  
+onde, fi representa as frequências das classes, k é o número de classes e n é o número total de objetos medidos. A derivação e os méritos relativos de várias medidas de variabilidade para dados de nível nominal são discutidos por Zar (1984, no Capítulo 4) (Esse livro esta disponível na Bibliografia da disciplina). 
+
+### Estatísticas de forma  
+
+É possível ter duas distribuições de frequência de amostra com a mesma média aritmética (ou seja, eles estão na mesma posição geral no eixo horizontal) e com o mesmo desvio padrão (ou seja, a variabilidade sobre a média é a mesma em média), mas com forma geral diferente (Figura 3).
+Existem duas estatísticas úteis para descrever a forma. **Skewness** é outro nome para assimetria, o que significa que uma cauda da distribuição de frequência é mais proeminente do que a outra. Uma skewness de zero implica em um histograma de formato simétrico, um valor negativo significa distorção para a esquerda e um valor positivo significa distorção para a direita. O histograma a direita da Figura 3 está inclinado para a direita.
+A **Kurtosis** (ou curtose em Português) é uma medida de quão “pontuda” (leptocurtose) é uma distribuição de frequência ou quão "achatada" (platicurtose) ela é. Um valor negativo indica platicurtose e um valor positivo indica leptocurtose.
+
+```{r _01fig1, echo=FALSE, fig.cap="Figura 3. Dois histogramas com a mesma média e o mesmo desvio padrão, mas com formato diferente."}
+knitr::include_graphics("imagens/rm1.fig1.png")
+```
+## Aplicações práticas
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O RStudio oferece diversas vantagens em relação ao uso do R base. Algumas dessas vantagens incluem:
+
+1. Interface amigável: o RStudio possui uma interface gráfica amigável e intuitiva, com recursos como realce de sintaxe, sugestões de código e facilidade na navegação entre arquivos, o que torna o processo de desenvolvimento mais fácil e produtivo. 
+2. Facilidade de gerenciamento de projetos: o RStudio oferece ferramentas para gerenciamento de projetos, que permitem aos usuários organizar e controlar arquivos e scripts em um ambiente centralizado. 
+3. Depuração eficiente: o RStudio oferece recursos de depuração integrados, como pontos de interrupção e rastreamento de variáveis, que facilitam a identificação e correção de erros no código. 
+4. Suporte para colaboração: o RStudio permite que múltiplos usuários colaborem em um projeto, com recursos como controle de versão integrado e ferramentas para compartilhamento de código. 
+5. Integração com outras ferramentas: o RStudio integra-se com diversas ferramentas populares de análise de dados, como o Git e o LaTeX, permitindo uma maior eficiência e produtividade no processo de análise e geração de relatórios. 
+
+Essas são apenas algumas das vantagens que o RStudio oferece em relação ao R. É importante notar que, embora o RStudio seja uma ferramenta poderosa para análise de dados, ele não substitui a necessidade de conhecimento em R e estatística para obter resultados precisos e significativos. 
+
+## O essencial 
+
+### Licença de software
+
+A licença de uso do RStudio depende da versão do software que está sendo utilizada. O RStudio oferece duas versões principais: a versão gratuita e a versão paga, conhecida como RStudio Pro. A versão gratuita do RStudio é licenciada sob a licença AGPLv3, o que significa que é um software de código aberto e livremente distribuível. Isso permite que os usuários baixem, modifiquem e distribuam o código-fonte do RStudio gratuitamente. No entanto, o uso comercial do RStudio sob a licença AGPLv3 pode ter algumas limitações, como a obrigatoriedade de disponibilizar o código-fonte modificado para os usuários. Já a versão paga do RStudio, o RStudio Pro, requer uma licença comercial para uso em ambientes empresariais ou acadêmicos. A licença comercial do RStudio Pro oferece recursos adicionais, como suporte técnico e atualizações regulares do software. Além disso, a licença comercial permite que os usuários utilizem o RStudio Pro em um ambiente sem a obrigação de divulgar o código-fonte modificado. É importante lembrar que as licenças de uso do RStudio podem mudar com o tempo, portanto, é recomendado que os usuários verifiquem as informações de licenciamento diretamente no site do RStudio antes de utilizar o software. 
+
+### Interface do usuário 
+
+Uma interface de programa estatístico é uma ferramenta que permite que os usuários interajam com uma linguagem de programação de maneira mais amigável e visual. Essas interfaces geralmente apresentam uma interface gráfica do usuário (GUI) que oferece um ambiente integrado para a análise de dados. Os usuários podem importar dados, criar visualizações, executar análises estatísticas e gerar relatórios. As interfaces de programa estatístico podem variar desde aplicativos de desktop autônomos até plug-ins para aplicativos de planilha, e muitos são desenvolvidos para atender a necessidades específicas de usuários em áreas como finanças, pesquisa médica, ciências sociais e outras. Essas interfaces tornam a análise de dados mais acessível a uma gama mais ampla de usuários, independentemente de sua experiência em programação ou estatística. 
+
+Linguagens de programação estatística de código aberto tem sido amplamente usadas em análises de dados e pesquisa em todo o mundo. Suas interfaces ou GUIs, embora poderosas, podem ser um pouco intimidadoras para novos usuários, uma vez que é necessário habilidades de programação básicas. 
+
+### Interface do usuário do RStudio 
+
+A interface de usuário do RStudio é composta por várias janelas e painéis que permitem a interação com o R de forma organizada e intuitiva. A janela principal é dividida em quatro painéis (Figura \@ref(fig:R-eng)):
+
+```{r R-eng, echo=FALSE, fig.cap="Interface do usuário do ambiente integrado de desenvolvimento (IDE) RStudio para a linguagem de programação R com os termos em inglês e em português. O operador de atribuição ( <- ), um dos operadores mais utilizados no R pode ser chamado pela combinação alt + - (alt e a tecla menos). De: R – software for data analysis | Ciência Prática (wordpress.com) https://cienciapratica.wordpress.com/2015/07/20/r-software-for-data-analysis/"}
+knitr::include_graphics("imagens/interfaceR-eng.png")
+```
+
+Editor de código: é onde o usuário pode criar, editar e salvar scripts R. O editor fornece recursos como destaque de sintaxe, indentação automática, autocompletar e outras ferramentas úteis para a programação. 
+
+Console: é onde o usuário pode digitar comandos diretamente no R e ver a saída correspondente. É aqui que a maior parte da interação com o R ocorre. 
+
+Arquivos/Plots/Pacotes/Ajuda: este painel pode ser dividido em quatro subpainéis, cada um dos quais mostra uma guia diferente. O painel de arquivos permite a navegação pelos arquivos e pastas do computador. O painel de plots mostra gráficos gerados no R. O painel de pacotes permite a instalação, atualização e carregamento de pacotes do R. O painel de ajuda exibe informações sobre funções e pacotes do R. 
+
+Ambiente/Histórico/Git/Conexões: este painel também pode ser dividido em quatro subpainéis. O painel de ambiente exibe informações sobre variáveis e funções criadas no R. O painel de histórico mostra os comandos recentes digitados no console. O painel de Git permite que o usuário integre o RStudio com um repositório Git para controle de versão. O painel de conexões permite a conexão com bancos de dados e outros recursos externos. 
+
+A interface de usuário do RStudio também inclui uma barra de ferramentas na parte superior da janela, que fornece acesso rápido a comandos e recursos comuns. Além disso, há uma barra de menus padrão que permite o acesso a todas as opções e recursos do RStudio. No geral, a interface de usuário do RStudio é altamente personalizável e pode ser configurada para atender às necessidades específicas do usuário.
+
+### Projetos 
+
+Um 'Projeto' no RStudio é um conjunto de dados e arquivos de resultados associados entre si, junto com as opções e configurações no momento em que o Projeto foi salvo pela última vez. Quando você abre um projeto, esses arquivos são abertos e suas opções e configurações são restauradas da última vez. Você só pode ter um projeto aberto por vez, mas pode alternar facilmente entre eles abrindo um projeto salvo. Um projeto pode ter mais de um arquivo de dados associado. Se você tiver um projeto aberto e abrir ou criar qualquer arquivo nele, o projeto será considerado modificado. Ao sair do RStudio ou abrir um novo projeto, será perguntado se deseja salvar o projeto modificado. Para melhor gerenciamento de dados, você pode manter seus arquivos de projeto em seus próprios diretórios, separados do software RStudio. Ele lembra o nome do caminho completo para cada projeto. Os detalhes de como o RStudio gerencia diretórios e definições de gerenciamento de arquivos são fornecidos no sistema de Ajuda. Você pode redefinir o diretório padrão (working directory) para que o RStudio navegue até o diretório que você escolheu e abra os arquivos ou projetos que você encontrará no diretório escolhido. 
+
+### Nomes de arquivos
+
+Alguns dos tipos de extensão de arquivos que podem ser criados ou manipulados no RStudio incluem:
+
+ Arquivos de script: São arquivos de texto contendo código R, com extensões de arquivo como .R, .Rmd, .Rnw, .Rhistory, entre outros.  
+ Arquivos de dados: São arquivos contendo dados que podem ser lidos e manipulados com o R, como .csv, .txt, .xls, .xlsx, .rda, .rdata, entre outros.  
+ Arquivos de pacotes: São arquivos compactados que contêm código, documentação e dados necessários para um pacote do R, com extensão .tar.gz.  
+ Arquivos de imagem: São arquivos de imagem gerados a partir de gráficos criados no R, com extensões como .pdf, .png, .jpeg, .bmp, entre outros.  
+ Arquivos de projeto: São arquivos que contêm todas as informações necessárias para reproduzir um projeto R, incluindo arquivos de script, dados e outros recursos, com extensão .Rproj. 
+
+Esses são apenas alguns dos tipos de arquivos que podem ser usados ou gerados no RStudio. O RStudio também oferece suporte a muitos outros tipos de arquivos, como arquivos de ajuda, arquivos de instalação de pacotes, entre outros. 
+
+## Preparação dos arquivos
+
+Arquivos de dados multivariádos são geralmente maiores e mais complexos do que outros, portanto, é necessário cuidado extra. Eles podem ser preparados de duas maneiras principais. A primeira forma é como a matriz completa de valores (.xlsx), onde cada linha mostra os valores de cada coluna. Isso é bom quando há poucos zeros. É assim que uma planilha funciona. A outra maneira, preferida pelos ecologistas para seus dados de espécies, é registrar apenas os valores diferentes de zero para cada espécie. Cada linha, representando uma unidade de amostragem, é então lida como uma lista de verificação ou registro quadrat. Este formato compacto (.csv ou tab delimited) é muito mais eficiente quando o tamanho da matriz de dados é muito grande. O RStudio considera as linhas no arquivo de dados como as unidades de amostragem e as colunas como as variáveis. Dependendo de quantos existem, pode ser mais conveniente inserir seus dados ao contrário e, em seguida, transpô-los para o RStudio. Veremos como fazer isso mais tarde. 
+
+### Formatos de arquivo de dados
+
+Você pode usar qualquer editor de texto, processador de texto ou planilha para construir sua planilha de dados, embora seja recomendado o uso do Excel. No entanto, a entrada de dados no RStudio deve ser feita dentro do ambiente R por linha de comando. Os dados podem ser preparados no formato de planilha (spreadsheet), mas você deve seguir o formato cuidadosamente para saber onde e como colocar as informações nas células da planilha. 
+
+A seguir é apresentada a estrutura básica de uma matriz comunitária e como importar um arquivo XLS/XLSX para o RStudio usando a programação R (Figura \@ref(fig:ppbio2)). Como tudo no R, existem várias formas para se ler os arquivos Excel. Usaremos primeiro pacote readxl (que já vem instalado com o R base). Veja https://www.tutorialkart.com/r-tutorial/r-read-excel-xls-xlsx/
+
+```{r ppbio2, echo=FALSE, fig.cap="Usaremos uma matriz multivariada (sítios x espécies, matriz comunitária) do PPBio. Identifique na figura abaixo os elementos que compõem uma matriz multivariada"}
+knitr::include_graphics("imagens/rm1.fig3.png")
+```
+
+### O arquivo de espécies
+
+Ao usar o formato de dados compacto, você viu que as variáveis (colunas) são numeradas, não nomeadas. Portanto, para aplicar um nome a eles, você precisa criar um arquivo de texto separado que contenha os códigos e nomes. Isso é mais útil quando as variáveis são espécies, uma vez que você pode ter um único arquivo de espécie que se aplica a todos os seus arquivos de dados e aos projetos.
+
+O arquivo de espécies também inclui o nome completo da espécie, que é usado em alguns arquivos de resultados. Esta facilidade é obviamente muito útil para registro de campo quando você pode identificar a maioria das espécies. Leve a lista de espécies com você e apenas escreva o número do código em sua folha de dados. Observe também os seguintes guias de formato e regras para o arquivo de espécies. 
+
+● Nomes de código curtos são recomendados para reduzir a superimposição de nomes em quaisquer resultados gráficos.  
+● Os registros podem estar em qualquer ordem neste arquivo. (No entanto, você achará útil manter as espécies em ordem alfabética porque a maior parte dos outputs é ordenada pela sequência de espécies em seu arquivo de espécies.).
+
+### Formato de valores separados por vírgula (.csv) 
+
+Um arquivo ASCII de valores separados por vírgula (formato *.csv) também pode ser usado para importar / exportar dados do RStudio. Este formato de arquivo requer uma formatação muito cuidadosa.
+
+### Editando a matriz de dados 
+
+O RStudio fornece uma pletora de formas para edição de matrizes. Isso é mais útil para pequenas correções. Essas edições são salvas no formato de planilha para que você possa alternar entre a edição do arquivo e o software de planilha. Use a planilha para uma edição mais extensa de suas matrizes. Você pode fazer operações do tipo matriz facilmente na janela principal. A exclusão de linhas ou colunas, transformações e transposição e multiplicação de matrizes estão disponíveis com linhas de comando.
+
+### Arquivos de resultados 
+
+Para manter um registro completo de suas análises, é melhor anexar arquivos de resultados sucessivos a um arquivo de scripts nomeado. Faça isso salvando o arquivo de resultado e, então, após cada operação sucessiva, selecione Salvar script. Você também deve adquirir o hábito de inserir um título descritivo significativo (usando [#]{style="color:green"}) para cada análise. Isso fornece documentação adicional de sua análise e aparece no script. As tabelas no arquivo de resultado são construídas com espaços, não tabulações. Portanto, o alinhamento das colunas no RStudio e nos processadores de texto só é obtido selecionando uma fonte de pitch-fixo, como Courier. Sendo arquivos de texto simples, você também pode pesquisar ou editar arquivos de resultados e scripts usando o R ou qualquer editor de texto. 
+
+Você pode exportar seus arquivos de resultado para sua planilha. 
+
+### Gráficos
+
+Você pode salvar imagens gráficas do RStudio como metarquivos do Windows (.wmf) ou metarquivos aprimorados (\*.emf), usando linhas de comando ou a interface gráfica. Um gráfico salvo dessa forma é uma imagem vetorial que pode ser aberta em um pacote gráfico ou colada em processadores de texto e redimensionada ou editada sem perda de detalhes. No entanto, certifique-se de não alterar a proporção de aspecto ao redimensionar. Se o formato *.emf não for lido corretamente por seu outro software, tente salvar o gráfico no formato .wmf.
+
+## Conclusão 
+
+Foram apresentadas as três primeiras etapas da sequência abaixo, incluindo a preparação da importantíssima matriz de dados e como importá-la e exportá-la. Resumir os dados e decidir sobre o tratamento dos valores ausentes é um primeiro passo para a familiarização com conjuntos de dados multivariados. 
+
+## Sequência típica na preparação e análise de dados 
+
+Para realizar uma análise multivariada, precisamos seguir uma sequência de etapas analíticas, como a seguir:
+
+1. Entrada de dados e verificação de erros  
+Crie os arquivos de dados e espécies usando sua planilha ou editor de texto ou banco de dados. 
+Verifique e arquive uma cópia do seu arquivo de dados limpo.
+
+2. Crie o arquivo de planilha .xlsx  
+Faça isso salvando a planilha ou importando outros formatos para o RStudio. Verifique se há erros de importação. Faça resumos para reproduzir seus registros de unidade de amostragem para dupla verificação.
+
+3. Examine a estrutura básica dos dados  
+Use os comandos de sumários para examinar os valores de linha e coluna 
+
+4. Faça uma Análise de Outliers  
+Procure outliers. Examine as relações entre curvas de espécies e espécie-área. 
+
+5. Decida se/e como modificar os dados  
+Mesclar, particionar, transformar, podar, transpor matriz etc. 
+
+5. Fazer análises, ordenar e classificar (grupos)  
+Cada análise pode exigir o carregamento de várias matrizes principais e secundárias 
+
+6. Inspecionar os resultados (gráficos e arquivos de resultados)
+
+Salve e imprima os resultados 
+
+## Material de apoio 
+
+Recursos na Web Apostilas 
+RStudio Desktop - Posit
+The Comprehensive R Archive Network (r-project.org)
+Landeiro-Introducao.pdf (r-project.org)
+
+## Apêndices {.unnumbered}
+
+### Sites consultados {.unnumbered}
+[https://youtu.be/U6ksXvvY6Q0]  
+[https://youtu.be/a7EJE_2mtGk]
+
+### Leitura suplementar 
+
+A multivariate analysis on spatiotemporal evolution of Covid-19 in Brazil (https://doi.org/10.1016/j.idm.2020.08.012)  
+Genetic markers in the playground of multivariate analysis (https://www.nature.com/articles/hdy200813)

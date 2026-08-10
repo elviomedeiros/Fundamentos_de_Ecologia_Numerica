@@ -1,0 +1,759 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# (PART) PARTE {-}
+
+# Teoria 1 - Introdução
+
+### Introdução à Análise Multivariada de Dados (AMD) {-}
+
+### Apresentação  {-}
+
+Os conjuntos de dados multivariados em ecologia são inerentemente grandes e de estrutura complexa. Existem várias maneiras de representá-los e, mais importante do que com estatísticas univariadas, decisões conscientes devem ser feitas sobre quais subconjuntos vamos analisar. Essas decisões refletem as perguntas que estamos fazendo. Há também a necessidade de considerar se quaisquer transformações e/ou padronizações precisam ser aplicadas antes da análise adequada. Novamente, essas operações de dados são influenciadas pelas perguntas que estamos fazendo. O que exatamente constitui o conjunto de ferramentas que chamamos de **análise multivariada** depende da disciplina em que se trabalha. Isso decorre da natureza dos dados comumente disponíveis para análise e do tipo de perguntas feitas em cada disciplina. Na ecologia, como em outras disciplinas, um conjunto dessas técnicas foi altamente ajustado para auxiliar na exploração de dados. A maioria deles se encaixa na rubrica de classificação ou ordenação.
+
+Uma visão geral dessas abordagens, os dados em que operam e as sequências analíticas típicas serão apresentadas ao longo deste livro.
+
+É importante ressaltar que esse livro se baseia fortemente nos textos clássicos de Ecologia Numérica (@RN1278, @RN1552, @RN1012, @RN67, @RN181, entre outros), bem como em sites da internet e livros e apostilhas publicados on-line. Busco aqui mais trazer um compilado de informações úteis para o novato e, quem sabe, para o veterano, do que apresentar um texto totalmennte novo. Afinal o objetivo principal deste livro é ser o apoio a minha disciplina na graduação.
+
+Então vamos lá...    
+
+### Plano de estudo {-}
+
+Aqui você aprenderá sobre essas decisões importantes e como tomá-las. Você verá por que é necessário considerar as propriedades dos objetos, atributos e valores, com cuidado, antes de passar para a análise.
+
+Você desenvolverá uma compreensão básica da matriz de dados brutos e como os dados multivariados podem ser representados. A partir de um conceito simples de similaridade, você desenvolverá uma compreensão do que são classificação e ordenação, e como elas diferem de outras técnicas multivariadas.
+
+Enfim, você terá uma visão geral das etapas possíveis em uma análise multivariada. Estude esse texto, pensando que você deverá der ser capaz de fazer o seguinte:
+  
+●	decidir como particionar grandes conjuntos de dados multivariados;  
+●	identificar outliers univariados e multivariados e decidir como tratá-los;    
+●	determinar o método apropriado de transformação e padronização para um problema específico.  
+
+Nesta disciplina você aprenderá os seguintes procedimentos de análise:
+
+●	Particionamento por exclusão seletiva de atributos e objetos  
+●	Transposição e randomização de uma matriz de dados  
+●	Codificação de atributos e transformação de seus valores  
+●	Padronização de valores por objetos ou atributos  
+●	Resumo univariado de objetos e atributos e teste para outliers  
+
+Este conteúdo é baseado na suposição de que você concluiu a disciplina de Bioestatística e requer base em estatísticas descritivas univariadas e a capacidade de instalar e importar dados para o RStudio. Algumas lacunas no conhecimento poderão ser abordadas de forma assíncrona e através de material de apoio.
+
+## Principais conceitos em AMD 
+
+### A natureza da análise de dados multivariados
+ 
+O que exatamente constitui o conjunto de ferramentas que chamamos de **análise multivariada** depende da disciplina em que se trabalha. Isso decorre da natureza dos dados comumente disponíveis para análise e do tipo de perguntas feitas em cada disciplina. Na ecologia, como em outras disciplinas, um conjunto dessas técnicas foi altamente ajustado para auxiliar na exploração de dados. A maioria deles se encaixa na rubrica de classificação ou ordenação. Uma visão geral dessas abordagens, os dados em que operam e as sequências analíticas típicas serão apresentadas subsequentemente.
+
+Os conjuntos de dados multivariados são inerentemente grandes e de estrutura complexa. Existem várias maneiras de representá-los e, mais importante do que com estatísticas univariadas, decisões conscientes devem ser feitas sobre quais subconjuntos vamos analisar. Essas decisões refletem as perguntas que estamos fazendo. Há também a necessidade de considerar se quaisquer transformações e/ou padronizações precisam ser aplicadas antes da análise adequada. Novamente, essas operações de dados são influenciadas pelas perguntas que estamos fazendo. **Dados ecológicos numéricos** são conjuntos de informações que descrevem a complexidade inerente da natureza, com seus inúmeros processos bióticos e abióticos interagindo para criar padrões estruturais, espaciais e temporais nas comunidades biológicas. A ecologia é a ciência que estuda essas interações, usando técnicas multivariadas de análise que detectam e descrevem padrões comunitários, permitindo a formulação de hipóteses sobre suas possíveis causas.
+
+A **Ecologia Numérica** é uma subárea da ecologia que se dedica a aplicar técnicas de análise generalizada a conjuntos de dados multidimensionais, com o objetivo de reduzir a complexidade dos dados e facilitar sua interpretação. Isso inclui a análise de grandes conjuntos de dados, como tabelas e matrizes comunitárias, para descrever sua estrutura e quantificar o grau de associação entre atributos e objetos. Além disso, a ecologia numérica permite definir comunidades biológicas e áreas ou períodos de características ecológicas similares, evidenciando e hierarquizando os fatores responsáveis pela variabilidade dos dados e da estrutura do sistema estudado.
+
+Em resumo, a Ecologia Numérica é uma ferramenta importante para entender a complexidade da natureza e as interações entre os seres vivos e o ambiente que os cerca.
+
+### Dados observacionais ou experimentais?
+
+Os dados que coletamos na ciência podem ser considerados experimentais ou observacionais em sua origem. A abordagem experimental pressupõe nossa habilidade de manipular o experimento de forma que:
+  
+●	tratamentos e controles sejam possíveis e constituam nossas variáveis independentes;  
+●	os efeitos dos tratamentos podem ser medidos, fornecendo assim nossas variáveis dependentes;  
+●	deduções podem ser feitas sobre nossas hipóteses seguindo testes estatísticos de significância adequados.  
+
+Por outro lado, a abordagem observacional mais comumente envolve medir as variáveis em uma gama de condições impostas pela natureza (os chamados "experimentos naturais"). Aqui descobrimos que:  
+
+●	não há distinção necessária entre as variáveis dependentes e independentes, porque os tratamentos e controles geralmente não estão disponíveis;  
+●	variáveis podem ser medidas em escalas diferentes (escalas mistas) e suas distribuições são comumente não normais;  
+●	podem existir vários conjuntos de dados diferentes.  
+
+Observe que algumas técnicas multivariadas, como regressão linear múltipla ou análise de função discriminante, não são consideradas neste assunto. Essas técnicas de dependência consideram várias variáveis independentes e, em alguns casos, várias variáveis dependentes (Tabela \@ref(tab:101tab1)). Historicamente, uma abordagem observacional e as análises subsequentes têm sido vistas como geradores de hipóteses, em vez de testes de hipóteses. Esta abordagem se alinha com o conceito mais geral de "análise exploratória de dados", fundado por @RN2162 e também chamado de "análise de padrões" por alguns. No entanto, como veremos, os testes de randomização (Monte Carlo, PERMANOVA, etc.) estão sendo cada vez mais desenvolvidos para testar a significância dos resultados multivariados. Claramente, a aplicação de vários testes univariados não é apropriada para dados multivariados, pois os erros do Tipo I aumentarão inaceitavelmente. 
+
+```{r 101tab1, echo=FALSE} 
+# Carregar os pacotes necessários
+library(knitr)
+library(kableExtra)
+tabela <- data.frame(
+  " " = c("Univariado", "Dependente multivariado", "Independente multivariado"),
+  "Variáveis dependentes Contínuo" = c("Y1", "Y1 Y2", ""),
+  "Variáveis dependentes Discreto" = c("B1", "B1 B2", ""),
+  "Variáveis independentes Contínuo" = c("X1", "X1 X2 X3 ...", "X1 X2 X3 ..."),
+  "Variáveis independentes Discreto" = c("A1", "A1 A2 A3 ...", "A1 A2 A3 ...")
+)
+tabela_kable <- kable(tabela, col.names = c(" ", "Variáveis dependentes Contínuo",
+                                            "Variáveis dependentes Discreto",
+                                            "Variáveis independentes Contínuo",
+                                            "Variáveis independentes Discreto"),
+                      caption = "Estruturas de dados univariadas e multivariadas comparados em termos de natureza das variáveis incluídas na análise.")
+kable_styling(tabela_kable, full_width = F, position = "center")
+```
+
+Existem diversas técnicas utilizadas na análise de dados ecológicos numéricos, entre as quais se destacam os métodos univariados, de distribuição e multivariados [@RN450].
+
+Os **métodos univariados** são utilizados para resumir um conjunto de dados de espécies ou sítios em um único coeficiente, como é o caso dos índices de diversidade. Já os **métodos de distribuição**, por sua vez, resumem os dados em um histograma, como as curvas de abundância. Os **métodos multivariados**, por sua vez, comparam duas ou mais amostras com base na composição de suas comunidades. Para isso, são utilizados coeficientes de similaridade calculados entre cada par de amostra, que permitem a classificação (clustering) das amostras em grupos mutuamente similares, ou a ordenação das amostras em um espaço bi/tri-dimensional, onde a distância entre cada par de amostra reflete a similaridade entre suas espécies.
+
+Essas técnicas multivariadas são fundamentais para a análise de dados ecológicos numéricos, permitindo uma compreensão mais completa e detalhada das interações entre os seres vivos e o ambiente em que vivem. Em resumo, as técnicas multivariadas detectam e descrevem os padrões comunitários, e permitem a formulação (e o teste) de hipóteses sobre suas possíveis causas.
+
+## Representação de dados multivariados
+
+As técnicas multivariadas são aplicáveis em todas as disciplinas e isso é visto se considerarmos os nomes aplicados aos objetos e variáveis medidos por cientistas em uma variedade de disciplinas. Consequentemente, as técnicas foram desenvolvidas na maioria das disciplinas, mas particularmente na psicologia, taxonomia e ecologia (Tabela \@ref(tab:101tab2)). Em algumas disciplinas, as variáveis medidas são normalmente obtidas ao longo de um gradiente, como por exemplo um perfil atmosférico, aquático ou do solo. Isso requer consideração especial na escolha da medida de similaridade se quisermos comparar atributos perfilados entre objetos.
+
+```{r 101tab2, echo=FALSE}
+library(knitr)
+library(kableExtra)
+tabela2 <- data.frame(
+  "Disciplina" = c("Psicologia", "Sociologia", "Informação geográfica", "Sensoriamento remoto", "Climatologia", "Taxonomia", "Ecologia", "Ecologia"),
+  "Objeto" = c("estudante", "sujeito", "grade de células", "pixels", "estações", "espécime", "sítios (sites, transectos, quadrats, etc.)", "tempo (estações do ano, meses, etc.)"),
+  "Atributo" = c("teste", "questões", "camadas (“layers”)", "reflectâncias", "clima", "caracteres", "espécies", "dados ambientais")
+)
+tabela2_kable <- kable(tabela2, col.names = c("Disciplina", "Objeto", "Atributo"),
+                      caption = "Unidades típicas para estudo em várias disciplinas.")
+kable_styling(tabela2_kable, full_width = F, position = "center")
+```
+
+### O que tem em um nome? 
+
+A análise multivariada em todas as áreas da ciência tende a esconder os princípios básicos por trás de uma enxurrada de terminologia supérflua e redundante ou a tornar a descrição altamente específica para um tipo particular de dados, perdendo assim de vista a generalidade. Neste assunto, iremos nos referir principalmente a **objetos** e **atributos** como sendo os itens representados nas linhas e colunas de um conjunto de dados multivariado. Muitos termos equivalentes são usados na literatura, em várias combinações (Tabela \@ref(tab:101tab3)). Os objetos são geralmente as linhas na matriz de dados e a maioria dos softwares exige que você transponha a matriz de dados se desejar considerar as coisas ao contrário. 
+
+```{r 101tab3, echo=FALSE}
+library(knitr)
+library(kableExtra)
+tabela3 <- data.frame(
+  "Objeto" = c("indivíduo", "caso", "observação", "entidade", "item", "amostra (UA¹ ou UTO²)"),
+  "Atributo" = c("qualidade", "caráter", "variável", "descritor", "estado", "propriedade")
+)
+tabela3_kable <- kable(tabela3, col.names = c("Objeto", "Atributo"),
+                       escape = FALSE,
+                       caption = "Exemplos de nomes alternativos.")
+tabela3_kable <- kable_styling(tabela3_kable, full_width = F, position = "center")
+tabela3_kable <- footnote(tabela3_kable, general = "¹ Unidade Amostral e ² Unidade Taxonômica Operacional")
+tabela3_kable
+```
+
+Às vezes, na literatura da ecologia e em alguns softwares, a palavra "amostra" infelizmente é usada para se referir a cada objeto ou unidade de amostragem. Ou seja, a amostra é utilizada em dois sentidos, primeiro a amostra estatística (= todos os objetos) e, em segundo lugar, referente a cada uma das **unidades amostrais** (UA) ou objetos. Isso dá origem ao enigma da amostra que consiste em amostras! Neste caso, evitaremos usar 'amostra' com o segundo significado, como fazem Legendre e Legendre (1998), entre outros.
+
+### Dados multivariados em ecologia e em outras áreas
+
+Existem duas maneiras comuns de representar dados multivariados: como uma **matriz** e como uma **figura geométrica** (Figura \@ref(fig:fig-101fig1)). Essas formas complementares são paralelas ao uso de álgebra matricial e geometria para derivar e explicar análises multivariadas. Infelizmente, estamos limitados na vista geométrica a um pequeno número de dimensões, mas podemos usar essas imagens 2 e 3-D para nos ajudar a entender os conceitos envolvidos. Podemos dizer que uma imagem vale mil números. 
+
+```{r tab-101fig1, echo=FALSE, warning=FALSE, fig.show='hide', fig.cap="Um conjunto de dados simples (8 objetos medidos em 2 atributos) exibido como uma matriz de dados e como um gráfico dos objetos em um espaço geométrico definido pelos dois atributos."}  
+library(ggplot2)
+library(gridExtra)
+library(grid)
+data <- data.frame(
+  objetos = c("a", "b", "c", "d", "e", "f", "g", "h"),
+  A = c(2, 2, 4, 5, 6, 7, 8, 9),
+  B = c(3, 4, 4, 5, 6, 7, 7, 6)
+)
+# Increase the font size of the table
+table_theme <- ttheme_minimal(
+  core = list(fg_params = list(cex = 2)),
+  colhead = list(fg_params = list(cex = 2))
+)
+table_plot <- tableGrob(data, rows = NULL, theme = table_theme)
+# Create a title grob aligned to the left
+table_title <- textGrob("atributos", gp = gpar(fontsize = 24,
+                                               fontface = "bold"),
+                        hjust = 1.2, x = 1.3)
+# Arrange the title and table together with appropriate spacing
+table_with_title <- arrangeGrob(
+  table_title,
+  table_plot,
+  ncol = 1,
+  heights = unit.c(unit(-10, "lines"), unit(1, "npc") - unit(5, "lines"))
+)
+scatter_plot <- ggplot(data, aes(x = A, y = B, label = objetos)) +
+  geom_point(size = 4) +
+  geom_text(vjust = -1, size = 5) +
+  labs(x = "Atributo A", y = "Atributo B",
+       title = "                   ESPAÇO 2-D DOS ATRIBUTOS") +
+  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1), labels = seq(0, 10, by = 1)) +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1), labels = seq(0, 10, by = 1)) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(margin = margin(b = 30)),
+    axis.title = element_text(size = 20),
+    axis.text = element_text(size = 20)
+  )
+combined_plot <- grid.arrange(table_with_title, scatter_plot, ncol = 2, widths = c(0.3, 1))
+# Save as PNG file (high-resolution)
+ggsave("fig-101fig1.png", combined_plot, width = 11, height = 7, dpi = 300)
+```
+
+```{r fig-101fig1, echo=FALSE, purl=FALSE, fig.cap="Um conjunto de dados simples (8 objetos medidos em 2 atributos) exibido como uma matriz de dados e como um gráfico dos objetos em um espaço geométrico definido pelos dois atributos."}
+knitr::include_graphics("fig-101fig1.png")
+```
+
+Além dessas duas maneiras de exibir nossos dados multivariados, há duas maneiras de considerar a orientação de nossos dados brutos. Se começarmos dizendo que as linhas em nossa matriz de dados são nossos objetos, poderíamos igualmente decidir considerar nossos objetos como atributos e vice-versa. Isso equivale a **transpor a matriz** (Figura \@ref(fig:fig-101fig2)) ou definir o espaço de atributos geométricos pelos oito objetos originais, isso seria um espaço 8-dimensional! Para ser passível de compreensão a representação geométrica deve ser limitada a duas ou três dimensões.
+
+```{r tab-101fig2, echo=FALSE, fig.show='hide', fig.cap="A matriz de dados transposta da Figura \\@ref(fig:fig-101fig1)."}  
+library(ggplot2)
+library(gridExtra)
+library(grid)
+datat <- data.frame(
+  objetos = c("A", "B"),
+  a = c(2, 3),
+  b = c(2, 4),
+  c = c(4, 4),
+  d = c(5, 5),
+  e = c(6, 6),
+  f = c(7, 7),
+  g = c(8, 7),
+  h = c(9, 6)
+)
+# Increase the font size of the table
+table_theme <- ttheme_minimal(
+  core = list(fg_params = list(cex = 2)),
+  colhead = list(fg_params = list(cex = 2))
+)
+table_plot <- tableGrob(datat, rows = NULL, theme = table_theme)
+# Create a title grob aligned to the left
+table_title <- textGrob("atributos", gp = gpar(fontsize = 23,
+                                               fontface = "bold"),
+                        hjust = 0.5, x = 0.5)
+# Arrange the title and table together with appropriate spacing
+table_with_title <- arrangeGrob(
+  table_title,
+  table_plot,
+  ncol = 1,
+  heights = unit.c(unit(-23, "lines"), unit(1, "npc") - unit(5, "lines"))
+)
+# Create scatter plot with specified axes and labels
+scatter_plot <- ggplot(datat, aes(x = a, y = b, label = objetos)) +
+  geom_point(size = 4) +
+  geom_text(vjust = -1, size = 5) +
+  labs(x = "Atributo a", y = "Atributo b",
+       title = "ESPAÇO 2-D DOS ATRIBUTOS") +
+  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1), labels = seq(0, 10, by = 1)) +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1), labels = seq(0, 10, by = 1)) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(margin = margin(b = 30)),
+    axis.title = element_text(size = 20),
+    axis.text = element_text(size = 20)
+  )
+# Combine the table and scatter plot
+combined_plot <- grid.arrange(table_with_title, scatter_plot, ncol = 2, widths = c(0.6, 0.9))
+# Save as PNG file (high-resolution)
+ggsave("fig-101fig2.png", combined_plot, width = 11, height = 7, dpi = 300)
+```
+
+```{r fig-101fig2, echo=FALSE, purl=FALSE, fig.cap="A matriz de dados transposta da Figura \\@ref(fig:fig-101fig1)."}
+knitr::include_graphics("fig-101fig2.png")
+```
+
+Essa dualidade teórica e matemática não se estende totalmente às análises empíricas que podemos realizar em nossos dados. Isto é pela razão geral que nosso planejamento do estudo geralmente nos leva a considerar uma dimensão de nossa caixa de dados como o conjunto de objetos de maior interesse, e, também, porque as propriedades das linhas e colunas de nossos dados geralmente serão um pouco diferentes.  
+
+Por exemplo, na situação comum em que os objetos são sítios e os atributos são espécies (a chamada **matriz comunitária**), cada sítio pode ter sido escolhido independentemente dos outros, embora não seja possível fazer isso para as espécies. Da mesma forma, muitas vezes consideramos cada local como uma parte distinta do todo, ao passo que as espécies registradas neles são apenas um conjunto parcial das ocorrências de cada espécie. Consequentemente, as linhas e colunas provavelmente precisam de consideração diferente para sua análise. Temos ainda as chamadas análises Q e R e sua representação geométrica dos dados nos espaços A (atributos) e I (indivíduos). 
+
+### Similaridade como distância geométrica
+
+Discutiremos o que se entende por similaridade, em detalhes, subsequentemente. No entanto, uma visão simples do conceito é obtida calculando a diferença entre cada atributo para um determinado par de objetos e somando todas essas diferenças. Por exemplo:
+
+Para calcular a distância entre os objetos `a` e `b` temos,
+
+- Objeto "a": \( A_a = 2 \), \( B_a = 3 \)
+- Objeto "b": \( A_b = 2 \), \( B_b = 4 \)
+
+
+Calculamos a diferença absoluta entre os atributos "A":
+
+ \[
+   |A_a - A_b| = |2 - 2| = 0
+   \]
+   
+Calculamos a diferença absoluta entre os atributos "B":
+
+   \[
+   |B_a - B_b| = |3 - 4| = 1
+   \]
+
+Somamos todas as diferenças absolutas para obter a distância entre `a` e `b`:
+
+   \[
+   \text{Distância}(a, b) = |A_a - A_b| + |B_a - B_b| = 0 + 1 = 1
+   \]
+
+Para os 8 objetos na Figura 1, calculamos essas distâncias (você pode verificá-las!) e apresentamos em uma **matriz de similaridade** como mostrado na Figura 3.
+
+```{r tab-101fig3, echo=FALSE, fig.show='hide', fig.cap="Dissimilaridade como a soma das diferenças entre os 8 objetos da Figura \\@ref(fig:fig-101fig1). Observe que há \\[ \\frac{n(n-1)}{2} \\] dessas medidas e que a matriz é simétrica em relação à diagonal. Elementos na diagonal são a diferença de um objeto para si mesmo, zero."}
+library(ggplot2)
+library(gridExtra)
+library(grid)
+# Criar o data frame
+data <- data.frame(
+  objetos = c("a", "b", "c", "d", "e", "f", "g", "h"),
+  A = c(2, 2, 4, 5, 6, 7, 8, 9),
+  B = c(3, 4, 4, 5, 6, 7, 7, 6)
+)
+# Função para calcular a soma das diferenças absolutas
+calc_diff_sum <- function(df) {
+  n <- nrow(df)
+  diff_matrix <- matrix(0, n, n)
+  rownames(diff_matrix) <- df$objetos
+  colnames(diff_matrix) <- df$objetos
+  
+  for (i in 1:n) {
+    for (j in 1:n) {
+      diff_matrix[i, j] <- sum(abs(df[i, 2:3] - df[j, 2:3]))
+    }
+  }
+  
+  return(diff_matrix)
+}
+# Calcular a matriz de distâncias usando a soma das diferenças absolutas
+dist_matrix <- round(calc_diff_sum(data), 1)
+dist_df <- as.data.frame(dist_matrix)
+dist_df$objetos <- rownames(dist_df)
+dist_df <- dist_df[, c(ncol(dist_df), 1:(ncol(dist_df)-1))]
+# Aumentar o tamanho da fonte da tabela
+table_theme <- ttheme_minimal(
+  core = list(fg_params = list(cex = 2)),
+  colhead = list(fg_params = list(cex = 2))
+)
+# Criar o table grob para os dados originais
+table_plot <- tableGrob(data, rows = NULL, theme = table_theme)
+# Criar um título grob alinhado à esquerda
+table_title <- textGrob("atributos", gp = gpar(fontsize = 23, fontface = "bold"), hjust = 1.2, x = 1.2)
+# Organizar o título e a tabela juntos com espaçamento apropriado
+table_with_title <- arrangeGrob(
+  table_title,
+  table_plot,
+  ncol = 1,
+  heights = unit.c(unit(-10, "lines"), unit(1, "npc") - unit(5, "lines"))
+)
+# Criar o table grob para a matriz de distâncias
+table_plot2 <- tableGrob(dist_df, rows = NULL, theme = table_theme)
+# Criar um título grob alinhado ao centro
+table_title2 <- textGrob("Matriz de Distâncias", gp = gpar(fontsize = 23, fontface = "bold"), hjust = 0.5, x = 0.5)
+# Organizar o título e a tabela juntos com espaçamento apropriado
+table_with_title2 <- arrangeGrob(
+  table_title2,
+  table_plot2,
+  ncol = 1,
+  heights = unit.c(unit(-10, "lines"), unit(1, "npc") - unit(5, "lines"))
+)
+
+# Combinar as duas tabelas lado a lado
+combined_plot <- grid.arrange(table_with_title, table_with_title2, ncol = 2, widths = c(0.3, 1))
+# Save as PNG file (high-resolution)
+ggsave("fig-101fig3.png", combined_plot, width = 9, height = 7, dpi = 300)
+```
+
+```{r fig-101fig3, echo=FALSE, purl=FALSE, fig.cap="Distância como a soma das diferenças entre os 8 objetos da Figura \\@ref(fig:fig-101fig1). Observe que há \\[ \\frac{n(n-1)}{2} \\] dessas medidas e que a matriz é simétrica em relação à diagonal. Elementos na diagonal são a distância de um objeto para si mesmo, zero."}
+knitr::include_graphics("fig-101fig3.png")
+```
+
+Discutiremos o que se entende por similaridade, em detalhes, subsequentemente. No entanto, uma visão simples do conceito é obtida calculando a distância geométrica euclidiana entre cada par de objetos quando eles são plotados em um espaço de atributos (teorema de Pitágoras). Para os 8 objetos na Figura 1, calculamos essas distâncias (você pode verificá-las!) e apresentamos em uma **matriz de distâncias** como mostrado na Figura 3.
+
+Por exemplo, para a distância entre os objetos a e c mostrados no gráfico dos objetos no espaço geométrico definido pelos dois atributos A e B, da Figura 1, temos que:
+
+Utilizando o teorema de Pitágoras, a hipotenusa (H) de um triângulo retângulo é dada pela raiz quadrada da soma dos quadrados dos catetos (C^1^ e C^2^). Assim, na Figura 1, temos que a hipotenusa é a distância de `a` para `c` (D~a,c~) e os catetos são C^1^ = b-a e C^2^ = c-b,
+
+resolvemos o teorema de Pitágoras como:
+
+\[ H^2 = C^2 + C^2 \]
+
+ou seja,
+
+\[ (D_{a,c})^2 = (b-a)^2 + (c-b)^2 \]
+
+Substituindo os valores do gráfico,
+
+\[ (D_{a,c})^2 = (4-3)^2 + (4-2)^2 \]
+
+Resolvendo o teorema,
+
+\[ (D_{a,c}) = \sqrt{(2)^2 + (1)^2} \]
+
+\[ (D_{a,c}) = \sqrt{5} \]
+
+\[ (D_{a,c}) \approx 2.23 \quad \text{(Ver Figura 3)} \]
+
+
+Podemos dizer que quanto menor a distância, mais semelhantes são os dois objetos. A maioria das técnicas de ordenação e classificação analisa essas matrizes de distância para descrever sua estrutura. Veremos isso mais detalhadamente subsequentemente. 
+
+```{r tab-101fig4, echo=FALSE, fig.show='hide', fig.cap="Distância em linha reta entre os 8 objetos da Figura \\@ref(fig:fig-101fig1). Observe que há \\[ \\frac{n(n-1)}{2} \\] dessas medidas e que a matriz é simétrica em relação à diagonal. Elementos na diagonal são a distância de um objeto para si mesmo, zero."}  
+library(ggplot2)
+library(gridExtra)
+library(grid)
+data <- data.frame(
+  objetos = c("a", "b", "c", "d", "e", "f", "g", "h"),
+  A = c(2, 2, 4, 5, 6, 7, 8, 9),
+  B = c(3, 4, 4, 5, 6, 7, 7, 6)
+)
+# Increase the font size of the table
+table_theme <- ttheme_minimal(
+  core = list(fg_params = list(cex = 2)),
+  colhead = list(fg_params = list(cex = 2))
+)
+table_plot <- tableGrob(data, rows = NULL, theme = table_theme)
+# Create a title grob aligned to the left
+table_title <- textGrob("atributos", gp = gpar(fontsize = 23,
+                                               fontface = "bold"),
+                        hjust = 1.2, x = 1.2)
+# Arrange the title and table together with appropriate spacing
+table_with_title <- arrangeGrob(
+  table_title,
+  table_plot,
+  ncol = 1,
+  heights = unit.c(unit(-10, "lines"), unit(1, "npc") - unit(5, "lines"))
+)
+#### Calculate the Euclidean distance matrix
+dist_matrix <- round(as.matrix(dist(data[, c("A", "B")])), 1)
+rownames(dist_matrix) <- data$objetos
+colnames(dist_matrix) <- data$objetos
+# Convert the distance matrix to a data frame for table display
+dist_df <- as.data.frame(dist_matrix)
+dist_df$objetos <- rownames(dist_df)
+dist_df <- dist_df[, c(ncol(dist_df), 1:(ncol(dist_df)-1))]
+# Increase the font size of the table
+table_theme <- ttheme_minimal(
+  core = list(fg_params = list(cex = 2)),
+  colhead = list(fg_params = list(cex = 2))
+)
+# Create the table grob
+table_plot <- tableGrob(dist_df, rows = NULL, theme = table_theme)
+# Create a title grob aligned to the left
+table_title2 <- textGrob("Matriz de Distâncias", 
+                        gp = gpar(fontsize = 23, fontface = "bold"),
+                        hjust = 0.5, x = 0.5)
+# Arrange the title and table together with appropriate spacing
+table_with_title2 <- arrangeGrob(
+  table_title2,
+  table_plot,
+  ncol = 1,
+  heights = unit.c(unit(-10, "lines"), unit(1, "npc") - unit(5, "lines"))
+)
+combined_plot <- grid.arrange(table_with_title, table_with_title2, ncol = 2, widths = c(0.3, 1))
+# Save as PNG file (high-resolution)
+ggsave("fig-101fig4.png", combined_plot, width = 9, height = 7, dpi = 300)
+```
+
+```{r fig-101fig4, echo=FALSE, purl=FALSE, fig.cap="Distância em linha reta entre os 8 objetos da Figura \\@ref(fig:fig-101fig1). Observe que há \\[ \\frac{n(n-1)}{2} \\] dessas medidas e que a matriz é simétrica em relação à diagonal. Elementos na diagonal são a distância de um objeto para si mesmo, zero."}
+knitr::include_graphics("fig-101fig4.png")
+```
+
+A fórmula para calcular o número de pares distintos que podem ser formados a partir de \( n \) elementos é dada por:
+
+\[ \frac{n(n-1)}{2} \]
+
+Esta fórmula representa o número de combinações de 2 elementos escolhidos entre \( n \), considerando que a ordem não importa.
+
+### Visão geral da Classificação e Ordenação
+
+Antes da era do computador, a possibilidade de realizar análises multivariadas em conjuntos de dados realistas era pequena. Isso não deteve alguns ecologistas e outros, que desenvolveram nossas abordagens iniciais para examinar a matriz de dados multivariada, para detectar e exibir padrões nela e para medir a similaridade entre objetos. Essas abordagens são tipificadas pelo desenvolvimento do diagrama de constelação e da tabela classificada.
+
+O diagrama de constelação (ou plexo) foi desenvolvido para exibir o grau de associação entre objetos (geralmente espécies) e foi baseado na estatística qui-quadrado como uma medida de similaridade entre espécies em um conjunto de locais. A prática consistia em indicar a força de associação entre cada par de espécies pela espessura da linha que os unia e mostrar apenas aquelas com uma probabilidade maior do que, digamos, 5% (Figura \@ref(fig:fig-101fig5)).
+
+```{r fig-101fig5, echo=FALSE, warning=FALSE, fig.cap="Diagrama de Constelação - Associação entre Espécies - baseado em estatística (Qui-Quadrado). Apenas associações significativas (p-valor <= 0.05) são mostradas."}
+# Carregar bibliotecas necessárias
+library(ggraph)
+library(igraph)
+# Definir semente para reproducibilidade
+set.seed(123456)
+# Gerar dados fictícios de associação entre espécies (50 espécies)
+num_species <- 50
+dados <- data.frame(
+  especie1 = sample(1:num_species, 100, replace = TRUE),
+  especie2 = sample(1:num_species, 100, replace = TRUE),
+  qui_quadrado = runif(100, 1, 10),  # Estatística fictícia
+  p_valor = runif(100, 0.001, 0.1)
+)
+# Filtrar apenas associações significativas (p-valor <= 0.05)
+dados_significativos <- dados[dados$p_valor <= 0.05, ]
+# Criar um grafo a partir dos dados filtrados
+g <- graph_from_data_frame(dados_significativos, directed = FALSE)
+# Layout do gráfico
+layout <- create_layout(graph = g, layout = "stress")
+# Plotar o diagrama de constelação
+ggraph(g, layout = "stress") +
+  geom_edge_link(
+    aes(x = x, y = y, xend = xend, yend = yend, alpha = 0.5, size = 1.5),
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    color = "blue"
+  ) +
+  geom_node_point(
+    aes(x = x, y = y),
+    color = "red",
+    size = 5
+  ) +
+  geom_node_text(
+    aes(x = x, y = y, label = name),
+    size = 5,
+    color = "black"
+  ) +
+  labs(
+    title = "Diagrama de Constelação - Associação entre Espécies",
+    subtitle = "Baseado em Estatística (Qui-Quadrado)",
+    caption = "Associações significativas (p-valor <= 0.05) são mostradas",
+    x = "", y = ""
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 14),
+    plot.caption = element_text(size = 10, color = "gray")
+  )
+```
+
+A arte e a ciência da classificação de tabelas multivariadas foram desenvolvidas em alto nível, especialmente por fitossociólogos europeus da escola Braun-Blanquet. Eles desenvolveram procedimentos manuais para buscar padrões nos dados brutos, reordenando suas linhas e colunas (Figura 4b). Esses procedimentos foram convertidos em programas de computador (chamados TABORD etc.) na década de 1970 e agora foram amplamente substituídos por rotinas de classificação e ordenação, que operam nas semelhanças em vez da matriz de dados bruta. Mueller-Dombois e Ellenberg (1974) descrevem o processo com alguns detalhes. 
+
+Figura 4. Diagrama de constelação de espécies (a) e tabela multivariada (b)
+(a)
+ 	(b)
+ 
+
+A tabela mostra os dados brutos, mas as linhas (espécies) e colunas (quadrantes) foram reordenados para maximizar a representação dos padrões aparentes neles. 
+A partir da década de 1950, a disponibilidade de computadores levou a um rápido desenvolvimento na análise multivariada e sua aplicação na ecologia. As abordagens de ordenação e classificação foram desenvolvidas em paralelo. Na verdade, houve uma controvérsia considerável sobre seus méritos relativos por um tempo. Hoje em dia, nós os veríamos como complementares, com a ordenação sendo mais útil e robusta onde a estrutura natural de classes não existe. Por outro lado, se podemos justificar a formação de grupos, então obviamente é necessária uma classificação. No entanto, existem relativamente poucas ocasiões na ecologia de comunidade em que podemos dizer que deve haver grupos de objetos bem definidos. Observe que isso é bastante diferente de ter grupos definidos com base em critérios externos, como alguma forma de tratamentos experimentais. 
+
+## Um pouco de história
+
+> A maioria dos biólogos presta um serviço superficial à necessidade de um conhecimento básico de química orgânica, química inorgânica, cálculo, física e estatística. No entanto, a falta de tempo e a indiferença para com os detalhes matemáticos do último desses assuntos deixam o biólogo bastante despreparado para lidar de maneira eficaz com um problema que ele enfrenta com muito mais frequência do que está disposto a admitir, a saber, a redução a uma forma 'sensata' de uma massa de observações medidas ou enumeradas.
+> SEAL
+
+### Rao
+
+As análises multivariadas têm suas raízes na investigação de padrões de dados com múltiplas variáveis simultâneas, com um desenvolvimento que pode ser rastreado desde o século XIX [@RN1448]. Inicialmente, Francis Galton foi uma figura chave ao investigar leis de hereditariedade e aplicar análise de dados bivariados para estudar a relação entre a altura de pais e filhos. Ele observou que a dispersão dos dados era homoscedástica e que os contornos de equiprobabilidade da distribuição bivariada eram elípticos, o que levou à formulação da distribuição normal bivariada e à sua generalização para o caso multivariado.
+
+Karl Pearson, junto com colaboradores como Weldon e Edgeworth, trabalhou na formalização do coeficiente de correlação e desenvolveu a correção de Sheppard para momentos, além de estabelecer as bases da teoria das correlações parciais e múltiplas. Durante os anos 1920 e 1930, R.A. Fisher introduziu distribuições estatísticas fundamentais, como a distribuição F, e métodos de estimação de máxima verossimilhança, além de desenvolver técnicas modernas de desenho e análise de experimentos. Sua obra "Statistical Methods for Research Workers" (1925) foi crucial para a disseminação das novas metodologias.
+
+Nos Estados Unidos, Harold Hotelling e Samuel S. Wilks fizeram avanços significativos. Hotelling introduziu o estatístico \( T^2 \) e desenvolveu os conceitos de componentes principais e correlações canônicas, enquanto Wilks trabalhou nos critérios de razão de verossimilhança para testar hipóteses sobre vetores de médias e matrizes de covariância. Na Índia, P.C. Mahalanobis desenvolveu a medida \( D^2 \) para estudar inter-relações entre populações, aprimorando o coeficiente de semelhança racial de Pearson. Ele e seus colaboradores, como Bose e Roy, fizeram avanços significativos na distribuição de \( D^2 \) e nas raízes de equações determinantes, essenciais na análise multivariada. C. Radhakrishna Rao, sob a orientação de Mahalanobis, fez contribuições fundamentais para a análise de dados antropométricos e desenvolveu critérios como \( V_r \) para testar a igualdade de vetores de médias em várias populações. Ele também introduziu correlações intraclasse e processos de ortogonalização, como o processo de Gram-Schmidt, para simplificar cálculos em análises multivariadas.
+
+As técnicas fundamentais que emergiram desse período incluem a distribuição normal multivariada, desenvolvida a partir dos trabalhos de Gauss, Bravais e Galton e formalizada por Pearson e Fisher; o coeficiente de correlação e as correlações múltiplas, desenvolvidas por Pearson, Edgeworth e Fisher; o estatístico \( T^2 \) de Hotelling, uma generalização do \( t \) de Student para o caso multivariado; a análise de componentes principais introduzida por Hotelling para reduzir a dimensionalidade dos dados; a medida \( D^2 \) de Mahalanobis para medir a distância entre populações multivariadas; e a função discriminante linear desenvolvida por Fisher para a classificação de amostras em diferentes grupos.
+
+Em resumo, a análise multivariada evoluiu a partir da necessidade de compreender e modelar dados com múltiplas variáveis, envolvendo contribuições críticas de estatísticos como Galton, Pearson, Fisher, Hotelling, Wilks, Mahalanobis e Rao. Essas contribuições estabeleceram os fundamentos teóricos e metodológicos que continuam a influenciar a pesquisa e a aplicação da estatística multivariada até hoje.
+
+### Barlett
+
+A análise multivariada tem suas raízes traçadas até o final do século XIX e início do século XX, refletindo a evolução de diferentes técnicas estatísticas e matemáticas utilizadas para entender e interpretar dados complexos [@RN1449]. Um marco inicial significativo na análise multivariada foi a tentativa de introduzir métodos experimentais na psicologia, inspirado pela transição da filosofia especulativa para uma ciência empírica. Durante o século XIX, pioneiros como Galileo e Newton estabeleceram a base para relacionar causas independentes a efeitos específicos, influenciando teóricos como Hume a aplicar essas ideias à mente humana em um contexto bivariado  .
+
+O desenvolvimento dos métodos multivariados propriamente ditos começou com Karl Pearson e Francis Galton, que introduziram técnicas como a correlação e a análise de variância para lidar com múltiplas variáveis simultaneamente. Pearson, em particular, foi fundamental no desenvolvimento da técnica de componentes principais  .
+
+Nos anos 1930, três figuras chave avançaram significativamente o campo: R.A. Fisher, Harold Hotelling e P.C. Mahalanobis. Fisher contribuiu com a discriminação multivariada e o uso eficiente de medições multivariadas para fins discriminatórios. Hotelling introduziu a análise de correlação canônica, e Mahalanobis propôs uma medida de distância generalizada entre populações, que se tornou conhecida como distância de Mahalanobis  .
+
+A segunda metade do século XX viu um aumento na aplicação e sofisticação dos métodos multivariados, impulsionado pelo advento dos computadores. Métodos como a análise de agrupamentos (cluster analysis) tornaram-se populares, auxiliados por algoritmos computacionais desenvolvidos em resposta à demanda crescente  .
+
+Desta forma, a análise multivariada evoluiu de métodos simples de correlação e regressão para técnicas complexas e computacionalmente intensivas, permitindo uma compreensão mais profunda e detalhada de dados multidimensionais.
+
+### Burt
+
+Os primórdios das análises multivariadas no campo da psicologia remontam a esforços do século XIX para transformar a psicologia de uma filosofia especulativa em uma ciência empírica [@RN1450]. Inspirados pelas ciências naturais, pioneiros como Galileo e Newton desenvolveram métodos experimentais que buscavam relacionar causas independentes a efeitos específicos. Esse enfoque bivariado influenciou figuras como Hume, que aplicou princípios similares ao estudo da mente humana, comparando a associação de ideias com a gravitação de Newton【6:3†source】.
+
+No entanto, foi apenas com os trabalhos de Galton e Pearson que as técnicas multivariadas começaram a se estabelecer. Pearson, por exemplo, desenvolveu o método dos componentes principais, uma técnica essencial em análises multivariadas. Esses métodos iniciais de extração de fatores foram posteriormente refinados e adaptados para atender às necessidades específicas da psicologia geral e individual. A análise multivariada evoluiu para incluir procedimentos como a análise de variância e a análise correlacional, tornando-se ferramentas fundamentais para lidar com problemas complexos【6:0†source】【6:1†source】.
+
+Na Grã-Bretanha, o uso de métodos estatísticos na psicologia enfrentou resistência, particularmente da escola experimental de Cambridge, que via com ceticismo as abordagens matemáticas da escola de Londres. No entanto, figuras como Fisher demonstraram a importância de combinar experimentação adequada com análise estatística rigorosa, um princípio que se aplicava igualmente à psicologia【6:4†source】.
+
+### Em ecologia
+
+####CAssie
+
+Desde que a disciplina foi estabelecida pela primeira vez, os ecologistas têm enfatizado a extrema complexidade da ecologia. Essa complexidade frequentemente tornou a interpretação de dados de campo quase impossível ou, quando a interpretação teve sucesso, geralmente abrangeu os fenômenos mais óbvios. Suspeita-se que, como em uma draga de ouro ineficiente, muito do valor é deixado para trás nos "rejeitos". Grande parte (embora certamente não toda) da teoria matemática necessária para extrair as informações perdidas está disponível há muito tempo, mas ou era desconhecida pelos ecologistas, ou seu uso era tão demorado que sua aplicação era impraticável. Com o advento do computador de alta velocidade, as dificuldades logísticas, pelo menos, foram removidas; e o poder e a elegância das técnicas multivariadas foram demonstrados na ecologia por trabalhos pioneiros como os de Goodall (1954) e Williams e Lambert (1959), embora o trabalho de Goodall tenha sido realizado, na verdade, em uma calculadora manual Facit. Ao mesmo tempo, a aplicação da teoria matemática a situações ecológicas não é totalmente clara, e muitos dos métodos e conceitos ainda são sujeitos a controvérsias.
+
+
+###Tecnicas
+
+A história das técnicas de classificação e ordenação no contexto da análise multivariada pode ser traçada a partir do trabalho de pioneiros no final do século XIX e início do século XX. Estas técnicas foram desenvolvidas em resposta à necessidade de identificar e classificar indivíduos com base em múltiplas características [@RN1450, @RN1449].
+
+
+#### Técnicas de Classificação
+
+As origens das técnicas de classificação são frequentemente associadas ao trabalho de Francis Galton, que se interessou pela determinação de tipos físicos e mentais. Galton foi um dos primeiros a usar medidas físicas para classificar pessoas, especialmente em seu esforço para identificar criminosos de maneira científica. Ele notou que várias das medidas físicas utilizadas estavam altamente correlacionadas, sugerindo que medições redundantes poderiam ser eliminadas para obter um conjunto de traços representativos com a menor correlação possível entre si【25:1†source】【25:5†source】.
+
+Edgeworth, em 1896, expandiu as ideias de Galton propondo a substituição das características correlacionadas por características hipotéticas que não apresentassem nenhuma correlação entre si. Ele utilizou funções de frequência multivariada e transformações em eixos principais para ilustrar seu ponto, desenvolvendo o conceito de "fatores" independentes, precursor da análise de componentes principais desenvolvida posteriormente por Karl Pearson【25:5†source】.
+
+### Técnicas de Ordenação
+
+As técnicas de ordenação, por outro lado, são frequentemente associadas ao desenvolvimento da análise de componentes principais (PCA) por Karl Pearson no início do século XX. Pearson formalizou matematicamente o processo de encontrar direções principais em um conjunto de dados, o que permitiu a redução dimensional e a ordenação dos dados de maneira que maximizasse a variância explicada pelos componentes principais【25:1†source】【25:4†source】.
+
+R.A. Fisher também contribuiu significativamente para essas técnicas, especialmente com a introdução da análise discriminante linear, que permitiu a classificação e a ordenação de amostras em diferentes grupos com base em medições multivariadas【25:4†source】. Fisher e outros, como Harold Hotelling e P.C. Mahalanobis, avançaram ainda mais a análise multivariada, desenvolvendo métodos para relacionar e discriminar entre múltiplas variáveis simultaneamente【25:4†source】.
+
+### Conclusão
+
+Em resumo, as técnicas de classificação e ordenação na análise multivariada têm suas raízes no final do século XIX, com as contribuições de Galton e Edgeworth na classificação física e a formalização matemática de Pearson na análise de componentes principais. O trabalho subsequente de Fisher, Hotelling e Mahalanobis expandiu essas técnicas para aplicações mais complexas e variadas, estabelecendo a base para a moderna análise multivariada【25:1†source】【25:4†source】【25:5†source】.
+
+
+Classificação  
+A palavra classificação, como usada no contexto aqui, tem seu significado cotidiano normal - o agrupamento de semelhante com semelhante - e é distinta da classificação (taxonômica) de espécies biológicas. Por exemplo, podemos classificar as unidades de amostragem juntando aquelas que são mais semelhantes na composição de espécies. Da mesma forma, podemos classificar as espécies por sua similaridade de ocorrências nas UAs da amostra. 
+A classificação se concentra em encontrar descontinuidades entre os objetos, com base em seus atributos medidos.  
+É fundamental perceber que os algoritmos de classificação sempre encontrarão descontinuidades, ou seja, as classes sempre podem ser formadas. É uma questão de avaliação e interpretação adicionais para saber se esses grupos são úteis e significativos ou não.  
+Para classificar numericamente, isto é, usar um computador para operar nossos dados brutos, algoritmos eficientes tiveram que ser desenvolvidos. Há uma variedade desses procedimentos. A maioria deles agora prossegue agrupando iguais repetidamente, até que todos os objetos sejam fundidos em uma única classe (a amostra). Isso envolve algumas decisões cruciais sobre como fazer a fusão e a estratégia de fusão. O resultado típico de uma classificação é um diagrama que mostra a composição do grupo em cada nível desse processo.  
+Alguns procedimentos de classificação são classificação hierárquica e não-hierárquica e classificação aglomerativa e divisiva.  
+Ordenação  
+Ordenação é uma palavra de uso menos comum, significando simplesmente organizar em fileiras ou séries. Ela engloba procedimentos projetados para reduzir o número de variáveis de que precisamos para descrever de forma sucinta nossos objetos. Isso acarreta uma redução no número de atributos necessários para descrever as relações entre os objetos. Em vez de exibir os objetos no espaço de atributo original, desejamos mostrá-los no "espaço da ordenação", menos dimensional. A partir de uma ordenação, podemos fazer alguns julgamentos sobre a distinção das classes identificadas por uma classificação.  
+A ordenação se concentra em retratar a variação nas propriedades dos objetos, sejam elas contínuas ou descontínuas.  
+Algumas técnicas de ordenação são componentes principais e análise fatorial, média recíproca e escalonamento multidimensional não-métrico.  
+Abordagens relacionadas  
+Como mencionado acima, também existem abordagens de dependência multivariada que podem ser úteis em conjunto com a classificação e ordenação. Estes incluem:
+●	árvore de classificação e regressão, combinam ambas as abordagens para classificar objetos definidos por variáveis contínuas e discretas;  
+●	análise da função discriminante, encontra a função linear mais capaz de distinguir entre grupos predefinidos;  
+●	correlação canônica, correlaciona dois conjuntos de variáveis usando um modelo linear. 
+
+Uma sequência de análise típica  
+A análise multivariada consiste em uma série de etapas, cada etapa exigindo decisões específicas. Para uma análise multivariada básica, essas etapas e decisões são mostradas na Figura 2-6. 
+Figura 5. Caminho e decisões necessárias para uma típica análise multivariada. Na realidade, essa análise é não é um caminho unidirecional. 
+ 
+ 	
+Principais decisões 
+
+
+Como subdividir os dados?
+
+Quais são os objetos?
+
+Quais transformações são justificadas?
+
+Quais padronizações são justificadas?
+
+Classificação hierárquica ou não? 
+
+Qual medida de similaridade?
+
+Qual a estratégia de fusão?
+
+Qual método de ordenação? métrico ou não-métrico?
+
+Como os atributos estão relacionados à ordenação dos objetos? 
+
+Como os atributos externos se relacionam com a ordenação ou classificação?
+
+A ordenação e classificação dos mesmos objetos concordam?
+
+Os grupos refletem os resultados experimentais?
+
+
+Tipos de dados
+
+Em ecologia numérica, um objeto pode ser descrito por caracteres ou variáveis de três tipos diferentes: quantitativos, semiquantitativos ou qualitativos.
+Os dados quantitativos implicam em relações de mensuração, medida ou contagem e podem ser classificados em dois subtipos: discretos e intervalares. Dados discretos envolvem valores que assumem um conjunto finito de valores possíveis e possuem zero verdadeiro, como a contagem de indivíduos de determinados organismos, altura, peso e comprimento. Já dados intervalares envolvem valores que pertencem a um intervalo de números reais e não possuem zero verdadeiro, como muitas das medidas de variáveis físico-químicas (que também dependem da com resolução do instrumento).
+Os dados semiquantitativos, por sua vez, são oriundos de variáveis quantitativas codificadas por meio de valores inteiros crescentes. São úteis quando, por razão metodológica, há impossibilidade de se medir com precisão a variável quantitativa. Um exemplo disso é a declividade.
+Os dados qualitativos, por sua vez, expressam atributos e qualidades do objeto pesquisado. Para cada objeto, existe apenas uma alternativa, possuir ou não possuir um determinado caractere, o que representa uma resposta sim ou não, tudo ou nada, presente ou ausente (ou seja, codificação binária de 0 ou 1). Em ecologia, frequentemente se usa a presença/ausência de determinada espécie em cada sítio. Os dados qualitativos podem ser subdivididos em dois tipos: ordinais e nominais. Os dados qualitativos ordinais são aqueles em que é possível atribuir alguma ordem aos indivíduos depois de atribuída a característica, como escolaridade. Já os dados qualitativos nominais são aqueles em que não é possível atribuir ordem às variáveis, como profissão.
+Em estudos ecológicos, é comum que se utilize uma grande variedade de descritores, com dados de tipos diferentes, tornando necessária a homogeneização dos dados. Entretanto, os dados qualitativos não podem ser transformados em dados quantitativos, o que representa uma perda de informação proveniente dos dados quantitativos. Além disso, às vezes é necessária a transformação dos valores para diminuir o tamanho dos números e facilitar sua manipulação e interpretação, bem como a normalização da distribuição de frequências dos dados. Isso permite a aplicação de testes estatísticos paramétricos e diminui a skewness (cauda) dos dados, já que dados ecológicos são, via de regra, fortemente unicaudais devido à alta frequência de valores nulos (zeros).
+Para maiores detalhes sobre os tipos de dados em estatística e sua importância consulte o conteúdo de revisão sobre “Estatística descritiva univariada”.
+
+Pré-análises  
+Tipos de dados e suas transformações
+O exame cuidadoso dos dados brutos é essencial para uma análise multivariada bem-sucedida. Três questões primárias precisam ser consideradas:  
+1.	que objeto e atributos dos dados serão úteis para abordar quais questões (necessita particionamento?);  
+2.	os dados necessitam de relativizações e transformações (padronizações)? 
+a.	como os atributos são escalados (necessita codificação e transformação?);  
+b.	as escalas são comparáveis (comensuráveis) entre os atributos (necessita padronização?), e 
+3.	existem outliers (necessita sua exclusão)?  
+Trataremos de cada um deles separadamente.  
+1. Particionando seu conjunto de dados  
+Infelizmente, em muitos casos, os dados para análise multivariada vêm de programas de amostragem que foram mal planejados. Isso pode surgir da decisão inicial de “coletar os dados primeiro, decidir o que fazer depois”. Nesses casos, um rico conjunto de dados pode resultar, mas requer particionamento cuidadoso para obter o máximo valor de sua análise.  
+A necessidade de particionamento surge do fato de os dados serem frequentemente hiper dimensionais de várias maneiras possíveis. Em primeiro lugar, muitas vezes temos objetos, atributos e períodos como uma característica dos dados, dando origem a uma caixa de dados 3D. Em segundo lugar, tanto os objetos quanto os atributos (e tempos) podem ser agrupados (ou agrupáveis), hierarquicamente ou não. Isso torna problemática qualquer análise multivariada da matriz de dados completa; por causa da heterogeneidade dos conjuntos, estamos chamando objetos e/ou atributos.  
+O agrupamento de atributos é comum; por exemplo, frequentemente medimos a composição de espécies, bem como atributos ambientais físicos para o mesmo conjunto de objetos. Dado que o número de espécies registradas é desconhecido para começar e o número de medidas ambientais que podemos tomar é arbitrário, há um problema em decidir como ponderar esses dois conjuntos de atributos na medição da similaridade entre objetos. A composição das espécies deve ser igualmente considerada em relação às condições ambientais? Não existe uma resposta simples.  
+A aplicação da navalha de Ockham (lei da parcimônia) sugeriria que poderíamos evitar o problema fazendo análises separadas dos dois conjuntos de atributos e, em seguida, comparando os resultados para responder a uma questão específica sobre as relações entre espécies e ambientes. Apesar disso, tentativas foram feitas para superar esse problema de atributos agrupados diretamente, mas ainda é preciso decidir que peso dar a cada conjunto de atributos.  
+A adição do tempo como uma terceira dimensão à nossa caixa de dados também apresenta uma dificuldade, uma vez que a maioria das técnicas multivariadas opera apenas em uma matriz de atributos de objetos por atributos (n x m). Portanto, não podemos analisar diretamente uma caixa 3-D. No entanto, existem várias opções para reduzir os dados a uma caixa 2-D. Os mais comuns são os seguintes.  
+●	Poderíamos usar a análise de série temporal, se tivéssemos tempos suficientes (mais de 100?), para resumir as tendências temporais de cada atributo em um único valor.  
+●	Podemos calcular a média ao longo dos tempos ou, mais comumente, considerar os tempos como objetos separados. Neste caso, cada objeto se torna uma combinação de objeto * tempo.  
+●	Outra possibilidade é considerar o tempo como um atributo de perfil por meio de uma medida de similaridade capaz de considerar perfis.  
+Objetos agrupados são bastante comuns e geralmente surgem da necessidade de subamostrar. Nesse caso, precisamos decidir cuidadosamente quais de nossas unidades de amostragem serão os objetos definidos.  
+Por exemplo, em estudos de dietas de animais com base no conteúdo intestinal, nossa unidade de amostragem é um único intestino. No entanto, podemos decidir que este nível de resolução não é representativo, pois reflete simplesmente a última refeição de um animal. Diante dessa situação, escolheríamos agregar as unidades a um nível que se adequasse ao nosso conceito de padrão alimentar de uma espécie. Isso é semelhante ao problema de pseudoreplicação. 
+2. Escalas de atributos  
+Lembre-se de que existem quatro escalas de atributos fundamentais. Estes influenciam as possíveis transformações e a escolha da medida de similaridade. A escala nominal é a menos desejável e a escala de razão é a mais desejável na análise multivariada. Exceto para dados 0/1 (presença-ausência), a maioria das medidas de similaridade opera nos dados assumindo o nível de razão. Os dados de presença / ausência de espécies, codificados como binários 1 e 0, às vezes são descritos como escala nominal. No entanto, pode ser considerada uma forma de escala de razão truncada, ao invés de nominal. Todas as variáveis naturais de nível de razão são truncadas por causa da faixa de valores reais possíveis. As árvores não excedem a altura de 100 m com muita frequência, por exemplo.  
+As propriedades essenciais das quatro escalas de atributos podem ser resumidas como segue. Uma discussão mais aprofundada das escalas de medição é fornecida subsequentemente. 
+Escala	Operadores matemáticos com significado válido	Exemplo do maior operador
+Nominal	= ≠	5 não é 10
+Ordinal	= ≠ > < 	5 é menor que 10 
+Intervalar	= ≠ > < + −	5 é 5 de distância de 10
+Razão	= ≠ > < + − × ÷	5 é metade de 10
+Codificação dos atributos  
+Existem quatro principais maneiras pelas quais podemos considerar a alteração dos valores de nossos atributos, conforme registrado nas planilhas de dados, antes de iniciar a análise adequada. Os dois primeiros envolvem operações em cada valor, independentemente das propriedades da linha ou coluna. O terceiro e o quarto métodos envolvem operações em valores dependentes de alguma propriedade geral da linha e/ou coluna.  
+1. Enumeração  
+A maioria dos softwares requer a codificação de variáveis medidas (possível exceção de categorias) como números no arquivo de dados. Os dados nominais podem requerer codificação usando variáveis dummy (variáveis semiquantitativas).  
+A codificação deve levar a um dimensionamento de nossos atributos de forma que sejam proporcionais a todos os atributos que desejamos incluir em qualquer análise específica. No cálculo da similaridade, geralmente precisamos adicionar e subtrair valores de atributos. Portanto, é importante, neste estágio, verificar se tais operações fazem sentido com nossos atributos e suas escalas.  
+Dois ou mais atributos podem ser definidos como proporcionais se medem propriedades qualitativamente comparáveis nos objetos. Em um conjunto de dados comunitários, não teríamos atributos proporcionais se as espécies de ervas fossem medidas como frequência, enquanto as árvores e arbustos fossem medidos como densidades. Uma possibilidade é separar os conjuntos de atributos e analisá-los. Outra é convertê-los todos para uma escala comum sem unidade usando padronização, mais sobre isso em breve. No entanto, embora tal operação remova as diferenças de escala, ela não muda o fato de que a frequência e a densidade são incomensuráveis.  
+2. Transformar ou ponderar (peso)  
+Como uma transformação, aqui nos referimos à aplicação de um operador matemático a cada valor na matriz de dados brutos, independente de todos os outros. Podemos obter a raiz quadrada ou log de cada valor, por exemplo.  
+As razões para fazer esse tipo de transformação geralmente são para reduzir a distribuição distorcida de valores. Os dados de contagem da população, por exemplo, quase sempre têm uma distribuição de frequência fortemente inclinada para a direita. Outra razão para a transformação é reduzir os efeitos indevidos dos poucos valores grandes em certas medidas de similaridade (especialmente a de Bray-Curtis). 
+3. Centralização  
+Às vezes referida com padronização, a centralização envolve uma tradução da escala para cada linha ou coluna. A maneira mais comum de fazer isso é subtrair a média da linha ou coluna de cada valor nessa linha ou coluna específica (e dividir pelo desvio padrão daquela linha ou coluna, ver próximo tópico). Isso faz com que a média dos valores centralizados se torne zero e, portanto, igual nas linhas ou colunas centralizadas.  
+Por exemplo, usando um conjunto de dados de uma comunidade (locais*espécies), a centralização pela média das espécies tornaria a origem do espaço da espécie igual ao local médio, mas preservaria as distâncias relativas entre os locais. Centralizar pela média do sítio significaria traduzir os locais para o plano diagonal onde suas posições relativas mudariam (Figura 6).  
+
+
+Figura 6. Efeitos da centralização nas posições 2-D dos sítios para duas espécies. Dados brutos mostrados como letras (ver Figura 1), sites centrados por espécies significam como a´, b´, etc. Sites centrados pela média do site significam como a”, b”, etc. Os sites c”, d” e e” são idênticos, assim como f” e h”.
+   
+
+A centralização remove os efeitos das diferenças nas médias de nossos atributos. Ela converte cerca de metade dos nossos valores em valores negativos e, portanto, geralmente é aplicada apenas em conjunto com padronizações e medidas de similaridade que podem lidar com valores negativos.
+
+4. Padronização (“Scaling”)  
+Também por vezes referida como “scaling” (ver documentação do R/RStudio, por exemplo), refere-se às operações nas linhas ou colunas da matriz de dados brutos de forma a eliminar diferenças entre elas em termos de tamanho e dispersão. Transformar, em sentido estrito, é converter os valores de uma variável em seus z-scores. Isso envolve a subtração da média e a divisão pelo desvio padrão. A variável terá então uma média zero, variância unitária e será expressa em unidades de desvio padrão, não nas unidades de medida originais.  
+Existem outras maneiras de padronizar (que comumente nos referimos como relativizações), incluindo expressar um valor como uma fração do intervalo de uma variável. Em geral, padronizamos dividindo cada valor por uma medida de tamanho ou por uma medida de dispersão para cada atributo específico. As medidas de tamanho comuns são a média, o máximo e o total. As medidas de dispersão comuns são o desvio padrão, o intervalo (min-max) e a norma (Raiz ∑x2).
+Quando nossas variáveis são medidas em escalas diferentes, como é comum para dados ambientais, não podemos somar ou multiplicar de forma significativa. Da mesma forma, se nossas unidades de amostragem são de intensidade diferente (tamanho, volume, duração e dependendo da natureza das variáveis), então não podemos compará-las diretamente. Em ambas as situações, a padronização é obrigatória antes do cálculo das medidas de similaridade. No entanto, vale ressaltar que algumas medidas incorporam a padronização necessária em sua formulação, que veremos subsequentemente. 
+
+Para dados comunitários, todos os atributos são normalmente a mesma medida e, portanto, são formalmente comensuráveis. Eles podem ou não ser ecologicamente proporcionais. Por exemplo, poderíamos equalizar a densidade de um deserto efêmero (talvez 1000/ m2) com a de um arbusto de vida longa (1/1000 m2)? Para esses dados, a decisão sobre a padronização se resume à natureza das perguntas feitas.  
+Ao padronizar, podemos alterar marcadamente os pesos a priori dos atributos e/ou objetos para as análises subsequentes. Isso é exemplificado na figura 7. 
+
+Figura 7. Efeitos das padronizações nas posições do espaço 2-D das espécies. Dados brutos mostrados na Figura 1. Sítios padronizados pelo total, mostrados como a´, b´, etc., sítios padronizados pela norma mostrados como a”, b”, etc., sítios padronizados pelo valor máximo do sítio mostrados como a*, b*, etc. Observe como essas três formas projetam os sites em uma hipotenusa, esfera e cubo unitários, respectivamente. Estes têm seus equivalentes em espaços multidimensionais.  
+ 
+
+Os efeitos da padronização  
+Em geral, podemos pensar na soma dos quadrados de um objeto ou atributo como um índice a priori de sua contribuição para análises multivariadas subsequentes (Noy-Meir et al. 1975). As somas relativas dos quadrados podem ser marcadamente alteradas por padronizações. Para um conjunto típico de dados de comunidade, podemos resumir seus efeitos conforme a tabela a seguir.
+
+Tabela 4. Impacto geral das padronizações em um conjunto de dados da comunidade. Conclusões semelhantes para quaisquer conjuntos de dados.  
+
+Padronização aplicada	Pesos a priori das espécies	Pesos a priori dos sítios
+Nenhuma	Alto para espécies com alta abundância ou alta frequência, e com maior variância	Alto para sites com abundância total alta ou alta riqueza, e com maior variância
+Pelo desvio padrão das espécies *	Pesos equalizados	Maior para sites com mais espécies raras, e com maior variância
+Pela norma do site *	Maior para espécies com alta abundância e frequência, e maior variância 	Pesos equalizados
+Por sítios e espécies (padronização dupla)	Pesos equalizados	Pesos equalizados
+* as formas mais comuns
+
+A padronização das espécies usando o desvio padrão (DP) está implícita no uso do coeficiente de correlação ou quiquadrado como medidas de similaridade. Isso dá ênfase a uma proporção relativamente pequena de sítios ricos em espécies mais raras. Esses sites dominam os resultados multivariados, sejam eles ordenação ou classificação, e muitas vezes deixam a maior proporção de sites como um lote indistinto. Se removemos espécies mais raras dos dados, então não sobra muita coisa para a análise encontrar. Devemos considerar se isso está de acordo com os objetivos de nossa análise. A padronização por espécies está alinhada com o interesse nos padrões de distribuição de todas as espécies.  
+A padronização de sites, por outro lado, dá ênfase à composição dos sites. Usando a norma como divisor, a análise enfatizará as espécies dominantes mais comuns e os sítios em que ocorrem.  
+A padronização dupla remove mais informações dos dados brutos em comparação com as abordagens de linha ou coluna sozinhas. Ele tenta equalizar os pesos a priori para linhas e colunas. Isso tenderá a enfatizar as espécies menos abundantes que ocorrem nos locais mais pobres.
+
+Nota importante sobre a terminologia  
+Na literatura de estatística multivariada (e univariada), as palavras transformação, padronização, relativização e ponderação infelizmente não são usadas de forma consistente. Nesta disciplina usamos da seguinte forma.   
+Transformar (ou ponderar), para a aplicação de uma única função a todos os valores em uma matriz de dados independentemente de linhas e/ou colunas. Este é o significado normal no contexto univariado, e também é aplicável para dados multivariados.
+Relativizar (ou padronizar), para a aplicação de uma função a todos os valores na matriz de dados, onde a função envolve alguma propriedade estatística de cada linha e/ou coluna. No contexto univariado, a padronização geralmente significa converter para z-scores, mas no contexto multivariado, esse conceito precisa ser ampliado, por isso a conversão para z-scores também pode ser chamada de "scaling" ou centralização. 
+Normalizar, para dividir pela norma, ou reescalar os valores para variar entre 0 e 1. 
+Portanto, nessa disciplina, usamos esses termos conforme definido acima, para fins de consistência.  
+
+Termo	Descrição
+Transformar (ou ponderar)	Aplicação de uma única função matemática a todos os valores. Ex. Log, Raiz, etc.
+Relativizar	≅ Normalizar
+Padronizar ✓	Reescalar os dados para apresentarem uma média = 0 e um desvio padrão = 1, subtraindo a média de cada valor e dividir pelo desvio padrão. 
+Normalizar ✓	Dividir pela norma. Reescalar os valores para variar entre 0 e 1.
+Centrar	≅ Padronizar
+Reescalar	Adicionar ou subtrair uma constante, e então multiplicar ou dividir por uma constante. Significa mudar a unidade de medida. Ex. Celsius para Fahrenheit
+Escalar x	≅ Relativizar. Dividir cada variável por um fator. Variáveis diferentes têm fatores de escalar diferentes
+✓ termo consistente na literatura
+x termo pode ter mais de um significado diferente
+≅ equivalente a
+Antes das principais etapas analíticas na análise multivariada, uma matriz de dados pode precisar ser enumerada, transformada ou padronizada. A enumeração (traduzir categorias em números como variáveis fictícias) pode ser mais bem realizada na planilha em vez de editar no RStudio, mas transformar, centralizar e padronizar são simples no ambiente do R/RStudio.  
+Transformando uma matriz de dados  
+Aprendendo como converter dados numéricos em dados de presença-ausência, P = 0. Esta é a transformação mais extrema que se pode aplicar. Ele converte todos os valores diferentes de zero em um.  
+Consideração deve ser dada aos efeitos de cada método de transformação. As transformações afetam a média, a variação e a assimetria de um conjunto de dados. Algumas das razões para a transformação ficarão mais evidentes subsequentemente. 
+Potência, para dados numéricos, eleva o valor a uma potência, um valor de 2 = ao quadrado, 1 = nenhum efeito, 0 = presença/ausência, 0,5 = raiz quadrada, 0,25 = raiz quarta.  
+Log, para dados numéricos, eleva o log10 do valor. Mas lembre-se de que você não pode registrar zeros ou números negativos. Nesses casos usa-se o log (x+1).  
+Arcoseno, para dados percentuais, usa o arco seno dos valores 0 <x <1  
+Arcoseno da raiz quadrada, para dados de proporção, um método mais extremo para valores 0 < x <1.  
+
+Embora a transformação de uma matriz possa às vezes, e indiscutivelmente, ser realizada em certas colunas, em vez de todas as colunas, esteja ciente de que é normal aplicar este processo a todos valores para os dados da comunidade. Ou seja, uma transformação seletiva dos dados de comunidade tornariam as colunas incomensuráveis umas com as outras.  
+Padronização ou Relativização? 
+Os dados são geralmente padronizados quando as estatísticas de linha ou coluna são muito diferentes e essas diferenças não são importantes para as questões do estudo. A padronização minimiza essas diferenças.  
+Um método é padronizar os dados pelo valor máximo registrado em uma unidade de amostragem (ou seja, padronizar pelo máximo da coluna ou linha, o que se referir a UA). Fazendo com que todas as UAs tenham o mesmo máximo; eliminamos as diferenças devido às diferentes riquezas do local (para dados de presença) ou abundâncias totais (dados de abundância). Qualquer análise subsequente enfatiza a composição relativa da UA. Considerações estatísticas semelhantes, mas não ecológicas, se aplicam quando padronizamos por espécie.  
+3. Buscando objetos incomuns (outliers)  
+Os dados discrepantes (outliers) para classificação e ordenação são considerados pouco importantes, mas, mesmo assim, devem ser verificados. Eles têm pouco efeito sobre os resultados da classificação, uma vez que são, de fato, grupos facilmente identificáveis e não afetam o resto da análise. Com a ordenação, no entanto, os outliers dominarão os resultados, assim como fazem na regressão. Considere seriamente excluí-los da análise de ordenação.  
+Outliers podem ser identificados de uma perspectiva univariada, bivariada e multivariada, cada um com uma implicação ligeiramente diferente para a análise e tratamento de dados. Os objetos podem aparecer como outliers em algumas visualizações e não em outras.  
+Se tivermos um grupo significativo de objetos como outliers univariados (> ± 2,5 DP), isso sugeriria que as variáveis em questão podem estar distorcidas para a direita e precisam ser transformadas.  
+Um gráfico de objetos em todos os pares de variáveis (uma matriz de gráfico de dispersão) ajudará a detectar valores discrepantes bivariados. Em dados multivariados, outliers bivariados podem ser um indicador da presença de relações não lineares entre as variáveis. Isso tem implicações na escolha da medida de similaridade e do método de ordenação.  
+Um teste para outliers multivariados (objetos com um conjunto incomum de valores) é o cálculo da distância de cada objeto para a média multivariada (o centróide). Essa distância é chamada de distância de Mahalanobis e pode ser testada quanto à significância (Hair et al. 1998). 
+Se encontrarmos outliers multivariados, precisamos considerar porque eles estão ali, e se desejamos excluí-los ou não. Se eles estão muito isolados, por assim dizer, devemos considerar excluí-los pelo menos das análises de ordenação. Se eles estão apenas no final de uma cadeia de objetos de distância crescente do centroide, então não há muito sentido em excluí-los. 
+
+Conclusão  
+Foi apresentado o exame importantíssimo da matriz de dados brutos e como os dados multivariados podem ser representados e usados para calcular a similaridade. Também foi definido a que a classificação e ordenação se propõem e suas distinções de algumas outras técnicas multivariadas de uso comum.  
+Foi estabelecido aqui a lógica prática e os métodos comuns para particionar dados, recodificar objetos e atributos e verificar se há outliers. Um tempo considerável deve ser necessariamente dedicado para esta etapa na análise multivariada, ele nunca é desperdiçado, pois garante a escolha adequada dos métodos, orienta a análise subsequente de forma eficiente e evita a armadilha de realizar todas as análises concebíveis e selecionar a que “melhor se adequa” aos nossos desejos, e por fim, proporciona maior percepção na interpretação dos resultados.  
+Referências  
+
+Hair, J. F. J., Anderson, R. E., Tatham, R. L., & Black, W. C. (1998). Multivariate Data Analysis. New Jersey: Prentice Hall.
+Legendre, P., & Legendre, L. (1998). Numerical Ecology (2nd English ed ed.). Amsterdam, The Netherlands ; New York ; Oxford.
+Mueller-Dombois, D., & Ellenberg, H. (1974). Aims and Methods of Vegetation Ecology. New York: John Wiley & Sons.
+Noy-Meir, I., Walker, D., & Williams, W. T. (1975). Data Transformations in Ecological Ordination: II. On the Meaning of Data Standardization. Journal of Ecology, 63(3), 779-800. Retrieved from https://www.jstor.org/stable/2258601
+Tukey, J. W. (1977). Exploratory Data Analysis: Addison-Wesley, Reading, Mass.
+
+## Referências {-}

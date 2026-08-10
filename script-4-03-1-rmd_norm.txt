@@ -1,0 +1,114 @@
+# rm(list=ls(all=TRUE)) #limpa a memória
+# install.packages("openxlsx") #importa arquivos do excel
+# install.packages("fdth")
+library(openxlsx)
+# getwd()
+# setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+brotos <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/brotos.xlsx",
+                    rowNames = F, colNames = F,
+                    sheet = "Planilha1")
+head(brotos,10)
+head(brotos[, 1:5], 10)
+# #View(brotos)
+# print(brotos[1:5,1:5])
+# brotos
+# str(brotos)
+# mode(brotos)
+# class(brotos)
+brotos_v <- as.vector(as.matrix(brotos))
+brotos_v
+# #View(brotos_v)
+# print(brotos_v)
+# brotos_v
+# sort(brotos_v)
+# str(brotos_v)
+# mode(brotos_v)
+# class(brotos_v)
+# range(brotos_v)
+# length(brotos_v)
+set.seed(666)
+brotos_sub <- sample(brotos_v, size = 500, replace = F) #atualize o valor de 'size=' se necessário
+brotos_sub
+library(fdth)
+range(brotos_sub) #retorna o valor máximo e mínimo
+length(brotos_sub)
+#?range
+tf <- fdt(brotos_sub, start=10, end=45, h=5) #tabela de frequência
+#?fdt #atente para o uso de k, por exemplo tf <- fdt(brotos_sub, k=7)
+print(tf)
+#Regra de Sturges
+k <- 1 + 3.3*log10(length(brotos_sub))
+k <- ceiling(k) #ver as funções floor() e round()
+h <- (max(brotos_sub) - min(brotos_sub))/k
+h <- floor(h)
+tf <- fdt(brotos_sub, start=10, end=45, h=h) #tabela de frequência manual
+#?fdt #atente para o uso de k, por exemplo tf <- fdt(brotos_sub, k=k)
+print(tf)
+stem(brotos_sub)
+sort(brotos_sub)
+library(moments)
+skewness(brotos_sub)
+kurtosis(brotos_sub)
+par(mfrow = c(1,2)) #gráficos lado a lado
+plot(tf) #distribuição de frequências
+boxplot(brotos_sub, horizontal = TRUE,
+        xlab="Class limits") #boxplot
+par(mfrow = c(1,1)) #gráficos de volta ao normal
+# Quartis
+Q1 <- quantile(brotos_sub, 0.25)
+Q3 <- quantile(brotos_sub, 0.75)
+# Intervalo interquartil
+IQR <- IQR(brotos_sub)
+# Limites para outliers
+lim_inf <- Q1 - 1.5 * IQR
+lim_sup <- Q3 + 1.5 * IQR
+# Valores considerados outliers
+outliers <- brotos_sub[
+  brotos_sub < lim_inf |
+  brotos_sub > lim_sup
+]
+# Resultados
+Q1
+Q3
+IQR
+lim_inf
+lim_sup
+outliers
+sort(outliers)
+hist(brotos_sub, probability = TRUE) #adicionamos a função densidade
+curve(dnorm(x, mean = mean(brotos_sub), 
+            sd = sd(brotos_sub)), #cria valores de x dentro do intervalo do gráfico
+      col = "red",
+      add = TRUE) #adiciona ao gráfico atual
+hist(
+  brotos_sub,
+  probability = TRUE,
+  breaks = seq(10, 45, by = 5)
+)
+curve(dnorm(x, mean = mean(brotos_sub), 
+            sd = sd(brotos_sub)), #cria valores de x dentro do intervalo do gráfico
+      col = "red",
+      add = TRUE) #adiciona ao gráfico atual
+qqnorm(brotos_sub,
+       main = "Normal Q-Q Plot dos Brotos")
+qqline(brotos_sub,
+       col = "red",
+       lwd = 2)
+summary(brotos_sub)
+#?summary
+sd(brotos_sub) #desvio padrão
+var(brotos_sub) #variância
+names(sort(table(brotos_sub), decreasing = TRUE))[1] #moda
+shapiro.test(brotos_sub)
+#format(p, scientific = FALSE)
+ks.test(brotos_sub, "pnorm") #assume media 0 e desvio padrão 1
+ks.test(brotos_sub, #média e desvio padrão estimados da amostra
+        "pnorm",
+        mean(brotos_sub),
+        sd(brotos_sub))
+#format(p, scientific = FALSE)
+#install.packages("nortest")
+library(nortest)
+lillie.test(brotos_sub)
+#format(p, scientific = FALSE)

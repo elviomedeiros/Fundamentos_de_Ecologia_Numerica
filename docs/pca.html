@@ -103,7 +103,7 @@
 <li><a class="" href="partdiv.html"><span class="header-section-number">17</span> R Modulo 8.2 - Decomposição da diversidade</a></li>
 <li><a class="" href="estrhab.html"><span class="header-section-number">18</span> R Módulo 9 - Estrutura do habitat</a></li>
 <li class="book-part">V. ANÁLISES MULTIVARIADAS</li>
-<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 10.2 - Relativizações e transformações</a></li>
+<li><a class="" href="reltrns.html"><span class="header-section-number">19</span> R Modulo 10.1 - Relativizações e transformações</a></li>
 <li><a class="" href="outcentr.html"><span class="header-section-number">20</span> R Módulo 10.2 - Análise de outliers baseada no desvio padrão do centróide</a></li>
 <li><a class="" href="upgma.html"><span class="header-section-number">21</span> R Módulo 11.1 - Análise de Classificação Hierárquica - SAHN</a></li>
 <li><a class="" href="kmeans.html"><span class="header-section-number">22</span> R Módulo 11.2 - Análise de Classificação Não-hierárquica - K-Means</a></li>
@@ -145,7 +145,7 @@
 <span class="header-section-number">23.1.1</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"vegan"</span><span class="op">)</span></span>
@@ -155,11 +155,11 @@
 <div id="limpando-a-memória-7" class="section level4 unnumbered">
 <h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-7"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">##LIMPA A MEMORIA</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span></code></pre></div>
-<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <p>Os códigos acima, são usados para instalar os pacotes necessários para este módulo. O comando <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> será usado para carregarmos esses pacote a medida que eles forem sendo necessários.</p>
 </div>
@@ -167,7 +167,7 @@
 <h4>Definindo diretório de trabalho<a class="anchor" aria-label="anchor" href="#definindo-diret%C3%B3rio-de-trabalho-4"><i class="fas fa-link"></i></a>
 </h4>
 <p>Para definir o diretório de trabalho usa-se os códigos abaixo. <strong>Lembre de usar a barra “/” entre os diretórios. E não a contra-barra “\”.</strong></p>
-<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"C:/Seu/Diretório/De/Trabalho"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternativamente você pode ir na barra de tarefas e escolhes as opções:<br>
@@ -192,7 +192,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <span class="header-section-number">23.3</span> Importando a planilha de trabalho<a class="anchor" aria-label="anchor" href="#importando-a-planilha-de-trabalho-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Note que o sómbolo <code>#</code> em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações. Ajuste a segunda linha do código abaixo para refletir <span style="color:blue">“C:/Seu/Diretório/De/Trabalho/Planilha.xlsx”</span>.</p>
-<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">ppbio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx"</span>,</span>
 <span>                   rowNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -213,7 +213,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <span class="header-section-number">23.4</span> Particionando as variáveis de interesse<a class="anchor" aria-label="anchor" href="#particionando-as-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
 </h2>
 <p>Use o script abaixo apenas se for necessário escolher quais variáveis entrar na análise e particionar a matriz para as variáveis geomorfológicas da matriz ambiental <code>m.variáveis</code>.</p>
-<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Lista as colunas</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ppbio_a</span><span class="op">)</span></span>
 <span><span class="co">#Escolher quais colunas usar por nome</span></span>
@@ -237,7 +237,7 @@ SESSION -&gt; SET WORKING DIRECTORY -&gt; CHOOSE DIRECTORY</p>
 <div id="hello" class="greeting message" style="color: green;">
 <p>Aqui substitui-se uma nova matriz de dados, caso seja necessário refazer a análise com uma matriz gerada nesse código.</p>
 </div>
-<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_trab</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ppbio</span><span class="op">)</span>   <span class="co"># &lt;1&gt;</span></span>
 <span><span class="co">#m_trab &lt;- (m_part)   # &lt;1&gt;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
@@ -361,7 +361,7 @@ m_trab
 <span class="header-section-number">23.6.1</span> Dendrograma e Heatmap<a class="anchor" aria-label="anchor" href="#dendrograma-e-heatmap"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ao criar a matriz transformada <code>m_trns</code> verifique o tipo de relativização/transformação, ela deve ser específica para cada tipo de matriz, comunitária e ambiental.</p>
-<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Dendrograma</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/">vegan</a></span><span class="op">)</span></span>
 <span><span class="co">#relativização/transformação da matriz comunitária</span></span>
@@ -410,14 +410,14 @@ m_trab
 ## S-R-CT2 0.6274997 0.7759468 0.8789631 0.0000000 0.7280378 0.8836068
 ## S-R-CP2 0.8106894 0.7726098 0.9178304 0.7280378 0.0000000 0.8915271
 ## S-A-TA2 0.9420728 0.7342613 0.5700984 0.8836068 0.8915271 0.0000000</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-2.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-3.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-375-4.png" alt="" width="768"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-377-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-377-2.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-377-3.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-377-4.png" alt="" width="768"></p>
 </div>
 <div id="histórico-das-fusões-2" class="section level3" number="23.6.2">
 <h3>
 <span class="header-section-number">23.6.2</span> Histórico das fusões<a class="anchor" aria-label="anchor" href="#hist%C3%B3rico-das-fus%C3%B5es-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Criamos agora o histórico das fusões dos objetos. Na tabela gerada, as duas primeiras colunas (No. e UA) representam o número (No.) atribuido a cada unidade amostral (UA). As duas colunas subsequentes (Cluster1 e Cluster2) representam o par de objetos (indicado pelo sinal de “-”) ou grupo de objetos (indicado pela ausência do sinall de “-”) que foram agrupadas. A coluna Height, indica o valor de similaridade na qual um dado par de objetos (ou grupo de objetos) foi agrupado. O valor aproximado de Height também pode ser visualizado no eixo do dendrograma. Por último, na coluna Histórico, é mostrada a sequência das fusões da primeira até a <code>m-1</code> última fusão entre os dois últimos grupos. Nesse caso, 22.</p>
-<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span><span class="va">merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cluster_uas</span><span class="op">$</span><span class="va">merge</span><span class="op">)</span></span>
 <span><span class="va">merge</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">merge</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>,<span class="st">"0"</span><span class="op">)</span></span>
@@ -1085,7 +1085,7 @@ m_trab
 <h2>
 <span class="header-section-number">23.7</span> Análise de Componentes Principais<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-componentes-principais"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trab</span><span class="op">)</span></span>
 <span><span class="va">pca</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
@@ -1334,14 +1334,14 @@ m_trab
 ## Standard deviation     0.1818 0.03664 0.00211 0.00000000000001304
 ## Proportion of Variance 0.0000 0.00000 0.00000 0.00000000000000000
 ## Cumulative Proportion  1.0000 1.00000 1.00000 1.00000000000000000</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-377-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-1.png" alt="" width="672"></div>
 <p>Uma PCA sempre retorna <code>n</code> componentes principais (PCs), onde n é o número de objetos da <code>n x m</code> matrix de dados.</p>
 <div id="subsetting-as-variáveis-para-a-pca" class="section level3" number="23.7.1">
 <h3>
 <span class="header-section-number">23.7.1</span> Subsetting as variáveis para a PCA<a class="anchor" aria-label="anchor" href="#subsetting-as-vari%C3%A1veis-para-a-pca"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para escolher quais variáveis entrar na PCA podemos:</p>
-<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Remover a primeira coluna</span></span>
 <span><span class="va">pca_part1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
@@ -1367,21 +1367,21 @@ m_trab
 <h3>
 <span class="header-section-number">23.7.2</span> Explorando correlações multivariadas<a class="anchor" aria-label="anchor" href="#explorando-correla%C3%A7%C3%B5es-multivariadas"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#attach(m_trns)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span>, <span class="va">m_trns</span><span class="op">$</span><span class="st">"ge-brasi"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-1.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-381-1.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot(m_trns$"m.elev", m_trns$"m.river")</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"ge-brasi"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-2.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-381-2.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot(scale(m_trns$"m.elev"), scale(m_trns$"m.river"))</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">$</span><span class="st">"as-bimac"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-3.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-381-3.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot((m_trns$"m.elev" - mean(m_trns$"m.elev")) / sd(m_trns$"m.elev"))</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
@@ -1393,8 +1393,8 @@ m_trab
 <span>             ellipses <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># show correlation ellipses</span></span>
 <span>             alpha <span class="op">=</span> <span class="fl">0.5</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-379-4.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-381-4.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Ordem pela soma das colunas</span></span>
 <span><span class="co"># Passo 1</span></span>
 <span><span class="va">col_sums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">m_trns</span><span class="op">)</span></span>
@@ -1654,7 +1654,7 @@ Escalar (X)
 <h3>
 <span class="header-section-number">23.7.3</span> Centrando e re-escalando a matriz de dados<a class="anchor" aria-label="anchor" href="#centrando-e-re-escalando-a-matriz-de-dados"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca_ce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="co">#pca_ce</span></span>
 <span><span class="va">pca_cs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -1895,7 +1895,7 @@ Escalar (X)
 ## Standard deviation     0.008369 0.0000000000000003174
 ## Proportion of Variance 0.000000 0.0000000000000000000
 ## Cumulative Proportion  1.000000 1.0000000000000000000</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-380-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-380-2.png" alt="" width="768"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-382-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-382-2.png" alt="" width="768"></p>
 <p>No <code>scree plot</code> o eixo x representa os componentes principais (n x k) = (35) x (23). O eixo y representa a variância de cada componente principal, expressa como o desvio padrão ao elevado ao quadrado (<span class="math inline">\(DP^2\)</span>), que também é o <code>eigenvalor</code> daquele eixo. Por exemplo, o desvio padrão do primeiro componente foi de 2.977894, que elevado ao quadrado resulta em 8.8678527, como apresentado no gráfico. Para o segundo PC, temos PC2 2.1644397 <sup>2</sup> = 4.6847991.</p>
 <div id="sobre-o-scree-plot" class="section level4" number="23.7.3.1">
 <h4>
@@ -1909,7 +1909,7 @@ Escalar (X)
 <h4>
 <span class="header-section-number">23.7.3.2</span> Descendo os nomes das UAs<a class="anchor" aria-label="anchor" href="#descendo-os-nomes-das-uas-1"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">add.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">m_trns</span>, var <span class="op">=</span> <span class="st">"UAs"</span><span class="op">)</span></span>
 <span><span class="co">#add.col</span></span>
 <span><span class="va">agrup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">add.col</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span> <span class="co">#descendo os nomes</span></span>
@@ -1929,7 +1929,7 @@ Escalar (X)
 <h2>
 <span class="header-section-number">23.8</span> Fazendo a PCA<a class="anchor" aria-label="anchor" href="#fazendo-a-pca"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca_sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">m_trns</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">pca_sc</span> <span class="co">#fornece os desvios padrões, Rotação dos eixos e Eigenvetores</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
@@ -2168,7 +2168,7 @@ Escalar (X)
 ## Cumulative Proportion  1.000000 1.0000000000000000000
 ##  [1] 25.34 13.39 12.57  8.42  8.35  6.87  6.58  6.41  3.88  2.50  1.78  1.58
 ## [13]  0.93  0.52  0.37  0.25  0.14  0.09  0.02  0.02  0.00  0.00  0.00</code></pre>
-<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-382-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-382-2.png" alt="" width="768"></p>
+<p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-384-1.png" alt="" width="768"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-384-2.png" alt="" width="768"></p>
 </div>
 <div id="interpretando-o-biplot-gerado-no-código-anterior" class="section level2" number="23.9">
 <h2>
@@ -2197,7 +2197,7 @@ Escalar (X)
 <h2>
 <span class="header-section-number">23.10</span> Extraindo PC escores<a class="anchor" aria-label="anchor" href="#extraindo-pc-escores"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pca_sc</span><span class="op">)</span></span>
 <span><span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span></span>
 <span><span class="va">pca_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Agrupamento <span class="op">=</span> <span class="va">m_pca_agrup</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">m_trns</span>, <span class="va">pca_sc</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
@@ -2467,13 +2467,13 @@ Escalar (X)
 <span class="header-section-number">23.11</span> Gráfico melhorado com <code>ggplot</code><a class="anchor" aria-label="anchor" href="#gr%C3%A1fico-melhorado-com-ggplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Ou talves seja melhor melhorar usando os pacotes <code>FactoMineR</code> e <code>factoextra</code> com o código disponível nos Apêndices (<a href="pca.html#pca-usando-o-pacote-factominer">PCA usando o pacote FactoMineR</a>).</p>
-<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pca_scores</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">PC1</span>, <span class="va">PC2</span>, col <span class="op">=</span> <span class="va">Agrupamento</span>, fill <span class="op">=</span> <span class="va">Agrupamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"polygon"</span>, col <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Too few points to calculate an ellipse</code></pre>
-<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">m_trns</span>, <span class="va">pca_scores</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="st">"PC2"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                    PC1          PC2
 ## ap-davis  -0.080590613  0.026040181
@@ -2511,7 +2511,7 @@ Escalar (X)
 ## sy-marmo   0.003311395  0.045155197
 ## te-chalc  -0.121806115  0.031078223
 ## tr-signa   0.461271364  0.002418833</code></pre>
-<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-384-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-386-1.png" alt="" width="672"></div>
 <p>Fizemos uma PCA. Pergunta… É recomendavel uma análise métrica para dados de comunidade?</p>
 </div>
 <div id="apêndices-17" class="section level2 unnumbered">
@@ -2521,7 +2521,7 @@ Escalar (X)
 <h3>PCA usando o pacote FactoMineR<a class="anchor" aria-label="anchor" href="#pca-usando-o-pacote-factominer"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/" class="uri">http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/</a></p>
-<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://factominer.free.fr">FactoMineR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kassambara/factoextra">factoextra</a></span><span class="op">)</span></span>
 <span><span class="va">pca_fm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FactoMineR/man/PCA.html">PCA</a></span><span class="op">(</span><span class="va">m_trns</span>, graph <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -2617,7 +2617,7 @@ MEDEIROS, E. S. F.; SILVA, M. J.; RAMOS, R. T. C. Application of catchment- and 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 08/08/2026 11:03:05.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/08/2026 19:23:25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

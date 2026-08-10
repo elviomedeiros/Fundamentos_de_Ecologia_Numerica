@@ -1,0 +1,76 @@
+# dev.off() #apaga os graficos, se houver algum
+# rm(list=ls(all=TRUE)) #limpa a memória
+# cat("\014") #limpa o console
+# install.packages("openxlsx") #importa arquivos do excel
+library(openxlsx)
+# getwd()
+# setwd("C:/Seu/Diretório/De/Trabalho")
+library(openxlsx)
+univ <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx",
+                    rowNames = T, colNames = T,
+                    sheet = "tucuna")
+head(univ, 10)
+head(univ[, 1:5], 10)
+# #View(univ)
+# print(univ[1:5,1:5])
+# univ
+# str(univ)
+# mode(univ)
+# class(univ)
+df<-data.frame(univ$CT_cm, univ$CP_cm, univ$PT_g)
+df
+plot(df[,1:2])
+# Teste de Pearson
+cor(df, method="pearson")
+cor.test(univ$CP_cm, univ$CT_cm,
+         method = "pearson")
+# Teste de Spearman
+cor(df[,1:2], method="spearman")
+cor.test(univ$CT_cm, univ$CP_cm,
+         method="spearman")
+cor(
+  univ[, c("CP_cm", "CT_cm", "PT_g")],
+  use = "complete.obs"
+)
+#install.packages("ppcor")
+library(ppcor)
+pcor.test(
+  univ$CP_cm,
+  univ$CT_cm,
+  univ$PT_g
+)
+df<-data.frame(univ$CT_cm, univ$CP_cm, univ$PT_g)
+df
+plot(df[,1:2])
+# Teste de Pearson
+cor(df, method="pearson")
+cor.test(univ$CT_cm, univ$CP_cm,
+         method = "pearson")
+# Teste de Spearman
+cor(df[,1:2], method="spearman")
+cor.test(univ$CP_cm, univ$CT_cm,
+         method="spearman")
+cor.test(univ$CP_cm, univ$CT_cm, method="spearman")
+modelo <- lm(CP_cm ~ CT_cm, data=univ)
+summary(modelo)
+par(mfrow=c(2,2))
+plot(modelo)
+par(mfrow=c(1,1))
+anova(modelo) 
+library(car)
+Anova(modelo)
+Anova(modelo, white.adjust=TRUE)
+univ <- univ[univ$CT_cm!=max(univ$CT_cm),]
+univ
+library(ggplot2)
+colnames(univ)
+dados <- subset(univ,
+                sexo != "imaturo" & Pgon_g>0.2 & Pgon_g<10) #ou `filter` do dplyr
+table(dados$sexo)
+unique(dados$sexo)
+ggplot(dados, aes(x = CP_cm,
+                 y = Pgon_g,
+                 color = sexo)) +
+  geom_point() + 
+  geom_smooth(method = "lm",
+              se = FALSE)

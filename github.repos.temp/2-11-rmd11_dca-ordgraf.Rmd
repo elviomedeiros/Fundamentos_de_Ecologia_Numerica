@@ -1,0 +1,259 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# R Modulo 11
+
+### Gráficos de ordenação e DCA {-}
+
+### Apresentação {-}
+
+## Organização básica
+
+```{r, eval=FALSE}
+dev.off() #apaga os graficos, se houver algum
+rm(list=ls(all=TRUE)) #limpa a memória
+cat("\014") #limpa o console
+```
+
+Instalando os pacotes necessários para esse módulo
+
+```{r, eval=FALSE}
+install.packages("vegan3d")
+install.packages("geometry")
+install.packages("magick")
+```
+
+Agora vamos **definir o diretório de trabalho**. Esse código é usado para obter e definir o diretório de trabalho atual no R. O comando `getwd()` retorna o caminho do diretório onde o R está lendo e salvando arquivos. O comando `setwd()` muda esse diretório de trabalho para o caminho especificado entre aspas. No seu caso, você deve ajustar o caminho para o seu próprio diretório de trabalho. **Lembre de usar a barra "/" entre os diretórios. E não a contra-barra "\\".**
+
+Definindo o diretório de trabalho e installando os pacotes necessários:
+
+```{r, eval=FALSE}
+getwd()
+setwd("C:/Seu/Diretório/De/Trabalho")
+```
+
+### Sobre os dados do PPBio
+
+A planilha `ppbio` contém os dados de abundância de espécies em diferentes unidades amostrais (UA's). A base teórica dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+### A planilha PPBio Grupos
+
+Para esse módulo também usaremos a planilha `ppbio06-grupos`. Esta é uma **tabela de agrupamentos**, guardados no arquivo `ppbio06-grupos.xlsx`, que traz os agrupamentos das UA's definidos *a priori* no delineamento amostral do PPBio. Essa tabela contem as ~26 localidades (UAs) em períodos diferentes (linhas) x ~5 tipos de grupos aos quais cada UA foi atribuida (colunas) (dados publicados por @RN2491). As bases teóricas dos dados do PPBio para o presente estudo pode ser vista em [Base Teórica](www.quarto.com). Leia antes de prosseguir.
+
+### Importando as planilhas
+
+Note que o símbolo [`#`]{style="color:green"} em programação R significa que o texto que vem depois dele é um comentário e não será executado pelo programa. Isso é útil para explicar o código ou deixar anotações.  
+	- Ajuste a primeira linha do código abaixo para refletir ["C:/Seu/Diretório/De/Trabalho/Planilha.xlsx"]{style="color:blue"}.  
+	- Ajuste o parâmetro `sheet = ""` para refletir a aba correta do arquivo .xlsx a ser importado.
+
+::: {#hello .greeting .message style="color: green;"}
+  [ATENÇÃO]{style="color:red"}
+Para a matriz de peixes, escolha a aba "peixesp" da tabela de agrupamentos ´ppbio06-grupos.xlsx´; para a matriz de bentos, escolha a aba "bentos" da tabela de agrupamentos, e assim por diante.
+:::
+
+Alternativamente você pode ir na barra de tarefas e escolhes as opções:\
+SESSION -\> SET WORKING DIRECTORY -\> CHOOSE DIRECTORY
+
+```{r, results='hold'}
+library(openxlsx)
+ppbio <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-peixes.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "Sheet1")
+t_grps <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06-grupos.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "peixesp")
+m_hab <- read.xlsx("D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/ppbio06p-habitat.xlsx",
+                   rowNames = T,
+                   colNames = T,
+                   sheet = "ano1")
+ppbio[1:5,1:5] #[1:5,1:5] mostra apenas as linhas e colunas de 1 a 5.
+t_grps
+```
+
+## REINÍCIO 1
+
+::: {#hello .greeting .message style="color: green;"}
+[ATENÇÃO]{style="color:red"} Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.
+:::
+
+```{r}
+m_bruta <- (ppbio)   # <1>
+```
+1.  Aqui usaremos as matrizes relativizadas/transformadas/particionadas, etc
+
+Podemos exibir a planilha depois de ter sido importada para o ambiente R/RStudio usando as funções `View()`, `print()` ou `head()`. Note que essas funções são case-sensitive. A função `ignore.case()` é uma função do pacote stringr que modifica um padrão para que ele não considere o  caso das letras nas correspondências. Por exemplo, se você quiser encontrar todas as ocorrências da letra "a" em um vetor de caracteres, independente de ser "A" ou "a", você pode usar essa função.
+
+### Relativizando e transformando
+
+```{r, eval=FALSE}
+library(vegan)
+m_trns <- asin(sqrt(decostand(m_bruta,
+                               method="total", MARGIN = 2)))
+#m_trns <- sqrt(m_trab)
+```
+
+## REINÍCIO 2
+
+::: {#hello .greeting .message style="color: green;"}
+[ATENÇÃO]{style="color:red"} Aqui substitui-se uma nova matriz de dados, relativizada e/ou transformada, pela matriz de trabalho inicial.
+:::
+
+```{r}
+m_trab <- (m_bruta)   # <1>
+```
+1.  Aqui usaremos as matrizes relativizadas/transformadas/particionadas, etc
+
+## DCA
+
+https://www.davidzeleny.net/anadat-r/doku.php/en:ordiagrams_examples
+
+```{r, results='hold', fig.show='hold', warning=FALSE}
+library (vegan)
+#veg.data <- read.delim ('https://raw.githubusercontent.com/zdealveindy/anadat-r/master/data/vltava-spe.txt', row.names = 1)
+#env.data <- read.delim ('https://raw.githubusercontent.com/zdealveindy/anadat-r/master/data/vltava-env.txt')
+com.data <- m_trab
+env.data <- t_grps
+env.data
+#env.data <- within(env.data, ambiente <- factor(ambiente, labels = c(1,2)))
+#lvs <- factor(env.data$area, labels = c(2,1))
+grp <- env.data$area
+env.data$lvs <- factor(env.data$area, labels = c(2,1)) #adiciona uma coluna chamada levels
+env.data$lvs <- as.numeric(as.character(env.data$lvs)) #lvs como numeros
+lvs <- env.data$lvs
+
+DCA <- decorana(com.data)
+DCA
+summary(DCA)
+plot(DCA, choices = c(1,2), display = "sites", type = "text")
+points(DCA)
+```
+
+A DCA é uma técnica de ordenação usada em ecologia para entender padrões em dados de abundância de espécies ou composição de comunidades. É uma forma avançada de análise de correspondência que corrige certos artefatos para proporcionar uma representação mais precisa das relações ecológicas.
+
+Resultados da DCA
+Informações Gerais:
+
+Call: Mostra a função que foi chamada e os dados usados (decorana(com.data)).
+Detrended correspondence analysis with 26 segments: A análise foi feita com 26 segmentos. Esse detrending ajuda a remover curvas artificiais dos dados.
+Rescaling of axes with 4 iterations: Os eixos foram reescalados em 4 iterações, o que ajuda a uniformizar a variância ao longo dos eixos.
+Total inertia (scaled Chi-square): 3.8345: A inércia total representa a variabilidade total nos dados. É uma medida da variação total explicada pelos dados.
+Eigenvalues e Outros Valores:
+
+Eigenvalues: São valores que indicam a quantidade de variação explicada por cada eixo da DCA. Quanto maior o eigenvalue, mais variação esse eixo explica.
+DCA1: 0.6772 (primeiro eixo)
+DCA2: 0.3542 (segundo eixo)
+DCA3: 0.3524 (terceiro eixo)
+DCA4: 0.22035 (quarto eixo)
+Additive Eigenvalues: Esses valores são usados para ajustar os eigenvalues principais. São ligeiramente diferentes dos eigenvalues, refletindo a soma acumulada de variações explicadas.
+DCA1: 0.6772
+DCA2: 0.3520
+DCA3: 0.3686
+DCA4: 0.21920
+Decorana values: Estes valores representam a variância explicada depois do detrending e do reescalamento.
+DCA1: 0.7171
+DCA2: 0.3430
+DCA3: 0.1673
+DCA4: 0.03794
+Axis lengths: Comprimento dos eixos. Indicam a extensão dos dados ao longo de cada eixo.
+DCA1: 4.1449
+DCA2: 3.2131
+DCA3: 2.7721
+DCA4: 1.76694
+Resumo da Interpretação
+Eixos (DCA1, DCA2, etc.): Representam diferentes dimensões dos dados. O primeiro eixo (DCA1) explica a maior parte da variação, seguido pelo segundo eixo (DCA2), e assim por diante.
+Eigenvalues: Valores que indicam a quantidade de variação explicada por cada eixo. Eixos com valores maiores são mais importantes para entender a variação nos dados.
+Axis lengths: Indicam a amplitude dos dados ao longo de cada eixo. Eixos mais longos sugerem maior variabilidade ao longo daquela dimensão.
+Portanto, a análise de correspondência detrended (DCA) foi usada para entender a variação nos dados de abundância de espécies. Os resultados mostram quantas dimensões (eixos) foram analisadas, quanta variação cada eixo explica (eigenvalues) e a extensão da variabilidade dos dados ao longo de cada eixo (axis lengths).
+
+```{r, results='hold', fig.show='hold'}
+par(mfrow=c(2,2))
+ordiplot(DCA, display = 'sites', type = 'p')
+ordiplot(DCA, display = 'species', type = 't')
+ordiplot(DCA, display = 'sp', type = 'n')
+orditorp(DCA, display = 'sp')
+ordiplot(DCA, display = 'sp', type = 'n')
+ordilabel(DCA, display = 'sp')
+par(mfrow=c(1,1))
+
+ordiplot(DCA, display = 'si', type = 'n')
+points(DCA, col = lvs, pch = grp)
+
+ordiplot(DCA, display = 'si', type = 'n')
+points(DCA, col = lvs, pch = lvs)
+
+ordiplot(DCA, display = 'si', type = 'n')
+for (i in seq (1, 2)) ordispider(DCA, groups = lvs, show.groups = i, col = i, label = T)
+for (i in seq (1, 2)) ordihull(DCA, groups = lvs, show.groups = i, col = i, lty = 'dotted')
+
+ordiplot(DCA, display = 'si', type = 'n')
+points(DCA, col = lvs, pch = lvs)
+for (i in unique (lvs)) ordihull (DCA, groups = lvs, show.group = i, col = i, draw = 'polygon', label = T)
+
+source('http://www.davidzeleny.net/anadat-r/doku.php/en:customized_functions:ordicenter?do=export_code&codeblock=0')
+ordiplot(DCA, display = 'si', type = 'n')
+ordicenter(DCA, groups = grp, col = 'red', cex = 2)
+
+ordiplot(DCA, display = 'si', type = 'n')
+scaling.parameter <- as.vector(table(lvs))/max(as.vector(table(lvs)))
+for (i in 1:length (unique (lvs)))
+  ordicenter (DCA, groups = lvs, show.groups = i, col = i, cex = 4*scaling.parameter[i])
+
+colnames(m_hab)
+ordiplot(DCA, display = 'si', type = 'n')
+ordiarrows(DCA, groups = env.data$area, order.by = grp, startmark = 1, label = TRUE, length = .1) #integers
+```
+
+### Fazendo gráficos em 3D
+
+Ao executar a função ´ordirgl()´ procure pelo widget criado usando o pacote `rgl` e abra-o em uma segunda tela.
+
+```{r, results='hold', fig.show='hold', warning=FALSE}
+library (vegan3d)
+library(rgl)
+ordirgl(DCA)
+orglspider(DCA, groups = grp)
+source('http://www.davidzeleny.net/anadat-r/doku.php/en:customized_functions:orglhull?do=export_code&codeblock=1')
+orglhull(DCA, groups = grp, col = 'tomato', alpha = 0.5)
+```
+
+### Fazendo a animação do gráfico
+
+```{r eval=FALSE}
+#veg.data <- read.delim ('https://raw.githubusercontent.com/zdealveindy/anadat-r/master/data/vltava-spe.txt', row.names = 1)
+#env.data <- read.delim ('https://raw.githubusercontent.com/zdealveindy/anadat-r/master/data/vltava-env.txt')
+library(magick)
+temp.dir <- tempdir ()
+DCA <- decorana(veg = com.data)
+rgl.bg(color = 'white')  # makes the background white
+ordirgl(DCA)
+movie3d(spin3d(axis = c(0,1,0)), duration=60/5, movie = "ordirgl", fps = 20, dir = temp.dir)
+orglspider(DCA, groups = grp)
+movie3d(spin3d(axis = c(0,1,0)), duration=60/5, movie = "orglspider", fps = 20, dir = temp.dir)
+library(geometry)
+source('http://www.davidzeleny.net/anadat-r/doku.php/en:customized_functions:orglhull?do=export_code&codeblock=1')
+orglhull(DCA, groups = grp, col = 'tomato', alpha = 0.5)
+movie3d(spin3d(axis = c(0,1,0)), duration=60/5, movie = "orglhull", fps = 20, dir = temp.dir)
+# Gif files are stored in tempdir:
+temp.dir
+```
+
+## Apêndices {.unnumbered}
+
+### Script limpo {-}
+
+Aqui apresento o scrip na íntegra sem os textos ou outros comentários. Você pode copiar e colar no R para executa-lo. Lembre de remover os [`#`]{style=color:green} ou [`##`]{style=color:green} caso necessite executar essas linhas.
+
+```{r, eval=FALSE, echo=FALSE, purl=FALSE}
+knitr::purl(input = "2-11-rmd11_dca-ordgraf.Rmd", output = "script-rmd11.txt", documentation = 0)
+Script <- readLines("script-rmd11.txt")
+Script <- Script[Script != ""]
+writeLines(Script, "script-rmd11.txt")
+cat(Script, sep = "\n")
+```
+
+## Referências {-}
