@@ -1668,13 +1668,17 @@
 </div>
 </div>
 </div>
-<div id="id_4042reinicio" class="section level2" number="14.6">
-<h2>
-<span class="header-section-number">14.6</span> REINÍCIO<a class="anchor" aria-label="anchor" href="#id_4042reinicio"><i class="fas fa-link"></i></a>
+<div id="reinício" class="section level2 unnumbered">
+<h2>REINÍCIO<a class="anchor" aria-label="anchor" href="#rein%C3%ADcio"><i class="fas fa-link"></i></a>
 </h2>
-<div id="organizando-variáveis-de-interesse" class="section level4" number="14.6.0.1">
+<div id="id_4042reinicio" class="infobox2 stopred">
+<div class="center">
+<p><span style="color:white"><strong>REINÍCIO</strong></span></p>
+</div>
+</div>
+<div id="organizando-variáveis-de-interesse" class="section level4" number="14.5.1.3">
 <h4>
-<span class="header-section-number">14.6.0.1</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.1.3</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse"><i class="fas fa-link"></i></a>
 </h4>
 <p>Cada linha deve representar uma observação e cada coluna uma variável.</p>
 <div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
@@ -1743,14 +1747,14 @@
 ## S-R-SE-4  8.603085    5.686241    8.602325 5.477226  2.323790</code></pre>
 </div>
 </div>
-<div id="regressão-multipla-simultânea" class="section level2" number="14.7">
+<div id="regressão-multipla-simultânea" class="section level2" number="14.6">
 <h2>
-<span class="header-section-number">14.7</span> Regressão Multipla Simultânea<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.6</span> Regressão Multipla Simultânea<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><i class="fas fa-link"></i></a>
 </h2>
 <p>Na regressão múltipla simultânea, tentamos responder a pergunta:</p>
 <p>PERGUNTA (1): Qual contribuição as variáveis morfológicas oferecem para a previsão da riqueza de espécies?</p>
 <p>Para isso testamos a hipótese de:</p>
-<p><span class="math inline">\(H_0\)</span>: nenhuma das variáveis explicativas está associada à variável resposra.<br><span class="math inline">\(H_1\)</span>: pelo menos uma das variáveis explicativas está associada à variável resposta.</p>
+<p><span class="math inline">\(H_0\)</span>: nenhuma das variáveis explicativas está associada à variável resposta.<br><span class="math inline">\(H_1\)</span>: pelo menos uma das variáveis explicativas está associada à variável resposta.</p>
 <p>No R, implementamos o modelo de RMS usando a fórmula:</p>
 <pre><code>y ~ x1 + x2 + x3</code></pre>
 <p>onde,</p>
@@ -1883,9 +1887,9 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 <p>Portanto, não há evidências de multicolinearidade severa entre as variáveis explicativas. Assim, o fato de nenhuma variável ter sido significativa (p &gt; 0,05) provavelmente não é consequência da multicolinearidade, mas sim porque, para este conjunto de dados, essas variáveis realmente apresentam pouca capacidade de explicar a variação de Srare.</p>
 <p>O QUE REPORTAR: A multicolinearidade entre as variáveis explicativas foi avaliada pelo Fator de Inflação da Variância (VIF). Todos os valores de VIF foram inferiores a 5 (1,32–4,12), indicando ausência de multicolinearidade entre os preditores e sugerindo que as estimativas dos coeficientes não foram substancialmente afetadas pela correlação entre as variáveis independentes.</p>
 </div>
-<div id="regressão-múltipla-hierárquica" class="section level2" number="14.8">
+<div id="regressão-múltipla-hierárquica" class="section level2" number="14.7">
 <h2>
-<span class="header-section-number">14.8</span> Regressão Múltipla Hierárquica<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.7</span> Regressão Múltipla Hierárquica<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><i class="fas fa-link"></i></a>
 </h2>
 <p>Na regressão múltipla hierárquica, respondemos a pergunta:</p>
 <p>PERGUNTA (2): Estudos anteriores sugerem que a profundidade influencia a riqueza de espécies. Essa hipótese é corroborada pelos dados analisados?</p>
@@ -1912,9 +1916,9 @@ vezes maior do que seria se não existisse correlação entre as variáveis. Ain
 <span>                        <span class="va">m.slope</span> <span class="op">+</span></span>
 <span>                        <span class="va">m.width</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span></code></pre></div>
-<div id="comparando-os-modelos" class="section level4" number="14.8.0.1">
+<div id="comparando-os-modelos" class="section level4" number="14.7.0.1">
 <h4>
-<span class="header-section-number">14.8.0.1</span> Comparando os modelos<a class="anchor" aria-label="anchor" href="#comparando-os-modelos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.7.0.1</span> Comparando os modelos<a class="anchor" aria-label="anchor" href="#comparando-os-modelos"><i class="fas fa-link"></i></a>
 </h4>
 <p>A principal comparação é feita com a função <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</p>
 <div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
@@ -2029,9 +2033,9 @@ Se p ≥ 0,05, não se rejeita <span class="math inline">\(H_0\)</span>: o bloco
 <p>Diferentemente da <strong>regressão múltipla simultânea</strong>, em que o teste F avalia todo o conjunto de preditores, na <strong>regressão hierárquica</strong> cada teste F avalia apenas a contribuição adicional do bloco recém-incluído, mantendo fixas as variáveis que já estavam no modelo.</p>
 </div>
 </div>
-<div id="regressão-múltipla-stepwise" class="section level2" number="14.9">
+<div id="regressão-múltipla-stepwise" class="section level2" number="14.8">
 <h2>
-<span class="header-section-number">14.9</span> Regressão Múltipla <em>Stepwise</em><a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8</span> Regressão Múltipla <em>Stepwise</em><a class="anchor" aria-label="anchor" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><i class="fas fa-link"></i></a>
 </h2>
 <p>PERGUNTA (3): Qual variável morfológica é a melhor preditora da riqueza de espécies?</p>
 <p>Quando temos muitas variáveis candidatas, podemos utilizar <strong>métodos de seleção de modelos</strong> para identificar um subconjunto de preditores que forneça uma combinação adequada entre qualidade do ajuste e complexidade do modelo.</p>
@@ -2067,12 +2071,12 @@ capacidade preditiva: quão bem o modelo consegue prever observações que não 
 <div class="infobox2 stopred">
 <div class="center">
 <p><span style="color:white"><strong>REINÍCIO</strong></span></p>
-</div>
-</div>
 <p>Se for necessário, volte até a seção de <a href="regmul.html#id_4042reinicio">REINÍCIO</a> desse capítulo e refaça as análises com novas variáveis preditoras.</p>
-<div id="backward-elimination" class="section level4" number="14.9.0.1">
+</div>
+</div>
+<div id="backward-elimination" class="section level4" number="14.8.0.1">
 <h4>
-<span class="header-section-number">14.9.0.1</span> <em>Backward elimination</em><a class="anchor" aria-label="anchor" href="#backward-elimination"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.1</span> <em>Backward elimination</em><a class="anchor" aria-label="anchor" href="#backward-elimination"><i class="fas fa-link"></i></a>
 </h4>
 <p>Nesse método, começamos com um modelo que inclui todas as variáveis preditoras (modelo completo) e, de forma iterativa, removemos a variável menos estatisticamente significativa a cada etapa, até que a remoção de novas variáveis deixe de melhorar o modelo.</p>
 <div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
@@ -2139,11 +2143,12 @@ capacidade preditiva: quão bem o modelo consegue prever observações que não 
 Srare ~ m.depth_mar + m.depth_max + m.width
 Srare ~ m.depth_max + m.slope + m.width</p>
 <p>E assim sucessivamente. A variável cuja remoção produz o maior benefício segundo o AIC (ver a seguir) é retirada. O processo continua até que a remoção de qualquer variável adicional não reduza mais o AIC.</p>
+<p>O <code>&lt;none&gt;</code> representa a opção de não remover nenhuma variável naquele passo, ou seja, é simplesmente o modelo atual, antes de qualquer alteração. Para esses dados, no primeiro passo, a melhor decisão é <strong>remover m.depth_max, porque produz o menor AIC (75.483)</strong>.</p>
 <p>Lembre que esse processo não é simplesmente “remover a variável menos significativa”. O algoritmo não está executando uma eliminação baseada exclusivamente em valores de p. Ele está procurando alterações que melhorem o critério de seleção.</p>
 </div>
-<div id="forward-selection" class="section level4" number="14.9.0.2">
+<div id="forward-selection" class="section level4" number="14.8.0.2">
 <h4>
-<span class="header-section-number">14.9.0.2</span> <em>Forward selection</em><a class="anchor" aria-label="anchor" href="#forward-selection"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.2</span> <em>Forward selection</em><a class="anchor" aria-label="anchor" href="#forward-selection"><i class="fas fa-link"></i></a>
 </h4>
 <p>Na seleção progressiva (<em>forward selection</em>), inicia-se com um modelo nulo ou vazio (<code>y ~ 1</code>), que não contém variáveis preditoras (x), apenas o intercepto = 1. A partir desse modelo, cada variável candidata é adicionada individualmente. O algoritmo compara os modelos resultantes e seleciona a alteração que produz a maior melhora segundo o critério utilizado. O processo continua enquanto uma nova variável melhorar o critério de seleção.</p>
 <div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
@@ -2193,9 +2198,9 @@ Srare ~ m.depth_max + m.slope + m.width</p>
 <p>Essa <strong>dependência do caminho (<em>path dependence</em>)</strong> é uma das limitações conhecidas dos métodos <em>stepwise</em>: diferentes estratégias de seleção podem conduzir a diferentes modelos, mesmo quando aplicadas ao mesmo conjunto de dados.</p>
 <p>Vejamos a seguir os resultados para <em>both-directions</em>.</p>
 </div>
-<div id="both-directions" class="section level4" number="14.9.0.3">
+<div id="both-directions" class="section level4" number="14.8.0.3">
 <h4>
-<span class="header-section-number">14.9.0.3</span> <em>Both-directions</em><a class="anchor" aria-label="anchor" href="#both-directions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.3</span> <em>Both-directions</em><a class="anchor" aria-label="anchor" href="#both-directions"><i class="fas fa-link"></i></a>
 </h4>
 <p>Na regressão bidirecional (ou mista), o algoritmo combina as abordagens <em>forward</em> e <em>backward</em>, e permite tanto adicionar quanto remover variáveis, otimizando o modelo ao adicionar variáveis estatisticamente significativas e remover aquelas que não são significativas.</p>
 <div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
@@ -2265,9 +2270,9 @@ Srare ~ m.depth_max + m.slope + m.width</p>
 ## F-statistic: 3.633 on 1 and 20 DF,  p-value: 0.07112</code></pre>
 <p>Nesse caso, depois de uma variável ser adicionada, outra variável pode posteriormente ser removida caso isso melhore o critério de seleção. Essa estratégia é mais flexível que forward ou backward, pois permite que o modelo seja modificado nos dois sentidos durante a busca.</p>
 </div>
-<div id="visualizando-resíduos" class="section level4" number="14.9.0.4">
+<div id="visualizando-resíduos" class="section level4" number="14.8.0.4">
 <h4>
-<span class="header-section-number">14.9.0.4</span> Visualizando resíduos<a class="anchor" aria-label="anchor" href="#visualizando-res%C3%ADduos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.4</span> Visualizando resíduos<a class="anchor" aria-label="anchor" href="#visualizando-res%C3%ADduos"><i class="fas fa-link"></i></a>
 </h4>
 <p>Depois de selecionar os modelos, podemos visualizar seus resíduos:</p>
 <div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
@@ -2280,17 +2285,17 @@ Srare ~ m.depth_max + m.slope + m.width</p>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-157-1.png" alt="" width="672"></div>
 <p>Os resíduos representam a diferença entre os valores observados e os valores estimados pelo modelo. A inspeção dos resíduos é importante porque um modelo selecionado pelo AIC pode apresentar um bom critério de informação e, ainda assim, violar pressupostos da regressão linear.</p>
 </div>
-<div id="exemplo-com-stepaic-e-leaps" class="section level4" number="14.9.0.5">
+<div id="exemplo-com-stepaic-e-leaps" class="section level4" number="14.8.0.5">
 <h4>
-<span class="header-section-number">14.9.0.5</span> Exemplo com <code>stepAIC</code> e <code>leaps</code><a class="anchor" aria-label="anchor" href="#exemplo-com-stepaic-e-leaps"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.5</span> Exemplo com <code>stepAIC</code> e <code>leaps</code><a class="anchor" aria-label="anchor" href="#exemplo-com-stepaic-e-leaps"><i class="fas fa-link"></i></a>
 </h4>
 <p>Agora vamos usar duas abordagens complementares.</p>
 <p>Usaremos as funções <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">MASS::stepAIC</a></code> (realiza uma busca stepwise orientada pelo AIC) e <code><a href="https://rdrr.io/pkg/leaps/man/regsubsets.html">leaps::regsubsets</a></code>, que avalia conjuntos de variáveis de diferentes tamanhos. Dessa forma, escolheremos um modelo com base no <strong>AIC/BIC</strong> e, em seguida, avaliaremos a capacidade preditiva dos modelos usando <strong>validação cruzada</strong> em um fluxo de trabalho do <code>tidymodels</code>. Essa distinção é importante. Um <em>modelo pode apresentar excelente ajuste aos dados utilizados na análise, mas isso não significa necessariamente que ele terá bom desempenho em novos dados</em>.</p>
 <p>Veremos as limitações conhecidas do método stepwise (<strong><span class="math inline">\(r^2\)</span> inflado, instabilidade e valores de p distorcidos</strong>). O exemplo foi desenvolvido para um conjuntos de dados ambientais (x) e riqueza de espécies (y) <span class="citation">(<a href="#ref-medeiros2024">MEDEIROS et al., 2024</a>)</span>, adaptado de <a href="https://www.datanovia.com/learn/machine-learning/model-selection/stepwise-regression">Datanovia, 2026</a>.</p>
 </div>
-<div id="organizando-variáveis-de-interesse-1" class="section level4" number="14.9.0.6">
+<div id="organizando-variáveis-de-interesse-1" class="section level4" number="14.8.0.6">
 <h4>
-<span class="header-section-number">14.9.0.6</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.6</span> Organizando variáveis de interesse<a class="anchor" aria-label="anchor" href="#organizando-vari%C3%A1veis-de-interesse-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Cada linha deve representar uma observação e cada coluna uma variável.</p>
 <div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
@@ -2382,9 +2387,9 @@ Srare ~ m.depth_max + m.slope + m.width</p>
 ## S-R-SE-3  3.763162 0.0000000 5.316641 2.449490 4.163332
 ## S-R-SE-4  8.603085 0.0000000 5.709641 2.449490 4.000000</code></pre>
 </div>
-<div id="comparando-tamanhos-de-modelos" class="section level4" number="14.9.0.7">
+<div id="comparando-tamanhos-de-modelos" class="section level4" number="14.8.0.7">
 <h4>
-<span class="header-section-number">14.9.0.7</span> Comparando tamanhos de modelos<a class="anchor" aria-label="anchor" href="#comparando-tamanhos-de-modelos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.7</span> Comparando tamanhos de modelos<a class="anchor" aria-label="anchor" href="#comparando-tamanhos-de-modelos"><i class="fas fa-link"></i></a>
 </h4>
 <p>Existem diversas funções e pacotes no R para realizar a regressão <em>stepwise</em>. Entre eles, destaca-se a função <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code>, disponível no pacote <code>MASS</code>, que seleciona o melhor modelo com base no <strong>Critério de Informação de Akaike (AIC)</strong>. A função possui o argumento <code>direction</code>, que define a estratégia de seleção a ser utilizada (<em>both</em>, <em>backward</em> e <em>forward</em>).</p>
 <p>A cada etapa, o <code><a href="https://rdrr.io/pkg/MASS/man/stepAIC.html">stepAIC()</a></code> considera adicionar ou remover uma variável e calcula o AIC de cada candidata. Ele avança para a alteração que <strong>mais reduz o AIC</strong> e para quando nenhuma adição ou remoção melhora o valor. Como</p>
@@ -2517,9 +2522,9 @@ AIC = (falta\ de\ ajuste) + (penalização\ pelo\ número\ de\ termos),
 <p>As vezes, os critérios (AIC, <span class="math inline">\(r^2\)</span> e BIC) discordam sobre o número de variáveis para os modelos. Isso é justamente o motivo pelo qual o próximo passo é importante: a <strong>validação cruzada</strong>.</p>
 <p>Nesse caso, você quer saber <strong>se o modelo que parece melhor nos dados utilizados para construir os modelos também apresenta bom desempenho quando precisa prever dados que não foram utilizados no ajuste</strong>.</p>
 </div>
-<div id="treinando-o-modelo-validação-cruzada" class="section level4" number="14.9.0.8">
+<div id="treinando-o-modelo-validação-cruzada" class="section level4" number="14.8.0.8">
 <h4>
-<span class="header-section-number">14.9.0.8</span> Treinando o modelo: validação cruzada<a class="anchor" aria-label="anchor" href="#treinando-o-modelo-valida%C3%A7%C3%A3o-cruzada"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8.0.8</span> Treinando o modelo: validação cruzada<a class="anchor" aria-label="anchor" href="#treinando-o-modelo-valida%C3%A7%C3%A3o-cruzada"><i class="fas fa-link"></i></a>
 </h4>
 <p>Usamos a função <code><a href="https://rdrr.io/pkg/caret/man/train.html">train()</a></code> do pacote <code>caret</code>, para um fluxo de trabalho simplificado para realizar a seleção de variáveis por meio dos pacotes <code>leaps</code> e <code>MASS</code>. Ela também possui o argumento <code>method</code> (“leapBackward”, “leapForward” e “leapSeq”).</p>
 <p>Nesse caso, também é necessário especificar o parâmetro de ajuste <code>nvmax</code>, que corresponde ao número máximo de variáveis preditoras a serem incorporadas ao modelo. Por exemplo, é possível variar <code>nvmax</code> de 1 a 5. Nesse caso, a função busca os melhores modelos de diferentes tamanhos, até o melhor modelo com quatro variáveis.</p>
@@ -2549,7 +2554,7 @@ AIC = (falta\ de\ ajuste) + (penalização\ pelo\ número\ de\ termos),
 <strong>nvmax</strong>: número de variáveis presentes no modelo. Por exemplo, <code>nvmax = 2</code> indica o melhor modelo contendo duas variáveis preditoras.</li>
 <li>
 <strong>RMSE</strong> e <strong>MAE</strong>: são duas métricas utilizadas para medir o erro de predição de cada modelo. Quanto menores os valores de RMSE e MAE, melhor é o desempenho do modelo.
-<strong>R-quadrado (r<span class="math inline">\(^2\)</span>)</strong>: indica a correlação entre os valores observados da variável resposta e os valores preditos pelo modelo. Quanto maior o valor de ((r<span class="math inline">\(^2\)</span>)), melhor o ajuste do modelo.</li>
+<strong>R-quadrado (r<span class="math inline">\(^2\)</span>)</strong>: indica a correlação entre os valores observados da variável resposta e os valores preditos pelo modelo. Quanto maior o valor de (r<span class="math inline">\(^2\)</span>), melhor o ajuste do modelo.</li>
 </ul>
 <p>No exemplo apresentado, observa-se que o modelo com quatro variáveis (<code>nvmax = 4</code>) é o que apresenta o menor valor de RMSE.</p>
 <p>Na sequência, obtemos Os melhores valores do parâmetro de ajuste (<code>nvmax</code>) selecionados automaticamente pela função <code><a href="https://rdrr.io/pkg/caret/man/train.html">train()</a></code>, o melhor conjunto de variáveis para cada tamanho de modelo (função <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>), desde o melhor modelo com uma variável até o melhor modelo com quatro variáveis e os coeficientes de regressão do modelo final (<code>id = 4</code>).</p>
@@ -2612,14 +2617,14 @@ AIC = (falta\ de\ ajuste) + (penalização\ pelo\ número\ de\ termos),
 <p>O QUE REPORTAR (RESULTADOS): O Modelo de Regressão Múltipla <em>Stepwise</em> (SMRM) com seleção de variáveis pelo método <em>sequential replacement</em> foi aplicado separadamente para cada um dos quatro conjuntos de variáveis ambientais (morfologia, qualidade da água, composição do sedimento e estruturas do habitat marginal). Dentre as variáveis de qualidade da água, a SMRM identificou um modelo contendo velocidade da água, temperatura, oxigênio dissolvido e turbidez como preditores de Srare. O modelo selecionado apresentou o melhor desempenho na validação cruzada (RMSE = 4.85; r<span class="math inline">\(^2\)</span> = 0.929) e foi estatisticamente significativo (F<span class="math inline">\(_{4,17}\)</span> = 3.12, p = 0.043), explicando 42,3% da variação na riqueza rarefeita (r<span class="math inline">\(^2\)</span> ajustado = 0.288). A velocidade da água teve efeito negativo significativo (<span class="math inline">\(\beta\)</span> = -19.97, p = 0.041), enquanto a temperatura apresentou efeito positivo significativo (<span class="math inline">\(\beta\)</span> = 16.11, p = 0.005). As variáveis oxigênio dissolvido e turbidez não apresentaram efeitos significativos no modelo final (p &gt; 0.05).</p>
 </div>
 </div>
-<div id="material-de-apoio-7" class="section level2" number="14.10">
+<div id="material-de-apoio-7" class="section level2" number="14.9">
 <h2>
-<span class="header-section-number">14.10</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9</span> Material de apoio<a class="anchor" aria-label="anchor" href="#material-de-apoio-7"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="teste-seus-conhecimentos-6" class="section level2" number="14.11">
+<div id="teste-seus-conhecimentos-6" class="section level2" number="14.10">
 <h2>
-<span class="header-section-number">14.11</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.10</span> TESTE SEUS CONHECIMENTOS<a class="anchor" aria-label="anchor" href="#teste-seus-conhecimentos-6"><i class="fas fa-link"></i></a>
 </h2>
 <div class="infobox note">
 <div class="center">
@@ -2694,12 +2699,12 @@ MEDEIROS, E. S. F.; SILVA, M. J.; RAMOS, T. P. A.; RAMOS, R. T. C. Environmental
 <li>
 <a class="nav-link" href="#importando-a-planilha-4"><span class="header-section-number">14.5</span> Importando a planilha</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#organizando-os-dados-1"><span class="header-section-number">14.5.1</span> Organizando os dados</a></li></ul>
 </li>
-<li><a class="nav-link" href="#id_4042reinicio"><span class="header-section-number">14.6</span> REINÍCIO</a></li>
-<li><a class="nav-link" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><span class="header-section-number">14.7</span> Regressão Multipla Simultânea</a></li>
-<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">14.8</span> Regressão Múltipla Hierárquica</a></li>
-<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><span class="header-section-number">14.9</span> Regressão Múltipla Stepwise</a></li>
-<li><a class="nav-link" href="#material-de-apoio-7"><span class="header-section-number">14.10</span> Material de apoio</a></li>
-<li><a class="nav-link" href="#teste-seus-conhecimentos-6"><span class="header-section-number">14.11</span> TESTE SEUS CONHECIMENTOS</a></li>
+<li><a class="nav-link" href="#rein%C3%ADcio">REINÍCIO</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-multipla-simult%C3%A2nea"><span class="header-section-number">14.6</span> Regressão Multipla Simultânea</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-hier%C3%A1rquica"><span class="header-section-number">14.7</span> Regressão Múltipla Hierárquica</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-m%C3%BAltipla-stepwise"><span class="header-section-number">14.8</span> Regressão Múltipla Stepwise</a></li>
+<li><a class="nav-link" href="#material-de-apoio-7"><span class="header-section-number">14.9</span> Material de apoio</a></li>
+<li><a class="nav-link" href="#teste-seus-conhecimentos-6"><span class="header-section-number">14.10</span> TESTE SEUS CONHECIMENTOS</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-8">Apêndices</a></li>
 <li><a class="nav-link" href="#sites-para-consulta-2">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-5">Script limpo</a></li>
@@ -2720,7 +2725,7 @@ MEDEIROS, E. S. F.; SILVA, M. J.; RAMOS, T. P. A.; RAMOS, R. T. C. Environmental
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 10/08/2026 19:23:25.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 12/08/2026 07:26:27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
