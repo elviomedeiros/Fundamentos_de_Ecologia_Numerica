@@ -406,7 +406,7 @@ onde,</p>
 <span class="header-section-number">15.1.1</span> Pacotes do módulo<a class="anchor" aria-label="anchor" href="#pacotes-do-m%C3%B3dulo-5"><i class="fas fa-link"></i></a>
 </h3>
 <p>Instalando os pacotes necessários para esse módulo.</p>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"rlang"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/remove.packages.html">remove.packages</a></span><span class="op">(</span><span class="st">"rlang"</span><span class="op">)</span></span>
@@ -417,12 +417,12 @@ onde,</p>
 <div id="limpando-a-memória-4" class="section level4 unnumbered">
 <h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-4"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
 <span><span class="co">#options(scipen = 999) #sem notação científica</span></span></code></pre></div>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
 <span><span class="va">univ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="st">"D:/Elvio/OneDrive/Disciplinas/_EcoNumerica/5.Matrizes/tucuna.xlsx"</span>,</span>
 <span>                  rowNames <span class="op">=</span> <span class="cn">T</span>, colNames <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -475,7 +475,7 @@ onde,</p>
 <p>No seu modelo apresentado, o nível <code>FÊMEA</code> foi escolhido como referência. Assim, no modelo, <code>FÊMEA</code> (referência) equivale ao intercepto. Temos 3 níveis, mas apenas 2 coeficientes, porque o terceiro está embutido no intercepto.</p>
 <p>Nesse caso, o intercepto vale 14.90. Esse é o comprimento médio (CP_cm) das fêmeas, no período chuvoso (também referência, note que que ele não aparece no modelo). O coeficiente <code>sexoMACHO</code> (<em>Estimate</em> = 2.765 e p = 0.0248), significa que, no período chuvoso, machos possuem, em média, 14.90 + 2.77 = 17.67 cm. Enquanto fêmeas possuem 14.90 cm. Já o coeficiente <code>sexoimaturo</code> (<em>Estimate</em> = -7.723), significa que os imaturos são, em média, 14.90 - 7.72 = 7.18 cm menores que as fêmeas no período chuvoso.</p>
 <p>Para mudar para que <code>MACHO</code> seja a referência, pode-se redefinir o fator <code>univ$sexo &lt;- relevel(univ$sexo, ref = "MACHO")</code>.</p>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mjskay.github.io/ggdist/">ggdist</a></span><span class="op">)</span></span>
 <span><span class="va">p_box</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
@@ -552,7 +552,7 @@ onde,</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">Plot1</span><span class="op">+</span><span class="va">Plot2</span></span></code></pre></div>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-169-3.png" alt="" width="672"></p>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Plot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">univ</span>,</span>
 <span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>,</span>
 <span>                  y <span class="op">=</span> <span class="va">CP_cm</span>,</span>
@@ -582,7 +582,7 @@ onde,</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">Plot1</span><span class="op">+</span><span class="va">Plot2</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-170-1.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">NewData</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sexo</span>, y <span class="op">=</span> <span class="va">response</span>, colour <span class="op">=</span> <span class="va">periodo</span><span class="op">)</span>,</span>
 <span>             position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -601,7 +601,7 @@ onde,</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sexo"</span>, y <span class="op">=</span> <span class="st">"Variável resposta (CP(cm))"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-171-1.png" alt="" width="672"></div>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">univ</span><span class="op">)</span></span>
@@ -771,7 +771,7 @@ onde,</p>
 <p><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-172-1.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-172-2.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-172-3.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-172-4.png" alt="" width="672"><img src="fundamentos_de_ecologia_numerica_files/figure-html/unnamed-chunk-172-5.png" alt="" width="672"></p>
 <p>Como há uma interação significativa (sexo × CP_cm, p &lt; 0,001), esse gráfico é especialmente interessante porque mostra que as inclinações das retas são diferentes entre machos e fêmeas, e isso é justamente o que o termo de interação está testando. Em vez de interpretar apenas a tabela de coeficientes, o gráfico permite visualizar como a relação entre comprimento e peso da gônada muda entre os sexos. Isso segue exatamente a abordagem adotada no tutorial que você está utilizando.</p>
 <p>Hoje é mais comum usar o pacote <code>emmeans</code> para interpretar modelos com interações. Além de <code>summary(lm2)</code>, podemos fazer:</p>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvlenth.github.io/emmeans/">emmeans</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">lm2</span>, <span class="va">pairwise</span> <span class="op">~</span> <span class="va">sexo</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emtrends.html">emtrends</a></span><span class="op">(</span><span class="va">lm2</span>, <span class="va">pairwise</span> <span class="op">~</span> <span class="va">sexo</span>, var <span class="op">=</span> <span class="st">"CP_cm"</span><span class="op">)</span></span></code></pre></div>
@@ -907,7 +907,7 @@ predict(modelo)</code></pre>
 <div id="limpando-a-memória-5" class="section level4 unnumbered">
 <h4>Limpando a memória<a class="anchor" aria-label="anchor" href="#limpando-a-mem%C3%B3ria-5"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#apaga os graficos, se houver algum</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#limpa a memória</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\014"</span><span class="op">)</span> <span class="co">#limpa o console </span></span>
@@ -917,7 +917,7 @@ predict(modelo)</code></pre>
 <h3>
 <span class="header-section-number">15.2.1</span> Organizando os dados<a class="anchor" aria-label="anchor" href="#organizando-os-dados-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anovas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"t_anovas.csv"</span>,</span>
 <span>                   sep <span class="op">=</span> <span class="st">";"</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>                   row.names <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -1021,14 +1021,14 @@ predict(modelo)</code></pre>
 <span class="header-section-number">15.2.2</span> ANOVA vs GLM<a class="anchor" aria-label="anchor" href="#anova-vs-glm"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suponha que você queira comparar a riqueza (Srare) entre grupos (Grupos):</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="va">anovas</span></span>
 <span><span class="va">modelo_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_aov</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq
 ## Grupos      21  612.4   29.16</code></pre>
 <p>ou</p>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modelo_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_lm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -1040,7 +1040,7 @@ predict(modelo)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>O mesmo modelo usando GLM</li>
 </ol>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modelo_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Srare</span> <span class="op">~</span> <span class="va">Grupos</span>,</span>
 <span>                  data <span class="op">=</span> <span class="va">dados</span>,</span>
 <span>                  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span><span class="op">)</span></span>
@@ -1058,7 +1058,7 @@ predict(modelo)</code></pre>
 ## NULL                      21     612.37
 ## Grupos 21   612.37         0       0.00</code></pre>
 <p>ou</p>
-<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_glm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1098,7 +1098,7 @@ predict(modelo)</code></pre>
 ## 
 ## Number of Fisher Scoring iterations: 1</code></pre>
 <p>Esse modelo é matematicamente equivalente à ANOVA.</p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#packageVersion("rlang")</span></span>
@@ -1331,10 +1331,13 @@ predict(modelo)</code></pre>
 <h2>Apêndices<a class="anchor" aria-label="anchor" href="#ap%C3%AAndices-9"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="sites-para-consulta-3" class="section level2 unnumbered">
-<h2>Sites para consulta<a class="anchor" aria-label="anchor" href="#sites-para-consulta-3"><i class="fas fa-link"></i></a>
+<div id="sites-para-consulta-4" class="section level2 unnumbered">
+<h2>Sites para consulta<a class="anchor" aria-label="anchor" href="#sites-para-consulta-4"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a><br><a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a><br><a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a><br><a href="https://bedeffinianrowedavies.com/statisticstutorials/introductionglms" class="uri">https://bedeffinianrowedavies.com/statisticstutorials/introductionglms</a></p>
+<p>stackoverflow: <a href="https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r" class="uri">https://stackoverflow.com/questions/31741742/how-to-identify-the-distribution-of-the-given-data-using-r</a><br>
+stackexchange: <a href="https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best" class="uri">https://stats.stackexchange.com/questions/132652/how-to-determine-which-distribution-fits-my-data-best</a><br>
+R-bloggers: <a href="https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/" class="uri">https://www.r-bloggers.com/2015/11/correlation-and-linear-regression/</a><br>
+bedeffinianrowedavies: <a href="https://bedeffinianrowedavies.com/statisticstutorials/introductionglms" class="uri">https://bedeffinianrowedavies.com/statisticstutorials/introductionglms</a><br></p>
 </div>
 <div id="script-limpo-6" class="section level2 unnumbered">
 <h2>Script limpo<a class="anchor" aria-label="anchor" href="#script-limpo-6"><i class="fas fa-link"></i></a>
@@ -1407,7 +1410,7 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <li><a class="nav-link" href="#material-de-apoio-8"><span class="header-section-number">15.3</span> Material de apoio</a></li>
 <li><a class="nav-link" href="#teste-seus-conhecimentos-7"><span class="header-section-number">15.4</span> TESTE SEUS CONHECIMENTOS</a></li>
 <li><a class="nav-link" href="#ap%C3%AAndices-9">Apêndices</a></li>
-<li><a class="nav-link" href="#sites-para-consulta-3">Sites para consulta</a></li>
+<li><a class="nav-link" href="#sites-para-consulta-4">Sites para consulta</a></li>
 <li><a class="nav-link" href="#script-limpo-6">Script limpo</a></li>
 <li><a class="nav-link" href="#refer%C3%AAncias-12">Referências</a></li>
 </ul>
@@ -1426,7 +1429,7 @@ ZUUR, A. F.; IENO, E. N.; WALKER, N.; SAVELIEV, A. A.; SMITH, G. M. <strong>Mixe
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 12/08/2026 07:26:27.</p>
+    <p>"<strong>Fundamentos de Ecologia Numérica</strong>: Disciplina de Ecologia Numérica do Curso de Ciências Biológicas do Campus V da UEPB" was written by Prof. Elvio S. F. Medeiros, Laboratório de Ecologia, Universidade Estadual da Paraíba, Campus V, João Pessoa, PB. It was last built on Last updated: 13/08/2026 12:55:22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
